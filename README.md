@@ -4,7 +4,15 @@ is a VPS hosted CVE fetching pipeline that displays recently modified CVEs.
 The dashboard displays semantic kill-chain tags with a custom (signals based) scoring model.
 It generates JSON artifacts from filtered records (API) & represents them on a dashboard.
 
-Design goal: fast overview of what is critical now (with min attack surface)
+Objective: 
+
+fast overview of what is critical now (with min attack surface).
+
+Design goal:
+
+- pull recent CVE records from NVD
+- filter for higher-signal incidents
+- generate an hourly Telegram alert summary
 
 _____________________________________________________________________________
 
@@ -30,7 +38,7 @@ Overview
 3.   Runtime:
    - Files: `Dockerfile`, `docker-compose.yml`
    - Role:
-     - Provide structured execution environment for pipeline 🐍
+     - Provide structured execution environment for pipeline 
      - git gateway
     
 4.   Data:
@@ -45,5 +53,12 @@ Overview
       - `severity`
       - `summary`
       - `references`
+  
+5.   Stack:
+    - Python
+    - JavaScript
+    - Docker
+    - VPS
+    - API (AI & Telegram)
       - `source`
 
