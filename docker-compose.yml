@@ -1,0 +1,14 @@
+services:
+  glancer-daemon:
+    container_name: openclaw_glancer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: ["gateway", "run", "--allow-unconfigured", "--port", "18789"]
+    network_mode: host
+    env_file: .env
+    volumes:
+      - ./workspace:/workspace
+      - ./workspace:/home/node/.openclaw/workspace
+      - ./.openclaw_state:/home/node/.openclaw
