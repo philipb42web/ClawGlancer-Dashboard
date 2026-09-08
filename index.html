@@ -368,7 +368,7 @@ a:hover{ text-decoration:underline; }
   </div>
 
 <script>
-const DATA_FILE = "prioritized_threats.json"; 
+const DATA_FILES = ["data/prioritized_threats.json", "prioritized_threats.json"]; 
 let all = [];
 
 let lastManualRefresh = 0;
@@ -459,21 +459,28 @@ function render(){
 async function load(){
   clearErr();
   setStatus("Loading…");
-  try{
-    const res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${DATA_FILE}`);
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error("JSON is not an array");
-    all = data;
-    renderTagOptions();
-    render();
-    const now = new Date();
-lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
-    setStatus("OK");
-  }catch(e){
-    setStatus("ERROR");
-    showErr(String(e));
+  let lastError = null;
+
+  for (const path of DATA_FILES) {
+    try {
+      const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${path}`);
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error("JSON is not an array");
+      all = data;
+      renderTagOptions();
+      render();
+      const now = new Date();
+      lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
+      setStatus("OK");
+      return;
+    } catch (e) {
+      lastError = e;
+    }
   }
+
+  setStatus("ERROR");
+  showErr(String(lastError || "Failed to load threat data"));
 }
 
 

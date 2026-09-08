@@ -314,37 +314,9 @@ a:hover{ text-decoration:underline; }
 }
 
 
-  
-
-.top-actions{
-  display:flex;
-  justify-content:flex-end;
-  padding:0 14px 10px;
-}
-
-.about-link{
-  display:inline-block;
-  padding:0;
-  border:none;
-  border-radius:0;
-  color:#d7fff0;
-  text-decoration:none;
-  background:transparent;
-  box-shadow:none;
-  font:14px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
-.about-link:hover,
-.about-link:focus-visible{
-  text-decoration:underline;
-  outline:none;
-}
-
-
-</style>
+  </style>
 </head>
 <body>
-
   <div class="wrap">
     <header>
       <div class="title">
@@ -352,10 +324,6 @@ a:hover{ text-decoration:underline; }
         
       </div>
     </header>
-
-    <div class="top-actions">
-      <a class="about-link" href="/about/">About</a>
-    </div>
 
     <section class="panel">
       <div class="controls">
@@ -400,7 +368,7 @@ a:hover{ text-decoration:underline; }
   </div>
 
 <script>
-const DATA_FILE = "prioritized_threats.json"; 
+const DATA_FILES = ["data/prioritized_threats.json", "prioritized_threats.json"]; 
 let all = [];
 
 let lastManualRefresh = 0;
@@ -491,28 +459,30 @@ function render(){
 async function load(){
   clearErr();
   setStatus("Loading…");
-  try{
-    let res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) {
-      res = await fetch("data/prioritized_threats.json?t=" + Date.now(), { cache: "no-store" });
+  let lastError = null;
+
+  for (const path of DATA_FILES) {
+    try {
+      const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${path}`);
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error("JSON is not an array");
+      all = data;
+      renderTagOptions();
+      render();
+      const now = new Date();
+      lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
+      setStatus("OK");
+      return;
+    } catch (e) {
+      lastError = e;
     }
-    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${DATA_FILE}`);
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error("JSON is not an array");
-    all = data;
-    renderTagOptions();
-    render();
-    const now = new Date();
-    lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
-    setStatus("OK");
-  }catch(e){
-    setStatus("ERROR");
-    showErr(String(e));
   }
+
+  setStatus("ERROR");
+  showErr(String(lastError || "Failed to load threat data"));
 }
 
-tagEl.addEventListener("change", render);
-minScoreEl.addEventListener("change", render);
 
 el("refresh").addEventListener("click", () => {
   const now = Date.now();
@@ -531,47 +501,6 @@ document.addEventListener("visibilitychange", () => {
 
 
 load();
-</script>
-<script>
-(async () => {
-  try {
-    let r = await fetch("delta.json?t=" + Date.now(), { cache: "no-store" });
-    if (!r.ok) {
-      r = await fetch("data/delta.json?t=" + Date.now(), { cache: "no-store" });
-    }
-    if (!r.ok) return;
-    const d = await r.json();
-
-    const topNote = d.top_changed ? "top moved" : "top steady";
-    const text = `Δ new: ${d.new_count ?? 0} · dropped: ${d.dropped_count ?? 0} · ${topNote}`;
-
-    // try to attach near the "Last load" pill
-    const all = Array.from(document.querySelectorAll("body *"));
-    const lastLoadEl = all.find(el => (el.textContent || "").includes("Last load"));
-
-    const badge = document.createElement("span");
-    badge.textContent = text;
-    badge.style.marginLeft = "10px";
-    badge.style.padding = "6px 10px";
-    badge.style.borderRadius = "999px";
-    badge.style.border = "1px solid rgba(0,255,255,0.15)";
-    badge.style.background = "rgba(10,20,20,0.55)";
-    badge.style.backdropFilter = "blur(10px)";
-    badge.style.webkitBackdropFilter = "blur(10px)";
-    badge.style.fontSize = "12px";
-    badge.style.opacity = "0.95";
-
-    if (lastLoadEl && lastLoadEl.parentElement) {
-      lastLoadEl.parentElement.appendChild(badge);
-    } else {
-      // fallback: put it under the title
-      const h = document.querySelector("h1, header, body");
-      h.appendChild(badge);
-    }
-  } catch (e) {
-    // quiet fail
-  }
-})();
 </script>
 </body>
 </html>

@@ -427,10 +427,28 @@ def main():
         json.dump(delta, f, indent=2, ensure_ascii=False)
     os.replace(delta_tmp, delta_path)
 
+    # Also sync root delta.json if data_dir is the repo data/ dir
+    root_delta_path = os.path.join(repo_root, "delta.json")
+    try:
+        with open(root_delta_path + ".tmp", "w", encoding="utf-8") as f:
+            json.dump(delta, f, indent=2, ensure_ascii=False)
+        os.replace(root_delta_path + ".tmp", root_delta_path)
+    except Exception:
+        pass
+
     top_tmp = top_path + ".tmp"
     with open(top_tmp, "w", encoding="utf-8") as f:
         json.dump(top_items, f, indent=2, ensure_ascii=False)
     os.replace(top_tmp, top_path)
+
+    # Also sync root prioritized_threats.json
+    root_top_path = os.path.join(repo_root, "prioritized_threats.json")
+    try:
+        with open(root_top_path + ".tmp", "w", encoding="utf-8") as f:
+            json.dump(top_items, f, indent=2, ensure_ascii=False)
+        os.replace(root_top_path + ".tmp", root_top_path)
+    except Exception:
+        pass
 
     meta_path = f"{data_dir}/meta.json"
     meta_tmp = meta_path + ".tmp"
@@ -444,7 +462,7 @@ def main():
     os.replace(meta_tmp, meta_path)
 
     print(f"Wrote {len(vulns_sorted)} records to {out_path}")
-    print(f"Wrote {min(100, len(vulns_sorted))} records to {top_path}")
+    print(f"Wrote {min(100, len(vulns_sorted))} records to {top_path} and {root_top_path}")
     print(f"Wrote delta metrics to {delta_path}")
 
 if __name__ == "__main__":
