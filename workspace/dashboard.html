@@ -400,7 +400,7 @@ a:hover{ text-decoration:underline; }
   </div>
 
 <script>
-const DATA_FILE = "data/prioritized_threats.json"; 
+const DATA_FILE = "prioritized_threats.json"; 
 let all = [];
 
 let lastManualRefresh = 0;
@@ -492,7 +492,10 @@ async function load(){
   clearErr();
   setStatus("Loading…");
   try{
-    const res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
+    let res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) {
+      res = await fetch("data/prioritized_threats.json?t=" + Date.now(), { cache: "no-store" });
+    }
     if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${DATA_FILE}`);
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error("JSON is not an array");
@@ -500,7 +503,7 @@ async function load(){
     renderTagOptions();
     render();
     const now = new Date();
-lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
+    lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
     setStatus("OK");
   }catch(e){
     setStatus("ERROR");
@@ -508,6 +511,8 @@ lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
   }
 }
 
+tagEl.addEventListener("change", render);
+minScoreEl.addEventListener("change", render);
 
 el("refresh").addEventListener("click", () => {
   const now = Date.now();
@@ -530,12 +535,15 @@ load();
 <script>
 (async () => {
   try {
-    const r = await fetch("data/delta.json", { cache: "no-store" });
+    let r = await fetch("delta.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) {
+      r = await fetch("data/delta.json?t=" + Date.now(), { cache: "no-store" });
+    }
     if (!r.ok) return;
     const d = await r.json();
 
     const topNote = d.top_changed ? "top moved" : "top steady";
-// removed delta placeholder:     const text = `Δ new: dropped: · `;
+    const text = `Δ new: ${d.new_count ?? 0} · dropped: ${d.dropped_count ?? 0} · ${topNote}`;
 
     // try to attach near the "Last load" pill
     const all = Array.from(document.querySelectorAll("body *"));

@@ -49,6 +49,7 @@ body{
   position: relative;
 }
 
+
 body::before{
   content:"";
   position: fixed;
@@ -144,15 +145,21 @@ input, select, button{
   color: var(--txt);
   font-family: var(--mono);
   outline:none;
-}
 
-#q {
-  max-width: 100%;
-}
-
+  
 #tag {
-  width: 100%;
+  width: auto;          
+  justify-self: start;  
+  min-width: 260px;     
+  max-width: 320px;     
 }
+}
+
+  #q{
+    max-width: 420px;   
+    justify-self: start;
+  }
+
 
 select{
   appearance: none;
@@ -183,6 +190,7 @@ option{
   background: #050807;
   color: rgba(180,255,220,.92);
 }
+
 
 input{
   overflow: hidden;
@@ -305,6 +313,9 @@ a:hover{ text-decoration:underline; }
   table{ font-size: 11px; }
 }
 
+
+  
+
 .top-actions{
   display:flex;
   justify-content:flex-end;
@@ -328,6 +339,8 @@ a:hover{ text-decoration:underline; }
   text-decoration:underline;
   outline:none;
 }
+
+
 </style>
 </head>
 <body>
@@ -336,7 +349,7 @@ a:hover{ text-decoration:underline; }
     <header>
       <div class="title">
         <h1>Claw 🦞 Glancer</h1>
-        <p class="sub">Prioritized Security Threat Intelligence</p>
+        
       </div>
     </header>
 
@@ -346,7 +359,7 @@ a:hover{ text-decoration:underline; }
 
     <section class="panel">
       <div class="controls">
-        <input id="q" type="text" placeholder="Filter CVE, vendor, tag, keyword..." />
+        
         <select id="tag">
           <option value="">Tag: any</option>
         </select>
@@ -374,7 +387,7 @@ a:hover{ text-decoration:underline; }
           <thead>
             <tr>
               <th style="width:110px">Score</th>
-              <th style="width:140px">CVE</th>
+              <th style="width:130px">CVE</th>
               <th style="width:110px">Severity</th>
               <th style="width:220px">Tags</th>
               <th>Summary</th>
@@ -387,11 +400,12 @@ a:hover{ text-decoration:underline; }
   </div>
 
 <script>
-const DATA_FILE = "data/prioritized_threats.json"; 
+const DATA_FILE = "prioritized_threats.json"; 
 let all = [];
 
 let lastManualRefresh = 0;
 const REFRESH_COOLDOWN_MS = 10_000;
+
 
 const el = (id)=>document.getElementById(id);
 const rowsEl = el("rows");
@@ -400,7 +414,6 @@ const statusEl = el("status");
 const lastLoadEl = el("lastLoad");
 const countEl = el("count");
 
-const qEl = el("q");
 const tagEl = el("tag");
 const minScoreEl = el("minScore");
 
@@ -439,8 +452,7 @@ function match(x, q, tag, minScore){
     x.cve_id || "",
     x.summary || "",
     (x.tags || []).join(" "),
-    (x.reasons || []).join(" "),
-    (x.affected || []).map(a => `${a.vendor || ""} ${a.product || ""}`).join(" ")
+    (x.reasons || []).join(" ")
   ].join(" ").toLowerCase();
   return hay.includes(q.toLowerCase());
 }
@@ -450,7 +462,7 @@ function esc(s){
 }
 
 function render(){
-  const q = (qEl ? qEl.value : "").trim();
+  const q = "";
   const tag = tagEl.value;
   const minScore = Number(minScoreEl.value || 0);
 
@@ -480,7 +492,10 @@ async function load(){
   clearErr();
   setStatus("Loading…");
   try{
-    const res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
+    let res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) {
+      res = await fetch("data/prioritized_threats.json?t=" + Date.now(), { cache: "no-store" });
+    }
     if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${DATA_FILE}`);
     const data = await res.json();
     if (!Array.isArray(data)) throw new Error("JSON is not an array");
@@ -496,7 +511,6 @@ async function load(){
   }
 }
 
-if (qEl) qEl.addEventListener("input", render);
 tagEl.addEventListener("change", render);
 minScoreEl.addEventListener("change", render);
 
@@ -510,24 +524,30 @@ el("refresh").addEventListener("click", () => {
   load();
 });
 
+
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) load();
 });
+
 
 load();
 </script>
 <script>
 (async () => {
   try {
-    const r = await fetch("data/delta.json?t=" + Date.now(), { cache: "no-store" });
+    let r = await fetch("delta.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) {
+      r = await fetch("data/delta.json?t=" + Date.now(), { cache: "no-store" });
+    }
     if (!r.ok) return;
     const d = await r.json();
 
     const topNote = d.top_changed ? "top moved" : "top steady";
     const text = `Δ new: ${d.new_count ?? 0} · dropped: ${d.dropped_count ?? 0} · ${topNote}`;
 
-    const allNodes = Array.from(document.querySelectorAll("body *"));
-    const lastLoadEl = allNodes.find(el => (el.textContent || "").includes("Last load"));
+    // try to attach near the "Last load" pill
+    const all = Array.from(document.querySelectorAll("body *"));
+    const lastLoadEl = all.find(el => (el.textContent || "").includes("Last load"));
 
     const badge = document.createElement("span");
     badge.textContent = text;
@@ -544,8 +564,9 @@ load();
     if (lastLoadEl && lastLoadEl.parentElement) {
       lastLoadEl.parentElement.appendChild(badge);
     } else {
+      // fallback: put it under the title
       const h = document.querySelector("h1, header, body");
-      if (h) h.appendChild(badge);
+      h.appendChild(badge);
     }
   } catch (e) {
     // quiet fail
