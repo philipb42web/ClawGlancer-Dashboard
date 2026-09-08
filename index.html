@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        base-uri 'none';
+        form-action 'none';
+        frame-ancestors 'none';
+        object-src 'none';
+        img-src 'self' data:;
+        connect-src 'self';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline';
+        upgrade-insecure-requests;
+      ">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+  <title>Claw 🦞 Glancer</title>
+  <style>
+    :root{
+      --bg:#050807;
+      --panel:#07110c;
+      --grid:rgba(0,255,140,.08);
+      --txt:rgba(180,255,220,.92);
+      --muted:rgba(180,255,220,.60);
+      --neon:rgba(0,255,140,.95);
+      --warn:rgba(255,120,120,.95);
+      --amber:rgba(255,210,120,.95);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+html, body { height: 100%; }
+
+body{
+  margin:0;
+  min-height: 100%;
+  background: linear-gradient(180deg, #030504 0%, #050807 45%, #040706 100%);
+  background-attachment: fixed;
+  color: var(--txt);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.00),
+    rgba(255,255,255,0.00) 2px,
+    rgba(0,0,0,0.10) 3px
+  );
+  pointer-events: none;
+  opacity: .20;
+  z-index: 0;
+}
+
+.wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 26px 18px 40px;
+  position: relative;
+  z-index: 1; 
+}
+
+header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin-bottom:16px;
+  text-align:center;
+}
+
+.title{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:center;
+}
+
+h1{
+  margin:0;
+  font-size:20px;
+  letter-spacing:.5px;
+  font-family:var(--mono);
+  color:var(--neon);
+  text-shadow:0 0 18px rgba(0,255,140,.12);
+  text-align:center;
+}
+
+.sub{
+  margin:0;
+  font-size:12px;
+  color:var(--muted);
+  font-family:var(--mono);
+}
+
+.panel{
+  background: rgba(7,17,12,.78);
+  border: 1px solid rgba(0,255,140,.18);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.controls{
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1.3fr .7fr 1fr max-content; 
+  gap: 10px;
+  align-items: center;
+}
+
+button#refresh{
+  width: max-content;    
+  justify-self: end;     
+  white-space: nowrap;   
+}
+
+.controls > *{ min-width: 0; } 
+
+@media (max-width: 900px){
+  .controls{ grid-template-columns: 1fr 1fr; }
+}
+
+input, select, button{
+  width:100%;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(0,255,140,.18);
+  background: rgba(0,0,0,.25);
+  color: var(--txt);
+  font-family: var(--mono);
+  outline:none;
+}
+
+#q {
+  max-width: 100%;
+}
+
+#tag {
+  width: 100%;
+}
+
+select{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 38px;                 
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(0,255,140,.75) 50%),
+    linear-gradient(135deg, rgba(0,255,140,.75) 50%, transparent 50%),
+    linear-gradient(to right, rgba(0,255,140,.18), rgba(0,255,140,.18));
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%,
+    calc(100% - 34px) 50%;
+  background-size:
+    6px 6px,
+    6px 6px,
+    1px 18px;
+  background-repeat: no-repeat;
+}
+
+select:focus, input:focus{
+  border-color: rgba(0,255,140,.42);
+  box-shadow: 0 0 0 3px rgba(0,255,140,.10);
+}
+
+option{
+  background: #050807;
+  color: rgba(180,255,220,.92);
+}
+
+input{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+input::placeholder{ color: rgba(180,255,220,.45); }
+
+button{
+  cursor:pointer;
+  padding: 10px 14px;
+  width: auto; 
+  border: 1px solid rgba(0,255,140,.30);
+  background: rgba(0,255,140,.08);
+}
+
+button:hover{ background: rgba(0,255,140,.14); }
+
+.meta{
+  padding: 0 14px 14px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size:12px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(0,255,140,.18);
+  background: rgba(0,0,0,.18);
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background: var(--neon);
+  box-shadow: 0 0 12px rgba(0,255,140,.30);
+}
+
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-family: var(--mono);
+  font-size:12px;
+}
+
+thead th{
+  text-align:left;
+  padding:12px 14px;
+  color: rgba(200,255,230,.85);
+  border-bottom:1px solid rgba(0,255,140,.16);
+  background: rgba(0,0,0,.16);
+  position:sticky;
+  top:0;
+  backdrop-filter: blur(8px);
+}
+
+tbody td{
+  padding:12px 14px;
+  border-bottom:1px solid rgba(0,255,140,.10);
+  vertical-align:top;
+}
+
+tbody tr:hover{ background: rgba(0,255,140,.06); }
+
+.score{ font-weight:700; color: var(--neon); }
+
+.sev{ font-weight:700; }
+.sev.CRITICAL{ color: var(--warn); }
+.sev.HIGH{ color: var(--amber); }
+
+.tags{ display:flex; flex-wrap:wrap; gap:6px; }
+
+.tag{
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(0,255,140,.16);
+  background: rgba(0,0,0,.18);
+  color: rgba(180,255,220,.88);
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.summary{
+  color: rgba(200,255,230,.88);
+  line-height:1.35;
+  max-width:72ch;
+}
+
+a{ color: rgba(0,255,140,.92); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+.err{
+  margin-top:12px;
+  padding:12px 14px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,120,120,.35);
+  background: rgba(255,120,120,.08);
+  font-family: var(--mono);
+  color: rgba(255,210,210,.92);
+  white-space: pre-wrap;
+}
+
+@media (max-width: 520px){
+  .wrap{ padding: 18px 12px 28px; }
+  .controls{ grid-template-columns: 1fr; }
+  button#refresh{ width: auto; } 
+  thead th, tbody td{ padding: 10px 10px; }
+  table{ font-size: 11px; }
+}
+
+.top-actions{
+  display:flex;
+  justify-content:flex-end;
+  padding:0 14px 10px;
+}
+
+.about-link{
+  display:inline-block;
+  padding:0;
+  border:none;
+  border-radius:0;
+  color:#d7fff0;
+  text-decoration:none;
+  background:transparent;
+  box-shadow:none;
+  font:14px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.about-link:hover,
+.about-link:focus-visible{
+  text-decoration:underline;
+  outline:none;
+}
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Claw 🦞 Glancer</h1>
+        <p class="sub">Prioritized Security Threat Intelligence</p>
+      </div>
+    </header>
+
+    <div class="top-actions">
+      <a class="about-link" href="/about/">About</a>
+    </div>
+
+    <section class="panel">
+      <div class="controls">
+        <input id="q" type="text" placeholder="Filter CVE, vendor, tag, keyword..." />
+        <select id="tag">
+          <option value="">Tag: any</option>
+        </select>
+        <select id="minScore">
+          <option value="0">Min score: 0</option>
+          <option value="60">Min score: 60</option>
+          <option value="80">Min score: 80</option>
+          <option value="100">Min score: 100</option>
+          <option value="120">Min score: 120</option>
+          <option value="140">Min score: 140</option>
+        </select>
+        <button id="refresh">Refresh</button>
+      </div>
+
+      <div class="meta">
+        <div class="pill"><span class="dot"></span><span id="status">Idle</span></div>
+        <div class="pill">Last load: <span id="lastLoad">never</span></div>
+        <div class="pill">Showing: <span id="count">0</span></div>
+      </div>
+
+      <div id="err" class="err" style="display:none"></div>
+
+      <div style="overflow:auto; border-top:1px solid rgba(0,255,140,.10)">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:110px">Score</th>
+              <th style="width:140px">CVE</th>
+              <th style="width:110px">Severity</th>
+              <th style="width:220px">Tags</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+<script>
+const DATA_FILE = "data/prioritized_threats.json"; 
+let all = [];
+
+let lastManualRefresh = 0;
+const REFRESH_COOLDOWN_MS = 10_000;
+
+const el = (id)=>document.getElementById(id);
+const rowsEl = el("rows");
+const errEl = el("err");
+const statusEl = el("status");
+const lastLoadEl = el("lastLoad");
+const countEl = el("count");
+
+const qEl = el("q");
+const tagEl = el("tag");
+const minScoreEl = el("minScore");
+
+function setStatus(s){ statusEl.textContent = s; }
+function showErr(msg){
+  errEl.style.display = "block";
+  errEl.textContent = msg;
+}
+function clearErr(){ errEl.style.display = "none"; errEl.textContent = ""; }
+
+function uniqTags(items){
+  const s = new Set();
+  for (const x of items){
+    const tags = x.tags || [];
+    for (const t of tags) s.add(t);
+  }
+  return Array.from(s).sort();
+}
+
+function renderTagOptions(){
+  const tags = uniqTags(all);
+  const current = tagEl.value;
+  tagEl.innerHTML = '<option value="">Tag: any</option>' + tags.map(t => `<option value="${t}">${t}</option>`).join("");
+  if (tags.includes(current)) tagEl.value = current;
+}
+
+function match(x, q, tag, minScore){
+  const score = Number(x.intel_score ?? 0);
+  if (score < minScore) return false;
+  if (tag){
+    const tags = x.tags || [];
+    if (!tags.includes(tag)) return false;
+  }
+  if (!q) return true;
+  const hay = [
+    x.cve_id || "",
+    x.summary || "",
+    (x.tags || []).join(" "),
+    (x.reasons || []).join(" "),
+    (x.affected || []).map(a => `${a.vendor || ""} ${a.product || ""}`).join(" ")
+  ].join(" ").toLowerCase();
+  return hay.includes(q.toLowerCase());
+}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function render(){
+  const q = (qEl ? qEl.value : "").trim();
+  const tag = tagEl.value;
+  const minScore = Number(minScoreEl.value || 0);
+
+  const filtered = all.filter(x => match(x, q, tag, minScore));
+  countEl.textContent = filtered.length;
+
+  rowsEl.innerHTML = filtered.map(x => {
+    const score = x.intel_score ?? 0;
+    const sev = x.severity || "";
+    const tags = x.tags || [];
+    const summary = x.summary || "";
+    const cve = x.cve_id || "";
+
+    return `
+      <tr>
+        <td class="score">${esc(score)}</td>
+        <td><a href="https://nvd.nist.gov/vuln/detail/${encodeURIComponent(cve)}" target="_blank" rel="noreferrer">${esc(cve)}</a></td>
+        <td class="sev ${esc(sev)}">${esc(sev)}</td>
+        <td><div class="tags">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div></td>
+        <td class="summary">${esc(summary)}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+async function load(){
+  clearErr();
+  setStatus("Loading…");
+  try{
+    const res = await fetch(DATA_FILE + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${DATA_FILE}`);
+    const data = await res.json();
+    if (!Array.isArray(data)) throw new Error("JSON is not an array");
+    all = data;
+    renderTagOptions();
+    render();
+    const now = new Date();
+    lastLoadEl.textContent = now.toISOString().replace("T"," ").replace("Z"," UTC");
+    setStatus("OK");
+  }catch(e){
+    setStatus("ERROR");
+    showErr(String(e));
+  }
+}
+
+if (qEl) qEl.addEventListener("input", render);
+tagEl.addEventListener("change", render);
+minScoreEl.addEventListener("change", render);
+
+el("refresh").addEventListener("click", () => {
+  const now = Date.now();
+  if (now - lastManualRefresh < REFRESH_COOLDOWN_MS){
+    setStatus("Cooling down…");
+    return;
+  }
+  lastManualRefresh = now;
+  load();
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) load();
+});
+
+load();
+</script>
+<script>
+(async () => {
+  try {
+    const r = await fetch("data/delta.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return;
+    const d = await r.json();
+
+    const topNote = d.top_changed ? "top moved" : "top steady";
+    const text = `Δ new: ${d.new_count ?? 0} · dropped: ${d.dropped_count ?? 0} · ${topNote}`;
+
+    const allNodes = Array.from(document.querySelectorAll("body *"));
+    const lastLoadEl = allNodes.find(el => (el.textContent || "").includes("Last load"));
+
+    const badge = document.createElement("span");
+    badge.textContent = text;
+    badge.style.marginLeft = "10px";
+    badge.style.padding = "6px 10px";
+    badge.style.borderRadius = "999px";
+    badge.style.border = "1px solid rgba(0,255,255,0.15)";
+    badge.style.background = "rgba(10,20,20,0.55)";
+    badge.style.backdropFilter = "blur(10px)";
+    badge.style.webkitBackdropFilter = "blur(10px)";
+    badge.style.fontSize = "12px";
+    badge.style.opacity = "0.95";
+
+    if (lastLoadEl && lastLoadEl.parentElement) {
+      lastLoadEl.parentElement.appendChild(badge);
+    } else {
+      const h = document.querySelector("h1, header, body");
+      if (h) h.appendChild(badge);
+    }
+  } catch (e) {
+    // quiet fail
+  }
+})();
+</script>
+</body>
+</html>

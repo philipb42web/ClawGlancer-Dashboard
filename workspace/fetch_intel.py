@@ -381,7 +381,9 @@ def main():
     vulns_sorted = sorted(vulns, key=lambda x: x.get("intel_score", 0.0), reverse=True)
 
     
-    data_dir = "/opt/clawglancer/public/data"
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    default_data_dir = os.path.join(repo_root, "data")
+    data_dir = os.environ.get("DATA_DIR", default_data_dir)
     os.makedirs(data_dir, exist_ok=True)
 
     out_path = f"{data_dir}/critical_threats.json"
@@ -391,15 +393,49 @@ def main():
     os.replace(tmp_path, out_path)
 
     top_path = f"{data_dir}/prioritized_threats.json"
+    top_items = vulns_sorted[:100]
+
+    # Calculate delta against previous top list if present
+    old_top_items = []
+    if os.path.exists(top_path):
+        try:
+            with open(top_path, "r", encoding="utf-8") as f:
+                old_top_items = json.load(f)
+        except Exception:
+            old_top_items = []
+
+    old_ids = {x.get("cve_id") for x in old_top_items if x.get("cve_id")}
+    new_ids = {x.get("cve_id") for x in top_items if x.get("cve_id")}
+
+    new_count = len(new_ids - old_ids) if old_ids else 0
+    dropped_count = len(old_ids - new_ids) if old_ids else 0
+    top_changed = False
+    if old_top_items and top_items:
+        top_changed = (old_top_items[0].get("cve_id") != top_items[0].get("cve_id"))
+
+    now_iso = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+    delta = {
+        "new_count": new_count,
+        "dropped_count": dropped_count,
+        "top_changed": top_changed,
+        "generated_at": now_iso
+    }
+    delta_path = f"{data_dir}/delta.json"
+    delta_tmp = delta_path + ".tmp"
+    with open(delta_tmp, "w", encoding="utf-8") as f:
+        json.dump(delta, f, indent=2, ensure_ascii=False)
+    os.replace(delta_tmp, delta_path)
+
     top_tmp = top_path + ".tmp"
     with open(top_tmp, "w", encoding="utf-8") as f:
-        json.dump(vulns_sorted[:100], f, indent=2, ensure_ascii=False)
+        json.dump(top_items, f, indent=2, ensure_ascii=False)
     os.replace(top_tmp, top_path)
 
     meta_path = f"{data_dir}/meta.json"
     meta_tmp = meta_path + ".tmp"
     meta = {
-        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z"),
+        "generated_at": now_iso,
         "count_total": len(vulns_sorted),
         "count_top": min(100, len(vulns_sorted)),
     }
@@ -409,6 +445,7 @@ def main():
 
     print(f"Wrote {len(vulns_sorted)} records to {out_path}")
     print(f"Wrote {min(100, len(vulns_sorted))} records to {top_path}")
+    print(f"Wrote delta metrics to {delta_path}")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Claw Glancer</title>
+  <style>
+    :root{
+      --bg:#050807;
+      --panel:#07110c;
+      --txt:rgba(180,255,220,.92);
+      --muted:rgba(180,255,220,.60);
+      --neon:rgba(0,255,140,.95);
+      --warn:rgba(255,120,120,.95);
+      --amber:rgba(255,210,120,.95);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; margin:0; }
+
+    body{
+      min-height:100%;
+      background:linear-gradient(180deg, #030504 0%, #050807 45%, #040706 100%);
+      background-attachment:fixed;
+      color:var(--txt);
+      font-family:var(--sans);
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.00),
+        rgba(255,255,255,0.00) 2px,
+        rgba(0,0,0,0.10) 3px
+      );
+      pointer-events:none;
+      opacity:.20;
+      z-index:0;
+    }
+
+    .wrap{
+      max-width:1160px;
+      margin:0 auto;
+      padding:26px 18px 40px;
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+      padding-bottom:12px;
+      border-bottom:1px solid rgba(0,255,140,.12);
+    }
+
+    .brand{
+      margin:0;
+      font-size:20px;
+      letter-spacing:.5px;
+      font-family:var(--mono);
+      color:var(--neon);
+      text-shadow:0 0 18px rgba(0,255,140,.12);
+    }
+
+    .back{
+      display:inline-block;
+      padding:8px 14px;
+      border:1px solid rgba(0,255,140,.24);
+      border-radius:999px;
+      color:var(--txt);
+      text-decoration:none;
+      background:rgba(0,0,0,.25);
+      font:12px/1.2 var(--mono);
+      transition:all .15s ease;
+    }
+
+    .back:hover,
+    .back:focus-visible{
+      background:rgba(0,255,140,.12);
+      border-color:var(--neon);
+      text-decoration:none;
+      outline:none;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:360px minmax(0, 1fr);
+      gap:24px;
+      align-items:start;
+    }
+
+    .card{
+      background:rgba(7,17,12,.78);
+      border:1px solid rgba(0,255,140,.18);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      overflow:hidden;
+    }
+
+    .hero{
+      padding:18px 20px 14px;
+      border-bottom:1px solid rgba(0,255,140,.10);
+    }
+
+    .page{
+      margin:0 0 8px;
+      font-size:16px;
+      line-height:1.2;
+      color:rgba(220,255,235,.96);
+      font-family:var(--mono);
+    }
+
+    .sub{
+      margin:0;
+      font-size:12px;
+      line-height:1.55;
+      color:var(--muted);
+      font-family:var(--mono);
+    }
+
+    .content{
+      padding:16px;
+      display:grid;
+      gap:14px;
+    }
+
+    .block{
+      padding:14px;
+      border:1px solid rgba(0,255,140,.12);
+      border-radius:14px;
+      background:rgba(0,0,0,.22);
+    }
+
+    .block-title{
+      margin:0 0 8px;
+      font-size:13px;
+      color:var(--neon);
+      font-family:var(--mono);
+      letter-spacing:.3px;
+    }
+
+    p, li{
+      font-size:12px;
+      line-height:1.55;
+      color:rgba(200,255,230,.88);
+      font-family:var(--mono);
+    }
+
+    p{margin:0 0 10px}
+    p:last-child{margin-bottom:0}
+    ul{margin:0; padding-left:18px}
+    li{margin:6px 0}
+
+    code{
+      color:#b7ffe0;
+      background:rgba(20,241,149,.08);
+      padding:2px 6px;
+      border-radius:6px;
+      font-family:var(--mono);
+      font-size:11px;
+    }
+
+    .tag-grid{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:6px 12px;
+      font-family:var(--mono);
+      font-size:11px;
+    }
+
+    .tag-item{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .tag-name{
+      padding:2px 6px;
+      border-radius:6px;
+      background:rgba(0,255,140,.08);
+      border:1px solid rgba(0,255,140,.18);
+      color:var(--txt);
+    }
+
+    .tag-weight{
+      font-weight:700;
+      color:var(--neon);
+    }
+
+    .feed-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 12px;
+      border-radius:10px;
+      background:rgba(0,0,0,.30);
+      border:1px solid rgba(0,255,140,.15);
+      color:var(--txt);
+      text-decoration:none;
+      font-family:var(--mono);
+      font-size:11px;
+      margin-top:8px;
+      transition:background .15s;
+    }
+
+    .feed-link:hover{
+      background:rgba(0,255,140,.10);
+      border-color:var(--neon);
+    }
+
+    @media (max-width:980px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:520px){
+      .wrap{padding:18px 12px 28px}
+      .brand{font-size:18px}
+      .page{font-size:15px}
+      p, li{font-size:11px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 class="brand">Claw 🦞 Glancer</h1>
+      <a class="back" href="/">← Back to dashboard</a>
+    </header>
+
+    <div class="layout">
+      <!-- LEFT SIDEBAR: Scoring & Tag weights -->
+      <aside class="card">
+        <div class="hero">
+          <h2 class="page">Scoring Engine</h2>
+          <p class="sub">
+            Signals-based threat model ranking real-world exploitability over raw CVSS noise.
+          </p>
+        </div>
+
+        <div class="content">
+          <div class="block">
+            <h3 class="block-title">Score Components</h3>
+            <p><strong>Base CVSS:</strong> <code>CVSS_v3 × 5.0</code> (0 - 50 pts)</p>
+            <p><strong>Freshness Boost:</strong> <code>+10 pts</code> for CVEs modified in last 48h.</p>
+          </div>
+
+          <div class="block">
+            <h3 class="block-title">Killchain Tag Weights</h3>
+            <div class="tag-grid">
+              <div class="tag-item"><span class="tag-name">in_the_wild</span></div>
+              <div class="tag-weight">+35</div>
+
+              <div class="tag-item"><span class="tag-name">rce</span></div>
+              <div class="tag-weight">+30</div>
+
+              <div class="tag-item"><span class="tag-name">auth_bypass</span></div>
+              <div class="tag-weight">+25</div>
+
+              <div class="tag-item"><span class="tag-name">priv_esc</span></div>
+              <div class="tag-weight">+25</div>
+
+              <div class="tag-item"><span class="tag-name">wormable</span></div>
+              <div class="tag-weight">+25</div>
+
+              <div class="tag-item"><span class="tag-name">deserialization</span></div>
+              <div class="tag-weight">+20</div>
+
+              <div class="tag-item"><span class="tag-name">poc</span></div>
+              <div class="tag-weight">+20</div>
+
+              <div class="tag-item"><span class="tag-name">command_injection</span></div>
+              <div class="tag-weight">+18</div>
+
+              <div class="tag-item"><span class="tag-name">sqli / ssrf</span></div>
+              <div class="tag-weight">+18</div>
+
+              <div class="tag-item"><span class="tag-name">path_traversal</span></div>
+              <div class="tag-weight">+15</div>
+
+              <div class="tag-item"><span class="tag-name">file_write</span></div>
+              <div class="tag-weight">+15</div>
+
+              <div class="tag-item"><span class="tag-name">xss</span></div>
+              <div class="tag-weight">+8</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3 class="block-title">Raw Feeds</h3>
+            <a class="feed-link" href="/data/prioritized_threats.json" target="_blank">
+              <span>prioritized_threats.json</span>
+              <span>↗</span>
+            </a>
+            <a class="feed-link" href="/data/critical_threats.json" target="_blank">
+              <span>critical_threats.json</span>
+              <span>↗</span>
+            </a>
+            <a class="feed-link" href="/data/delta.json" target="_blank">
+              <span>delta.json</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT COLUMN: Project Info -->
+      <main class="card">
+        <div class="hero">
+          <h1 class="page">About Claw Glancer</h1>
+          <p class="sub">
+            A high-signal, lightweight vulnerability intelligence dashboard designed for security teams and engineers.
+          </p>
+        </div>
+
+        <div class="content">
+          <div class="block">
+            <h2 class="block-title">What It Does</h2>
+            <p>
+              Claw Glancer pulls newly published and modified vulnerability records from NIST's National Vulnerability Database (NVD).
+              Instead of burying security analysts in hundreds of low-impact alerts, it normalizes the data into a strict schema, extracts kill-chain indicators, and computes a composite <strong>Intel Score</strong>.
+            </p>
+          </div>
+
+          <div class="block">
+            <h2 class="block-title">How It Works</h2>
+            <ul>
+              <li><strong>Scraper & Normalizer:</strong> Ingests NVD CVE 2.0 API data scoped to the recent 72-hour window.</li>
+              <li><strong>Pattern Matching:</strong> Scans summaries and reference advisories for critical exploit patterns (RCE, bypass, active exploitation, PoCs).</li>
+              <li><strong>Signal Extraction:</strong> Deduplicates records, discards low-severity noise (CVSS &lt; 7.0), and produces atomic JSON artifacts.</li>
+              <li><strong>Zero-Server Architecture:</strong> The dashboard runs as a pure static web application hosted on GitHub Pages with automated cron workflows.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h2 class="block-title">Design Philosophy</h2>
+            <p>
+              Many vulnerability trackers are cluttered with bloated dashboards and opaque metrics. Claw Glancer prioritizes:
+            </p>
+            <ul>
+              <li><strong>Speed:</strong> Instant client-side filtering by score, tags, vendor, and keywords.</li>
+              <li><strong>Explainability:</strong> Every score is transparently backed by explicit reasons (e.g. <code>rce+30</code>, <code>in_the_wild+35</code>).</li>
+              <li><strong>Minimal Attack Surface:</strong> Static client delivery without complex backend servers or database maintenance.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h2 class="block-title">Roadmap</h2>
+            <p>
+              Future planned upgrades include CISA KEV cross-referencing, EPSS (Exploit Prediction Scoring System) integration, and RSS / JSON feeds for direct SIEM ingestion.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
