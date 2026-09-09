@@ -23,7 +23,7 @@ Acting as an automated, serverless threat intelligence aggregator & scoring engi
 ---
 
 
-* Python (Scraper & Heuristics)
+* Python 
 * JavaScript / HTML5 / CSS 
 * GitHub Actions/Pages
 
