@@ -1,67 +1,30 @@
-  ##demo - https://clawglancer.dev
-  
- 
- Claw 🦞 Glancer - dashboard:
+*** Claw 🦞 Glancer ***
 
-is a VPS hosted CVE fetching pipeline that displays recently modified CVEs. 
-The dashboard displays semantic kill-chain tags with a custom (signals based) scoring model.
-It generates JSON artifacts from filtered records (API) & represents them on a dashboard.
+Is a Live Dashboard: [https://clawglancer.dev](https://clawglancer.dev)
 
-Objective: 
+Acting as an automated, serverless threat intelligence aggregator & scoring engine. It continuously tracks newly published and modified high-severity CVEs, cross-references them against active in-the-wild exploitation catalogs, enriches them with predictive exploit modeling, and rolls breaking cybersecurity advisories in real time.
 
-fast overview of what is critical now (with min attack surface).
+---
 
-Design goal:
+# Core functions
 
-- pull recent CVE records from NVD
-- filter for higher-signal incidents
-- generate an hourly Telegram alert summary
+* **Multi-Source Intelligence**:
+  * **NIST NVD (API v2.0)**: Ingests newly published and modified CVEs across rolling 72-hour windows.
+  * **CISA KEV Catalog**: Cross-references 1,700+ confirmed actively exploited vulnerabilities with instant prioritization.
+  * **FIRST.org EPSS**: Enriches threats with machine-learning exploit prediction probabilities (0–100%) and percentiles.
+* **Rolling Cyber Intel Marquee**:
+  * Sticky real-time news ticker streaming latest dispatches from **SANS Internet Storm Center (ISC)**, **CISA Cybersecurity Alerts**, and **BleepingComputer / DFIR**.
+  * Interactive pause-on-hover with direct links to vendor advisories.
+* **Explainable Threat Scoring**:
+  * Calculates an `intel_score` combining base CVSS, a 48h freshness boost, keyword killchain heuristics (`rce`, `auth_bypass`, `priv_esc`, `poc`), CISA KEV confirmation (+40), and high EPSS probability (+25).
+* **Zero-Cost & Serverless**:
+  * Runs on a cron via **GitHub Actions**; hosted globally with zero server overhead via **GitHub Pages**.
 
-_____________________________________________________________________________
-
-Overview
+---
 
 
-1.   Fetcher (Python):
-   - File: `workspace/fetch_intel.py`
-   - Role:
-     - Pull CVE records from NVD (API call with last-modified scope)
-     - Normalization to strict schema
-     - Filtering (recent + CVSS >= 7)
-     - Application of semantic tags & `intel_score` with `reasons`
-     - Write output JSON files (atomically)
+* Python (Scraper & Heuristics)
+* JavaScript / HTML5 / CSS 
+* GitHub Actions/Pages
 
-2.   Dashboard:
-   - File: `workspace/dashboard.html`
-   - Role:
-     - Read `prioritized_threats.json` (same directory)
-     - Provide search / filters / refresh
-     - no critical backend requirements
-
-3.   Runtime:
-   - Files: `Dockerfile`, `docker-compose.yml`
-   - Role:
-     - Provide structured execution environment for pipeline 
-     - git gateway
-    
-4.   Data:
-     - Array - `workspace/critical_threats.json` :
-     - CVE records (recent, high severity)
-
-      Examples (approx. top 100):
-      - `cve_id`
-      - `published`
-      - `last_modified`
-      - `cvss_v3`
-      - `severity`
-      - `summary`
-      - `references`
-  
-5.   Stack:
-    - Python
-    - JavaScript
-    - Docker
-    - VPS
-    - API (AI & Telegram)
-      - `source`
 
