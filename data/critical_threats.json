@@ -1283,34 +1283,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-76639",
-    "published": "2026-08-27T20:18:38.230",
-    "last_modified": "2026-09-08T20:23:49.880",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Unitree G1 EDU firmware through 1.5.2 contains an unauthenticated remote code execution vulnerability that allows network-adjacent attackers to execute arbitrary commands as root by chaining three weaknesses: an unauthenticated WebRTC-to-DDS bridge on TCP port 9991, a static AES-128 key stored with world-readable permissions, and a path traversal flaw in the chat_go knowledge upload API. Attackers can publish DDS control messages to restart the bashrunner service, plant a malicious payload in its script execution directory via path traversal, and trigger execution of that payload as uid 0 through the bashrunner shell subprocess.",
-    "references": [
-      "https://boschko.ca/g1-ble-rce/",
-      "https://github.com/OlivierLaflamme/UniBLEed",
-      "https://www.vulncheck.com/advisories/unitree-g1-edu-unauthenticated-rce-via-dds-bridge-and-path-traversal"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.6,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-48080",
     "published": "2026-08-06T22:17:10.703",
     "last_modified": "2026-09-08T20:51:43.490",
@@ -1973,6 +1945,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-68502",
+    "published": "2026-07-30T21:18:13.317",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "LazyOwn RedTeam/APT Framework is an AI-powered C2 and red-team operations framework. Prior to 0.2.154, LazyOwn's lazyc2.py registers an unauthenticated Socket.IO input event handler that dispatches data.get('value') to LazyOwnShell.one_cmd, reaching LazyOwnShell.do_cmd and subprocess.call(command, shell=True), allowing unauthenticated remote code execution in the C2 process. This issue is fixed in 0.2.154.",
+    "references": [
+      "https://github.com/grisuno/LazyOwn/commit/2e1e3a7b5da8149ae28a970b5883aefa42921652",
+      "https://github.com/grisuno/LazyOwn/releases/tag/release/0.2.154",
+      "https://github.com/grisuno/LazyOwn/security/advisories/GHSA-fr84-8cfg-59w4",
+      "https://github.com/grisuno/LazyOwn/security/advisories/GHSA-fr84-8cfg-59w4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-68770",
     "published": "2026-07-31T21:17:32.440",
     "last_modified": "2026-09-09T20:35:08.537",
@@ -2587,6 +2586,33 @@
       "recently modified (last 48h)",
       "priv_esc+25",
       "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2020-14498",
+    "published": "2020-08-26T14:15:10.540",
+    "last_modified": "2026-09-10T18:17:53.100",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "HMS Industrial Networks AB eCatcher all versions prior to 6.5.5 is vulnerable to a stack-based buffer overflow, which may allow an attacker to remotely execute arbitrary code.",
+    "references": [
+      "https://www.cisa.gov/news-events/ics-advisories/icsa-20-210-03",
+      "https://www.hms-networks.com/cybersecurity/security-advisories",
+      "https://us-cert.cisa.gov/ics/advisories/icsa-20-210-03",
+      "https://www.hms-networks.com/cybersecurity/security-advisories"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.9,
+    "epss_percentile": 86.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -3466,37 +3492,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-54721",
-    "published": "2026-08-27T20:17:49.973",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Silverstripe UserForms provides a visual form builder for the Silverstripe CMS. From 6.0.0 until 6.4.9, 7.0.7, and 7.1.1, the userform email recipient subject field in the CMS accepts a specially crafted payload that can be interpreted as executable server-side code. An authenticated CMS user with permission to configure a UserForms email recipient can use the subject field to run arbitrary code on the server, compromising confidentiality, integrity, and availability. This issue is fixed in versions 6.4.9, 7.0.7, and 7.1.1.",
-    "references": [
-      "https://github.com/silverstripe/silverstripe-userforms/commit/23c069866900c19b499bfa997d1e251e97491702",
-      "https://github.com/silverstripe/silverstripe-userforms/commit/c55494ad7c717b199a3c1663b43a54db5d95604c",
-      "https://github.com/silverstripe/silverstripe-userforms/pull/1441",
-      "https://github.com/silverstripe/silverstripe-userforms/pull/1442",
-      "https://github.com/silverstripe/silverstripe-userforms/releases/tag/6.4.9",
-      "https://github.com/silverstripe/silverstripe-userforms/releases/tag/7.0.7",
-      "https://github.com/silverstripe/silverstripe-userforms/releases/tag/7.1.1",
-      "https://github.com/silverstripe/silverstripe-userforms/security/advisories/GHSA-g8wr-r2v2-vqc6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-67328",
     "published": "2026-08-01T13:17:03.380",
     "last_modified": "2026-09-08T20:34:34.997",
@@ -3853,7 +3848,7 @@
   {
     "cve_id": "CVE-2026-19387",
     "published": "2026-08-10T03:16:40.223",
-    "last_modified": "2026-09-08T20:17:29.063",
+    "last_modified": "2026-09-10T17:17:02.130",
     "cvss_v3": 7.6,
     "severity": "HIGH",
     "affected": [],
@@ -3865,6 +3860,8 @@
       "https://access.redhat.com/errata/RHSA-2026:65122",
       "https://access.redhat.com/errata/RHSA-2026:65123",
       "https://access.redhat.com/errata/RHSA-2026:65124",
+      "https://access.redhat.com/errata/RHSA-2026:66406",
+      "https://access.redhat.com/errata/RHSA-2026:66407",
       "https://access.redhat.com/security/cve/CVE-2026-19387",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2513015",
       "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/12235",
@@ -4316,6 +4313,54 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 49.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-0297",
+    "published": "2026-08-13T03:16:45.077",
+    "last_modified": "2026-09-10T17:07:52.880",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A buffer overflow vulnerability exists in the Palo Alto Networks GlobalProtect™ app that enables a man-in-the-middle (MitM) attacker or a rogue gateway to disrupt system processes and potentially execute arbitrary code with elevated privileges (SYSTEM privileges on Windows, and root privileges on macOS and Linux).",
+    "references": [
+      "https://security.paloaltonetworks.com/CVE-2026-0297"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-0298",
+    "published": "2026-08-13T03:16:45.560",
+    "last_modified": "2026-09-10T17:01:09.003",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An improper input validation vulnerability exists in the Windows Pre-Logon Access Provider (PLAP) component of the Palo Alto Networks GlobalProtect™ app on Windows devices which enables a man-in-the-middle (MitM) attacker to execute arbitrary code with SYSTEM privileges on an affected client.\n\nThe GlobalProtect app on Linux, macOS, iOS, Android, and Chrome OS  is not affected.",
+    "references": [
+      "https://security.paloaltonetworks.com/CVE-2026-0298"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.5,
     "tags": [
       "rce"
     ],
@@ -5559,32 +5604,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-76640",
-    "published": "2026-08-27T20:18:38.380",
-    "last_modified": "2026-09-08T20:23:49.880",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Unitree G1 EDU firmware through 1.5.2 contains multiple chained vulnerabilities in the BLE GATT server and WiFi provisioning stack that allow unauthenticated proximate attackers to achieve root code execution without pairing or credentials by exploiting an unquoted heredoc variable in the WiFi provisioning script and a buffer overflow in the SSID chunk accumulator. Attackers can send crafted BLE writes to overflow a fixed BSS buffer across BLE connections, corrupting an adjacent mainloop function pointer dispatch entry that is subsequently invoked by the cleanup path passing attacker-controlled data to system() as uid 0.",
-    "references": [
-      "https://boschko.ca/g1-ble-rce/",
-      "https://github.com/OlivierLaflamme/UniBLEed",
-      "https://www.vulncheck.com/advisories/unitree-g1-edu-ble-gatt-rce-via-wifi-provisioning-stack"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-70149",
     "published": "2026-02-18T17:21:36.160",
     "last_modified": "2026-09-08T20:17:28.017",
@@ -6065,38 +6084,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-54718",
-    "published": "2026-08-27T20:17:49.817",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Silverstripe Advanced Workflow is a highly configurable step-based workflow module. Prior to 6.4.5, 7.1.3, and 7.2.1, an attacker with permission to author the advanced workflow email template can place a specially crafted server-side template payload in NotifyUsersWorkflowAction.EmailTemplate. When NotifyUsersWorkflowAction renders the field through the Silverstripe template engine SSTemplateParser, the payload can cause PHP evaluation and arbitrary code execution on the server; the regression coverage is in tests/php/WorkflowEngineTest.php. This issue is fixed in versions 6.4.5, 7.1.3, and 7.2.1.",
-    "references": [
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/commit/28d0b536491e5c68b1c445579bdd1ddc8beaf8bb",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/commit/f170766af992ed2ed3e5f21d127d0d0d3129678b",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/pull/629",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/pull/630",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/releases/tag/6.4.5",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/releases/tag/7.1.3",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/releases/tag/7.2.1",
-      "https://github.com/silverstripe/silverstripe-advancedworkflow/security/advisories/GHSA-39mm-rwm3-29jp",
-      "https://www.silverstripe.org/download/security-releases/cve-2026-54718"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 76.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-27962",
     "published": "2026-03-16T18:16:07.383",
     "last_modified": "2026-09-10T13:18:01.463",
@@ -6559,6 +6546,60 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-67581",
+    "published": "2026-08-19T18:17:17.303",
+    "last_modified": "2026-09-10T18:00:52.630",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Authentication Bypass by Capture-replay in ZenHive mpp allows an unauthenticated remote client to obtain paid resources by resubmitting one settled on-chain transfer.\n\nMPP.Methods.EVM.verify/2 accepts a transaction-hash credential and matches a transfer purely on token, to and amount (ERC-20) or to and value (native). It binds the proof neither to the challenge being verified nor to any record of prior use, and the generic MPP.Plug dedup store keys on challenge.id, which is regenerated for every 402 response. On a static-price route, a single historical transfer matching the charge therefore satisfies an unbounded number of later charges, including transfers an attacker can read off a public block explorer.\n\nThis issue affects mpp: from 0.3.0 before 0.6.3.",
+    "references": [
+      "https://cna.erlef.org/cves/CVE-2026-67581.html",
+      "https://github.com/ZenHive/mpp/commit/ecc038088b1cda09ad8a84acc6cc112addb4a68f",
+      "https://github.com/ZenHive/mpp/security/advisories/GHSA-vp5h-xh25-44wf",
+      "https://osv.dev/vulnerability/EEF-CVE-2026-67581"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.1,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 72.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73136",
+    "published": "2026-08-19T18:17:25.453",
+    "last_modified": "2026-09-10T18:17:22.870",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Authentication Bypass by Capture-replay in ZenHive mpp allows an unauthenticated third party to obtain paid resources by replaying a transfer settled by an unrelated payer.\n\nMPP.Methods.Tempo normally binds a settled TIP-20 TransferWithMemo to the specific challenge under verification through an attribution nonce carried in the memo. When a static \"memo\" is configured in method_config, check_matched_memo_binding/3 returns the match unconditionally and that binding is skipped, leaving only token, recipient, amount and the static memo value to match on. The static memo is echoed in every unauthenticated 402 response and Tempo transfers are public, so an attacker can take any matching transfer paid by a legitimate customer, request a fresh challenge for the same route, and present that transaction hash as a type=\"hash\" credential. The hash path performs no sender or signature check tying the presenter to the wallet that broadcast the transfer.\n\nThis issue affects mpp: from 0.6.1 before 0.6.4.",
+    "references": [
+      "https://cna.erlef.org/cves/CVE-2026-73136.html",
+      "https://github.com/ZenHive/mpp/commit/2207d7f456ae14c1d3fcacc6f635bf4f8cee1a34",
+      "https://github.com/ZenHive/mpp/security/advisories/GHSA-34g7-vx6g-82mq",
+      "https://osv.dev/vulnerability/EEF-CVE-2026-73136"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.9,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 72.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-5795",
     "published": "2026-04-08T14:16:32.633",
     "last_modified": "2026-09-09T13:20:32.147",
@@ -6660,6 +6701,30 @@
     "cisa_kev": false,
     "epss": 2.1,
     "epss_percentile": 80.4,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 72.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-24301",
+    "published": "2026-08-18T14:17:01.897",
+    "last_modified": "2026-09-10T18:26:54.557",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper neutralization of special elements used in a command ('command injection') in Microsoft Copilot allows an unauthorized attacker to disclose information over a network.",
+    "references": [
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-24301"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.2,
+    "epss_percentile": 81.6,
     "tags": [
       "command_injection"
     ],
@@ -7393,6 +7458,32 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-54650",
+    "published": "2026-07-28T23:17:08.763",
+    "last_modified": "2026-09-10T20:05:05.293",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "openhole exposes localhost to the internet in one command. In 0.1.1 and earlier, openhole-server in internal/server/public_proxy.go forwarded r.URL.Path instead of preserving the original request target with r.URL.EscapedPath(), allowing percent encoded dot segments %2e and separators %2f to reach tunneled local services as ../ and / for path traversal. This issue is fixed in version 0.1.2.",
+    "references": [
+      "https://github.com/bablilayoub/openhole/commit/a28c27adde2a7ed0c347b730c8707208c0f78ed3",
+      "https://github.com/bablilayoub/openhole/releases/tag/v0.1.2",
+      "https://github.com/bablilayoub/openhole/security/advisories/GHSA-fh2f-xfxc-q9cc"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.4,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 68.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
     ]
   },
   {
@@ -8623,6 +8714,53 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 52.6,
+    "tags": [],
+    "intel_score": 59.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-54680",
+    "published": "2026-07-29T17:16:52.900",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Logging operator automates the deployment and configuration of Kubernetes logging pipelines. Prior to 6.6.0, the Fluentd configuration renderer FluentRender in pkg/sdk/logging/model/render/fluent.go writes CRD strings such as Flow record_transformer.records values directly into fluent.conf without escaping, allowing a user who can create Flow resources to inject a Fluentd <match **> block using @type exec and execute arbitrary commands inside the Fluentd aggregator. This issue is fixed in version 6.6.0.",
+    "references": [
+      "https://github.com/kube-logging/logging-operator/commit/cf437d7f1e056c78740bf5716ac8bdebcf002425",
+      "https://github.com/kube-logging/logging-operator/releases/tag/6.6.0",
+      "https://github.com/kube-logging/logging-operator/security/advisories/GHSA-mjqf-28ph-426h",
+      "https://github.com/kube-logging/logging-operator/security/advisories/GHSA-mjqf-28ph-426h"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
+    "tags": [],
+    "intel_score": 59.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-52855",
+    "published": "2026-07-31T17:16:33.313",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Wings is the server control plane for Pterodactyl, a free, open-source game server management panel. Prior to 1.12.3, {{config.}} placeholders in egg configuration-file templates allow a low-privileged user to read {{config.token}}, {{config.token_id}}, and {{config.docker.registries}} from the full daemon configuration. This issue is fixed in version 1.12.3.",
+    "references": [
+      "https://github.com/pterodactyl/wings/commit/eb65e27ae077a63e38518c490768486af1cd86a9",
+      "https://github.com/pterodactyl/wings/releases/tag/v1.12.3",
+      "https://github.com/pterodactyl/wings/security/advisories/GHSA-pfvc-3p5h-x7h6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.4,
     "tags": [],
     "intel_score": 59.5,
     "reasons": [
@@ -9888,22 +10026,23 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-64068",
-    "published": "2026-07-19T16:17:47.390",
-    "last_modified": "2026-09-07T16:17:29.043",
+    "cve_id": "CVE-2026-68503",
+    "published": "2026-07-30T21:18:13.460",
+    "last_modified": "2026-09-10T20:12:43.783",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfs: Fix missing locking around retry adding new subreqs\n\nFix netfs_retry_read_subrequests() and netfs_retry_write_stream() to take\nthe appropriate lock when adding extra subrequests into\nstream->subrequests.",
+    "summary": "LazyOwn RedTeam/APT Framework is an AI-powered C2 and red-team operations framework. Prior to 0.2.154, LazyOwn ships default C2 credentials LazyOwn and LazyOwn in payload.json and core/payload_schema.py and passes them unchanged to lazyc2.py HTTP Basic authentication, allowing any network-reachable attacker who knows the defaults to authenticate to the C2 dashboard with operator-level access. This issue is fixed in 0.2.154.",
     "references": [
-      "https://git.kernel.org/stable/c/393f3f0d7353a94b1e0bc4ca89c683fe983e5fd2",
-      "https://git.kernel.org/stable/c/cce18c263e9623872327ba3c956012f73c1179cc",
-      "https://git.kernel.org/stable/c/d5c9d19b0ff2f7153532ac238a5e96fed2df315c"
+      "https://github.com/grisuno/LazyOwn/commit/2e1e3a7b5da8149ae28a970b5883aefa42921652",
+      "https://github.com/grisuno/LazyOwn/releases/tag/release/0.2.154",
+      "https://github.com/grisuno/LazyOwn/security/advisories/GHSA-38jf-j9x7-jf6f",
+      "https://github.com/grisuno/LazyOwn/security/advisories/GHSA-38jf-j9x7-jf6f"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.3,
+    "epss": 0.4,
+    "epss_percentile": 33.0,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -10683,6 +10822,30 @@
     "reasons": [
       "recently modified (last 48h)",
       "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-54725",
+    "published": "2026-07-31T18:17:17.013",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "vault-secrets-webhook is a Kubernetes mutating webhook that makes direct secret injection into Pods possible. Prior to 1.23.1, parseVaultConfig() in pkg/webhook/config.go accepts the vault.security.banzaicloud.io/vault-addr annotation, MutateConfigMap and MutateSecret call newVaultClient in pkg/webhook/webhook.go, and vault.security.banzaicloud.io/vault-serviceaccount can cause a ServiceAccount JWT to be sent to an attacker-controlled Vault address. This issue is fixed in version 1.23.1.",
+    "references": [
+      "https://github.com/bank-vaults/vault-secrets-webhook/commit/76db45976fee0f54cafd94dffa425e6b542f65a0",
+      "https://github.com/bank-vaults/vault-secrets-webhook/releases/tag/v1.23.1",
+      "https://github.com/bank-vaults/vault-secrets-webhook/security/advisories/GHSA-r2v3-8gwf-7ghm",
+      "https://github.com/bank-vaults/vault-secrets-webhook/security/advisories/GHSA-r2v3-8gwf-7ghm"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.6,
+    "tags": [],
+    "intel_score": 58.0,
+    "reasons": [
+      "recently modified (last 48h)"
     ]
   },
   {
@@ -11824,30 +11987,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-56015",
-    "published": "2026-07-03T13:17:30.130",
-    "last_modified": "2026-09-07T19:17:26.970",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Net::IP::LPM versions before 1.11 for Perl allow a heap out-of-bounds read via an unbounded prefix length.\n\nadd() passes the prefix string to the trie builder addPrefixToTrie() without checking it against the address width.\n\naddPrefixToTrie() then walks the prefix buffer by prefix_length bits, reading prefix[byte] for byte up to prefix_len/8, where prefix is the 4-byte (IPv4) or 16-byte (IPv6) packed address. A prefix length greater than 32 for IPv4 or 128 for IPv6, for example add(\"1.2.3.4/255\", $v) or add(\"2001:db8::/255\", $v), reads past the end of the packed address.\n\nThe out-of-bounds read happens during trie construction and is bounded: the prefix length is stored as an unsigned char, so the bit walk reads at most 32 bytes from the start of the packed address, a short distance past the end of the 4-byte or 16-byte buffer. It is detectable under AddressSanitizer, valgrind, or a hardened allocator, where it can abort the process. Lookups and dump() format only the valid address width, so the out-of-bounds bytes are not exposed through the module's API.",
-    "references": [
-      "https://metacpan.org/release/RRWO/Net-IP-LPM-1.11/changes",
-      "https://rt.cpan.org/Ticket/Display.html?id=179856",
-      "https://security.metacpan.org/patches/N/Net-IP-LPM/1.10/CVE-2026-56015-r2.patch",
-      "http://www.openwall.com/lists/oss-security/2026/07/03/4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.2,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-13221",
     "published": "2026-07-13T17:16:48.923",
     "last_modified": "2026-09-08T22:17:37.217",
@@ -12469,29 +12608,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-30156",
-    "published": "2026-08-28T00:16:45.557",
-    "last_modified": "2026-09-08T21:11:56.250",
-    "cvss_v3": 8.9,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Ceph is an open-source distributed storage platform providing object, block, and file storage. In versions prior to 20.2.4 and 19.2.6, the CephX authentication protocol encrypts tickets with AES-128-CBC in an unauthenticated mode that uses a hard-coded initialization vector and no message authentication, allowing an attacker to forge credentials and gain cluster-wide access. Because the ciphertext is malleable and the monitor will encrypt attacker-chosen entity names, an attacker holding one low-privilege key and able to observe CephX traffic can use the monitor as an encryption oracle and splice ciphertext blocks into valid tickets for privileged entities such as Manager, MDS, and OSD. The same lack of authentication also lets an attacker with CephX permissions escalate privileges by flipping a single bit in a service ticket to set its allow_all field to true. This issue is fixed in versions 20.2.4 and 19.2.6.",
-    "references": [
-      "https://github.com/ceph/ceph/commit/2ba086255de09c8b95177717cc7e9dd4377e2f0f",
-      "https://github.com/ceph/ceph/commit/3078188a7bdd89e2975280f2a906c71c2f6effd6",
-      "https://github.com/ceph/ceph/security/advisories/GHSA-7q3q-3975-qw3q"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.6,
-    "tags": [],
-    "intel_score": 54.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-20701",
     "published": "2025-08-04T07:15:28.027",
     "last_modified": "2026-09-08T16:17:48.883",
@@ -12598,29 +12714,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 28.4,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43391",
-    "published": "2026-05-08T15:16:50.490",
-    "last_modified": "2026-09-07T16:17:28.400",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnsfs: tighten permission checks for handle opening\n\nEven privileged services should not necessarily be able to see other\nprivileged service's namespaces so they can't leak information to each\nother. Use may_see_all_namespaces() helper that centralizes this policy\nuntil the nstree adapts.",
-    "references": [
-      "https://git.kernel.org/stable/c/1797ee11451f1b2be69863a9f5bd43b948813fdf",
-      "https://git.kernel.org/stable/c/24ebaf6676ae4f74f4856eb645959b15e62bc1b4",
-      "https://git.kernel.org/stable/c/d2324a9317f00013facb0ba00b00440e19d2af5e"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.7,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -14016,29 +14109,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-39944",
-    "published": "2026-08-28T00:17:27.860",
-    "last_modified": "2026-09-08T21:11:56.250",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Ceph is an open-source distributed storage platform providing object, block, and file storage. In versions prior to 20.2.4 and 19.2.6, the RADOS Gateway (RGW) protects STS session tokens with an AES-128-CBC handler that provides no message authentication, allowing an attacker who holds any valid STS token to tamper with it undetected and escalate to full RGW administrative access. Because the ciphertext is unauthenticated, the attacker can perform a CBC bit-flip on the acct_type, perm_type, and is_admin fields of their own token, and a forged is_admin value triggers a global administrative override that bypasses all capability checks. The attack is reachable remotely over the RGW S3 endpoint and is a self-contained modification of a token the attacker already possesses, requiring no encryption oracle and no network observation. It requires only a single valid STS token, which need not carry any elevated privileges, with STS enabled. This issue is fixed in versions 20.2.4 and 19.2.6.",
-    "references": [
-      "https://github.com/ceph/ceph/releases/tag/v19.2.6",
-      "https://github.com/ceph/ceph/releases/tag/v20.2.4",
-      "https://github.com/ceph/ceph/security/advisories/GHSA-j73r-qrgx-jvq2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-4601",
     "published": "2026-03-23T06:16:21.893",
     "last_modified": "2026-09-10T13:20:22.510",
@@ -14491,29 +14561,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-22108",
-    "published": "2025-04-16T15:16:05.083",
-    "last_modified": "2026-09-07T16:17:27.353",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nbnxt_en: Mask the bd_cnt field in the TX BD properly\n\nThe bd_cnt field in the TX BD specifies the total number of BDs for\nthe TX packet.  The bd_cnt field has 5 bits and the maximum number\nsupported is 32 with the value 0.\n\nCONFIG_MAX_SKB_FRAGS can be modified and the total number of SKB\nfragments can approach or exceed the maximum supported by the chip.\nAdd a macro to properly mask the bd_cnt field so that the value 32\nwill be properly masked and set to 0 in the bd_cnd field.\n\nWithout this patch, the out-of-range bd_cnt value will corrupt the\nTX BD and may cause TX timeout.\n\nThe next patch will check for values exceeding 32.",
-    "references": [
-      "https://git.kernel.org/stable/c/107b25db61122d8f990987895c2912927b8b6e3f",
-      "https://git.kernel.org/stable/c/9ee185e0f15594017a6f1a191ebe6630cfea5f74",
-      "https://git.kernel.org/stable/c/f60b41b815826f15c4d0323f923f398c423178d0"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [],
-    "intel_score": 53.0,
-    "reasons": [
-      "recently modified (last 48h)"
     ]
   },
   {
@@ -15634,30 +15681,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-23459",
-    "published": "2026-04-03T16:16:32.833",
-    "last_modified": "2026-09-07T16:17:27.923",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nip_tunnel: adapt iptunnel_xmit_stats() to NETDEV_PCPU_STAT_DSTATS\n\nBlamed commits forgot that vxlan/geneve use udp_tunnel[6]_xmit_skb() which\ncall iptunnel_xmit_stats().\n\niptunnel_xmit_stats() was assuming tunnels were only using\nNETDEV_PCPU_STAT_TSTATS.\n\n@syncp offset in pcpu_sw_netstats and pcpu_dstats is different.\n\n32bit kernels would either have corruptions or freezes if the syncp\nsequence was overwritten.\n\nThis patch also moves pcpu_stat_type closer to dev->{t,d}stats to avoid\na potential cache line miss since iptunnel_xmit_stats() needs to read it.",
-    "references": [
-      "https://git.kernel.org/stable/c/0d087d00161f562d5047cc4009bb0c6a19daf9f1",
-      "https://git.kernel.org/stable/c/5d562153b4719234227f99c2fb529f98a6a44d15",
-      "https://git.kernel.org/stable/c/8431c602f551549f082bbfa67f3003f2d8e3e132",
-      "https://git.kernel.org/stable/c/e40e2d11ced8119d3e4469ebe91264bc1cf71530"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.1,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-33810",
     "published": "2026-04-08T02:16:03.950",
     "last_modified": "2026-09-10T13:18:18.447",
@@ -16240,6 +16263,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-71048",
+    "published": "2026-08-18T21:18:04.600",
+    "last_modified": "2026-09-10T19:03:23.303",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle Product Lifecycle Analytics product of Oracle Supply Chain (component: Installation Issues).   The supported version that is affected is 3.6.1. Easily exploitable vulnerability allows low privileged attacker with network access via HTTP to compromise Oracle Product Lifecycle Analytics.  Successful attacks of this vulnerability can result in  unauthorized access to critical data or complete access to all Oracle Product Lifecycle Analytics accessible data as well as  unauthorized update, insert or delete access to some of Oracle Product Lifecycle Analytics accessible data and unauthorized ability to cause a partial denial of service (partial DOS) of Oracle Product Lifecycle Analytics. CVSS 3.1 Base Score 7.6 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:L).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspuaug2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.1,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 51.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-63407",
     "published": "2026-08-19T16:18:37.863",
     "last_modified": "2026-09-09T21:13:25.910",
@@ -16285,6 +16332,30 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 34.1,
+    "tags": [],
+    "intel_score": 51.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73541",
+    "published": "2026-08-19T18:17:25.627",
+    "last_modified": "2026-09-10T18:24:36.653",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Allocation of Resources Without Limits or Throttling in ZenHive mpp allows an unauthenticated remote client to drain the fee-payer wallet through concurrent sponsored payments, denying service to legitimate payers once it is empty.\n\nMPP.Methods.Tempo.FeePayerPolicy enforces its ceilings (max_gas, max_fee_per_gas, max_priority_fee_per_gas, the worst-case gas_limit * max_fee_per_gas <= max_total_fee budget cap, and a validity window) against one transaction at a time, and nothing accounts for exposure across concurrent requests. reserve_hash_atomic/2 is keyed on the transaction hash, so it prevents duplicate broadcast of the same signed transaction but not N distinct sponsored transactions carrying distinct expiring nonces. Committed sponsor exposure is therefore N times max_total_fee, bounded by nothing in the library, and the default 900 second validity window lets co-signed transactions stay broadcastable and uncounted for that entire period.\n\nThis issue affects mpp: from 0.2.0 before 0.12.0.",
+    "references": [
+      "https://cna.erlef.org/cves/CVE-2026-73541.html",
+      "https://github.com/ZenHive/mpp/commit/ddc46868fba57ccebb567c04709812b466123076",
+      "https://github.com/ZenHive/mpp/security/advisories/GHSA-j4j7-7xpr-c7cr",
+      "https://osv.dev/vulnerability/EEF-CVE-2026-73541"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.3,
     "tags": [],
     "intel_score": 51.0,
     "reasons": [
@@ -18028,6 +18099,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-54638",
+    "published": "2026-07-28T23:17:08.617",
+    "last_modified": "2026-09-10T20:05:05.293",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "gotd/td is a T Telegram MTProto API client in Go. Prior to 0.145.1, proto.UnencryptedMessage.Decode in proto/unencrypted_message.go read attacker controlled dataLen from an unauthenticated MTProto unencrypted packet and allocated make([]byte, dataLen) before checking the remaining buffer, allowing remote unauthenticated denial of service through excessive memory allocation and CPU or garbage collection pressure. This issue is fixed in version 0.145.1.",
+    "references": [
+      "https://github.com/gotd/td/commit/9d5d1f31ea5022d9798d84ccce15de2e91ba6baa",
+      "https://github.com/gotd/td/issues/1711",
+      "https://github.com/gotd/td/releases/tag/v0.145.1",
+      "https://github.com/gotd/td/security/advisories/GHSA-whmm-qj9r-wvr2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.7,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-66360",
     "published": "2026-07-30T23:16:53.070",
     "last_modified": "2026-09-08T19:30:43.093",
@@ -19706,173 +19804,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-53580",
-    "published": "2026-08-27T20:17:49.153",
-    "last_modified": "2026-09-09T16:49:20.627",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Trilium is an open-source hierarchical note-taking application. In versions prior to 0.104.0, the automatic image-download feature accepts file:// URLs in a note's img tags and reads the referenced local file with no path validation, allowing any authenticated user to disclose arbitrary files readable by the Trilium process. When a text note is saved, Trilium scans its HTML for image sources and downloads each external one; because the HTML sanitizer keeps file as an allowed scheme, a source such as file:///etc/passwd is passed straight to a filesystem read and its contents are stored as a note attachment the user can then retrieve. Pointing the same primitive at an unbounded source such as /dev/zero causes uncontrolled memory allocation that crashes the server process. The feature is enabled by default and is reachable through the web UI, the ETAPI, the web clipper, and note imports, requiring only an authenticated session or an ETAPI token. This issue is fixed in version 0.104.0",
-    "references": [
-      "https://github.com/TriliumNext/Trilium/commit/c417c901dfe45222c321fab1685f26730cc2068f",
-      "https://github.com/TriliumNext/Trilium/security/advisories/GHSA-3gxr-j6g6-q75c",
-      "https://github.com/TriliumNext/Trilium/security/advisories/GHSA-3gxr-j6g6-q75c"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.7,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38344",
-    "published": "2026-08-28T00:17:27.087",
-    "last_modified": "2026-09-08T19:42:20.313",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A NULL pointer dereference in the get_min_buffer_size function (/libswscale/slice.c) of FFmpeg N-122528-gdd2976b9e1 allows attackers to cause a Denial of Service (DoS) via supplying a crafted video file.",
-    "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/issues/21583"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38346",
-    "published": "2026-08-28T00:17:27.317",
-    "last_modified": "2026-09-09T15:53:46.577",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An integer overflow in the yuv2planeX_8_c() function (libswscale/output.c) of FFmpeg N-122528-gdd2976b9e1 allows attackers to cause a Denial of Service (DoS) via supplying a crafted video file.",
-    "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/issues/21584"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38347",
-    "published": "2026-08-28T00:17:27.420",
-    "last_modified": "2026-09-08T19:42:20.313",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap overflow in the ff_sws_alphablendaway function (libswscale/alphablend.c) of FFmpeg git-master commit 722a217 allows attackers to cause a Denial of Service (DoS) via a crafted input.",
-    "references": [
-      "https://trac.ffmpeg.org/ticket/11692"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.8,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38348",
-    "published": "2026-08-28T00:17:27.530",
-    "last_modified": "2026-09-09T15:53:46.577",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An integer overflow in the libswscale/utils.c component of FFmpeg N-122528-gdd2976b9e1 allows attackers to cause a Denial of Service (DoS) via supplying a crafted image file.",
-    "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/issues/21588"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38349",
-    "published": "2026-08-28T00:17:27.630",
-    "last_modified": "2026-09-09T15:53:46.577",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An integer overflow in the hScale16To19_c() function (libswscale/output.c) of FFmpeg N-122528-gdd2976b9e1 allows attackers to cause a Denial of Service (DoS) via supplying a crafted image file.",
-    "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/issues/21592"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38350",
-    "published": "2026-08-28T00:17:27.743",
-    "last_modified": "2026-09-09T15:53:46.577",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An integer overflow in the target_sws_fuzzer() function (libswscale/output.c) of FFmpeg N-122528-gdd2976b9e1 allows attackers to cause a Denial of Service (DoS) via supplying a crafted input.",
-    "references": [
-      "https://trac.ffmpeg.org/ticket/11686"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-22029",
     "published": "2026-01-10T03:15:48.870",
     "last_modified": "2026-09-10T13:17:42.633",
@@ -20156,7 +20087,7 @@
   {
     "cve_id": "CVE-2026-58014",
     "published": "2026-06-30T13:19:17.580",
-    "last_modified": "2026-09-09T08:17:21.477",
+    "last_modified": "2026-09-10T18:18:03.887",
     "cvss_v3": 7.3,
     "severity": "HIGH",
     "affected": [],
@@ -20179,6 +20110,7 @@
       "https://access.redhat.com/errata/RHSA-2026:65770",
       "https://access.redhat.com/errata/RHSA-2026:65771",
       "https://access.redhat.com/errata/RHSA-2026:65773",
+      "https://access.redhat.com/errata/RHSA-2026:66018",
       "https://access.redhat.com/security/cve/CVE-2026-58014",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2492255",
       "https://gitlab.gnome.org/GNOME/glib/-/issues/3930",
@@ -20245,28 +20177,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-44629",
-    "published": "2026-08-28T00:17:28.117",
-    "last_modified": "2026-09-09T18:16:57.667",
-    "cvss_v3": 7.9,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper access control to the Synergis Softwire installation folder. This vulnerability affects Streamvault all-in-one appliances (SV-100E and SV-300E series) and Synergis Softwire installed on Windows servers.",
-    "references": [
-      "https://techdocs.genetec.com/r/en-US/Security-Updates-for-SynergisTM-Softwire-12.0/Resolved-vulnerabilities-in-Synergis-Softwire-12.0.2",
-      "https://techdocs.genetec.com/r/en-US/Security-Updates-for-SynergisTM-Softwire-12.2/Resolved-vulnerabilities-in-Synergis-Softwire-12.2.0"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.2,
-    "tags": [],
-    "intel_score": 49.5,
-    "reasons": [
-      "recently modified (last 48h)"
     ]
   },
   {
@@ -20586,29 +20496,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 1.3,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43009",
-    "published": "2026-05-01T15:16:44.770",
-    "last_modified": "2026-09-07T16:17:28.090",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nbpf: Fix incorrect pruning due to atomic fetch precision tracking\n\nWhen backtrack_insn encounters a BPF_STX instruction with BPF_ATOMIC\nand BPF_FETCH, the src register (or r0 for BPF_CMPXCHG) also acts as\na destination, thus receiving the old value from the memory location.\n\nThe current backtracking logic does not account for this. It treats\natomic fetch operations the same as regular stores where the src\nregister is only an input. This leads the backtrack_insn to fail to\npropagate precision to the stack location, which is then not marked\nas precise!\n\nLater, the verifier's path pruning can incorrectly consider two states\nequivalent when they differ in terms of stack state. Meaning, two\nbranches can be treated as equivalent and thus get pruned when they\nshould not be seen as such.\n\nFix it as follows: Extend the BPF_LDX handling in backtrack_insn to\nalso cover atomic fetch operations via is_atomic_fetch_insn() helper.\nWhen the fetch dst register is being tracked for precision, clear it,\nand propagate precision over to the stack slot. For non-stack memory,\nthe precision walk stops at the atomic instruction, same as regular\nBPF_LDX. This covers all fetch variants.\n\nBefore:\n\n  0: (b7) r1 = 8                        ; R1=8\n  1: (7b) *(u64 *)(r10 -8) = r1         ; R1=8 R10=fp0 fp-8=8\n  2: (b7) r2 = 0                        ; R2=0\n  3: (db) r2 = atomic64_fetch_add((u64 *)(r10 -8), r2)          ; R2=8 R10=fp0 fp-8=mmmmmmmm\n  4: (bf) r3 = r10                      ; R3=fp0 R10=fp0\n  5: (0f) r3 += r2\n  mark_precise: frame0: last_idx 5 first_idx 0 subseq_idx -1\n  mark_precise: frame0: regs=r2 stack= before 4: (bf) r3 = r10\n  mark_precise: frame0: regs=r2 stack= before 3: (db) r2 = atomic64_fetch_add((u64 *)(r10 -8), r2)\n  mark_precise: frame0: regs=r2 stack= before 2: (b7) r2 = 0\n  6: R2=8 R3=fp8\n  6: (b7) r0 = 0                        ; R0=0\n  7: (95) exit\n\nAfter:\n\n  0: (b7) r1 = 8                        ; R1=8\n  1: (7b) *(u64 *)(r10 -8) = r1         ; R1=8 R10=fp0 fp-8=8\n  2: (b7) r2 = 0                        ; R2=0\n  3: (db) r2 = atomic64_fetch_add((u64 *)(r10 -8), r2)          ; R2=8 R10=fp0 fp-8=mmmmmmmm\n  4: (bf) r3 = r10                      ; R3=fp0 R10=fp0\n  5: (0f) r3 += r2\n  mark_precise: frame0: last_idx 5 first_idx 0 subseq_idx -1\n  mark_precise: frame0: regs=r2 stack= before 4: (bf) r3 = r10\n  mark_precise: frame0: regs=r2 stack= before 3: (db) r2 = atomic64_fetch_add((u64 *)(r10 -8), r2)\n  mark_precise: frame0: regs= stack=-8 before 2: (b7) r2 = 0\n  mark_precise: frame0: regs= stack=-8 before 1: (7b) *(u64 *)(r10 -8) = r1\n  mark_precise: frame0: regs=r1 stack= before 0: (b7) r1 = 8\n  6: R2=8 R3=fp8\n  6: (b7) r0 = 0                        ; R0=0\n  7: (95) exit",
-    "references": [
-      "https://git.kernel.org/stable/c/179ee84a89114b854ac2dd1d293633a7f6c8dac1",
-      "https://git.kernel.org/stable/c/7ffbe45b1d227e24659998a91cfd4c27af457e71",
-      "https://git.kernel.org/stable/c/ea150ffa9fc9f78c5cf22e1f7b06b6d016b1017c"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.7,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -30818,6 +30705,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-68500",
+    "published": "2026-07-30T21:18:13.007",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Sylius Mollie Plugin provides Mollie payment integration for Sylius applications. Prior to 2.2.8, 3.2.4, and 3.3.1, Sylius Mollie Plugin's POST /{_locale}/update-payment payment webhook accepts attacker-controlled id and orderId parameters but does not verify that the Mollie payment belongs to the referenced Sylius order, allowing an unauthenticated attacker with any valid paid Mollie payment ID to mark a victim order as paid without transferring funds for that order. This issue is fixed in 2.2.8, 3.2.4, and 3.3.1.",
+    "references": [
+      "https://github.com/Sylius/MolliePlugin/commit/01316b3ad3cf82e3c5ad160115d0a2cf89174e49",
+      "https://github.com/Sylius/MolliePlugin/commit/153c754486b1bc597b67a90ac07ef71cd7958267",
+      "https://github.com/Sylius/MolliePlugin/commit/d1f7753e92106e8bf3bedcfc61b02ea7b8e1c38a",
+      "https://github.com/Sylius/MolliePlugin/pull/351",
+      "https://github.com/Sylius/MolliePlugin/pull/352",
+      "https://github.com/Sylius/MolliePlugin/pull/354",
+      "https://github.com/Sylius/MolliePlugin/releases/tag/v2.2.8",
+      "https://github.com/Sylius/MolliePlugin/releases/tag/v3.2.4",
+      "https://github.com/Sylius/MolliePlugin/releases/tag/v3.3.1",
+      "https://github.com/Sylius/MolliePlugin/security/advisories/GHSA-rc52-c4hv-w89p"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.6,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-56671",
     "published": "2026-07-31T06:16:29.860",
     "last_modified": "2026-09-08T20:41:31.497",
@@ -30857,6 +30774,29 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 36.3,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-52856",
+    "published": "2026-07-31T17:16:33.460",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Wings is the server control plane for Pterodactyl, a free, open-source game server management panel. Prior to 1.13.0, a malformed packet received during the SFTP connection handshake causes a Go panic. This issue is fixed in version 1.13.0.",
+    "references": [
+      "https://github.com/pterodactyl/wings/commit/8e49c7c0eda815d3ada171831876a1c14c493026",
+      "https://github.com/pterodactyl/wings/releases/tag/v1.13.0",
+      "https://github.com/pterodactyl/wings/security/advisories/GHSA-ghrq-5wpp-hxx5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 26.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -31002,6 +30942,28 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 30.2,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-59643",
+    "published": "2026-08-03T01:16:44.333",
+    "last_modified": "2026-09-10T19:02:52.073",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In Bouncy Castle for Java before 1.85, OpenPGP inline-signature policy failures silently ignored. This issue also affects Bouncy Castle for Java FIPS (BC-FJA) before bcpg-fips 2.0.13.",
+    "references": [
+      "https://github.com/bcgit/bc-java/commit/d3f8cc408b4a36d28e5a410c93436fe3d0fe726b",
+      "https://github.com/bcgit/bc-java/wiki/CVE%E2%80%902026%E2%80%9059643"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.1,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -31795,6 +31757,27 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 36.4,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-71092",
+    "published": "2026-08-18T21:18:09.450",
+    "last_modified": "2026-09-10T19:06:49.887",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the PeopleSoft Enterprise FIN Lease Administration product of Oracle PeopleSoft (component: Lease Administration).   The supported version that is affected is 9.2. Difficult to exploit vulnerability allows low privileged attacker with logon to the infrastructure where PeopleSoft Enterprise FIN Lease Administration executes to compromise PeopleSoft Enterprise FIN Lease Administration.  While the vulnerability is in PeopleSoft Enterprise FIN Lease Administration, attacks may significantly impact additional products (scope change).  Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all PeopleSoft Enterprise FIN Lease Administration accessible data as well as  unauthorized access to critical data or complete access to all PeopleSoft Enterprise FIN Lease Administration accessible data. CVSS 3.1 Base Score 7.5 (Confidentiality and Integrity impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:N).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspuaug2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 0.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -32605,29 +32588,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-77438",
-    "published": "2026-08-27T20:18:39.407",
-    "last_modified": "2026-09-09T16:49:20.627",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Trilium is an open-source hierarchical note-taking application. In versions up to and including 0.103.0, the public share-search endpoint does not enforce the per-note shareCredentials and shareHiddenFromTree controls, allowing an unauthenticated visitor to read the titles, tree paths, and content of protected shared notes. The endpoint authorizes only the ancestor note supplied in the request and then runs a full-text search across the entire published subtree, returning each matching note's title, share identifier, and hierarchical path without re-checking whether that individual note requires a share password or is hidden from the navigation tree. Because the search matches note content, an attacker can enumerate protected notes and use the endpoint as a boolean oracle that confirms arbitrary substrings, recovering the full contents of notes that should be gated behind a password. This issue is fixed in version 0.104.0.",
-    "references": [
-      "https://github.com/TriliumNext/Trilium/commit/49fc7b67d9d49f01833e1ad9712ec83b079f98d2",
-      "https://github.com/TriliumNext/Trilium/security/advisories/GHSA-6rxv-6w3q-7mv9",
-      "https://github.com/TriliumNext/Trilium/security/advisories/GHSA-6rxv-6w3q-7mv9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.2,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-1249",
     "published": "2024-04-17T14:15:08.160",
     "last_modified": "2026-09-08T20:17:25.350",
@@ -33225,6 +33185,27 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-0296",
+    "published": "2026-08-13T03:16:44.703",
+    "last_modified": "2026-09-10T17:09:30.590",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper certificate validation vulnerabilities in Palo Alto Networks GlobalProtect™ app enable an unauthenticated attacker with man-in-the-middle (MitM) access to intercept and modify application communications. VPN tunnel traffic is not impacted.\n\nThe GlobalProtect app on iOS, Android, and Chrome OS is not affected.",
+    "references": [
+      "https://security.paloaltonetworks.com/CVE-2026-0296"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 0.6,
+    "tags": [],
+    "intel_score": 47.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-53793",
     "published": "2026-08-13T15:19:43.690",
     "last_modified": "2026-09-08T20:28:37.587",
@@ -33660,6 +33641,30 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 12.7,
+    "tags": [],
+    "intel_score": 46.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-54737",
+    "published": "2026-07-31T18:17:17.330",
+    "last_modified": "2026-09-10T20:12:43.783",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "@phun-ky/defaults-deep is a library like lodash defaultsDeep with array preservation and no lodash dependency. Prior to 2.0.5, defaultsDeep() recursively merges user-supplied objects without filtering proto, constructor, and prototype, allowing properties to be written to Object.prototype. This issue is fixed in version 2.0.5.",
+    "references": [
+      "https://github.com/phun-ky/defaults-deep/commit/807dba930f8718f9126cad59d949b8fd3539b059",
+      "https://github.com/phun-ky/defaults-deep/pull/49",
+      "https://github.com/phun-ky/defaults-deep/releases/tag/2.0.5",
+      "https://github.com/phun-ky/defaults-deep/security/advisories/GHSA-mj3g-7xcc-x4vh"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.9,
     "tags": [],
     "intel_score": 46.5,
     "reasons": [
@@ -35349,6 +35354,27 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 15.4,
+    "tags": [],
+    "intel_score": 45.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-0295",
+    "published": "2026-08-13T03:16:44.493",
+    "last_modified": "2026-09-10T17:12:10.887",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A race condition in the Palo Alto Networks GlobalProtect™ client on macOS enables a locally authenticated low-privileged attacker to escalate their privileges to root.\n\nThe GlobalProtect app on Linux, Windows, iOS, Android, and Chrome OS is not affected.",
+    "references": [
+      "https://security.paloaltonetworks.com/CVE-2026-0295"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 0.3,
     "tags": [],
     "intel_score": 45.0,
     "reasons": [
