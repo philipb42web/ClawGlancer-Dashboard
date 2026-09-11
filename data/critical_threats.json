@@ -674,6 +674,37 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-80428",
+    "published": "2026-08-26T16:16:45.100",
+    "last_modified": "2026-09-10T20:48:45.067",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "ILIAS before versions 9.22, 10.10, and 11.3 contains an unauthenticated PHP object injection vulnerability that allows unauthenticated attackers to execute arbitrary code by injecting serialized objects through the LTI authentication endpoint and triggering deserialization via the Shibboleth back-channel logout endpoint. Attackers can write arbitrary serialized objects into session storage, then exploit an available POP gadget through the logout endpoint's unrestricted deserialization to write attacker-controlled PHP content to a web-accessible path and achieve remote code execution as the web server user.",
+    "references": [
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225630&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225631&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225632&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=934",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=935",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=936"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 51.9,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-51366",
     "published": "2026-08-19T14:17:32.283",
     "last_modified": "2026-09-09T16:04:24.933",
@@ -810,6 +841,59 @@
       "recently modified (last 48h)",
       "rce+30",
       "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47884",
+    "published": "2026-08-27T06:17:18.507",
+    "last_modified": "2026-09-10T14:11:26.970",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use of XsltView in a Spring MVC application can result in SSRF and RCE attack if the application has an \"/**\" mapping that results in view rendering, and where the view name is not explicitly specified.\nSpring Framework 7.0.0 - 7.0.8\nSpring Framework 6.2.0 - 6.2.19\nSpring Framework 6.1.0 - 6.1.28\nSpring Framework 6.0.0 - 6.0.30\nSpring Framework 5.3.0 - 5.3.49\nSpring Framework 5.2.25.RELEASE and earlier",
+    "references": [
+      "https://spring.io/security/cve-2026-47884"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.6,
+    "tags": [
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-37003",
+    "published": "2026-08-27T20:17:41.107",
+    "last_modified": "2026-09-08T19:29:09.680",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Agno up to and including 2.5.8 is vulnerable to Remote Code Execution (RCE) via prompt injection. The PythonTools and ShellTools components pass unsanitized, LLM-generated arguments directly to execution sinks including exec(), runpy.run_path(), and subprocess.run(). An unauthenticated attacker can exploit this by embedding malicious instructions in content processed by the agent (such as web pages or documents), allowing for arbitrary code and OS command execution on the host server.",
+    "references": [
+      "http://agno.com",
+      "https://yerangamage.com/cves/detail/?slug=agno-rce-tools"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.6,
+    "epss_percentile": 74.4,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -1464,43 +1548,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-52943",
-    "published": "2026-06-24T10:17:19.293",
-    "last_modified": "2026-09-08T09:18:11.903",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: skbuff: fix missing zerocopy reference in pskb_carve helpers\n\npskb_carve_inside_header() and pskb_carve_inside_nonlinear() both copy\nthe old skb_shared_info header into a new buffer via memcpy(), which\nincludes the destructor_arg pointer (uarg) for MSG_ZEROCOPY skbs.\nNeither function calls net_zcopy_get() for the new shinfo, creating an\nunaccounted holder: every skb_shared_info with destructor_arg set will\ncall skb_zcopy_clear() once when freed, but the corresponding\nnet_zcopy_get() was never called for the new copy. Repeated calls\ndrive uarg->refcnt to zero prematurely, freeing ubuf_info_msgzc while\nTX skbs still hold live destructor_arg pointers.\n\nKASAN reports use-after-free on a freed ubuf_info_msgzc:\n\n  BUG: KASAN: slab-use-after-free in skb_release_data+0x77b/0x810\n  Read of size 8 at addr ffff88801574d3e8 by task poc/220\n\n  Call Trace:\n   skb_release_data+0x77b/0x810\n   kfree_skb_list_reason+0x13e/0x610\n   skb_release_data+0x4cd/0x810\n   sk_skb_reason_drop+0xf3/0x340\n   skb_queue_purge_reason+0x282/0x440\n   rds_tcp_inc_free+0x1e/0x30\n   rds_recvmsg+0x354/0x1780\n   __sys_recvmsg+0xdf/0x180\n\n  Allocated by task 219:\n   msg_zerocopy_realloc+0x157/0x7b0\n   tcp_sendmsg_locked+0x2892/0x3ba0\n\n  Freed by task 219:\n   ip_recv_error+0x74a/0xb10\n   tcp_recvmsg+0x475/0x530\n\nThe skb consuming the late access still referenced the same uarg via\nshinfo->destructor_arg copied by pskb_carve_inside_nonlinear() without\na refcount bump. This has been verified to be reliably exploitable: a\nworking proof-of-concept achieves full root privilege escalation from\nan unprivileged local user on a default kernel configuration.\n\nThe fix follows the pattern of pskb_expand_head() which has the same\nmemcpy/cloned structure. For pskb_carve_inside_header(), net_zcopy_get()\nis placed after skb_orphan_frags() succeeds, so the orphan error path\nneeds no cleanup. For pskb_carve_inside_nonlinear(), net_zcopy_get() is\nplaced after all failure points and just before skb_release_data(), so\nno error path needs cleanup at all -- matching pskb_expand_head() more\nclosely and avoiding the need for a balancing net_zcopy_put().",
-    "references": [
-      "https://git.kernel.org/stable/c/2e0e74c59b2761a414d9f48d7bee1e45220b2427",
-      "https://git.kernel.org/stable/c/474d6c771d798bca84f0a140b611e36743511e18",
-      "https://git.kernel.org/stable/c/8dbed691e43a50903658130bde0fcb5abc425b37",
-      "https://git.kernel.org/stable/c/96a4713ae041cc85e712bac682cd2e644004d6c6",
-      "https://git.kernel.org/stable/c/98d0912e9f841e5529a5b89a972805f34cb1c69d",
-      "https://git.kernel.org/stable/c/9b40bdc2a3298225dffab8158208a0d8c6300578",
-      "https://git.kernel.org/stable/c/ceafb893b12f23331dcc5ff9587e643c3a40ee9f",
-      "https://git.kernel.org/stable/c/fd470f0a97b8e9a125f520265d2f3b088ffb5b8a",
-      "https://access.redhat.com/security/cve/CVE-2026-52943",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2492137",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-52943.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.8,
-    "tags": [
-      "poc",
-      "priv_esc"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "poc+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-57171",
     "published": "2026-08-26T05:18:11.923",
     "last_modified": "2026-09-09T21:09:13.080",
@@ -1555,6 +1602,34 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-70293",
+    "published": "2026-08-26T20:16:59.697",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in Denx U-Boot before 2026.04. An integer overflow vulnerability exists in function ext4fs_get_bgdtable, the size calculation can lead to under allocation and this underallocated buffer will be used in memcpy() which could lead to arbitrary code execution, a denial of service, or other unspecified impacts.",
+    "references": [
+      "http://denx.com",
+      "http://u-boot.com",
+      "https://gist.github.com/c0zy1/4d9648d10a5ff07bda2771ea1298e469"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.4,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
     ]
   },
   {
@@ -2387,6 +2462,80 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 53.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-70290",
+    "published": "2026-08-26T20:16:59.550",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in Denx U-Boot before 2026.04. An integer overflow vulnerability in the ZFS filesystem support can be triggered by malformed on-disk metadata. The issue may result in incorrect memory allocation followed by out-of-bounds memory access, potentially leading to a crash or arbitrary code execution during the boot process.",
+    "references": [
+      "http://u-boot.com",
+      "https://gist.github.com/c0zy1/4d9648d10a5ff07bda2771ea1298e469"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-52103",
+    "published": "2026-08-26T21:16:38.340",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A zero-click remote code execution (RCE) vulnerability in the /Terminal/Notification.hs component of SimpleX Chat before v6.5 allows attackers to execute arbitrary commands in the context of the application without user interaction via sending a crafted payload in a text message.",
+    "references": [
+      "https://te.mpe.st/disclosures/20260510-simplex.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-37006",
+    "published": "2026-08-27T20:17:41.423",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability in the WebSocket endpoint of gpt-researcher v0.14.7 and before allows an unauthenticated remote attacker to achieve code execution via malicious Model Context Protocol configurations.",
+    "references": [
+      "http://gpt-researcher.com",
+      "https://yerangamage.com/cves/detail/?slug=gptresearcher-websocket-rce"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
     "tags": [
       "rce"
     ],
@@ -3302,6 +3451,31 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-75325",
+    "published": "2026-08-26T19:17:03.673",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "DWSurvey v6.14.0 is is vulnerable to authentication bypass via the '/api/dwsurvey/none/' and '/api/dwsurvey/up/**' parameters.",
+    "references": [
+      "https://github.com/fangtang7/CVE/blob/main/DWSurvey/DWSurvey%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E.md",
+      "https://github.com/fangtang7/CVE/blob/main/DWSurvey/DWSurvey%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.7,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
     ]
   },
   {
@@ -4385,111 +4559,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-30033",
-    "published": "2025-08-12T12:15:34.733",
-    "last_modified": "2026-09-08T09:17:30.320",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The affected setup component is vulnerable to DLL hijacking. This could allow an attacker to execute arbitrary code when a legitimate user installs an application that uses the affected setup component.",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/html/ssa-282044.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43284",
-    "published": "2026-05-08T08:16:43.827",
-    "last_modified": "2026-09-08T09:18:03.953",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nxfrm: esp: avoid in-place decrypt on shared skb frags\n\nMSG_SPLICE_PAGES can attach pages from a pipe directly to an skb. TCP\nmarks such skbs with SKBFL_SHARED_FRAG after skb_splice_from_iter(),\nso later paths that may modify packet data can first make a private\ncopy. The IPv4/IPv6 datagram append paths did not set this flag when\nsplicing pages into UDP skbs.\n\nThat leaves an ESP-in-UDP packet made from shared pipe pages looking\nlike an ordinary uncloned nonlinear skb. ESP input then takes the no-COW\nfast path for uncloned skbs without a frag_list and decrypts in place\nover data that is not owned privately by the skb.\n\nMark IPv4/IPv6 datagram splice frags with SKBFL_SHARED_FRAG, matching\nTCP. Also make ESP input fall back to skb_cow_data() when the flag is\npresent, so ESP does not decrypt externally backed frags in place.\nPrivate nonlinear skb frags still use the existing fast path.\n\nThis intentionally does not change ESP output. In esp_output_head(),\nthe path that appends the ESP trailer to existing skb tailroom without\ncalling skb_cow_data() is not reachable for nonlinear skbs:\nskb_tailroom() returns zero when skb->data_len is nonzero, while ESP\ntailen is positive. Thus ESP output will either use the separate\ndestination-frag path or fall back to skb_cow_data().",
-    "references": [
-      "https://git.kernel.org/stable/c/50ed1e7873100f77abad20fd31c51029bc49cd03",
-      "https://git.kernel.org/stable/c/52646cbd00e765a6db9c3afe9535f26218276034",
-      "https://git.kernel.org/stable/c/5d55c7336f8032d434adcc5fab987ccc93a44aec",
-      "https://git.kernel.org/stable/c/71a1d9d985d26716f74d21f18ee8cac821b06e97",
-      "https://git.kernel.org/stable/c/8253aab4659ca16116b522203c2a6b18dccacea7",
-      "https://git.kernel.org/stable/c/a6cb440f274a22456ef3e86b457344f1678f38f9",
-      "https://git.kernel.org/stable/c/ab8b995323e5237041472d07e5055f5f7dcdf15b",
-      "https://git.kernel.org/stable/c/b54edf1e9a3fd3491bdcb82a21f8d21315271e0d",
-      "https://git.kernel.org/stable/c/f4c50a4034e62ab75f1d5cdd191dd5f9c77fdff4",
-      "https://git.kernel.org/stable/c/fe785bb3a8096dffcc4048a85cd0c83337eeecad",
-      "http://www.openwall.com/lists/oss-security/2026/05/08/7",
-      "http://www.openwall.com/lists/oss-security/2026/05/13/6",
-      "http://www.openwall.com/lists/oss-security/2026/05/14/2",
-      "http://www.openwall.com/lists/oss-security/2026/05/14/4",
-      "https://www.vicarius.io/vsociety/posts/cve-2026-43284-detection-script-dirty-frag-linux-kernel-local-privilege-escalation",
-      "https://www.vicarius.io/vsociety/posts/cve-2026-43284-mitigation-script-dirty-frag-linux-kernel-local-privilege-escalation",
-      "https://access.redhat.com/errata/RHSA-2026:16061",
-      "https://access.redhat.com/errata/RHSA-2026:16062",
-      "https://access.redhat.com/errata/RHSA-2026:16100",
-      "https://access.redhat.com/errata/RHSA-2026:16155",
-      "https://access.redhat.com/errata/RHSA-2026:16157",
-      "https://access.redhat.com/errata/RHSA-2026:16160",
-      "https://access.redhat.com/errata/RHSA-2026:16161",
-      "https://access.redhat.com/errata/RHSA-2026:16171",
-      "https://access.redhat.com/errata/RHSA-2026:16176",
-      "https://access.redhat.com/errata/RHSA-2026:16180",
-      "https://access.redhat.com/errata/RHSA-2026:16195",
-      "https://access.redhat.com/errata/RHSA-2026:16196",
-      "https://access.redhat.com/errata/RHSA-2026:16201",
-      "https://access.redhat.com/errata/RHSA-2026:16202",
-      "https://access.redhat.com/errata/RHSA-2026:16203",
-      "https://access.redhat.com/errata/RHSA-2026:16204",
-      "https://access.redhat.com/errata/RHSA-2026:16206",
-      "https://access.redhat.com/errata/RHSA-2026:16254",
-      "https://access.redhat.com/errata/RHSA-2026:16312",
-      "https://access.redhat.com/errata/RHSA-2026:16314",
-      "https://access.redhat.com/errata/RHSA-2026:16328",
-      "https://access.redhat.com/errata/RHSA-2026:17795",
-      "https://access.redhat.com/errata/RHSA-2026:18025",
-      "https://access.redhat.com/errata/RHSA-2026:19074",
-      "https://access.redhat.com/errata/RHSA-2026:19225",
-      "https://access.redhat.com/errata/RHSA-2026:19564",
-      "https://access.redhat.com/errata/RHSA-2026:19568",
-      "https://access.redhat.com/errata/RHSA-2026:19569",
-      "https://access.redhat.com/errata/RHSA-2026:19572",
-      "https://access.redhat.com/errata/RHSA-2026:19573",
-      "https://access.redhat.com/errata/RHSA-2026:19574",
-      "https://access.redhat.com/errata/RHSA-2026:19575",
-      "https://access.redhat.com/errata/RHSA-2026:19577",
-      "https://access.redhat.com/errata/RHSA-2026:21695",
-      "https://access.redhat.com/errata/RHSA-2026:23233",
-      "https://access.redhat.com/errata/RHSA-2026:26542",
-      "https://access.redhat.com/errata/RHSA-2026:33486",
-      "https://access.redhat.com/errata/RHSA-2026:34098",
-      "https://access.redhat.com/security/cve/CVE-2026-43284",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2467771",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-082556.html",
-      "https://github.com/V4bel/dirtyfrag",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-43284.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 93.2,
-    "epss_percentile": 99.8,
-    "tags": [],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "High EPSS exploit prob 93.2% (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-11332",
     "published": "2026-06-05T09:16:26.070",
     "last_modified": "2026-09-10T13:17:30.930",
@@ -5080,6 +5149,34 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-61792",
+    "published": "2026-08-26T21:16:39.510",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Weblate is a web-based continuous localization platform used to manage software translations. In versions prior to 2026.7, a project administrator can read files outside their repository through the App store metadata download feature, which resolves attacker-influenced paths without adequately confining them to the repository. This is an incomplete fix for CVE-2026-34242, whose original patch failed to fully prevent the path traversal, allowing the arbitrary file read to persist. A user with project-administrator privileges can therefore disclose the contents of files on the Weblate host that lie outside the project's repository. This issue is fixed in version 2026.7.",
+    "references": [
+      "https://github.com/WeblateOrg/weblate/commit/299fb28315674ae3fb010e96031951cacfe367db",
+      "https://github.com/WeblateOrg/weblate/commit/33a9acb5ad223a927a56ffd741bbddf28a54a5e3",
+      "https://github.com/WeblateOrg/weblate/security/advisories/GHSA-xwj4-fp82-r2rj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.3,
+    "tags": [
+      "file_write",
+      "path_traversal"
+    ],
+    "intel_score": 78.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "file_write+15"
     ]
   },
   {
@@ -5675,6 +5772,54 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-35868",
+    "published": "2026-08-27T20:17:40.463",
+    "last_modified": "2026-09-08T19:29:09.680",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A Command Injection vulnerability exists in the bs_SetLimitCli_info function within the libshare.so library of LB-link Router AC2100_AZ3 V1.0.4. This flaw occurs due to insufficient validation and sanitization of user-supplied input before it is passed to a system-level command execution context. An attacker can exploit this vulnerability by injecting specially crafted shell metacharacters or payloads into the vulnerable parameter, resulting in the execution of arbitrary operating system commands.",
+    "references": [
+      "https://github.com/Orcust-Automaton/Vulnerability/blob/main/LB-Link/AC2100_AZ3/bs_SetLimitCli_info.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.4,
+    "epss_percentile": 70.1,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 77.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-35869",
+    "published": "2026-08-27T20:17:40.620",
+    "last_modified": "2026-09-08T19:29:09.680",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A Command Injection vulnerability exists in the bs_SetLimitCli_info function within the libshare.so library of LB-link Router AC450M V4.0.0. This flaw occurs due to insufficient validation and sanitization of user-supplied input before it is passed to a system-level command execution context. An attacker can exploit this vulnerability by injecting specially crafted shell metacharacters or payloads into the vulnerable parameter, resulting in the execution of arbitrary operating system commands.",
+    "references": [
+      "https://github.com/Orcust-Automaton/Vulnerability/blob/main/LB-Link/AC450M/bs_SetLimitCli_info.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.3,
+    "epss_percentile": 69.5,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 77.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-18755",
     "published": "2026-08-04T08:16:34.930",
     "last_modified": "2026-09-09T15:41:02.580",
@@ -5696,32 +5841,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-47809",
-    "published": "2025-05-16T01:15:51.827",
-    "last_modified": "2026-09-08T09:17:37.580",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Wibu CodeMeter before 8.30a sometimes allows privilege escalation immediately after installation (before a logoff or reboot). For exploitation, there must have been an unprivileged installation with UAC, and the CodeMeter Control Center component must be installed, and the CodeMeter Control Center component must not have been restarted. In this scenario, the local user can navigate from Import License to a privileged instance of Windows Explorer.",
-    "references": [
-      "https://www.wibu.com/support/security-advisories/wibu-100120.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-201595.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-331739.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.7,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 76.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
     ]
   },
   {
@@ -6157,35 +6276,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-7867",
-    "published": "2026-08-06T22:18:33.100",
-    "last_modified": "2026-09-08T08:17:12.173",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in udisks2. A local attacker with an active console session can exploit insufficient authorization checking on the 'as-user' option in the org.freedesktop.UDisks2.Filesystem.Mount() D-Bus method. This allows the attacker to spoof the 'as-user' parameter, mounting filesystems on behalf of arbitrary users, including privileged accounts. This can lead to local privilege escalation through mount point injection and manipulation of the mount namespace visible to privileged users.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:53435",
-      "https://access.redhat.com/errata/RHSA-2026:64798",
-      "https://access.redhat.com/security/cve/CVE-2026-7867",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2466747",
-      "https://github.com/storaged-project/udisks/releases/tag/udisks-2.11.2",
-      "https://github.com/storaged-project/udisks/security/advisories/GHSA-j42g-v9jw-6ph3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 7.2,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 74.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-0294",
     "published": "2026-08-13T03:16:44.323",
     "last_modified": "2026-09-09T16:32:33.997",
@@ -6232,6 +6322,56 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-75340",
+    "published": "2026-08-26T23:17:19.033",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The device metadata import interface /device/instance/{productId}/property-metadata/import of jetlinks community 2.11 is vulnerable to Server-side request forgery (SSRF).",
+    "references": [
+      "https://github.com/fangtang7/CVE/blob/main/jetlinks-community/ssrf.md",
+      "https://github.com/fangtang7/CVE/blob/main/jetlinks-community/ssrf.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 14.0,
+    "tags": [
+      "ssrf"
+    ],
+    "intel_score": 73.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-57499",
+    "published": "2026-08-27T17:18:52.633",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Liman is open source server management software. Prior to 2.2.2 - 1103, an OS command injection vulnerability in the log rotation configuration endpoint allows an authenticated administrator to execute arbitrary operating system commands on the Liman server. The `ip_address` parameter is embedded directly into a shell command without sanitization, enabling shell escape via single-quote injection. This is fixed in 2.2.2 - 1103.",
+    "references": [
+      "https://github.com/limanmys/core/security/advisories/GHSA-3jrp-54r2-9g63",
+      "https://github.com/limanmys/core/security/advisories/GHSA-3jrp-54r2-9g63"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.0,
+    "epss_percentile": 59.4,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 73.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
     ]
   },
   {
@@ -6791,30 +6931,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-40581",
-    "published": "2025-05-13T10:15:28.333",
-    "last_modified": "2026-09-08T09:17:36.583",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been identified in SCALANCE LPE9403 (6GK5998-3GS00-2AC2) (All versions < V2.1 HF0 with SINEMA Remote Connect Edge Client installed). Affected devices are vulnerable to an authentication bypass.\r\nThis could allow a non-privileged local attacker to bypass the authentication of the SINEMA Remote Connect Edge Client, and to read and modify the configuration parameters.",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/html/ssa-327438.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 4.7,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 70.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
     ]
   },
   {
@@ -8153,6 +8269,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-75328",
+    "published": "2026-08-26T22:16:28.980",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In DocSys-master V2.02.85, the downloadDocEx interface in src/com/DocSystem/controller/DocController.java has an arbitrary file read vulnerability:",
+    "references": [
+      "https://github.com/fangtang7/CVE/blob/main/DocSys/DocSys%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.md",
+      "https://github.com/fangtang7/CVE/blob/main/DocSys/DocSys%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 26.5,
+    "tags": [
+      "file_write"
+    ],
+    "intel_score": 62.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-33240",
     "published": "2026-08-21T22:16:36.863",
     "last_modified": "2026-09-09T21:06:39.057",
@@ -8222,6 +8363,32 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 27.4,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 61.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47665",
+    "published": "2026-08-26T23:17:13.693",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 8.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Penpot is an open-source design and prototyping platform. In versions up to and including 2.14.3, Penpot is vulnerable to stored cross-site scripting through file comments, whose content is stored as raw text and rendered into the page with innerHTML without any sanitization. Because the backend applies only a length check and the frontend writes comment content directly through innerHTML, any team member who can comment on a shared file can embed HTML such as an image error handler or script that executes in the browser of every other collaborator. The attack is passive: any user who opens the comments panel on the affected file triggers script execution on the Penpot origin, allowing theft of session cookies, actions performed as the victim, and access to their files and projects. This issue is fixed in version 2.15.3.",
+    "references": [
+      "https://github.com/penpot/penpot/commit/29f940fb7ab521033b1e276b8285afbc3609df6c",
+      "https://github.com/penpot/penpot/security/advisories/GHSA-vc72-6r45-q988",
+      "https://github.com/penpot/penpot/security/advisories/GHSA-vc72-6r45-q988"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 16.5,
     "tags": [
       "xss"
     ],
@@ -9098,6 +9265,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-51106",
+    "published": "2026-08-26T19:16:50.800",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.3,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue in TokTok qTox v1.18.4 allows a local attacker to cause a denial of service via the src/persistence/serialize.cpp component",
+    "references": [
+      "https://github.com/TokTok/qTox/issues/706",
+      "https://github.com/TokTok/qTox/issues/706"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.4,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 59.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-70150",
     "published": "2026-02-18T18:24:20.040",
     "last_modified": "2026-09-08T20:17:28.220",
@@ -9495,45 +9687,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-43501",
-    "published": "2026-05-21T13:16:19.410",
-    "last_modified": "2026-09-08T09:18:05.747",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nipv6: rpl: reserve mac_len headroom when recompressed SRH grows\n\nipv6_rpl_srh_rcv() decompresses an RFC 6554 Source Routing Header, swaps\nthe next segment into ipv6_hdr->daddr, recompresses, then pulls the old\nheader and pushes the new one plus the IPv6 header back.  The\nrecompressed header can be larger than the received one when the swap\nreduces the common-prefix length the segments share with daddr (CmprI=0,\nCmprE>0, seg[0][0] != daddr[0] gives the maximum +8 bytes).\n\npskb_expand_head() was gated on segments_left == 0, so on earlier\nsegments the push consumed unchecked headroom.  Once skb_push() leaves\nfewer than skb->mac_len bytes in front of data,\nskb_mac_header_rebuild()'s call to:\n\n\tskb_set_mac_header(skb, -skb->mac_len);\n\nwill store (data - head) - mac_len into the u16 mac_header field, which\nwraps to ~65530, and the following memmove() writes mac_len bytes ~64KiB\npast skb->head.\n\nA single AF_INET6/SOCK_RAW/IPV6_HDRINCL packet over lo with a two\nsegment type-3 SRH (CmprI=0, CmprE=15) reaches headroom 8 after one\npass; KASAN reports a 14-byte OOB write in ipv6_rthdr_rcv.\n\nFix this by expanding the head whenever the remaining room is less than\nthe push size plus mac_len, and request that much extra so the rebuilt\nMAC header fits afterwards.",
-    "references": [
-      "https://git.kernel.org/stable/c/0a9e8053f1f8a8e1bfc1dd61ffe67be6c1180402",
-      "https://git.kernel.org/stable/c/4babc2d9fda2df43823b85d08a0180b68f1b0854",
-      "https://git.kernel.org/stable/c/7398ebefbfd4f8a31d4f665a4213302fa995494b",
-      "https://git.kernel.org/stable/c/8e8be63465a5e80394c70324603dfea1bfdad48f",
-      "https://git.kernel.org/stable/c/9e6bf146b55999a095bb14f73a843942456d1adc",
-      "https://git.kernel.org/stable/c/bde199c72d319a4e207f88daabc888317504e2fb",
-      "https://git.kernel.org/stable/c/be1fa0aa9b4fdd5a8b7a61ba520a690a68391e6e",
-      "https://git.kernel.org/stable/c/c261d07a80576dc8ccf394ef8f074f8c67a06b37",
-      "https://access.redhat.com/errata/RHSA-2026:25191",
-      "https://access.redhat.com/errata/RHSA-2026:25217",
-      "https://access.redhat.com/errata/RHSA-2026:27713",
-      "https://access.redhat.com/errata/RHSA-2026:27731",
-      "https://access.redhat.com/errata/RHSA-2026:33900",
-      "https://access.redhat.com/errata/RHSA-2026:34094",
-      "https://access.redhat.com/errata/RHSA-2026:34095",
-      "https://access.redhat.com/security/cve/CVE-2026-43501",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2480457",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-43501.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.1,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-8376",
     "published": "2026-05-26T00:16:57.150",
     "last_modified": "2026-09-08T22:19:18.373",
@@ -9583,35 +9736,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 37.0,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52986",
-    "published": "2026-06-24T17:17:09.383",
-    "last_modified": "2026-09-08T09:18:12.620",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: nf_conntrack_sip: don't use simple_strtoul\n\nReplace unsafe port parsing in epaddr_len(), ct_sip_parse_header_uri(),\nand ct_sip_parse_request() with a new sip_parse_port() helper that\nvalidates each digit against the buffer limit, eliminating the use of\nsimple_strtoul() which assumes NUL-terminated strings.\n\nThe previous code dereferenced pointers without bounds checks after\nsip_parse_addr() and relied on simple_strtoul() on non-NUL-terminated\nskb data. A port that reaches the buffer limit without a trailing\ncharacter is also rejected as malformed.\n\nAlso get rid of all simple_strtoul() usage in conntrack, prefer a\nstricter version instead.  There are intentional changes:\n\n- Bail out if number is > UINT_MAX and indicate a failure, same for\n  too long sequences.\n  While we do accept 05535 as port 5535, we will not accept e.g.\n  'sip:10.0.0.1:005060'.  While its syntactically valid under RFC 3261,\n  we should restrict this to not waste cycles when presented with\n  malformed packets with 64k '0' characters.\n\n- Force base 10 in ct_sip_parse_numerical_param(). This is used to fetch\n  'expire=' and 'rports='; both are expected to use base-10.\n\n- In nf_nat_sip.c, only accept the parsed value if its within the 1k-64k\n  range.\n\n- epaddr_len now returns 0 if the port is invalid, as it already does\n  for invalid ip addresses.  This is intentional. nf_conntrack_sip\n  performs lots of guesswork to find the right parts of the message\n  to parse.  Being stricter could break existing setups.\n  Connection tracking helpers are designed to allow traffic to\n  pass, not to block it.\n\nBased on an earlier patch from Jenny Guanni Qu <qguanni@gmail.com>.",
-    "references": [
-      "https://git.kernel.org/stable/c/523762e3b6933fff81f01dfa3c60c0774044cdab",
-      "https://git.kernel.org/stable/c/7df9863bf538a626e8a684e59cb2c43eac0ef3c8",
-      "https://git.kernel.org/stable/c/8cd0358379570003659186706e077929d6930c40",
-      "https://git.kernel.org/stable/c/8cf6809cddcbe301aedfc6b51bcd4944d45795f6",
-      "https://git.kernel.org/stable/c/9c6afcb1c3cbb2c0da65b8515ac14d7273872f84",
-      "https://git.kernel.org/stable/c/9f69c323ae0ab517e595c2cc74e0ae0d9d085611",
-      "https://git.kernel.org/stable/c/b3264c977e79d8a25778d4fd11520f00fea1329c",
-      "https://git.kernel.org/stable/c/ea2ecd29b8f4433e52607192ca91084f95787ca0",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.6,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -10343,6 +10467,51 @@
     ]
   },
   {
+    "cve_id": "CVE-2023-42179",
+    "published": "2026-08-26T18:16:25.377",
+    "last_modified": "2026-09-08T19:29:09.680",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Bird Home Automation GmbH D1101V-F 000140 is vulnerable to Incorrect Access Control via the Key derivation process, password validation process.",
+    "references": [
+      "http://bird.com",
+      "https://github.com/johndoe31415/doorbird-kdf-vulnerability",
+      "https://github.com/johndoe31415/doorbird-kdf-vulnerability"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.8,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-75338",
+    "published": "2026-08-26T23:17:18.903",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "disconf (Distributed Configuration Management Platform) 2.6.36 is vulnerable to Incorrect Access Control. The config-fetching APIs /api/config/item, /api/config/file, /api/config/list and /api/config/simple/list are exposed without authentication. The LoginInterceptor explicitly whitelists these four paths, so any anonymous attacker can read every configuration item and configuration file managed by the config center.",
+    "references": [
+      "https://github.com/fangtang7/CVE/blob/main/disconf/Unauthenticated.md",
+      "https://github.com/fangtang7/CVE/blob/main/disconf/Unauthenticated.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.5,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-49796",
     "published": "2025-06-16T16:15:19.370",
     "last_modified": "2026-09-10T10:17:28.800",
@@ -10397,6 +10566,56 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-32257",
+    "published": "2026-08-26T17:16:53.247",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Winter is a free, open-source content management system (CMS) based on the Laravel PHP framework. Prior to 1.2.13, custom CSS supplied through the Brand Settings Styles field by a backend user with the backend.manage_branding permission is compiled by the LESS parser and rendered without sanitization on every backend page, allowing stored cross-site scripting against backend users. This issue is fixed in version 1.2.13.",
+    "references": [
+      "https://github.com/wintercms/winter/commit/d28f0b9474af79cfaa80eeb9d691f7a7c4469720",
+      "https://github.com/wintercms/winter/security/advisories/GHSA-v7cf-8gh9-gxmj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 11.9,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 58.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-32258",
+    "published": "2026-08-26T17:16:53.410",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Winter is a free, open-source content management system (CMS) based on the Laravel PHP framework. From 1.2.10 through 1.2.12, authenticated backend users with the backend.manage_editor permission can store custom Markup Styles that are compiled by the LESS parser and rendered without sanitization on every backend page, allowing stored cross-site scripting. This issue is fixed in version 1.2.13.",
+    "references": [
+      "https://github.com/wintercms/winter/commit/d28f0b9474af79cfaa80eeb9d691f7a7c4469720",
+      "https://github.com/wintercms/winter/security/advisories/GHSA-vgp4-2fc4-qff2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 11.9,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 58.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
     ]
   },
   {
@@ -11145,6 +11364,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-47666",
+    "published": "2026-08-26T23:17:13.843",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Penpot is an open-source design and prototyping platform. In versions up to and including 2.14.3, Penpot is vulnerable to stored cross-site scripting through custom font family names, which are interpolated into a @font-face CSS rule and injected into the page as HTML without sanitization. Because the backend accepts an arbitrary font-family string and the frontend writes the resulting style through innerHTML, a name containing markup such as a closing style tag followed by a script can break out of the style element and execute JavaScript on the Penpot origin. The attack is passive: any team member who opens a file referencing the malicious font triggers script execution simply by rendering the page, allowing theft of session cookies, actions performed as the victim, and access to their files and projects. This issue is fixed in version 2.15.3.",
+    "references": [
+      "https://github.com/penpot/penpot/commit/67d95679711da538b3b22a873bcb6c197104dc0c",
+      "https://github.com/penpot/penpot/security/advisories/GHSA-w5hh-gj5c-5wpc",
+      "https://github.com/penpot/penpot/security/advisories/GHSA-w5hh-gj5c-5wpc"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.0,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 56.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-49794",
     "published": "2025-06-16T16:15:18.997",
     "last_modified": "2026-09-10T10:17:26.977",
@@ -11249,34 +11494,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 39.7,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43071",
-    "published": "2026-05-05T16:16:16.420",
-    "last_modified": "2026-09-08T09:18:02.470",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ndcache: Limit the minimal number of bucket to two\n\nThere is an OOB read problem on dentry_hashtable when user sets\n'dhash_entries=1':\n  BUG: unable to handle page fault for address: ffff888b30b774b0\n  #PF: supervisor read access in kernel mode\n  #PF: error_code(0x0000) - not-present page\n  Oops: Oops: 0000 [#1] SMP PTI\n  RIP: 0010:__d_lookup+0x56/0x120\n   Call Trace:\n    d_lookup.cold+0x16/0x5d\n    lookup_dcache+0x27/0xf0\n    lookup_one_qstr_excl+0x2a/0x180\n    start_dirop+0x55/0xa0\n    simple_start_creating+0x8d/0xa0\n    debugfs_start_creating+0x8c/0x180\n    debugfs_create_dir+0x1d/0x1c0\n    pinctrl_init+0x6d/0x140\n    do_one_initcall+0x6d/0x3d0\n    kernel_init_freeable+0x39f/0x460\n    kernel_init+0x2a/0x260\n\nThere will be only one bucket in dentry_hashtable when dhash_entries is\nset as one, and d_hash_shift is calculated as 32 by dcache_init(). Then,\nfollowing process will access more than one buckets(which memory region\nis not allocated) in dentry_hashtable:\n d_lookup\n  b = d_hash(hash)\n    dentry_hashtable + ((u32)hashlen >> d_hash_shift)\n    // The C standard defines the behavior of right shift amounts\n    // exceeding the bit width of the operand as undefined. The\n    // result of '(u32)hashlen >> d_hash_shift' becomes 'hashlen',\n    // so 'b' will point to an unallocated memory region.\n  hlist_bl_for_each_entry_rcu(b)\n   hlist_bl_first_rcu(head)\n    h->first  // read OOB!\n\nFix it by limiting the minimal number of dentry_hashtable bucket to two,\nso that 'd_hash_shift' won't exceeds the bit width of type u32.",
-    "references": [
-      "https://git.kernel.org/stable/c/277cedabb0ab86baae83fa58218be13c6d3e5526",
-      "https://git.kernel.org/stable/c/426ef05e82ee52c8d0e95fc0808b7383d8352d73",
-      "https://git.kernel.org/stable/c/45b06bb5ea96f75ad81d7ef446f832ea6b0026fe",
-      "https://git.kernel.org/stable/c/5718df131ab78897a9dd1f2e71c3ba732d4392af",
-      "https://git.kernel.org/stable/c/755b40903eff563768d4d96fd4ef51ec48adde3b",
-      "https://git.kernel.org/stable/c/ddd57ebce245f9c7e2f6902a6c087d6186d2385d",
-      "https://git.kernel.org/stable/c/f08fe8891c3eeb63b73f9f1f6d97aa629c821579",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.4,
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -11479,35 +11696,6 @@
     "cisa_kev": false,
     "epss": 7.3,
     "epss_percentile": 94.0,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52999",
-    "published": "2026-06-24T17:17:10.913",
-    "last_modified": "2026-09-08T09:18:12.990",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: nfnetlink_osf: fix out-of-bounds read on option matching\n\nIn nf_osf_match(), the nf_osf_hdr_ctx structure is initialized once\nand passed by reference to nf_osf_match_one() for each fingerprint\nchecked. During TCP option parsing, nf_osf_match_one() advances the\nshared ctx->optp pointer.\n\nIf a fingerprint perfectly matches, the function returns early without\nrestoring ctx->optp to its initial state. If the user has configured\nNF_OSF_LOGLEVEL_ALL, the loop continues to the next fingerprint.\nHowever, because ctx->optp was not restored, the next call to\nnf_osf_match_one() starts parsing from the end of the options buffer.\nThis causes subsequent matches to read garbage data and fail\nimmediately, making it impossible to log more than one match or logging\nincorrect matches.\n\nInstead of using a shared ctx->optp pointer, pass the context as a\nconstant pointer and use a local pointer (optp) for TCP option\ntraversal. This makes nf_osf_match_one() strictly stateless from the\ncaller's perspective, ensuring every fingerprint check starts at the\ncorrect option offset.",
-    "references": [
-      "https://git.kernel.org/stable/c/0145548346c4a30981a870a8ca00eac46ba27e85",
-      "https://git.kernel.org/stable/c/1c136f2c44a5913646bac85303612fd0825197a0",
-      "https://git.kernel.org/stable/c/1e19a07291bb8682c14c39a64725a3ae54ab8ccc",
-      "https://git.kernel.org/stable/c/21883587593d7c8bb519a79460a0b5bc5ffbdabd",
-      "https://git.kernel.org/stable/c/32e50f92c7cf3f4eba29622179a5fcdc2aebab41",
-      "https://git.kernel.org/stable/c/70a3f31d25cf2ec9d4ddfa408120171ead955623",
-      "https://git.kernel.org/stable/c/edb78a142d2e5948e63647c0646aa7e7886935f0",
-      "https://git.kernel.org/stable/c/f5ca450087c3baf3651055e7a6de92600f827af3",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.6,
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -11793,33 +11981,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-18963",
-    "published": "2026-08-18T17:16:57.083",
-    "last_modified": "2026-09-08T09:17:43.063",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A flaw was found in the reset-credentials flow of the keycloak-services component, which is the core engine for identity and access management in Red Hat Build of Keycloak. The issue allows an unauthenticated attacker to force the password reset process for any user without needing to click the required email verification link. This can result in the attacker gaining full control over target user accounts by directly setting new credentials.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:56519",
-      "https://access.redhat.com/errata/RHSA-2026:56520",
-      "https://access.redhat.com/errata/RHSA-2026:56523",
-      "https://access.redhat.com/errata/RHSA-2026:56524",
-      "https://access.redhat.com/security/cve/CVE-2026-18963",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2511595",
-      "https://cert-portal.siemens.com/productcert/html/ssa-503852.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 3.2,
-    "epss_percentile": 87.3,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-52723",
     "published": "2026-08-18T17:16:59.200",
     "last_modified": "2026-09-08T21:02:26.047",
@@ -12028,6 +12189,29 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 25.9,
+    "tags": [],
+    "intel_score": 55.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-51679",
+    "published": "2026-08-26T21:16:37.570",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in openRISC OR1200 commit 83ac6b. A mismatch between the RTL and netlist can lead to unexpected behavior.",
+    "references": [
+      "https://github.com/openrisc/mor1kx/issues/161",
+      "https://mason.gmu.edu/~rsaravan/projects/synfuzz/cve/cve.html",
+      "https://www.arxiv.org/abs/2504.18812"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 28.4,
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -12430,35 +12614,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 17.7,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53275",
-    "published": "2026-06-25T09:16:45.687",
-    "last_modified": "2026-09-08T09:18:15.730",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nipv6: mcast: Fix use-after-free when processing MLD queries\n\nWhen processing an MLD query, a pointer to the multicast group address\nis retrieved when initially parsing the packet. This pointer is later\ndereferenced without being reloaded despite the fact that the skb header\nmight have been reallocated following the pskb_may_pull() calls, leading\nto a use-after-free [1].\n\nFix by copying the multicast group address when the packet is initially\nparsed.\n\n[1]\nBUG: KASAN: slab-use-after-free in __mld_query_work (net/ipv6/mcast.c:1512)\nRead of size 8 at addr ffff8881154b8e90 by task kworker/4:1/118\n\nWorkqueue: mld mld_query_work\nCall Trace:\n<TASK>\ndump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120)\nprint_address_description.constprop.0 (mm/kasan/report.c:378)\nprint_report (mm/kasan/report.c:482)\nkasan_report (mm/kasan/report.c:595)\n__mld_query_work (net/ipv6/mcast.c:1512)\nmld_query_work (net/ipv6/mcast.c:1563)\nprocess_one_work (kernel/workqueue.c:3314)\nworker_thread (kernel/workqueue.c:3397 kernel/workqueue.c:3478)\nkthread (kernel/kthread.c:436)\nret_from_fork (arch/x86/kernel/process.c:158)\nret_from_fork_asm (arch/x86/entry/entry_64.S:245)\n</TASK>\n\n[...]\n\nFreed by task 118:\nkasan_save_stack (mm/kasan/common.c:57)\nkasan_save_track (mm/kasan/common.c:78)\nkasan_save_free_info (mm/kasan/generic.c:584)\n__kasan_slab_free (mm/kasan/common.c:253 mm/kasan/common.c:285)\nkfree (./include/linux/kasan.h:235 mm/slub.c:2689 mm/slub.c:6251 mm/slub.c:6566)\npskb_expand_head (net/core/skbuff.c:2335)\n__pskb_pull_tail (net/core/skbuff.c:2878 (discriminator 4))\n__mld_query_work (net/ipv6/mcast.c:1495 (discriminator 1))\nmld_query_work (net/ipv6/mcast.c:1563)\nprocess_one_work (kernel/workqueue.c:3314)\nworker_thread (kernel/workqueue.c:3397 kernel/workqueue.c:3478)\nkthread (kernel/kthread.c:436)\nret_from_fork (arch/x86/kernel/process.c:158)\nret_from_fork_asm (arch/x86/entry/entry_64.S:245)",
-    "references": [
-      "https://git.kernel.org/stable/c/087dbacf897c020f438f780f0a4a8aa73b6d7c5a",
-      "https://git.kernel.org/stable/c/1354271c89d0e5fbf8b3d94097ff0216695209c7",
-      "https://git.kernel.org/stable/c/2a613bf497029d555a7428406aa8cdb84a503cea",
-      "https://git.kernel.org/stable/c/4203806f700bb44ea0b05d484d9d40044b47fb04",
-      "https://git.kernel.org/stable/c/53baa63a4183291574483f89583dbef13677a2c4",
-      "https://git.kernel.org/stable/c/791c91dc7a9dfb2457d5e29b8216a6484b9c4b40",
-      "https://git.kernel.org/stable/c/b2eb8886200b907fc71806869620609f0f4cacb0",
-      "https://git.kernel.org/stable/c/dfaf1f5e7eb81be87582bd6a57d34e61a57d5dea",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 17.0,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -13687,6 +13842,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-56798",
+    "published": "2026-08-26T18:16:26.033",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Cross-Site Request Forgery (CSRF) vulnerability in Lime Technology, Inc.'s Unraid OS version 6.12.14 and earlier allows remote attackers to escalate privileges via the Unraid authentication cookie's lax same-site policy.",
+    "references": [
+      "https://alittleinsecure.com/raiding-unraid/",
+      "https://alittleinsecure.com/unraid-research/",
+      "https://unraid.net/blog/cvd",
+      "https://alittleinsecure.com/raiding-unraid/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.3,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-4601",
     "published": "2026-03-23T06:16:21.893",
     "last_modified": "2026-09-10T13:20:22.510",
@@ -14814,33 +14993,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-64552",
-    "published": "2026-07-27T21:17:08.173",
-    "last_modified": "2026-09-08T09:18:20.187",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nvirtio-net: fix len check in receive_big()\n\nreceive_big() bounds the device-announced length by\n(big_packets_num_skbfrags + 1) * PAGE_SIZE.  That is still too loose:\nadd_recvbuf_big() sets sg[1] to start at offset\nsizeof(struct padded_vnet_hdr) into the first page, so the chain\nactually carries hdr_len + (PAGE_SIZE - sizeof(padded_vnet_hdr)) +\nbig_packets_num_skbfrags * PAGE_SIZE bytes -- 20 bytes less than the\ncheck allows for the common hdr_len == 12 case.\n\nA malicious virtio backend can announce a len in that gap.  page_to_skb()\nthen walks one frag past the page chain, storing a NULL page->private\ninto skb_shinfo()->frags[MAX_SKB_FRAGS], which is both an out-of-bounds\nwrite past the static frag array and a NULL frag handed up the rx path.\n\nBound len by the size add_recvbuf_big() actually advertised.",
-    "references": [
-      "https://git.kernel.org/stable/c/38e94d63e29f4a5c6eae87ee2c02101aaa321502",
-      "https://git.kernel.org/stable/c/9e5ad06ea826322ce8c58b4a68442a96f600c3c4",
-      "https://git.kernel.org/stable/c/c7fc9adf4e006155f7f2aeda052fbcde25cdcc49",
-      "https://git.kernel.org/stable/c/e6b8463b7d791f3886d7584259d6e9f06a69f12e",
-      "https://git.kernel.org/stable/c/f9451d0fd5ba635dcabb49bfe456a6db734a8986",
-      "https://git.kernel.org/stable/c/fbeb65154583879d556ea94cb2f15888e9470f3d",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.8,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-72734",
     "published": "2026-08-10T18:18:51.823",
     "last_modified": "2026-09-08T20:54:37.790",
@@ -14991,34 +15143,6 @@
     "intel_score": 51.5,
     "reasons": [
       "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-9165",
-    "published": "2026-07-06T09:16:39.400",
-    "last_modified": "2026-09-08T08:17:13.800",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Red Hat Advanced Cluster Security for Kubernetes (RHACS). Central does not limit the depth of GraphQL queries served on the authenticated GraphQL API. An authenticated user with a valid API token can send deeply nested queries that cause excessive resource consumption in Central, resulting in a denial of service for the management plane.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:36207",
-      "https://access.redhat.com/errata/RHSA-2026:36319",
-      "https://access.redhat.com/errata/RHSA-2026:36625",
-      "https://access.redhat.com/security/cve/CVE-2026-9165",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2480505"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.1,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 51.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
     ]
   },
   {
@@ -15217,70 +15341,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-42386",
-    "published": "2024-11-18T10:15:07.427",
-    "last_modified": "2026-09-08T09:17:18.023",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use of Out-of-range Pointer Offset vulnerability in Cesanta Mongoose Web Server v7.14 allows an attacker to send an unexpected TLS packet and produce a segmentation fault on the application.",
-    "references": [
-      "https://www.nozominetworks.com/labs/vulnerability-advisories-cve-2024-42386",
-      "https://cert-portal.siemens.com/productcert/html/ssa-142885.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.8,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-56181",
-    "published": "2025-03-11T10:15:15.597",
-    "last_modified": "2026-09-08T09:17:20.340",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been identified in SIMATIC Field PG M5 (All versions), SIMATIC IPC BX-21A (All versions < V31.01.07), SIMATIC IPC BX-32A (All versions < V29.01.07), SIMATIC IPC BX-39A (All versions < V29.01.07), SIMATIC IPC BX-59A (All versions < V32.01.04), SIMATIC IPC PX-32A (All versions < V29.01.07), SIMATIC IPC PX-39A (All versions < V29.01.07), SIMATIC IPC PX-39A PRO (All versions < V29.01.07), SIMATIC IPC RC-543A (All versions < V36.01.03), SIMATIC IPC RC-543B (All versions < V35.01.12), SIMATIC IPC RW-543A (All versions < V1.1.4), SIMATIC IPC RW-543B (All versions < V35.02.10), SIMATIC IPC127E (All versions < V27.01.11), SIMATIC IPC227E (All versions), SIMATIC IPC227G (All versions < V28.01.14), SIMATIC IPC277E (All versions), SIMATIC IPC277G (All versions < V28.01.14), SIMATIC IPC277G PRO (All versions < V28.01.14), SIMATIC IPC3000 SMART V3 (All versions), SIMATIC IPC327G (All versions < V28.01.14), SIMATIC IPC347G (All versions), SIMATIC IPC377G (All versions < V28.01.14), SIMATIC IPC427E (All versions < V21.01.21), SIMATIC IPC477E (All versions < V21.01.21), SIMATIC IPC477E PRO (All versions < V21.01.21), SIMATIC IPC527G (All versions), SIMATIC IPC627E (All versions < V25.02.15), SIMATIC IPC647E (All versions < V25.02.15), SIMATIC IPC677E (All versions < V25.02.15), SIMATIC IPC847E (All versions < V25.02.15), SIMATIC ITP1000 (All versions). The affected devices have insufficient protection mechanism for the EFI(Extensible Firmware Interface) variables stored on the device. This could allow an authenticated attacker to alter the secure boot configuration without proper authorization by directly communicate with the flash controller.",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/html/ssa-216014.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.3,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-56182",
-    "published": "2025-03-11T10:15:15.823",
-    "last_modified": "2026-09-08T09:17:20.690",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been identified in SIMATIC Field PG M5 (All versions), SIMATIC Field PG M6 (All versions < V26.01.12), SIMATIC IPC BX-21A (All versions < V31.01.07), SIMATIC IPC BX-32A (All versions < V29.01.07), SIMATIC IPC BX-39A (All versions < V29.01.07), SIMATIC IPC BX-59A (All versions < V32.01.04), SIMATIC IPC PX-32A (All versions < V29.01.07), SIMATIC IPC PX-39A (All versions < V29.01.07), SIMATIC IPC PX-39A PRO (All versions < V29.01.07), SIMATIC IPC RC-543A (All versions < V36.01.03), SIMATIC IPC RC-543B (All versions < V35.01.12), SIMATIC IPC RW-543A (All versions < V1.1.4), SIMATIC IPC RW-543B (All versions < V35.02.10), SIMATIC IPC127E (All versions < V27.01.11), SIMATIC IPC227E (All versions), SIMATIC IPC227G (All versions < V28.01.14), SIMATIC IPC277E (All versions), SIMATIC IPC277G (All versions < V28.01.14), SIMATIC IPC277G PRO (All versions < V28.01.14), SIMATIC IPC3000 SMART V3 (All versions), SIMATIC IPC327G (All versions < V28.01.14), SIMATIC IPC347G (All versions), SIMATIC IPC377G (All versions < V28.01.14), SIMATIC IPC427E (All versions < V21.01.21), SIMATIC IPC477E (All versions < V21.01.21), SIMATIC IPC477E PRO (All versions < V21.01.21), SIMATIC IPC527G (All versions), SIMATIC IPC627E (All versions < V25.02.15), SIMATIC IPC647E (All versions < V25.02.15), SIMATIC IPC677E (All versions < V25.02.15), SIMATIC IPC847E (All versions < V25.02.15), SIMATIC ITP1000 (All versions). The affected devices have insufficient protection mechanism for the EFI(Extensible Firmware Interface) variables stored on the device. This could allow an authenticated attacker to disable the BIOS password without proper authorization by directly communicate with the flash controller.",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/html/ssa-216014.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.3,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-33810",
     "published": "2026-04-08T02:16:03.950",
     "last_modified": "2026-09-10T13:18:18.447",
@@ -15405,92 +15465,6 @@
     "cisa_kev": false,
     "epss": 0.9,
     "epss_percentile": 58.1,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46037",
-    "published": "2026-05-27T14:17:23.027",
-    "last_modified": "2026-09-08T09:18:06.897",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nipv4: icmp: validate reply type before using icmp_pointers\n\nExtended echo replies use ICMP_EXT_ECHOREPLY as the outbound reply type.\nThat value is outside the range covered by icmp_pointers[], which only\ndescribes the traditional ICMP types up to NR_ICMP_TYPES.\n\nAvoid consulting icmp_pointers[] for reply types outside that range, and\nuse array_index_nospec() for the remaining in-range lookup. Normal ICMP\nreplies keep their existing behavior unchanged.",
-    "references": [
-      "https://git.kernel.org/stable/c/67bf002a2d7387a6312138210d0bd06e3cf4879b",
-      "https://git.kernel.org/stable/c/92e7c209036dcc0e8ffdf806fdfd3645b263bea5",
-      "https://git.kernel.org/stable/c/93df2af4f491de33827550b9d420f01808c0706b",
-      "https://git.kernel.org/stable/c/b3a88fc5ae024d43c5ecf653f3bbe837e4a6dc99",
-      "https://git.kernel.org/stable/c/bc64a66e0b9ad937d3d49934242ee62b01ba9a94",
-      "https://git.kernel.org/stable/c/c2178ff1c70ebfc2ab9651b230c58a34683db759",
-      "https://git.kernel.org/stable/c/d700c34a5d186b9ba0715bcb19e0ff80ffbfbfc1",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 37.4,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46303",
-    "published": "2026-06-08T17:16:48.853",
-    "last_modified": "2026-09-08T09:18:09.583",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nisofs: validate Rock Ridge CE continuation extent against volume size\n\nrock_continue() reads rs->cont_extent verbatim from the Rock Ridge CE\nrecord and passes it to sb_bread() without checking that the block\nnumber is within the mounted ISO 9660 volume.  commit e595447e177b\n(\"[PATCH] rock.c: handle corrupted directories\") added cont_offset\nand cont_size rejection for the CE continuation but did not validate\nthe extent block number itself.  commit f54e18f1b831 (\"isofs: Fix\ninfinite looping over CE entries\") later capped the CE chain length\nat RR_MAX_CE_ENTRIES = 32 but again left the block number unchecked.\n\nWith a crafted ISO mounted via udisks2 (desktop optical auto-mount)\nor via CAP_SYS_ADMIN mount, rs->cont_extent can therefore point at\nan out-of-range block or at blocks belonging to an adjacent\nfilesystem on the same block device.  sb_bread() on an out-of-range\nblock returns NULL cleanly via the block layer EIO path, so there\nis no memory-safety violation.  For in-range reads of adjacent-\nfilesystem data, the CE buffer is parsed as Rock Ridge records and\nonly the text of SL sub-records reaches userspace through\nreadlink(), which makes the info-leak channel narrow and difficult\nto exploit; still, rejecting the malformed CE outright matches the\nrejection shape already present in the same function for\ncont_offset and cont_size.\n\nAdd an ISOFS_SB(sb)->s_nzones bounds check to rock_continue() next\nto the existing offset/size rejection, printing the same\ncorrupted-directory-entry notice.",
-    "references": [
-      "https://git.kernel.org/stable/c/22b36fa081f38ab397c7697f9d539211b51a0cfc",
-      "https://git.kernel.org/stable/c/8356fb821016797f5677cbeee5ddc0d32a95b4be",
-      "https://git.kernel.org/stable/c/a36d990f591320e9dd379ab30063ebfe91d47e1f",
-      "https://git.kernel.org/stable/c/bf1bc673c587f5ef7e9c09b94aea7c5a7847d4d9",
-      "https://git.kernel.org/stable/c/c9b37c8b73f6368e4750e5ccb0632c380b43c6e5",
-      "https://git.kernel.org/stable/c/d582e12378bc1637f337622feef762f53c43fd57",
-      "https://git.kernel.org/stable/c/e69da8eeab74b4f4505024c38a17bce060fe7df8",
-      "https://git.kernel.org/stable/c/ef048470c90bc8c1b8318bb2ce329da9ef64b9fe",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.8,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53268",
-    "published": "2026-06-25T09:16:44.883",
-    "last_modified": "2026-09-08T09:18:15.393",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: conntrack_irc: fix possible out-of-bounds read\n\nWhen parsing fails after we've matched the command string we\nshould bail out instead of trying to match a different command.\n\nThis helper should be deprecated, given prevalence of TLS I doubt it has\nany relevance in 2026.",
-    "references": [
-      "https://git.kernel.org/stable/c/0afc802160af0df61ed374fdb97fb34cfe5cdf2f",
-      "https://git.kernel.org/stable/c/4cdda7f868f48e2f81579371584fdbdce37df2c8",
-      "https://git.kernel.org/stable/c/573810f61bcd6b6815e2ff53bbdd2b9c9d747176",
-      "https://git.kernel.org/stable/c/66eba0ffce3b7e11449946b4cbbef8ea36112f56",
-      "https://git.kernel.org/stable/c/7c34f91305292083253df6a9f6c8ede02d4ccaea",
-      "https://git.kernel.org/stable/c/8a1d6e40dedfe1068aee094d851bd69e289c9fd6",
-      "https://git.kernel.org/stable/c/9e5da2379f968a3ea5a6e38921ab6201576466dc",
-      "https://git.kernel.org/stable/c/ddddd8271359961e403d11c90c9ba9fc38914f7e",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.1,
     "tags": [],
     "intel_score": 51.0,
     "reasons": [
@@ -19240,6 +19214,246 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-51675",
+    "published": "2026-08-26T21:16:37.430",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue was discovered in openRISC OR1200 commit 83ac6b. An inaccurate update of program counter (PC) values when SPR changes can lead to a Denial of Service (DoS).",
+    "references": [
+      "https://mason.gmu.edu/~rsaravan/projects/synfuzz/cve/cve.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.0,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-61478",
+    "published": "2026-08-26T21:16:37.703",
+    "last_modified": "2026-09-09T16:03:22.897",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue in Vanderbilt Industries, Acre Security SPC5300.000 Main Board v.3.14.1 allows a physically proximate attacker to cause a denial of service via Spoofed SYN packets.",
+    "references": [
+      "https://nva.sikt.no/registration/019c9145712a-8c458dda-4473-488c-9a20-b9e8938f24d5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.0,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-61479",
+    "published": "2026-08-26T21:16:37.820",
+    "last_modified": "2026-09-09T16:03:22.897",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue in Vanderbilt Industries, Acre Security SPC5300.000 Main Board v.3.14.1 allows a physically proximate attacker to cause a denial of service via the SPC Connect Pro software accepts replayed application-layer payloads injected into an active TCP session.",
+    "references": [
+      "https://nva.sikt.no/registration/019c9145712a-8c458dda-4473-488c-9a20-b9e8938f24d5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 15.4,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-61480",
+    "published": "2026-08-26T21:16:37.937",
+    "last_modified": "2026-09-09T16:03:22.897",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue in Vanderbilt Industries, Acre Security SPC5300.000 Main Board v.3.14.1 allows a physically proximate attacker to cause a denial of service via spoofed TCP FIN packets without validating the sequence or acknowledgment numbers.",
+    "references": [
+      "https://nva.sikt.no/registration/019c9145712a-8c458dda-4473-488c-9a20-b9e8938f24d5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.6,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-55228",
+    "published": "2026-08-26T21:16:38.737",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Weblate is a web-based continuous localization platform used to manage software translations. In versions prior to 2026.7, the REST API did not properly enforce the scope of project- and workspace-scoped teams, allowing a user to submit invalid team configurations through the API. By assigning projects to a team via these unvalidated requests, a user could grant access to projects they were not authorized to see or manage. This could expose private projects and permit translation, repository, and project-management operations outside the user's intended permission scope. This issue is fixed in version 2026.7.",
+    "references": [
+      "https://github.com/WeblateOrg/weblate/commit/19babc99b05f2cc299b5090f90f79d8181f25d79",
+      "https://github.com/WeblateOrg/weblate/security/advisories/GHSA-2q2q-jr9g-v9rf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.4,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-77317",
+    "published": "2026-08-26T22:16:29.717",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SeaweedFS is a distributed storage system for files and blobs. In versions from 3.88 through 4.39, the SFTP server evaluates configured path permissions with a literal string-prefix comparison, so a user scoped to a path is also granted the same access to any sibling path whose name merely begins with the same characters. A user granted access to /tenants/alice therefore also matches /tenants/alice-archive, /tenants/alice2, and similar siblings, because the check does not require a path-component boundary. An authenticated low-privilege SFTP user with a root home directory and narrow path permissions can thereby cross the configured ACL boundary to read another tenant's files, and to overwrite them if granted write, all through the documented SFTP service with its own valid credentials. This issue is fixed in version 4.40.",
+    "references": [
+      "https://github.com/seaweedfs/seaweedfs/commit/29981f8d24a62e9571962c4534fb23c48c00bae2",
+      "https://github.com/seaweedfs/seaweedfs/security/advisories/GHSA-fvpg-g364-j8vh",
+      "https://github.com/seaweedfs/seaweedfs/security/advisories/GHSA-fvpg-g364-j8vh"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.5,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47886",
+    "published": "2026-08-27T06:17:19.053",
+    "last_modified": "2026-09-10T14:25:17.517",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Applications that evaluate user-supplied Spring Expression Language (SpEL) expressions may be vulnerable to a Denial of Service (DoS) attack when the power operator (^) is used with a BigDecimal or BigInteger operand and a large exponent value.\nSpring Framework 7.0.0 - 7.0.8\nSpring Framework 6.2.0 - 6.2.19\nSpring Framework 6.1.0 - 6.1.28\nSpring Framework 6.0.0 - 6.0.30\nSpring Framework 5.3.0 - 5.3.49\nSpring Framework 5.2.25.RELEASE and earlier",
+    "references": [
+      "https://spring.io/security/cve-2026-47886"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-5680",
+    "published": "2026-08-27T17:18:58.397",
+    "last_modified": "2026-09-09T12:17:12.673",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Undertow. A remote attacker could exploit this vulnerability by sending specially crafted WebSocket messages with permessage-deflate negotiated. This could lead to excessive memory consumption due to the PerMessageDeflateFunction.largerBuffer() method using exponential doubling, resulting in a Denial of Service (DoS) for the affected application.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-5680",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2455350"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.9,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-37198",
+    "published": "2026-08-27T20:17:43.563",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An integer overflow in the SMF component of Open5GS v2.7.6 allows attackers to cause a Denial of Service (DoS) via supplying a crafted GTP packet.",
+    "references": [
+      "https://gist.github.com/hackeryounow/b1b6475d9c1d9b2bd1f1ef895d1f298c",
+      "https://github.com/hackeryounow/5GCVulDB/tree/main/CVE-2026-37198",
+      "https://github.com/open5gs/open5gs/issues/4277",
+      "https://github.com/open5gs/open5gs/issues/4278"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 37.6,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-53580",
+    "published": "2026-08-27T20:17:49.153",
+    "last_modified": "2026-09-09T16:49:20.627",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Trilium is an open-source hierarchical note-taking application. In versions prior to 0.104.0, the automatic image-download feature accepts file:// URLs in a note's img tags and reads the referenced local file with no path validation, allowing any authenticated user to disclose arbitrary files readable by the Trilium process. When a text note is saved, Trilium scans its HTML for image sources and downloads each external one; because the HTML sanitizer keeps file as an allowed scheme, a source such as file:///etc/passwd is passed straight to a filesystem read and its contents are stored as a note attachment the user can then retrieve. Pointing the same primitive at an unbounded source such as /dev/zero causes uncontrolled memory allocation that crashes the server process. The feature is enabled by default and is reachable through the web UI, the ETAPI, the web clipper, and note imports, requiring only an authenticated session or an ETAPI token. This issue is fixed in version 0.104.0",
+    "references": [
+      "https://github.com/TriliumNext/Trilium/commit/c417c901dfe45222c321fab1685f26730cc2068f",
+      "https://github.com/TriliumNext/Trilium/security/advisories/GHSA-3gxr-j6g6-q75c",
+      "https://github.com/TriliumNext/Trilium/security/advisories/GHSA-3gxr-j6g6-q75c"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 19.7,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-22029",
     "published": "2026-01-10T03:15:48.870",
     "last_modified": "2026-09-10T13:17:42.633",
@@ -19616,55 +19830,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-21863",
-    "published": "2025-03-12T10:15:19.387",
-    "last_modified": "2026-09-08T09:17:26.527",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nio_uring: prevent opcode speculation\n\nsqe->opcode is used for different tables, make sure we santitise it\nagainst speculations.",
-    "references": [
-      "https://git.kernel.org/stable/c/18eae8420081ef8e043ad455937bfb470ef08607",
-      "https://git.kernel.org/stable/c/1e988c3fe1264708f4f92109203ac5b1d65de50b",
-      "https://git.kernel.org/stable/c/506b9b5e8c2d2a411ea8fe361333f5081c56d23a",
-      "https://git.kernel.org/stable/c/87e9eef43c758da267f6332678058a79764c7eba",
-      "https://git.kernel.org/stable/c/b9826e3b26ec031e9063f64a7c735449c43955e4",
-      "https://git.kernel.org/stable/c/d261ead565a080e3411b0dd04e6d58a52471cac8",
-      "https://git.kernel.org/stable/c/fdbfd52bd8b85ed6783365ff54c82ab7067bd61b",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.2,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-40582",
-    "published": "2025-05-13T10:15:28.537",
-    "last_modified": "2026-09-08T09:17:36.933",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been identified in SCALANCE LPE9403 (6GK5998-3GS00-2AC2) (All versions < V2.1 HF0 with SINEMA Remote Connect Edge Client installed). Affected devices do not properly sanitize configuration parameters.\r\nThis could allow a non-privileged local attacker to execute root commands on the device.",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/html/ssa-327438.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 7.2,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-6020",
     "published": "2025-06-17T13:15:21.660",
     "last_modified": "2026-09-08T14:17:19.873",
@@ -19881,218 +20046,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-31449",
-    "published": "2026-04-22T14:16:38.933",
-    "last_modified": "2026-09-08T09:17:55.763",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\next4: validate p_idx bounds in ext4_ext_correct_indexes\n\next4_ext_correct_indexes() walks up the extent tree correcting\nindex entries when the first extent in a leaf is modified. Before\naccessing path[k].p_idx->ei_block, there is no validation that\np_idx falls within the valid range of index entries for that\nlevel.\n\nIf the on-disk extent header contains a corrupted or crafted\neh_entries value, p_idx can point past the end of the allocated\nbuffer, causing a slab-out-of-bounds read.\n\nFix this by validating path[k].p_idx against EXT_LAST_INDEX() at\nboth access sites: before the while loop and inside it. Return\n-EFSCORRUPTED if the index pointer is out of range, consistent\nwith how other bounds violations are handled in the ext4 extent\ntree code.",
-    "references": [
-      "https://git.kernel.org/stable/c/01bf1e0b997d82c0e353b51ed74ef99698043c33",
-      "https://git.kernel.org/stable/c/10242e640b36b91ad03d25f3dc77854bbdff8358",
-      "https://git.kernel.org/stable/c/2acb5c12ebd860f30e4faf67e6cc8c44ddfe5fe8",
-      "https://git.kernel.org/stable/c/39d6e2b67651614bac0dc6592fa9836321910067",
-      "https://git.kernel.org/stable/c/407c944f217c17d4343148011acafebc604d55e1",
-      "https://git.kernel.org/stable/c/4d08401aa13f1531216f1a7ae281ca4806e90a5c",
-      "https://git.kernel.org/stable/c/93f2e975ed658ce09db4d4c2877ca2c06540df83",
-      "https://git.kernel.org/stable/c/c5839b34704c9c2f47f079451bdbb22de0da1ed1",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.9,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-31700",
-    "published": "2026-05-01T14:16:19.907",
-    "last_modified": "2026-09-08T09:17:59.693",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet/packet: fix TOCTOU race on mmap'd vnet_hdr in tpacket_snd()\n\nIn tpacket_snd(), when PACKET_VNET_HDR is enabled, vnet_hdr points\ndirectly into the mmap'd TX ring buffer shared with userspace. The\nkernel validates the header via __packet_snd_vnet_parse() but then\nre-reads all fields later in virtio_net_hdr_to_skb(). A concurrent\nuserspace thread can modify the vnet_hdr fields between validation\nand use, bypassing all safety checks.\n\nThe non-TPACKET path (packet_snd()) already correctly copies vnet_hdr\nto a stack-local variable. All other vnet_hdr consumers in the kernel\n(tun.c, tap.c, virtio_net.c) also use stack copies. The TPACKET TX\npath is the only caller of virtio_net_hdr_to_skb() that reads directly\nfrom user-controlled shared memory.\n\nFix this by copying vnet_hdr from the mmap'd ring buffer to a\nstack-local variable before validation and use, consistent with the\napproach used in packet_snd() and all other callers.",
-    "references": [
-      "https://git.kernel.org/stable/c/0f4c9754956b86de158a4af5278c5cf5bda9439e",
-      "https://git.kernel.org/stable/c/1490f82353bdabc09265a74e645b07f05cf4188e",
-      "https://git.kernel.org/stable/c/28324a3b62d9ce7f9bdd65a8ce63f382041d1b27",
-      "https://git.kernel.org/stable/c/2c054e17d9d41f1020376806c7f750834ced4dc5",
-      "https://git.kernel.org/stable/c/3a1bf9116ea31470b89692585c3910dfe830dcdd",
-      "https://git.kernel.org/stable/c/48a6ef291a17639e1b6ae0fbe9c8b2bb87d7804b",
-      "https://git.kernel.org/stable/c/714aa973da8163925eda7efd49361ccbee21ee46",
-      "https://git.kernel.org/stable/c/74e2db36fe50e3ad9d5300d7fd0e6e2a15a6d121",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.3,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43116",
-    "published": "2026-05-06T10:16:25.400",
-    "last_modified": "2026-09-08T09:18:03.600",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: ctnetlink: ensure safe access to master conntrack\n\nHolding reference on the expectation is not sufficient, the master\nconntrack object can just go away, making exp->master invalid.\n\nTo access exp->master safely:\n\n- Grab the nf_conntrack_expect_lock, this gets serialized with\n  clean_from_lists() which also holds this lock when the master\n  conntrack goes away.\n\n- Hold reference on master conntrack via nf_conntrack_find_get().\n  Not so easy since the master tuple to look up for the master conntrack\n  is not available in the existing problematic paths.\n\nThis patch goes for extending the nf_conntrack_expect_lock section\nto address this issue for simplicity, in the cases that are described\nbelow this is just slightly extending the lock section.\n\nThe add expectation command already holds a reference to the master\nconntrack from ctnetlink_create_expect().\n\nHowever, the delete expectation command needs to grab the spinlock\nbefore looking up for the expectation. Expand the existing spinlock\nsection to address this to cover the expectation lookup. Note that,\nthe nf_ct_expect_iterate_net() calls already grabs the spinlock while\niterating over the expectation table, which is correct.\n\nThe get expectation command needs to grab the spinlock to ensure master\nconntrack does not go away. This also expands the existing spinlock\nsection to cover the expectation lookup too. I needed to move the\nnetlink skb allocation out of the spinlock to keep it GFP_KERNEL.\n\nFor the expectation events, the IPEXP_DESTROY event is already delivered\nunder the spinlock, just move the delivery of IPEXP_NEW under the\nspinlock too because the master conntrack event cache is reached through\nexp->master.\n\nWhile at it, add lockdep notations to help identify what codepaths need\nto grab the spinlock.",
-    "references": [
-      "https://git.kernel.org/stable/c/497f99b26fffdc5635706d1b4811f1ed8ee21a5b",
-      "https://git.kernel.org/stable/c/5e1c1d22268ae710c238342c8030c21daf298168",
-      "https://git.kernel.org/stable/c/9e1196d27ef496f404c76f7a9d03761142d991c4",
-      "https://git.kernel.org/stable/c/bffcaad9afdfe45d7fc777397d3b83c1e3ebffe5",
-      "https://git.kernel.org/stable/c/d52fa1fa7440676b8c238037a050ab008c22737f",
-      "https://git.kernel.org/stable/c/f338ced0473849c9f6ed0b77ca99f1aab5826787",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.8,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43303",
-    "published": "2026-05-08T14:16:37.583",
-    "last_modified": "2026-09-08T09:18:04.847",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/page_alloc: clear page->private in free_pages_prepare()\n\nSeveral subsystems (slub, shmem, ttm, etc.) use page->private but don't\nclear it before freeing pages.  When these pages are later allocated as\nhigh-order pages and split via split_page(), tail pages retain stale\npage->private values.\n\nThis causes a use-after-free in the swap subsystem.  The swap code uses\npage->private to track swap count continuations, assuming freshly\nallocated pages have page->private == 0.  When stale values are present,\nswap_count_continued() incorrectly assumes the continuation list is valid\nand iterates over uninitialized page->lru containing LIST_POISON values,\ncausing a crash:\n\n  KASAN: maybe wild-memory-access in range [0xdead000000000100-0xdead000000000107]\n  RIP: 0010:__do_sys_swapoff+0x1151/0x1860\n\nFix this by clearing page->private in free_pages_prepare(), ensuring all\nfreed pages have clean state regardless of previous use.",
-    "references": [
-      "https://git.kernel.org/stable/c/23b82b7a26182ad840ae67d390d7ec9771e8c00f",
-      "https://git.kernel.org/stable/c/3edb8ebbf79b9016040e8f3421d723ae3d542b32",
-      "https://git.kernel.org/stable/c/ac1ea219590c09572ed5992dc233bbf7bb70fef9",
-      "https://git.kernel.org/stable/c/d757c793853ec5483eb41ec2942c300b8fa720fb",
-      "https://git.kernel.org/stable/c/e7790ab165713b79b1617ce659742ceb3a859d05",
-      "https://git.kernel.org/stable/c/f9719e32a67b4b00b3c9b133e8b5ffa72a26b67b",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43499",
-    "published": "2026-05-21T13:16:19.300",
-    "last_modified": "2026-09-08T09:18:05.213",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nrtmutex: Use waiter::task instead of current in remove_waiter()\n\nremove_waiter() is used by the slowlock paths, but it is also used for\nproxy-lock rollback in rt_mutex_start_proxy_lock() when invoked from\nfutex_requeue().\n\nIn the latter case waiter::task is not current, but remove_waiter()\noperates on current for the dequeue operation. That results in several\nproblems:\n\n  1) the rbtree dequeue happens without waiter::task::pi_lock being held\n\n  2) the waiter task's pi_blocked_on state is not cleared, which leaves a\n     dangling pointer primed for UAF around.\n\n  3) rt_mutex_adjust_prio_chain() operates on the wrong top priority waiter\n     task\n\nUse waiter::task instead of current in all related operations in\nremove_waiter() to cure those problems.\n\n[ tglx: Fixup rt_mutex_adjust_prio_chain(), add a comment and amend the\n  \tchangelog ]",
-    "references": [
-      "https://git.kernel.org/stable/c/3bfdc63936dd4773109b7b8c280c0f3b5ae7d349",
-      "https://git.kernel.org/stable/c/3fb7394a837740770f0d6b4b30567e60786a63f2",
-      "https://git.kernel.org/stable/c/6d52dfcb2a5db86e346cf51f8fcf2071b8085166",
-      "https://git.kernel.org/stable/c/838ce5cb5d93c3ab8b27e75bc6ad905a94b752fd",
-      "https://git.kernel.org/stable/c/88614876370aac8ad1050ad785a4c095ba17ac11",
-      "https://git.kernel.org/stable/c/8a1fc8d698ac5e5916e3082a0f74450d71f9611f",
-      "https://git.kernel.org/stable/c/d8cce4773c2b23d819baf5abedc62f7b430e8745",
-      "https://git.kernel.org/stable/c/f3fa3424bceb128d2be4b3745506b22844b87db7",
-      "http://www.openwall.com/lists/oss-security/2026/07/08/12",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.1,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46300",
-    "published": "2026-05-23T12:17:02.660",
-    "last_modified": "2026-09-08T09:18:09.057",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: skbuff: preserve shared-frag marker during coalescing\n\nskb_try_coalesce() can attach paged frags from @from to @to.  If @from\nhas SKBFL_SHARED_FRAG set, the resulting @to skb can contain the same\nexternally-owned or page-cache-backed frags, but the shared-frag marker\nis currently lost.\n\nThat breaks the invariant relied on by later in-place writers.  In\nparticular, ESP input checks skb_has_shared_frag() before deciding\nwhether an uncloned nonlinear skb can skip skb_cow_data().  If TCP\nreceive coalescing has moved shared frags into an unmarked skb, ESP can\nsee skb_has_shared_frag() as false and decrypt in place over page-cache\nbacked frags.\n\nPropagate SKBFL_SHARED_FRAG when skb_try_coalesce() transfers paged\nfrags.  The tailroom copy path does not need the marker because it copies\nbytes into @to's linear data rather than transferring frag descriptors.",
-    "references": [
-      "https://git.kernel.org/stable/c/2f2b16022a2e10ca7bccfb98db5ed2ec0f72641c",
-      "https://git.kernel.org/stable/c/3599e6b3cc1ada96883d496a50a210d3afbb6987",
-      "https://git.kernel.org/stable/c/3884358a9286b17f389a72b1426fc4547c23c111",
-      "https://git.kernel.org/stable/c/3bd9e113d50034db99d7ef69fd8e5242d15e414a",
-      "https://git.kernel.org/stable/c/760e1addc27ba1a7beb4a0a7e8b3e9ec49e7a34e",
-      "https://git.kernel.org/stable/c/78bf6b6bb19541d19fbda6242e7cfe2c682763c0",
-      "https://git.kernel.org/stable/c/9d3e5fd19fe1063bf607219e8562fbd567b8e8d5",
-      "https://git.kernel.org/stable/c/f84eca5817390257cef78013d0112481c503b4a3",
-      "http://www.openwall.com/lists/oss-security/2026/05/13/5",
-      "http://www.openwall.com/lists/oss-security/2026/05/21/11",
-      "http://www.openwall.com/lists/oss-security/2026/05/21/12",
-      "http://www.openwall.com/lists/oss-security/2026/05/21/13",
-      "https://access.redhat.com/errata/RHBA-2026:20032",
-      "https://access.redhat.com/errata/RHSA-2026:19521",
-      "https://access.redhat.com/errata/RHSA-2026:19540",
-      "https://access.redhat.com/errata/RHSA-2026:19568",
-      "https://access.redhat.com/errata/RHSA-2026:19569",
-      "https://access.redhat.com/errata/RHSA-2026:19664",
-      "https://access.redhat.com/errata/RHSA-2026:19666",
-      "https://access.redhat.com/errata/RHSA-2026:19705",
-      "https://access.redhat.com/errata/RHSA-2026:19711",
-      "https://access.redhat.com/errata/RHSA-2026:19875",
-      "https://access.redhat.com/errata/RHSA-2026:20051",
-      "https://access.redhat.com/errata/RHSA-2026:20054",
-      "https://access.redhat.com/errata/RHSA-2026:20087",
-      "https://access.redhat.com/errata/RHSA-2026:20129",
-      "https://access.redhat.com/errata/RHSA-2026:20130",
-      "https://access.redhat.com/errata/RHSA-2026:20299",
-      "https://access.redhat.com/errata/RHSA-2026:20593",
-      "https://access.redhat.com/errata/RHSA-2026:21656",
-      "https://access.redhat.com/errata/RHSA-2026:21690",
-      "https://access.redhat.com/errata/RHSA-2026:21695",
-      "https://access.redhat.com/errata/RHSA-2026:21702",
-      "https://access.redhat.com/errata/RHSA-2026:23233",
-      "https://access.redhat.com/errata/RHSA-2026:23240",
-      "https://access.redhat.com/errata/RHSA-2026:23245",
-      "https://access.redhat.com/errata/RHSA-2026:23468",
-      "https://access.redhat.com/errata/RHSA-2026:23469",
-      "https://access.redhat.com/errata/RHSA-2026:23470",
-      "https://access.redhat.com/errata/RHSA-2026:23471",
-      "https://access.redhat.com/errata/RHSA-2026:24814",
-      "https://access.redhat.com/errata/RHSA-2026:25044",
-      "https://access.redhat.com/errata/RHSA-2026:28887",
-      "https://access.redhat.com/errata/RHSA-2026:33486",
-      "https://access.redhat.com/errata/RHSA-2026:34098",
-      "https://access.redhat.com/security/cve/CVE-2026-46300",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2477015",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-082556.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-46300.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 9.3,
-    "epss_percentile": 95.1,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-45998",
     "published": "2026-05-27T14:17:17.407",
     "last_modified": "2026-09-09T13:20:15.190",
@@ -20118,87 +20071,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 3.1,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46015",
-    "published": "2026-05-27T14:17:19.840",
-    "last_modified": "2026-09-08T09:18:06.277",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ntcp: call sk_data_ready() after listener migration\n\nWhen inet_csk_listen_stop() migrates an established child socket from\na closing listener to another socket in the same SO_REUSEPORT group,\nthe target listener gets a new accept-queue entry via\ninet_csk_reqsk_queue_add(), but that path never notifies the target\nlistener's waiters. A nonblocking accept() still works because it\nchecks the queue directly, but poll()/epoll_wait() waiters and\nblocking accept() callers can also remain asleep indefinitely.\n\nCall READ_ONCE(nsk->sk_data_ready)(nsk) after a successful migration\nin inet_csk_listen_stop().\n\nHowever, after inet_csk_reqsk_queue_add() succeeds, the ref acquired\nin reuseport_migrate_sock() is effectively transferred to\nnreq->rsk_listener. Another CPU can then dequeue nreq via accept()\nor listener shutdown, hit reqsk_put(), and drop that listener ref.\nSince listeners are SOCK_RCU_FREE, wrap the post-queue_add()\ndereferences of nsk in rcu_read_lock()/rcu_read_unlock(), which also\ncovers the existing sock_net(nsk) access in that path.\n\nThe reqsk_timer_handler() path does not need the same changes for two\nreasons: half-open requests become readable only after the final ACK,\nwhere tcp_child_process() already wakes the listener; and once nreq is\nvisible via inet_ehash_insert(), the success path no longer touches\nnsk directly.",
-    "references": [
-      "https://git.kernel.org/stable/c/12625b4da84caf4d84a04988710a7b9bcf702b18",
-      "https://git.kernel.org/stable/c/14e9bb6eba8f59dcc637702e4744ae5e30660d76",
-      "https://git.kernel.org/stable/c/3864c6ba1e041bc75342353a70fa2a2c6f909923",
-      "https://git.kernel.org/stable/c/7aa7933a5607b1e5b56f322d17265c1d0ea02c51",
-      "https://git.kernel.org/stable/c/83bb57635d7cbafde32f865b577ecfd969f02337",
-      "https://git.kernel.org/stable/c/ab5fdcd535645f6dbe6e9e21d96a08d141e88b4b",
-      "https://git.kernel.org/stable/c/bebd058ef40c67a81fe6d9ee8beaa4ede90e0704",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.9,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46116",
-    "published": "2026-05-28T10:16:27.080",
-    "last_modified": "2026-09-08T09:18:07.767",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nxfrm: defensively unhash xfrm_state lists in __xfrm_state_delete\n\nKASAN reproduces a slab-use-after-free in __xfrm_state_delete()'s\nhlist_del_rcu calls under syzkaller load on linux-6.12.y stable\n(reproduced on 6.12.47, also reachable via the same code path on\ntorvalds/master and on the ipsec tree). Nine unique signatures cluster\nin the xfrm_state lifecycle, the load-bearing one being:\n\n  BUG: KASAN: slab-use-after-free in __hlist_del include/linux/list.h:990 [inline]\n  BUG: KASAN: slab-use-after-free in hlist_del_rcu include/linux/rculist.h:516 [inline]\n  BUG: KASAN: slab-use-after-free in __xfrm_state_delete net/xfrm/xfrm_state.c\n  Write of size 8 at addr ffff8881198bcb70 by task kworker/u8:9/435\n\n  Workqueue: netns cleanup_net\n  Call Trace:\n   __hlist_del / hlist_del_rcu\n   __xfrm_state_delete\n   xfrm_state_delete\n   xfrm_state_flush\n   xfrm_state_fini\n   ops_exit_list\n   cleanup_net\n\nThe other observed signatures hit the same slab object from\n__xfrm_state_lookup, xfrm_alloc_spi, __xfrm_state_insert and an OOB\nwrite variant of __xfrm_state_delete, all on the byseq/byspi\nhash chains.\n\n__xfrm_state_delete() guards its byseq and byspi unhashes with\nvalue-based predicates:\n\n\tif (x->km.seq)\n\t\thlist_del_rcu(&x->byseq);\n\tif (x->id.spi)\n\t\thlist_del_rcu(&x->byspi);\n\nwhile everywhere else in the file (e.g. state_cache, state_cache_input)\nthe safer hlist_unhashed() check is used. xfrm_alloc_spi() sets\nx->id.spi = newspi inside xfrm_state_lock and then immediately inserts\ninto byspi, but a path that observes x->id.spi != 0 outside of\nxfrm_state_lock can still skip-or-hit the byspi unhash inconsistently\nwith whether x is actually on the list. The same holds for x->km.seq\nversus byseq, and the bydst/bysrc unhashes have no predicate at all,\nso a second __xfrm_state_delete() on the same object writes through\nLIST_POISON pprev.\n\nThe defensive change here:\n\n  - Use hlist_del_init_rcu() instead of hlist_del_rcu() on bydst,\n    bysrc, byseq and byspi so a second deletion is a no-op rather\n    than a write through LIST_POISON pprev. The byseq/byspi nodes\n    are already initialised in xfrm_state_alloc().\n  - Test hlist_unhashed() rather than the value predicate for\n    byseq/byspi, so the unhash decision tracks list state rather than\n    mutable scalar fields.\n\nEmpirical verification: applied this patch on top of v6.12.47, rebuilt,\nand re-ran the same syzkaller harness for 1h16m on a previously-crashy\nconfiguration that produced ~100 hits each of slab-use-after-free\nRead in xfrm_alloc_spi / Read in __xfrm_state_lookup / Write in\n__xfrm_state_delete. After the patch, 7.1M execs across 32 VMs at\n~1550 exec/sec produced zero xfrm_state UAF/OOB hits. /proc/slabinfo\nconfirms the xfrm_state slab is actively allocated and freed during\nthe run (~143 KiB resident), so the fuzzer is still exercising those\ncode paths -- they just no longer crash.\n\nReproduction:\n\n  - Linux 6.12.47 x86_64 + KASAN_GENERIC + KASAN_INLINE + KCOV\n  - syzkaller @ 746545b8b1e4c3a128db8652b340d3df90ce61db\n  - 32 QEMU/KVM VMs x 2 vCPU on AWS c5.metal bare metal\n  - 9 unique signatures collected in ~9h, all within xfrm_state\n    lifecycle",
-    "references": [
-      "https://git.kernel.org/stable/c/14acf9652e5690de3c7486c6db5fb8dafd0a32a3",
-      "https://git.kernel.org/stable/c/26edb0a3c99f9d958c212be68b21f1221614dcf0",
-      "https://git.kernel.org/stable/c/2c617848ae6e4f07a3e397f604208c293bbecacc",
-      "https://git.kernel.org/stable/c/3943fcad7694a7d0b15aeabe7d3cc2a2eb8e92e8",
-      "https://git.kernel.org/stable/c/4980162de555cb838f1a189ce7d2cbf5d2e7b050",
-      "https://git.kernel.org/stable/c/6b4dc3181b4bfc5f5fc33ab33b1dc6e15759f4b6",
-      "https://git.kernel.org/stable/c/a2e2d08fb070fab4947447171f1c4e3ca5a188e5",
-      "https://git.kernel.org/stable/c/b4a53add2fa8f1b5aa17d4c5686c320785fab182",
-      "https://access.redhat.com/errata/RHSA-2026:36018",
-      "https://access.redhat.com/errata/RHSA-2026:39179",
-      "https://access.redhat.com/errata/RHSA-2026:39180",
-      "https://access.redhat.com/errata/RHSA-2026:39371",
-      "https://access.redhat.com/errata/RHSA-2026:41234",
-      "https://access.redhat.com/errata/RHSA-2026:41235",
-      "https://access.redhat.com/errata/RHSA-2026:42919",
-      "https://access.redhat.com/errata/RHSA-2026:43231",
-      "https://access.redhat.com/errata/RHSA-2026:44385",
-      "https://access.redhat.com/errata/RHSA-2026:47632",
-      "https://access.redhat.com/errata/RHSA-2026:47633",
-      "https://access.redhat.com/errata/RHSA-2026:47739",
-      "https://access.redhat.com/errata/RHSA-2026:47869",
-      "https://access.redhat.com/errata/RHSA-2026:49033",
-      "https://access.redhat.com/errata/RHSA-2026:59142",
-      "https://access.redhat.com/errata/RHSA-2026:59143",
-      "https://access.redhat.com/errata/RHSA-2026:59145",
-      "https://access.redhat.com/errata/RHSA-2026:59146",
-      "https://access.redhat.com/errata/RHSA-2026:59147",
-      "https://access.redhat.com/errata/RHSA-2026:59148",
-      "https://access.redhat.com/errata/RHSA-2026:59149",
-      "https://access.redhat.com/security/cve/CVE-2026-46116",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2482523",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-46116.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.9,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -20273,34 +20145,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-46173",
-    "published": "2026-05-28T10:16:32.923",
-    "last_modified": "2026-09-08T09:18:08.613",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nexit: prevent preemption of oopsing TASK_DEAD task\n\nWhen an already-exiting task oopses, make_task_dead() currently calls\ndo_task_dead() with preemption enabled.  That is forbidden:\ndo_task_dead() calls __schedule(), which has a comment saying \"WARNING:\nmust be called with preemption disabled!\".\n\nIf an oopsing task is preempted in do_task_dead(), between becoming\nTASK_DEAD and entering the scheduler explicitly, bad things happen:\nfinish_task_switch() assumes that once the scheduler has switched away\nfrom a TASK_DEAD task, the task can never run again and its stack is no\nlonger needed; but that assumption apparently doesn't hold if the dead\ntask was preempted (the SM_PREEMPT case).\n\nThis means that the scheduler ends up repeatedly dropping references on\nthe dead task's stack, which can lead to use-after-free or double-free\nof the entire task stack; in other words, two tasks can end up running\non the same stack, resulting in various kinds of memory corruption.\n\n(This does not just affect \"recursively oopsing\" tasks; it is enough to\noops once during task exit, for example in a file_operations::release\nhandler)",
-    "references": [
-      "https://git.kernel.org/stable/c/3d6fb8a7690c23e3213c4b008f64d89a44b98737",
-      "https://git.kernel.org/stable/c/640b4c00fb0e2920327435f6176cbefc3c546165",
-      "https://git.kernel.org/stable/c/6f49f94f3b11fe8bff1bf2a054143789e76aaf17",
-      "https://git.kernel.org/stable/c/7b2800ba5f5f77a8ee7f4cbadb19cf1264597a34",
-      "https://git.kernel.org/stable/c/9756b3db5db6c2f5eccb32dddbd88eb4c54f575e",
-      "https://git.kernel.org/stable/c/c1fa0bb633e4a6b11e83ffc57fa5abe8ebb87891",
-      "https://project-zero.issues.chromium.org/issues/510793286",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.6,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-46189",
     "published": "2026-05-28T10:16:34.540",
     "last_modified": "2026-09-09T13:20:16.377",
@@ -20336,138 +20180,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 4.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46323",
-    "published": "2026-06-09T13:16:37.753",
-    "last_modified": "2026-09-08T09:18:10.030",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: gro: don't merge zcopy skbs\n\nskb_gro_receive() can currently copy frags between the source and GRO\nskb, without checking the zerocopy status, and in particular the\nSKBFL_MANAGED_FRAG_REFS flag.\n\nWhen SKBFL_MANAGED_FRAG_REFS is set, the skb doesn't hold a reference\non the pages in shinfo->frags. Appending those frags to another skb's\nfrags without fixing up the page refcount can lead to UAF.\n\nWhen either the last skb in the GRO chain (the one we would append\nfrags to) or the source skb is zerocopy, don't merge the skbs.",
-    "references": [
-      "https://git.kernel.org/stable/c/1f9c828556416fbe3f49386708ce999fc4d4da06",
-      "https://git.kernel.org/stable/c/3c6cc9f2ca65b6dd61b1af75452dc0e1cd0aad8d",
-      "https://git.kernel.org/stable/c/44bea2032af0425e4ce6d26a8af0ede79db49ec1",
-      "https://git.kernel.org/stable/c/479084ae0e1d9cb7929cb4298d35623de189f80a",
-      "https://git.kernel.org/stable/c/4db79a322db8c97f7b73b8a347395ef4d685eb40",
-      "https://git.kernel.org/stable/c/e334cbf3388fd9334503a778a82d9e9f14dd2f71",
-      "https://access.redhat.com/errata/RHSA-2026:27708",
-      "https://access.redhat.com/errata/RHSA-2026:27731",
-      "https://access.redhat.com/errata/RHSA-2026:27735",
-      "https://access.redhat.com/errata/RHSA-2026:36018",
-      "https://access.redhat.com/errata/RHSA-2026:44230",
-      "https://access.redhat.com/errata/RHSA-2026:44231",
-      "https://access.redhat.com/errata/RHSA-2026:44259",
-      "https://access.redhat.com/errata/RHSA-2026:44262",
-      "https://access.redhat.com/errata/RHSA-2026:44270",
-      "https://access.redhat.com/errata/RHSA-2026:47727",
-      "https://access.redhat.com/errata/RHSA-2026:62639",
-      "https://access.redhat.com/errata/RHSA-2026:62640",
-      "https://access.redhat.com/errata/RHSA-2026:62641",
-      "https://access.redhat.com/errata/RHSA-2026:62642",
-      "https://access.redhat.com/security/cve/CVE-2026-46323",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2479832",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-46323.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.4,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52910",
-    "published": "2026-06-19T15:16:35.487",
-    "last_modified": "2026-09-08T09:18:10.877",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nbpf: Free reuseport cBPF prog after RCU grace period.\n\nEulgyu Kim reported the splat below with a repro. [0]\n\nThe repro sets up a UDP reuseport group with a cBPF prog and\nreplaces it with a new one while another thread is sending\na UDP packet to the group.\n\nThe reuseport prog is freed by sk_reuseport_prog_free().\nbpf_prog_put() is called for \"e\"BPF prog to destruct through\nmultiple stages while cBPF prog is freed immediately by\nbpf_release_orig_filter() and bpf_prog_free().\n\nIf a reuseport prog is detached from the setsockopt() path\n(reuseport_attach_prog() or reuseport_detach_prog()),\nsk_reuseport_prog_free() is called without waiting for RCU\nreaders to complete, resulting in various bugs.\n\nLet's defer freeing the reuseport cBPF prog after one RCU\ngrace period.\n\nNote \"e\"BPF prog is safe as is unless the fast path starts\nto touch fields destroyed in bpf_prog_put_deferred() and\n__bpf_prog_put_noref().\n\n[0]:\nBUG: KASAN: vmalloc-out-of-bounds in reuseport_select_sock+0xedc/0x1220 net/core/sock_reuseport.c:596\nRead of size 4 at addr ffffc9000051e004 by task slowme/10208\nCPU: 6 UID: 1000 PID: 10208 Comm: slowme Not tainted 7.0.0-geb7ac95ff75e #32 PREEMPT(full)\nHardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014\nCall Trace:\n <IRQ>\n dump_stack_lvl+0xe8/0x150 lib/dump_stack.c:120\n print_address_description mm/kasan/report.c:378 [inline]\n print_report+0xca/0x240 mm/kasan/report.c:482\n kasan_report+0x118/0x150 mm/kasan/report.c:595\n reuseport_select_sock+0xedc/0x1220 net/core/sock_reuseport.c:596\n udp4_lib_lookup2+0x3bc/0x950 net/ipv4/udp.c:495\n __udp4_lib_lookup+0x768/0xe20 net/ipv4/udp.c:723\n __udp4_lib_lookup_skb+0x297/0x390 net/ipv4/udp.c:752\n __udp4_lib_rcv+0x1312/0x2620 net/ipv4/udp.c:2752\n ip_protocol_deliver_rcu+0x282/0x440 net/ipv4/ip_input.c:207\n ip_local_deliver_finish+0x3bb/0x6f0 net/ipv4/ip_input.c:241\n NF_HOOK+0x30c/0x3a0 include/linux/netfilter.h:318\n NF_HOOK+0x30c/0x3a0 include/linux/netfilter.h:318\n __netif_receive_skb_one_core net/core/dev.c:6181 [inline]\n __netif_receive_skb net/core/dev.c:6294 [inline]\n process_backlog+0xaa4/0x1960 net/core/dev.c:6645\n __napi_poll+0xae/0x340 net/core/dev.c:7709\n napi_poll net/core/dev.c:7772 [inline]\n net_rx_action+0x5d7/0xf50 net/core/dev.c:7929\n handle_softirqs+0x22b/0x870 kernel/softirq.c:622\n do_softirq+0x76/0xd0 kernel/softirq.c:523\n </IRQ>\n <TASK>\n __local_bh_enable_ip+0xf8/0x130 kernel/softirq.c:450\n local_bh_enable include/linux/bottom_half.h:33 [inline]\n rcu_read_unlock_bh include/linux/rcupdate.h:924 [inline]\n __dev_queue_xmit+0x1dd7/0x3710 net/core/dev.c:4890\n neigh_output include/net/neighbour.h:556 [inline]\n ip_finish_output2+0xca9/0x1070 net/ipv4/ip_output.c:237\n NF_HOOK_COND include/linux/netfilter.h:307 [inline]\n ip_output+0x29f/0x450 net/ipv4/ip_output.c:438\n ip_send_skb+0x45/0xc0 net/ipv4/ip_output.c:1508\n udp_send_skb+0xb04/0x1510 net/ipv4/udp.c:1195\n udp_sendmsg+0x1a71/0x2350 net/ipv4/udp.c:1485\n sock_sendmsg_nosec net/socket.c:727 [inline]\n __sock_sendmsg net/socket.c:742 [inline]\n __sys_sendto+0x554/0x680 net/socket.c:2206\n __do_sys_sendto net/socket.c:2213 [inline]\n __se_sys_sendto net/socket.c:2209 [inline]\n __x64_sys_sendto+0xde/0x100 net/socket.c:2209\n do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]\n do_syscall_64+0x160/0xf80 arch/x86/entry/syscall_64.c:94\n entry_SYSCALL_64_after_hwframe+0x77/0x7f\nRIP: 0033:0x415a2d\nCode: b3 66 2e 0f 1f 84 00 00 00 00 00 66 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48\nRSP: 002b:00007f6bc31e41e8 EFLAGS: 00000212 ORIG_RAX: 000000000000002c\nRAX: ffffffffffffffda RBX: 00007f6bc31e4cdc RCX: 0000000000415a2d\nRDX: 0000000000000001 RSI: 00007f6bc31e421f RDI: 0000000000000003\nRBP: 00007f6bc31e4240 R08: 00007f6bc31e4220 R09: 0000000000000010\nR10: 0000000000000000 R11: \n---truncated---",
-    "references": [
-      "https://git.kernel.org/stable/c/08264d5bba0bdd3a79bc2984fee09286aba0c4eb",
-      "https://git.kernel.org/stable/c/18fc650ccd7fe3376eca89203668cfb8268f60df",
-      "https://git.kernel.org/stable/c/298db6167f81e9c470a57cf652e4e47757b4293e",
-      "https://git.kernel.org/stable/c/87dfb977bdb6eaa47e9993a34e18f44970f88b1f",
-      "https://git.kernel.org/stable/c/90e47dc5c572d1c73971ac51c7428803f42b78eb",
-      "https://git.kernel.org/stable/c/c3e3fddda6b5d9ba505d218b4055e7d8a282ac57",
-      "https://git.kernel.org/stable/c/f8b8f1d4bb76098e87b8269a0631019648330e6d",
-      "https://git.kernel.org/stable/c/fec41484e7c2aa7ded44c541bba98872be937754",
-      "https://access.redhat.com/security/cve/CVE-2026-52910",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2490779",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-52910.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.1,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52912",
-    "published": "2026-06-24T08:16:20.640",
-    "last_modified": "2026-09-08T09:18:11.190",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: nf_queue: hold bridge skb->dev while queued\n\nbr_pass_frame_up() rewrites skb->dev from the ingress port to the bridge\nmaster before queueing bridge LOCAL_IN packets. NFQUEUE only holds\nreferences on state.in/out and bridge physdevs, so a queued bridge\npacket can retain a freed bridge master in skb->dev until reinjection.\n\nWhen the verdict is reinjected later, br_netif_receive_skb() re-enters\nthe receive path with skb->dev still pointing at the freed bridge master,\ntriggering a use-after-free.\n\nStore skb->dev in the queue entry, hold a reference on it for the queue\nlifetime, and use the saved device when dropping queued packets during\nNETDEV_DOWN handling.",
-    "references": [
-      "https://git.kernel.org/stable/c/15d464265120ab9818bd673af301deee09bedab2",
-      "https://git.kernel.org/stable/c/19924bdd8a45ebc72a7b84c57fd63057d1dc75ac",
-      "https://git.kernel.org/stable/c/1e5e20031c5eee8d2e490a90ff4d6a2feecfc3be",
-      "https://git.kernel.org/stable/c/3823c27099cfe2482299065814adbaa771be9644",
-      "https://git.kernel.org/stable/c/3fb0f5c0f64162a8c3f25616a4f1e340b921737f",
-      "https://git.kernel.org/stable/c/950d809f154dca04e5fbe5d3c8b9c5e44769cd57",
-      "https://git.kernel.org/stable/c/a698ac8ab2561cf575d2d9f34095032651dd952e",
-      "https://git.kernel.org/stable/c/e196115ec330a18de415bdb9f5071aa9f08e53ce",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 4.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52933",
-    "published": "2026-06-24T08:16:23.480",
-    "last_modified": "2026-09-08T09:18:11.540",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nio_uring/poll: fix signed comparison in io_poll_get_ownership()\n\nio_poll_get_ownership() uses a signed comparison to check whether\npoll_refs has reached the threshold for the slowpath:\n\n    if (unlikely(atomic_read(&req->poll_refs) >= IO_POLL_REF_BIAS))\n\natomic_read() returns int (signed). When IO_POLL_CANCEL_FLAG\n(BIT(31)) is set in poll_refs, the value becomes negative in\nsigned arithmetic, so the >= 128 comparison always evaluates to\nfalse and the slowpath is never taken.\n\nFix this by casting the atomic_read() result to unsigned int\nbefore the comparison, so that the cancel flag is treated as a\nlarge positive value and correctly triggers the slowpath.",
-    "references": [
-      "https://git.kernel.org/stable/c/326941b22806cbf2df1fbfe902b7908b368cce42",
-      "https://git.kernel.org/stable/c/81bf96b0abbfa4cd47ea32e12596aed3855fb2f3",
-      "https://git.kernel.org/stable/c/c6d191164dc81838d8dbf452a6000f68c558d1ae",
-      "https://git.kernel.org/stable/c/cf522703d4f194991615763697ae25a3f9539763",
-      "https://git.kernel.org/stable/c/ea0697129807d718037f618221037aa0660ee3c5",
-      "https://git.kernel.org/stable/c/fc47043f3d9af3efa407665b47f8378ec691ba18",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.1,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -20599,35 +20311,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-53050",
-    "published": "2026-06-24T17:17:16.887",
-    "last_modified": "2026-09-08T09:18:14.037",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nquota: Fix race of dquot_scan_active() with quota deactivation\n\ndquot_scan_active() can race with quota deactivation in\nquota_release_workfn() like:\n\n  CPU0 (quota_release_workfn)         CPU1 (dquot_scan_active)\n  ==============================      ==============================\n  spin_lock(&dq_list_lock);\n  list_replace_init(\n    &releasing_dquots, &rls_head);\n    /* dquot X on rls_head,\n       dq_count == 0,\n       DQ_ACTIVE_B still set */\n  spin_unlock(&dq_list_lock);\n  synchronize_srcu(&dquot_srcu);\n                                      spin_lock(&dq_list_lock);\n                                      list_for_each_entry(dquot,\n                                          &inuse_list, dq_inuse) {\n                                        /* finds dquot X */\n                                        dquot_active(X) -> true\n                                        atomic_inc(&X->dq_count);\n                                      }\n                                      spin_unlock(&dq_list_lock);\n  spin_lock(&dq_list_lock);\n  dquot = list_first_entry(&rls_head);\n  WARN_ON_ONCE(atomic_read(&dquot->dq_count));\n\nThe problem is not only a cosmetic one as under memory pressure the\ncaller of dquot_scan_active() can end up working on freed dquot.\n\nFix the problem by making sure the dquot is removed from releasing list\nwhen we acquire a reference to it.",
-    "references": [
-      "https://git.kernel.org/stable/c/2bdc80f4619411e5bd4a3ef23f51e14021ed457c",
-      "https://git.kernel.org/stable/c/61e25f664dc2a08299e07d84c85776abc2350f75",
-      "https://git.kernel.org/stable/c/6678dde265708003c2b42551af4a2e3cb05decd5",
-      "https://git.kernel.org/stable/c/82cbdb4c1ebb5ea7d7bd45c18d3483b5bd32ebc1",
-      "https://git.kernel.org/stable/c/ac8a2e0d287ebf35e5d7e51e260b4e146648ba4a",
-      "https://git.kernel.org/stable/c/e93ab401da4b2e2c1b8ef2424de2f238d51c8b2d",
-      "https://git.kernel.org/stable/c/f9438cb8c8ec3adc84b2b450a3aab0123d074c3b",
-      "https://git.kernel.org/stable/c/fdd424d7c35633ac577fd87d1b043d1b8a6cd350",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-53185",
     "published": "2026-06-25T09:16:35.920",
     "last_modified": "2026-09-09T13:20:28.880",
@@ -20661,35 +20344,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-53239",
-    "published": "2026-06-25T09:16:41.840",
-    "last_modified": "2026-09-08T09:18:15.057",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nxfrm: policy: fix use-after-free on inexact bin in xfrm_policy_bysel_ctx()\n\nFix the race by pruning the bin while still holding xfrm_policy_lock,\nbefore dropping it. Use __xfrm_policy_inexact_prune_bin() directly since\nthe lock is already held. The wrapper xfrm_policy_inexact_prune_bin()\nbecomes unused and is removed.\n\nRace:\n\n  CPU0 (XFRM_MSG_DELPOLICY)           CPU1 (XFRM_MSG_NEWSPDINFO)\n  ==========================          ==========================\n  xfrm_policy_bysel_ctx():\n    spin_lock_bh(xfrm_policy_lock)\n    bin = xfrm_policy_inexact_lookup()\n    __xfrm_policy_unlink(pol)\n    spin_unlock_bh(xfrm_policy_lock)\n    xfrm_policy_kill(ret)\n    // wide window, lock not held\n                                       xfrm_hash_rebuild():\n                                         spin_lock_bh(xfrm_policy_lock)\n                                         __xfrm_policy_inexact_flush():\n                                           kfree_rcu(bin)  // bin freed\n                                         spin_unlock_bh(xfrm_policy_lock)\n    xfrm_policy_inexact_prune_bin(bin)\n    // UAF: bin is freed",
-    "references": [
-      "https://git.kernel.org/stable/c/25c8c7fb3b0b9668c7d05e209f58c158d2b020c7",
-      "https://git.kernel.org/stable/c/42827d03f8009a6a218bacab153e21f39d6a121c",
-      "https://git.kernel.org/stable/c/7f2d76c9c03257c0782afef9d95321fa04096f60",
-      "https://git.kernel.org/stable/c/88697cf980222d5906a37bf47662dac0732e2a0f",
-      "https://git.kernel.org/stable/c/8fc536e9f6856230f19c7d13e71af064b6a77b22",
-      "https://git.kernel.org/stable/c/b5316e2b8614a87d8736941972441cb47bfd4491",
-      "https://git.kernel.org/stable/c/c4c1ea36d83bf3c4569468ca5b8b614fda1bf821",
-      "https://git.kernel.org/stable/c/ec82ea4eb220164d854f8734ca5a35e23e577b94",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 7.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-15809",
     "published": "2026-07-15T13:17:03.933",
     "last_modified": "2026-09-10T10:17:29.623",
@@ -20712,63 +20366,6 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 6.7,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53400",
-    "published": "2026-07-19T12:16:51.177",
-    "last_modified": "2026-09-08T09:18:16.267",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ni2c: core: fix adapter registration race\n\nAdapters can be looked up based on their id using i2c_get_adapter()\nwhich takes a reference to the embedded struct device.\n\nMake sure that the adapter (including its struct device) has been\ninitialised before adding it to the IDR to avoid accessing uninitialised\ndata which could, for example, lead to NULL-pointer dereferences or\nuse-after-free.\n\nNote that the i2c-dev chardev, which is registered from a bus notifier,\ncurrently uses i2c_get_adapter() so the adapter needs to be added to the\nIDR before registration.",
-    "references": [
-      "https://git.kernel.org/stable/c/1febb174815bcae56d73587e99e8f87e02f0784d",
-      "https://git.kernel.org/stable/c/2e57c788e71f1763445f812eba4e0b4a2fbd0646",
-      "https://git.kernel.org/stable/c/6a946038f2a5a8c29048c6af369d4e391448a5c5",
-      "https://git.kernel.org/stable/c/78793c75dc6d0ff2e4d50ad617349b328a99054e",
-      "https://git.kernel.org/stable/c/a4365bc41baaf67f3a5aa8556d23544e6ec7480a",
-      "https://git.kernel.org/stable/c/a4c8094bbf4c6fa68b17e3b16f6a0a1b7a14f3e0",
-      "https://git.kernel.org/stable/c/ba14d7cf2fe7284610a29854bdff22b2537d3ce6",
-      "https://git.kernel.org/stable/c/da9d8d9711f78deebc202d0cffcf577e45ee8621",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.2,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64279",
-    "published": "2026-07-25T10:17:08.437",
-    "last_modified": "2026-09-08T09:18:17.850",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ni2c: core: fix adapter deregistration race\n\nAdapters can be looked up by their id using i2c_get_adapter() which\ntakes a reference to the embedded struct device.\n\nRemove the adapter from the IDR before tearing it down during\nderegistration (and on registration failure) to make sure its resources\nare not accessed after having been freed (e.g. the device name).",
-    "references": [
-      "https://git.kernel.org/stable/c/11dfa37bf544cc806f21742ca2fd2d841bd7032e",
-      "https://git.kernel.org/stable/c/35dbd1f1f603401155cbd3a180bb18e3a3b675b8",
-      "https://git.kernel.org/stable/c/9882a9bd74db08e7bae5821a7050627ae92d3380",
-      "https://git.kernel.org/stable/c/b1a58ed9eab146b36f41a55db8f5d7ce9fdedf3f",
-      "https://git.kernel.org/stable/c/b6d2af6fe9c1f5ec0484536753c979cbd40a8ac3",
-      "https://git.kernel.org/stable/c/bb234487a447a99315add1b46aa57b72e163e1eb",
-      "https://git.kernel.org/stable/c/d39282f552dd6c35b9b84b4af78f1198c24f3373",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.0,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -20912,35 +20509,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-64423",
-    "published": "2026-07-25T10:17:26.350",
-    "last_modified": "2026-09-08T09:18:19.463",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nipv4: igmp: remove multicast group from hash table on device destruction\n\nWhen a device is destroyed under RTNL, ip_mc_destroy_dev() iterates through\nthe multicast list and calls ip_ma_put() on each membership, scheduling\nthem for RCU reclamation. However, they are not unlinked from the device's\nmulticast hash table (mc_hash).\n\nSince the device remains published in dev->ip_ptr until after\nip_mc_destroy_dev() completes, concurrent RCU readers traversing mc_hash\ncan still locate and access the multicast group after its refcount is\ndecremented. If the RCU callback runs and frees the group while a reader is\naccessing it, a use-after-free occurs.\n\nFix this by unlinking the multicast group from mc_hash using\nip_mc_hash_remove() before scheduling it for reclamation.\n\nBUG: KASAN: slab-use-after-free in ip_check_mc_rcu+0x149/0x3f0\nRead of size 4 at addr ffff888009bf1408 by task mausezahn/2276\n\nCall Trace:\n <IRQ>\n dump_stack_lvl+0x67/0x90\n print_report+0x175/0x7c0\n kasan_report+0x147/0x180\n ip_check_mc_rcu+0x149/0x3f0\n udp_v4_early_demux+0x36d/0x12d0\n ip_rcv_finish_core+0xb8b/0x1390\n ip_rcv_finish+0x54/0x120\n NF_HOOK+0x213/0x2b0\n __netif_receive_skb+0x126/0x340\n process_backlog+0x4f2/0xf00\n __napi_poll+0x92/0x2c0\n net_rx_action+0x583/0xc60\n handle_softirqs+0x236/0x7f0\n do_softirq+0x57/0x80\n </IRQ>\n\nAllocated by task 2239:\n kasan_save_track+0x3e/0x80\n __kasan_kmalloc+0x72/0x90\n ____ip_mc_inc_group+0x31a/0xa40\n __ip_mc_join_group+0x334/0x3f0\n do_ip_setsockopt+0x16fa/0x2010\n ip_setsockopt+0x3f/0x90\n do_sock_setsockopt+0x1ad/0x300\n\nFreed by task 0:\n kasan_save_track+0x3e/0x80\n kasan_save_free_info+0x40/0x50\n __kasan_slab_free+0x3a/0x60\n __rcu_free_sheaf_prepare+0xd4/0x220\n rcu_free_sheaf+0x36/0x190\n rcu_core+0x8d9/0x12f0\n handle_softirqs+0x236/0x7f0",
-    "references": [
-      "https://git.kernel.org/stable/c/2ca18df1c2611f70eb3eb487e02ae85eb703b284",
-      "https://git.kernel.org/stable/c/412ba7def06ffe974ba9a1d862b022362c54ffa5",
-      "https://git.kernel.org/stable/c/5f42729d74bd6c61306d864423290d92962de4e1",
-      "https://git.kernel.org/stable/c/76d030ac95e17f91d69a595f17ebc5979700cf9a",
-      "https://git.kernel.org/stable/c/7993211bde166471dffac074dc965489f86531f8",
-      "https://git.kernel.org/stable/c/8820b530cb2388503d7418228d03ba074bf7a03e",
-      "https://git.kernel.org/stable/c/c6cb5f8ebe1c1a78710c19f102db9fe48b9e6ba9",
-      "https://git.kernel.org/stable/c/f91883031e5a62877a29ce139442973cbea769f1",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.7,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-17523",
     "published": "2026-07-27T10:16:36.270",
     "last_modified": "2026-09-10T14:17:00.323",
@@ -20956,35 +20524,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 4.2,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64560",
-    "published": "2026-07-29T17:16:53.637",
-    "last_modified": "2026-09-08T09:18:20.357",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nposix-cpu-timers: Prevent UAF caused by non-leader exec() race\n\nWongi and Jungwoo decoded and reported a non-leader exec() related race\nwhich can result in an UAF:\n\n sys_timer_delete()\t\t\texec()\n   posix_cpu_timer_del()\n   // Observes old leader\n   p = pid_task(pid, pid_type);\t\tde_thread()\n   \t\t\t\t\t  switch_leader();\n\t\t\t\t\t  release_task(old_leader)\n\t\t\t\t\t    __exit_signal(old_leader)\n\t\t\t\t\t      sighand = lock(old_leader, sighand);\n\t\t\t\t\t      posix_cpu_timers*_exit();\n   sighand = lock_task_sighand(p)\t      unhash_task(old_leader);\n     sh = lock(p, sighand)\t    \t      old_leader->sighand = NULL;\n\t\t\t\t\t      unlock(sighand);\n     (p->sighand == NULL)\n\tunlock(sh)\n\treturn NULL;\n\n   // Returns without action\n   if(!sighand)\n      return 0;\n   free_posix_timer();\n\nThis is \"harmless\" unless the deleted timer was armed and enqueued in\np->signal because on exec() a TGID targeted timer is inherited.\n\nAs sys_timer_delete() freed the underlying posix timer object\nrun_posix_cpu_timers() or any timerqueue related add/delete operations on\nother timers will access the freed object's timerqueue node, which results\nin an UAF.\n\nThere is a similar problem vs. posix_cpu_timer_set(). For regular posix\ntimers it just transiently returns -ESRCH to user space, but for the use\ncase in do_cpu_nanosleep() it's the same UAF just that the k_itimer is\nallocated on the stack.\n\nAlso posix_cpu_timer_rearm() fails to rearm the timer, which means it stops\nto expire.\n\nWhile debating solutions Frederic pointed out another problem:\n\n   posix_cpu_timer_del(tmr)\n\t\t\t\t\t__exit_signal(p)\n\t\t\t\t\t  posix_cpu_timers*_exit(p);\n\t\t\t\t\t  unhash_task(p);\n\t\t\t\t\t  p->sighand = NULL;\n     sh = lock_task_sighand(p)\n        sighand = p->sighand;\n\tif (!sighand)\n\t    return NULL;\n\tlock(sighand);\n\n     if (!sh)\n\tWARN_ON_ONCE(timer_queued(tmr));\n\nOn weakly ordered architectures it is not guaranteed that\nposix_cpu_timer_del() will observe the stores in posix_cpu_timers*_exit()\nwhen p->sighand is observed as NULL, which means the WARN() can be a false\npositive.\n\nSolve these issues by:\n\n  1) Changing the store in __exit_signal() to smp_store_release().\n\n  2) Adding a smp_acquire__after_ctrl_dep() into the !sighand path\n     of lock_task_sighand().\n\n  3) Creating a helper function for looking up the task and locking sighand\n     which does not return when sighand == NULL. Instead it retries the\n     task lookup and only if that fails it gives up.\n\n  4) Using that helper in the three affected functions.\n\n#1/#2 ensures that the reader side which observes sighand == NULL also\nobserves all preceeding stores, i.e. the stores in posix_cpu_timers*_exit()\nand the ones in unhash_task().\n\n#3 ensures that the above described non-leader exec() situation is handled\ngracefully. When the task lookup returns the old leader, but sighand ==\nNULL then it retries. In the non-leader exec() case the subsequent task\nlookup will observe the new leader due to #1/#2. In normal exit() scenarios\nthe subsequent lookup fails.\n\nWhen the task lookup fails, the function also checks whether the timer is\nstill enqueued and issues a warning if that's the case. Unfortunately there\nis nothing which can be done about it, but as the task is already not\nlonger visible the timer should not be accessed anymore. This check also\nrequires memory ordering, which is not provided when the first lookup\nfails. To achieve that the check is preceeded by a smp_rmb() which pairs\nwith the smp_wmb() in write_seqlock() in __exit_signal(). That ensures that\nthe stores in posix_cpu_timers*_exit() are visible.\n\nThe history of the non-leader exec() issue goes back to the early days of\nposix CPU timers, which stored a pointer to the group leader task in the\ntimer. That obviously fails when a non-leader exec() switches the leader.\ncommit e0a70217107e (\"posix-cpu-timers: workaround to suppress the problems\nwith mt exec\") added a temporary workaround for that in 2010 which surv\n---truncated---",
-    "references": [
-      "https://git.kernel.org/stable/c/12a891c773aeb5823d63dbd0cb2ab931d6c21c9b",
-      "https://git.kernel.org/stable/c/67aa823e3e8c229c6d374df79c804f6721cb83b6",
-      "https://git.kernel.org/stable/c/6a7ecc25abe6f0fecc6e62a05096987200edbd02",
-      "https://git.kernel.org/stable/c/920f893f735e92ba3a1cd9256899a186b161928d",
-      "https://git.kernel.org/stable/c/ad1cafa1bdaa71da85d71cac053838bbe97852b6",
-      "https://git.kernel.org/stable/c/cc35ddbc497311e0b6b9a6a6a4f4d1217d6ab1aa",
-      "https://git.kernel.org/stable/c/d8bcb28abad857f1415da7656f19b2ada90af04f",
-      "https://git.kernel.org/stable/c/e74443f5db0037c556ef436fa64b88bf4ea08f83",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.0,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -21644,6 +21183,50 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-61617",
+    "published": "2026-08-26T22:16:25.247",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Wings is the server control plane for the Pterodactyl game-server management panel. In versions up to and including 1.13.2, the SFTP write path does not enforce a server's disk quota during a transfer, allowing a tenant with SFTP write access to a single server to exhaust the host node's physical disk and take down every server on it. Wings checks available space only once, as a boolean, when the write handle is opened, using a stale cached usage value and without knowing the size of the incoming data, and it then returns a raw, unaccounted file handle that is never re-checked as the transfer proceeds. A single upload can therefore be written without bound, far beyond the configured disk limit, until the node's disk is full, and because a server stopped for exceeding its limit is not treated as suspended, SFTP writes are still accepted even after the quota is already exceeded. This issue is fixed in version 1.13.3.",
+    "references": [
+      "https://github.com/pterodactyl/wings/commit/da1a216cfff5867fa66be32cb1edb93e37fd71ff",
+      "https://github.com/pterodactyl/wings/security/advisories/GHSA-8j54-xcwx-597p",
+      "https://github.com/pterodactyl/wings/security/advisories/GHSA-8j54-xcwx-597p"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 16.2,
+    "tags": [],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47879",
+    "published": "2026-08-27T06:17:17.813",
+    "last_modified": "2026-09-10T15:18:41.147",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Spring Cloud Gateway JsonToGrpcGatewayFilterFactory allows arbitrary Spring Resource locations for defining the proto descriptor.\nSpring Cloud Gateway 5.0.0 - 5.0.2\nSpring Cloud Gateway 4.3.0 - 4.3.5\nSpring Cloud Gateway 4.0.0 - 4.2.9\nSpring Cloud Gateway 3.1.13 and earlier",
+    "references": [
+      "https://spring.io/security/cve-2026-47879"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 15.4,
+    "tags": [],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-16313",
     "published": "2026-07-28T17:16:37.807",
     "last_modified": "2026-09-09T16:17:01.500",
@@ -21970,23 +21553,24 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-42384",
-    "published": "2024-11-18T10:15:06.943",
-    "last_modified": "2026-09-08T09:17:17.430",
-    "cvss_v3": 7.5,
+    "cve_id": "CVE-2026-77368",
+    "published": "2026-08-26T22:16:29.860",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 7.6,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Integer Overflow or Wraparound vulnerability in Cesanta Mongoose Web Server v7.14 allows an attacker to send an unexpected TLS packet and produce a segmentation fault on the application.",
+    "summary": "SeaweedFS is a distributed storage system for files and blobs. In version 4.39, the filer's TUS resumable-upload handler checks JWT allowed_prefixes scoping only when a session is created, letting a low-privilege tenant hijack another tenant's upload session to write content to filer paths their own token forbids. The HEAD, PATCH, and DELETE verbs that act on an existing session by its id never verify that the session's stored target path falls within the caller's allowed prefixes, so a tenant who obtains another upload's session identifier can PATCH attacker bytes into it and, on completion, have the file land at the victim's out-of-scope path. The same token can also DELETE other tenants' sessions and HEAD them to read upload progress and size, defeating the JWT prefix isolation. This vulnerability only affects deployments that configure filer JWT signing and have TUS uploads enabled. This issue is fixed in version 4.40.",
     "references": [
-      "https://www.nozominetworks.com/blog",
-      "https://cert-portal.siemens.com/productcert/html/ssa-142885.html"
+      "https://github.com/seaweedfs/seaweedfs/commit/ce82e3a057080162a9fba11889157d2255815f71",
+      "https://github.com/seaweedfs/seaweedfs/commit/fa549e9c83b7799d512157d728f52052912831af",
+      "https://github.com/seaweedfs/seaweedfs/security/advisories/GHSA-99q7-x53r-6j4g"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.0,
+    "epss": 0.2,
+    "epss_percentile": 11.9,
     "tags": [],
-    "intel_score": 47.5,
+    "intel_score": 48.0,
     "reasons": [
       "recently modified (last 48h)"
     ]
@@ -29192,35 +28776,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-46306",
-    "published": "2026-06-08T17:16:49.383",
-    "last_modified": "2026-09-08T09:18:09.837",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nflow_dissector: do not dissect PPPoE PFC frames\n\nRFC 2516 Section 7 states that Protocol Field Compression (PFC) is NOT\nRECOMMENDED for PPPoE. In practice, pppd does not support negotiating\nPFC for PPPoE sessions, and the flow dissector driver has assumed an\nuncompressed frame until the blamed commit.\n\nDuring the review process of that commit [1], support for PFC is\nsuggested. However, having a compressed (1-byte) protocol field means\nthe subsequent PPP payload is shifted by one byte, causing 4-byte\nmisalignment for the network header and an unaligned access exception\non some architectures.\n\nThe exception can be reproduced by sending a PPPoE PFC frame to an\nethernet interface of a MIPS board, with RPS enabled, even if no PPPoE\nsession is active on that interface:\n\n$ 0   : 00000000 80c40000 00000000 85144817\n$ 4   : 00000008 00000100 80a75758 81dc9bb8\n$ 8   : 00000010 8087ae2c 0000003d 00000000\n$12   : 000000e0 00000039 00000000 00000000\n$16   : 85043240 80a75758 81dc9bb8 00006488\n$20   : 0000002f 00000007 85144810 80a70000\n$24   : 81d1bda0 00000000\n$28   : 81dc8000 81dc9aa8 00000000 805ead08\nHi    : 00009d51\nLo    : 2163358a\nepc   : 805e91f0 __skb_flow_dissect+0x1b0/0x1b50\nra    : 805ead08 __skb_get_hash_net+0x74/0x12c\nStatus: 11000403        KERNEL EXL IE\nCause : 40800010 (ExcCode 04)\nBadVA : 85144817\nPrId  : 0001992f (MIPS 1004Kc)\nCall Trace:\n[<805e91f0>] __skb_flow_dissect+0x1b0/0x1b50\n[<805ead08>] __skb_get_hash_net+0x74/0x12c\n[<805ef330>] get_rps_cpu+0x1b8/0x3fc\n[<805fca70>] netif_receive_skb_list_internal+0x324/0x364\n[<805fd120>] napi_complete_done+0x68/0x2a4\n[<8058de5c>] mtk_napi_rx+0x228/0xfec\n[<805fd398>] __napi_poll+0x3c/0x1c4\n[<805fd754>] napi_threaded_poll_loop+0x234/0x29c\n[<805fd848>] napi_threaded_poll+0x8c/0xb0\n[<80053544>] kthread+0x104/0x12c\n[<80002bd8>] ret_from_kernel_thread+0x14/0x1c\n\nCode: 02d51821  1060045b  00000000 <8c640000> 3084000f  2c820005  144001a2  00042080  8e220000\n\nTo reduce the attack surface and maintain performance, do not process\nPPPoE PFC frames.\n\n[1] https://lore.kernel.org/r/20220630231016.GA392@debian.home",
-    "references": [
-      "https://git.kernel.org/stable/c/0d00b9015069712944934bab09eaa6c542143049",
-      "https://git.kernel.org/stable/c/18ae9eacfc95cc715c0606b2c86e8aa8a86cf3e3",
-      "https://git.kernel.org/stable/c/6044392d9cace3a3672b02c8bc7d38b502e51734",
-      "https://git.kernel.org/stable/c/7c93f353eab4ea911e394630f07d72e040a729d8",
-      "https://git.kernel.org/stable/c/abc5bc84e0f2edc7ea2d437afa6ef3fe1fc43200",
-      "https://git.kernel.org/stable/c/d6c19b31a3c1d519fabdcf0aa239e6b6109b9473",
-      "https://git.kernel.org/stable/c/db104b0d8a7856397c0469d83a4289adf7c54863",
-      "https://git.kernel.org/stable/c/e7c811ca372d53c2be7d01a1614e71fae1054836",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 36.9,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-46625",
     "published": "2026-06-10T22:16:59.613",
     "last_modified": "2026-09-09T13:20:18.357",
@@ -29918,65 +29473,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-52946",
-    "published": "2026-06-24T17:17:04.610",
-    "last_modified": "2026-09-08T09:18:12.257",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nfs/fcntl: fix SOFTIRQ-unsafe lock order in fasync signaling\n\nA SOFTIRQ-safe to SOFTIRQ-unsafe lock order deadlock can occur in\nsend_sigio() and send_sigurg() when a process group receives a signal.\n\nWhen FASYNC is configured for a process group (PIDTYPE_PGID), both\nfunctions use read_lock(&tasklist_lock) to traverse the task list.\nHowever, they are frequently called from softirq context:\n- send_sigio() via input_inject_event -> kill_fasync\n- send_sigurg() via tcp_check_urg -> sk_send_sigurg (NET_RX_SOFTIRQ)\n\nThe deadlock is caused by the rwlock writer fairness mechanism:\n1. CPU 0 (process context) holds read_lock(&tasklist_lock) in do_wait().\n2. CPU 1 (process context) attempts write_lock(&tasklist_lock) in\n   fork() or exit() and spins, which blocks all new readers.\n3. CPU 0 is interrupted by a softirq (e.g., TCP URG packet reception).\n4. The softirq calls send_sigurg() and attempts to acquire\n   read_lock(&tasklist_lock), deadlocking because CPU 1 is waiting.\n\nSince PID hashing and do_each_pid_task() traversals are already\nRCU-protected, the read_lock on tasklist_lock is no longer strictly\nrequired for safe traversal. Fix this by replacing tasklist_lock with\nrcu_read_lock(), aligning the process group signaling path with the\nsingle-PID path. This also mitigates a potential remote denial of\nservice vector via TCP URG packets.\n\nLockdep splat:\n=====================================================\nWARNING: SOFTIRQ-safe -> SOFTIRQ-unsafe lock order detected\n[...]\nChain exists of:\n  &dev->event_lock --> &f_owner->lock --> tasklist_lock\n\nPossible interrupt unsafe locking scenario:\n       CPU0                    CPU1\n       ----                    ----\n  lock(tasklist_lock);\n                           local_irq_disable();\n                           lock(&dev->event_lock);\n                           lock(&f_owner->lock);\n  <Interrupt>\n    lock(&dev->event_lock);\n\n*** DEADLOCK ***",
-    "references": [
-      "https://git.kernel.org/stable/c/00633c4683828acd5256fa8d5163f440d74bbe71",
-      "https://git.kernel.org/stable/c/1bee417678f1135e35b25a37734db46aa94258d2",
-      "https://git.kernel.org/stable/c/20a93e397abe850c49b6fa0e8cc827b5f634a8f5",
-      "https://git.kernel.org/stable/c/32dbd5ce4be3a3ed7e00f8af18795cc84fc50a33",
-      "https://git.kernel.org/stable/c/36c1b57b2ecf3c61ac93f5f07bd29b6f21e226ed",
-      "https://git.kernel.org/stable/c/54626335ea4174ab2d9a183b511d825f6765e47b",
-      "https://git.kernel.org/stable/c/897d6a7247739fb1528f98c575df4f2e5de7f994",
-      "https://git.kernel.org/stable/c/b5fa9e32fb6718f70c986ee14dd5d01b4846f331",
-      "https://git.kernel.org/stable/c/bfcc8e8d8a495bb34cae9e620adfb75fb13a3954",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.6,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52998",
-    "published": "2026-06-24T17:17:10.777",
-    "last_modified": "2026-09-08T09:18:12.810",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: nfnetlink_osf: fix potential NULL dereference in ttl check\n\nThe nf_osf_ttl() function accessed skb->dev to perform a local interface\naddress lookup without verifying that the device pointer was valid.\n\nAdditionally, the implementation utilized an in_dev_for_each_ifa_rcu\nloop to match the packet source address against local interface\naddresses. It assumed that packets from the same subnet should not see a\ndecrement on the initial TTL. A packet might appear it is from the same\nsubnet but it actually isn't especially in modern environments with\ncontainers and virtual switching.\n\nRemove the device dereference and interface loop. Replace the logic with\na switch statement that evaluates the TTL according to the ttl_check.",
-    "references": [
-      "https://git.kernel.org/stable/c/5d05de2f0928d81309a815ecc76d1a3ad72cbc16",
-      "https://git.kernel.org/stable/c/711987ba281fd806322a7cd244e98e2a81903114",
-      "https://git.kernel.org/stable/c/79b90a96688e521771fa6ed3dc7864b76b8df293",
-      "https://git.kernel.org/stable/c/83fc5dd63455a779ea2dd0f7ffee3c920919d80b",
-      "https://git.kernel.org/stable/c/95be653a76793856ff8b2d8bd82c2943c23f5ca8",
-      "https://git.kernel.org/stable/c/c996a90f3071cf43683e5423da31aadbe002b8b4",
-      "https://git.kernel.org/stable/c/edc806f9122961f0d3819f7c69c14cccde31f277",
-      "https://git.kernel.org/stable/c/f4de0777e4554a7de19c920accde6319dd530782",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.0,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-13676",
     "published": "2026-06-29T14:16:47.967",
     "last_modified": "2026-09-10T13:17:34.637",
@@ -30061,34 +29557,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 32.1,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64545",
-    "published": "2026-07-27T21:17:07.130",
-    "last_modified": "2026-09-08T09:18:20.010",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet, bpf: check master for NULL in xdp_master_redirect()\n\nxdp_master_redirect() dereferences the result of\nnetdev_master_upper_dev_get_rcu() without a NULL check, but that helper\nreturns NULL when the receiving device has no upper-master adjacency.\n\nThe reach guard only checks netif_is_bond_slave(). On bond slave release\nbond_upper_dev_unlink() drops the upper-master adjacency before clearing\nIFF_SLAVE, so an XDP_TX reaching xdp_master_redirect() in that window\nstill passes netif_is_bond_slave() while master is already NULL, and\nfaults on master->flags at offset 0xb0:\n\n  BUG: kernel NULL pointer dereference, address: 00000000000000b0\n  RIP: 0010:xdp_master_redirect (net/core/filter.c:4432)\n  Call Trace:\n   xdp_master_redirect (net/core/filter.c:4432)\n   bpf_prog_run_generic_xdp (include/net/xdp.h:700)\n   do_xdp_generic (net/core/dev.c:5608)\n   __netif_receive_skb_one_core (net/core/dev.c:6204)\n   process_backlog (net/core/dev.c:6319)\n   __napi_poll (net/core/dev.c:7729)\n   net_rx_action (net/core/dev.c:7792)\n   handle_softirqs (kernel/softirq.c:622)\n   __dev_queue_xmit (include/linux/bottom_half.h:33)\n   packet_sendmsg (net/packet/af_packet.c:3082)\n   __sys_sendto (net/socket.c:2252)\n  Kernel panic - not syncing: Fatal exception in interrupt\n\nThe missing check dates back to the original code; commit 1921f91298d1\n(\"net, bpf: fix null-ptr-deref in xdp_master_redirect() for down master\")\nlater added the master->flags read where the fault now lands but kept the\nunconditional deref. Check master for NULL before use; a NULL master is\ntreated the same as one that is not up.",
-    "references": [
-      "https://git.kernel.org/stable/c/03b743586a2469744e96e9c1015096d07240935d",
-      "https://git.kernel.org/stable/c/3876318ea54e83eb70982b8280a3c5e4e32269bf",
-      "https://git.kernel.org/stable/c/4edbcacca09f92b85d3951b6add11894b20a84bc",
-      "https://git.kernel.org/stable/c/89c103d702b25ceb2d097faf854deb47b53b17ff",
-      "https://git.kernel.org/stable/c/c99ca049e910d61ddbd28cc2c47242f2bfbb4970",
-      "https://git.kernel.org/stable/c/e2a56441233131fe18a76001de347ecda217e40c",
-      "https://git.kernel.org/stable/c/e82d8cc4321c373dc46e741cd2dfdaa7921fddb7",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -31970,6 +31438,158 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-46369",
+    "published": "2026-08-26T20:17:23.163",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Nimiq is a Rust implementation of the Nimiq Proof-of-Stake protocol based on the Albatross consensus algorithm. Through 1.5.0, the validity store uses a strict lower-bound comparison that expires a stored transaction too early relative to Transaction::is_valid_at, allowing a remote attacker to replay the same signed transaction during a blocks_per_batch minus one block window and cause the sender and recipient balances to be updated twice. This issue is fixed in version 1.5.1.",
+    "references": [
+      "https://github.com/nimiq/core-rs-albatross/commit/a530b2434ebca6e3716f07c73079786fcc6f2e41",
+      "https://github.com/nimiq/core-rs-albatross/pull/3772",
+      "https://github.com/nimiq/core-rs-albatross/security/advisories/GHSA-3763-qp59-59vf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.6,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-75413",
+    "published": "2026-08-26T21:16:41.217",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DocSys V2.02.80 is vulnerable to Any File Download. An attacker does not need to go through authentication to utilize the downloadDocEx.do interface and download any file via the parameter targetPath.",
+    "references": [
+      "https://github.com/RainyGao-GitHub/DocSys/issues/48",
+      "https://github.com/RainyGao-GitHub/DocSys/issues/48"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.3,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47885",
+    "published": "2026-08-27T06:17:18.747",
+    "last_modified": "2026-09-10T14:06:46.513",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The PartEventHttpMessageReader in Spring WebFlux does not enforce the maxPartSize limit when maxInMemorySize is set to -1.\nSpring Framework 7.0.0 - 7.0.8\nSpring Framework 6.2.0 - 6.2.19\nSpring Framework 6.1.0 - 6.1.28",
+    "references": [
+      "https://spring.io/security/cve-2026-47885"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.6,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47888",
+    "published": "2026-08-27T06:17:19.623",
+    "last_modified": "2026-09-10T14:26:40.220",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A Spring RSocket application is exposed to a memory leak via a malformed SETUP frame.\nSpring Framework 7.0.0 - 7.0.8\nSpring Framework 6.2.0 - 6.2.19\nSpring Framework 6.1.0 - 6.1.28\nSpring Framework 6.0.0 - 6.0.30\nSpring Framework 5.3.0 - 5.3.49\nSpring Framework 5.2.0.RELEASE - 5.2.25.RELEASE",
+    "references": [
+      "https://spring.io/security/cve-2026-47888"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.3,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47889",
+    "published": "2026-08-27T06:17:19.867",
+    "last_modified": "2026-09-10T14:48:04.053",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A WebFlux application running on the Jetty 12 Core reactive adapter serializes response cookies without the sameSite attribute.\nSpring Framework 7.0.0 - 7.0.8\nSpring Framework 6.2.0 - 6.2.19",
+    "references": [
+      "https://spring.io/security/cve-2026-47889"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 16.7,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-26456",
+    "published": "2026-08-27T17:17:48.147",
+    "last_modified": "2026-09-08T19:42:20.313",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A null pointer dereference vulnerability exists in the server-side session management logic of ccoap 77f55c4b466e99327c24ace8a2913d3ba7e2ccd5. The issue is caused by a race condition between the request dispatch thread and the session cleanup thread when accessing shared session list nodes without proper synchronization.",
+    "references": [
+      "https://github.com/ipflavors/ccoap",
+      "https://github.com/songxpu/bug_report/blob/master/CoAP/ccoap/VULNERABILITY_REPORT5.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.3,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-80212",
+    "published": "2026-08-27T17:20:50.880",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue was discovered in the resolv gem before 0.7.2 for Ruby. Resolv::DNS::Resource.get_class, Resolv::DNS::Resource::Generic.create, and Resolv::DNS::SvcParam::Generic.create generate a new class for each unknown DNS resource record (type, class) pair, or each unknown SvcParamKey, encountered while decoding a response. Each generated class was permanently registered both as a constant on Resource (or SvcParam::Generic) and as an entry in a class-lookup hash (ClassHash), and thus the class remained reachable through that constant after the response was discarded. Type and class are each 16-bit values, and thus an attacker controlling DNS responses (a spoofed response, or a malicious or hijacked upstream DNS server) has roughly 2^32 distinct (type, class) pairs to choose from. A single response of a few hundred kilobytes carrying tens of thousands of distinct unknown types permanently grows process memory by tens of megabytes; repeated responses accumulate without bound and are never reclaimed by garbage collection, because the constant keeps each class alive. Any code path that calls Resolv::DNS::Message.decode on attacker-influenced DNS responses is affected. resolv is a default gem, and thus this is reachable from a plain Ruby installation without any additional dependency.",
+    "references": [
+      "https://github.com/ruby/resolv",
+      "https://www.ruby-lang.org/en/news/2026/08/27/multiple-vulnerabilities-in-resolv/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.2,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2024-1249",
     "published": "2024-04-17T14:15:08.160",
     "last_modified": "2026-09-08T20:17:25.350",
@@ -33315,38 +32935,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-46033",
-    "published": "2026-05-27T14:17:22.313",
-    "last_modified": "2026-09-08T09:18:06.620",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: authencesn - reject short ahash digests during instance creation\n\nauthencesn requires either a zero authsize or an authsize of at least\n4 bytes because the ESN encrypt/decrypt paths always move 4 bytes of\nhigh-order sequence number data at the end of the authenticated data.\n\nWhile crypto_authenc_esn_setauthsize() already rejects explicit\nnon-zero authsizes in the range 1..3, crypto_authenc_esn_create()\nstill copied auth->digestsize into inst->alg.maxauthsize without\nvalidating it.  The AEAD core then initialized the tfm's default\nauthsize from that value.\n\nAs a result, selecting an ahash with digest size 1..3, such as\ncbcmac(cipher_null), exposed authencesn instances whose default\nauthsize was invalid even though setauthsize() would have rejected the\nsame value.  AF_ALG could then trigger the ESN tail handling with a\ntoo-short tag and hit an out-of-bounds access.\n\nReject authencesn instances whose ahash digest size is in the invalid\nnon-zero range 1..3 so that no tfm can inherit an unsupported default\nauthsize.",
-    "references": [
-      "https://git.kernel.org/stable/c/2f31cd1e64a079c845bca31d2da7b3c90a311726",
-      "https://git.kernel.org/stable/c/5db6ef9847717329f12c5ea8aba7e9f588a980c0",
-      "https://git.kernel.org/stable/c/67f1f0933cc3d78dde222842bcad2778ec7a0b88",
-      "https://git.kernel.org/stable/c/77f59fb2d3aa33e90ec6cbbf45dcfb20ab82b1a9",
-      "https://git.kernel.org/stable/c/9aff81e8217e9de2929084b03b3c7f81988c112b",
-      "https://git.kernel.org/stable/c/b42821c15445f93daea3e76ada682b2b7181c476",
-      "https://git.kernel.org/stable/c/b69933e97efea238ebbfcf70c2b1be1cd03f13e3",
-      "https://git.kernel.org/stable/c/d4c6a6d08e70bb1083c7c405fc7faacbf19aebc0",
-      "https://access.redhat.com/security/cve/CVE-2026-46033",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2482000",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-46033.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.1,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-53704",
     "published": "2026-06-15T20:16:33.697",
     "last_modified": "2026-09-08T23:17:25.130",
@@ -33373,67 +32961,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-52942",
-    "published": "2026-06-24T08:16:24.490",
-    "last_modified": "2026-09-08T09:18:11.710",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: nf_log: validate MAC header was set before dumping it\n\nThe fallback path of dump_mac_header() guards the MAC header access\nonly with \"skb->mac_header != skb->network_header\", without checking\nskb_mac_header_was_set(). When the MAC header is unset, mac_header is\n0xffff, so the test passes and skb_mac_header(skb) returns\nskb->head + 0xffff, ~64 KiB past the buffer; the loop then reads\ndev->hard_header_len bytes out of bounds into the kernel log.\n\nThis is reachable via the netdev logger: nf_log_unknown_packet() calls\ndump_mac_header() unconditionally, and an skb sent through AF_PACKET\nwith PACKET_QDISC_BYPASS reaches the egress hook with mac_header still\nunset (__dev_queue_xmit(), which would reset it, is bypassed).\n\nAdd the skb_mac_header_was_set() check the ARPHRD_ETHER path already\nuses, and replace the open-coded MAC header length test with\nskb_mac_header_len(). Only skbs with an unset MAC header are affected;\nvalid ones are dumped as before.\n\n BUG: KASAN: slab-out-of-bounds in dump_mac_header (net/netfilter/nf_log_syslog.c:831)\n Read of size 1 at addr ffff88800ea49d3f by task exploit/148\n Call Trace:\n  kasan_report (mm/kasan/report.c:595)\n  dump_mac_header (net/netfilter/nf_log_syslog.c:831)\n  nf_log_netdev_packet (net/netfilter/nf_log_syslog.c:938 net/netfilter/nf_log_syslog.c:963)\n  nf_log_packet (net/netfilter/nf_log.c:260)\n  nft_log_eval (net/netfilter/nft_log.c:60)\n  nft_do_chain (net/netfilter/nf_tables_core.c:285)\n  nft_do_chain_netdev (net/netfilter/nft_chain_filter.c:307)\n  nf_hook_slow (net/netfilter/core.c:619)\n  nf_hook_direct_egress (net/packet/af_packet.c:257)\n  packet_xmit (net/packet/af_packet.c:280)\n  packet_sendmsg (net/packet/af_packet.c:3114)\n  __sys_sendto (net/socket.c:2265)",
-    "references": [
-      "https://git.kernel.org/stable/c/2e96e1bc9b4d5450e6c33f078e19a9bc1dda6c0b",
-      "https://git.kernel.org/stable/c/65ef7397eb9a296e91839f5fd10be96f23d332e7",
-      "https://git.kernel.org/stable/c/8a81e336da685423f5b64aac4d571e63d674c52a",
-      "https://git.kernel.org/stable/c/a84b6fedbc97078788be78dbdd7517d143ad1a77",
-      "https://git.kernel.org/stable/c/af1b7699466f6556b351fa25d3dc870abfb5d310",
-      "https://git.kernel.org/stable/c/befb8968a2abdfa948d5600ea7f7a509a292a590",
-      "https://git.kernel.org/stable/c/c38d41134085193efd5b237cf513ad5b3421a60d",
-      "https://git.kernel.org/stable/c/d704ee9c7bc68a161684c51a7ac05b446dcf38d4",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.7,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53223",
-    "published": "2026-06-25T09:16:40.073",
-    "last_modified": "2026-09-08T09:18:14.723",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: guard timestamp cmsgs to real error queue skbs\n\nskb_is_err_queue() treats PACKET_OUTGOING as the sole marker for an skb\nfrom sk_error_queue. That assumption is not true for AF_PACKET sockets:\noutgoing packet taps are also delivered to packet sockets with\nskb->pkt_type == PACKET_OUTGOING, but their skb->cb is owned by AF_PACKET\ninstead of struct sock_exterr_skb.\n\nIf such an skb is received with timestamping enabled, the generic\ntimestamp cmsg path can read AF_PACKET control-buffer state as\nsock_exterr_skb::opt_stats. With SO_RXQ_OVFL enabled, the packet drop\ncounter overlaps opt_stats. An odd drop count makes the path emit\nSCM_TIMESTAMPING_OPT_STATS with skb->len and skb->data. For non-linear\nskbs this copies past the linear head and can trigger hardened usercopy or\ndisclose adjacent heap contents.\n\nKeep skb_is_err_queue() local to net/socket.c, but make it verify that\nthe PACKET_OUTGOING marker is paired with the sock_rmem_free destructor\ninstalled by sock_queue_err_skb(). AF_PACKET receive skbs use normal\nreceive ownership and no longer pass as error-queue skbs, while legitimate\nsk_error_queue entries keep the PACKET_OUTGOING marker and sock_rmem_free\nownership.",
-    "references": [
-      "https://git.kernel.org/stable/c/1ee90b77b727df903033db873c75caac5c27ec98",
-      "https://git.kernel.org/stable/c/24a0d548d3a765cd4558224e4f8e06e14cba26e3",
-      "https://git.kernel.org/stable/c/3dde4fb941fa5649ab809f6cd3e20e0c424a4e31",
-      "https://git.kernel.org/stable/c/71ff5cdd5da61d0438e902aa0fd68c28bc901abe",
-      "https://git.kernel.org/stable/c/ad9a0374ee6d11048e1f74cd5180bad58b9848b4",
-      "https://git.kernel.org/stable/c/b903e9b5629ec8dd6db92174070045bf81ad7060",
-      "https://git.kernel.org/stable/c/e0665b2a8e90bb08bd205062c75662b502d31797",
-      "https://git.kernel.org/stable/c/eb51a9ad3ceb01bc6c0fb608dbc856e03ee6f24a",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.8,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-16118",
     "published": "2026-07-17T20:17:16.167",
-    "last_modified": "2026-09-08T13:17:17.507",
+    "last_modified": "2026-09-11T10:16:51.150",
     "cvss_v3": 7.1,
     "severity": "HIGH",
     "affected": [],
@@ -33441,6 +32971,7 @@
     "references": [
       "https://access.redhat.com/errata/RHSA-2026:64799",
       "https://access.redhat.com/errata/RHSA-2026:64800",
+      "https://access.redhat.com/errata/RHSA-2026:66451",
       "https://access.redhat.com/security/cve/CVE-2026-16118",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2501732",
       "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41",
@@ -33450,35 +32981,6 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 15.7,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64317",
-    "published": "2026-07-25T10:17:13.010",
-    "last_modified": "2026-09-08T09:18:18.020",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nisofs: bound Rock Ridge symlink components to the SL record\n\nget_symlink_chunk() and the SL handling in\nparse_rock_ridge_inode_internal() walk the variable-length components of\na Rock Ridge \"SL\" (symbolic link) record.  Each component is a two-byte\nheader (flags, len) followed by len bytes of text, so it occupies\nslp->len + 2 bytes.  Both loops read slp->len and advance to the next\ncomponent, and get_symlink_chunk() additionally does\nmemcpy(rpnt, slp->text, slp->len), but neither checks that the component\nlies within the SL record before dereferencing it.\n\nA crafted SL record whose component declares a len that runs past the\nrecord (rr->len) therefore triggers an out-of-bounds read of up to 255\nbytes.  When the record sits at the tail of its backing buffer - for\nexample a small kmalloc()ed continuation block reached through a CE\nrecord - the read crosses the allocation; get_symlink_chunk() then\ncopies the out-of-bounds bytes into the symlink body returned to user\nspace by readlink(), disclosing adjacent kernel memory.\n\nISO 9660 images are routinely mounted from untrusted removable media -\ndesktop environments auto-mount them (e.g. via udisks2) without\nCAP_SYS_ADMIN - so the record contents are attacker-controlled.\n\nReject any component that does not fit in the remaining record bytes\nbefore using it.  In get_symlink_chunk() return NULL, like the existing\noutput-buffer (plimit) checks, so a malformed record makes readlink()\nfail with -EIO rather than silently returning a truncated target; in\nparse_rock_ridge_inode_internal() stop the inode-size walk.",
-    "references": [
-      "https://git.kernel.org/stable/c/1015e1c4b2fadd9c09704e24738e46598778c869",
-      "https://git.kernel.org/stable/c/36fe7d25dbc40da0c6b1dd4513a4f69ac6164eee",
-      "https://git.kernel.org/stable/c/5fa1d6a5ec2356d2107dead614437c66fa7138b1",
-      "https://git.kernel.org/stable/c/6bf41db09ef935d76fcc84ccf213b42c18de95ee",
-      "https://git.kernel.org/stable/c/9830725078c8483c6831ec10222ae724806ea36b",
-      "https://git.kernel.org/stable/c/a22cb6bb54dc167047ea9e70d97dfbc2c15649e3",
-      "https://git.kernel.org/stable/c/b5699642640d6cff357638738c5293985cd5a53d",
-      "https://git.kernel.org/stable/c/b736b12108fd116c41777628f5a333791604df26",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.2,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -33507,93 +33009,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 23.5,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64411",
-    "published": "2026-07-25T10:17:24.853",
-    "last_modified": "2026-09-08T09:18:18.777",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: ebtables: terminate table name before find_table_lock()\n\nupdate_counters() and compat_update_counters() forward a user-supplied\n32-byte table name to find_table_lock() without NUL-terminating it. On a\nlookup miss, find_inlist_lock() calls try_then_request_module(..., \"%s%s\",\n\"ebtable_\", name), and vsnprintf() reads past the name field and the\nstack object until it hits a zero byte.\n\n  BUG: KASAN: stack-out-of-bounds in string (lib/vsprintf.c:648 lib/vsprintf.c:730)\n  Read of size 1 at addr ffff8880119dfb20 by task exploit/147\n  Call Trace:\n  ...\n   string (lib/vsprintf.c:648 lib/vsprintf.c:730)\n   vsnprintf (lib/vsprintf.c:2945)\n   __request_module (kernel/module/kmod.c:150)\n   do_update_counters.isra.0 (net/bridge/netfilter/ebtables.c:371 net/bridge/netfilter/ebtables.c:380)\n   update_counters (net/bridge/netfilter/ebtables.c:1440)\n   do_ebt_set_ctl (net/bridge/netfilter/ebtables.c:2573)\n   nf_setsockopt (net/netfilter/nf_sockopt.c:101)\n   ip_setsockopt (net/ipv4/ip_sockglue.c:1424)\n   raw_setsockopt (net/ipv4/raw.c:847)\n   __sys_setsockopt (net/socket.c:2393)\n  ...\n\ncompat_do_replace() shares the same unterminated name via\ncompat_copy_ebt_replace_from_user(); terminate it there too so all\nfind_table_lock() callers behave alike. The other callers already\nterminate the name after the copy.",
-    "references": [
-      "https://git.kernel.org/stable/c/2664f537ca5bcb2ef3fac2683dcca602e51fad24",
-      "https://git.kernel.org/stable/c/4c046ca4e35a83ea32f6e748f54139f5fe2a1d01",
-      "https://git.kernel.org/stable/c/6fe8d3cecd20bfaaaf440db3a06ba674d2f2e322",
-      "https://git.kernel.org/stable/c/7436da6c1bc44654b7f11a17e746f6999fd37250",
-      "https://git.kernel.org/stable/c/a622d2e9608c9dff47fc2e5759ac7aa3a836b45d",
-      "https://git.kernel.org/stable/c/ab63ccefb9c71627f957a0724c2b9ebc869c6f20",
-      "https://git.kernel.org/stable/c/b6183b1b88a722b6d8ea0cecc99eba168a15e0be",
-      "https://git.kernel.org/stable/c/c6f539311e58e76aa96feef0f1572b13a564f8a2",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.8,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64412",
-    "published": "2026-07-25T10:17:24.990",
-    "last_modified": "2026-09-08T09:18:18.950",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: ebtables: module names must be null-terminated\n\nWe need to explicitly check the length, else we may pass non-null\nterminated string to request_module().",
-    "references": [
-      "https://git.kernel.org/stable/c/084d23f818321390509e9738a0b08bbf46df6425",
-      "https://git.kernel.org/stable/c/0ddca0f90fa3395111d078ae4399615cf3ea94aa",
-      "https://git.kernel.org/stable/c/13a5f532e3a4fc75c33060a026def1572c208643",
-      "https://git.kernel.org/stable/c/43dd2332b8a27b3ac5108791680cade654ab0f96",
-      "https://git.kernel.org/stable/c/5777c8f1c3610786d8482b8f620f40fccaf1542b",
-      "https://git.kernel.org/stable/c/7b217960e88b5d2d1e8cdcbcaf3bdf6fe199a0c8",
-      "https://git.kernel.org/stable/c/d2367d99f2455f373996d9ddbe833dbe9f942213",
-      "https://git.kernel.org/stable/c/da32e78bbb187ed7b137e0007034185570a3a172",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.8,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64422",
-    "published": "2026-07-25T10:17:26.213",
-    "last_modified": "2026-09-08T09:18:19.287",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: ipv4: bound TCP reordering sysctl writes and MTU probe sizes\n\nReject invalid `net.ipv4.tcp_reordering` values before they reach TCP\nsocket state. The sysctl is stored as an `int` but copied into the\n`u32` `tp->reordering` field for new sockets, so negative writes wrap\nto large values.\n\nWith `tcp_mtu_probing=2`, the wrapped value can overflow the\n`tcp_mtu_probe()` size calculation and drive the MTU probing path into\nan out-of-bounds read. Route `tcp_reordering` writes through\n`proc_dointvec_minmax()` and require it to be at least 1. Also require\n`tcp_max_reordering` to be at least 1 so the configured maximum cannot\nbecome negative either.\n\nWhen registering the table for a non-init network namespace, relocate\n`extra2` pointers that refer into `init_net.ipv4` so the\n`tcp_reordering` upper bound follows that namespace's\n`tcp_max_reordering`.\n\nHarden `tcp_mtu_probe()` itself by computing `size_needed` as `u64`.\nThis keeps the send queue and window checks from being bypassed through\nsigned integer overflow.",
-    "references": [
-      "https://git.kernel.org/stable/c/27ddf4486c7dbf5bdd393fa8bef6b67179796d98",
-      "https://git.kernel.org/stable/c/782708ca1ea1f68b8cbb5ea3a7f5f18d0000efae",
-      "https://git.kernel.org/stable/c/99206ce2244f8a3ed64298d0667c9055845a5dc7",
-      "https://git.kernel.org/stable/c/a094ac95d3b69adfa1676eb9c8eae6835d4f1671",
-      "https://git.kernel.org/stable/c/bbae351c0f32f7c200249e4aa6561b2b419dcf69",
-      "https://git.kernel.org/stable/c/e81f805824a8109504fce090641b17d135b48cd1",
-      "https://git.kernel.org/stable/c/efb8763d7bbb40cff4cc55a6b62c3095a038149c",
-      "https://git.kernel.org/stable/c/f0d88a4cd03affff6c08adf6c63964e235aede43",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.3,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -34540,6 +33955,53 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-29419",
+    "published": "2026-08-26T18:16:25.893",
+    "last_modified": "2026-09-08T19:42:20.313",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "CTFd v3.7.6 was discovered to be vulnerable to a man-in-the-middle attack.",
+    "references": [
+      "http://ctfd.com",
+      "https://github.com/CTFd/CTFd",
+      "https://github.com/QingdaoU/OnlineJudge",
+      "https://thewindghost.github.io/#cve-2025-29419"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.3,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-77611",
+    "published": "2026-08-26T22:16:30.007",
+    "last_modified": "2026-09-09T21:09:13.080",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SeaweedFS is a distributed storage system for files and blobs. In versions prior to 4.40, an authenticated S3 principal with permissions scoped to a nested object key can overwrite a different object outside that scope by calling PutObjectAcl on the key it is allowed to access. The handler authorizes the request against the requested nested key but then writes the updated entry back to the bucket root rather than the key's actual parent directory, so an ACL change on allowed/protected.txt is instead applied to protected.txt at the bucket root. Because the update carries the full entry rather than only ACL metadata, an existing target object is overwritten with the content, metadata, owner information, and ACL of the scoped object, bypassing the object-level action scoping configured through the static S3 identity file. This issue is fixed in version 4.40.",
+    "references": [
+      "https://github.com/seaweedfs/seaweedfs/commit/311bc3a6dfbd042751692bc3de8accc516fcf8c1",
+      "https://github.com/seaweedfs/seaweedfs/security/advisories/GHSA-9x53-cjpr-m682",
+      "https://github.com/seaweedfs/seaweedfs/security/advisories/GHSA-9x53-cjpr-m682"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.6,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-48564",
     "published": "2025-12-08T17:16:14.660",
     "last_modified": "2026-09-08T19:17:46.237",
@@ -34658,35 +34120,6 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 55.6,
-    "tags": [],
-    "intel_score": 45.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64413",
-    "published": "2026-07-25T10:17:25.110",
-    "last_modified": "2026-09-08T09:18:19.117",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: ebtables: zero chainstack array\n\nsashiko reports:\n looking at ebtables table\n translation, could a sparse cpu_possible_mask lead to an uninitialized pointer\n free?\n\n If cpu_possible_mask is sparse (for example, CPU 0 and CPU 2 are possible,\n but CPU 1 is not), the allocation loop skips CPU 1. If vmalloc_node() fails at\n CPU 2, the cleanup loop will blindly decrement and call vfree() on\n newinfo->chainstack[1].\n\nNot a real-world bug, such allocation isn't expected to fail\nin the first place.",
-    "references": [
-      "https://git.kernel.org/stable/c/29bf41a9b59aff9f6197df58641a00037d567ca8",
-      "https://git.kernel.org/stable/c/2ade612967e2cdfb9290ebcb773f302c82f311fa",
-      "https://git.kernel.org/stable/c/42bef500d07b5769d916e9122a3e3fa3fd2245ef",
-      "https://git.kernel.org/stable/c/5ee856e4208acafaaaf7b84824d39b78c21345d6",
-      "https://git.kernel.org/stable/c/9e6c5169db423e51dcc66a73fd15409c0d38e088",
-      "https://git.kernel.org/stable/c/9f74d28e903fa4fdf82f870d0aeadddc8196e41c",
-      "https://git.kernel.org/stable/c/cbfe53599eebffd188938ab6774cc41794f6f9d5",
-      "https://git.kernel.org/stable/c/fc7f105451044501a50cfd530cfa3b472c54acbc",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.4,
     "tags": [],
     "intel_score": 45.0,
     "reasons": [

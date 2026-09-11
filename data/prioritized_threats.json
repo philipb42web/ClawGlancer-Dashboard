@@ -674,6 +674,37 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-80428",
+    "published": "2026-08-26T16:16:45.100",
+    "last_modified": "2026-09-10T20:48:45.067",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "ILIAS before versions 9.22, 10.10, and 11.3 contains an unauthenticated PHP object injection vulnerability that allows unauthenticated attackers to execute arbitrary code by injecting serialized objects through the LTI authentication endpoint and triggering deserialization via the Shibboleth back-channel logout endpoint. Attackers can write arbitrary serialized objects into session storage, then exploit an available POP gadget through the logout endpoint's unrestricted deserialization to write attacker-controlled PHP content to a web-accessible path and achieve remote code execution as the web server user.",
+    "references": [
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225630&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225631&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225632&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=934",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=935",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=936"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 51.9,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-51366",
     "published": "2026-08-19T14:17:32.283",
     "last_modified": "2026-09-09T16:04:24.933",
@@ -810,6 +841,59 @@
       "recently modified (last 48h)",
       "rce+30",
       "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-47884",
+    "published": "2026-08-27T06:17:18.507",
+    "last_modified": "2026-09-10T14:11:26.970",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use of XsltView in a Spring MVC application can result in SSRF and RCE attack if the application has an \"/**\" mapping that results in view rendering, and where the view name is not explicitly specified.\nSpring Framework 7.0.0 - 7.0.8\nSpring Framework 6.2.0 - 6.2.19\nSpring Framework 6.1.0 - 6.1.28\nSpring Framework 6.0.0 - 6.0.30\nSpring Framework 5.3.0 - 5.3.49\nSpring Framework 5.2.25.RELEASE and earlier",
+    "references": [
+      "https://spring.io/security/cve-2026-47884"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.6,
+    "tags": [
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-37003",
+    "published": "2026-08-27T20:17:41.107",
+    "last_modified": "2026-09-08T19:29:09.680",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Agno up to and including 2.5.8 is vulnerable to Remote Code Execution (RCE) via prompt injection. The PythonTools and ShellTools components pass unsanitized, LLM-generated arguments directly to execution sinks including exec(), runpy.run_path(), and subprocess.run(). An unauthenticated attacker can exploit this by embedding malicious instructions in content processed by the agent (such as web pages or documents), allowing for arbitrary code and OS command execution on the host server.",
+    "references": [
+      "http://agno.com",
+      "https://yerangamage.com/cves/detail/?slug=agno-rce-tools"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.6,
+    "epss_percentile": 74.4,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -1464,43 +1548,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-52943",
-    "published": "2026-06-24T10:17:19.293",
-    "last_modified": "2026-09-08T09:18:11.903",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: skbuff: fix missing zerocopy reference in pskb_carve helpers\n\npskb_carve_inside_header() and pskb_carve_inside_nonlinear() both copy\nthe old skb_shared_info header into a new buffer via memcpy(), which\nincludes the destructor_arg pointer (uarg) for MSG_ZEROCOPY skbs.\nNeither function calls net_zcopy_get() for the new shinfo, creating an\nunaccounted holder: every skb_shared_info with destructor_arg set will\ncall skb_zcopy_clear() once when freed, but the corresponding\nnet_zcopy_get() was never called for the new copy. Repeated calls\ndrive uarg->refcnt to zero prematurely, freeing ubuf_info_msgzc while\nTX skbs still hold live destructor_arg pointers.\n\nKASAN reports use-after-free on a freed ubuf_info_msgzc:\n\n  BUG: KASAN: slab-use-after-free in skb_release_data+0x77b/0x810\n  Read of size 8 at addr ffff88801574d3e8 by task poc/220\n\n  Call Trace:\n   skb_release_data+0x77b/0x810\n   kfree_skb_list_reason+0x13e/0x610\n   skb_release_data+0x4cd/0x810\n   sk_skb_reason_drop+0xf3/0x340\n   skb_queue_purge_reason+0x282/0x440\n   rds_tcp_inc_free+0x1e/0x30\n   rds_recvmsg+0x354/0x1780\n   __sys_recvmsg+0xdf/0x180\n\n  Allocated by task 219:\n   msg_zerocopy_realloc+0x157/0x7b0\n   tcp_sendmsg_locked+0x2892/0x3ba0\n\n  Freed by task 219:\n   ip_recv_error+0x74a/0xb10\n   tcp_recvmsg+0x475/0x530\n\nThe skb consuming the late access still referenced the same uarg via\nshinfo->destructor_arg copied by pskb_carve_inside_nonlinear() without\na refcount bump. This has been verified to be reliably exploitable: a\nworking proof-of-concept achieves full root privilege escalation from\nan unprivileged local user on a default kernel configuration.\n\nThe fix follows the pattern of pskb_expand_head() which has the same\nmemcpy/cloned structure. For pskb_carve_inside_header(), net_zcopy_get()\nis placed after skb_orphan_frags() succeeds, so the orphan error path\nneeds no cleanup. For pskb_carve_inside_nonlinear(), net_zcopy_get() is\nplaced after all failure points and just before skb_release_data(), so\nno error path needs cleanup at all -- matching pskb_expand_head() more\nclosely and avoiding the need for a balancing net_zcopy_put().",
-    "references": [
-      "https://git.kernel.org/stable/c/2e0e74c59b2761a414d9f48d7bee1e45220b2427",
-      "https://git.kernel.org/stable/c/474d6c771d798bca84f0a140b611e36743511e18",
-      "https://git.kernel.org/stable/c/8dbed691e43a50903658130bde0fcb5abc425b37",
-      "https://git.kernel.org/stable/c/96a4713ae041cc85e712bac682cd2e644004d6c6",
-      "https://git.kernel.org/stable/c/98d0912e9f841e5529a5b89a972805f34cb1c69d",
-      "https://git.kernel.org/stable/c/9b40bdc2a3298225dffab8158208a0d8c6300578",
-      "https://git.kernel.org/stable/c/ceafb893b12f23331dcc5ff9587e643c3a40ee9f",
-      "https://git.kernel.org/stable/c/fd470f0a97b8e9a125f520265d2f3b088ffb5b8a",
-      "https://access.redhat.com/security/cve/CVE-2026-52943",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2492137",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-52943.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.8,
-    "tags": [
-      "poc",
-      "priv_esc"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "poc+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-57171",
     "published": "2026-08-26T05:18:11.923",
     "last_modified": "2026-09-09T21:09:13.080",
@@ -1555,6 +1602,34 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-70293",
+    "published": "2026-08-26T20:16:59.697",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in Denx U-Boot before 2026.04. An integer overflow vulnerability exists in function ext4fs_get_bgdtable, the size calculation can lead to under allocation and this underallocated buffer will be used in memcpy() which could lead to arbitrary code execution, a denial of service, or other unspecified impacts.",
+    "references": [
+      "http://denx.com",
+      "http://u-boot.com",
+      "https://gist.github.com/c0zy1/4d9648d10a5ff07bda2771ea1298e469"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.4,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
     ]
   },
   {
@@ -2397,6 +2472,80 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-70290",
+    "published": "2026-08-26T20:16:59.550",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in Denx U-Boot before 2026.04. An integer overflow vulnerability in the ZFS filesystem support can be triggered by malformed on-disk metadata. The issue may result in incorrect memory allocation followed by out-of-bounds memory access, potentially leading to a crash or arbitrary code execution during the boot process.",
+    "references": [
+      "http://u-boot.com",
+      "https://gist.github.com/c0zy1/4d9648d10a5ff07bda2771ea1298e469"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-52103",
+    "published": "2026-08-26T21:16:38.340",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A zero-click remote code execution (RCE) vulnerability in the /Terminal/Notification.hs component of SimpleX Chat before v6.5 allows attackers to execute arbitrary commands in the context of the application without user interaction via sending a crafted payload in a text message.",
+    "references": [
+      "https://te.mpe.st/disclosures/20260510-simplex.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-37006",
+    "published": "2026-08-27T20:17:41.423",
+    "last_modified": "2026-09-09T16:04:24.933",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability in the WebSocket endpoint of gpt-researcher v0.14.7 and before allows an unauthenticated remote attacker to achieve code execution via malicious Model Context Protocol configurations.",
+    "references": [
+      "http://gpt-researcher.com",
+      "https://yerangamage.com/cves/detail/?slug=gptresearcher-websocket-rce"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-75002",
     "published": "2026-08-17T13:16:54.747",
     "last_modified": "2026-09-08T18:59:00.907",
@@ -2979,164 +3128,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 41.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-72826",
-    "published": "2026-08-14T12:16:45.780",
-    "last_modified": "2026-09-08T20:32:39.347",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The getgrav/grav-plugin-api plugin before 1.0.13 fails to validate that the scopes of a newly created API key are a subset of the caller's scopes in createApiKey. The self-target path of requireApiKeyPermission() requires only the baseline api.access scope, and the new key's scopes are read directly from the request body with no subset check. An attacker holding a minimal-scope API key on a super account can submit an empty scopes array to mint an unscoped, full-access super key, bypassing scope restrictions (and enabling further chains such as configuration write to RCE).",
-    "references": [
-      "https://github.com/getgrav/grav/security/advisories/GHSA-95v9-4fcj-96gh",
-      "https://www.vulncheck.com/advisories/grav-before-scope-bypass-via-createapikey",
-      "https://github.com/getgrav/grav/security/advisories/GHSA-95v9-4fcj-96gh"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 17.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-72827",
-    "published": "2026-08-14T12:16:45.907",
-    "last_modified": "2026-09-08T20:32:39.347",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grav CMS before 2.0.13 contains a server-side template injection vulnerability in email-action parameters that allows low-privileged page editors to execute arbitrary operating-system commands. Attackers can inject Twig payloads using the unsandboxed find filter in email subject, body, to, or from fields to achieve remote code execution when forms are submitted.",
-    "references": [
-      "https://github.com/getgrav/grav/security/advisories/GHSA-xx48-97m4-h7qm",
-      "https://www.vulncheck.com/advisories/grav-cms-before-remote-code-execution-via-twig",
-      "https://github.com/getgrav/grav/security/advisories/GHSA-xx48-97m4-h7qm"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-74997",
-    "published": "2026-08-17T13:16:54.100",
-    "last_modified": "2026-09-08T19:09:05.140",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In Roundcube Webmail before 1.6.18 and 1.7.x before 1.7.3, the cmd_learn driver of the markasjunk plugin is subject to remote code execution via crafted placeholder replacement values. This issue only affects Roundcube instances using the markasjunk plugin with its cmd_learn driver.",
-    "references": [
-      "https://github.com/roundcube/roundcubemail/commit/14044f843cfacbe78b042f659e379d6b4497aa7c",
-      "https://github.com/roundcube/roundcubemail/commit/495d211638f222336b20f4744545c53712426c2a",
-      "https://github.com/roundcube/roundcubemail/commit/b8f90e28a46d42e79a69568cba897f8f4223d9cd",
-      "https://github.com/roundcube/roundcubemail/releases/tag/1.6.18",
-      "https://github.com/roundcube/roundcubemail/releases/tag/1.7.3",
-      "https://roundcube.net/news/2026/08/09/security-updates-1.6.18-and-1.7.3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 53.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-50768",
-    "published": "2026-08-17T18:17:08.760",
-    "last_modified": "2026-09-09T16:04:24.933",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "File Upload vulnerability in T-Systems International GmbH ImageMaster Version: 9.14.2.8.1 allows a remote attacker to execute arbitrary code via the add attachments feature in the create new document function.",
-    "references": [
-      "https://github.com/Henkel-CyberVM/CVEs/tree/main/CVE-2026-50768",
-      "https://www.t-systems.com/in/en/content-and-collaboration/solutions/enterprise-content-management/imagemaster"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 37.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-71694",
-    "published": "2026-08-19T14:17:39.333",
-    "last_modified": "2026-09-09T16:04:24.933",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An issue in Berkeley Out-of-Order Machine (BOOM) / BoomTile RTL benchmark v1.2 2d08d0d8b4563212175212f9db0e69f6e68c9619 allows a remote attacker to execute arbitrary code via the CSR trap-return state restoration logic, MRET handling logic, mstatus.MPRV update path, CSRFile logic in ProcessorFuzz BOOM benchmark Benchmarks/Verilog/SmallBoomTile_v1.2_state.v",
-    "references": [
-      "https://github.com/bu-icsg/ProcessorFuzz",
-      "https://github.com/duan528/BOOM-MRET-MPRV-Vulnerability-Report",
-      "https://github.com/riscv-boom/riscv-boom",
-      "https://github.com/riscv/riscv-isa-manual"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76224",
-    "published": "2026-08-19T14:17:48.880",
-    "last_modified": "2026-09-08T20:32:39.347",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ArcadeDB before 26.8.1 (arcadedb-gremlin, affected <= 26.7.3) contains a remote code execution vulnerability in its Gremlin query engine. Although the engine defaults to the documented-secure java (gremlin-lang) engine, ArcadeGremlin.executeStatement() silently falls back to the insecure Groovy engine whenever a request carries any query parameter and the query does not parse as gremlin-lang. An authenticated user with any database role, including a read-only reader, can submit a parameterized Gremlin query to trigger the Groovy fallback and execute arbitrary operating system commands as the ArcadeDB server process user.",
-    "references": [
-      "https://github.com/ArcadeData/arcadedb/security/advisories/GHSA-wcm5-4wjm-9wj3",
-      "https://www.vulncheck.com/advisories/arcadedb-before-remote-code-execution-via-groovy-fallback"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.9,
     "tags": [
       "rce"
     ],
