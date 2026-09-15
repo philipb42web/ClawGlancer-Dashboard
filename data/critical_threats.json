@@ -178,6 +178,62 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-72709",
+    "published": "2026-09-11T17:18:58.760",
+    "last_modified": "2026-09-15T03:17:05.813",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "SPIP before version 4.4.18 contains a missing authorization vulnerability in sensitive actions under ecrire/action/ that allows unauthenticated attackers to invoke privileged actions by supplying only a valid CSRF nonce without any server-side permission check. Attackers can bypass template-level authorization guards through direct HTTP requests to invoke actions such as editer_auteur, enabling arbitrary account password rewrites including administrator accounts and resulting in full account takeover.",
+    "references": [
+      "https://blog.lexfo.fr/casse-spip-sqli-to-rce.html",
+      "https://blog.spip.net/Mise-a-jour-critique-de-securite-sortie-de-SPIP-4-4-18.html",
+      "https://www.vulncheck.com/advisories/spip-missing-authorization-via-ecrire-action-editer-auteur"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.5,
+    "tags": [
+      "rce",
+      "sqli"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-72710",
+    "published": "2026-09-11T17:18:58.907",
+    "last_modified": "2026-09-15T03:17:05.947",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "SPIP before 4.4.18 contains a mass assignment vulnerability in the editer_objet action that allows unauthenticated attackers to write arbitrary rows to any SQL table lacking a champs_editables allowlist by supplying an attacker-controlled arg parameter resolving to internal database tables. Attackers can insert a malicious row into the spip_jobs queue with a controlled PHP function and arguments, which is then dynamically executed when the cron processes the queue, resulting in remote code execution.",
+    "references": [
+      "https://blog.lexfo.fr/casse-spip-sqli-to-rce.html",
+      "https://blog.spip.net/Mise-a-jour-critique-de-securite-sortie-de-SPIP-4-4-18.html",
+      "https://www.vulncheck.com/advisories/spip-remote-code-execution-via-editer-objet-php-job-queue-injection"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.6,
+    "tags": [
+      "rce",
+      "sqli"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "sqli+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-82845",
     "published": "2026-09-12T06:16:26.043",
     "last_modified": "2026-09-14T21:10:17.423",
@@ -614,6 +670,37 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-90493",
+    "published": "2026-09-13T03:16:27.370",
+    "last_modified": "2026-09-15T02:16:48.217",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was detected in Tonec Internet Download Manager up to 6.42 Build 63 on Windows. The impacted element is an unknown function of the file idmwfp.sys of the component Kernel Driver. The manipulation results in improper access controls. Attacking locally is a requirement. Internet Download Manager for Windows up to and including 6.42 Build 63 installs idmwfp.sys, a Windows kernel driver that exposes the \\.\\IDMWFP device interface to authenticated local users. The device object is created with an access control descriptor equivalent to D:P(A;;GA;;;AU), granting Authenticated Users generic access to the driver. The driver's IOCTL 0x12C028 handler accepts registry-operation subcommands 0x0C through 0x0F and processes caller-controlled registry paths and values. These handlers do not authenticate the caller, do not enforce the caller's registry permissions, and do not restrict operations to IDM-owned registry namespaces. A low-privileged local authenticated user can therefore read, create, modify, and delete arbitrary registry values under HKLM and HKU through the kernel driver. This includes registry configuration consumed by privileged Windows services and drivers and enables Local Privilege Escalation, high-privilege persistence, unauthorized system configuration disclosure or modification, and compromise of system confidentiality, integrity, and availability. Exploitation requires local access, low privileges, and no user interaction. A public proof of concept is available. The exploit is now public and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://github.com/KnCRJVirX/IDM_LPE_PoC/blob/main/report_en.md",
+      "https://github.com/KnCRJVirX/IDM_LPE_PoC/tree/main/poc",
+      "https://vuldb.com/cve/CVE-2026-90493",
+      "https://vuldb.com/submit/891910",
+      "https://vuldb.com/vuln/403081",
+      "https://vuldb.com/vuln/403081/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.5,
+    "tags": [
+      "poc",
+      "priv_esc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "poc+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-76461",
     "published": "2026-09-14T17:17:51.113",
     "last_modified": "2026-09-14T21:00:09.477",
@@ -689,6 +776,37 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91771",
+    "published": "2026-09-15T02:16:49.680",
+    "last_modified": "2026-09-15T02:16:49.680",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Weights & Biases wandb before 0.29.0 fails to validate the file name from server responses in the File.download function, allowing path traversal attacks. Attackers controlling the backend can supply file names with directory traversal sequences to write files outside the intended download directory, potentially enabling code execution through modification of shell startup files or Python import paths.",
+    "references": [
+      "https://github.com/wandb/wandb",
+      "https://github.com/wandb/wandb/blob/v0.27.2/wandb/apis/public/files.py#L319-L347",
+      "https://github.com/wandb/wandb/commit/e52558f3a6a94ea816af74969a13a35e5904cad6",
+      "https://github.com/wandb/wandb/issues/12592",
+      "https://github.com/wandb/wandb/releases/tag/v0.29.0",
+      "https://www.vulncheck.com/advisories/weights-biases-wandb-before-0.29.0-path-traversal-via-file-download"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
     ]
   },
   {
@@ -800,6 +918,62 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-72708",
+    "published": "2026-09-11T17:18:57.197",
+    "last_modified": "2026-09-15T03:17:05.660",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SPIP before 4.4.18 contains an unauthenticated blind SQL injection vulnerability in the SQL escaping layer that allows unauthenticated attackers to inject arbitrary SQL by supplying a crafted annee parameter value matching a word character followed by an open parenthesis, which bypasses escaping for date-type columns across MySQL, SQLite, and PostgreSQL backends. Attackers can exploit the always-present sitemap.xml.html template's annee criterion to embed unescaped time-based or boolean payloads into database queries, enabling extraction of arbitrary database content including the alea_ephemere secret used to sign SPIP action nonces.",
+    "references": [
+      "https://blog.lexfo.fr/casse-spip-sqli-to-rce.html",
+      "https://blog.spip.net/Mise-a-jour-critique-de-securite-sortie-de-SPIP-4-4-18.html",
+      "https://www.vulncheck.com/advisories/spip-unauthenticated-sql-injection-via-sitemap-annee-parameter"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.0,
+    "tags": [
+      "rce",
+      "sqli"
+    ],
+    "intel_score": 95.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-84568",
+    "published": "2026-09-14T21:17:33.000",
+    "last_modified": "2026-09-14T23:18:56.230",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal issue was addressed with improved path validation. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An attacker with control of a network directory server may be able to execute arbitrary code with root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-90932",
     "published": "2026-09-14T13:19:31.523",
     "last_modified": "2026-09-14T13:19:31.523",
@@ -824,6 +998,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12944",
+    "published": "2026-09-14T22:16:56.950",
+    "last_modified": "2026-09-14T22:16:56.950",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 can allow attackers to execute arbitrary Python code with root privileges (UID=0) on the Langflow server by submitting components containing socket or urllib imports. This enables: (1) AWS credential theft via IMDSv1 SSRF with full IAM role permissions, (2) arbitrary file exfiltration from the container filesystem, and (3) lateral movement to internal services (PostgreSQL, Redis) within the Docker network. The scanner incorrectly returns \"validated\": true, providing a false security signal.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7278919"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "ssrf"
+    ],
+    "intel_score": 91.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ssrf+18",
+      "file_write+15"
     ]
   },
   {
@@ -1191,6 +1391,37 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-65414",
+    "published": "2026-09-14T21:17:25.057",
+    "last_modified": "2026-09-14T23:17:20.127",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An out-of-bounds write issue was addressed with improved bounds checking. This issue is fixed in iOS 26.7 and iPadOS 26.7, iOS 27 and iPadOS 27, macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7, tvOS 27, visionOS 27, watchOS 27. A remote attacker may be able to cause unexpected app termination or arbitrary code execution.",
+    "references": [
+      "https://support.apple.com/en-us/149034",
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149036",
+      "https://support.apple.com/en-us/149037",
+      "https://support.apple.com/en-us/149038",
+      "https://support.apple.com/en-us/149041",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-42018",
     "published": "2026-08-12T18:17:29.473",
     "last_modified": "2026-09-12T04:16:33.587",
@@ -1237,6 +1468,32 @@
       "rce"
     ],
     "intel_score": 85.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-12821",
+    "published": "2026-02-19T07:17:28.770",
+    "last_modified": "2026-09-14T23:17:14.290",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The NewsBlogger theme for WordPress is vulnerable to Cross-Site Request Forgery in versions 0.2.5.6  to 0.2.5.9. This is due to missing or incorrect nonce validation on the newsblogger_install_and_activate_plugin() function. This makes it possible for unauthenticated attackers to upload arbitrary files and achieve remote code execution via a forged request granted they can trick a site administrator into performing an action such as clicking on a link. This is due to a reverted fix of CVE-2025-1305.",
+    "references": [
+      "https://themes.trac.wordpress.org/browser/newsblogger/0.2.5.8/functions.php#L499",
+      "https://themes.trac.wordpress.org/changeset?old=302341&old_path=%2Fnewsblogger%2F0.2.5.9%2Ffunctions.php&new=304663&new_path=%2Fnewsblogger%2F0.2.6%2Ffunctions.php",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/9f33096a-dfd5-48c1-84d8-30a0faa2a7f5?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1377,36 +1634,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86169",
-    "published": "2026-09-05T11:16:45.703",
-    "last_modified": "2026-09-12T00:17:05.260",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Axolotl before 0.19.0 contains a remote code execution vulnerability in the multipack patch path where trust_remote_code defaults to None instead of False, causing the security guard to be bypassed. Attackers can execute arbitrary Python code by crafting a malicious Hugging Face model repository selected as base_model, which is loaded with hardcoded trust_remote_code=True during AutoModelForCausalLM.from_pretrained.",
-    "references": [
-      "https://github.com/axolotl-ai-cloud/axolotl",
-      "https://github.com/axolotl-ai-cloud/axolotl/blob/v0.18.0/src/axolotl/loaders/patch_manager.py#L794-L806",
-      "https://github.com/axolotl-ai-cloud/axolotl/blob/v0.18.0/src/axolotl/monkeypatch/multipack.py#L86-L96",
-      "https://github.com/axolotl-ai-cloud/axolotl/commit/b62d60b101eea7f32532ee3c0b17c2f2430a9262",
-      "https://github.com/axolotl-ai-cloud/axolotl/pull/3858",
-      "https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.19.0",
-      "https://www.vulncheck.com/advisories/axolotl-through-0.18.0-remote-code-execution-via-multipack-patching"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -1697,6 +1924,60 @@
     "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 IBM DataStage could allow a remote authenticated attacker to execute arbitrary code due to improper configuration of the XSLT transformation engine.",
     "references": [
       "https://www.ibm.com/support/pages/node/7286562"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43692",
+    "published": "2026-09-14T21:17:08.550",
+    "last_modified": "2026-09-14T23:17:16.353",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A validation issue was addressed with improved input sanitization. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. A remote user may cause an unexpected app termination or arbitrary code execution.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91200",
+    "published": "2026-09-14T23:19:00.630",
+    "last_modified": "2026-09-14T23:19:00.630",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DevSpace through 6.3.21 fails to reject parent-directory segments in tar entry names from the in-pod sync stream. Attackers operating a malicious container can stream tar entries with traversal sequences to write arbitrary files on the developer workstation, enabling code execution.",
+    "references": [
+      "https://github.com/devspace-sh/devspace",
+      "https://github.com/devspace-sh/devspace/blob/7f272dcf90653fa9b42bc4347f7f3f9a52b0e8b5/pkg/devspace/sync/tar.go#L68-L82",
+      "https://github.com/devspace-sh/devspace/blob/7f272dcf90653fa9b42bc4347f7f3f9a52b0e8b5/pkg/devspace/sync/util.go#L9-L11",
+      "https://github.com/devspace-sh/devspace/issues/3290",
+      "https://www.vulncheck.com/advisories/devspace-through-6.3.21-path-traversal-via-tar-extraction"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -2422,6 +2703,66 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-11332",
+    "published": "2026-06-05T09:16:26.070",
+    "last_modified": "2026-09-14T23:17:14.650",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in ansible-core. The ansible-galaxy role install command processes dependency specifications from a role's meta/requirements.yml file. Due to improper neutralization of argument delimiters, a malicious role author can inject arbitrary git configuration flags through the src field. This allows arbitrary code execution on the machine of a user who installs the role via ansible-galaxy role install.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:42078",
+      "https://access.redhat.com/errata/RHSA-2026:42079",
+      "https://access.redhat.com/errata/RHSA-2026:42080",
+      "https://access.redhat.com/errata/RHSA-2026:46836",
+      "https://access.redhat.com/errata/RHSA-2026:50340",
+      "https://access.redhat.com/errata/RHSA-2026:50344",
+      "https://access.redhat.com/errata/RHSA-2026:50357",
+      "https://access.redhat.com/errata/RHSA-2026:50479",
+      "https://access.redhat.com/errata/RHSA-2026:57148",
+      "https://access.redhat.com/errata/RHSA-2026:57149",
+      "https://access.redhat.com/errata/RHSA-2026:63385",
+      "https://access.redhat.com/errata/RHSA-2026:63386",
+      "https://access.redhat.com/errata/RHSA-2026:63387",
+      "https://access.redhat.com/errata/RHSA-2026:66248",
+      "https://access.redhat.com/errata/RHSA-2026:67465",
+      "https://access.redhat.com/errata/RHSA-2026:67466",
+      "https://access.redhat.com/errata/RHSA-2026:67467",
+      "https://access.redhat.com/security/cve/CVE-2026-11332",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2485379",
+      "https://github.com/ansible/ansible",
+      "https://access.redhat.com/errata/RHSA-2026:42078",
+      "https://access.redhat.com/errata/RHSA-2026:42079",
+      "https://access.redhat.com/errata/RHSA-2026:42080",
+      "https://access.redhat.com/errata/RHSA-2026:46836",
+      "https://access.redhat.com/errata/RHSA-2026:50340",
+      "https://access.redhat.com/errata/RHSA-2026:50344",
+      "https://access.redhat.com/errata/RHSA-2026:50357",
+      "https://access.redhat.com/errata/RHSA-2026:50479",
+      "https://access.redhat.com/errata/RHSA-2026:57148",
+      "https://access.redhat.com/errata/RHSA-2026:57149",
+      "https://access.redhat.com/errata/RHSA-2026:63385",
+      "https://access.redhat.com/errata/RHSA-2026:63386",
+      "https://access.redhat.com/errata/RHSA-2026:63387",
+      "https://access.redhat.com/errata/RHSA-2026:66248",
+      "https://access.redhat.com/security/cve/CVE-2026-11332",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2485379",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-11332.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-85617",
     "published": "2026-09-04T12:17:25.410",
     "last_modified": "2026-09-14T20:16:58.680",
@@ -2711,6 +3052,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-91752",
+    "published": "2026-09-15T01:16:54.967",
+    "last_modified": "2026-09-15T01:16:54.967",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "GNU libextractor before 1.15 contains a stack-based buffer overflow vulnerability in the process_star_office function that sizes a variable-length stack array from attacker-controlled OLE2 stream data. Attackers can craft malicious StarOffice documents that allocate up to 4 MB on the stack, causing stack overflow and crashing any application extracting metadata from the document.",
+    "references": [
+      "https://git.gnunet.org/gnunet/libextractor/commit/04004eb19033e093938138b09befdf31e71e8522.html",
+      "https://git.gnunet.org/gnunet/libextractor/commit/2781c7e9095f4ddaff4f535d69342f3903b18422.html",
+      "https://github.com/Haitam-lazaar/libextractor-ole2-rce",
+      "https://www.gnu.org/software/libextractor/",
+      "https://www.vulncheck.com/advisories/gnu-libextractor-before-1.15-stack-overflow-via-ole2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 77.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-70470",
     "published": "2026-08-04T18:16:57.930",
     "last_modified": "2026-09-14T19:19:38.873",
@@ -2741,7 +3110,7 @@
   {
     "cve_id": "CVE-2026-87595",
     "published": "2026-09-09T01:17:17.437",
-    "last_modified": "2026-09-14T13:18:59.180",
+    "last_modified": "2026-09-14T21:43:53.327",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -3196,34 +3565,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-90493",
-    "published": "2026-09-13T03:16:27.370",
-    "last_modified": "2026-09-14T20:56:48.220",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was detected in Tonec Internet Download Manager up to 6.42 Build 63 on Windows. The impacted element is an unknown function of the file idmwfp.sys of the component Kernel Driver. The manipulation results in improper access controls. Attacking locally is a requirement. The exploit is now public and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://github.com/KnCRJVirX/IDM_LPE_PoC/tree/main/poc",
-      "https://vuldb.com/cve/CVE-2026-90493",
-      "https://vuldb.com/submit/891910",
-      "https://vuldb.com/vuln/403081",
-      "https://vuldb.com/vuln/403081/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.5,
-    "tags": [
-      "poc"
-    ],
-    "intel_score": 74.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "poc+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-76440",
     "published": "2026-09-14T17:17:50.520",
     "last_modified": "2026-09-14T21:00:09.477",
@@ -3319,6 +3660,35 @@
       "https://vuldb.com/vuln/403245",
       "https://vuldb.com/vuln/403245/cti",
       "https://www.dlink.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 73.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90847",
+    "published": "2026-09-15T01:16:54.423",
+    "last_modified": "2026-09-15T01:16:54.423",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was determined in EFM ipTIME C200E 1.094. The impacted element is an unknown function of the file iux_set.cgi of the component System Setup. This manipulation causes os command injection. It is possible to initiate the attack remotely. The exploit has been publicly disclosed and may be utilized.",
+    "references": [
+      "https://drive.google.com/file/d/19WVo2tOImpmSEg3dFsmyB5Rw1aMQXyyd/view?usp=drive_link",
+      "https://vuldb.com/cve/CVE-2026-90847",
+      "https://vuldb.com/submit/925831",
+      "https://vuldb.com/vuln/403400",
+      "https://vuldb.com/vuln/403400/cti",
+      "https://youtu.be/qdFGRSpCiY0"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -4174,30 +4544,34 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-88924",
-    "published": "2026-09-10T15:17:59.253",
-    "last_modified": "2026-09-11T22:16:45.760",
-    "cvss_v3": 7.0,
+    "cve_id": "CVE-2026-90843",
+    "published": "2026-09-15T01:16:53.627",
+    "last_modified": "2026-09-15T01:16:53.627",
+    "cvss_v3": 8.3,
     "severity": "HIGH",
     "affected": [],
-    "summary": "A flaw was found in the admin backend of gvfs. The privileged gvfsd-admin daemon changes the ownership of newly created private D-Bus sockets by calling the link-following chown() function on a pathname inside a user-controlled directory. A local attacker can exploit this via a Time-of-Check Time-of-Use (TOCTOU) race condition and exchange the socket pathname with a symbolic link pointing to an arbitrary root-owned file (such as /etc/pam.d/su). The daemon subsequently follows the symlink and changes the ownership of the targeted root-owned file to the attacker's user ID. This allows an authenticated local attacker to modify critical system files, leading to a full local privilege escalation to root.",
+    "summary": "A security vulnerability has been detected in SabyasachiRana WebMap up to 8b95fe4dc301a3c09ddf145b895de0bf9f8d2a25. This affects the function nmap_newscan of the file functions_nmap.py of the component New Nmap Scan Handler. Such manipulation of the argument target/params leads to os command injection. The attack may be launched remotely. The exploit has been disclosed publicly and may be used. The name of the patch is 3d52f65803a2716bff14d938352c6fef45b0cfb6. A patch should be applied to remediate this issue. This issue got fixed with a silent patch.",
     "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-88924",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2531456",
-      "https://gitlab.gnome.org/GNOME/gvfs/-/issues/875",
-      "https://gitlab.gnome.org/GNOME/gvfs/-/issues/875"
+      "https://calledstriker.gitbook.io/blog/security-research/webmap",
+      "https://github.com/SabyasachiRana/WebMap/",
+      "https://github.com/SabyasachiRana/WebMap/commit/3d52f65803a2716bff14d938352c6fef45b0cfb6",
+      "https://raw.githubusercontent.com/CalledSTRIKER/CalledSTRIKER-gitbook/refs/heads/main/security-research/2026-05-30_12-29.png",
+      "https://vuldb.com/cve/CVE-2026-90843",
+      "https://vuldb.com/submit/925586",
+      "https://vuldb.com/vuln/403395",
+      "https://vuldb.com/vuln/403395/cti"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "priv_esc"
+      "command_injection"
     ],
-    "intel_score": 70.0,
+    "intel_score": 69.5,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25"
+      "command_injection+18"
     ]
   },
   {
@@ -5074,6 +5448,177 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-90841",
+    "published": "2026-09-15T00:17:31.140",
+    "last_modified": "2026-09-15T00:17:31.140",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security flaw has been discovered in PHPGurukul Blood Donor Management System 1.0. Affected by this vulnerability is an unknown functionality of the file /application/controllers/admin/Report.php of the component Report Endpoint. The manipulation of the argument fromdate/todate results in sql injection. The attack can be launched remotely. The exploit has been released to the public and may be used for attacks.",
+    "references": [
+      "https://github.com/usernamevnq/CVEs/issues/2",
+      "https://phpgurukul.com/",
+      "https://vuldb.com/cve/CVE-2026-90841",
+      "https://vuldb.com/submit/925627",
+      "https://vuldb.com/vuln/403393",
+      "https://vuldb.com/vuln/403393/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90844",
+    "published": "2026-09-15T01:16:53.833",
+    "last_modified": "2026-09-15T01:16:53.833",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was detected in PHPGurukul Daily Expense Tracker System 1.1. This vulnerability affects unknown code of the file /dets/index.php of the component Login. Performing a manipulation of the argument email results in sql injection. Remote exploitation of the attack is possible. The exploit is now public and may be used.",
+    "references": [
+      "https://github.com/usernamevnq/CVEs/issues/4",
+      "https://phpgurukul.com/",
+      "https://vuldb.com/cve/CVE-2026-90844",
+      "https://vuldb.com/submit/925668",
+      "https://vuldb.com/vuln/403396",
+      "https://vuldb.com/vuln/403396/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90846",
+    "published": "2026-09-15T01:16:54.230",
+    "last_modified": "2026-09-15T01:16:54.230",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability has been found in PHPGurukul Daily Expense Tracker System 1.1. Impacted is an unknown function of the file /dets/forgot-password.php. The manipulation of the argument email/contactno leads to sql injection. The attack is possible to be carried out remotely. The exploit has been disclosed to the public and may be used.",
+    "references": [
+      "https://github.com/usernamevnq/CVEs/issues/8",
+      "https://phpgurukul.com/",
+      "https://vuldb.com/cve/CVE-2026-90846",
+      "https://vuldb.com/submit/925687",
+      "https://vuldb.com/vuln/403398",
+      "https://vuldb.com/vuln/403398/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90849",
+    "published": "2026-09-15T02:16:48.960",
+    "last_modified": "2026-09-15T02:16:48.960",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security vulnerability has been detected in SourceCodester College Notes Gallery Management System 1.0. Affected by this vulnerability is an unknown functionality of the file /College/login.php. The manipulation of the argument User leads to sql injection. The attack may be initiated remotely. The exploit has been disclosed publicly and may be used.",
+    "references": [
+      "https://github.com/akaiwen/cve/issues/1",
+      "https://vuldb.com/cve/CVE-2026-90849",
+      "https://vuldb.com/submit/926860",
+      "https://vuldb.com/submit/926861",
+      "https://vuldb.com/vuln/403404",
+      "https://vuldb.com/vuln/403404/cti",
+      "https://www.sourcecodester.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90854",
+    "published": "2026-09-15T03:17:06.560",
+    "last_modified": "2026-09-15T03:17:06.560",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security flaw has been discovered in SourceCodester/katojkalemba Online Food Ordering System 1.0. The impacted element is an unknown function of the file /web/category-foods.php. The manipulation of the argument ID results in sql injection. It is possible to launch the attack remotely. The exploit has been released to the public and may be used for attacks.",
+    "references": [
+      "https://vuldb.com/cve/CVE-2026-90854",
+      "https://vuldb.com/submit/927127",
+      "https://vuldb.com/vuln/403411",
+      "https://vuldb.com/vuln/403411/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90855",
+    "published": "2026-09-15T03:17:06.733",
+    "last_modified": "2026-09-15T03:17:06.733",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A weakness has been identified in SourceCodester/katojkalemba Online Food Ordering System 1.0. This affects an unknown function of the file /web/order.php. This manipulation of the argument ID causes sql injection. The attack can be initiated remotely. The exploit has been made available to the public and could be used for attacks.",
+    "references": [
+      "https://vuldb.com/cve/CVE-2026-90855",
+      "https://vuldb.com/submit/927134",
+      "https://vuldb.com/vuln/403412",
+      "https://vuldb.com/vuln/403412/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-82429",
     "published": "2026-09-14T15:17:09.807",
     "last_modified": "2026-09-14T20:58:48.430",
@@ -5231,30 +5776,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-49846",
-    "published": "2026-09-11T22:16:37.537",
-    "last_modified": "2026-09-11T22:16:37.537",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "libks provides foundational support for signalwire C products. Prior to version 2.0.11, `clean_uri()` in libks's HTTP request parser fails to reject URIs whose path has more segments than its internal canonicalization buffer can hold. The canonicalization step silently passes such URIs through with embedded \"..\" sequences intact, enabling path traversal in any consumer that later joins the URI with a filesystem path. Version 2.0.11 patches the issue.",
-    "references": [
-      "https://github.com/signalwire/libks/security/advisories/GHSA-684h-wjm9-2p6j"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.4,
-    "tags": [
-      "path_traversal"
-    ],
-    "intel_score": 62.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-90774",
     "published": "2026-09-13T11:17:02.163",
     "last_modified": "2026-09-14T16:17:39.350",
@@ -5347,6 +5868,33 @@
     "summary": "IBM Db2 11.5.0 through 11.5.9, and 12.1.0 through 12.1.5 could allow a remote attacker to perform an arbitrary file write due to improper validation of file paths.",
     "references": [
       "https://www.ibm.com/support/pages/node/7286998"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write"
+    ],
+    "intel_score": 62.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91144",
+    "published": "2026-09-14T22:16:59.053",
+    "last_modified": "2026-09-14T22:16:59.053",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ZFile through 5.0.5 fails to validate requested file paths against a share link's allowed entries on the download endpoint. Attackers holding a share link can supply arbitrary file paths as query parameters to download any file under the shared base directory, bypassing the intended access restrictions.",
+    "references": [
+      "https://github.com/zfile-dev/zfile",
+      "https://github.com/zfile-dev/zfile/blob/5.0.5/src/main/java/im/zhaojun/zfile/module/share/service/ShareLinkFileService.java",
+      "https://github.com/zfile-dev/zfile/issues/826",
+      "https://www.vulncheck.com/advisories/zfile-through-5.0.5-share-entry-filter-bypass-via-download-endpoint"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -11280,6 +11828,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-91751",
+    "published": "2026-09-15T01:16:54.797",
+    "last_modified": "2026-09-15T01:16:54.797",
+    "cvss_v3": 8.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Flextype CMS through 1.0.0-alpha.3 fails to properly validate id and new_id parameters in the Entries REST API, allowing API token holders to read, create, or overwrite files outside the entries directory. Attackers can use traversal sequences in API requests to escape the project entries directory and manipulate arbitrary files and directories on the filesystem.",
+    "references": [
+      "https://github.com/flextype/flextype",
+      "https://github.com/flextype/flextype/blob/v1.0.0-alpha.3/src/flextype/core/Entries/Entries.php#L856-L906",
+      "https://github.com/flextype/flextype/issues/596",
+      "https://www.vulncheck.com/advisories/flextype-cms-through-1.0.0-alpha.3-path-traversal-via-entries-rest-api"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 51.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-33810",
     "published": "2026-04-08T02:16:03.950",
     "last_modified": "2026-09-14T13:18:09.277",
@@ -11612,33 +12184,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-89266",
-    "published": "2026-09-12T00:17:06.440",
-    "last_modified": "2026-09-12T00:17:06.440",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "stb_vorbis through 1.22 contains a heap buffer overflow in start_decoder() where the codebook multiplicands allocation size is truncated from size_t to int. Attackers can craft a malicious Ogg Vorbis file with large entries and dimensions values to trigger out-of-bounds writes, causing process crashes or heap corruption.",
-    "references": [
-      "https://github.com/nothings/stb",
-      "https://github.com/nothings/stb/blob/2c980bb59875b0d32144a71867fbdebb2f77cd20/stb_vorbis.c#L3878-L3880",
-      "https://github.com/nothings/stb/blob/2c980bb59875b0d32144a71867fbdebb2f77cd20/stb_vorbis.c#L950",
-      "https://github.com/nothings/stb/issues/1928",
-      "https://github.com/nothings/stb/issues/1933",
-      "https://github.com/nothings/stb/issues/1947",
-      "https://www.vulncheck.com/advisories/stb-vorbis-through-1.22-heap-buffer-overflow-via-codebook-multiplicands"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.6,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-90537",
     "published": "2026-09-12T13:16:51.667",
     "last_modified": "2026-09-14T21:03:01.800",
@@ -11839,6 +12384,33 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-23368",
+    "published": "2025-03-04T16:15:39.270",
+    "last_modified": "2026-09-14T22:16:55.233",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Wildfly Elytron integration. The component does not implement sufficient measures to prevent multiple failed authentication attempts within a short time frame, making it more susceptible to brute force attacks via CLI.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:18054",
+      "https://access.redhat.com/errata/RHSA-2026:18055",
+      "https://access.redhat.com/errata/RHSA-2026:18059",
+      "https://access.redhat.com/errata/RHSA-2026:33371",
+      "https://access.redhat.com/security/cve/CVE-2025-23368",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2337621",
+      "https://www.gruppotim.it/it/footer/red-team.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 56.7,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
     ]
   },
   {
@@ -12780,6 +13352,28 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 25.4,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-16772",
+    "published": "2026-08-14T16:16:50.290",
+    "last_modified": "2026-09-14T22:16:57.260",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In Akaunting versions <= 3.1.21, low‑privileged authenticated users can modify their own account to assign themselves the admin role ID, granting full administrator privileges. This vulnerability is caused by a flaw in the `UpdateUser` job, which processes user-supplied role assignments via an unconditional `roles()->sync()` call without verifying whether the caller is authorized to manage roles. Users only require the default `update-auth-profile` permission to access the self-update path and assign themselves as admins. The API endpoints are properly permission‑gated and are not affected by this issue. This vulnerability has been remediated in v3.2.0, commit 80ef6d3b154a.",
+    "references": [
+      "https://vokecyber.com/research/cve-2026-16772-akaunting-privilege-escalation",
+      "https://vokecyber.com/research/cve-2026-16772-akaunting-privilege-escalation"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.1,
     "tags": [],
     "intel_score": 50.5,
     "reasons": [
@@ -18090,6 +18684,232 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-43689",
+    "published": "2026-09-14T21:17:08.237",
+    "last_modified": "2026-09-14T23:17:16.013",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A permissions issue was addressed with additional restrictions. This issue is fixed in iOS 26.7 and iPadOS 26.7, iOS 27 and iPadOS 27, macOS Golden Gate 27, visionOS 27. A malicious app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149034",
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149038",
+      "https://support.apple.com/en-us/149041"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43691",
+    "published": "2026-09-14T21:17:08.443",
+    "last_modified": "2026-09-14T23:17:16.177",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path handling issue was addressed with improved validation. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43783",
+    "published": "2026-09-14T21:17:11.080",
+    "last_modified": "2026-09-14T23:17:16.517",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A race condition was addressed with improved locking. This issue is fixed in macOS Tahoe 26.6. A malicious app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/128067"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43786",
+    "published": "2026-09-14T21:17:11.290",
+    "last_modified": "2026-09-14T23:17:16.663",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "This issue was addressed with additional entitlement checks. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-64701",
+    "published": "2026-09-14T21:17:13.577",
+    "last_modified": "2026-09-14T23:17:19.067",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A permissions issue was addressed with additional restrictions. This issue is fixed in macOS Sequoia 15.7.8, macOS Tahoe 26.6. A malicious app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/128067",
+      "https://support.apple.com/en-us/128071"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-64712",
+    "published": "2026-09-14T21:17:13.953",
+    "last_modified": "2026-09-14T23:17:19.227",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "This issue was addressed with improved checks. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-65362",
+    "published": "2026-09-14T21:17:21.283",
+    "last_modified": "2026-09-14T23:17:19.797",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "This issue was addressed with improved checks. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-84505",
+    "published": "2026-09-14T21:17:27.077",
+    "last_modified": "2026-09-14T23:18:54.083",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An out-of-bounds write issue was addressed with improved bounds checking. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-84631",
+    "published": "2026-09-14T21:17:38.050",
+    "last_modified": "2026-09-14T23:18:56.770",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "This issue was addressed with additional entitlement checks. This issue is fixed in macOS Golden Gate 27. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-86917",
+    "published": "2026-09-14T21:17:41.760",
+    "last_modified": "2026-09-14T23:18:58.903",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A permissions issue was addressed with additional restrictions. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An app may be able to gain root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-86750",
     "published": "2026-09-09T14:17:24.030",
     "last_modified": "2026-09-14T20:30:57.460",
@@ -20015,7 +20835,7 @@
   {
     "cve_id": "CVE-2026-87608",
     "published": "2026-09-09T01:17:18.873",
-    "last_modified": "2026-09-14T13:18:59.367",
+    "last_modified": "2026-09-14T21:43:36.733",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -21620,6 +22440,73 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-28960",
+    "published": "2026-09-14T21:17:05.823",
+    "last_modified": "2026-09-14T23:17:15.830",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A denial-of-service issue was addressed with improved validation. This issue is fixed in iOS 18.7.10 and iPadOS 18.7.10. A remote attacker may be able to cause a denial-of-service.",
+    "references": [
+      "https://support.apple.com/en-us/148287"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-65364",
+    "published": "2026-09-14T21:17:21.393",
+    "last_modified": "2026-09-14T23:17:19.960",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An out-of-bounds read was addressed with improved bounds checking. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. A remote attacker may be able to cause unexpected system termination.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-84553",
+    "published": "2026-09-14T21:17:31.450",
+    "last_modified": "2026-09-14T23:18:55.693",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A resource exhaustion issue was addressed with improved input validation. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. A remote attacker may be able to cause a denial-of-service.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-79389",
     "published": "2026-09-04T20:17:28.133",
     "last_modified": "2026-09-14T14:17:10.320",
@@ -22492,6 +23379,86 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-90840",
+    "published": "2026-09-15T00:17:30.957",
+    "last_modified": "2026-09-15T00:17:30.957",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was identified in PHPGurukul Blood Donor Management System 1.0. Affected is the function __construct of the file /application/controllers/admin/Dashboard.php of the component Admin Controllers. The manipulation leads to improper authentication. The attack can be initiated remotely. The exploit is publicly available and might be used.",
+    "references": [
+      "https://github.com/usernamevnq/CVEs/issues/1",
+      "https://phpgurukul.com/",
+      "https://vuldb.com/cve/CVE-2026-90840",
+      "https://vuldb.com/submit/925615",
+      "https://vuldb.com/vuln/403392",
+      "https://vuldb.com/vuln/403392/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 46.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90852",
+    "published": "2026-09-15T03:17:06.377",
+    "last_modified": "2026-09-15T03:17:06.377",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability has been found in luben zstd-jni up to 1.5.7-13. This vulnerability affects the function ZstdCompressCtx.loadDict of the file ZstdCompressCtx.java of the component Dictionary Sharing. Such manipulation leads to use after free. The attack can be executed remotely. The exploit has been disclosed to the public and may be used. Upgrading to version 1.5.7-14 is able to resolve this issue. The name of the patch is a560131d7834598afd9cea6b7c107bc88e915936. The affected component should be upgraded. The vendor was contacted early, responded in a very professional manner and quickly released a fixed version of the affected product.",
+    "references": [
+      "https://github.com/luben/zstd-jni/",
+      "https://github.com/luben/zstd-jni/commit/a560131d7834598afd9cea6b7c107bc88e915936",
+      "https://github.com/luben/zstd-jni/issues/404",
+      "https://github.com/luben/zstd-jni/releases/tag/v1.5.7-14",
+      "https://vuldb.com/cve/CVE-2026-90852",
+      "https://vuldb.com/submit/927022",
+      "https://vuldb.com/vuln/403407",
+      "https://vuldb.com/vuln/403407/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 46.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90856",
+    "published": "2026-09-15T03:17:06.910",
+    "last_modified": "2026-09-15T03:17:06.910",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security vulnerability has been detected in SourceCodester College Notes Gallery Management System 1.0. This impacts an unknown function of the file signup.php of the component Registration Flow. Such manipulation of the argument role leads to improper privilege management. The attack can be launched remotely. The exploit has been disclosed publicly and may be used.",
+    "references": [
+      "https://github.com/Andyov0/cve/issues/4",
+      "https://vuldb.com/cve/CVE-2026-90856",
+      "https://vuldb.com/submit/927252",
+      "https://vuldb.com/vuln/403413",
+      "https://vuldb.com/vuln/403413/cti",
+      "https://www.sourcecodester.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 46.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-77705",
     "published": "2026-09-12T06:16:24.967",
     "last_modified": "2026-09-14T21:10:17.423",
@@ -22566,6 +23533,31 @@
       "https://aws.amazon.com/security/security-bulletins/2026-112-aws/",
       "https://github.com/aws-samples/iam-identity-center-team/releases/tag/v1.5.1",
       "https://github.com/aws-samples/iam-identity-center-team/security/advisories/GHSA-6x87-mjv8-mgvj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 46.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91143",
+    "published": "2026-09-14T22:16:58.880",
+    "last_modified": "2026-09-14T22:16:58.880",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "goproxy through 15.3 fails to apply HTTP proxy basic authentication to CONNECT tunnel requests, allowing unauthenticated clients to bypass credential requirements. Attackers can issue CONNECT requests to establish tunnels through the authenticated proxy without providing credentials, enabling arbitrary TCP traffic relay and access to restricted destinations.",
+    "references": [
+      "https://github.com/geo-chen/oss/blob/main/goproxy.md",
+      "https://github.com/snail007/goproxy",
+      "https://github.com/snail007/goproxy/blob/v15.3/services/http.go",
+      "https://github.com/snail007/goproxy/blob/v15.3/utils/structs.go",
+      "https://www.vulncheck.com/advisories/goproxy-through-15.3-authentication-bypass-via-connect"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -23218,6 +24210,52 @@
     "summary": "IBM MQ 9.1.0.0 through 9.1.0.37 LTS, 9.2.0.0 through 9.2.0.43 LTS, 9.3.0.0 through 9.3.0.41 LTS, 9.3.0.0 through 9.3.5.1 CD, 9.4.0.0 through 9.4.0.25 LTS, 9.4.0.0 through 9.4.5.1 CD, and 10.0.0.0 is vulnerable to an XML external entity injection (XXE) attack when processing XML data. A remote attacker could exploit this vulnerability to expose sensitive information or consume memory resources.",
     "references": [
       "https://www.ibm.com/support/pages/node/7284937"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12756",
+    "published": "2026-09-14T22:16:56.470",
+    "last_modified": "2026-09-14T22:16:56.470",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM Business Automation Workflow containers and traditional is vulnerable to an XML external entity injection (XXE) attack when processing XML data. A remote attacker could exploit this vulnerability to expose sensitive information or consume memory resources.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7285930"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91145",
+    "published": "2026-09-14T22:16:59.217",
+    "last_modified": "2026-09-14T22:16:59.217",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Activiti through 7.1.0.M6 fails to validate hash-brace deferred expressions in process variables, allowing attackers to bypass expression filtering. Attackers can inject expressions beginning with #{ that are stored and later evaluated in the full Spring context when a mail task uses variable-backed body fields, enabling method invocation on application beans.",
+    "references": [
+      "https://github.com/Activiti/Activiti",
+      "https://github.com/Activiti/Activiti/blob/7.1.0.M6/activiti-core/activiti-api-impl/activiti-api-process-runtime-impl/src/main/java/org/activiti/runtime/api/impl/ExpressionResolver.java",
+      "https://github.com/Activiti/Activiti/blob/7.1.0.M6/activiti-core/activiti-engine/src/main/java/org/activiti/engine/impl/bpmn/behavior/MailActivityBehavior.java",
+      "https://github.com/Activiti/Activiti/issues/5438",
+      "https://www.vulncheck.com/advisories/activiti-through-7.1.0-m6-expression-injection-via-mail-task"
     ],
     "source": "NVD",
     "cisa_kev": false,
