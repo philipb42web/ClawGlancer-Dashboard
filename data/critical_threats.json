@@ -805,7 +805,7 @@
   {
     "cve_id": "CVE-2026-6893",
     "published": "2026-06-10T20:17:29.807",
-    "last_modified": "2026-09-15T12:17:52.943",
+    "last_modified": "2026-09-17T08:17:01.710",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -824,6 +824,7 @@
       "https://access.redhat.com/errata/RHSA-2026:62409",
       "https://access.redhat.com/errata/RHSA-2026:62549",
       "https://access.redhat.com/errata/RHSA-2026:63044",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
       "https://access.redhat.com/security/cve/CVE-2026-6893",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2459963",
       "https://access.redhat.com/errata/RHSA-2026:26532",
@@ -1118,6 +1119,38 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-63622",
+    "published": "2026-08-10T21:17:23.550",
+    "last_modified": "2026-09-17T08:17:01.457",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libvirt. A local attacker, specifically a process running as the confined `swtpm` user, could exploit a symlink-following vulnerability in the `virFileChownFiles()` function. By planting a symbolic link within the `swtpm` state directory, the attacker could trick the root-level libvirt daemon into changing the ownership of an arbitrary file to the `swtpm` user. This allows for privilege escalation from the `swtpm` sandbox to root-level file ownership control.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:64773",
+      "https://access.redhat.com/errata/RHSA-2026:65515",
+      "https://access.redhat.com/errata/RHSA-2026:65516",
+      "https://access.redhat.com/errata/RHSA-2026:65803",
+      "https://access.redhat.com/errata/RHSA-2026:68513",
+      "https://access.redhat.com/security/cve/CVE-2026-63622",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2513065"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.2,
+    "tags": [
+      "file_write",
+      "priv_esc"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "file_write+15"
     ]
   },
   {
@@ -2959,31 +2992,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-87785",
-    "published": "2026-09-14T11:17:05.503",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authentication bypass by spoofing vulnerability in Apache Syncope.\n\n\n\nWhen the configured JWKS settings for internal JWT authentication are disclosed (at least protocol and key), an attacker can spoof another user's privileges after completing a successful authentication and obtaining a valid JWT.\n\nThis issue affects Apache Syncope: from 3.0.0-M0 through 3.0.16, from 4.0.0-M0 through 4.0.7, from 4.1.0-M0 through 4.1.2.\n\n\n\nUsers are recommended to upgrade to version 4.0.8 / 4.1.3, which fix this issue.",
-    "references": [
-      "https://lists.apache.org/thread/3t3om8mny7ng52q053pdzpmtdtosnqoo",
-      "http://www.openwall.com/lists/oss-security/2026/09/14/24"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.4,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-68772",
     "published": "2026-08-07T17:17:07.573",
     "last_modified": "2026-09-16T20:32:21.400",
@@ -3522,12 +3530,17 @@
   {
     "cve_id": "CVE-2026-18917",
     "published": "2026-08-20T10:16:40.507",
-    "last_modified": "2026-09-15T07:16:26.900",
+    "last_modified": "2026-09-17T08:17:00.023",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in libvirt. An unprivileged local user could exploit an integer overflow vulnerability in the NodeGetFreePages RPC handler. This flaw allows crafted values to bypass a size check, leading to an undersized memory buffer. Subsequently, real NUMA node data can overwrite this buffer. This heap buffer overflow can corrupt the root libvirt daemon's memory, potentially leading to a denial of service or local privilege escalation.",
     "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68509",
+      "https://access.redhat.com/errata/RHSA-2026:68510",
+      "https://access.redhat.com/errata/RHSA-2026:68511",
+      "https://access.redhat.com/errata/RHSA-2026:68513",
+      "https://access.redhat.com/errata/RHSA-2026:68514",
       "https://access.redhat.com/security/cve/CVE-2026-18917",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2520161"
     ],
@@ -3692,31 +3705,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-82232",
-    "published": "2026-09-14T11:17:05.123",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper neutralization of special elements used in an SQL command ('SQL injection') vulnerability in Apache Syncope.\n\n\n\nAn administrator with adequate entitlements can achieve execution of arbitrary SQL via stacked queries, leveraging unsanitized sort clauses for Task search.\n\nThis issue affects Apache Syncope: from 3.0.0-M0 through 3.0.16, from 4.0.0-M0 through 4.0.7, from 4.1.0-M0 through 4.1.2.\n\n\n\nUsers are recommended to upgrade to version 4.0.8 / 4.1.3, which fix this issue.",
-    "references": [
-      "https://lists.apache.org/thread/v5zrdqcn0w0v4pk1d22ndt7frcrplo2b",
-      "http://www.openwall.com/lists/oss-security/2026/09/14/21"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.2,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 77.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
     ]
   },
   {
@@ -5957,31 +5945,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-89180",
-    "published": "2026-09-14T11:17:05.860",
-    "last_modified": "2026-09-14T12:17:50.447",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "EFence developed by Thinking Software Technology has a SQL Injection vulnerability, allowing unauthenticated remote attackers to inject arbitrary SQL commands to read database contents.",
-    "references": [
-      "https://www.twcert.org.tw/en/cp-139-11203-26db2-2.html",
-      "https://www.twcert.org.tw/tw/cp-132-11202-48c1b-1.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.2,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 65.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-61409",
     "published": "2026-09-07T13:20:33.720",
     "last_modified": "2026-09-16T01:15:33.650",
@@ -6339,34 +6302,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 35.0,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-90708",
-    "published": "2026-09-14T11:17:07.313",
-    "last_modified": "2026-09-15T17:17:38.973",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A weakness has been identified in Yot CMS up to 3.3.1. Affected by this vulnerability is the function Login of the file global.php of the component Cookie Handler. This manipulation of the argument yot3_user/yot3_pass causes sql injection. It is possible to initiate the attack remotely. The exploit has been made available to the public and could be used for attacks.",
-    "references": [
-      "https://github.com/dddwmr/CVE/blob/main/YOT%20III%20cookie%20auto-login%20SQL%20injection%20enables%20forged%20administrator%20sessions%20.md",
-      "https://vuldb.com/cve/CVE-2026-90708",
-      "https://vuldb.com/submit/918272",
-      "https://vuldb.com/vuln/403250",
-      "https://vuldb.com/vuln/403250/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 17.1,
     "tags": [
       "sqli"
     ],
@@ -9103,52 +9038,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86460",
-    "published": "2026-09-14T11:17:05.250",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Cypher injection vulnerability in the Neo4j persistence layer when processing some FIQL search conditions.\n\n\n\nThis issue affects Apache Syncope: from 3.0.0-M0 through 3.0.16, from 4.0.0-M0 through 4.0.7, from 4.1.0-M0 through 4.1.2.\n\n\n\nUsers are recommended to upgrade to version 4.0.8 / 4.1.3, which fix this issue.",
-    "references": [
-      "https://lists.apache.org/thread/cwcc0pz53q6cr0tms9dh5hycboqocw0d",
-      "http://www.openwall.com/lists/oss-security/2026/09/14/22"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.0,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-90898",
-    "published": "2026-09-14T11:17:08.237",
-    "last_modified": "2026-09-14T12:17:51.657",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Bifrost registers MCP clients through its management API. A stdio client is a command plus args. Bifrost starts that program in the gateway the moment the client is added. No MCP handshake required.\n\n\n\nThe default is governance.auth_config.is_enabled=false. Auth off means every caller is a local admin. One unauthenticated POST /api/mcp/client is enough to run a program as the Bifrost process user (appuser on the official image).\n\n\n\n transports/v2.1.0 refuses an unauthenticated stdio registration with 403. transports/v2.0.0 still allows it.",
-    "references": [
-      "https://github.com/maximhq/bifrost",
-      "https://github.com/maximhq/bifrost/commit/12e170352bd25eab1ae9ba16611f1797d1fd8fdc",
-      "https://github.com/maximhq/bifrost/pull/6757",
-      "https://github.com/maximhq/bifrost/releases/tag/transports/v2.1.0"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.7,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-45163",
     "published": "2024-08-22T04:15:20.247",
     "last_modified": "2026-09-16T21:17:06.310",
@@ -10454,28 +10343,6 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 50.9,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-87802",
-    "published": "2026-09-14T11:17:05.620",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper verification of cryptographic signature vulnerability in Apache Syncope.\n\n\n\nWhen SRA is configured for OAuth 2.0 without JWKS set URI assigned, an attacker can forge arbitrary JWTs to impersonate any user identity and permissions, gaining full access to services proxied by SRA.\n\nThis issue affects Apache Syncope: from 3.0.0-M0 through 3.0.16, from 4.0.0-M0 through 4.0.7, from 4.1.0-M0 through 4.1.2.\n\n\n\nUsers are recommended to upgrade to version 4.0.8 / 4.1.3, which fix this issue.",
-    "references": [
-      "https://lists.apache.org/thread/gx83cootj00kn8hqd73x1bp8441np33d",
-      "http://www.openwall.com/lists/oss-security/2026/09/14/25"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 17.6,
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -13581,33 +13448,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-90707",
-    "published": "2026-09-14T11:17:07.103",
-    "last_modified": "2026-09-15T14:17:32.230",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A security flaw has been discovered in Open5GS up to 2.7.x. Affected is the function amf_nnrf_try_old_amf_discovery_fallback of the file src/amf/nnrf-handler.c of the component Old AMF Discovery Fallback. The manipulation of the argument discovery_option results in use after free. The attack may be performed from remote. The patch is identified as ddd683a35f8aaac2b7b9884a24cd53bddfc65238. Applying a patch is advised to resolve this issue.",
-    "references": [
-      "https://github.com/open5gs/open5gs/",
-      "https://github.com/open5gs/open5gs/commit/ddd683a35f8aaac2b7b9884a24cd53bddfc65238",
-      "https://github.com/open5gs/open5gs/pull/4698",
-      "https://vuldb.com/cve/CVE-2026-90707",
-      "https://vuldb.com/submit/918267",
-      "https://vuldb.com/vuln/403249",
-      "https://vuldb.com/vuln/403249/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 24.2,
-    "tags": [],
-    "intel_score": 51.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-33810",
     "published": "2026-04-08T02:16:03.950",
     "last_modified": "2026-09-16T13:17:40.520",
@@ -14191,6 +14031,43 @@
     "intel_score": 50.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-11234",
+    "published": "2025-10-03T11:15:30.437",
+    "last_modified": "2026-09-17T08:16:58.090",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in QEMU. If the QIOChannelWebsock object is freed while it is waiting to complete a handshake, a GSource is leaked. This can lead to the callback firing later on and triggering a use-after-free in the use of the channel. This can be abused by a malicious client with network access to the VNC WebSocket port to cause a denial of service during the WebSocket handshake prior to the VNC client authentication.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2025:23228",
+      "https://access.redhat.com/errata/RHSA-2026:0326",
+      "https://access.redhat.com/errata/RHSA-2026:0332",
+      "https://access.redhat.com/errata/RHSA-2026:0702",
+      "https://access.redhat.com/errata/RHSA-2026:1831",
+      "https://access.redhat.com/errata/RHSA-2026:18772",
+      "https://access.redhat.com/errata/RHSA-2026:22147",
+      "https://access.redhat.com/errata/RHSA-2026:3077",
+      "https://access.redhat.com/errata/RHSA-2026:3165",
+      "https://access.redhat.com/errata/RHSA-2026:5578",
+      "https://access.redhat.com/errata/RHSA-2026:59831",
+      "https://access.redhat.com/errata/RHSA-2026:68513",
+      "https://access.redhat.com/security/cve/CVE-2025-11234",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2401209"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 56.8,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -15120,7 +14997,7 @@
   {
     "cve_id": "CVE-2026-14164",
     "published": "2026-06-30T07:16:32.170",
-    "last_modified": "2026-09-14T13:17:33.447",
+    "last_modified": "2026-09-17T09:16:38.713",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -15142,6 +15019,7 @@
       "https://access.redhat.com/errata/RHSA-2026:63041",
       "https://access.redhat.com/errata/RHSA-2026:63044",
       "https://access.redhat.com/errata/RHSA-2026:63100",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
       "https://access.redhat.com/security/cve/CVE-2026-14164",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2493411",
       "https://github.com/libarchive/libarchive/issues/3069",
@@ -15623,35 +15501,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 26.3,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85150",
-    "published": "2026-09-03T13:06:21.910",
-    "last_modified": "2026-09-14T06:16:57.763",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A NULL pointer dereference flaw was found in GStreamer's RTSP support library. The vulnerability occurs while parsing an Authorization or WWW-Authenticate header that uses Digest authentication. Specially crafted whitespace placement around a parameter's terminator can cause an internal length calculation to underflow, leading to a crash of the process parsing the header. On an RTSP server this can be triggered by a remote, unauthenticated attacker sending a single malformed request when the server has authentication enabled; the same flaw can also be triggered against an RTSP client by a malicious or compromised RTSP server. Successful exploitation results in a denial of service (application crash) and has no confirmed impact on confidentiality or integrity.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:66460",
-      "https://access.redhat.com/errata/RHSA-2026:67145",
-      "https://access.redhat.com/security/cve/CVE-2026-85150",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2527936",
-      "https://gitlab.freedesktop.org/gstreamer/gstreamer-security/-/merge_requests/120",
-      "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/blob/main/subprojects/gst-plugins-base/gst-libs/gst/rtsp/gstrtspmessage.c#L1408"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.8,
     "tags": [
       "dos"
     ],
@@ -16988,7 +16837,7 @@
   {
     "cve_id": "CVE-2026-3012",
     "published": "2026-05-27T11:16:18.357",
-    "last_modified": "2026-09-15T12:17:42.833",
+    "last_modified": "2026-09-17T08:17:00.227",
     "cvss_v3": 8.0,
     "severity": "HIGH",
     "affected": [],
@@ -17012,6 +16861,7 @@
       "https://access.redhat.com/errata/RHSA-2026:60019",
       "https://access.redhat.com/errata/RHSA-2026:62409",
       "https://access.redhat.com/errata/RHSA-2026:62549",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
       "https://access.redhat.com/security/cve/CVE-2026-3012",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2447319",
       "https://bugzilla.samba.org/show_bug.cgi?id=16003",
@@ -18050,6 +17900,36 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 1.2,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-15809",
+    "published": "2026-07-15T13:17:03.933",
+    "last_modified": "2026-09-17T09:16:39.383",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in CRI-O. The fix for a previous vulnerability (CVE-2022-4318) was incorrect, allowing it to be bypassed. An attacker capable of setting environment variables on a container can inject a newline character into the HOME environment variable. This issue allows the addition of arbitrary lines into /etc/passwd by use of a specially crafted environment variable.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:57361",
+      "https://access.redhat.com/errata/RHSA-2026:60444",
+      "https://access.redhat.com/errata/RHSA-2026:60449",
+      "https://access.redhat.com/errata/RHSA-2026:60452",
+      "https://access.redhat.com/errata/RHSA-2026:62548",
+      "https://access.redhat.com/errata/RHSA-2026:65906",
+      "https://access.redhat.com/security/cve/CVE-2026-15809",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2500846",
+      "https://github.com/cri-o/cri-o/pull/6450",
+      "https://github.com/cri-o/cri-o/pull/6524"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.8,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -21585,7 +21465,7 @@
   {
     "cve_id": "CVE-2026-16313",
     "published": "2026-07-28T17:16:37.807",
-    "last_modified": "2026-09-14T06:16:54.813",
+    "last_modified": "2026-09-17T08:16:59.777",
     "cvss_v3": 7.6,
     "severity": "HIGH",
     "affected": [],
@@ -21604,6 +21484,7 @@
       "https://access.redhat.com/errata/RHSA-2026:63041",
       "https://access.redhat.com/errata/RHSA-2026:63044",
       "https://access.redhat.com/errata/RHSA-2026:63100",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
       "https://access.redhat.com/errata/RHSA-2026:67157",
       "https://access.redhat.com/security/cve/CVE-2026-16313",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2502845",
@@ -23513,7 +23394,7 @@
   {
     "cve_id": "CVE-2026-15816",
     "published": "2026-08-07T11:17:05.100",
-    "last_modified": "2026-09-15T12:16:57.790",
+    "last_modified": "2026-09-17T08:16:59.480",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -23534,6 +23415,7 @@
       "https://access.redhat.com/errata/RHSA-2026:62549",
       "https://access.redhat.com/errata/RHSA-2026:63041",
       "https://access.redhat.com/errata/RHSA-2026:63044",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
       "https://access.redhat.com/errata/RHSA-2026:66357",
       "https://access.redhat.com/security/cve/CVE-2026-15816",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2459963",
@@ -23942,27 +23824,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 36.2,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86452",
-    "published": "2026-09-07T14:16:56.833",
-    "last_modified": "2026-09-14T07:17:23.740",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Affected versions of MISP permit unauthenticated or weakly constrained request paths to perform persistent work without adequate input bounds or rate limiting.\n\n\nThe users/forgot password-reset endpoint accepted an attacker-controlled email value without first imposing a reasonable length bound or validating its format. That value was then used to create an audit log entry and queue a password-reset job, causing the supplied value to be persisted more than once per request. The commit explicitly states that an unbounded unauthenticated request field was stored twice per call with no throttle.\n\nThe fix adds:\n\n - a maximum email input length of 1024 bytes;\n - email-format validation before persistent work;\n - a per-source pre-authentication request budget;\n - HTTP 429 responses when that budget is exceeded;\n - a 15-minute cooldown for API-access request emails;\n - POST-only handling and CSRF protection for the API-access request endpoint.\n\n\n\nThe new flood filter is specifically intended to limit persistent storage costs from anonymous requests such as password resets, registrations, and failed REST authentication attempts.\n\nVersion affected: ≤2.5.45",
-    "references": [
-      "https://github.com/MISP/MISP/commit/d75d899be"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -25404,28 +25265,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-87779",
-    "published": "2026-09-14T11:17:05.370",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Insertion of sensitive information into log file vulnerability in Apache Syncope.\n\n\n\nWhen AES key of non-standard length (not 16/24/32 bytes) is configured, Syncope will pad the provided value with random characters. The resulting key value is logged.\n\n\n\nThis issue affects Apache Syncope: from 3.0.15 through 3.0.16, from 4.0.3 through 4.0.7, from 4.1.0-M0 through 4.1.2.\n\n\n\nUsers are recommended to upgrade to version 4.0.8 / 4.1.3, which fix this issue.",
-    "references": [
-      "https://lists.apache.org/thread/3t3om8mny7ng52q053pdzpmtdtosnqoo",
-      "http://www.openwall.com/lists/oss-security/2026/09/14/23"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.1,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-9547",
     "published": "2026-07-03T07:16:25.990",
     "last_modified": "2026-09-15T07:16:35.310",
@@ -25794,32 +25633,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 22.2,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-71226",
-    "published": "2026-08-05T13:24:47.223",
-    "last_modified": "2026-09-14T10:17:02.830",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory Corruption via Uncanceled AIO Requests on Error: libkcapi's one-shot AIO path can return an error before all submitted IOCBs are drained, allowing later kernel writes into caller-owned output buffers.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:56985",
-      "https://access.redhat.com/errata/RHSA-2026:67265",
-      "https://access.redhat.com/errata/RHSA-2026:67266",
-      "https://access.redhat.com/errata/RHSA-2026:67267",
-      "https://access.redhat.com/security/cve/CVE-2026-71226",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2462114"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.3,
     "tags": [],
     "intel_score": 46.5,
     "reasons": [
@@ -27066,27 +26879,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 2.6,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-8821",
-    "published": "2026-09-14T11:17:06.153",
-    "last_modified": "2026-09-16T19:30:49.967",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Mattermost versions 11.9.x <= 11.9.0, 11.8.x <= 11.8.4, 11.7.x <= 11.7.7, 10.11.x <= 10.11.22 fail to validate channel member-management permission during playbook run creation, allowing an authenticated channel member to add an arbitrary user to a restricted channel via the run owner field.. Mattermost Advisory ID: MMSA-2026-00677",
-    "references": [
-      "https://mattermost.com/security-updates"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.8,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
