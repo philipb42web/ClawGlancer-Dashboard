@@ -212,32 +212,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-82845",
-    "published": "2026-09-12T06:16:26.043",
-    "last_modified": "2026-09-14T21:10:17.423",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The Masteriyo LMS  WordPress plugin before 3.4.1 does not prevent user-supplied values held as metadata from being deserialized when they are read back, allowing users with a minimal account to inject arbitrary PHP objects and, by way of a class shipped in a library bundled with the Masteriyo LMS  WordPress plugin before 3.4.1, write and execute arbitrary code on the server. A weaker form of the same issue is reachable without an account and yields an arbitrary file write rather than code execution.",
-    "references": [
-      "https://wpscan.com/vulnerability/5ced30ea-8b78-495f-b10c-42b3f10adcb3/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.0,
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 104.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2019-7105",
     "published": "2019-05-23T16:29:08.887",
     "last_modified": "2026-09-15T15:33:14.803",
@@ -328,7 +302,7 @@
   {
     "cve_id": "CVE-2026-15555",
     "published": "2026-08-11T09:17:12.540",
-    "last_modified": "2026-09-17T19:16:37.993",
+    "last_modified": "2026-09-18T00:16:54.457",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -336,6 +310,7 @@
     "references": [
       "https://access.redhat.com/errata/RHSA-2026:53644",
       "https://access.redhat.com/errata/RHSA-2026:53645",
+      "https://access.redhat.com/errata/RHSA-2026:53646",
       "https://access.redhat.com/errata/RHSA-2026:53806",
       "https://access.redhat.com/security/cve/CVE-2026-15555",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2480637"
@@ -459,6 +434,36 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 38.6,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 102.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-75983",
+    "published": "2026-09-15T07:16:29.743",
+    "last_modified": "2026-09-15T15:17:21.443",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Eventin – Event Calendar, Tickets, Registration, Booking & WooCommerce plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 4.1.23. This is due to the `PermissionManager::manage_permissions()` function being registered as a callback on WordPress core's `map_meta_cap` filter and unconditionally returning the always-true `'exist'` primitive for every capability check whenever the evaluated user ID is 1, without scoping this behavior to plugin-specific capabilities. This makes it possible for authenticated attackers whose account is user ID 1, even subscribers, to pass every WordPress capability check, including `manage_options`, `edit_plugins`, `edit_themes`, `promote_users`, and `update_core`, thereby elevating their privileges to administrator-equivalent power and achieving full site takeover, including remote code execution via the plugin and theme editors. Exploitation is only impactful when user ID 1 has been deliberately demoted to a lower-privilege role as a common administrator-account hardening practice; on default installations where user ID 1 retains the administrator role, no incremental privilege gain occurs.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/wp-event-solution/tags/4.1.21/core/AccessControl/PermissionManager.php#L24",
+      "https://plugins.trac.wordpress.org/browser/wp-event-solution/tags/4.1.21/core/AccessControl/PermissionManager.php#L52",
+      "https://plugins.trac.wordpress.org/browser/wp-event-solution/tags/4.1.21/core/Admin/AdminProvider.php#L32",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3689867%40wp-event-solution&new=3689867%40wp-event-solution",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/ff48db43-9cfa-4dab-b25e-bbc211121f6c?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 34.9,
     "tags": [
       "priv_esc",
       "rce"
@@ -1150,6 +1155,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-84568",
+    "published": "2026-09-14T21:17:33.000",
+    "last_modified": "2026-09-15T17:38:44.540",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal issue was addressed with improved path validation. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8, macOS Tahoe 26.7. An attacker with control of a network directory server may be able to execute arbitrary code with root privileges.",
+    "references": [
+      "https://support.apple.com/en-us/149035",
+      "https://support.apple.com/en-us/149042",
+      "https://support.apple.com/en-us/149043"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.7,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-90932",
     "published": "2026-09-14T13:19:31.523",
     "last_modified": "2026-09-16T15:18:44.557",
@@ -1175,6 +1208,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12944",
+    "published": "2026-09-14T22:16:56.950",
+    "last_modified": "2026-09-16T19:21:55.793",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 can allow attackers to execute arbitrary Python code with root privileges (UID=0) on the Langflow server by submitting components containing socket or urllib imports. This enables: (1) AWS credential theft via IMDSv1 SSRF with full IAM role permissions, (2) arbitrary file exfiltration from the container filesystem, and (3) lateral movement to internal services (PostgreSQL, Redis) within the Docker network. The scanner incorrectly returns \"validated\": true, providing a false security signal.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7278919"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 16.3,
+    "tags": [
+      "file_write",
+      "ssrf"
+    ],
+    "intel_score": 91.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ssrf+18",
+      "file_write+15"
     ]
   },
   {
@@ -1444,54 +1503,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-81402",
-    "published": "2026-09-12T06:16:25.730",
-    "last_modified": "2026-09-14T21:10:17.423",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The DS Ad Rotator WordPress plugin through 0.8 does not perform any capability check, nonce verification, or file-type validation on its image upload handler, allowing unauthenticated attackers to upload arbitrary files, including PHP, to a web-accessible directory, which can lead to remote code execution.",
-    "references": [
-      "https://wpscan.com/vulnerability/60e82611-ddf1-4275-8c68-14694d863fca/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-84171",
-    "published": "2026-09-12T06:16:27.137",
-    "last_modified": "2026-09-14T21:10:17.423",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The WP images upload on piclect WordPress plugin through 1.0 does not validate the name or type of uploaded files before writing them to a publicly accessible directory, allowing unauthenticated attackers to upload arbitrary files and execute arbitrary code on the server.",
-    "references": [
-      "https://wpscan.com/vulnerability/e5b9fd87-92a7-4fc6-b8b2-896b87d97c40/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-54333",
     "published": "2026-09-14T20:16:45.990",
     "last_modified": "2026-09-15T14:16:59.540",
@@ -1709,32 +1720,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-12821",
-    "published": "2026-02-19T07:17:28.770",
-    "last_modified": "2026-09-14T23:17:14.290",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The NewsBlogger theme for WordPress is vulnerable to Cross-Site Request Forgery in versions 0.2.5.6  to 0.2.5.9. This is due to missing or incorrect nonce validation on the newsblogger_install_and_activate_plugin() function. This makes it possible for unauthenticated attackers to upload arbitrary files and achieve remote code execution via a forged request granted they can trick a site administrator into performing an action such as clicking on a link. This is due to a reverted fix of CVE-2025-1305.",
-    "references": [
-      "https://themes.trac.wordpress.org/browser/newsblogger/0.2.5.8/functions.php#L499",
-      "https://themes.trac.wordpress.org/changeset?old=302341&old_path=%2Fnewsblogger%2F0.2.5.9%2Ffunctions.php&new=304663&new_path=%2Fnewsblogger%2F0.2.6%2Ffunctions.php",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/9f33096a-dfd5-48c1-84d8-30a0faa2a7f5?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-69100",
     "published": "2026-08-04T16:16:28.340",
     "last_modified": "2026-09-16T20:32:21.400",
@@ -1751,35 +1736,6 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 44.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-65346",
-    "published": "2026-08-17T22:17:25.293",
-    "last_modified": "2026-09-14T21:17:19.537",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An integer overflow was addressed with improved input validation. This issue is fixed in iOS 26.6.1 and iPadOS 26.6.1, macOS Sequoia 15.8, macOS Tahoe 26.6.2, tvOS 27, visionOS 27, watchOS 27. Processing an image may lead to arbitrary code execution.",
-    "references": [
-      "https://support.apple.com/en-us/148281",
-      "https://support.apple.com/en-us/148282",
-      "https://support.apple.com/en-us/149036",
-      "https://support.apple.com/en-us/149037",
-      "https://support.apple.com/en-us/149038",
-      "https://support.apple.com/en-us/149043"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.7,
     "tags": [
       "rce"
     ],
@@ -2164,31 +2120,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-82428",
-    "published": "2026-09-14T15:17:09.673",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Description\n\nDependency artifacts uploaded with `storm jar --artifacts` were stored under a blob key derived only from\nthe Maven coordinate, for example `dep---.jar`. The key was therefore identical\nfor every user of the cluster and predictable in advance. When the blob already existed, the uploader\ncaught `KeyAlreadyExistsException` and silently reused it, with no check that the existing blob's content\nor owner matched the artifact the submitter had resolved.\n\nA user who uploaded a blob under such a key first therefore controlled the bytes that every later submitter\nof the same coordinate would receive on the worker classpath, resulting in code execution inside another\ntenant's topology.\n\nThis affects deployments where more than one principal may create blobs and where the `--artifacts`\ndependency feature is used.\n\nMitigation\n\nUpgrade to 3.1.0, where each uploaded artifact receives a key carrying a freshly generated UUID and a\npre-existing blob is no longer silently reused.\n\nNote that the corrected key generation is on the SUBMITTING CLIENT, so upgrading the cluster alone does not\nclose this; every client that runs `storm jar --artifacts` must also be upgraded. Operators should audit\nexisting `dep-` blobs for unexpected owners before upgrading. Users who cannot upgrade immediately should\navoid the `--artifacts` mechanism in multi-tenant clusters and distribute dependencies inside the topology\njar instead.\n\nCredit\n\nThe ASF -- found using Claude agents to study the security of open-source projects, validated and reported by Apache Storm.",
-    "references": [
-      "https://lists.apache.org/thread/pj3fspp4l10fgk2jkvrnqsmxycmjv622",
-      "http://www.openwall.com/lists/oss-security/2026/09/13/8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-16428",
     "published": "2026-09-14T20:16:40.537",
     "last_modified": "2026-09-16T19:22:22.797",
@@ -2255,6 +2186,34 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 32.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91200",
+    "published": "2026-09-14T23:19:00.630",
+    "last_modified": "2026-09-15T14:17:46.707",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DevSpace through 6.3.21 fails to reject parent-directory segments in tar entry names from the in-pod sync stream. Attackers operating a malicious container can stream tar entries with traversal sequences to write arbitrary files on the developer workstation, enabling code execution.",
+    "references": [
+      "https://github.com/devspace-sh/devspace",
+      "https://github.com/devspace-sh/devspace/blob/7f272dcf90653fa9b42bc4347f7f3f9a52b0e8b5/pkg/devspace/sync/tar.go#L68-L82",
+      "https://github.com/devspace-sh/devspace/blob/7f272dcf90653fa9b42bc4347f7f3f9a52b0e8b5/pkg/devspace/sync/util.go#L9-L11",
+      "https://github.com/devspace-sh/devspace/issues/3290",
+      "https://www.vulncheck.com/advisories/devspace-through-6.3.21-path-traversal-via-tar-extraction"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.7,
     "tags": [
       "rce"
     ],
@@ -3001,31 +2960,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-87785",
-    "published": "2026-09-14T11:17:05.503",
-    "last_modified": "2026-09-14T20:58:48.430",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authentication bypass by spoofing vulnerability in Apache Syncope.\n\n\n\nWhen the configured JWKS settings for internal JWT authentication are disclosed (at least protocol and key), an attacker can spoof another user's privileges after completing a successful authentication and obtaining a valid JWT.\n\nThis issue affects Apache Syncope: from 3.0.0-M0 through 3.0.16, from 4.0.0-M0 through 4.0.7, from 4.1.0-M0 through 4.1.2.\n\n\n\nUsers are recommended to upgrade to version 4.0.8 / 4.1.3, which fix this issue.",
-    "references": [
-      "https://lists.apache.org/thread/3t3om8mny7ng52q053pdzpmtdtosnqoo",
-      "http://www.openwall.com/lists/oss-security/2026/09/14/24"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.4,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-68772",
     "published": "2026-08-07T17:17:07.573",
     "last_modified": "2026-09-16T20:32:21.400",
@@ -3204,6 +3138,81 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 12.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-11803",
+    "published": "2026-08-06T22:16:44.967",
+    "last_modified": "2026-09-17T14:17:11.953",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A maliciously crafted PDF file, when parsed through certain Autodesk products, can force a Out-of-Bounds Read vulnerability. A malicious actor can leverage this vulnerability to cause a crash, read sensitive data, or execute arbitrary code in the context of the current process.",
+    "references": [
+      "https://www.autodesk.com/products/autodesk-access/overview",
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2026-0011"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-1289",
+    "published": "2026-08-06T22:17:00.373",
+    "last_modified": "2026-09-17T14:17:12.393",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A maliciously crafted PDF file, when parsed through certain Autodesk products, can force a Use-After-Free vulnerability. A malicious actor can leverage this vulnerability to cause a crash, disclose sensitive data, or execute arbitrary code in the context of the current process.",
+    "references": [
+      "https://www.autodesk.com/products/autodesk-access/overview",
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2026-0011"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-8325",
+    "published": "2026-08-06T22:18:33.243",
+    "last_modified": "2026-09-17T14:17:52.297",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A maliciously crafted PDF file, when parsed through certain Autodesk products, can force a Out-of-Bounds Write vulnerability. A malicious actor may leverage this vulnerability to cause a crash, cause data corruption, or execute arbitrary code in the context of the current process.",
+    "references": [
+      "https://www.autodesk.com/products/autodesk-access/overview",
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2026-0011"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.1,
     "tags": [
       "rce"
     ],
