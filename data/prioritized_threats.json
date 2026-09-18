@@ -130,62 +130,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-72709",
-    "published": "2026-09-11T17:18:58.760",
-    "last_modified": "2026-09-15T03:17:05.813",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SPIP before version 4.4.18 contains a missing authorization vulnerability in sensitive actions under ecrire/action/ that allows unauthenticated attackers to invoke privileged actions by supplying only a valid CSRF nonce without any server-side permission check. Attackers can bypass template-level authorization guards through direct HTTP requests to invoke actions such as editer_auteur, enabling arbitrary account password rewrites including administrator accounts and resulting in full account takeover.",
-    "references": [
-      "https://blog.lexfo.fr/casse-spip-sqli-to-rce.html",
-      "https://blog.spip.net/Mise-a-jour-critique-de-securite-sortie-de-SPIP-4-4-18.html",
-      "https://www.vulncheck.com/advisories/spip-missing-authorization-via-ecrire-action-editer-auteur"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.0,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 107.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-72710",
-    "published": "2026-09-11T17:18:58.907",
-    "last_modified": "2026-09-15T03:17:05.947",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SPIP before 4.4.18 contains a mass assignment vulnerability in the editer_objet action that allows unauthenticated attackers to write arbitrary rows to any SQL table lacking a champs_editables allowlist by supplying an attacker-controlled arg parameter resolving to internal database tables. Attackers can insert a malicious row into the spip_jobs queue with a controlled PHP function and arguments, which is then dynamically executed when the cron processes the queue, resulting in remote code execution.",
-    "references": [
-      "https://blog.lexfo.fr/casse-spip-sqli-to-rce.html",
-      "https://blog.spip.net/Mise-a-jour-critique-de-securite-sortie-de-SPIP-4-4-18.html",
-      "https://www.vulncheck.com/advisories/spip-remote-code-execution-via-editer-objet-php-job-queue-injection"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.1,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 107.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-81048",
     "published": "2026-09-10T16:17:57.543",
     "last_modified": "2026-09-16T20:59:50.940",
@@ -328,33 +272,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-63427",
-    "published": "2026-09-10T21:17:28.347",
-    "last_modified": "2026-09-15T04:18:09.087",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An authentication bypass vulnerability was discovered in Lenovo Software Fix that could allow a local authenticated user to perform arbitrary code execution with elevated privileges.",
-    "references": [
-      "https://support.lenovo.com/us/en/downloads/ds101291-rescue-and-smart-assistant-lmsa",
-      "https://support.lenovo.com/us/en/product_security/LEN-217409"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.5,
-    "tags": [
-      "auth_bypass",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "auth_bypass+25"
     ]
   },
   {
@@ -1720,6 +1637,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-91998",
+    "published": "2026-09-15T12:17:55.407",
+    "last_modified": "2026-09-17T20:18:55.133",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Casdoor through 4.4.0 contains an authorization bypass vulnerability in the /api/mcp endpoint that allows attackers with any application's clientId and clientSecret to gain unrestricted access to user administration across all organizations. Attackers can enumerate user records including password salts and email addresses, create administrator accounts, modify existing users, and delete them in any organization by supplying legitimate credentials from a single application.",
+    "references": [
+      "https://github.com/casdoor/casdoor",
+      "https://github.com/casdoor/casdoor/blob/v4.4.0/authz/authz.go#L174-L176",
+      "https://github.com/casdoor/casdoor/blob/v4.4.0/mcpself/user.go",
+      "https://github.com/casdoor/casdoor/blob/v4.4.0/routers/base.go#L122-L154",
+      "https://github.com/geo-chen/oss/blob/main/casdoor.md#finding-2-application-credential-authorization-bypass-in-apimcp-enables-unrestricted-cross-organization-user-administration",
+      "https://www.vulncheck.com/advisories/casdoor-through-4.4.0-cross-organization-user-administration-via-api-mcp"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.4,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-69100",
     "published": "2026-08-04T16:16:28.340",
     "last_modified": "2026-09-16T20:32:21.400",
@@ -2224,6 +2170,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-91925",
+    "published": "2026-09-15T11:17:13.220",
+    "last_modified": "2026-09-15T13:16:46.980",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Polyaxon through 2.16.4 renders operation specification fields with an unsandboxed Jinja2 environment during server-side run preparation, allowing authenticated users to execute arbitrary code. Attackers can submit runs with Jinja2 payloads in queue, namespace, conditions, presets, or dependencies fields to execute operating system commands in the scheduler process context, exposing database credentials and service tokens.",
+    "references": [
+      "https://github.com/polyaxon/cli/blob/bfea04a0bf93886f69a3195954204d9d010b55aa/cli/polyaxon/_polyaxonfile/specs/libs/engine.py",
+      "https://github.com/polyaxon/cli/blob/bfea04a0bf93886f69a3195954204d9d010b55aa/cli/polyaxon/_polyaxonfile/specs/sections.py",
+      "https://github.com/polyaxon/polyaxon",
+      "https://github.com/polyaxon/polyaxon/issues/1540",
+      "https://www.vulncheck.com/advisories/polyaxon-through-2.16.4-server-side-template-injection-via-unsandboxed-jinja2-engine"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-82071",
     "published": "2026-09-08T17:18:36.140",
     "last_modified": "2026-09-16T20:39:21.083",
@@ -2238,32 +2212,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 23.6,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 83.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-25687",
-    "published": "2026-09-14T15:17:05.090",
-    "last_modified": "2026-09-15T04:18:03.757",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A race condition in the ZPA tunnel handler of affected versions of Zscaler Client Connector (ZCC) allows a heap corruption, resulting in a denial of service (client crash) and potentially arbitrary code execution in the context of the ZCC process.",
-    "references": [
-      "https://help.zscaler.com/zscaler-client-connector/client-connector-app-release-summary-2026"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.1,
     "tags": [
       "dos",
       "rce"
@@ -2491,7 +2439,7 @@
   {
     "cve_id": "CVE-2026-19387",
     "published": "2026-08-10T03:16:40.223",
-    "last_modified": "2026-09-16T07:16:33.107",
+    "last_modified": "2026-09-18T09:16:39.357",
     "cvss_v3": 7.6,
     "severity": "HIGH",
     "affected": [],
@@ -2507,6 +2455,7 @@
       "https://access.redhat.com/errata/RHSA-2026:66407",
       "https://access.redhat.com/errata/RHSA-2026:67151",
       "https://access.redhat.com/errata/RHSA-2026:67844",
+      "https://access.redhat.com/errata/RHSA-2026:67861",
       "https://access.redhat.com/security/cve/CVE-2026-19387",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2513015",
       "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/12235",
@@ -2876,36 +2825,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-9323",
-    "published": "2026-07-18T14:17:12.170",
-    "last_modified": "2026-09-15T08:17:07.543",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The urwid web display backend (urwid/display/web.py) generates web session identifiers (urwid_id) in Screen.start() by concatenating two random.randrange(10**9) calls that use Python's Mersenne Twister PRNG, which is not cryptographically secure. Each call consumes approximately 30 bits of PRNG state, and the Mersenne Twister internal state is approximately 19,937 bits, so an attacker who observes approximately 334 session IDs (for example via the X-Urwid-ID HTTP response header) can fully reconstruct the internal state and predict all past and future session IDs (Path B). The same identifier is also used as the filename of a FIFO created in the world-listable /tmp directory (for example /tmp/urwid375487765176907690.in), so any local user on the host can list /tmp to enumerate active session tokens directly (Path A). With a valid session ID, an attacker can read the victim's terminal screen via the polling endpoint, inject keystrokes into the victim's session (yielding OS-level code execution with the session owner's privileges if the session runs a shell), and inject exit sequences or flood the FIFO to terminate or crash the session. A prior Bandit S311 warning on this usage was suppressed with # noqa: S311 rather than fixed",
-    "references": [
-      "https://github.com/urwid/urwid",
-      "https://github.com/urwid/urwid/commit/24acd12f0d0598036d0d577f2ee63e4a27b4a3d9",
-      "https://github.com/urwid/urwid/issues/1127",
-      "https://github.com/urwid/urwid/pull/1128",
-      "https://github.com/urwid/urwid/security/advisories/GHSA-rjwp-g85x-gmjv",
-      "https://www.vulncheck.com/advisories/insecure-prng-and-information-exposure-in-urwid-web-display-backend",
-      "https://lists.debian.org/debian-lts-announce/2026/09/msg00015.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 36.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-54083",
     "published": "2026-08-28T00:18:07.233",
     "last_modified": "2026-09-15T19:19:39.370",
@@ -2950,6 +2869,36 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 14.4,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91995",
+    "published": "2026-09-15T12:17:54.943",
+    "last_modified": "2026-09-15T12:17:54.943",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "pig before 4.1.0 contains an authentication bypass vulnerability in the /register/password endpoint where password verification results are discarded, allowing any value as the current password. Remote attackers can submit a username with an incorrect current password to overwrite any account credential including the admin account and gain full administrative control.",
+    "references": [
+      "https://github.com/geo-chen/oss/blob/main/pig.md",
+      "https://github.com/pig-mesh/pig",
+      "https://github.com/pig-mesh/pig/blob/v4.0.0/pig-upms/pig-upms-biz/src/main/java/com/pig4cloud/pig/admin/controller/SysRegisterController.java#L21-L53",
+      "https://github.com/pig-mesh/pig/blob/v4.0.0/pig-upms/pig-upms-biz/src/main/java/com/pig4cloud/pig/admin/service/impl/SysUserServiceImpl.java#L650-L669",
+      "https://github.com/pig-mesh/pig/commit/ce958668f399110b97b3f1fcc5f517ff9bcfd535",
+      "https://github.com/pig-mesh/pig/issues/1249",
+      "https://www.vulncheck.com/advisories/pig-before-4.1.0-unverified-password-change-via-register-password"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.5,
     "tags": [
       "auth_bypass"
     ],
@@ -3220,6 +3169,55 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-71399",
+    "published": "2026-08-25T18:18:00.903",
+    "last_modified": "2026-09-15T15:01:17.123",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Adobe XD is affected by a Buffer Overflow vulnerability that could result in arbitrary code execution in the context of the current user. An attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
+    "references": [
+      "https://helpx.adobe.com/security/products/xd/apsb26-125.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85617",
+    "published": "2026-09-04T12:17:25.410",
+    "last_modified": "2026-09-16T20:41:58.400",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "snipe-it versions before 8.6.3 contain an authorization bypass vulnerability in the bulk delete functionality that allows restricted users to soft-delete users outside their authorized scope. Attackers can include unauthorized user IDs in bulk delete requests to bypass instance-level restrictions and modify or disable accounts they should not access.",
+    "references": [
+      "https://github.com/grokability/snipe-it/security/advisories/GHSA-mx3g-8v84-j6gg",
+      "https://www.vulncheck.com/advisories/snipe-it-before-8.6.3-authorization-bypass-via-bulk-delete"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.0,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
     ]
   }
 ]
