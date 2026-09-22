@@ -140,6 +140,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-95511",
+    "published": "2026-09-22T09:17:06.217",
+    "last_modified": "2026-09-22T10:17:10.330",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A privilege escalation vulnerability was found in CUPS when used with the cups-filters serial backend. A local user who is a member of the lpadmin group can configure a printer that uses a privileged serial backend. The CUPS scheduler does not restrict the path component of non-file device URIs, so the root-privileged backend can write attacker-controlled print data to an arbitrary file. This can be used to change security-sensitive CUPS configuration and ultimately achieve root code execution. Exploitation requires local lpadmin group membership and a serial backend binary installed with root-only permissions.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-95511",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537749",
+      "https://github.com/v12-security/pocs/tree/main/cups/cups2root"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 121.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-91097",
     "published": "2026-09-16T19:18:02.070",
     "last_modified": "2026-09-21T17:28:56.030",
@@ -797,6 +827,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-1281",
+    "published": "2026-09-22T08:16:36.250",
+    "last_modified": "2026-09-22T08:16:36.250",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The BM Content Builder plugin for WordPress is vulnerable to arbitrary file deletion due to insufficient file path validation in the ux_cb_remove_layout_ajax() and ux_cb_tools_export_ajax() functions in all versions up to, and excluding, 3.17.1. This makes it possible for authenticated attackers, with Subscriber-level access and above, to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+    "references": [
+      "https://themeforest.net/item/art-simple-clean-wordpress-theme-for-creatives/20170299",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/61084da5-fa8d-4fa9-a6a6-6155e9e25fbc?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-10751",
     "published": "2026-09-18T16:17:04.563",
     "last_modified": "2026-09-21T13:17:07.270",
@@ -1030,7 +1087,7 @@
   {
     "cve_id": "CVE-2026-7273",
     "published": "2026-06-16T03:16:13.557",
-    "last_modified": "2026-09-21T20:17:32.970",
+    "last_modified": "2026-09-22T10:45:32.420",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1044,39 +1101,6 @@
     "cisa_kev": true,
     "epss": 0.3,
     "epss_percentile": 24.6,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53266",
-    "published": "2026-06-25T09:16:44.643",
-    "last_modified": "2026-09-19T04:17:53.580",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: bridge: make ebt_snat ARP rewrite writable\n\nThe ebtables SNAT target keeps the Ethernet source address rewrite\nbehind skb_ensure_writable(skb, 0).  This is intentional: at the bridge\nebtables hooks the Ethernet header is addressed through\nskb_mac_header()/eth_hdr(), while skb->data points at the Ethernet\npayload.  Asking skb_ensure_writable() for ETH_HLEN bytes would check\nthe payload, not the Ethernet header, and would reintroduce the small\npacket regression fixed by commit 63137bc5882a.\n\nHowever, the optional ARP sender hardware address rewrite is different.\nIt writes through skb_store_bits() at an offset relative to skb->data:\n\n        skb_store_bits(skb, sizeof(struct arphdr), info->mac, ETH_ALEN)\n\nskb_header_pointer() only safely reads the ARP header; it does not make\nthe later sender hardware address range writable.  If that range is\nstill held in a nonlinear skb fragment backed by a splice-imported file\npage, skb_store_bits() maps the frag page and copies the new MAC address\ndirectly into it.\n\nEnsure the ARP SHA range is writable before reading the ARP header and\nbefore calling skb_store_bits().",
-    "references": [
-      "https://git.kernel.org/stable/c/153ea96c806aea395daba907a4f88480b6ad5093",
-      "https://git.kernel.org/stable/c/67ba971ae02514d85818fe0c32549ab4bfa3bf49",
-      "https://git.kernel.org/stable/c/76280b78cc9f23bdc6438e10ad6dff148ef8375b",
-      "https://git.kernel.org/stable/c/afd64b59c3de9bbbdd3759e834fdc55cda716e0b",
-      "https://git.kernel.org/stable/c/b18675263db1147c8e1cab625400c13a0d87bd2d",
-      "https://git.kernel.org/stable/c/b7e91939ba9be805a62a257fa4e227dffbb88fa0",
-      "https://git.kernel.org/stable/c/bf84ad7c7a9ede46e31afaa41a1ba06a159e8c87",
-      "https://git.kernel.org/stable/c/c9b5ff59feffb92a147a84a5aa28acd2cb8ff4c5",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-53266"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.3,
-    "epss_percentile": 20.2,
     "tags": [
       "cisa_kev",
       "in_the_wild"
@@ -1174,32 +1198,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-10858",
-    "published": "2026-09-18T16:17:05.310",
-    "last_modified": "2026-09-19T04:17:51.203",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM MQ for HPE NonStop 8.1.0 through 8.1.0.40 could allow an authenticated attacker to cause a denial of service or potentially execute arbitrary code due to a heap buffer underflow when processing multi-segment messages.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7287704"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.1,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 92.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-93872",
     "published": "2026-09-18T20:17:35.250",
     "last_modified": "2026-09-21T21:17:19.993",
@@ -1219,6 +1217,32 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 37.5,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 92.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91827",
+    "published": "2026-09-22T07:16:31.093",
+    "last_modified": "2026-09-22T07:16:31.093",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Ninja Forms WordPress plugin 3.15.3 does not prevent user-submitted form field values from being deserialised when an administrator later exports form submissions to CSV, allowing unauthenticated attackers to perform PHP Object Injection; if a suitable POP chain is present via another installed plugin or theme, this can lead to actions such as arbitrary file operations or remote code execution.",
+    "references": [
+      "https://wpscan.com/vulnerability/7b279db2-92e0-4122-b5c6-aa12b7b01858/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -1410,39 +1434,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-39964",
-    "published": "2025-10-13T14:15:34.737",
-    "last_modified": "2026-09-19T04:17:48.307",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: af_alg - Disallow concurrent writes in af_alg_sendmsg\n\nIssuing two writes to the same af_alg socket is bogus as the\ndata will be interleaved in an unpredictable fashion.  Furthermore,\nconcurrent writes may create inconsistencies in the internal\nsocket state.\n\nDisallow this by adding a new ctx->write field that indiciates\nexclusive ownership for writing.",
-    "references": [
-      "https://git.kernel.org/stable/c/0f28c4adbc4a97437874c9b669fd7958a8c6d6ce",
-      "https://git.kernel.org/stable/c/1b34cbbf4f011a121ef7b2d7d6e6920a036d5285",
-      "https://git.kernel.org/stable/c/1f323a48e9b5ebfe6dc7d130fdf5c3c0e92a07c8",
-      "https://git.kernel.org/stable/c/45bcf60fe49b37daab1acee57b27211ad1574042",
-      "https://git.kernel.org/stable/c/7c4491b5644e3a3708f3dbd7591be0a570135b84",
-      "https://git.kernel.org/stable/c/9aee87da5572b3a14075f501752e209801160d3d",
-      "https://git.kernel.org/stable/c/e4c1ec11132ec466f7362a95f36a506ce4dc08c9",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-39964"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.8,
-    "epss_percentile": 54.3,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-63622",
     "published": "2026-08-10T21:17:23.550",
     "last_modified": "2026-09-21T06:17:01.757",
@@ -1567,6 +1558,30 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 45.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-25254",
+    "published": "2026-09-22T10:17:08.583",
+    "last_modified": "2026-09-22T10:17:08.583",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper authorization leads to Remote Code Execution via SocketIO interface.",
+    "references": [
+      "https://docs.qualcomm.com/product/publicresources/securitybulletin/may-2026-bulletin.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1728,20 +1743,20 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-11381",
-    "published": "2026-09-18T16:17:05.767",
-    "last_modified": "2026-09-19T04:17:53.313",
+    "cve_id": "CVE-2026-11725",
+    "published": "2026-09-18T20:17:03.167",
+    "last_modified": "2026-09-22T04:17:57.393",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "IBM MQ could allow an authenticated attacker to cause a denial of service or potentially execute arbitrary code due to improper validation of message distribution list structures.",
+    "summary": "IBM MQ could allow an authenticated attacker to cause a denial of service or potentially execute arbitrary code due to an integer overflow in MQINQ request processing.",
     "references": [
-      "https://www.ibm.com/support/pages/node/7287706"
+      "https://www.ibm.com/support/pages/node/7284944"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.7,
+    "epss": 0.4,
+    "epss_percentile": 34.4,
     "tags": [
       "dos",
       "rce"
@@ -1751,30 +1766,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-69843",
-    "published": "2026-09-18T00:17:24.923",
-    "last_modified": "2026-09-19T04:17:55.650",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authentication bypass by spoofing in Microsoft Fabric allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69843"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.2,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
     ]
   },
   {
@@ -2373,30 +2364,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-15815",
-    "published": "2026-09-17T21:17:11.210",
-    "last_modified": "2026-09-19T04:17:53.427",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grafana OSS and Grafana Enterprise did not safely resolve symbolic links when\nextracting plugin archives. A crafted plugin archive can chain relative symbolic link\nentries to escape the plugin installation directory, writing arbitrary files and an\nexecutable backend binary outside that directory. The dropped executable runs with the\nprivileges of the Grafana server process, resulting in remote code execution.\n\nPlugin archives are extracted before their signature is verified, so a valid plugin\nsignature does not prevent the write. An operator can therefore be affected by\ninstalling a plugin that appears legitimate, as well as by installing a plugin from an\narbitrary archive using grafana-cli, the GF_INSTALL_PLUGINS environment variable, or\npreinstall configuration.\n\nGrafana Enterprise is affected because it includes the same plugin extraction code as\nGrafana OSS.",
-    "references": [
-      "https://grafana.com/security/security-advisories/cve-2026-15815"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 56.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-93377",
     "published": "2026-09-17T21:17:55.000",
     "last_modified": "2026-09-21T13:02:19.150",
@@ -2437,31 +2404,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 27.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93382",
-    "published": "2026-09-17T21:17:55.530",
-    "last_modified": "2026-09-19T04:18:03.333",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in PDFium in Google Chrome prior to 153.0.8010.52 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0194356994.html",
-      "https://issues.chromium.org/issues/541707261"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.1,
     "tags": [
       "rce"
     ],
@@ -2585,6 +2527,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-13355",
+    "published": "2026-09-22T05:16:54.960",
+    "last_modified": "2026-09-22T05:16:54.960",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Meta Box AIO plugin for WordPress is vulnerable to Privilege Escalation to Administrator in versions up to, and including, 3.11.0. This is due to a chained flaw: the populate_via_query_string() function in the mb-frontend-submission component unconditionally overrides the form's target object_id from the GET parameter 'rwmb_frontend_field_object_id' without any authorization check, and Form::process() lacks the user_can_edit() check present in render(), allowing unauthenticated attackers to overwrite the post_content of any page with an arbitrary shortcode via wp_update_post(); the mb-user-profile component then directly trusts the 'role' and 'auto_login' shortcode attributes in the injected [mb_user_profile_register] shortcode with no role validation. This makes it possible for unauthenticated attackers to elevate their privileges to Administrator. The standalone plugins Meta Box Frontend Submission (in versions up to 4.5.6) and Meta Box User Profile (versions up to 3.11.0) are also affected.",
+    "references": [
+      "https://metabox.io/changelog/",
+      "https://metabox.io/plugins/meta-box-aio/changelog/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/3b7b6e7e-b944-45f8-a6d8-bfd859bec0d1?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-10027",
     "published": "2026-09-18T16:17:03.873",
     "last_modified": "2026-09-21T13:17:06.897",
@@ -2613,7 +2581,7 @@
   {
     "cve_id": "CVE-2026-11727",
     "published": "2026-09-18T20:17:04.050",
-    "last_modified": "2026-09-19T15:16:57.890",
+    "last_modified": "2026-09-22T04:17:57.533",
     "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
@@ -3028,7 +2996,7 @@
   {
     "cve_id": "CVE-2026-11716",
     "published": "2026-09-18T20:17:02.837",
-    "last_modified": "2026-09-19T15:16:57.550",
+    "last_modified": "2026-09-22T04:17:57.237",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -3110,7 +3078,7 @@
   {
     "cve_id": "CVE-2026-94184",
     "published": "2026-09-21T15:17:38.547",
-    "last_modified": "2026-09-21T17:19:19.970",
+    "last_modified": "2026-09-22T04:18:02.670",
     "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
@@ -3157,6 +3125,37 @@
       "https://github.com/kubeedge/kubeedge/releases/tag/v1.22.2",
       "https://github.com/kubeedge/kubeedge/releases/tag/v1.23.1",
       "https://github.com/kubeedge/kubeedge/security/advisories/GHSA-9vm9-pqxx-x83v"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-92969",
+    "published": "2026-09-22T08:16:41.370",
+    "last_modified": "2026-09-22T08:16:41.370",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The HUSKY – Products Filter for WooCommerce Professional plugin for WordPress is vulnerable to Local File Inclusion in all versions up to, and including, 1.4.4 via the 'shortcode' parameter parameter. This makes it possible for unauthenticated attackers to include and execute arbitrary .php files on the server, allowing the execution of any PHP code in those files. This can be used to bypass access controls, obtain sensitive data, or achieve code execution in cases where .php file types can be uploaded and included. This vulnerability is exploitable by unauthenticated users because the only access control is a nonce check against woof_front_nonce, which is publicly emitted into inline JavaScript on every front-end page and is therefore obtainable by any site visitor without authentication.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/woocommerce-products-filter/trunk/index.php#L1044",
+      "https://plugins.trac.wordpress.org/browser/woocommerce-products-filter/trunk/index.php#L267",
+      "https://plugins.trac.wordpress.org/browser/woocommerce-products-filter/trunk/index.php#L2677",
+      "https://plugins.trac.wordpress.org/browser/woocommerce-products-filter/trunk/index.php#L2771",
+      "https://plugins.trac.wordpress.org/browser/woocommerce-products-filter/trunk/index.php#L2789",
+      "https://plugins.trac.wordpress.org/browser/woocommerce-products-filter/trunk/index.php#L3600",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3701864%40woocommerce-products-filter&new=3701864%40woocommerce-products-filter",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/1f71b558-e8c0-441e-b437-a7f30ad13513?source=cve"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -3268,30 +3267,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-77903",
-    "published": "2026-09-17T23:18:44.993",
-    "last_modified": "2026-09-19T04:17:56.510",
-    "cvss_v3": 9.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authentication bypass by spoofing in Microsoft Dataverse allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-77903"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.8,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 80.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-94089",
     "published": "2026-09-20T21:16:55.780",
     "last_modified": "2026-09-21T13:33:33.387",
@@ -3318,6 +3293,33 @@
     "reasons": [
       "recently modified (last 48h)",
       "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-95508",
+    "published": "2026-09-22T09:17:06.073",
+    "last_modified": "2026-09-22T09:17:06.073",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A heap-based buffer overflow was found in the DHCPv6 and TFTP response builders of libslirp. When the host is configured with a small interface MTU, a guest-supplied DHCPv6 CLIENTID option or TFTP blksize option can overflow the reply buffer with attacker-controlled content and length, resulting in denial of service and potentially arbitrary code execution in the host process. The default interface MTU is not affected.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-95508",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537748"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 80.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
     ]
   },
   {
@@ -3557,6 +3559,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-86482",
+    "published": "2026-09-07T17:17:26.383",
+    "last_modified": "2026-09-22T10:17:09.857",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In JetBrains YouTrack before 2026.2.18634, insufficient validation of role assignments allowed privilege escalation",
+    "references": [
+      "https://www.jetbrains.com/privacy-security/issues-fixed/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 14.3,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-76677",
     "published": "2026-09-15T20:17:49.540",
     "last_modified": "2026-09-21T20:17:30.080",
@@ -3715,6 +3741,103 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-19658",
+    "published": "2026-09-22T05:16:55.167",
+    "last_modified": "2026-09-22T05:16:55.167",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Give Tributes plugin for WordPress is vulnerable to PHP Object Injection in all versions up to, and including, 2.3.1 via deserialization of untrusted input . This makes it possible for unauthenticated attackers to inject a PHP Object. No known POP chain is present in the vulnerable software, which means this vulnerability has no impact unless another plugin or theme containing a POP chain is installed on the site. If a POP chain is present via an additional plugin or theme installed on the target system, it may allow the attacker to perform actions like delete arbitrary files, retrieve sensitive data, or execute code depending on the POP chain present. This vulnerability is only reachable when the \"Allow Multiple Recipients\" option is enabled for the donation form, as the single-recipient code path applies sanitize_textarea_field() which would neutralize the payload. Exploitation additionally requires the eCard \"Custom Message\" option to be disabled, which is the plugin default: when it is enabled the personalized message becomes a required field and GiveWP's give_clean() blanks serialized input during validation, causing the donation to be rejected before it is stored.",
+    "references": [
+      "https://www.liquidweb.com/software/give/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/0cdd5562-8755-4ca3-9c16-a5b364f8408b?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-25255",
+    "published": "2026-09-22T10:17:08.847",
+    "last_modified": "2026-09-22T10:17:08.847",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Exposed dangerous function lead to privilege escalation via gRPC server.",
+    "references": [
+      "https://docs.qualcomm.com/product/publicresources/securitybulletin/may-2026-bulletin.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-25264",
+    "published": "2026-09-22T10:17:09.110",
+    "last_modified": "2026-09-22T10:17:09.110",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Privilege escalation due to weak configuration during package extraction process.",
+    "references": [
+      "https://docs.qualcomm.com/product/publicresources/securitybulletin/june-2026-bulletin.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-25265",
+    "published": "2026-09-22T10:17:09.243",
+    "last_modified": "2026-09-22T10:17:09.243",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Privilege escalation due to weak configuration while temporary file handling.",
+    "references": [
+      "https://docs.qualcomm.com/product/publicresources/securitybulletin/june-2026-bulletin.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-56209",
     "published": "2026-06-19T17:16:30.427",
     "last_modified": "2026-09-21T11:17:10.100",
@@ -3854,30 +3977,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85885",
-    "published": "2026-09-17T23:18:53.080",
-    "last_modified": "2026-09-19T04:18:00.633",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper neutralization of special elements used in a command ('command injection') in M365 Copilot allows an authorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-85885"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.6,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
     ]
   },
   {
@@ -4042,6 +4141,37 @@
     "reasons": [
       "recently modified (last 48h)",
       "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-9231",
+    "published": "2026-09-22T09:17:06.353",
+    "last_modified": "2026-09-22T09:17:06.353",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The WP Travel Engine – Tour Booking Plugin – Tour Operator Software plugin for WordPress is vulnerable to Local File Inclusion in all versions up to, and including, 6.8.0 via the wte_get_template function. This makes it possible for authenticated attackers, with contributor-level access and above, to include and execute arbitrary .php files on the server, allowing the execution of any PHP code in those files. This can be used to bypass access controls, obtain sensitive data, or achieve code execution in cases where .php file types can be uploaded and included.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/wp-travel-engine/tags/6.7.12/includes/classes/Core/Shortcodes/General.php#L52",
+      "https://plugins.trac.wordpress.org/browser/wp-travel-engine/tags/6.7.12/includes/helpers/helpers.php#L882",
+      "https://plugins.trac.wordpress.org/browser/wp-travel-engine/tags/6.7.12/includes/helpers/helpers.php#L955",
+      "https://plugins.trac.wordpress.org/browser/wp-travel-engine/tags/6.7.7/includes/classes/Core/Shortcodes/General.php#L52",
+      "https://plugins.trac.wordpress.org/browser/wp-travel-engine/tags/6.7.7/includes/helpers/helpers.php#L882",
+      "https://plugins.trac.wordpress.org/browser/wp-travel-engine/tags/6.7.7/includes/helpers/helpers.php#L955",
+      "https://plugins.trac.wordpress.org/changeset/3572382/wp-travel-engine/tags/6.8.1/includes/classes/Core/Shortcodes/General.php",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/708b70c7-e4e6-4422-9682-c7d05063a188?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 77.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -4286,30 +4416,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-70200",
-    "published": "2026-09-17T23:18:36.113",
-    "last_modified": "2026-09-19T04:17:56.077",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper limitation of a pathname to a restricted directory ('path traversal') in Azure Logic Apps allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70200"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.4,
-    "tags": [
-      "path_traversal"
-    ],
-    "intel_score": 75.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15"
     ]
   },
   {
@@ -4831,6 +4937,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-93928",
+    "published": "2026-09-22T09:17:05.940",
+    "last_modified": "2026-09-22T09:17:05.940",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Authentication Bypass Using an Alternate Path or Channel vulnerability in Magepeople inc. Taxi Booking Manager for WooCommerce allows Authentication Bypass.\n\nThis issue affects Taxi Booking Manager for WooCommerce: from n/a before 2.0.8.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/ecab-taxi-booking-manager/vulnerability/wordpress-taxi-booking-manager-for-woocommerce-plugin-2-0-8-broken-authentication-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 71.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-87963",
     "published": "2026-09-17T07:16:28.533",
     "last_modified": "2026-09-20T14:16:59.507",
@@ -4900,6 +5030,33 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12470",
+    "published": "2026-09-22T06:16:48.700",
+    "last_modified": "2026-09-22T06:16:48.700",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The CMP – Coming Soon & Maintenance Plugin by NiteoThemes plugin for WordPress is vulnerable to unauthorized modification of data that can lead to privilege escalation due to a missing capability check on the 'cmp_ajax_import_settings' AJAX action in all versions up to, and including, 4.1.17. This makes it possible for authenticated attackers, with Editor-level access and above, to update arbitrary options on the WordPress site. This can be leveraged to update the default role for registration to administrator and enable user registration for attackers to gain administrative user access to a vulnerable site.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/cmp-coming-soon-maintenance/tags/4.1.17/niteo-cmp.php#L3104",
+      "https://plugins.trac.wordpress.org/browser/cmp-coming-soon-maintenance/tags/4.1.17/niteo-cmp.php#L3143",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3661069%40cmp-coming-soon-maintenance&new=3661069%40cmp-coming-soon-maintenance",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/20e2f410-72a9-4d94-b80d-1cb625c08962?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 71.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
     ]
   },
   {
@@ -5263,6 +5420,30 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 20.6,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 66.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94117",
+    "published": "2026-09-22T10:17:10.167",
+    "last_modified": "2026-09-22T10:17:10.167",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability in DevItems HashBar – WordPress Notification Bar allows Blind SQL Injection.\n\nThis issue affects HashBar – WordPress Notification Bar: from n/a through 2.0.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/hashbar-wp-notification-bar/vulnerability/wordpress-hashbar-wordpress-notification-bar-plugin-2-0-3-sql-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "sqli"
     ],
@@ -6407,69 +6588,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-83944",
-    "published": "2026-09-17T23:18:51.257",
-    "last_modified": "2026-09-19T04:17:59.907",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper access control in Azure Logic Apps allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-83944"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.5,
-    "tags": [],
-    "intel_score": 60.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85889",
-    "published": "2026-09-17T23:18:53.217",
-    "last_modified": "2026-09-19T04:18:00.780",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Missing authentication for critical function in Azure AI Foundry allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-85889"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.3,
-    "tags": [],
-    "intel_score": 60.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-62874",
-    "published": "2026-09-18T00:16:57.930",
-    "last_modified": "2026-09-19T04:17:55.503",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Insufficient verification of data authenticity in Azure Billing allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62874"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 24.7,
-    "tags": [],
-    "intel_score": 60.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-93605",
     "published": "2026-09-18T14:19:12.340",
     "last_modified": "2026-09-21T21:17:19.060",
@@ -6639,6 +6757,27 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-93952",
+    "published": "2026-09-22T08:16:43.047",
+    "last_modified": "2026-09-22T08:16:43.047",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "VeloCloud Orchestrator (VCO) on-prem has a security issue where this issue may allow a remote attacker to access privileged internal functionality and impact the VCO host. Successful exploitation may compromise the confidentiality, integrity, and availability of the orchestrator and data managed by the orchestrator.\n\nHosted, including Dedicated, versions of VCO were impacted and have already been patched.",
+    "references": [
+      "https://www.arista.com/en/support/advisories-notices/security-advisory/24765-security-advisory-0183"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 60.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-72733",
     "published": "2026-08-10T18:18:51.673",
     "last_modified": "2026-09-21T19:17:09.440",
@@ -6752,27 +6891,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 33.4,
-    "tags": [],
-    "intel_score": 59.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85878",
-    "published": "2026-09-18T00:17:47.777",
-    "last_modified": "2026-09-19T04:18:00.240",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper authorization in Azure Database for PostgreSQL allows an authorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-85878"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.6,
     "tags": [],
     "intel_score": 59.5,
     "reasons": [
@@ -7580,6 +7698,48 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-83269",
+    "published": "2026-09-15T20:18:39.290",
+    "last_modified": "2026-09-22T04:17:59.430",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle BI Publisher product of Oracle Analytics (component: BI Platform Security).  Supported versions that are affected are 8.2.0.0.0, 12.2.1.4.0 and  26.01.0.0.0. Easily exploitable vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle BI Publisher.  Successful attacks of this vulnerability can result in takeover of Oracle BI Publisher. CVSS 3.1 Base Score 9.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.2,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-83283",
+    "published": "2026-09-15T20:18:40.927",
+    "last_modified": "2026-09-22T04:18:00.013",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle Business Intelligence Enterprise Edition product of Oracle Analytics (component: Platform Security).   The supported version that is affected is 12.2.1.4.0. Easily exploitable vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle Business Intelligence Enterprise Edition.  Successful attacks of this vulnerability can result in takeover of Oracle Business Intelligence Enterprise Edition. CVSS 3.1 Base Score 9.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 38.3,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-83339",
     "published": "2026-09-15T20:18:47.243",
     "last_modified": "2026-09-21T18:06:46.613",
@@ -7885,7 +8045,7 @@
   {
     "cve_id": "CVE-2026-94301",
     "published": "2026-09-21T15:17:38.903",
-    "last_modified": "2026-09-21T18:10:30.343",
+    "last_modified": "2026-09-22T04:18:02.810",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -8171,27 +8331,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 33.5,
-    "tags": [],
-    "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-87701",
-    "published": "2026-09-17T23:18:53.623",
-    "last_modified": "2026-09-19T04:18:01.503",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper neutralization of special elements in output used by a downstream component ('injection') in Azure Cosmos DB allows an authorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-87701"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 37.3,
     "tags": [],
     "intel_score": 58.0,
     "reasons": [
@@ -9964,27 +10103,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-83315",
-    "published": "2026-09-15T20:18:44.520",
-    "last_modified": "2026-09-19T04:17:57.320",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle BI Publisher product of Oracle Analytics (component: BI Platform Security).  Supported versions that are affected are 8.2.0.0.0, 12.2.1.4.0 and  26.01.0.0.0. Easily exploitable vulnerability allows low privileged attacker with network access via SOAP to compromise Oracle BI Publisher.  Successful attacks of this vulnerability can result in takeover of Oracle BI Publisher. CVSS 3.1 Base Score 8.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cspusep2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-83410",
     "published": "2026-09-15T20:18:49.350",
     "last_modified": "2026-09-21T18:06:30.143",
@@ -10932,6 +11050,123 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-89412",
+    "published": "2026-09-22T07:16:29.927",
+    "last_modified": "2026-09-22T07:16:29.927",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The TranslatePress – Translate Multilingual sites with AI Translation plugin for WordPress is vulnerable to Stored Cross-Site Scripting via Translation Memory Suggestion Panel (v-html on suggestion.original) in all versions up to, and including, 3.3.5 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page. Unauthenticated attackers can seed the translation dictionary's original column with executable HTML because the front-end rendering pipeline decodes entity-encoded payloads via html_entity_decode() before persistence, and the original column is deliberately exempt from kses filtering — meaning no save-time sanitizer neutralizes the stored payload before it is later rendered in an administrator's session.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.3/assets/src/js/components/translation-memory.vue#L12",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.3/includes/class-translation-memory.php#L47",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.3/includes/class-translation-memory.php#L60",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.3/includes/class-translation-render.php#L1024",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.3/includes/class-translation-render.php#L996",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.5/assets/src/js/components/translation-memory.vue#L12",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.5/includes/class-translation-memory.php#L47",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.5/includes/class-translation-memory.php#L60",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.5/includes/class-translation-render.php#L1024",
+      "https://plugins.trac.wordpress.org/browser/translatepress-multilingual/tags/3.3.5/includes/class-translation-render.php#L996",
+      "https://plugins.trac.wordpress.org/changeset/3697206/translatepress-multilingual/trunk/assets/src/js/components/translation-memory.vue",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&new=3697206%40translatepress-multilingual%2Ftags%2F3.3.6&old=3686891%40translatepress-multilingual%2Ftags%2F3.3.5",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/717e8479-921b-4f18-8fbe-32e0d8a37590?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-92438",
+    "published": "2026-09-22T07:16:31.220",
+    "last_modified": "2026-09-22T07:16:31.220",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Ninja Forms WordPress plugin 3.15.3 does not escape submitted form field values before outputting them on the submission edit screen in the admin area, which could allow unauthenticated users to submit values through a public form that then execute in the browser of any high-privileged user who reviews the submission.",
+    "references": [
+      "https://wpscan.com/vulnerability/eeed1378-2c51-4d38-9dda-4a13ce330b25/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93778",
+    "published": "2026-09-22T08:16:42.767",
+    "last_modified": "2026-09-22T08:16:42.767",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The WP Yelp Review Slider plugin for WordPress is vulnerable to Stored Cross-Site Scripting via Yelp Review Text (imported via wpyelp_download_source) in all versions up to, and including, 9.2 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page. The malicious payload originates from an anonymous Yelp reviewer on a public platform and requires no WordPress account; it is introduced into the database during the site administrator's ordinary use of the plugin's Download Reviews feature, making the effective attacker unauthenticated.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/wp-yelp-review-slider/tags/9.1/admin/class-wp-yelp-review-slider-admin.php#L1140",
+      "https://plugins.trac.wordpress.org/browser/wp-yelp-review-slider/tags/9.1/admin/class-wp-yelp-review-slider-admin.php#L1336",
+      "https://plugins.trac.wordpress.org/browser/wp-yelp-review-slider/tags/9.1/admin/class-wp-yelp-review-slider-admin.php#L1358",
+      "https://plugins.trac.wordpress.org/browser/wp-yelp-review-slider/tags/9.1/admin/class-wp-yelp-review-slider-admin.php#L1659",
+      "https://plugins.trac.wordpress.org/browser/wp-yelp-review-slider/tags/9.1/public/partials/template_style_1.php#L129",
+      "https://plugins.trac.wordpress.org/browser/wp-yelp-review-slider/tags/9.1/public/partials/template_style_1.php#L95",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3704718%40wp-yelp-review-slider&new=3704718%40wp-yelp-review-slider",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/df6cbc36-d136-49c1-81f0-a61cb91f0ad7?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93836",
+    "published": "2026-09-22T08:16:42.907",
+    "last_modified": "2026-09-22T08:16:42.907",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The WPC Product Bundles for WooCommerce plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the 'qty' parameter in all versions up to, and including, 8.6.6 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page. The float cast used during quantity validation allows a numeric-prefixed payload such as '1<img src=x onerror=...>' to pass validation while retaining its malicious HTML, which is then stored verbatim in order item metadata under the '_woosb_ids' key.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/woo-product-bundle/tags/8.6.5/includes/class-backend.php#L1949",
+      "https://plugins.trac.wordpress.org/browser/woo-product-bundle/tags/8.6.5/includes/class-woosb.php#L1197",
+      "https://plugins.trac.wordpress.org/browser/woo-product-bundle/tags/8.6.5/includes/class-woosb.php#L579",
+      "https://plugins.trac.wordpress.org/browser/woo-product-bundle/tags/8.6.5/includes/class-woosb.php#L584",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3702892%40woo-product-bundle&new=3702892%40woo-product-bundle",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/fc620054-00ed-4c2e-9448-b40ae28efff3?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-28367",
     "published": "2026-03-27T17:16:27.750",
     "last_modified": "2026-09-21T14:17:15.060",
@@ -11018,6 +11253,30 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 16.8,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-66457",
+    "published": "2026-08-06T15:17:20.590",
+    "last_modified": "2026-09-22T08:16:39.517",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Pixelite Events Manager events-manager allows Reflected XSS.This issue affects Events Manager: from n/a through 7.4.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/events-manager/vulnerability/wordpress-events-manager-plugin-7-4-1-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.4,
     "tags": [
       "xss"
     ],
@@ -11344,6 +11603,27 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 27.3,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87273",
+    "published": "2026-09-15T20:19:16.023",
+    "last_modified": "2026-09-22T04:18:01.337",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Easily exploitable vulnerability allows unauthenticated attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in Oracle VM VirtualBox, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. CVSS 3.1 Base Score 8.6 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.9,
     "tags": [],
     "intel_score": 53.0,
     "reasons": [
@@ -11931,7 +12211,7 @@
   {
     "cve_id": "CVE-2026-49811",
     "published": "2026-09-21T20:17:25.660",
-    "last_modified": "2026-09-21T20:17:25.660",
+    "last_modified": "2026-09-22T04:17:58.433",
     "cvss_v3": 8.4,
     "severity": "HIGH",
     "affected": [],
@@ -12757,7 +13037,7 @@
   {
     "cve_id": "CVE-2026-15709",
     "published": "2026-07-14T20:16:57.027",
-    "last_modified": "2026-09-21T15:17:27.853",
+    "last_modified": "2026-09-22T08:16:36.553",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -12768,6 +13048,7 @@
       "https://access.redhat.com/errata/RHSA-2026:68612",
       "https://access.redhat.com/errata/RHSA-2026:69108",
       "https://access.redhat.com/errata/RHSA-2026:69297",
+      "https://access.redhat.com/errata/RHSA-2026:69863",
       "https://access.redhat.com/security/cve/CVE-2026-15709",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2499922",
       "https://gitlab.gnome.org/GNOME/libsoup/-/issues/511",
@@ -12789,7 +13070,7 @@
   {
     "cve_id": "CVE-2026-15711",
     "published": "2026-07-14T20:16:57.177",
-    "last_modified": "2026-09-21T15:17:28.020",
+    "last_modified": "2026-09-22T08:16:38.240",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -12801,6 +13082,7 @@
       "https://access.redhat.com/errata/RHSA-2026:68612",
       "https://access.redhat.com/errata/RHSA-2026:69108",
       "https://access.redhat.com/errata/RHSA-2026:69297",
+      "https://access.redhat.com/errata/RHSA-2026:69863",
       "https://access.redhat.com/security/cve/CVE-2026-15711",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2499924",
       "https://gitlab.gnome.org/GNOME/libsoup/-/issues/515",
@@ -12909,12 +13191,13 @@
   {
     "cve_id": "CVE-2026-78002",
     "published": "2026-08-27T17:20:29.367",
-    "last_modified": "2026-09-21T22:16:58.597",
+    "last_modified": "2026-09-22T04:17:58.567",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in rsyslog. An unauthenticated remote attacker can trigger a heap buffer overflow in the RainerScript `replace()` function by sending specially crafted syslog messages. This vulnerability arises from an incorrect buffer size calculation during string replacement, causing memory corruption. Successful exploitation can lead to a denial of service (DoS) for the affected system.",
     "references": [
+      "https://access.redhat.com/errata/RHSA-2026:69540",
       "https://access.redhat.com/errata/RHSA-2026:69541",
       "https://access.redhat.com/security/cve/CVE-2026-78002",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2521135",
@@ -13593,6 +13876,69 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-87286",
+    "published": "2026-09-15T20:19:18.560",
+    "last_modified": "2026-09-22T04:18:01.753",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle GraalVM product of Oracle Java SE (component: Compiler).   The supported version that is affected is Oracle GraalVM: 25.0.4.1. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle GraalVM.  Successful attacks of this vulnerability can result in takeover of Oracle GraalVM. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/oracle-open-source-cves-outside-other-oracle-public-documents.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.8,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87287",
+    "published": "2026-09-15T20:19:18.680",
+    "last_modified": "2026-09-22T04:18:01.913",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle GraalVM product of Oracle Java SE (component: Compiler).   The supported version that is affected is Oracle GraalVM: 25.0.4.1. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle GraalVM.  Successful attacks of this vulnerability can result in takeover of Oracle GraalVM. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/oracle-open-source-cves-outside-other-oracle-public-documents.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.8,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87288",
+    "published": "2026-09-15T20:19:18.790",
+    "last_modified": "2026-09-22T04:18:02.077",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle GraalVM product of Oracle Java SE (component: Compiler).   The supported version that is affected is Oracle GraalVM: 25.0.4.1. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle GraalVM.  Successful attacks of this vulnerability can result in takeover of Oracle GraalVM. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/oracle-open-source-cves-outside-other-oracle-public-documents.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.8,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-76856",
     "published": "2026-09-15T22:16:59.590",
     "last_modified": "2026-09-21T19:17:10.410",
@@ -13608,6 +13954,48 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 5.5,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-83357",
+    "published": "2026-09-15T22:17:03.543",
+    "last_modified": "2026-09-22T04:18:00.147",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle GraalVM for JDK, Oracle GraalVM product of Oracle Java SE (component: Compiler).   The supported version that is affected is Oracle GraalVM for JDK 17: 23.0.13.1; Oracle GraalVM for JDK 21: 23.1.12.1;  Oracle GraalVM: 25.0.4.1. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle GraalVM for JDK, Oracle GraalVM.  Successful attacks of this vulnerability can result in takeover of Oracle GraalVM for JDK, Oracle GraalVM. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.7,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-83408",
+    "published": "2026-09-15T22:17:03.807",
+    "last_modified": "2026-09-22T04:18:00.300",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle GraalVM for JDK, Oracle GraalVM product of Oracle Java SE (component: Compiler).   The supported version that is affected is Oracle GraalVM for JDK 17: 23.0.13.1; Oracle GraalVM for JDK 21: 23.1.12.1;  Oracle GraalVM: 25.0.4.1. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle GraalVM for JDK, Oracle GraalVM.  Successful attacks of this vulnerability can result in takeover of Oracle GraalVM for JDK, Oracle GraalVM. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.9,
     "tags": [],
     "intel_score": 50.5,
     "reasons": [
@@ -13860,30 +14248,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 36.5,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-10744",
-    "published": "2026-09-18T16:17:04.290",
-    "last_modified": "2026-09-19T04:17:50.697",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM MQ for HPE NonStop 8.1.0 through 8.1.0.40 could allow an authenticated attacker to cause a denial of service or potentially escalate privileges due to an integer overflow in MQINQ request validation.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7287702"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.4,
     "tags": [
       "dos"
     ],
@@ -14645,6 +15009,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-92235",
+    "published": "2026-09-22T08:16:41.230",
+    "last_modified": "2026-09-22T08:16:41.230",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The The WP Ultimate Review plugin for WordPress is vulnerable to arbitrary shortcode execution in all versions up to, and including, 2.4.2. This is due to the software allowing users to execute an action that does not properly validate a value before running do_shortcode. This makes it possible for authenticated attackers, with subscriber-level access and above, to execute arbitrary shortcodes.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-review/tags/2.4.2/app/content.php#L189",
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-review/tags/2.4.2/app/content.php#L341",
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-review/tags/2.4.2/app/content.php#L360",
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-review/tags/2.4.2/app/content.php#L56",
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-review/tags/2.4.2/init.php#L271",
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-review/tags/2.4.2/views/public/meta-box-user-review.php#L538",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3703958%40wp-ultimate-review&new=3703958%40wp-ultimate-review",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/dc0fe855-97b7-46ef-b1c8-1602447e97e6?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-15581",
     "published": "2026-08-10T21:17:19.743",
     "last_modified": "2026-09-21T11:17:07.700",
@@ -15193,7 +15585,7 @@
   {
     "cve_id": "CVE-2026-43961",
     "published": "2026-08-19T14:17:31.793",
-    "last_modified": "2026-09-21T12:17:14.583",
+    "last_modified": "2026-09-22T09:17:04.490",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -15719,6 +16111,111 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-87268",
+    "published": "2026-09-15T20:19:15.483",
+    "last_modified": "2026-09-22T04:18:00.440",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Easily exploitable vulnerability allows low privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. Note: This vulnerability applies to Windows host only. CVSS 3.1 Base Score 7.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 4.1,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87269",
+    "published": "2026-09-15T20:19:15.593",
+    "last_modified": "2026-09-22T04:18:00.637",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Easily exploitable vulnerability allows low privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. Note: This vulnerability applies to Windows host only. CVSS 3.1 Base Score 7.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.6,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87270",
+    "published": "2026-09-15T20:19:15.700",
+    "last_modified": "2026-09-22T04:18:00.810",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Easily exploitable vulnerability allows low privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. Note: This vulnerability applies to Windows host only. CVSS 3.1 Base Score 7.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.6,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87271",
+    "published": "2026-09-15T20:19:15.810",
+    "last_modified": "2026-09-22T04:18:00.980",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Easily exploitable vulnerability allows low privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. Note: This vulnerability applies to Windows host only. CVSS 3.1 Base Score 7.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 4.1,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87272",
+    "published": "2026-09-15T20:19:15.917",
+    "last_modified": "2026-09-22T04:18:01.150",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Easily exploitable vulnerability allows low privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. CVSS 3.1 Base Score 7.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 4.1,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-89799",
     "published": "2026-09-16T11:16:44.767",
     "last_modified": "2026-09-21T14:17:27.000",
@@ -15969,6 +16466,42 @@
     "epss_percentile": null,
     "tags": [],
     "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2023-6563",
+    "published": "2023-12-14T18:15:45.540",
+    "last_modified": "2026-09-22T04:17:56.693",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An unconstrained memory consumption vulnerability was discovered in Keycloak. It can be triggered in environments which have millions of offline tokens (> 500,000 users with each having at least 2 saved sessions). If an attacker creates two or more user sessions and then open the \"consents\" tab of the admin User Interface, the UI attempts to load a huge number of offline client sessions leading to excessive memory and CPU consumption which could potentially crash the entire system.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2023:7854",
+      "https://access.redhat.com/errata/RHSA-2023:7855",
+      "https://access.redhat.com/errata/RHSA-2023:7856",
+      "https://access.redhat.com/errata/RHSA-2023:7857",
+      "https://access.redhat.com/errata/RHSA-2023:7858",
+      "https://access.redhat.com/security/cve/CVE-2023-6563",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2253308",
+      "https://github.com/keycloak/keycloak/issues/13340",
+      "https://access.redhat.com/errata/RHSA-2023:7854",
+      "https://access.redhat.com/errata/RHSA-2023:7855",
+      "https://access.redhat.com/errata/RHSA-2023:7856",
+      "https://access.redhat.com/errata/RHSA-2023:7857",
+      "https://access.redhat.com/errata/RHSA-2023:7858",
+      "https://access.redhat.com/security/cve/CVE-2023-6563",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2253308",
+      "https://github.com/keycloak/keycloak/issues/13340"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.2,
+    "epss_percentile": 67.3,
+    "tags": [],
+    "intel_score": 48.5,
     "reasons": [
       "recently modified (last 48h)"
     ]
@@ -17714,27 +18247,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-83318",
-    "published": "2026-09-15T20:18:44.860",
-    "last_modified": "2026-09-19T04:17:59.600",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle BI Publisher product of Oracle Analytics (component: Administration).  Supported versions that are affected are 8.2.0.0.0, 12.2.1.4.0 and  26.01.0.0.0. Difficult to exploit vulnerability allows low privileged attacker with network access via HTTP to compromise Oracle BI Publisher.  Successful attacks of this vulnerability can result in takeover of Oracle BI Publisher. CVSS 3.1 Base Score 7.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cspusep2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.4,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-83326",
     "published": "2026-09-15T20:18:45.770",
     "last_modified": "2026-09-21T20:17:34.223",
@@ -17938,6 +18450,27 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 14.7,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87276",
+    "published": "2026-09-15T20:19:16.353",
+    "last_modified": "2026-09-22T04:18:01.553",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).   The supported version that is affected is 7.2.16. Difficult to exploit vulnerability allows low privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in Oracle VM VirtualBox, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox. CVSS 3.1 Base Score 7.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:H).",
+    "references": [
+      "https://www.oracle.com/security-alerts/cspusep2026.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.6,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18616,7 +19149,7 @@
   {
     "cve_id": "CVE-2026-88806",
     "published": "2026-09-21T14:17:22.273",
-    "last_modified": "2026-09-21T15:17:33.940",
+    "last_modified": "2026-09-22T04:18:02.373",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -19789,6 +20322,80 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-94504",
+    "published": "2026-09-22T07:16:31.340",
+    "last_modified": "2026-09-22T07:16:31.340",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Ninja Forms 3.15.3 stores an anonymous non-RTE textarea value and renders it without safe HTML encoding in the legacy submission editor. An attacker can break out of the textarea with stored script. When an Administrator opens the attacker-known direct submission URL, the script runs in the WordPress admin origin.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/ninja-forms/tags/3.15.3/includes/Database/Models/Submission.php#L205",
+      "https://plugins.trac.wordpress.org/browser/ninja-forms/tags/3.15.3/includes/Fields/Textarea.php#L35",
+      "https://plugins.trac.wordpress.org/browser/ninja-forms/tags/3.15.3/includes/Templates/admin-metabox-sub-fields.html.php#L23",
+      "https://plugins.trac.wordpress.org/browser/ninja-forms/trunk/includes/Fields/Textarea.php#L35",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&new=3705719%40ninja-forms%2Ftags%2F3.15.4&old=3685242%40ninja-forms%2Ftags%2F3.15.3",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/c599a562-5218-4b37-bcf7-0e82008a4e68?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 46.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2023-6291",
+    "published": "2024-01-26T15:15:08.280",
+    "last_modified": "2026-09-22T04:17:56.317",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the redirect_uri validation logic in Keycloak. This issue may allow a bypass of otherwise explicitly allowed hosts. A successful attack may lead to an access token being stolen, making it possible for the attacker to impersonate other users.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2023:7854",
+      "https://access.redhat.com/errata/RHSA-2023:7855",
+      "https://access.redhat.com/errata/RHSA-2023:7856",
+      "https://access.redhat.com/errata/RHSA-2023:7857",
+      "https://access.redhat.com/errata/RHSA-2023:7858",
+      "https://access.redhat.com/errata/RHSA-2023:7860",
+      "https://access.redhat.com/errata/RHSA-2023:7861",
+      "https://access.redhat.com/errata/RHSA-2024:0798",
+      "https://access.redhat.com/errata/RHSA-2024:0799",
+      "https://access.redhat.com/errata/RHSA-2024:0800",
+      "https://access.redhat.com/errata/RHSA-2024:0801",
+      "https://access.redhat.com/errata/RHSA-2024:0804",
+      "https://access.redhat.com/security/cve/CVE-2023-6291",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2251407",
+      "https://access.redhat.com/errata/RHSA-2023:7854",
+      "https://access.redhat.com/errata/RHSA-2023:7855",
+      "https://access.redhat.com/errata/RHSA-2023:7856",
+      "https://access.redhat.com/errata/RHSA-2023:7857",
+      "https://access.redhat.com/errata/RHSA-2023:7858",
+      "https://access.redhat.com/errata/RHSA-2023:7860",
+      "https://access.redhat.com/errata/RHSA-2023:7861",
+      "https://access.redhat.com/errata/RHSA-2024:0798",
+      "https://access.redhat.com/errata/RHSA-2024:0799",
+      "https://access.redhat.com/errata/RHSA-2024:0800",
+      "https://access.redhat.com/errata/RHSA-2024:0801",
+      "https://access.redhat.com/errata/RHSA-2024:0804",
+      "https://access.redhat.com/security/cve/CVE-2023-6291",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2251407"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.2,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-16118",
     "published": "2026-07-17T20:17:16.167",
     "last_modified": "2026-09-21T12:17:09.173",
@@ -20513,6 +21120,38 @@
     "summary": "The graph.UDF in FalkorDB (Redis module) v4.20.1 to v4.20.4 is not registered as a write command, leading to unexpected behavior within the application.",
     "references": [
       "https://github.com/FalkorDB/FalkorDB/issues/2401"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-6922",
+    "published": "2026-09-22T08:16:39.990",
+    "last_modified": "2026-09-22T08:16:39.990",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The WP Table Builder – Drag & Drop Table Builder plugin for WordPress is vulnerable to Incorrect Authorization in all versions up to, and including, 2.2.1. This is due to an operator precedence bug in the post-type guard within the trash_table_bulk() and restore_table_bulk() functions that causes the guard to never fire, combined with a permission callback that only verifies plugin role membership without per-post-type or ownership checks. This makes it possible for authenticated attackers, with subscriber-level access and above, to trash or restore any post, page, or custom post type on the site by supplying arbitrary post IDs.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/tags/2.1.10/inc/Admin/Api/TablePost.php#L292",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/tags/2.1.10/inc/Admin/Api/TablePost.php#L299",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/tags/2.1.10/inc/Admin/Api/TablePost.php#L318",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/tags/2.1.10/inc/Admin/Authorization.php#L9",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/tags/2.1.10/inc/Core/Settings.php#L107",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/trunk/inc/Admin/Api/TablePost.php#L292",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/trunk/inc/Admin/Api/TablePost.php#L299",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/trunk/inc/Admin/Api/TablePost.php#L318",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/trunk/inc/Admin/Authorization.php#L9",
+      "https://plugins.trac.wordpress.org/browser/wp-table-builder/trunk/inc/Core/Settings.php#L107",
+      "https://plugins.trac.wordpress.org/changeset/3676426",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/7c9ae1cd-c2fa-40a3-88f7-9ee7428391e5?source=cve"
     ],
     "source": "NVD",
     "cisa_kev": false,

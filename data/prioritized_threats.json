@@ -140,6 +140,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-95511",
+    "published": "2026-09-22T09:17:06.217",
+    "last_modified": "2026-09-22T10:17:10.330",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A privilege escalation vulnerability was found in CUPS when used with the cups-filters serial backend. A local user who is a member of the lpadmin group can configure a printer that uses a privileged serial backend. The CUPS scheduler does not restrict the path component of non-file device URIs, so the root-privileged backend can write attacker-controlled print data to an arbitrary file. This can be used to change security-sensitive CUPS configuration and ultimately achieve root code execution. Exploitation requires local lpadmin group membership and a serial backend binary installed with root-only permissions.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-95511",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537749",
+      "https://github.com/v12-security/pocs/tree/main/cups/cups2root"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 121.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-91097",
     "published": "2026-09-16T19:18:02.070",
     "last_modified": "2026-09-21T17:28:56.030",
@@ -797,6 +827,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-1281",
+    "published": "2026-09-22T08:16:36.250",
+    "last_modified": "2026-09-22T08:16:36.250",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The BM Content Builder plugin for WordPress is vulnerable to arbitrary file deletion due to insufficient file path validation in the ux_cb_remove_layout_ajax() and ux_cb_tools_export_ajax() functions in all versions up to, and excluding, 3.17.1. This makes it possible for authenticated attackers, with Subscriber-level access and above, to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+    "references": [
+      "https://themeforest.net/item/art-simple-clean-wordpress-theme-for-creatives/20170299",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/61084da5-fa8d-4fa9-a6a6-6155e9e25fbc?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-10751",
     "published": "2026-09-18T16:17:04.563",
     "last_modified": "2026-09-21T13:17:07.270",
@@ -1030,7 +1087,7 @@
   {
     "cve_id": "CVE-2026-7273",
     "published": "2026-06-16T03:16:13.557",
-    "last_modified": "2026-09-21T20:17:32.970",
+    "last_modified": "2026-09-22T10:45:32.420",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1044,39 +1101,6 @@
     "cisa_kev": true,
     "epss": 0.3,
     "epss_percentile": 24.6,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53266",
-    "published": "2026-06-25T09:16:44.643",
-    "last_modified": "2026-09-19T04:17:53.580",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nnetfilter: bridge: make ebt_snat ARP rewrite writable\n\nThe ebtables SNAT target keeps the Ethernet source address rewrite\nbehind skb_ensure_writable(skb, 0).  This is intentional: at the bridge\nebtables hooks the Ethernet header is addressed through\nskb_mac_header()/eth_hdr(), while skb->data points at the Ethernet\npayload.  Asking skb_ensure_writable() for ETH_HLEN bytes would check\nthe payload, not the Ethernet header, and would reintroduce the small\npacket regression fixed by commit 63137bc5882a.\n\nHowever, the optional ARP sender hardware address rewrite is different.\nIt writes through skb_store_bits() at an offset relative to skb->data:\n\n        skb_store_bits(skb, sizeof(struct arphdr), info->mac, ETH_ALEN)\n\nskb_header_pointer() only safely reads the ARP header; it does not make\nthe later sender hardware address range writable.  If that range is\nstill held in a nonlinear skb fragment backed by a splice-imported file\npage, skb_store_bits() maps the frag page and copies the new MAC address\ndirectly into it.\n\nEnsure the ARP SHA range is writable before reading the ARP header and\nbefore calling skb_store_bits().",
-    "references": [
-      "https://git.kernel.org/stable/c/153ea96c806aea395daba907a4f88480b6ad5093",
-      "https://git.kernel.org/stable/c/67ba971ae02514d85818fe0c32549ab4bfa3bf49",
-      "https://git.kernel.org/stable/c/76280b78cc9f23bdc6438e10ad6dff148ef8375b",
-      "https://git.kernel.org/stable/c/afd64b59c3de9bbbdd3759e834fdc55cda716e0b",
-      "https://git.kernel.org/stable/c/b18675263db1147c8e1cab625400c13a0d87bd2d",
-      "https://git.kernel.org/stable/c/b7e91939ba9be805a62a257fa4e227dffbb88fa0",
-      "https://git.kernel.org/stable/c/bf84ad7c7a9ede46e31afaa41a1ba06a159e8c87",
-      "https://git.kernel.org/stable/c/c9b5ff59feffb92a147a84a5aa28acd2cb8ff4c5",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-53266"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.3,
-    "epss_percentile": 20.2,
     "tags": [
       "cisa_kev",
       "in_the_wild"
@@ -1174,32 +1198,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-10858",
-    "published": "2026-09-18T16:17:05.310",
-    "last_modified": "2026-09-19T04:17:51.203",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM MQ for HPE NonStop 8.1.0 through 8.1.0.40 could allow an authenticated attacker to cause a denial of service or potentially execute arbitrary code due to a heap buffer underflow when processing multi-segment messages.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7287704"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.1,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 92.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-93872",
     "published": "2026-09-18T20:17:35.250",
     "last_modified": "2026-09-21T21:17:19.993",
@@ -1219,6 +1217,32 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 37.5,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 92.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91827",
+    "published": "2026-09-22T07:16:31.093",
+    "last_modified": "2026-09-22T07:16:31.093",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Ninja Forms WordPress plugin 3.15.3 does not prevent user-submitted form field values from being deserialised when an administrator later exports form submissions to CSV, allowing unauthenticated attackers to perform PHP Object Injection; if a suitable POP chain is present via another installed plugin or theme, this can lead to actions such as arbitrary file operations or remote code execution.",
+    "references": [
+      "https://wpscan.com/vulnerability/7b279db2-92e0-4122-b5c6-aa12b7b01858/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -1410,39 +1434,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-39964",
-    "published": "2025-10-13T14:15:34.737",
-    "last_modified": "2026-09-19T04:17:48.307",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: af_alg - Disallow concurrent writes in af_alg_sendmsg\n\nIssuing two writes to the same af_alg socket is bogus as the\ndata will be interleaved in an unpredictable fashion.  Furthermore,\nconcurrent writes may create inconsistencies in the internal\nsocket state.\n\nDisallow this by adding a new ctx->write field that indiciates\nexclusive ownership for writing.",
-    "references": [
-      "https://git.kernel.org/stable/c/0f28c4adbc4a97437874c9b669fd7958a8c6d6ce",
-      "https://git.kernel.org/stable/c/1b34cbbf4f011a121ef7b2d7d6e6920a036d5285",
-      "https://git.kernel.org/stable/c/1f323a48e9b5ebfe6dc7d130fdf5c3c0e92a07c8",
-      "https://git.kernel.org/stable/c/45bcf60fe49b37daab1acee57b27211ad1574042",
-      "https://git.kernel.org/stable/c/7c4491b5644e3a3708f3dbd7591be0a570135b84",
-      "https://git.kernel.org/stable/c/9aee87da5572b3a14075f501752e209801160d3d",
-      "https://git.kernel.org/stable/c/e4c1ec11132ec466f7362a95f36a506ce4dc08c9",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-39964"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.8,
-    "epss_percentile": 54.3,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-63622",
     "published": "2026-08-10T21:17:23.550",
     "last_modified": "2026-09-21T06:17:01.757",
@@ -1567,6 +1558,30 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 45.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-25254",
+    "published": "2026-09-22T10:17:08.583",
+    "last_modified": "2026-09-22T10:17:08.583",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper authorization leads to Remote Code Execution via SocketIO interface.",
+    "references": [
+      "https://docs.qualcomm.com/product/publicresources/securitybulletin/may-2026-bulletin.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1728,20 +1743,20 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-11381",
-    "published": "2026-09-18T16:17:05.767",
-    "last_modified": "2026-09-19T04:17:53.313",
+    "cve_id": "CVE-2026-11725",
+    "published": "2026-09-18T20:17:03.167",
+    "last_modified": "2026-09-22T04:17:57.393",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "IBM MQ could allow an authenticated attacker to cause a denial of service or potentially execute arbitrary code due to improper validation of message distribution list structures.",
+    "summary": "IBM MQ could allow an authenticated attacker to cause a denial of service or potentially execute arbitrary code due to an integer overflow in MQINQ request processing.",
     "references": [
-      "https://www.ibm.com/support/pages/node/7287706"
+      "https://www.ibm.com/support/pages/node/7284944"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.7,
+    "epss": 0.4,
+    "epss_percentile": 34.4,
     "tags": [
       "dos",
       "rce"
@@ -1751,30 +1766,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-69843",
-    "published": "2026-09-18T00:17:24.923",
-    "last_modified": "2026-09-19T04:17:55.650",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authentication bypass by spoofing in Microsoft Fabric allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69843"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.2,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
     ]
   },
   {
@@ -2373,30 +2364,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-15815",
-    "published": "2026-09-17T21:17:11.210",
-    "last_modified": "2026-09-19T04:17:53.427",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grafana OSS and Grafana Enterprise did not safely resolve symbolic links when\nextracting plugin archives. A crafted plugin archive can chain relative symbolic link\nentries to escape the plugin installation directory, writing arbitrary files and an\nexecutable backend binary outside that directory. The dropped executable runs with the\nprivileges of the Grafana server process, resulting in remote code execution.\n\nPlugin archives are extracted before their signature is verified, so a valid plugin\nsignature does not prevent the write. An operator can therefore be affected by\ninstalling a plugin that appears legitimate, as well as by installing a plugin from an\narbitrary archive using grafana-cli, the GF_INSTALL_PLUGINS environment variable, or\npreinstall configuration.\n\nGrafana Enterprise is affected because it includes the same plugin extraction code as\nGrafana OSS.",
-    "references": [
-      "https://grafana.com/security/security-advisories/cve-2026-15815"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 56.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-93377",
     "published": "2026-09-17T21:17:55.000",
     "last_modified": "2026-09-21T13:02:19.150",
@@ -2437,31 +2404,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 27.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93382",
-    "published": "2026-09-17T21:17:55.530",
-    "last_modified": "2026-09-19T04:18:03.333",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in PDFium in Google Chrome prior to 153.0.8010.52 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0194356994.html",
-      "https://issues.chromium.org/issues/541707261"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.1,
     "tags": [
       "rce"
     ],
@@ -2585,6 +2527,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-13355",
+    "published": "2026-09-22T05:16:54.960",
+    "last_modified": "2026-09-22T05:16:54.960",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Meta Box AIO plugin for WordPress is vulnerable to Privilege Escalation to Administrator in versions up to, and including, 3.11.0. This is due to a chained flaw: the populate_via_query_string() function in the mb-frontend-submission component unconditionally overrides the form's target object_id from the GET parameter 'rwmb_frontend_field_object_id' without any authorization check, and Form::process() lacks the user_can_edit() check present in render(), allowing unauthenticated attackers to overwrite the post_content of any page with an arbitrary shortcode via wp_update_post(); the mb-user-profile component then directly trusts the 'role' and 'auto_login' shortcode attributes in the injected [mb_user_profile_register] shortcode with no role validation. This makes it possible for unauthenticated attackers to elevate their privileges to Administrator. The standalone plugins Meta Box Frontend Submission (in versions up to 4.5.6) and Meta Box User Profile (versions up to 3.11.0) are also affected.",
+    "references": [
+      "https://metabox.io/changelog/",
+      "https://metabox.io/plugins/meta-box-aio/changelog/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/3b7b6e7e-b944-45f8-a6d8-bfd859bec0d1?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-10027",
     "published": "2026-09-18T16:17:03.873",
     "last_modified": "2026-09-21T13:17:06.897",
@@ -2613,7 +2581,7 @@
   {
     "cve_id": "CVE-2026-11727",
     "published": "2026-09-18T20:17:04.050",
-    "last_modified": "2026-09-19T15:16:57.890",
+    "last_modified": "2026-09-22T04:17:57.533",
     "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
@@ -2857,6 +2825,31 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 48.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43631",
+    "published": "2026-08-06T22:17:06.200",
+    "last_modified": "2026-09-21T18:11:21.397",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "llama.cpp builds b7492 through the latest b9060 contains a use-after-free vulnerability in the vocab pointer of llama-server when the --sleep-idle-seconds feature is enabled, allowing unauthenticated remote attackers to execute arbitrary code. Attackers can trigger the vulnerability by sending requests to affected endpoints while the server transitions to sleep mode, causing concurrent worker threads to dereference a freed vocab pointer that can be reclaimed with attacker-controlled data to achieve remote code execution.",
+    "references": [
+      "https://github.com/Vladimir-tokarev-cyera/llama-cpp-security-patches",
+      "https://www.vulncheck.com/advisories/llama-cpp-b7492-b9060-use-after-free-rce-via-llama-server"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
     "tags": [
       "rce"
     ],
