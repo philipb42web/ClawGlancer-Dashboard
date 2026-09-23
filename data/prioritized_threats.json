@@ -650,38 +650,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-94109",
-    "published": "2026-09-20T12:17:06.620",
-    "last_modified": "2026-09-22T20:25:55.870",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "openEQUELLA versions before 2026.1.0 contain a remote code execution vulnerability in FreeMarker template compilation due to an unsandboxed TemplateClassResolver configuration. Authenticated attackers can inject malicious template expressions through collection summaries, dashboard portlets, or MIME templates to instantiate dangerous classes like freemarker.template.utility.Execute and invoke Runtime.exec for arbitrary command execution.",
-    "references": [
-      "https://github.com/openequella/openEQUELLA",
-      "https://github.com/openequella/openEQUELLA/blob/8bd24b1dcf26cc3d74757e6b982fc1971a7d6767/Source/Plugins/Core/com.equella.core/src/com/tle/core/entity/service/impl/AbstractEntityServiceImpl.java#L230-L250",
-      "https://github.com/openequella/openEQUELLA/blob/8bd24b1dcf26cc3d74757e6b982fc1971a7d6767/Source/Plugins/Core/com.equella.core/src/com/tle/web/freemarker/BasicConfiguration.java",
-      "https://github.com/openequella/openEQUELLA/blob/8bd24b1dcf26cc3d74757e6b982fc1971a7d6767/Source/Plugins/Core/com.equella.core/src/com/tle/web/portal/standard/renderer/FreemarkerPortletRenderer.java#L141-L170",
-      "https://github.com/openequella/openEQUELLA/commit/d6e165afc986f8a3ed912cdb367d5ad8c1eeab5c",
-      "https://github.com/openequella/openEQUELLA/releases/tag/2026.1.0",
-      "https://www.vulncheck.com/advisories/openequella-before-2026.1.0-remote-code-execution-via-freemarker-template-injection"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.6,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-7006",
     "published": "2026-09-18T16:17:09.940",
     "last_modified": "2026-09-22T20:25:55.870",
@@ -796,6 +764,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73752",
+    "published": "2026-09-01T21:18:41.757",
+    "last_modified": "2026-09-22T20:53:11.150",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An unauthenticated arbitrary file write vulnerability exists in an API endpoint of AOS-CX. Successful exploitation of this vulnerability allows an attacker to write arbitrary files to the underlying operating system, which could lead to remote code execution.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.5,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-92970",
     "published": "2026-09-17T14:18:02.997",
     "last_modified": "2026-09-22T20:53:07.383",
@@ -883,6 +877,93 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94411",
+    "published": "2026-09-21T19:17:20.067",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP 3.6 contains a privilege escalation vulnerability in the updateOneValueByKeyIdAndType endpoint that allows authenticated users to grant themselves arbitrary roles. Attackers can send a POST request with type=UserRole, their own user ID, and a role ID list to escalate from low-privilege tenant user to tenant administrator.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-01-userbusiness-self-privilege-escalation.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserBusinessController.java#L178-L198",
+      "https://www.vulncheck.com/advisories/jsherp-3.6-privilege-escalation-via-updateonevaluebykeyidandtype"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.1,
+    "tags": [
+      "poc",
+      "priv_esc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94412",
+    "published": "2026-09-21T19:17:20.217",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 contains an authorization bypass vulnerability in the POST /user/resetPwd endpoint that allows authenticated users to reset any other user's password. Attackers can submit a request with an arbitrary target user ID to reset that account's password to a known default value, enabling unauthorized access to other user accounts including administrators.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-02-user-resetpwd-account-takeover.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserController.java#L230-L244",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-authorization-bypass-via-resetpwd"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.7,
+    "tags": [
+      "auth_bypass",
+      "poc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94501",
+    "published": "2026-09-21T19:17:21.910",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 contains an authorization bypass vulnerability in the userBusiness CRUD endpoints that allows authenticated users to create, modify, or delete authorization-relation rows without privilege checks. Attackers can manipulate user-role mappings and access controls to escalate privileges, strip access from other accounts, or modify role-function relationships for any user in the tenant.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-07-userbusiness-authorization-delete.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserBusinessController.java#L50-L80",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-privilege-escalation-via-userbusiness-crud"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.7,
+    "tags": [
+      "auth_bypass",
+      "poc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "poc+20"
     ]
   },
   {
@@ -1555,6 +1636,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73749",
+    "published": "2026-09-01T21:18:41.430",
+    "last_modified": "2026-09-22T20:55:15.857",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Multiple vulnerabilities exist in a daemon of AOS-CX that may allow for improper processing of malformed input. An unauthenticated remote attacker could exploit these vulnerabilities by sending specially crafted packets to the affected service. Successful exploitation could result in remote code execution with elevated privileges.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-69590",
     "published": "2026-09-08T18:19:29.310",
     "last_modified": "2026-09-21T19:01:31.960",
@@ -1569,33 +1674,6 @@
     "cisa_kev": false,
     "epss": 1.0,
     "epss_percentile": 59.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-39919",
-    "published": "2026-09-15T15:17:14.723",
-    "last_modified": "2026-09-20T01:16:29.087",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Ghostscript before 10.08.0 contains a heap-based buffer overflow vulnerability in the JPEG 2000 output adapter (base/sjpx_openjpeg.c) that allows attackers to cause memory corruption by supplying a crafted PDF containing a JPEG 2000 image with mismatched component subsampling factors. When image components declare different subsampling values, the non-samescale sub-byte-depth output path allocates a row buffer sized for packed output but writes a full byte per output column regardless of bit depth, overflowing the allocation and corrupting internal chunk-allocator metadata to achieve code execution.",
-    "references": [
-      "https://bugs.ghostscript.com/show_bug.cgi?id=709666",
-      "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/tag/gs10080",
-      "https://github.com/ArtifexSoftware/ghostpdl/commit/0a8bf88e39db07b0751a58d6ec1cf992073e4dc1",
-      "https://www.vulncheck.com/advisories/ghostscript-heap-buffer-overflow-via-jpeg-2000-output-adapter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.0,
     "tags": [
       "rce"
     ],
@@ -1884,7 +1962,7 @@
   {
     "cve_id": "CVE-2026-93839",
     "published": "2026-09-18T20:17:34.047",
-    "last_modified": "2026-09-22T16:18:14.177",
+    "last_modified": "2026-09-22T20:55:25.800",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2237,6 +2315,30 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 44.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73750",
+    "published": "2026-09-01T21:18:41.540",
+    "last_modified": "2026-09-22T20:54:27.840",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerabilities exist in the authentication module that may improperly process malformed or truncated input. An authenticated remote attacker could exploit these vulnerabilities by providing specially crafted input from a compromised or hostile authentication server. Successful exploitation could result in a Denial-of-Service or potential remote code execution with elevated privileges.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.2,
     "tags": [
       "rce"
     ],
@@ -2699,107 +2801,6 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 46.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92125",
-    "published": "2026-09-16T14:17:14.477",
-    "last_modified": "2026-09-21T17:30:09.747",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Jenkins Script Security Plugin 1415.v9a_f9b_3a_c253d and earlier does not reject the @GroovyASTTransformationClass annotation, allowing attackers with permission to define and run sandboxed scripts, including Pipelines, to run an arbitrary AST transformation at compile time, bypassing the sandbox protection and executing arbitrary code in the context of the Jenkins controller JVM.",
-    "references": [
-      "https://www.jenkins.io/security/advisory/2026-09-16/#SECURITY-3925%20(1)"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-89036",
-    "published": "2026-09-17T16:18:28.540",
-    "last_modified": "2026-09-22T20:25:55.870",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Appwrite before 2.0.0 contains an argument injection vulnerability that allows authenticated users with functions.write or sites.write permissions to execute arbitrary commands by injecting TAB characters into the providerRootDirectory parameter used to construct GNU tar commands. The application uses escapeshellcmd instead of escapeshellarg and fails to quote the parameter, allowing TAB characters to survive sanitization and be interpreted as argument separators, enabling injection of arbitrary GNU tar arguments such as --checkpoint-action=exec to achieve remote code execution as the builds worker process user.",
-    "references": [
-      "https://github.com/appwrite/appwrite/commit/a82dc6e386a6ac7b88e853a1e6fdb59e0b79ddca",
-      "https://github.com/appwrite/appwrite/pull/13028",
-      "https://github.com/appwrite/appwrite/releases#release-2.0.0",
-      "https://www.vulncheck.com/advisories/appwrite-argument-injection-via-providerrootdirectory-parameter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93377",
-    "published": "2026-09-17T21:17:55.000",
-    "last_modified": "2026-09-21T13:02:19.150",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Type confusion in V8 in Google Chrome prior to 153.0.8010.52 allowed a remote attacker leveraging social engineering to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0194356994.html",
-      "https://issues.chromium.org/issues/560121552"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 37.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93381",
-    "published": "2026-09-17T21:17:55.430",
-    "last_modified": "2026-09-21T14:17:45.780",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Buffer overflow in PDFium in Google Chrome on on Windows prior to 153.0.8010.52 allowed a remote attacker leveraging social engineering to potentially execute arbitrary code inside the sandbox via a crafted PDF file. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0194356994.html",
-      "https://issues.chromium.org/issues/556853443"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.5,
     "tags": [
       "rce"
     ],

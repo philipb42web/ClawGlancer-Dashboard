@@ -650,38 +650,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-94109",
-    "published": "2026-09-20T12:17:06.620",
-    "last_modified": "2026-09-22T20:25:55.870",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "openEQUELLA versions before 2026.1.0 contain a remote code execution vulnerability in FreeMarker template compilation due to an unsandboxed TemplateClassResolver configuration. Authenticated attackers can inject malicious template expressions through collection summaries, dashboard portlets, or MIME templates to instantiate dangerous classes like freemarker.template.utility.Execute and invoke Runtime.exec for arbitrary command execution.",
-    "references": [
-      "https://github.com/openequella/openEQUELLA",
-      "https://github.com/openequella/openEQUELLA/blob/8bd24b1dcf26cc3d74757e6b982fc1971a7d6767/Source/Plugins/Core/com.equella.core/src/com/tle/core/entity/service/impl/AbstractEntityServiceImpl.java#L230-L250",
-      "https://github.com/openequella/openEQUELLA/blob/8bd24b1dcf26cc3d74757e6b982fc1971a7d6767/Source/Plugins/Core/com.equella.core/src/com/tle/web/freemarker/BasicConfiguration.java",
-      "https://github.com/openequella/openEQUELLA/blob/8bd24b1dcf26cc3d74757e6b982fc1971a7d6767/Source/Plugins/Core/com.equella.core/src/com/tle/web/portal/standard/renderer/FreemarkerPortletRenderer.java#L141-L170",
-      "https://github.com/openequella/openEQUELLA/commit/d6e165afc986f8a3ed912cdb367d5ad8c1eeab5c",
-      "https://github.com/openequella/openEQUELLA/releases/tag/2026.1.0",
-      "https://www.vulncheck.com/advisories/openequella-before-2026.1.0-remote-code-execution-via-freemarker-template-injection"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.6,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-7006",
     "published": "2026-09-18T16:17:09.940",
     "last_modified": "2026-09-22T20:25:55.870",
@@ -796,6 +764,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73752",
+    "published": "2026-09-01T21:18:41.757",
+    "last_modified": "2026-09-22T20:53:11.150",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An unauthenticated arbitrary file write vulnerability exists in an API endpoint of AOS-CX. Successful exploitation of this vulnerability allows an attacker to write arbitrary files to the underlying operating system, which could lead to remote code execution.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.5,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-92970",
     "published": "2026-09-17T14:18:02.997",
     "last_modified": "2026-09-22T20:53:07.383",
@@ -883,6 +877,93 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94411",
+    "published": "2026-09-21T19:17:20.067",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP 3.6 contains a privilege escalation vulnerability in the updateOneValueByKeyIdAndType endpoint that allows authenticated users to grant themselves arbitrary roles. Attackers can send a POST request with type=UserRole, their own user ID, and a role ID list to escalate from low-privilege tenant user to tenant administrator.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-01-userbusiness-self-privilege-escalation.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserBusinessController.java#L178-L198",
+      "https://www.vulncheck.com/advisories/jsherp-3.6-privilege-escalation-via-updateonevaluebykeyidandtype"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.1,
+    "tags": [
+      "poc",
+      "priv_esc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94412",
+    "published": "2026-09-21T19:17:20.217",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 contains an authorization bypass vulnerability in the POST /user/resetPwd endpoint that allows authenticated users to reset any other user's password. Attackers can submit a request with an arbitrary target user ID to reset that account's password to a known default value, enabling unauthorized access to other user accounts including administrators.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-02-user-resetpwd-account-takeover.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserController.java#L230-L244",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-authorization-bypass-via-resetpwd"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.7,
+    "tags": [
+      "auth_bypass",
+      "poc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94501",
+    "published": "2026-09-21T19:17:21.910",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 contains an authorization bypass vulnerability in the userBusiness CRUD endpoints that allows authenticated users to create, modify, or delete authorization-relation rows without privilege checks. Attackers can manipulate user-role mappings and access controls to escalate privileges, strip access from other accounts, or modify role-function relationships for any user in the tenant.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-07-userbusiness-authorization-delete.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserBusinessController.java#L50-L80",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-privilege-escalation-via-userbusiness-crud"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.7,
+    "tags": [
+      "auth_bypass",
+      "poc"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "poc+20"
     ]
   },
   {
@@ -1555,6 +1636,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73749",
+    "published": "2026-09-01T21:18:41.430",
+    "last_modified": "2026-09-22T20:55:15.857",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Multiple vulnerabilities exist in a daemon of AOS-CX that may allow for improper processing of malformed input. An unauthenticated remote attacker could exploit these vulnerabilities by sending specially crafted packets to the affected service. Successful exploitation could result in remote code execution with elevated privileges.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-69590",
     "published": "2026-09-08T18:19:29.310",
     "last_modified": "2026-09-21T19:01:31.960",
@@ -1569,33 +1674,6 @@
     "cisa_kev": false,
     "epss": 1.0,
     "epss_percentile": 59.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-39919",
-    "published": "2026-09-15T15:17:14.723",
-    "last_modified": "2026-09-20T01:16:29.087",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Ghostscript before 10.08.0 contains a heap-based buffer overflow vulnerability in the JPEG 2000 output adapter (base/sjpx_openjpeg.c) that allows attackers to cause memory corruption by supplying a crafted PDF containing a JPEG 2000 image with mismatched component subsampling factors. When image components declare different subsampling values, the non-samescale sub-byte-depth output path allocates a row buffer sized for packed output but writes a full byte per output column regardless of bit depth, overflowing the allocation and corrupting internal chunk-allocator metadata to achieve code execution.",
-    "references": [
-      "https://bugs.ghostscript.com/show_bug.cgi?id=709666",
-      "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/tag/gs10080",
-      "https://github.com/ArtifexSoftware/ghostpdl/commit/0a8bf88e39db07b0751a58d6ec1cf992073e4dc1",
-      "https://www.vulncheck.com/advisories/ghostscript-heap-buffer-overflow-via-jpeg-2000-output-adapter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.0,
     "tags": [
       "rce"
     ],
@@ -1884,7 +1962,7 @@
   {
     "cve_id": "CVE-2026-93839",
     "published": "2026-09-18T20:17:34.047",
-    "last_modified": "2026-09-22T16:18:14.177",
+    "last_modified": "2026-09-22T20:55:25.800",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2237,6 +2315,30 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 44.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73750",
+    "published": "2026-09-01T21:18:41.540",
+    "last_modified": "2026-09-22T20:54:27.840",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerabilities exist in the authentication module that may improperly process malformed or truncated input. An authenticated remote attacker could exploit these vulnerabilities by providing specially crafted input from a compromised or hostile authentication server. Successful exploitation could result in a Denial-of-Service or potential remote code execution with elevated privileges.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.2,
     "tags": [
       "rce"
     ],
@@ -3624,6 +3726,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-62673",
+    "published": "2026-02-03T19:16:14.317",
+    "last_modified": "2026-09-22T23:17:05.257",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Heap-based Buffer Overflow vulnerability in Archer AX53 v1.0 and AX12 v1.0 (tdpserver modules) allows adjacent attackers to cause a segmentation fault or potentially execute arbitrary code via a specially crafted network packet containing a maliciously formed field.\n\nThis issue affects Archer AX53 v1.0: through 1.3.1 Build 20241120 and Archer AX12 v1.0: up to 1.5.1 Build 20260721.",
+    "references": [
+      "https://talosintelligence.com/vulnerability_reports/",
+      "https://www.tp-link.com/en/support/download/archer-ax12/#Firmware",
+      "https://www.tp-link.com/en/support/download/archer-ax53/v1/#Firmware",
+      "https://www.tp-link.com/kr/support/download/archer-ax12/#Firmware",
+      "https://www.tp-link.com/my/support/download/archer-ax53/v1/#Firmware",
+      "https://www.tp-link.com/us/support/faq/4943/",
+      "https://www.talosintelligence.com/vulnerability_reports/TALOS-2025-2290"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 44.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-55343",
     "published": "2026-09-15T19:17:21.600",
     "last_modified": "2026-09-21T17:20:08.437",
@@ -3717,6 +3849,32 @@
     "reasons": [
       "recently modified (last 48h)",
       "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94109",
+    "published": "2026-09-20T12:17:06.620",
+    "last_modified": "2026-09-22T21:17:33.723",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "openEQUELLA before 2026.1.0 contains an authenticated stored server-side template injection vulnerability in FreemarkerPortletRenderer.renderHtml() that allows any authenticated non-guest user to achieve remote code execution by storing a malicious FreeMarker payload through a POST request to the RemotePortletService invoker endpoint. The markup field from stored portlet configuration is passed directly to custFactory.createResult() without a TemplateClassResolver restriction or FreeMarker sandboxing in BasicConfiguration, leaving built-ins such as ?new and freemarker.template.utility.Execute available, causing the payload to execute in the application server process context when any user renders a dashboard containing the affected portlet.",
+    "references": [
+      "https://github.com/openequella/openEQUELLA/commit/d6e165afc986f8a3ed912cdb367d5ad8c1eeab5c",
+      "https://github.com/openequella/openEQUELLA/releases/tag/2026.1.0",
+      "https://www.vulncheck.com/advisories/openequella-authenticated-stored-ssti-via-freemarkerportletrenderer"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 58.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -5645,6 +5803,60 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-94496",
+    "published": "2026-09-21T19:17:21.590",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 fails to validate caller permissions in role management endpoints, allowing authenticated users to modify any role's data scope or delete roles. Attackers can exploit the /role/update and /role/delete endpoints to escalate privileges, change data visibility to all data, and access all business records in the tenant.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-11-role-tamper.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/RoleController.java#L76-L98",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-privilege-escalation-via-role-management"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.4,
+    "tags": [
+      "poc"
+    ],
+    "intel_score": 71.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-94497",
+    "published": "2026-09-21T19:17:21.743",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 8.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 fails to validate object ownership in by-id info, update, and delete endpoints across multiple resource types. Authenticated users can read, modify, and delete other users' business objects by submitting direct object identifiers without authorization checks.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-12-business-data-horizontal-access.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/MaterialController.java#L119-L125",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-unauthorized-access-via-by-id-endpoints"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.4,
+    "tags": [
+      "poc"
+    ],
+    "intel_score": 71.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "poc+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-14644",
     "published": "2026-08-07T17:16:57.030",
     "last_modified": "2026-09-22T17:06:38.660",
@@ -5902,31 +6114,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-91935",
-    "published": "2026-09-15T16:17:44.867",
-    "last_modified": "2026-09-20T01:16:33.733",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Flowise before 3.1.4 fails to validate baseURL parameters in chat-model nodes, allowing authenticated users to redirect requests to arbitrary hosts. Attackers with chatflows:create or chatflows:update permissions can exfiltrate LLM provider API keys by redirecting requests to cloud metadata services or internal hosts.",
-    "references": [
-      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-hx55-h48h-7rw9",
-      "https://www.vulncheck.com/advisories/flowise-before-3.1.4-ssrf-and-api-key-exfiltration-via-chat-model-nodes"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.2,
-    "tags": [
-      "ssrf"
-    ],
-    "intel_score": 69.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "ssrf+18"
     ]
   },
   {
@@ -6341,6 +6528,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-94495",
+    "published": "2026-09-21T19:17:21.427",
+    "last_modified": "2026-09-22T20:43:58.793",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "jshERP through 3.6 fails to properly validate user privileges in SystemConfigService.updateSystemConfig, allowing authenticated users to modify tenant system configuration. Attackers can rewrite or delete tenant-wide settings covering company identity, stock rules, approval behavior, and printing configuration through the systemConfig endpoint.",
+    "references": [
+      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-10-systemconfig-tamper.py",
+      "https://github.com/jishenghua/jshERP",
+      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/SystemConfigController.java#L93-L115",
+      "https://www.vulncheck.com/advisories/jsherp-through-3.6-missing-authorization-via-systemconfig"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 16.1,
+    "tags": [
+      "poc"
+    ],
+    "intel_score": 65.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "poc+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-50236",
     "published": "2026-08-11T12:17:38.183",
     "last_modified": "2026-09-21T17:17:35.473",
@@ -6365,6 +6579,34 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 26.7,
+    "tags": [
+      "ssrf"
+    ],
+    "intel_score": 65.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ssrf+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-18730",
+    "published": "2026-09-01T22:17:10.850",
+    "last_modified": "2026-09-22T21:17:30.087",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A server-side request forgery (SSRF) vulnerability was identified in GitHub Enterprise Server that allowed an unauthenticated attacker to cause the Manage API to send crafted outbound requests to an attacker-controlled host. An unauthenticated endpoint parsed an attacker-supplied cluster configuration and issued gateway-to-agent requests whose HMAC authenticated only a timestamp, not the request path or body. An attacker positioned to intercept the outbound request could capture this token and replay it against privileged management agent endpoints. High-availability deployments were not affected due to a topology restriction. This vulnerability affected GitHub Enterprise Server releases in the 3.17, 3.18, 3.19, 3.20, and 3.21 series and was fixed in versions 3.17.21, 3.18.15, 3.19.12, 3.20.8, and 3.21.6. This vulnerability was reported via the GitHub Bug Bounty program.",
+    "references": [
+      "https://docs.github.com/en/enterprise-server@3.17/admin/release-notes#3.17.21",
+      "https://docs.github.com/en/enterprise-server@3.18/admin/release-notes#3.18.15",
+      "https://docs.github.com/en/enterprise-server@3.19/admin/release-notes#3.19.12",
+      "https://docs.github.com/en/enterprise-server@3.20/admin/release-notes#3.20.8",
+      "https://docs.github.com/en/enterprise-server@3.21/admin/release-notes#3.21.6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.9,
     "tags": [
       "ssrf"
     ],
@@ -6424,35 +6666,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-90515",
-    "published": "2026-09-13T12:17:15.147",
-    "last_modified": "2026-09-20T01:16:32.200",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was determined in SourceCodester School Registration and Fee System 1.0. The impacted element is an unknown function of the file /bilal/normal/delete_stud.php. Executing a manipulation of the argument selector[] can lead to sql injection. The attack can be launched remotely. The exploit has been publicly disclosed and may be utilized.",
-    "references": [
-      "https://github.com/zuojiu567/cve/issues/2",
-      "https://vuldb.com/cve/CVE-2026-90515",
-      "https://vuldb.com/submit/912054",
-      "https://vuldb.com/vuln/403103",
-      "https://vuldb.com/vuln/403103/cti",
-      "https://www.sourcecodester.com/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 18.5,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
     ]
   },
   {
@@ -7381,6 +7594,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-93659",
+    "published": "2026-09-18T15:17:22.510",
+    "last_modified": "2026-09-22T20:55:25.800",
+    "cvss_v3": 8.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Concrete CMS Community Store before 2.7.8 renders customer-supplied order fields without HTML escaping in checkout and admin views. Unauthenticated attackers can store script payloads in billing name, email, or phone fields that execute in authenticated manager sessions to create rogue accounts or exfiltrate data.",
+    "references": [
+      "https://github.com/concretecms-community-store/community_store",
+      "https://github.com/concretecms-community-store/community_store/blob/v2.7.7/elements/order_slip.php",
+      "https://github.com/concretecms-community-store/community_store/commit/2a802d6a5717f4e351ef21fdf8bdaf8061c40109",
+      "https://github.com/concretecms-community-store/community_store/releases/tag/v2.7.8",
+      "https://www.vulncheck.com/advisories/concrete-cms-community-store-before-2.7.8-stored-xss"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.7,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 61.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-94044",
     "published": "2026-09-20T19:17:12.960",
     "last_modified": "2026-09-21T15:17:37.987",
@@ -7469,6 +7710,29 @@
     "reasons": [
       "recently modified (last 48h)",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-44756",
+    "published": "2026-09-08T01:17:30.840",
+    "last_modified": "2026-09-22T21:17:30.593",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A memory safety vulnerability exists in the Extended Passport Protocol (EPP) processing library. Under specific conditions, an unauthenticated attacker could exploit a crafted network request containing a malformed EPP header, potentially resulting in undefined behavior and abnormal program termination. Successful exploitation may have a high impact on the confidentiality, integrity, and availability of the application.",
+    "references": [
+      "https://me.sap.com/notes/3747649",
+      "https://url.sap/sapsecuritypatchday",
+      "http://seclists.org/fulldisclosure/2026/Sep/65"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 25.4,
+    "tags": [],
+    "intel_score": 60.0,
+    "reasons": [
+      "recently modified (last 48h)"
     ]
   },
   {
@@ -7656,6 +7920,29 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-15630",
+    "published": "2026-07-23T21:17:02.760",
+    "last_modified": "2026-09-22T21:17:29.893",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A non-global organization admin in one tenant can bypass tenant boundaries to delete, create, or modify resources in any other tenant by exploiting a mismatch between authorization (based on ?id=) and action (based on request body).",
+    "references": [
+      "https://vokecyber.com/research/cve-2026-15630-casdoor-cross-tenant-authz",
+      "https://www.kb.cert.org/vuls/id/889462",
+      "https://vokecyber.com/research/cve-2026-15630-casdoor-cross-tenant-authz"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.8,
+    "tags": [],
+    "intel_score": 59.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-72733",
     "published": "2026-08-10T18:18:51.673",
     "last_modified": "2026-09-21T19:17:09.440",
@@ -7748,27 +8035,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 34.3,
-    "tags": [],
-    "intel_score": 59.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76672",
-    "published": "2026-09-15T20:17:48.977",
-    "last_modified": "2026-09-20T01:16:29.750",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A vulnerability exists in the SD-WAN Orchestrator that may lead to the exposure of sensitive configuration information. An authenticated remote attacker with read-only privileges could exploit this vulnerability by sending a specially crafted request to the cache synchronization endpoint. Successful exploitation could result in the disclosure of sensitive third-party API tokens and credentials, potentially enabling lateral movement to external security platforms.",
-    "references": [
-      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.5,
     "tags": [],
     "intel_score": 59.5,
     "reasons": [
@@ -9535,34 +9801,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 23.4,
-    "tags": [],
-    "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92018",
-    "published": "2026-09-15T13:16:51.540",
-    "last_modified": "2026-09-20T01:16:34.680",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Sandbox escape in the DOM: Core & HTML component. This vulnerability was fixed in Firefox 156, Firefox ESR 115.41, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2064287",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-91/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 28.7,
     "tags": [],
     "intel_score": 58.0,
     "reasons": [
@@ -11412,6 +11650,27 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73751",
+    "published": "2026-09-01T21:18:41.647",
+    "last_modified": "2026-09-22T20:53:53.203",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An authenticated user with low-privileged access could submit crafted input through the web-based management interface to execute arbitrary commands on the underlying operating system.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05134en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.5,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-73753",
     "published": "2026-09-01T21:18:41.863",
     "last_modified": "2026-09-22T20:52:29.757",
@@ -11791,6 +12050,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-87766",
+    "published": "2026-09-09T09:17:12.540",
+    "last_modified": "2026-09-22T23:17:07.763",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in bubblewrap. During sandbox setup, creating files or directories under the new root can follow a parent symlink onto the host via /oldroot, writing attacker-chosen paths outside the sandbox as the launching user. This happens before the sandboxed process starts. This issue is GHSA-pxhw-h44j-8pfx. It is fixed in bubblewrap 0.12.0.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-87766",
+      "https://bugs.debian.org/1145655",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2530542",
+      "https://github.com/containers/bubblewrap/releases/tag/v0.12.0",
+      "https://github.com/containers/bubblewrap/security/advisories/GHSA-pxhw-h44j-8pfx",
+      "https://www.openwall.com/lists/oss-security/2026/08/27/7",
+      "http://www.openwall.com/lists/oss-security/2026/09/09/3",
+      "http://www.openwall.com/lists/oss-security/2026/09/22/23"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 3.7,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2023-28148",
     "published": "2026-09-14T05:16:56.837",
     "last_modified": "2026-09-22T19:56:19.073",
@@ -11831,344 +12118,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 24.3,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92016",
-    "published": "2026-09-15T13:16:51.247",
-    "last_modified": "2026-09-20T01:16:34.487",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Disability Access APIs component. This vulnerability was fixed in Firefox 156, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2061327",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.7,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92021",
-    "published": "2026-09-15T13:16:52.210",
-    "last_modified": "2026-09-20T01:16:34.863",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the JavaScript Engine: JIT component. This vulnerability was fixed in Firefox ESR 140.16 and Thunderbird 140.16.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2067208",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.0,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92022",
-    "published": "2026-09-15T13:16:52.337",
-    "last_modified": "2026-09-20T01:16:35.040",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the DOM: HTML Parser component. This vulnerability was fixed in Firefox 156, Firefox ESR 115.41, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2068059",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-91/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92023",
-    "published": "2026-09-15T13:16:52.487",
-    "last_modified": "2026-09-20T01:16:35.217",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the XML component. This vulnerability was fixed in Firefox 156, Firefox ESR 115.41, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2068342",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-91/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92024",
-    "published": "2026-09-15T13:16:52.620",
-    "last_modified": "2026-09-20T01:16:35.393",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the SVG component. This vulnerability was fixed in Firefox 156, Firefox ESR 115.41, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2068354",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-91/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92028",
-    "published": "2026-09-15T13:16:53.920",
-    "last_modified": "2026-09-20T01:16:35.570",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the DOM: Core & HTML component. This vulnerability was fixed in Firefox 156, Firefox ESR 115.41, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2068440",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-91/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92029",
-    "published": "2026-09-15T13:16:54.070",
-    "last_modified": "2026-09-20T01:16:35.747",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the SVG component. This vulnerability was fixed in Firefox 156, Firefox ESR 115.41, Firefox ESR 140.16, Firefox ESR 153.3, Thunderbird 156, Thunderbird 140.16, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2068445",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-91/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-92/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-95/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92040",
-    "published": "2026-09-15T13:16:55.407",
-    "last_modified": "2026-09-20T01:16:35.913",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the JavaScript: WebAssembly component. This vulnerability was fixed in Firefox 156 and Thunderbird 156.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2024248",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.0,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92046",
-    "published": "2026-09-15T13:16:56.243",
-    "last_modified": "2026-09-20T01:16:36.263",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Graphics component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2058618",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 24.2,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92049",
-    "published": "2026-09-15T13:16:56.607",
-    "last_modified": "2026-09-20T01:16:36.430",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Widget: Win32 component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2061295",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 16.4,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92056",
-    "published": "2026-09-15T13:16:59.947",
-    "last_modified": "2026-09-20T01:16:36.603",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Graphics: Text component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2065346",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 16.4,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92058",
-    "published": "2026-09-15T13:17:00.207",
-    "last_modified": "2026-09-20T01:16:36.777",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Graphics component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2068438",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 16.4,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92060",
-    "published": "2026-09-15T13:17:00.510",
-    "last_modified": "2026-09-20T01:16:36.950",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Internationalization component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2027336",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 16.4,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -12219,31 +12168,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 1.4,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92067",
-    "published": "2026-09-15T13:17:01.403",
-    "last_modified": "2026-09-20T01:16:37.297",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use-after-free in the Widget: Gtk component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2058664",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 16.4,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -13927,6 +13851,79 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-94403",
+    "published": "2026-09-21T19:17:19.867",
+    "last_modified": "2026-09-22T19:04:55.677",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A weakness has been identified in ColorFul iGameCenter 1.0.3.4. This impacts the function sub_140001AF0 in the library ene.sys of the component IOCTL Handler. This manipulation causes untrusted pointer dereference. The attack can only be executed locally. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://vuldb.com/cve/CVE-2026-94403",
+      "https://vuldb.com/submit/894821",
+      "https://vuldb.com/vuln/408110",
+      "https://vuldb.com/vuln/408110/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.5,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-55159",
+    "published": "2026-09-21T20:17:26.500",
+    "last_modified": "2026-09-21T20:17:26.500",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "luci-app-adblock-fast a WebUI for fast, lightweight DNS-based ad-blocker for OpenWrt that works with dnsmasq, smartdns, or unbound. Prior to 1.2.4-2, the luci.adblock-fast.setCronEntry RPC method accepts an entry argument containing carriage-return or line-feed characters and serializes it into /etc/crontabs/root as though it were one logical line. An authenticated delegated user with the luci-app-adblock-fast write ACL can therefore create an additional physical root cron entry through applications/luci-app-adblock-fast/root/usr/share/rpcd/ucode/luci.adblock-fast, resulting in persistent command execution as UID 0 when cron runs. The issue is not demonstrated for unauthenticated callers or users without the component write ACL. This vulnerability is fixed in 1.2.4-2.",
+    "references": [
+      "https://github.com/openwrt/luci/commit/9ccd99b5898457e5ef39dc21aea226d7fb6e5c7e",
+      "https://github.com/openwrt/luci/commit/f67461fd0255bf992b2b559c22ec288067f2f9da",
+      "https://github.com/openwrt/luci/pull/8705",
+      "https://github.com/openwrt/luci/security/advisories/GHSA-ggpf-xrph-wg5v"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.2,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-55897",
+    "published": "2026-09-21T20:17:26.670",
+    "last_modified": "2026-09-21T21:17:05.723",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "luci-app-advanced-reboot is a LuCI (web interface) application for OpenWrt that provides a  way to reboot your router into an alternative firmware partition or perform  reboot operations directly from the web UI. Prior to 1.1.2-6, the luci-app-advanced-reboot read ACL in applications/luci-app-advanced-reboot/root/usr/share/rpcd/acl.d/luci-app-advanced-reboot.json grants rpcd file.exec permission for the general shell interpreter /bin/sh. An authenticated delegated session with that read ACL can supply caller-controlled params; rpcd authorizes the executable path and passes those arguments to the shell, allowing arbitrary commands to execute as root. Builds without the /bin/sh exec grant, including the checked openwrt-24.10 and openwrt-23.05 branches, are not affected by this specific chain. This vulnerability is fixed in 1.1.2-6.",
+    "references": [
+      "https://github.com/openwrt/luci/commit/2df00deb122093cbf429266ffef7ad06aaecb48f",
+      "https://github.com/openwrt/luci/commit/f85102548ee8325bfd581a0327b210b5f7670829",
+      "https://github.com/openwrt/luci/pull/8710",
+      "https://github.com/openwrt/luci/security/advisories/GHSA-vj96-f37g-37f6",
+      "https://github.com/openwrt/luci/security/advisories/GHSA-vj96-f37g-37f6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.4,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-28367",
     "published": "2026-03-27T17:16:27.750",
     "last_modified": "2026-09-21T14:17:15.060",
@@ -15186,6 +15183,27 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-49811",
+    "published": "2026-09-21T20:17:25.660",
+    "last_modified": "2026-09-22T19:08:49.763",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dell Command | Monitor (DCM), versions prior to 10.13.2, contain an Incorrect Permission Assignment for Critical Resource vulnerability. A low privileged attacker with local access could potentially exploit this vulnerability, leading to Elevation of Privileges.",
+    "references": [
+      "https://www.dell.com/support/kbdoc/en-us/000502473/dsa-2026-380-security-update-for-dell-command-monitor-dcm-for-an-incorrect-permission-assignment-for-critical-resource-vulnerability"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 0.6,
+    "tags": [],
+    "intel_score": 52.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-73780",
     "published": "2026-09-01T21:18:44.847",
     "last_modified": "2026-09-22T20:50:12.593",
@@ -15200,27 +15218,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 3.3,
-    "tags": [],
-    "intel_score": 51.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-13327",
-    "published": "2026-09-15T20:17:07.627",
-    "last_modified": "2026-09-20T01:16:28.273",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper certificate validation on LDAPS connections to Active Directory in Devolutions Server 2026.2.16 and earlier allows a network-positioned attacker to intercept privileged directory service credentials via a spoofed domain controller certificate.",
-    "references": [
-      "https://devolutions.net/security/advisories/DEVO-2026-0030/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.8,
     "tags": [],
     "intel_score": 51.5,
     "reasons": [
@@ -15568,33 +15565,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 25.0,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-89266",
-    "published": "2026-09-12T00:17:06.440",
-    "last_modified": "2026-09-20T01:16:31.883",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "stb_vorbis through 1.22 contains a heap buffer overflow in start_decoder() where the codebook multiplicands allocation size is truncated from size_t to int. Attackers can craft a malicious Ogg Vorbis file with large entries and dimensions values to trigger out-of-bounds writes, causing process crashes or heap corruption.",
-    "references": [
-      "https://github.com/nothings/stb",
-      "https://github.com/nothings/stb/blob/2c980bb59875b0d32144a71867fbdebb2f77cd20/stb_vorbis.c#L3878-L3880",
-      "https://github.com/nothings/stb/blob/2c980bb59875b0d32144a71867fbdebb2f77cd20/stb_vorbis.c#L950",
-      "https://github.com/nothings/stb/issues/1928",
-      "https://github.com/nothings/stb/issues/1933",
-      "https://github.com/nothings/stb/issues/1947",
-      "https://www.vulncheck.com/advisories/stb-vorbis-through-1.22-heap-buffer-overflow-via-codebook-multiplicands"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.1,
     "tags": [],
     "intel_score": 51.0,
     "reasons": [
@@ -17159,31 +17129,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-91941",
-    "published": "2026-09-15T16:17:46.000",
-    "last_modified": "2026-09-20T01:16:33.873",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Crawl4AI before 0.9.3 contains an uncontrolled resource consumption vulnerability in PDFContentScrapingStrategy that allows untrusted clients to cause denial of service. Attackers can select the PDF scraping strategy in POST requests to download large remote PDFs without size or page limits, exhausting disk, CPU, and bandwidth on shared workers.",
-    "references": [
-      "https://github.com/unclecode/crawl4ai/security/advisories/GHSA-v2rm-hvrj-2x9q",
-      "https://www.vulncheck.com/advisories/crawl4ai-before-0.9.3-denial-of-service-via-pdfcontentscrapingstrategy"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.8,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-66974",
     "published": "2026-09-15T18:17:12.033",
     "last_modified": "2026-09-22T20:00:03.713",
@@ -17206,27 +17151,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-12101",
-    "published": "2026-09-15T18:17:13.487",
-    "last_modified": "2026-09-20T01:16:27.420",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM Verify Identity Access could allow an administrator to execute additional commands they are not entitled to due to improper validation of user supplied requests.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7286188"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.8,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
     ]
   },
   {
@@ -18378,13 +18302,15 @@
   {
     "cve_id": "CVE-2026-93488",
     "published": "2026-09-18T12:17:30.667",
-    "last_modified": "2026-09-21T17:19:17.010",
+    "last_modified": "2026-09-22T23:17:07.980",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in Netty. SpdySessionHandler accepts an unlimited number of concurrent remote-initiated streams because localConcurrentStreams defaults to Integer.MAX_VALUE and the handler provides no API to change it. A remote peer can open a SPDY connection and send a large number of SYN_STREAM frames with FLAG_FIN=0, causing unbounded heap and direct memory allocation that can lead to JVM OutOfMemoryError and a denial of service.",
     "references": [
+      "https://access.redhat.com/errata/RHSA-2026:69440",
       "https://access.redhat.com/errata/RHSA-2026:69470",
+      "https://access.redhat.com/errata/RHSA-2026:70257",
       "https://access.redhat.com/security/cve/CVE-2026-93488",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2536887",
       "https://github.com/netty/netty/releases/tag/netty-4.1.138.Final",
@@ -18510,13 +18436,15 @@
   {
     "cve_id": "CVE-2026-93558",
     "published": "2026-09-18T15:17:19.590",
-    "last_modified": "2026-09-21T17:19:17.313",
+    "last_modified": "2026-09-22T23:17:08.123",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in Netty's WebSocketServerExtensionHandler. A remote, unauthenticated attacker can exploit this vulnerability by using HTTP/1.1 pipelining to send requests faster than the application can respond. This leads to an unbounded growth of a per-connection queue, consuming excessive memory. Eventually, this can cause the Java Virtual Machine (JVM) to exhaust its heap, resulting in a Denial of Service (DoS) for the affected server.",
     "references": [
+      "https://access.redhat.com/errata/RHSA-2026:69440",
       "https://access.redhat.com/errata/RHSA-2026:69470",
+      "https://access.redhat.com/errata/RHSA-2026:70257",
       "https://access.redhat.com/security/cve/CVE-2026-93558",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2536932",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2536932"
@@ -19291,6 +19219,27 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 16.8,
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58269",
+    "published": "2026-09-21T20:17:26.837",
+    "last_modified": "2026-09-21T20:17:26.837",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Sync-in Server is an open-source platform for file storage, sharing, collaboration, and syncing. Prior to version 2.4.0, `POST /api/auth/token` authenticates with username and password only, then calls `getTokens()`, which returns full access and refresh JWTs without checking whether the account has TOTP 2FA enabled. An attacker with stolen or phished credentials can bypass 2FA in a single request. The parallel login endpoint (`POST /api/auth/login`) correctly enforces 2FA by calling `setCookies(user, res, true)`, which gates on `user.twoFaEnabled`. Version 2.4.0 patches the issue.",
+    "references": [
+      "https://github.com/Sync-in/server/security/advisories/GHSA-92cr-jxw4-5wjg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.5,
     "tags": [],
     "intel_score": 50.5,
     "reasons": [
@@ -21835,28 +21784,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-13210",
-    "published": "2026-09-15T18:17:16.280",
-    "last_modified": "2026-09-20T01:16:27.960",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 15.7 before 19.1.8, 19.2 before 19.2.6, and 19.3 before 19.3.2 that under certain conditions could have allowed an authenticated user to access CI/CD variables outside their intended environment scope due to improper input validation in the environment scope pattern matcher.",
-    "references": [
-      "https://gitlab.com/gitlab-org/gitlab/-/work_items/603978",
-      "https://hackerone.com/reports/3655211"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.1,
-    "tags": [],
-    "intel_score": 48.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-83012",
     "published": "2026-09-15T20:18:07.910",
     "last_modified": "2026-09-22T19:10:03.940",
@@ -22749,6 +22676,29 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-63330",
+    "published": "2026-09-21T19:17:08.440",
+    "last_modified": "2026-09-21T19:17:08.440",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Warpgate is an open source SSH, HTTPS and MySQL bastion host for Linux. Prior to 0.25.6, api_get_recording_stream in warpgate-admin/src/api/recordings_detail.rs protects /@warpgate/admin/api/recordings/{uuid}/stream only with session authentication and omits require_admin_permission for AdminPermission::RecordingsView. Any authenticated regular user who identifies an active recording can subscribe to its WebSocket and receive real-time terminal input and output from proxied SSH, MySQL, or PostgreSQL sessions, including credentials, commands, and other sensitive data belonging to users and administrators. This issue is fixed in version 0.25.6.",
+    "references": [
+      "https://github.com/warp-tech/warpgate/commit/f5cb06ea09065f375870ccee64fe721a2ca79766",
+      "https://github.com/warp-tech/warpgate/releases/tag/v0.25.6",
+      "https://github.com/warp-tech/warpgate/security/advisories/GHSA-2q37-6vxr-26jr"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.2,
+    "tags": [],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-16313",
     "published": "2026-07-28T17:16:37.807",
     "last_modified": "2026-09-21T04:17:21.677",
@@ -23614,34 +23564,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-87824",
-    "published": "2026-09-09T15:17:27.753",
-    "last_modified": "2026-09-20T01:16:31.623",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "zstd-jni before 1.5.7-14 fails to validate the samples buffer capacity in Zstd.trainFromBufferDirect, allowing attackers to read past buffer boundaries by supplying oversized per-sample lengths. Attackers can trigger out-of-bounds memory access by providing crafted sample length arrays that cause the native implementation to walk past the buffer allocation, resulting in JVM termination.",
-    "references": [
-      "https://github.com/luben/zstd-jni",
-      "https://github.com/luben/zstd-jni/blob/v1.5.7-13/src/main/java/com/github/luben/zstd/Zstd.java",
-      "https://github.com/luben/zstd-jni/blob/v1.5.7-13/src/main/native/jni_zdict.c",
-      "https://github.com/luben/zstd-jni/commit/53d3c6342883f7d6717b2477a7f9c1b4a4a56980",
-      "https://github.com/luben/zstd-jni/commit/bba6cfca2c0897f1fa004f4193247479f10da853",
-      "https://github.com/luben/zstd-jni/releases/tag/v1.5.7-14",
-      "https://github.com/luben/zstd-jni/security/advisories/GHSA-257p-3h6w-pg7h",
-      "https://www.vulncheck.com/advisories/zstd-jni-1.3.3-1-through-1.5.7-13-out-of-bounds-read-via-zstd-trainfrombufferdirect"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.9,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-79592",
     "published": "2026-09-10T21:17:47.047",
     "last_modified": "2026-09-22T20:00:03.713",
@@ -23781,31 +23703,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-90780",
-    "published": "2026-09-13T12:17:17.093",
-    "last_modified": "2026-09-20T01:16:32.707",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SIPp through 3.7.7 contains a buffer overflow vulnerability in the get_header() function in src/sip_parser.cpp when processing SIP messages with header content exceeding 20,490 bytes. Unauthenticated remote attackers can send crafted SIP messages with oversized headers to overflow the static buffer and crash the process.",
-    "references": [
-      "https://github.com/SIPp/sipp",
-      "https://github.com/SIPp/sipp/blob/v3.7.7/src/sip_parser.cpp#L164-L227",
-      "https://github.com/SIPp/sipp/commit/8ddfb43359703e665041a955543e07f504f80232",
-      "https://github.com/SIPp/sipp/pull/881",
-      "https://www.vulncheck.com/advisories/sipp-through-3.7.7-buffer-overflow-via-oversized-sip-header-content"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 49.0,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-32803",
     "published": "2026-09-14T05:16:57.290",
     "last_modified": "2026-09-22T19:56:19.073",
@@ -23854,31 +23751,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-92042",
-    "published": "2026-09-15T13:16:55.630",
-    "last_modified": "2026-09-20T01:16:36.093",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Race condition in the DOM: Content Processes component. This vulnerability was fixed in Firefox 156, Firefox ESR 153.3, Thunderbird 156, and Thunderbird 153.3.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=2049342",
-      "https://www.mozilla.org/security/advisories/mfsa2026-90/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-93/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-94/",
-      "https://www.mozilla.org/security/advisories/mfsa2026-96/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.9,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-92044",
     "published": "2026-09-15T13:16:55.860",
     "last_modified": "2026-09-21T18:17:13.017",
@@ -23920,28 +23792,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 18.0,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-91930",
-    "published": "2026-09-15T16:17:43.743",
-    "last_modified": "2026-09-20T01:16:33.600",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Flowise before 3.1.4 fails to scope enterprise organization and workspace membership APIs to the caller's tenant, allowing authenticated users to supply arbitrary organization IDs. Attackers can add themselves as organization owners, create workspaces, and gain administrative access to victim organizations by exploiting insufficient tenant isolation in the organizationuser and workspace endpoints.",
-    "references": [
-      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-pprx-4prj-35mj",
-      "https://www.vulncheck.com/advisories/flowise-before-3.1.4-cross-tenant-organization-admin-takeover"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -25616,6 +25466,180 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73512",
+    "published": "2026-09-21T20:17:27.647",
+    "last_modified": "2026-09-22T14:17:14.037",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy's HttpDatagramHandler caches the current RequestDecoder when Capsule Protocol is enabled. Stream recreation, including an internal redirect, replaces the ActiveStream and updates EnvoyQuicServerStream but does not update the handler's cached pointer. A subsequent HTTP/3 datagram can call decodeData through the freed decoder, causing invalid virtual dispatch and a process crash. The relevant scope boundary is that hTTP/3 datagrams and Capsule Protocol must be enabled, and the request must enter a stream-recreation path such as an internal redirect. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/29dbaae4a9971011e2f1948acfaf383296e901ea",
+      "https://github.com/envoyproxy/envoy/commit/85495163fdc67364a5258bfe478c34a44f6428b4",
+      "https://github.com/envoyproxy/envoy/commit/c0e46dabc3ac286bbe608e9274776555911aadb9",
+      "https://github.com/envoyproxy/envoy/commit/f2417eec2ff49abe243d484ded916fbc2faca38d",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.36.10",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-r6j2-mrm5-72mg",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-r6j2-mrm5-72mg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 55.9,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73513",
+    "published": "2026-09-21T20:17:27.820",
+    "last_modified": "2026-09-21T20:17:27.820",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy's optional oghttp2 upstream HTTP/2 codec accepts a response trailer HEADERS frame without END_STREAM. Envoy completes and deferred-deletes the ActiveRequest while oghttp2 keeps the stream open, leaving ClientStreamImpl with a dangling response_decoder_ reference. A later frame on the stream can dispatch through the freed object and crash the process. The relevant scope boundary is that the default nghttp2 codec rejects the malformed trailers, and the trigger is upstream-only with oghttp2 enabled. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/0d33268d7d8cdc5c8ffef462e0cceefa56156b72",
+      "https://github.com/envoyproxy/envoy/commit/3df69eeee220d6a4088cfdd3be79b55e2e6d3514",
+      "https://github.com/envoyproxy/envoy/commit/c4610b6c85d72ed01e014c2a1aba2934a2b774e9",
+      "https://github.com/envoyproxy/envoy/commit/e6963c6b64cd62aa8e078ef17c76052b6e33e82b",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-jjmm-fw8p-crpw"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.3,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73547",
+    "published": "2026-09-21T20:17:28.230",
+    "last_modified": "2026-09-22T16:17:53.667",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy's ext_authz filter assumes that a request contains a :path pseudoheader when applying query_parameters_to_set or query_parameters_to_remove from an authorization response. A path-less CONNECT request makes request_headers_->Path() return null, and Filter::onComplete dereferences that pointer while parsing the query string. An unauthenticated downstream client can crash the Envoy process when the filter and authorization response use query-parameter mutation. The relevant scope boundary is that the deployment must accept path-less CONNECT and configure ext_authz query-parameter mutation. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/064af2e61d0d1c421490d9e3e6e643c5d117ffe4",
+      "https://github.com/envoyproxy/envoy/commit/5f3b8e9b2b8a787a63202d35bb38820f3e9271fe",
+      "https://github.com/envoyproxy/envoy/commit/838f8ffd9d7b5217682a22ee33470d4c7afb7e98",
+      "https://github.com/envoyproxy/envoy/commit/c3170d7c747e51bb8254378ea89afc03d3e71929",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.36.10",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-87ph-jqwm-pg6r"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 55.9,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73548",
+    "published": "2026-09-21T20:17:28.397",
+    "last_modified": "2026-09-21T20:17:28.397",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy forwards data for a configured non-WebSocket HTTP upgrade before the upstream accepts the upgrade. An unauthenticated HTTP/2 client can place a complete HTTP/1.1 request in extended CONNECT data; Envoy downgrades the request, writes the data unframed to a keep-alive HTTP/1.1 upstream, and returns the socket to the shared pool while the smuggled response remains queued. A different downstream client can then receive the attacker's response. The relevant scope boundary is that webSocket upgrades, plain CONNECT, disabled backend keep-alive, per-downstream pools, and max_requests_per_connection set to 1 are not affected by the demonstrated path. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/309855626966cff176155c821043ed3b44671361",
+      "https://github.com/envoyproxy/envoy/commit/3c7998545a9c9fb3933a4bc1907d92f0e752bc2b",
+      "https://github.com/envoyproxy/envoy/commit/4633b8cce3d15b8734eefe232e30c12b0140b91c",
+      "https://github.com/envoyproxy/envoy/commit/bd6711f2617658e28dfa3df3dace6bfe3cfc0766",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.36.10",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-3vhp-c83q-jqc2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 50.4,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73550",
+    "published": "2026-09-21T20:17:28.733",
+    "last_modified": "2026-09-21T20:17:28.733",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy copies every decoded HTTP/2 Host header value before discarding it when :authority is already present. The discarded value bypasses saveHeader, so its bytes and count are not charged against request header limits. An unauthenticated client can use HPACK indexing to submit many references to a large Host value across a bounded number of streams, forcing extreme header-copy allocation and causing the proxy to be out-of-memory killed. The relevant scope boundary is that the demonstrated amplification uses HTTP/2 HPACK and the duplicate Host discard behavior. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/0910997f70e91d2d20c329bb507bfce44ce01f80",
+      "https://github.com/envoyproxy/envoy/commit/1fec994c868df008cdd4ae285aab58a196fd31f2",
+      "https://github.com/envoyproxy/envoy/commit/3fd0ffee7ac87adf3bc6e421656bb96310512300",
+      "https://github.com/envoyproxy/envoy/commit/fc75d8e35b0d11acbae18b63a0bd96e32e84f61b",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.36.10",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-qgf6-qvhw-4hvh"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 57.6,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73552",
+    "published": "2026-09-21T20:17:28.900",
+    "last_modified": "2026-09-22T16:17:53.803",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy HTTP RBAC accepts RFC-valid opaque header bytes but evaluates safe_regex values with RE2's UTF-8 subject semantics. A downstream client can preserve a prohibited marker and add an unrelated obs-text octet, causing RE2::FullMatch to return false and a negative RBAC policy to treat the invalid subject as an ordinary no-match. A byte-oriented route matcher can still observe the marker, allowing the request to reach a route intended to be denied. The relevant scope boundary is that plain positive ALLOW regexes normally fail closed, and exact, prefix, suffix, and contains matchers are not shown to have this subject-domain failure. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/5650cb9770d4420ec2bcbed8b90be06f564ecc07",
+      "https://github.com/envoyproxy/envoy/commit/7d1dee5dda66434d84437cc5c85153aa03955e26",
+      "https://github.com/envoyproxy/envoy/commit/c2b9a19dc081f03be6a9b4ca932673e5e7a33d18",
+      "https://github.com/envoyproxy/envoy/commit/f3726765f3a12ddc76dcb52c0b79bec3d95ced1c",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.36.10",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-23xh-2qxr-3xv8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 50.4,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-1254",
     "published": "2025-05-08T09:15:19.510",
     "last_modified": "2026-09-22T18:17:09.643",
@@ -26077,6 +26101,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-73546",
+    "published": "2026-09-21T20:17:28.040",
+    "last_modified": "2026-09-21T21:17:09.360",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Envoy is an open source edge and service proxy designed for cloud-native applications. Prior to 1.36.10, 1.37.6, 1.38.4, and 1.39.1, Envoy's /stats?format=html admin endpoint uses StatsHtmlRender, which sanitizes string statistic values but emits statistic names without HTML encoding. A data-plane component such as grpc_stats with stats_for_all_methods enabled can incorporate attacker-controlled path segments into cached dynamic statistic names. When an operator views the HTML stats page, the stored name can execute script with the admin interface's origin and issue privileged same-origin requests. The relevant scope boundary is that the admin interface must be browser-accessible and an enabled component must persist attacker-influenced text in statistic names. This issue is fixed in versions 1.36.10, 1.37.6, 1.38.4, and 1.39.1.",
+    "references": [
+      "https://github.com/envoyproxy/envoy/commit/11d34660ca0322eb125d045a564d9d87f016397f",
+      "https://github.com/envoyproxy/envoy/commit/884d30c56b835d5801733ae1dc38c94a08de23e8",
+      "https://github.com/envoyproxy/envoy/commit/9484e17c34353662f9bfd30c74f61fa8c9ee7b83",
+      "https://github.com/envoyproxy/envoy/commit/ab63a0e52b5a28472f2ff865b6464ae4004f7593",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.36.10",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.37.6",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.38.4",
+      "https://github.com/envoyproxy/envoy/releases/tag/v1.39.1",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-pv9h-4fxf-7vrg",
+      "https://github.com/envoyproxy/envoy/security/advisories/GHSA-pv9h-4fxf-7vrg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.3,
+    "tags": [],
+    "intel_score": 47.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-13201",
     "published": "2026-06-24T21:16:52.420",
     "last_modified": "2026-09-21T18:17:07.700",
@@ -26181,28 +26235,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86754",
-    "published": "2026-09-09T14:17:24.590",
-    "last_modified": "2026-09-20T01:16:30.750",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Snipe-IT before 8.7.0 fails to properly gate Laravel Passport's OAuth client management routes, allowing any authenticated user to register OAuth clients with attacker-controlled redirect URIs. Attackers can trick administrators into approving consent screens, then exchange authorization codes for bearer tokens inheriting full admin API permissions lasting up to 40 years.",
-    "references": [
-      "https://github.com/grokability/snipe-it/security/advisories/GHSA-gq7g-hxjg-8j27",
-      "https://www.vulncheck.com/advisories/snipe-it-before-8.7.0-authorization-bypass-via-oauth-clients"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 9.0,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-89087",
     "published": "2026-09-10T20:17:32.247",
     "last_modified": "2026-09-22T20:00:03.713",
@@ -26242,55 +26274,6 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 48.7,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-90509",
-    "published": "2026-09-13T10:16:56.117",
-    "last_modified": "2026-09-20T01:16:32.033",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A weakness has been identified in dromara orion-visor up to 2.5.7. Affected by this issue is the function ExposeApiAspect.beforeExposeApi of the file ExposeApiAspect.java. Executing a manipulation can lead to hard-coded credentials. The attack can be executed remotely. The exploit has been made available to the public and could be used for attacks. The project was informed of the problem early through an issue report but has not responded yet.",
-    "references": [
-      "https://github.com/dromara/orion-visor/",
-      "https://github.com/dromara/orion-visor/issues/170",
-      "https://github.com/sumo166/CVE-apply/blob/main/dromara-orion-visor/ExposeApi%20Hardcoded%20Default%20Token%20Authentication%20Bypass%20(CWE-798)_en.md",
-      "https://vuldb.com/cve/CVE-2026-90509",
-      "https://vuldb.com/submit/911864",
-      "https://vuldb.com/vuln/403097",
-      "https://vuldb.com/vuln/403097/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 21.9,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-58383",
-    "published": "2026-09-14T13:17:15.150",
-    "last_modified": "2026-09-20T01:16:26.887",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Froxlor before 2.2.0 (affected up to and including 2.2.0-rc3) generates /etc/pure-ftpd/db/mysql.conf with mode 0644 via the XML configuration templates in lib/configfiles/, even though the file contains the Froxlor SQL user's password. On systems where the parent directories are world readable (the default on Debian 12), any unprivileged local user able to execute commands or code on the host — including virtual users without SSH access who can upload PHP/CGI scripts — can read the file and obtain the Froxlor database credentials. Database access can then be leveraged to alter an administrator's password hash and TOTP seed, log in as a Froxlor administrator, and ultimately gain root privileges. Only instances configured to use pure-ftpd are affected.",
-    "references": [
-      "https://github.com/froxlor/froxlor/security/advisories/GHSA-34qg-65m4-f23m",
-      "https://www.vulncheck.com/advisories/froxlor-before-2.2.0-insecure-file-permissions-mysql-conf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.0,
     "tags": [],
     "intel_score": 46.5,
     "reasons": [
@@ -26462,6 +26445,27 @@
     "epss_percentile": 23.4,
     "tags": [],
     "intel_score": 46.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-23816",
+    "published": "2026-03-11T04:17:35.533",
+    "last_modified": "2026-09-22T20:56:07.920",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability in the command line interface of AOS-CX Switches could allow an authenticated remote attacker to execute arbitrary commands on the underlying operating system.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05027en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 50.6,
+    "tags": [],
+    "intel_score": 46.0,
     "reasons": [
       "recently modified (last 48h)"
     ]
@@ -27193,28 +27197,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 43.3,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86759",
-    "published": "2026-09-09T14:17:25.593",
-    "last_modified": "2026-09-20T01:16:30.887",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Snipe-IT versions before 8.7.0 fail to authorize the POST /hardware/history endpoint, allowing any authenticated user to reassign arbitrary assets and modify audit logs. Attackers can submit a CSV file to reassign assets across companies and inject fraudulent audit trail entries, compromising inventory integrity and accountability.",
-    "references": [
-      "https://github.com/grokability/snipe-it/security/advisories/GHSA-2232-926w-qvr9",
-      "https://www.vulncheck.com/advisories/snipe-it-before-8.7.0-missing-authorization-via-asset-history-csv-importer"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.3,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
