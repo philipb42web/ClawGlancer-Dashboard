@@ -15,19 +15,48 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 85.5,
-    "epss_percentile": 99.7,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "cisa_kev",
       "in_the_wild",
       "rce"
     ],
-    "intel_score": 154.0,
+    "intel_score": 129.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "CISA KEV active exploitation (+40)",
-      "High EPSS exploit prob 85.5% (+25)"
+      "CISA KEV active exploitation (+40)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-88772",
+    "published": "2026-09-27T17:16:56.390",
+    "last_modified": "2026-09-28T12:26:47.670",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23 leading to Remote Code Execution or Denial of Service",
+    "references": [
+      "https://support.citrix.com/support-home/kbsearch/article?articleNumber=CTX697096&articleTitle=Citrix_NetScaler_ADC_and_Citrix_NetScaler_Gateway_Security_Bulletin_for_CVE_2026_88771_CVE_2026_88772_CVE_2026_88773_CVE_2026_88774_CVE_2026_88775_CVE_2026_88776_CVE_2026_88777_and_CVE_2026_88778",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-88772"
+    ],
+    "source": "NVD",
+    "cisa_kev": true,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "cisa_kev",
+      "dos",
+      "in_the_wild",
+      "rce"
+    ],
+    "intel_score": 123.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3",
+      "CISA KEV active exploitation (+40)"
     ]
   },
   {
@@ -44,21 +73,20 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 39.4,
-    "epss_percentile": 98.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "cisa_kev",
       "dos",
       "in_the_wild",
       "rce"
     ],
-    "intel_score": 131.5,
+    "intel_score": 121.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
       "dos+3",
-      "CISA KEV active exploitation (+40)",
-      "Moderate EPSS prob 39.4% (+10)"
+      "CISA KEV active exploitation (+40)"
     ]
   },
   {
@@ -76,19 +104,18 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 18.2,
-    "epss_percentile": 97.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "cisa_kev",
       "in_the_wild",
       "rce"
     ],
-    "intel_score": 130.5,
+    "intel_score": 120.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "CISA KEV active exploitation (+40)",
-      "Moderate EPSS prob 18.2% (+10)"
+      "CISA KEV active exploitation (+40)"
     ]
   },
   {
@@ -141,8 +168,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass",
       "rce",
@@ -169,13 +196,43 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 3.0,
-    "epss_percentile": 86.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass",
       "rce"
     ],
     "intel_score": 112.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100721",
+    "published": "2026-09-27T02:17:17.547",
+    "last_modified": "2026-09-28T17:17:46.057",
+    "cvss_v3": 9.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "vm2 before 3.12.2 contains an authorization bypass in the NodeVM external-module resolver. When an embedder configures `require.external` with a custom resolver (and `context: 'host'`), `LegacyResolver.customResolve` in lib/resolver-compat.js records the resolved module directory in `this.externals` as `new RegExp('^' + escapeRegExp(resolvedPath))`, without requiring a path separator or end-of-string boundary. Untrusted guest code can therefore require the allowlisted module (e.g. `foo`) and then require the absolute path of a non-allowlisted sibling whose path merely shares the resolved prefix (e.g. `.../node_modules/foo2/index.js`); the sibling passes `isPathAllowedForModule` and is loaded through `hostRequire`, so its top-level code runs in the host process before the exports are wrapped with `vm.readonly`, resulting in a sandbox escape and arbitrary code execution in the host context.",
+    "references": [
+      "https://github.com/patriksimek/vm2/commit/6ac3916da84e060c403e407b6b6318fcc66b0e72",
+      "https://github.com/patriksimek/vm2/commit/91034466bfb7f56b95fd48083ec6ca36d058f164",
+      "https://github.com/patriksimek/vm2/commit/ab4ee7d803e8c80155e9eb3672226bddbca4aa9c",
+      "https://github.com/patriksimek/vm2/security/advisories/GHSA-5h3f-q97h-ccvc",
+      "https://www.vulncheck.com/advisories/vm2-before-3.12.2-authorization-bypass-via-custom-resolver"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "auth_bypass",
+      "rce"
+    ],
+    "intel_score": 110.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
@@ -200,8 +257,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 63.7,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "deserialization",
       "rce"
@@ -227,8 +284,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "rce"
@@ -256,8 +313,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 53.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "rce"
@@ -270,29 +327,57 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-75682",
-    "published": "2026-09-22T19:16:46.260",
-    "last_modified": "2026-09-25T18:20:33.223",
-    "cvss_v3": 9.9,
+    "cve_id": "CVE-2026-82384",
+    "published": "2026-09-28T08:16:42.273",
+    "last_modified": "2026-09-28T14:29:44.860",
+    "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Adobe Connect is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary SQL commands, potentially gaining elevated access or control over the victim's account or session. Exploitation of this issue does not require user interaction. Scope is changed.",
+    "summary": "Deserialization of Untrusted Data in Apache Roller 6.1.5 allows an unauthenticated remote attacker to cause deserialization of attacker-controlled bytes, because the XML-RPC endpoint accepts vendor extension types that are deserialized during request parsing, before authentication. The servlet is mapped unconditionally, so parsing occurs even when the global XML-RPC feature is set to disabled; no non-default configuration is required for this path. This can lead to remote code execution. Users are recommended to upgrade to Apache Roller 6.1.6 or later, which disables the extension types and rejects requests when the XML-RPC feature is disabled.",
     "references": [
-      "https://helpx.adobe.com/security/products/connect/apsb26-150.html"
+      "https://github.com/apache/roller/pull/171",
+      "https://lists.apache.org/thread/21p1dh6x179gmcdpw84kkx9yclrdp410",
+      "http://www.openwall.com/lists/oss-security/2026/09/25/17"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "rce",
-      "sqli"
+      "deserialization",
+      "rce"
     ],
-    "intel_score": 107.5,
+    "intel_score": 109.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "sqli+18"
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-6721",
+    "published": "2026-09-23T21:17:01.927",
+    "last_modified": "2026-09-28T20:45:56.910",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "IBM Concert 1.0.0 through 3.0.0 allows an unauthenticated remote attacker can supply specially crafted input that is incorporated into OS commands, resulting in arbitrary command execution on the underlying system. Successful exploitation allows remote code execution with the privileges of the affected application.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7288830"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -308,8 +393,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.7,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "rce"
@@ -335,8 +420,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "rce"
@@ -378,38 +463,35 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-15555",
-    "published": "2026-08-11T09:17:12.540",
-    "last_modified": "2026-09-25T13:17:08.087",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
+    "cve_id": "CVE-2026-82901",
+    "published": "2026-09-26T19:16:28.427",
+    "last_modified": "2026-09-28T15:16:04.793",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "A flaw was found in JBoss marshalling. The Infinispan session replication path deserializes replicated session data via the JBoss Marshalling River unmarshaller with no class filtering — enabling RCE via deserialization gadget chains on every cluster node.",
+    "summary": "The Ultra Addons for Contact Form 7 plugin for WordPress is vulnerable to Arbitrary File Upload due to insufficient file type validation in the 'uacf7_wpcf7_mail_components' function in all versions up to, and including, 3.5.50. This makes it possible for unauthenticated attackers to upload arbitrary files on the affected site's server which may make remote code execution possible. Note: This is only exploitable when the plugin's PDF Generator module is enabled, which is disabled by default.",
     "references": [
-      "https://access.redhat.com/errata/RHSA-2026:53644",
-      "https://access.redhat.com/errata/RHSA-2026:53645",
-      "https://access.redhat.com/errata/RHSA-2026:53646",
-      "https://access.redhat.com/errata/RHSA-2026:53806",
-      "https://access.redhat.com/errata/RHSA-2026:70228",
-      "https://access.redhat.com/errata/RHSA-2026:70229",
-      "https://access.redhat.com/errata/RHSA-2026:70230",
-      "https://access.redhat.com/errata/RHSA-2026:70277",
-      "https://access.redhat.com/security/cve/CVE-2026-15555",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2480637"
+      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/pdf-generator/pdf-generator.php#L608",
+      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/pdf-generator/pdf-generator.php#L807",
+      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/signature/ultimate-signature.php#L133",
+      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/signature/ultimate-signature.php#L192",
+      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/signature/ultimate-signature.php#L300",
+      "https://plugins.trac.wordpress.org/changeset/3698232/ultimate-addons-for-contact-form-7",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/872e1a05-aacc-44fa-93c1-8c3f7b2fb46d?source=cve"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "deserialization",
+      "file_write",
       "rce"
     ],
     "intel_score": 104.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "deserialization+20"
+      "file_write+15"
     ]
   },
   {
@@ -425,8 +507,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 61.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce",
       "sqli"
@@ -451,8 +533,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "command_injection",
       "rce"
@@ -477,8 +559,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "ssrf"
@@ -503,8 +585,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "ssrf"
@@ -529,8 +611,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 9.5,
-    "epss_percentile": 95.3,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "deserialization",
       "rce"
@@ -540,32 +622,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-16672",
-    "published": "2026-09-22T22:17:07.280",
-    "last_modified": "2026-09-25T18:42:23.747",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to improper neutralization of special elements used in an OS command.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7288649"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.0,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
     ]
   },
   {
@@ -581,8 +637,34 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.8,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12268",
+    "published": "2026-09-28T11:16:44.063",
+    "last_modified": "2026-09-28T14:17:14.983",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ManageEngine DDI Central versions below 6201 are vulnerable to PowerShell command injection in Windows DNS SPF/TXT record push leading to remote code execution.",
+    "references": [
+      "https://www.manageengine.com/dns-dhcp-ipam/security-updates/security-updates.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "command_injection",
       "rce"
@@ -662,8 +744,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "deserialization",
       "rce"
@@ -673,32 +755,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76460",
-    "published": "2026-09-16T21:17:21.430",
-    "last_modified": "2026-09-25T16:53:35.463",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A vulnerability in an API of Cisco Identity Services Engine (ISE) could allow an unauthenticated, remote attacker to bypass authentication.\r\n\r\nThis vulnerability is due to insufficient authentication control on an API endpoint. An attacker could exploit this vulnerability by sending a crafted request to an affected API endpoint. A successful exploit could allow the attacker to gain unauthorized access to the affected device by bypassing the web-based management interface.",
-    "references": [
-      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ISE-ABP-VNSW7Tn5",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-76460"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 14.0,
-    "epss_percentile": 96.4,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 100.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
     ]
   },
   {
@@ -719,8 +775,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc",
       "rce"
@@ -730,6 +786,33 @@
       "recently modified (last 48h)",
       "rce+30",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100706",
+    "published": "2026-09-26T14:16:55.843",
+    "last_modified": "2026-09-28T15:20:06.633",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "kyverno before 1.19.1 fails to properly validate URL-encoded path segments in Policy apiCall urlPath, allowing namespace tenants to bypass the per-namespace clamp and create objects in other namespaces as the admission-controller ServiceAccount. Attackers can exploit this by using percent-encoded directory traversal sequences to create MutatingWebhookConfiguration objects cluster-wide or PolicyException objects in the kyverno namespace, enabling privilege escalation to cluster admin.",
+    "references": [
+      "https://github.com/kyverno/kyverno/security/advisories/GHSA-5qq8-67g6-4h2w",
+      "https://www.vulncheck.com/advisories/kyverno-before-1.19.1-privilege-escalation-via-policy-apicall-urlpath"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "path_traversal",
+      "priv_esc"
+    ],
+    "intel_score": 99.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "path_traversal+15"
     ]
   },
   {
@@ -749,8 +832,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 57.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -776,8 +859,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 43.9,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -803,8 +886,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.7,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -830,8 +913,8 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 1.2,
-    "epss_percentile": 66.9,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "cisa_kev",
       "in_the_wild"
@@ -840,68 +923,12 @@
     "reasons": [
       "recently modified (last 48h)",
       "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-33824",
-    "published": "2026-04-14T18:17:34.767",
-    "last_modified": "2026-09-25T18:17:25.133",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Double free in Windows IKE Extension allows an unauthorized attacker to execute code over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-33824",
-      "https://unit42.paloaltonetworks.com/autonomous-ai-cyber-attack-campaign/",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-33824"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 1.6,
-    "epss_percentile": 75.1,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93834",
-    "published": "2026-09-25T14:17:24.063",
-    "last_modified": "2026-09-25T14:17:24.063",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free vulnerability was found in QEMU's 9pfs subsystem. A race condition between the main thread and a worker thread when processing concurrent Tlcreate and Twalk requests allows a malicious guest user to craft a fid path containing stale heap data, bypassing directory traversal restrictions and escaping the shared directory boundary. This can lead to arbitrary host file read/write and code execution (VM escape) as the QEMU process user.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-93834",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2537939",
-      "https://gitlab.com/qemu-project/qemu/-/work_items/4491",
-      "https://gitlab.com/qemu-project/qemu/-/work_items/4491"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.1,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
     ]
   },
   {
     "cve_id": "CVE-2026-100682",
     "published": "2026-09-26T14:16:52.433",
-    "last_modified": "2026-09-26T14:16:52.433",
+    "last_modified": "2026-09-28T16:36:05.010",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -912,8 +939,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -923,6 +950,140 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100843",
+    "published": "2026-09-27T02:17:22.853",
+    "last_modified": "2026-09-28T20:53:43.443",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "MONAI versions before 1.6.0 contain a remote code execution vulnerability in the algo_from_pickle() function due to unsafe pickle.loads() deserialization in monai/auto3dseg/utils.py. Attackers can craft malicious pickle files that execute arbitrary system commands when deserialized by the vulnerable function.",
+    "references": [
+      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-qxq5-qhx6-94qw",
+      "https://www.vulncheck.com/advisories/monai-before-1.6.0-remote-code-execution-via-algo-from-pickle"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100845",
+    "published": "2026-09-27T02:17:23.140",
+    "last_modified": "2026-09-28T21:03:04.910",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "MONAI before 1.6.0 contains an unsafe deserialization vulnerability in the NumpyReader class that unconditionally uses numpy.load with allow_pickle=True when loading .npy and .npz files. Attackers can craft malicious .npy files with pickle payloads that execute arbitrary code when loaded through MONAI's standard data pipeline.",
+    "references": [
+      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-wg9g-w2j2-8pgr",
+      "https://www.vulncheck.com/advisories/monai-before-1.6.0-remote-code-execution-via-numpyreader",
+      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-wg9g-w2j2-8pgr"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-88771",
+    "published": "2026-09-27T17:16:56.260",
+    "last_modified": "2026-09-28T13:17:25.027",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23 leading to an unauthenticated attacker to execute arbitrary commands.",
+    "references": [
+      "https://support.citrix.com/support-home/kbsearch/article?articleNumber=CTX697096",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-88771"
+    ],
+    "source": "NVD",
+    "cisa_kev": true,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "cisa_kev",
+      "in_the_wild"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "CISA KEV active exploitation (+40)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12264",
+    "published": "2026-09-28T12:17:36.597",
+    "last_modified": "2026-09-28T16:17:13.337",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Zohocorp ManageEngine DDI Central versions before 6201 are vulnerable to Arbitrary file write via HA Failover Config sync upload leading to remote code execution.",
+    "references": [
+      "https://www.manageengine.com/dns-dhcp-ipam/security-updates/security-updates.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100846",
+    "published": "2026-09-27T02:17:23.283",
+    "last_modified": "2026-09-28T20:53:43.443",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "MONAI before 1.5.2 contains a deserialization of untrusted data vulnerability in the algo_from_pickle function in monai/auto3dseg/utils.py. The function reads a .pkl file and passes its contents to pickle.loads without validating the data source or content. If an application invokes algo_from_pickle on an attacker-supplied pickle file, an object defining __reduce__ is executed during deserialization, resulting in arbitrary code execution in the context of the application.",
+    "references": [
+      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-89gg-p5r5-q6r4",
+      "https://www.vulncheck.com/advisories/monai-before-1.5.2-remote-code-execution-via-pickle-deserialization"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 98.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -940,8 +1101,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce",
       "xss"
@@ -956,7 +1117,7 @@
   {
     "cve_id": "CVE-2026-84862",
     "published": "2026-09-25T15:17:56.110",
-    "last_modified": "2026-09-26T04:17:47.860",
+    "last_modified": "2026-09-28T13:17:24.310",
     "cvss_v3": 7.2,
     "severity": "HIGH",
     "affected": [],
@@ -966,8 +1127,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 28.3,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "deserialization",
       "rce"
@@ -1023,8 +1184,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -1086,8 +1247,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 3.1,
-    "epss_percentile": 87.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "command_injection",
       "rce"
@@ -1112,8 +1273,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce",
       "xss"
@@ -1138,8 +1299,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce",
       "xss"
@@ -1164,8 +1325,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce",
       "xss"
@@ -1190,8 +1351,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "path_traversal",
       "rce"
@@ -1218,8 +1379,8 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 2.1,
-    "epss_percentile": 81.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "cisa_kev",
       "in_the_wild"
@@ -1231,58 +1392,55 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-97602",
-    "published": "2026-09-25T11:17:11.573",
-    "last_modified": "2026-09-25T15:18:00.950",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2026-76690",
+    "published": "2026-09-15T20:17:51.043",
+    "last_modified": "2026-09-28T13:52:50.370",
+    "cvss_v3": 7.2,
     "severity": "HIGH",
     "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ninet: frags: invalidate queues before flushing them\n\nfqdir_pre_exit() flushes the skbs from incomplete queues without\nchanging their completion state. A fragment which found a queue before\nhigh_thresh was cleared can then acquire the queue lock and reuse stale\nreassembly metadata. A queue concurrently killed after fqdir->dead is\nset can instead become INET_FRAG_COMPLETE|INET_FRAG_HASH_DEAD while\nstill holding its old skbs; skipping it because it is complete leaves\nthose references behind until asynchronous fqdir teardown.\n\nFor IPv6, stale metadata can make ip6_frag_reasm() use the old\nnhoffset with a new skb and access memory out of bounds. The resulting\nheap corruption can be leveraged for local privilege escalation when\nunprivileged network namespaces are available. Unflushed fragments can\nalso keep conntrack references alive after the conntrack per-net\ncleanup point.\n\nKill each incomplete queue, then flush every queue still owned by the\ndying rhashtable. HASH_DEAD identifies that ownership, while complete\nqueues without it are already owned by another destroy path and must be\nleft alone. Releasing a timer reference removed by inet_frag_kill() is\ndeferred to inet_frag_putn(), after the queue lock is dropped.\n\nKASAN report:\n\n  BUG: KASAN: slab-out-of-bounds in ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  Write of size 1 at addr ff110001039c6e00 by task poc/771\n  Call Trace:\n  ? ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:479 (discriminator 5))\n  ip6_input_finish (net/ipv6/ip6_input.c:534)\n  ipv6_rcv (include/net/dst.h:480 (discriminator 3) net/ipv6/ip6_input.c:119 (discriminator 3) net/ipv6/ip6_input.c:109 (discriminator 3) include/linux/netfilter.h:325 (discriminator 3) include/linux/netfilter.h:319 (discriminator 3) net/ipv6/ip6_input.c:351 (discriminator 3))\n  packet_sendmsg (net/packet/af_packet.c:3110 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  The buggy address belongs to the object at ff110001039c6b40\n  which belongs to the cache skbuff_small_head of size 704\n  The buggy address is located 0 bytes to the right of\n  allocated 704-byte region [ff110001039c6b40, ff110001039c6e00)\n\n  BUG: KASAN: slab-out-of-bounds in ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  Read of size 1 at addr ff110001039c6e08 by task poc/771\n  Call Trace:\n  ? ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  ip6_input_finish (net/ipv6/ip6_input.c:534)\n  ipv6_rcv (include/net/dst.h:480 (discriminator 3) net/ipv6/ip6_input.c:119 (discriminator 3) net/ipv6/ip6_input.c:109 (discriminator 3) include/linux/netfilter.h:325 (discriminator 3) include/linux/netfilter.h:319 (discriminator 3) net/ipv6/ip6_input.c:351 (discriminator 3))\n  packet_sendmsg (net/packet/af_packet.c:3110 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  packet_sendmsg (net/packet/af_packet.c:2959 net/packet/af_packet.c:3053 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  The buggy address belongs to the object at ff110001039c6b40\n  which belongs to the cache skbuff_small_head of size 704\n  The buggy address is located 8 bytes to the right of\n  allocated 704-byte region [ff110001039c6b40, ff110001039c6e00)",
+    "summary": "A vulnerability exists in a component of the HPE Networking EdgeConnect SD-WAN Gateways that may allow for arbitrary command execution. An authenticated remote attacker could exploit this vulnerability by providing a specially crafted input to the affected component. Successful exploitation could result in remote code execution as root.",
     "references": [
-      "https://git.kernel.org/stable/c/7cb5f4643a7fcdbfbee1fad3cdfc678add62d378",
-      "https://git.kernel.org/stable/c/b824476c56a153934c67c9e0f873e1fd967743d6",
-      "https://git.kernel.org/stable/c/b9d77f1652e79e58eac48430d0431c329137efcc",
-      "https://git.kernel.org/stable/c/bf3d6c44c84c57e8a4bb7f40ad95b64f9b0198ba"
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 4.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "poc",
-      "priv_esc"
+      "command_injection",
+      "rce"
     ],
     "intel_score": 94.0,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25",
-      "poc+20"
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
-    "cve_id": "CVE-2026-20147",
-    "published": "2026-04-15T17:17:02.410",
-    "last_modified": "2026-09-25T16:41:55.563",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-12267",
+    "published": "2026-09-28T11:16:43.943",
+    "last_modified": "2026-09-28T14:17:14.820",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "A vulnerability in Cisco ISE and Cisco ISE-PIC could allow an authenticated, remote attacker to execute arbitrary commands on the underlying operating system of an affected device. To exploit this vulnerability, the attacker must have valid administrative credentials.\r\n\r\nThis vulnerability is due to insufficient validation of user-supplied input. An attacker could exploit this vulnerability by sending a crafted HTTP request to an affected device. A successful exploit could allow the attacker to obtain user-level access to the underlying operating system and then elevate privileges to root. In single-node ISE deployments, successful exploitation of this vulnerability could cause the affected ISE node to become unavailable, resulting in a denial of service (DoS) condition. In that condition, endpoints that have not already authenticated would be unable to access the network until the node is restored.",
+    "summary": "ManageEngine DDI Central versions below 6201 are vulnerable to Command injection in Windows DNS Query Resolution Policy name field leading to remote code execution.",
     "references": [
-      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-rce-traversal-8bYndVrZ"
+      "https://www.manageengine.com/dns-dhcp-ipam/security-updates/security-updates.html"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 10.4,
-    "epss_percentile": 95.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "dos",
+      "command_injection",
       "rce"
     ],
-    "intel_score": 92.5,
+    "intel_score": 94.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "dos+3"
+      "command_injection+18"
     ]
   },
   {
@@ -1298,8 +1456,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "dos",
       "rce"
@@ -1312,62 +1470,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-85750",
-    "published": "2026-09-25T14:17:20.330",
-    "last_modified": "2026-09-25T15:17:56.560",
-    "cvss_v3": 7.2,
+    "cve_id": "CVE-2026-4556",
+    "published": "2026-09-28T15:17:17.723",
+    "last_modified": "2026-09-28T17:17:49.710",
+    "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Piwigo before v16.4.0 is vulnerable to arbitrary file read and remote code execution in image upload handling when using the Imagick library due to insufficient validation and unsafe processing of user-supplied image files. By abusing format confusion (e.g., disguising SVG content as PNG), an attacker can trigger unintended interpretation of embedded SVG elements that reference local files. In more advanced scenarios, the Imagick support for Magick Scripting Language (MSL) may be abused to process attacker-controlled instructions, potentially leading to unauthorized server-side file writes and remote code execution, depending on configuration. This has been patched in 16.4.0.",
+    "summary": "Exam4 is affected by a local privilege escalation vulnerability in the com.extegrity.LogTool privileged helper, which communicates with the application via XPC. The [ConsoleLogHelper copyConsoleIntoFileFromStartDate:] method executes a syslog command using attacker-controlled parameters without proper sanitization, enabling command injection. Successful exploitation allows a local attacker to execute arbitrary commands with root privileges through LaunchSynchronous.",
     "references": [
-      "https://github.com/Piwigo/Piwigo/security/advisories/GHSA-j9q6-q52g-g8jw",
-      "https://www.helx.io/en/blog/advisory-piwigo",
-      "https://github.com/Piwigo/Piwigo/security/advisories/GHSA-j9q6-q52g-g8jw"
+      "https://pentraze.com/vulnerability-reports"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 67.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "file_write",
-      "rce"
+      "command_injection",
+      "priv_esc"
     ],
-    "intel_score": 91.0,
+    "intel_score": 92.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100372",
-    "published": "2026-09-25T20:17:06.143",
-    "last_modified": "2026-09-25T20:17:06.143",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ClipBucket v5 before 5.5.3-#197 contains a path traversal vulnerability in the admin template editor that allows authenticated administrators to overwrite PHP files by supplying directory traversal sequences in the folder parameter. Attackers with manage_template_access permission can traverse outside the layout directory to modify executable PHP files and achieve remote code execution as the web server user.",
-    "references": [
-      "https://github.com/MacWarrior/clipbucket-v5",
-      "https://github.com/MacWarrior/clipbucket-v5/blob/61cce55ab26ef88fb782dfde47b44c17c56978cd/upload/admin_area/template_editor.php#L44-L69",
-      "https://github.com/MacWarrior/clipbucket-v5/commit/f31de49b2194482ffef7147aa1e9b1c8f0f04eb7",
-      "https://github.com/MacWarrior/clipbucket-v5/releases/tag/5.5.3-%23197",
-      "https://hackmd.io/@leediay/S1AIRjzqfx",
-      "https://www.vulncheck.com/advisories/clipbucket-v5-before-5.5.3-197-path-traversal-via-template-editor-php"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 65.3,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 91.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
+      "priv_esc+25",
+      "command_injection+18"
     ]
   },
   {
@@ -1383,8 +1508,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1407,8 +1532,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 68.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1431,8 +1556,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 68.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1455,8 +1580,36 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 66.0,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 90.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100886",
+    "published": "2026-09-27T23:16:59.020",
+    "last_modified": "2026-09-28T15:16:04.793",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was identified in Seetong T8108, T8108P, T8116 and T8232 4.6.1.4-build202604241011. The affected element is an unknown function of the component Debug Service. Such manipulation leads to improper authentication. The attack may be launched remotely. The exploit is publicly available and might be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://github.com/heapframe/seetong-ts81xxd3x-rce",
+      "https://vuldb.com/cve/CVE-2026-100886",
+      "https://vuldb.com/submit/916434",
+      "https://vuldb.com/vuln/410835",
+      "https://vuldb.com/vuln/410835/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1484,8 +1637,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 56.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1508,8 +1661,60 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.3,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-89078",
+    "published": "2026-09-24T00:17:22.060",
+    "last_modified": "2026-09-28T15:22:58.227",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 19.2 before 19.2.7, 19.3 before 19.3.3, and 19.4 before 19.4.1 that under certain conditions could have allowed an authenticated user to execute arbitrary code on the GitLab server due to a double free issue when parsing a specially crafted regular expression in a CI/CD configuration.",
+    "references": [
+      "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-1-released/",
+      "https://gitlab.com/gitlab-org/gitlab/-/work_items/628577",
+      "https://hackerone.com/reports/4019059"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93577",
+    "published": "2026-09-24T00:17:22.850",
+    "last_modified": "2026-09-28T15:22:15.293",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 19.2 before 19.2.7, 19.3 before 19.3.3, and 19.4 before 19.4.1 that under certain conditions could have allowed an authenticated user to execute arbitrary code on the GitLab server due to an integer overflow issue when compiling a specially crafted regular expression in a CI/CD configuration.",
+    "references": [
+      "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-1-released/",
+      "https://gitlab.com/gitlab-org/gitlab/-/work_items/629758",
+      "https://hackerone.com/reports/3995696"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1532,8 +1737,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1556,8 +1761,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1580,8 +1785,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.3,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1605,8 +1810,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 12.3,
-    "epss_percentile": 96.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1630,8 +1835,8 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 2.5,
-    "epss_percentile": 84.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "cisa_kev",
       "in_the_wild"
@@ -1656,7 +1861,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 60.1,
+    "epss_percentile": 60.2,
     "tags": [
       "rce"
     ],
@@ -1667,20 +1872,20 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-25254",
-    "published": "2026-09-22T10:17:08.583",
-    "last_modified": "2026-09-25T13:37:41.860",
+    "cve_id": "CVE-2026-76674",
+    "published": "2026-09-15T20:17:49.207",
+    "last_modified": "2026-09-28T13:46:39.970",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Improper authorization leads to Remote Code Execution via SocketIO interface.",
+    "summary": "Buffer overflow vulnerabilities exist in the underlying operating system of HPE Networking EdgeConnect SD-WAN Gateways that could allow an unauthenticated remote attacker to execute arbitrary code. Successful exploitation could allow an attacker to execute arbitrary commands on the underlying operating system leading to complete system compromise.",
     "references": [
-      "https://docs.qualcomm.com/product/publicresources/securitybulletin/may-2026-bulletin.html"
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1691,21 +1896,20 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-97230",
-    "published": "2026-09-24T23:19:22.960",
-    "last_modified": "2026-09-25T17:17:20.880",
+    "cve_id": "CVE-2026-6730",
+    "published": "2026-09-23T21:17:02.053",
+    "last_modified": "2026-09-28T20:47:20.347",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "IO::Socket::SSL::SelfCertificate versions 1.00 for Perl contains malware which executes Python code from an obfuscated URL.\n\nThe generate_certificate runs a Python script saved as a certificate file.  The pyhton script attempts to retrieve code from a hardcoded http URL that is obfuscated with base64 encoding and run the response body directly.\n\nThe impact is that arbitrary code can be invoked as the user, without a dropped script being saved on the affected host.\n\nThe releases have no test scripts nor build hooks.  The intention may have been to trigger the payload after installation.\n\nThe dropper script is in lib/Crypt/SelfCertificate/sample/cert.pem.\n\nThis is similar to CVE-2026-95831 for the module Crypt::SelfCertificate.\n\nThe SHA-256 digests of the files are\n\n    ba24ee8ec3b7f47f65bed62e16fb413ace50653cf44bd8ea90914390922831e0  IO-Socket-SSL-SelfCertificate-1.00.tar.gz\n    821d38830e5eb8607738421c25ac25f59fff02a6ab67daa32fbd020429454dac  IO-Socket-SSL-SelfCertificate-1.00/lib/IO/Socket/SSL/SelfCertificate/sample/cert.pem\n\n    d483cb7b23b7271cb11cf242bff4a2e1c02df0b9525eb0429abeea8961c399d5  IO-Socket-SSL-SelfCertificate-1.00-upload.tar.gz",
+    "summary": "IBM Concert 1.0.0 through 3.0.0 is vulnerable to a buffer overflow, caused by improper bounds checking. A local user could overflow the buffer and execute arbitrary code on the system.",
     "references": [
-      "https://www.cve.org/CVERecord?id=CVE-2026-95831",
-      "https://www.nntp.perl.org/group/perl.cpan.testers.discuss/2026/09/msg4756.html"
+      "https://www.ibm.com/support/pages/node/7288830"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 13.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1713,6 +1917,33 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100714",
+    "published": "2026-09-26T14:16:57.240",
+    "last_modified": "2026-09-26T23:16:33.297",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Froxlor before 2.3.12 does not restrict or escape the system.letsencryptchallengepath setting: unlike sibling settings hardened in GHSA-33mp, the field has no string_regexp or required_otp guard, and its value is concatenated unescaped into the acme.sh command line built in lib/Froxlor/Cron/Http/LetsEncrypt/AcmeSh.php and executed by the root cron via FileDir::safe_exec. Because safe_exec only blacklists shell metacharacters such as ; | & > < \\ $ ~ ?, spaces and quotes survive and the value is word-split into additional acme.sh arguments. An administrator, or any actor able to write settings (for example through the settings-import API), can therefore inject acme.sh options such as --renew-hook, --pre-hook or --post-hook to obtain arbitrary command execution as root at the next Let's Encrypt cron run, or use --config-home/--cert-home for arbitrary file writes. Versions up to and including 2.3.10 are affected; the issue is fixed in 2.3.12.",
+    "references": [
+      "https://github.com/froxlor/froxlor/security/advisories/GHSA-3w4g-cmpj-rj42",
+      "https://www.vulncheck.com/advisories/froxlor-before-2.3.12-command-injection-via-letsencryptchallengepath"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "command_injection",
+      "file_write"
+    ],
+    "intel_score": 88.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18",
+      "file_write+15"
     ]
   },
   {
@@ -1728,8 +1959,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 28.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1755,6 +1986,30 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 47.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12342",
+    "published": "2026-09-28T16:17:13.460",
+    "last_modified": "2026-09-28T18:17:21.410",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "This vulnerability\nimpacts all versions of IdentityIQ and allows an unauthenticated user remote\ncode execution on the IdentityIQ server due to improper input validation of\nsubmitted web service API content.",
+    "references": [
+      "https://www.sailpoint.com/security-advisories/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1816,8 +2071,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "dos",
       "rce"
@@ -1827,30 +2082,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-75686",
-    "published": "2026-09-22T19:16:46.520",
-    "last_modified": "2026-09-25T18:19:40.843",
-    "cvss_v3": 9.3,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Connect is affected by an Improper Input Validation vulnerability that could result in arbitrary code execution in the context of the current user. An attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue requires user interaction in that a victim must visit a maliciously crafted URL or interact with a compromised web page. Scope is changed.",
-    "references": [
-      "https://helpx.adobe.com/security/products/connect/apsb26-150.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 86.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -1866,8 +2097,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 10.6,
-    "epss_percentile": 95.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1890,8 +2121,36 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 67.0,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 85.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-101894",
+    "published": "2026-09-28T17:17:48.830",
+    "last_modified": "2026-09-28T18:17:17.730",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The decompress package for Node.js extracts archives. Prior to 10.2.2 and 11.1.4, the default decompress(input, output) API relies on lexical containment checks that do not account for the kernel following a planted symlink chain. An attacker can supply a crafted archive containing chained symlink entries so that a later entry resolves outside the output directory. This allows files outside output to be read or written, and overwriting startup scripts or configuration can lead to remote code execution. The maintained @xhmikosr/decompress package is fixed in 10.2.2 and 11.1.4, but the separately affected unmaintained decompress package remains unpatched through 4.2.1. This vulnerability results from a bypass of the incomplete hardening for CVE-2026-53486. @xhmikosr/decompress is fixed in versions 10.2.2 and 11.1.4.",
+    "references": [
+      "https://github.com/XhmikosR/decompress/commit/5f4b2f64abb31bbaf1fef8975b595fd7df2558d8",
+      "https://github.com/XhmikosR/decompress/commit/f6c88c668216d6a12c6cecf4fe0b6c70bf77050a",
+      "https://github.com/XhmikosR/decompress/releases/tag/v10.2.2",
+      "https://github.com/XhmikosR/decompress/releases/tag/v11.1.4",
+      "https://github.com/XhmikosR/decompress/security/advisories/GHSA-hrh2-vp3x-79xf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1914,32 +2173,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.4,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-69843",
-    "published": "2026-09-18T00:17:24.923",
-    "last_modified": "2026-09-25T19:53:30.793",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authentication bypass by spoofing in Microsoft Fabric allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69843"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass"
     ],
@@ -1966,8 +2201,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "poc",
       "sqli"
@@ -1980,57 +2215,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-76669",
-    "published": "2026-09-15T20:17:48.627",
-    "last_modified": "2026-09-25T12:56:46.377",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Privilege escalation vulnerabilities exist in the API of HPE Networking EdgeConnect SD-WAN Orchestrator. Successful exploitation could allow a remote low-privileged authenticated user to escalate their privileges to those of an administrative user, leading to complete system compromise.",
-    "references": [
-      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.2,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76670",
-    "published": "2026-09-15T20:17:48.833",
-    "last_modified": "2026-09-25T12:56:42.727",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Privilege escalation vulnerabilities exist in the API of HPE Networking EdgeConnect SD-WAN Orchestrator. Successful exploitation could allow a remote low-privileged authenticated user to escalate their privileges to those of an administrative user, leading to complete system compromise.",
-    "references": [
-      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.2,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-97882",
     "published": "2026-09-25T18:17:35.063",
-    "last_modified": "2026-09-25T18:17:35.063",
+    "last_modified": "2026-09-28T15:16:04.793",
     "cvss_v3": 7.3,
     "severity": "HIGH",
     "affected": [],
@@ -2044,8 +2231,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.3,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "poc",
       "sqli"
@@ -2070,8 +2257,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 28.2,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass"
     ],
@@ -2094,8 +2281,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 34.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass"
     ],
@@ -2118,8 +2305,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 34.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass"
     ],
@@ -2142,8 +2329,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 13.5,
-    "epss_percentile": 96.3,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2169,8 +2356,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2195,8 +2382,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 34.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc"
     ],
@@ -2221,8 +2408,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2246,8 +2433,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.7,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2271,8 +2458,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.7,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass"
     ],
@@ -2301,8 +2488,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.6,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc"
     ],
@@ -2327,8 +2514,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 3.3,
-    "epss_percentile": 88.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "auth_bypass"
     ],
@@ -2352,8 +2539,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2380,8 +2567,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 59.9,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2407,8 +2594,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 59.4,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2435,8 +2622,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 59.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2463,8 +2650,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.8,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2496,8 +2683,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 62.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -2520,8 +2707,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.0,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "priv_esc"
     ],
@@ -2545,194 +2732,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-16526",
-    "published": "2026-07-30T06:25:02.663",
-    "last_modified": "2026-09-28T10:16:43.420",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw in the PCP linux_sockets module exposes an unsecured internal connection.\nAn attacker with initial code execution can exploit this to escalate privileges and execute arbitrary commands as root.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:55560",
-      "https://access.redhat.com/errata/RHSA-2026:55617",
-      "https://access.redhat.com/errata/RHSA-2026:55740",
-      "https://access.redhat.com/errata/RHSA-2026:72272",
-      "https://access.redhat.com/errata/RHSA-2026:72273",
-      "https://access.redhat.com/security/cve/CVE-2026-16526",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2506026"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 36.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-18951",
-    "published": "2026-08-10T21:17:21.710",
-    "last_modified": "2026-09-28T10:16:44.640",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the Red Hat OpenShift AI (RHOAI) overlay for the training operator. The RHOAI overlay incorrectly aggregates `trainjobs` management permissions into the native Kubernetes `edit ClusterRole`. This allows any user with `edit ClusterRole` permissions in a namespace to create, modify, and delete `TrainJobs`. When combined with a separate vulnerability (TRN-01) that permits arbitrary pod configurations, a remote attacker with namespace editor privileges could exploit this to escalate privileges, potentially leading to arbitrary code execution.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:53262",
-      "https://access.redhat.com/errata/RHSA-2026:53263",
-      "https://access.redhat.com/errata/RHSA-2026:60367",
-      "https://access.redhat.com/errata/RHSA-2026:60520",
-      "https://access.redhat.com/security/cve/CVE-2026-18951",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2511187"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 57.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76425",
-    "published": "2026-09-16T21:17:14.107",
-    "last_modified": "2026-09-28T12:27:36.030",
-    "cvss_v3": 7.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability in the APIs of Cisco ISE could allow an authenticated, remote attacker to conduct SQL injection attacks against the backend database.\r\n\r\nThis vulnerability is due to insufficient validation of certain parameters that are concatenated directly into an SQL query. An attacker could exploit this vulnerability by sending a crafted request that contains SQL statements to an affected endpoint. A successful exploit could allow the attacker to read arbitrary content from the SQL database and conduct server-side request forgery (SSRF) attacks. To exploit this vulnerability, the attacker must have valid administrative credentials.",
-    "references": [
-      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-multi-hrP9jQSQ"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.3,
-    "tags": [
-      "sqli",
-      "ssrf"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "ssrf+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-88418",
-    "published": "2026-09-22T20:17:10.960",
-    "last_modified": "2026-09-26T00:16:37.843",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "CMSimple 5.24 ships with CSRF protection disabled by default, which turns csrfProtection() into a no-op on every state-changing admin request, and it does not send the csrf_token hidden field in admin forms. Because administrator authentication is cookie-only and no CSRF token is enforced, an unauthenticated attacker can induce a logged-in administrator's browser to issue a forged content-save request with a text payload containing a scripting marker. The marker is stored verbatim into content/content.php; on every subsequent page view evaluate_cmsimple_scripting() (functions.php) executes the marker body with PHP eval() — for all visitors, including unauthenticated ones. This yields persistent remote code execution on the web server.",
-    "references": [
-      "https://github.com/15536818056/CVE/issues/5",
-      "https://github.com/15536818056/CVE/issues/5"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 15.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-80412",
-    "published": "2026-09-23T21:17:03.067",
-    "last_modified": "2026-09-26T23:16:36.023",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to improper escaping of connector property values during OSH script generation.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7288649"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-51997",
-    "published": "2026-09-24T15:17:23.397",
-    "last_modified": "2026-09-25T17:17:09.083",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An issue in geelen mcp-remote 0.1.16 through 0.1.38 allows a remote attacker to execute arbitrary code via the open() functions",
-    "references": [
-      "https://github.com/geelen/mcp-remote",
-      "https://github.com/geelen/mcp-remote/security/advisories",
-      "https://github.com/playb0t/mcp-remote-oauth-security/blob/v1.0.1/advisories/F-08-browser-url-validation.md"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-96883",
-    "published": "2026-09-24T20:17:35.240",
-    "last_modified": "2026-09-25T13:16:34.693",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "pgcollection is an open source extension to PostgreSQL. A type confusion issue in AWS pgcollection 2.0.0 through 2.1.1 might allow an authenticated remote user to execute arbitrary code as the postgres operating system user via crafted SQL statements that rely on mismatched type metadata in collection value retrieval and array conversion functions.\n\n\n\nTo remediate this issue, users should upgrade to version 2.1.2 or later.",
-    "references": [
-      "https://aws.amazon.com/security/security-bulletins/2026-118-aws/",
-      "https://github.com/aws/pgcollection/releases/tag/v2.1.2",
-      "https://github.com/aws/pgcollection/security/advisories/GHSA-g539-cj32-hv6r"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.1,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
