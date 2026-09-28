@@ -235,35 +235,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-54752",
-    "published": "2026-09-17T20:16:52.877",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "NetBox Device Type Library is a collection of community-sourced device type definitions for import into NetBox. The validation test harness can deserialize pull-request-controlled tracked pickle cache files through pickle.load in the read_pickle_data function in tests/pickle_operations.py. An unauthenticated contributor can change USE_LOCAL_KNOWN_SLUGS in tests/test_configuration.py and supply a crafted tests/known-modules.pickle or tests/known-racks.pickle file that tests/definitions_test.py loads when pytest runs. Deserialization invokes attacker-controlled object reduction behavior, allowing arbitrary code execution in the GitHub Actions runner or in a maintainer process that runs the tests, with the confidentiality, integrity, and availability of reachable resources at risk. This vulnerability is fixed with commit 1c6f7e2b93589b965318c6e67ac3504831f0e71e.",
-    "references": [
-      "https://github.com/netbox-community/devicetype-library/commit/1c6f7e2b93589b965318c6e67ac3504831f0e71e",
-      "https://github.com/netbox-community/devicetype-library/pull/4238",
-      "https://github.com/netbox-community/devicetype-library/security/advisories/GHSA-492p-5wp7-2w7c",
-      "https://github.com/netbox-community/devicetype-library/security/advisories/GHSA-492p-5wp7-2w7c"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.6,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 108.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-75682",
     "published": "2026-09-22T19:16:46.260",
     "last_modified": "2026-09-25T18:20:33.223",
@@ -283,33 +254,6 @@
       "sqli"
     ],
     "intel_score": 107.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-63564",
-    "published": "2026-09-23T17:17:14.323",
-    "last_modified": "2026-09-24T21:08:55.030",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SQL injection vulnerability in Moodle Socialwall plugin v.3.0 through v.3.3 allows an attacker to execute arbitrary code via crafted HTTP requests",
-    "references": [
-      "http://moodle.com",
-      "https://medium.com/@lcrawfqrd/sqli-in-moodle-plugin-9f0ce4eb05f2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.7,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 107.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
@@ -396,36 +340,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2022-50796",
-    "published": "2025-12-30T23:15:46.743",
-    "last_modified": "2026-09-24T23:10:00.133",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SOUND4 IMPACT/FIRST/PULSE/Eco <=2.x contains an unauthenticated remote code execution vulnerability in the firmware upload functionality with path traversal flaw. Attackers can exploit the upload.cgi script to write malicious files to the system with www-data permissions, enabling unauthorized access and code execution.",
-    "references": [
-      "https://exchange.xforce.ibmcloud.com/vulnerabilities/247951",
-      "https://packetstormsecurity.com/files/170268/SOUND4-IMPACT-FIRST-PULSE-Eco-2.x-upload.cgi-Code-Execution.html",
-      "https://www.sound4.com/",
-      "https://www.vulncheck.com/advisories/sound-impactfirstpulseeco-x-unauthenticated-remote-code-execution-via-uploadcgi",
-      "https://www.zeroscience.mk/en/vulnerabilities/ZSL-2022-5741.php"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 74.3,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-14032",
     "published": "2026-04-06T16:16:26.470",
     "last_modified": "2026-09-26T21:10:00.130",
@@ -487,118 +401,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-54916",
-    "published": "2026-09-17T21:17:17.790",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NetBox Device Type Library is a collection of community-sourced device type definitions for import into NetBox. The absence of tests/init.py and the lack of --import-mode=importlib cause pytest prepend import mode to place the tests directory at the front of sys.path during collection. An unauthenticated contributor can add a module such as tests/git.py that shadows GitPython when tests/definitions_test.py executes from git import Git, Repo, or add tests/conftest.py for automatic collection-time execution. Python imports and runs the pull-request module before any test function, allowing arbitrary code execution on the GitHub Actions runner, test-result tampering, and access to tokens or network resources exposed to the workflow. This module-shadowing path is independent of the earlier pickle deserialization flaw and the separately tracked NETBOX_DT_LIBRARY_URL issue. This vulnerability is fixed by commit b0d9a3dadd0a0a9d3c93b0b2777559fd4bad1037.",
-    "references": [
-      "https://github.com/netbox-community/devicetype-library/commit/b0d9a3dadd0a0a9d3c93b0b2777559fd4bad1037",
-      "https://github.com/netbox-community/devicetype-library/pull/4239",
-      "https://github.com/netbox-community/devicetype-library/security/advisories/GHSA-wwg5-825x-83g6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.1,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-28325",
-    "published": "2026-09-22T20:17:03.430",
-    "last_modified": "2026-09-24T21:00:46.893",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SolarWinds Observability Self-Hosted was found to be affected by an unauthenticated remote code execution vulnerability stemming from deserialization of untrusted data when the application is configured to use a specific communication mode.",
-    "references": [
-      "https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-secure-configuration.htm",
-      "https://documentation.solarwinds.com/en/success_center/orionplatform/content/release_notes/hco_2026-2-3_release_notes.htm",
-      "https://www.solarwinds.com/trust-center/security-advisories/CVE-2026-28325"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.5,
-    "epss_percentile": 73.5,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-67615",
-    "published": "2026-09-22T21:17:31.100",
-    "last_modified": "2026-09-24T21:08:22.573",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "openEQUELLA before 2026.1.0 contains an authenticated remote code execution vulnerability that allows any authenticated non-guest user to execute arbitrary code by exploiting Java deserialization in the HTTP invoker endpoint at /invoker/*. Attackers can bypass the class-name denylist enforced by PluginAwareObjectInputStream by nesting a serialized payload inside a java.security.SignedObject, causing the inner stream to be deserialized by a separate ObjectInputStream that does not apply the denylist, ultimately reaching a JNDI sink and enabling code execution.",
-    "references": [
-      "https://blog.evan.lat/posts/openeq",
-      "https://github.com/openequella/openEQUELLA/releases/tag/2026.1.0",
-      "https://www.vulncheck.com/advisories/openequella-authenticated-rce-via-java-deserialization-in-http-invoker"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.3,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-75131",
-    "published": "2026-09-23T19:19:14.073",
-    "last_modified": "2026-09-24T21:04:40.340",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NetworkManager-l2tp through 1.52.4, fixed in 1.52.6, contains a privilege escalation vulnerability that allows local users with permission to create VPN connections to execute arbitrary code as root by injecting pppd options through a crafted VPN username. Attackers can embed a double-quote character or whitespace in the username to break out of the pppd options file quoting context and include the pppd plugin directive, causing the privileged pppd process to load an attacker-controlled shared object.",
-    "references": [
-      "https://github.com/nm-l2tp/NetworkManager-l2tp/security/advisories/GHSA-v2wj-xr2m-xc4j",
-      "https://www.vulncheck.com/advisories/networkmanager-l2tp-privilege-escalation-via-pppd-username-injection",
-      "https://github.com/nm-l2tp/NetworkManager-l2tp/security/advisories/GHSA-v2wj-xr2m-xc4j"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.6,
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
     ]
   },
   {
@@ -865,33 +667,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-79310",
-    "published": "2026-09-23T16:16:45.687",
-    "last_modified": "2026-09-24T21:08:22.573",
-    "cvss_v3": 8.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "webpy web.py 0.76 is vulnerable to server-side template injection (SSTI). The template engine can be tricked into executing attacker-controlled template code that built-in security checks are designed to reject. When an application precompiles templates from a directory the attacker can write to and later renders them through the precompiled template loader, the sandbox is bypassed and the attacker's code runs, resulting in arbitrary Python code execution and OS command execution on the server.",
-    "references": [
-      "https://github.com/lichoin/TraceLoom/blob/main/CVEs/CVE-2026-79310.md",
-      "https://github.com/webpy/webpy"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.9,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 100.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-5430",
     "published": "2026-08-06T08:16:33.240",
     "last_modified": "2026-09-25T12:53:05.517",
@@ -944,31 +719,34 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-55071",
-    "published": "2026-09-21T15:17:29.450",
-    "last_modified": "2026-09-24T21:17:43.237",
-    "cvss_v3": 8.4,
+    "cve_id": "CVE-2026-100310",
+    "published": "2026-09-25T20:17:05.833",
+    "last_modified": "2026-09-26T01:16:59.740",
+    "cvss_v3": 7.0,
     "severity": "HIGH",
     "affected": [],
-    "summary": "MCP-for-Stata is a MCP server for integrating Stata into agent loops with a safety-first design. Prior to version 1.19.0, the ado_package_install MCP tool in stata-mcp concatenates user-controlled input directly into a Stata command string without any validation or sanitization. An attacker who can invoke the MCP tool or the equivalent Python API can embed newline characters in the package argument to inject arbitrary Stata commands. Because Stata supports a shell escape command, this leads to full OS-level arbitrary command execution (RCE) under the account running the Stata-MCP server. The tool is registered in the default all profile, so no non-default configuration is required. This issue has been patched in version 1.19.0.",
+    "summary": "GNU libextractor before 1.16 loads plugins from an untrusted search path specified by the LIBEXTRACTOR_PREFIX environment variable without proper privilege checks. A local attacker can exploit this by setting LIBEXTRACTOR_PREFIX to a directory containing a malicious plugin that executes arbitrary code with elevated privileges when loaded by a setuid or setgid program.",
     "references": [
-      "https://github.com/SepineTam/mcp-for-stata/releases/tag/v1.19.0",
-      "https://github.com/SepineTam/mcp-for-stata/security/advisories/GHSA-49m4-vp58-wgc9",
-      "https://github.com/SepineTam/mcp-for-stata/security/advisories/GHSA-49m4-vp58-wgc9"
+      "https://ftp.gnu.org/gnu/libextractor/",
+      "https://git.gnunet.org/gnunet/libextractor/commit/6edfa653c048800e24a17f7e8cc2bb42659b8d01.html",
+      "https://github.com/Haitam-lazaar/libextractor-privesc",
+      "https://www.gnu.org/software/libextractor/",
+      "https://www.vulncheck.com/advisories/gnu-libextractor-before-1.16-privilege-escalation-via-libextractor-prefix",
+      "http://www.openwall.com/lists/oss-security/2026/09/25/25"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 15.0,
+    "epss": 0.1,
+    "epss_percentile": 2.5,
     "tags": [
-      "command_injection",
+      "priv_esc",
       "rce"
     ],
     "intel_score": 100.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "command_injection+18"
+      "priv_esc+25"
     ]
   },
   {
@@ -1109,25 +887,23 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-91771",
-    "published": "2026-09-15T02:16:49.680",
-    "last_modified": "2026-09-24T21:08:22.573",
+    "cve_id": "CVE-2026-93834",
+    "published": "2026-09-25T14:17:24.063",
+    "last_modified": "2026-09-25T14:17:24.063",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Weights & Biases wandb before 0.29.0 fails to validate the file name from server responses in the File.download function, allowing path traversal attacks. Attackers controlling the backend can supply file names with directory traversal sequences to write files outside the intended download directory, potentially enabling code execution through modification of shell startup files or Python import paths.",
+    "summary": "A use-after-free vulnerability was found in QEMU's 9pfs subsystem. A race condition between the main thread and a worker thread when processing concurrent Tlcreate and Twalk requests allows a malicious guest user to craft a fid path containing stale heap data, bypassing directory traversal restrictions and escaping the shared directory boundary. This can lead to arbitrary host file read/write and code execution (VM escape) as the QEMU process user.",
     "references": [
-      "https://github.com/wandb/wandb",
-      "https://github.com/wandb/wandb/blob/v0.27.2/wandb/apis/public/files.py#L319-L347",
-      "https://github.com/wandb/wandb/commit/e52558f3a6a94ea816af74969a13a35e5904cad6",
-      "https://github.com/wandb/wandb/issues/12592",
-      "https://github.com/wandb/wandb/releases/tag/v0.29.0",
-      "https://www.vulncheck.com/advisories/weights-biases-wandb-before-0.29.0-path-traversal-via-file-download"
+      "https://access.redhat.com/security/cve/CVE-2026-93834",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537939",
+      "https://gitlab.com/qemu-project/qemu/-/work_items/4491",
+      "https://gitlab.com/qemu-project/qemu/-/work_items/4491"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 66.1,
+    "epss": 0.4,
+    "epss_percentile": 29.1,
     "tags": [
       "path_traversal",
       "rce"
@@ -1137,67 +913,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-92748",
-    "published": "2026-09-16T21:17:23.387",
-    "last_modified": "2026-09-24T21:00:46.893",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "BC Security Empire before 6.7.1 fails to validate the multipart filename parameter in upload endpoints, allowing authenticated operators to write files to arbitrary paths on the C2 server. Attackers can use path traversal sequences in the filename to bypass directory containment and write malicious files to sensitive locations for code execution.",
-    "references": [
-      "https://github.com/BC-SECURITY/Empire",
-      "https://github.com/BC-SECURITY/Empire/blob/v6.6.0/empire/server/core/download_service.py#L148-L193",
-      "https://github.com/BC-SECURITY/Empire/commit/c33a626316cb20bc8ed707e03a22d324d5d4762a",
-      "https://github.com/BC-SECURITY/Empire/issues/824",
-      "https://github.com/BC-SECURITY/Empire/releases/tag/v6.7.1",
-      "https://www.vulncheck.com/advisories/bc-security-empire-before-6.7.1-path-traversal-file-upload-rce",
-      "https://github.com/BC-SECURITY/Empire/issues/824"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.5,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-94411",
-    "published": "2026-09-21T19:17:20.067",
-    "last_modified": "2026-09-24T23:19:21.860",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "jshERP 3.6 contains a privilege escalation vulnerability in the updateOneValueByKeyIdAndType endpoint that allows authenticated users to grant themselves arbitrary roles. Attackers can send a POST request with type=UserRole, their own user ID, and a role ID list to escalate from low-privilege tenant user to tenant administrator.",
-    "references": [
-      "https://github.com/LinYuanyi1/cve-request-poc/blob/master/jshERP/poc-01-userbusiness-self-privilege-escalation.py",
-      "https://github.com/jishenghua/jshERP",
-      "https://github.com/jishenghua/jshERP/blob/v3.6/jshERP-boot/src/main/java/com/jsh/erp/controller/UserBusinessController.java#L178-L198",
-      "https://www.vulncheck.com/advisories/jsherp-3.6-privilege-escalation-via-updateonevaluebykeyidandtype"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.1,
-    "tags": [
-      "poc",
-      "priv_esc"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "poc+20"
     ]
   },
   {
@@ -1226,6 +941,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-84862",
+    "published": "2026-09-25T15:17:56.110",
+    "last_modified": "2026-09-26T04:17:47.860",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM Guardium Data Protection 12.2 is vulnerable to insecure deserialization in the Quartz JDBC job store. An authenticated attacker could exploit this vulnerability to execute arbitrary code on the affected system.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7288040"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 28.3,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 96.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -1283,6 +1024,69 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-6893",
+    "published": "2026-06-10T20:17:29.807",
+    "last_modified": "2026-09-28T02:17:28.093",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in dracut. A remote attacker on the adjacent network can exploit this vulnerability by providing specially crafted DHCP (Dynamic Host Configuration Protocol) options, such as a malicious hostname, to a system using dracut's legacy DHCP path. These options are improperly handled and written into temporary shell scripts without proper escaping, leading to command injection. This allows the attacker to achieve root code execution within the initramfs, potentially compromising the system's boot and network behavior.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:26532",
+      "https://access.redhat.com/errata/RHSA-2026:26533",
+      "https://access.redhat.com/errata/RHSA-2026:26534",
+      "https://access.redhat.com/errata/RHSA-2026:26713",
+      "https://access.redhat.com/errata/RHSA-2026:57580",
+      "https://access.redhat.com/errata/RHSA-2026:57772",
+      "https://access.redhat.com/errata/RHSA-2026:57775",
+      "https://access.redhat.com/errata/RHSA-2026:57785",
+      "https://access.redhat.com/errata/RHSA-2026:61252",
+      "https://access.redhat.com/errata/RHSA-2026:62269",
+      "https://access.redhat.com/errata/RHSA-2026:62409",
+      "https://access.redhat.com/errata/RHSA-2026:62549",
+      "https://access.redhat.com/errata/RHSA-2026:63044",
+      "https://access.redhat.com/errata/RHSA-2026:65839",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
+      "https://access.redhat.com/errata/RHSA-2026:67857",
+      "https://access.redhat.com/errata/RHSA-2026:69118",
+      "https://access.redhat.com/errata/RHSA-2026:69119",
+      "https://access.redhat.com/security/cve/CVE-2026-6893",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2459963",
+      "https://access.redhat.com/errata/RHSA-2026:26532",
+      "https://access.redhat.com/errata/RHSA-2026:26533",
+      "https://access.redhat.com/errata/RHSA-2026:26534",
+      "https://access.redhat.com/errata/RHSA-2026:26713",
+      "https://access.redhat.com/errata/RHSA-2026:57580",
+      "https://access.redhat.com/errata/RHSA-2026:57772",
+      "https://access.redhat.com/errata/RHSA-2026:57775",
+      "https://access.redhat.com/errata/RHSA-2026:57785",
+      "https://access.redhat.com/errata/RHSA-2026:61252",
+      "https://access.redhat.com/errata/RHSA-2026:62269",
+      "https://access.redhat.com/errata/RHSA-2026:62409",
+      "https://access.redhat.com/errata/RHSA-2026:62549",
+      "https://access.redhat.com/errata/RHSA-2026:63044",
+      "https://access.redhat.com/errata/RHSA-2026:65839",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
+      "https://access.redhat.com/security/cve/CVE-2026-6893",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2459963",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-6893.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 3.1,
+    "epss_percentile": 87.4,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 95.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -1417,6 +1221,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-97602",
+    "published": "2026-09-25T11:17:11.573",
+    "last_modified": "2026-09-25T15:18:00.950",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ninet: frags: invalidate queues before flushing them\n\nfqdir_pre_exit() flushes the skbs from incomplete queues without\nchanging their completion state. A fragment which found a queue before\nhigh_thresh was cleared can then acquire the queue lock and reuse stale\nreassembly metadata. A queue concurrently killed after fqdir->dead is\nset can instead become INET_FRAG_COMPLETE|INET_FRAG_HASH_DEAD while\nstill holding its old skbs; skipping it because it is complete leaves\nthose references behind until asynchronous fqdir teardown.\n\nFor IPv6, stale metadata can make ip6_frag_reasm() use the old\nnhoffset with a new skb and access memory out of bounds. The resulting\nheap corruption can be leveraged for local privilege escalation when\nunprivileged network namespaces are available. Unflushed fragments can\nalso keep conntrack references alive after the conntrack per-net\ncleanup point.\n\nKill each incomplete queue, then flush every queue still owned by the\ndying rhashtable. HASH_DEAD identifies that ownership, while complete\nqueues without it are already owned by another destroy path and must be\nleft alone. Releasing a timer reference removed by inet_frag_kill() is\ndeferred to inet_frag_putn(), after the queue lock is dropped.\n\nKASAN report:\n\n  BUG: KASAN: slab-out-of-bounds in ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  Write of size 1 at addr ff110001039c6e00 by task poc/771\n  Call Trace:\n  ? ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:479 (discriminator 5))\n  ip6_input_finish (net/ipv6/ip6_input.c:534)\n  ipv6_rcv (include/net/dst.h:480 (discriminator 3) net/ipv6/ip6_input.c:119 (discriminator 3) net/ipv6/ip6_input.c:109 (discriminator 3) include/linux/netfilter.h:325 (discriminator 3) include/linux/netfilter.h:319 (discriminator 3) net/ipv6/ip6_input.c:351 (discriminator 3))\n  packet_sendmsg (net/packet/af_packet.c:3110 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  The buggy address belongs to the object at ff110001039c6b40\n  which belongs to the cache skbuff_small_head of size 704\n  The buggy address is located 0 bytes to the right of\n  allocated 704-byte region [ff110001039c6b40, ff110001039c6e00)\n\n  BUG: KASAN: slab-out-of-bounds in ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  Read of size 1 at addr ff110001039c6e08 by task poc/771\n  Call Trace:\n  ? ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  ip6_input_finish (net/ipv6/ip6_input.c:534)\n  ipv6_rcv (include/net/dst.h:480 (discriminator 3) net/ipv6/ip6_input.c:119 (discriminator 3) net/ipv6/ip6_input.c:109 (discriminator 3) include/linux/netfilter.h:325 (discriminator 3) include/linux/netfilter.h:319 (discriminator 3) net/ipv6/ip6_input.c:351 (discriminator 3))\n  packet_sendmsg (net/packet/af_packet.c:3110 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  packet_sendmsg (net/packet/af_packet.c:2959 net/packet/af_packet.c:3053 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  The buggy address belongs to the object at ff110001039c6b40\n  which belongs to the cache skbuff_small_head of size 704\n  The buggy address is located 8 bytes to the right of\n  allocated 704-byte region [ff110001039c6b40, ff110001039c6e00)",
+    "references": [
+      "https://git.kernel.org/stable/c/7cb5f4643a7fcdbfbee1fad3cdfc678add62d378",
+      "https://git.kernel.org/stable/c/b824476c56a153934c67c9e0f873e1fd967743d6",
+      "https://git.kernel.org/stable/c/b9d77f1652e79e58eac48430d0431c329137efcc",
+      "https://git.kernel.org/stable/c/bf3d6c44c84c57e8a4bb7f40ad95b64f9b0198ba"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 4.0,
+    "tags": [
+      "poc",
+      "priv_esc"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "poc+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-20147",
     "published": "2026-04-15T17:17:02.410",
     "last_modified": "2026-09-25T16:41:55.563",
@@ -1469,32 +1302,62 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58264",
-    "published": "2026-09-18T20:17:18.107",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-85750",
+    "published": "2026-09-25T14:17:20.330",
+    "last_modified": "2026-09-25T15:17:56.560",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "FluidSynth is a software synthesizer based on the SoundFont 2 specifications. From 1.1.2 until 2.5.6, the FluidSynth command handler accepts a pitch_bend_range command whose channel argument is not bounds checked before the supplied value is written through the selected synth channel. An out-of-range channel can therefore cause an out-of-bounds heap write, leading to denial of service or possible code execution. The issue is remotely reachable when the TCP server is enabled through new_fluid_server() or fluidsynth -s, and it is locally reachable through malicious commands delivered to the FluidSynth shell on standard input. Applications that do not use the shell, command handler, or TCP server are not affected. This issue is fixed in version 2.5.6.",
+    "summary": "Piwigo before v16.4.0 is vulnerable to arbitrary file read and remote code execution in image upload handling when using the Imagick library due to insufficient validation and unsafe processing of user-supplied image files. By abusing format confusion (e.g., disguising SVG content as PNG), an attacker can trigger unintended interpretation of embedded SVG elements that reference local files. In more advanced scenarios, the Imagick support for Magick Scripting Language (MSL) may be abused to process attacker-controlled instructions, potentially leading to unauthorized server-side file writes and remote code execution, depending on configuration. This has been patched in 16.4.0.",
     "references": [
-      "https://github.com/FluidSynth/fluidsynth/commit/762a3bd39a431cd45abf3bbcce7286c87909d087",
-      "https://github.com/FluidSynth/fluidsynth/pull/1796",
-      "https://github.com/FluidSynth/fluidsynth/releases/tag/v2.5.6",
-      "https://github.com/FluidSynth/fluidsynth/security/advisories/GHSA-mqmq-w63q-cj94"
+      "https://github.com/Piwigo/Piwigo/security/advisories/GHSA-j9q6-q52g-g8jw",
+      "https://www.helx.io/en/blog/advisory-piwigo",
+      "https://github.com/Piwigo/Piwigo/security/advisories/GHSA-j9q6-q52g-g8jw"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.9,
+    "epss": 1.2,
+    "epss_percentile": 67.1,
     "tags": [
-      "dos",
+      "file_write",
       "rce"
     ],
-    "intel_score": 92.0,
+    "intel_score": 91.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "dos+3"
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100372",
+    "published": "2026-09-25T20:17:06.143",
+    "last_modified": "2026-09-25T20:17:06.143",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ClipBucket v5 before 5.5.3-#197 contains a path traversal vulnerability in the admin template editor that allows authenticated administrators to overwrite PHP files by supplying directory traversal sequences in the folder parameter. Attackers with manage_template_access permission can traverse outside the layout directory to modify executable PHP files and achieve remote code execution as the web server user.",
+    "references": [
+      "https://github.com/MacWarrior/clipbucket-v5",
+      "https://github.com/MacWarrior/clipbucket-v5/blob/61cce55ab26ef88fb782dfde47b44c17c56978cd/upload/admin_area/template_editor.php#L44-L69",
+      "https://github.com/MacWarrior/clipbucket-v5/commit/f31de49b2194482ffef7147aa1e9b1c8f0f04eb7",
+      "https://github.com/MacWarrior/clipbucket-v5/releases/tag/5.5.3-%23197",
+      "https://hackmd.io/@leediay/S1AIRjzqfx",
+      "https://www.vulncheck.com/advisories/clipbucket-v5-before-5.5.3-197-path-traversal-via-template-editor-php"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.1,
+    "epss_percentile": 65.3,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 91.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
     ]
   },
   {
@@ -1588,88 +1451,6 @@
       "rce"
     ],
     "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-97359",
-    "published": "2026-09-24T14:18:22.533",
-    "last_modified": "2026-09-24T21:08:55.030",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "HFS2 version 2.4.0 and earlier contains a template injection vulnerability in the multipart upload handler that allows unauthenticated attackers to achieve remote code execution by embedding malicious template syntax in a filename. Attackers can craft a filename containing a closing template quoting sequence followed by an exec macro, which bypasses the authorization check in the dispatcher to execute arbitrary commands on the underlying host system.",
-    "references": [
-      "https://github.com/wgetnz/hfs2/blob/master/advisories/hfs2-upload-filename-template-injection/README.md",
-      "https://www.vulncheck.com/advisories/hfs2-rce-via-multipart-upload-filename-template-injection"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-53837",
-    "published": "2026-09-18T16:17:03.527",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "XWiki Rendering is a generic rendering system that converts textual input in a given syntax (wiki syntax, HTML, etc) into another syntax (XHTML, etc). Prior to versions 14.10.2 and 15.0 RC1, any user who can edit their own user profile or any other document can execute arbitrary script macros including Groovy and Python macros that allow remote code execution including unrestricted read and write access to all wiki contents. The reason is that rendering output is included as content of HTML macros without further escaping and it is thus possible to close the HTML macro and inject script macros that are executed with programming rights. This has been patched in XWiki 14.10.2 and 15.0 RC1 by making sure that rendering output cannot close the surrounding HTML macro. A possible workaround is available. It is, in principle, possible to add escaping to all places where rendering output is used in wiki documents, but at the moment there is no list of them.",
-    "references": [
-      "https://github.com/xwiki/xwiki-rendering/commit/92bc8095ed3acce15ab200c8525e1623b4898be5",
-      "https://github.com/xwiki/xwiki-rendering/releases/tag/xwiki-rendering-14.10.2",
-      "https://github.com/xwiki/xwiki-rendering/releases/tag/xwiki-rendering-15.0-rc-1",
-      "https://github.com/xwiki/xwiki-rendering/security/advisories/GHSA-26vp-8gxg-v4pg",
-      "https://jira.xwiki.org/browse/XRENDERING-693",
-      "https://jira.xwiki.org/browse/XWIKI-20313",
-      "https://jira.xwiki.org/browse/XWIKI-20327"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-79920",
-    "published": "2026-09-21T17:18:59.567",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Ajenti is a Linux & BSD modular server admin panel. Prior to version 2.2.16, any authenticated user can call /api/core/tasks/start to enqueue InstallPlugin, UnInstallPlugin, or UpgradeAll from plugins/plugins/tasks.py without plugin-management authorization. InstallPlugin and UnInstallPlugin construct a pip package specification from unvalidated name and version fields, and the task worker invokes pip while running as root. A low-privileged user can therefore select or manipulate a package installed with root privileges and can install, remove, or upgrade plugins without administrative permission, resulting in root code execution and full host compromise. This issue is fixed in version 2.2.16.",
-    "references": [
-      "https://github.com/ajenti/ajenti/commit/3a8cbee32df4c5033796f19af4210011163a6f6e",
-      "https://github.com/ajenti/ajenti/commit/f07f02e0cdeeb3e528c1d5af28e27fd11623c49c",
-      "https://github.com/ajenti/ajenti/releases/tag/v2.2.16",
-      "https://github.com/ajenti/ajenti/security/advisories/GHSA-j8xf-5fw2-f99q"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1928,215 +1709,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86124",
-    "published": "2026-09-05T10:16:43.900",
-    "last_modified": "2026-09-24T21:08:55.030",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "AutoAgent contains an unauthenticated remote code execution vulnerability in the TCP server that binds to all interfaces and executes attacker-supplied commands as root. Attackers can connect to the exposed communication port and execute arbitrary bash commands within the container, gaining access to bind-mounted host workspace directories.",
-    "references": [
-      "https://github.com/HKUDS/AutoAgent",
-      "https://github.com/HKUDS/AutoAgent/blob/16c12b052ef2330a198063c62a07a7f9723031e3/autoagent/environment/docker_env.py",
-      "https://github.com/HKUDS/AutoAgent/blob/16c12b052ef2330a198063c62a07a7f9723031e3/autoagent/environment/tcp_server.py",
-      "https://github.com/HKUDS/AutoAgent/issues/96",
-      "https://www.vulncheck.com/advisories/autoagent-unauthenticated-remote-code-execution-via-the-sandbox-tcp-command-server"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-69590",
-    "published": "2026-09-08T18:19:29.310",
-    "last_modified": "2026-09-24T23:18:10.087",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Remote Code Execution in Windows Routing and Remote Access Service (RRAS) allows attacker to gain an unauthorized access to victim's machine",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-69590"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85880",
-    "published": "2026-09-08T18:21:14.087",
-    "last_modified": "2026-09-24T23:19:20.773",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Heap-based buffer overflow in Windows ALPC allows an authorized attacker to elevate privileges locally.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-85880",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-85880"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 3.6,
-    "epss_percentile": 89.1,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-39919",
-    "published": "2026-09-15T15:17:14.723",
-    "last_modified": "2026-09-24T21:04:40.340",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Ghostscript before 10.08.0 contains a heap-based buffer overflow vulnerability in the JPEG 2000 output adapter (base/sjpx_openjpeg.c) that allows attackers to cause memory corruption by supplying a crafted PDF containing a JPEG 2000 image with mismatched component subsampling factors. When image components declare different subsampling values, the non-samescale sub-byte-depth output path allocates a row buffer sized for packed output but writes a full byte per output column regardless of bit depth, overflowing the allocation and corrupting internal chunk-allocator metadata to achieve code execution.",
-    "references": [
-      "https://bugs.ghostscript.com/show_bug.cgi?id=709666",
-      "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/tag/gs10080",
-      "https://github.com/ArtifexSoftware/ghostpdl/commit/0a8bf88e39db07b0751a58d6ec1cf992073e4dc1",
-      "https://www.vulncheck.com/advisories/ghostscript-heap-buffer-overflow-via-jpeg-2000-output-adapter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-89026",
-    "published": "2026-09-15T17:17:33.510",
-    "last_modified": "2026-09-24T21:08:55.030",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The Issabel Framework, the web framework supporting Issabel PBX software, before commit b97dbaf contains a hard-coded HS256 JWT signing key in the pbxapi index.php file that is identical across every installation, allowing unauthenticated remote attackers to forge valid bearer tokens. Attackers can use the forged token to call the manager originate endpoint with the System application parameter, causing Asterisk to execute arbitrary OS commands as the Asterisk user. Exploitation evidence was first observed by the Shadowserver Foundation on 2026-09-09.",
-    "references": [
-      "https://github.com/IssabelFoundation/framework/commit/b97dbaf0b71c1c36f841e672b664afbeb02773bd",
-      "https://www.vulncheck.com/advisories/issabel-pbx-hard-coded-jwt-key-rce-via-pbxapi-manager-originate"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-59953",
-    "published": "2026-09-16T16:17:03.010",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "LMDeploy is a toolkit for compressing, deploying, and serving large language models. Starting in version 0.9.1 and prior to version 0.10.2, the LMdeploy implements an rpc server (AsyncRPCServer in zmq_rpc.py) for supporting the RPC communications. In its core functionality call_and_response(), I found it will directly use the pickles.loads() to deserialize the received messages without any sanitization, hence resulting in a remote code execution vulnerability by this RPC server. Version 0.10.2 contains a patch.",
-    "references": [
-      "https://github.com/InternLM/lmdeploy/releases/tag/v0.10.2",
-      "https://github.com/InternLM/lmdeploy/security/advisories/GHSA-5h8j-6crg-7rmw",
-      "https://github.com/InternLM/lmdeploy/security/advisories/GHSA-5h8j-6crg-7rmw"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-54626",
-    "published": "2026-09-17T20:16:51.970",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SAIL is a cross-platform library for loading and saving images with support for animation, metadata, and ICC profiles. In 0.9.10 and earlier, the TGA_INDEXED_RLE path selected by image_type == 9 allocates an image buffer using the one-byte-per-pixel SAIL_PIXEL_FORMAT_BPP8_INDEXED format returned by tga_private_sail_pixel_format() in src/sail-codecs/tga/helpers.c, while sail_codec_load_frame_v8_tga() in src/sail-codecs/tga/tga.c derives a two-to-four-byte pixel_size from an attacker-controlled header bpp value from 9 through 32. Loading a crafted color-mapped run-length-encoded TGA through sail_load_from_file() or sail_load_from_memory() therefore writes attacker-controlled bytes beyond the heap pixel buffer. The pixel-count clamp added for CVE-2026-40494 does not constrain the per-pixel write width, so this issue is an incomplete fix of that vulnerability and can cause heap corruption, a reliable crash, or potential code execution. This issue is fixed in version 1.0.0.",
-    "references": [
-      "https://github.com/HappySeaFox/sail/commit/fa24bceb93958ad665dbc3cf6b49a1079ab12559",
-      "https://github.com/HappySeaFox/sail/releases/tag/v1.0.0",
-      "https://github.com/HappySeaFox/sail/security/advisories/GHSA-744p-cqg2-m33h",
-      "https://github.com/HappySeaFox/sail/security/advisories/GHSA-744p-cqg2-m33h"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-45140",
-    "published": "2026-09-17T21:17:12.440",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Chamilo LMS is an open-source learning management system. Prior to 2.0.1, Chamilo LMS allows an unauthenticated remote attacker to execute arbitrary code on the server. The authoritative advisory does not identify the affected endpoint, component, input, or exploitation mechanism. This issue is fixed in version 2.0.1.",
-    "references": [
-      "https://github.com/chamilo/chamilo-lms/commit/4bdba1b9a8820bd70c0809317775d7f6eaa79844",
-      "https://github.com/chamilo/chamilo-lms/releases/tag/v2.0.1",
-      "https://github.com/chamilo/chamilo-lms/security/advisories/GHSA-g4c3-4g96-6g4m"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 69.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-25254",
     "published": "2026-09-22T10:17:08.583",
     "last_modified": "2026-09-25T13:37:41.860",
@@ -2151,33 +1723,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 22.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-28324",
-    "published": "2026-09-22T20:17:03.250",
-    "last_modified": "2026-09-24T21:00:46.893",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SolarWinds Observability Self-Hosted was found to be affected by an unauthenticated remote code execution vulnerability due to the insufficient integrity checks. Installations configured in a non-default and non-secure configuration are affected.",
-    "references": [
-      "https://documentation.solarwinds.com/en/success_center/orionplatform/content/core-secure-configuration.htm",
-      "https://documentation.solarwinds.com/en/success_center/orionplatform/content/release_notes/hco_2026-2-3_release_notes.htm",
-      "https://documentation.solarwinds.com/en/success_center/wpm/content/orionwpmagaddingalocation.htm",
-      "https://www.solarwinds.com/trust-center/security-advisories/CVE-2026-28324"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 49.3,
     "tags": [
       "rce"
     ],
@@ -2236,23 +1781,21 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-93352",
-    "published": "2026-09-23T22:16:59.523",
-    "last_modified": "2026-09-24T21:08:55.030",
+    "cve_id": "CVE-2026-97230",
+    "published": "2026-09-24T23:19:22.960",
+    "last_modified": "2026-09-25T17:17:20.880",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Laravel-Mediable 7.0.0 before 7.0.2 contains an incomplete patch for CVE-2026-49972 in which the .pht extension is absent from the forbidden_extensions blocklist in config/mediable.php. The blocklist introduced to address CVE-2026-49972 includes phpt but omits pht, which Apache executes as PHP via the default FilesMatch directive on Debian and Ubuntu systems. An attacker can upload a .pht file that passes all validation in MediaUploader::verifyExtension() and File::sanitizeFileName() because pht is not present in the blocklist, causing the file to be written to disk and executed as PHP when requested, enabling remote code execution with the privileges of the web server process.",
+    "summary": "IO::Socket::SSL::SelfCertificate versions 1.00 for Perl contains malware which executes Python code from an obfuscated URL.\n\nThe generate_certificate runs a Python script saved as a certificate file.  The pyhton script attempts to retrieve code from a hardcoded http URL that is obfuscated with base64 encoding and run the response body directly.\n\nThe impact is that arbitrary code can be invoked as the user, without a dropped script being saved on the affected host.\n\nThe releases have no test scripts nor build hooks.  The intention may have been to trigger the payload after installation.\n\nThe dropper script is in lib/Crypt/SelfCertificate/sample/cert.pem.\n\nThis is similar to CVE-2026-95831 for the module Crypt::SelfCertificate.\n\nThe SHA-256 digests of the files are\n\n    ba24ee8ec3b7f47f65bed62e16fb413ace50653cf44bd8ea90914390922831e0  IO-Socket-SSL-SelfCertificate-1.00.tar.gz\n    821d38830e5eb8607738421c25ac25f59fff02a6ab67daa32fbd020429454dac  IO-Socket-SSL-SelfCertificate-1.00/lib/IO/Socket/SSL/SelfCertificate/sample/cert.pem\n\n    d483cb7b23b7271cb11cf242bff4a2e1c02df0b9525eb0429abeea8961c399d5  IO-Socket-SSL-SelfCertificate-1.00-upload.tar.gz",
     "references": [
-      "https://github.com/plank/laravel-mediable/commit/8ddb0e5b300084e91ad2cb18a6e7bc768bb7b008",
-      "https://github.com/plank/laravel-mediable/pull/396",
-      "https://github.com/plank/laravel-mediable/releases/tag/7.0.2",
-      "https://www.vulncheck.com/advisories/laravel-mediable-rce-via-pht-file-upload"
+      "https://www.cve.org/CVERecord?id=CVE-2026-95831",
+      "https://www.nntp.perl.org/group/perl.cpan.testers.discuss/2026/09/msg4756.html"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.7,
+    "epss": 0.2,
+    "epss_percentile": 13.0,
     "tags": [
       "rce"
     ],
@@ -2575,31 +2118,33 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-61682",
-    "published": "2026-09-18T16:17:07.523",
-    "last_modified": "2026-09-24T21:25:27.050",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-97882",
+    "published": "2026-09-25T18:17:35.063",
+    "last_modified": "2026-09-25T18:17:35.063",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "kcp is a Kubernetes-like control plane for form-factors and use-cases beyond Kubernetes and container workloads. Prior to 0.31.4 and 0.32.2, the kcp front-proxy does not remove inbound X-Remote-User, X-Remote-Group, or X-Remote-Extra-* identity headers before forwarding requests to shards. Any authenticated tenant can inject X-Remote-Group: system:masters, authorization.kcp.io/warrant, authentication.kcp.io/scopes, or a group used for per-workspace required-group gating, and the shard trusts these values as authenticated identity assertions. This allows cross-workspace impersonation, authorization bypass, and arbitrary reading, writing, or deletion of resources, secrets, RBAC data, APIExports, APIBindings, and LogicalClusters. This issue is fixed in versions 0.31.4 and 0.32.2.",
+    "summary": "A weakness has been identified in mathurvishal CloudClassroom-PHP-Project up to 5dadec098bfbbf3300d60c3494db3fb95b66e7be. The impacted element is an unknown function of the file loginlinkfaculty.php of the component Faculty Authentication. Executing a manipulation of the argument fid/pass can lead to sql injection. It is possible to launch the attack remotely. The exploit has been made available to the public and could be used for attacks. This product takes the approach of rolling releases to provide continious delivery. Therefore, version details for affected and updated releases are not available. The vendor was contacted early about this disclosure but did not respond in any way.",
     "references": [
-      "https://github.com/kcp-dev/kcp/commit/7437cdcfec8f927d1a9bf1b2dd1e075d038e27ca",
-      "https://github.com/kcp-dev/kcp/commit/f913ee890fb2fd9fa78e50c43474b078bfb6aeff",
-      "https://github.com/kcp-dev/kcp/releases/tag/v0.31.4",
-      "https://github.com/kcp-dev/kcp/releases/tag/v0.32.2",
-      "https://github.com/kcp-dev/kcp/security/advisories/GHSA-c8w2-fgvx-vhv4"
+      "https://github.com/smithbraz/PoC-CloudClassroom-AuthBypass",
+      "https://vuldb.com/cve/CVE-2026-97882",
+      "https://vuldb.com/submit/914555",
+      "https://vuldb.com/vuln/409901",
+      "https://vuldb.com/vuln/409901/cti"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.8,
+    "epss": 0.5,
+    "epss_percentile": 41.3,
     "tags": [
-      "auth_bypass"
+      "poc",
+      "sqli"
     ],
     "intel_score": 84.5,
     "reasons": [
       "recently modified (last 48h)",
-      "auth_bypass+25"
+      "sqli+18",
+      "poc+20"
     ]
   },
   {
@@ -2689,6 +2234,482 @@
     "cisa_kev": false,
     "epss": 13.5,
     "epss_percentile": 96.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-10057",
+    "published": "2025-09-17T06:15:44.643",
+    "last_modified": "2026-09-26T00:10:00.127",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The WP Import – Ultimate CSV XML Importer for WordPress plugin for WordPress is vulnerable to Remote Code Execution in all versions up to, and including, 7.28. This is due to the write_to_customfile() function writing unfiltered PHP code to a file. This makes it possible for authenticated attackers, with Subscriber-level access and above, to inject the customFunction.php file with PHP code that can be accessed to trigger remote code execution.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/wp-ultimate-csv-importer/tags/7.25/importExtensions/ImportHelpers.php#L585",
+      "https://plugins.trac.wordpress.org/changeset/3360428/wp-ultimate-csv-importer/trunk/importExtensions/ImportHelpers.php",
+      "https://plugins.trac.wordpress.org/changeset/3360428/wp-ultimate-csv-importer/trunk/uploadModules/DesktopUpload.php",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/925af22b-a728-496e-a63a-5966347ebe6c?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-9967",
+    "published": "2025-10-15T09:15:43.500",
+    "last_modified": "2026-09-26T00:10:00.127",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Orion SMS OTP Verification plugin for WordPress is vulnerable to privilege escalation via account takeover in all versions up to, and including, 1.1.7. This is due to the plugin not properly validating a user's identity prior to updating their password. This makes it possible for unauthenticated attackers to change arbitrary user's password to a one-time password if the attacker knows the user's phone number",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/orion-sms-otp-verification/trunk/vendor/js/reset-password.js",
+      "https://plugins.trac.wordpress.org/log/orion-sms-otp-verification/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/b121fdb4-93a8-400c-89c2-3195cb40e03c?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 34.5,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-9890",
+    "published": "2025-10-18T09:15:34.687",
+    "last_modified": "2026-09-26T00:10:00.127",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Theme Editor plugin for WordPress is vulnerable to Cross-Site Request Forgery in all versions up to, and including, 3.0. This is due to missing or incorrect nonce validation on the 'theme_editor_theme' page. This makes it possible for unauthenticated attackers to achieve remote code execution via a forged request granted they can trick a site administrator into performing an action such as clicking on a link.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/theme-editor/trunk/app/controller/theme_controller.php#L87",
+      "https://plugins.trac.wordpress.org/changeset?sfp_email=&sfph_mail=&reponame=&old=3379404%40theme-editor&new=3379404%40theme-editor&sfp_email=&sfph_mail=",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/77189684-b794-41a0-8fc0-3320032c2f69?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66299",
+    "published": "2025-12-01T22:15:49.290",
+    "last_modified": "2026-09-26T00:10:00.127",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Grav is a file-based Web platform. Prior to 1.8.0-beta.27, Grav CMS is vulnerable to a Server-Side Template Injection (SSTI) that allows any authenticated user with editor permissions to execute arbitrary code on the remote server, bypassing the existing security sandbox. Since the security sandbox does not fully protect the Twig object, it is possible to interact with it (e.g., call methods, read/write attributes) through maliciously crafted Twig template directives injected into a web page. This allows an authenticated editor to add arbitrary functions to the Twig attribute system.twig.safe_filters, effectively bypassing the Grav CMS sandbox. This vulnerability is fixed in 1.8.0-beta.27.",
+    "references": [
+      "https://github.com/getgrav/grav/commit/e37259527d9c1deb6200f8967197a9fa587c6458",
+      "https://github.com/getgrav/grav/security/advisories/GHSA-gjc5-8cfh-653x"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-64055",
+    "published": "2025-12-03T21:15:52.813",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in Fanvil x210 V2 2.12.20 allowing unauthenticated attackers on the local network to access administrative functions of the device (e.g. file upload, firmware update, reboot...) via a crafted authentication bypass.",
+    "references": [
+      "https://github.com/SpikeReply/advisories/blob/main/cve/fanvil/cve-2025-64055.md",
+      "https://github.com/SpikeReply/advisories/blob/main/cve/fanvil/cve-2025-64055.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.7,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-13313",
+    "published": "2025-12-05T05:16:57.780",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The CRM Memberships plugin for WordPress is vulnerable to privilege escalation via password reset in all versions up to, and including, 2.6. This is due to missing authorization and authentication checks on the `ntzcrm_changepassword` AJAX action. This makes it possible for unauthenticated attackers to reset arbitrary user passwords and gain unauthorized access to user accounts via the `ntzcrm_changepassword` endpoint, granted they can obtain or enumerate a target user's email address. The plugin also exposes the `ntzcrm_get_users` endpoint without authentication, allowing attackers to enumerate subscriber email addresses, facilitating the exploitation of the password reset vulnerability.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/crm-memberships/tags/2.5/includes/class/class-ntzcrm-api.php#L12",
+      "https://plugins.trac.wordpress.org/browser/crm-memberships/tags/2.5/includes/class/class-ntzcrm-api.php#L63",
+      "https://plugins.trac.wordpress.org/browser/crm-memberships/tags/2.5/includes/class/class-ntzcrm-api.php#L795",
+      "https://plugins.trac.wordpress.org/browser/crm-memberships/tags/2.5/includes/class/class-ntzcrm-dbquery.php#L287",
+      "https://plugins.trac.wordpress.org/browser/crm-memberships/tags/2.5/ntzcrm-memberships.php#L42",
+      "https://plugins.trac.wordpress.org/changeset/3464130/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/e2837399-c44f-494e-bdc6-f9c6e4e2dc11?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.6,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66039",
+    "published": "2025-12-09T22:16:15.757",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "FreePBX Endpoint Manager is a module for managing telephony endpoints in FreePBX systems. Versions are vulnerable to authentication bypass when the authentication type is set to \"webserver.\" When providing an Authorization header with an arbitrary value, a session is associated with the target user regardless of valid credentials. This issue is fixed in versions 16.0.44 and 17.0.23.",
+    "references": [
+      "https://github.com/FreePBX/framework/commit/04224253156543cd9932b90458660b2f19fc0e35#diff-72f14a52840a61504a8e03cd195035b44e488aecd634b001bc6412a04bdc940bR20-R50",
+      "https://github.com/FreePBX/security-reporting/security/advisories/GHSA-9jvh-mv6x-w698",
+      "https://www.freepbx.org/watch-what-we-do-with-security-fixes-%f0%9f%91%80"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 3.3,
+    "epss_percentile": 88.0,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-65824",
+    "published": "2025-12-10T21:16:08.137",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An unauthenticated attacker within proximity of the Meatmeet device can perform an unauthorized Over The Air (OTA) firmware upgrade using Bluetooth Low Energy (BLE), resulting in the firmware on the device being overwritten with the attacker's code. As the device does not perform checks on upgrades, this results in Remote Code Execution (RCE) and the victim losing complete access to the Meatmeet.",
+    "references": [
+      "https://gist.github.com/dead1nfluence/4dffc239b4a460f41a03345fd8e5feb5#file-remote-code-execution-md",
+      "https://github.com/dead1nfluence/Meatmeet-Pro-Vulnerabilities/blob/main/Device/Remote-Code-Execution.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 44.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-58279",
+    "published": "2025-12-10T22:16:19.543",
+    "last_modified": "2026-09-26T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "appRain CMF 4.0.5 contains an authenticated remote code execution vulnerability that allows administrative users to upload malicious PHP files through the filemanager upload endpoint. Attackers can leverage authenticated access to generate a web shell with command execution capabilities by uploading a crafted PHP file to the site's uploads directory.",
+    "references": [
+      "https://github.com/apprain/apprain/archive/refs/tags/v4.0.5.zip",
+      "https://www.apprain.org",
+      "https://www.exploit-db.com/exploits/52041",
+      "https://www.vulncheck.com/advisories/apprain-cmf-authenticated-remote-code-execution-via-filemanager-upload",
+      "https://github.com/apprain/apprain/archive/refs/tags/v4.0.5.zip"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.0,
+    "epss_percentile": 59.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-58280",
+    "published": "2025-12-10T22:16:19.723",
+    "last_modified": "2026-09-26T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "CMSimple 5.15 contains a remote command execution vulnerability that allows authenticated attackers to modify file extensions and upload malicious PHP files. Attackers can append ',php' to Extensions_userfiles and upload a shell script to the media directory to execute arbitrary code on the server.",
+    "references": [
+      "https://www.cmsimple.org",
+      "https://www.cmsimple.org/downloads_cmsimple50/CMSimple_5-15.zip",
+      "https://www.exploit-db.com/exploits/52040",
+      "https://www.vulncheck.com/advisories/cmsimple-remote-command-execution-via-extensions-configuration"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-58281",
+    "published": "2025-12-10T22:16:19.907",
+    "last_modified": "2026-09-26T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dotclear 2.29 contains a remote code execution vulnerability that allows authenticated attackers to upload malicious PHP files through the media upload functionality. Attackers can exploit the file upload process by crafting a PHP shell with a command execution form to gain system access through the uploaded file.",
+    "references": [
+      "https://git.dotclear.org/explore/repos",
+      "https://github.com/dotclear/dotclear/archive/refs/heads/master.zip",
+      "https://www.exploit-db.com/exploits/52037",
+      "https://www.vulncheck.com/advisories/dotclear-remote-code-execution-via-authenticated-file-upload",
+      "https://github.com/dotclear/dotclear/archive/refs/heads/master.zip"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-58283",
+    "published": "2025-12-10T22:16:20.267",
+    "last_modified": "2026-09-26T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "WBCE CMS version 1.6.2 contains a remote code execution vulnerability that allows authenticated attackers to upload malicious PHP files through the Elfinder file manager. Attackers can exploit the file upload functionality in the elfinder connector to upload a web shell and execute arbitrary system commands through a user-controlled parameter.",
+    "references": [
+      "https://github.com/WBCE/WBCE_CMS/archive/refs/tags/1.6.2.zip",
+      "https://wbce-cms.org/",
+      "https://www.exploit-db.com/exploits/52039",
+      "https://www.vulncheck.com/advisories/wbce-cms-remote-code-execution-via-elfinder-file-upload",
+      "https://github.com/WBCE/WBCE_CMS/archive/refs/tags/1.6.2.zip"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 49.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66474",
+    "published": "2025-12-10T22:16:28.003",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "XWiki Rendering is a generic rendering system that converts textual input in a given syntax (wiki syntax, HTML, etc) into another syntax (XHTML, etc). Versions 16.10.9 and below, 17.0.0-rc-1 through 17.4.2 and 17.5.0-rc-1 through 17.5.0 have insufficient protection against {{/html}} injection, which attackers can exploit through RCE. Any user who can edit their own profile or any other document can execute arbitrary script macros, including Groovy and Python macros, which enable remote code execution as well as unrestricted read and write access to all wiki contents. This issue is fixed in versions 16.10.10, 17.4.3 and 17.6.0-rc-1.",
+    "references": [
+      "https://github.com/xwiki/xwiki-platform/commit/12b780ccd5bca5fc8f74f46648d7e02fa04fbc11",
+      "https://github.com/xwiki/xwiki-rendering/commit/9b71a2ee035815cfc29cebbfe81dbdd98f941d49",
+      "https://github.com/xwiki/xwiki-rendering/security/advisories/GHSA-9xc6-c2rm-f27p",
+      "https://jira.xwiki.org/browse/XRENDERING-693",
+      "https://jira.xwiki.org/browse/XRENDERING-792",
+      "https://jira.xwiki.org/browse/XRENDERING-793",
+      "https://jira.xwiki.org/browse/XWIKI-23378",
+      "https://jira.xwiki.org/browse/XRENDERING-693",
+      "https://jira.xwiki.org/browse/XRENDERING-792",
+      "https://jira.xwiki.org/browse/XRENDERING-793"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.0,
+    "epss_percentile": 62.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-64188",
+    "published": "2025-12-18T08:16:10.120",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Incorrect Privilege Assignment vulnerability in PenciDesign Soledad soledad allows Privilege Escalation.This issue affects Soledad: from n/a through <= 8.6.9.",
+    "references": [
+      "https://patchstack.com/database/Wordpress/Theme/soledad/vulnerability/wordpress-soledad-theme-8-6-9-privilege-escalation-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.0,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-68278",
+    "published": "2025-12-18T16:15:57.347",
+    "last_modified": "2026-09-25T23:10:00.463",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tina is a headless content management system. In tinacms prior to version 3.1.1, tinacms uses the gray-matter package in an insecure way allowing attackers that can control the content of the processed markdown files, e.g., blog posts, to execute arbitrary code. tinacms version 3.1.1, @tinacms/cli version 2.0.4, and @tinacms/graphql version 2.0.3 contain a fix for the issue.",
+    "references": [
+      "https://github.com/tinacms/tinacms/commit/fa7c27abef968e3f3a3e7d564f282bc566087569",
+      "https://github.com/tinacms/tinacms/security/advisories/GHSA-529f-9qwm-9628"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-88418",
+    "published": "2026-09-22T20:17:10.960",
+    "last_modified": "2026-09-26T00:16:37.843",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "CMSimple 5.24 ships with CSRF protection disabled by default, which turns csrfProtection() into a no-op on every state-changing admin request, and it does not send the csrf_token hidden field in admin forms. Because administrator authentication is cookie-only and no CSRF token is enforced, an unauthenticated attacker can induce a logged-in administrator's browser to issue a forged content-save request with a text payload containing a scripting marker. The marker is stored verbatim into content/content.php; on every subsequent page view evaluate_cmsimple_scripting() (functions.php) executes the marker body with PHP eval() — for all visitors, including unauthenticated ones. This yields persistent remote code execution on the web server.",
+    "references": [
+      "https://github.com/15536818056/CVE/issues/5",
+      "https://github.com/15536818056/CVE/issues/5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 15.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-80412",
+    "published": "2026-09-23T21:17:03.067",
+    "last_modified": "2026-09-26T23:16:36.023",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM DataStage on Cloud Pak for Data 5.4.0.0 could allow a remote authenticated attacker to execute arbitrary code due to improper escaping of connector property values during OSH script generation.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7288649"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-70125",
+    "published": "2026-09-23T23:18:12.510",
+    "last_modified": "2026-09-25T04:17:40.740",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Microsoft Office Outlook Remote Code Execution Vulnerability",
+    "references": [
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70125"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
     "tags": [
       "rce"
     ],
