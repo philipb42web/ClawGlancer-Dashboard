@@ -31,35 +31,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-71362",
-    "published": "2026-08-11T18:18:21.610",
-    "last_modified": "2026-09-25T12:53:15.757",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Commerce is affected by an Incorrect Authorization vulnerability that could result in privilege escalation. An attacker could leverage this vulnerability to gain elevated access to sensitive resources. Exploitation of this issue does not require user interaction.",
-    "references": [
-      "https://helpx.adobe.com/security/products/magento/apsb26-92.html",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-71362"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 87.5,
-    "epss_percentile": 99.8,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild",
-      "priv_esc"
-    ],
-    "intel_score": 145.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "CISA KEV active exploitation (+40)",
-      "High EPSS exploit prob 87.5% (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-20352",
     "published": "2025-09-24T18:15:36.930",
     "last_modified": "2026-09-26T00:10:00.127",
@@ -93,7 +64,7 @@
   {
     "cve_id": "CVE-2026-87902",
     "published": "2026-09-22T17:17:28.310",
-    "last_modified": "2026-09-26T04:17:49.733",
+    "last_modified": "2026-09-28T12:20:54.040",
     "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
@@ -153,6 +124,39 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-100641",
+    "published": "2026-09-26T14:16:46.080",
+    "last_modified": "2026-09-26T14:16:46.193",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SiYuan before v3.8.4 does not HTML-escape stored flashcard block content before interpolating it into the card-manager list markup. Block content returned by /api/riff/getRiffCards is inserted into a card item template in app/src/card/viewCards.ts and assigned to listElement.innerHTML, so content such as <img src=invalid onerror=...> becomes an executable event-handler attribute. Because the SiYuan desktop (Electron) main window is created with nodeIntegration enabled and contextIsolation disabled, an administrator who opens the card manager on a workspace containing attacker-supplied flashcard content (for example introduced through contribution or import) executes the attacker's script in a privileged renderer, which can lead to arbitrary code execution on the host. The affected endpoint remains behind authentication and administrator-role checks; this is an untrusted-content-to-privileged-renderer issue, not an authorization bypass.",
+    "references": [
+      "https://github.com/siyuan-note/siyuan/commit/1ecb1c07de497ff03b585536fe5579291754d96b",
+      "https://github.com/siyuan-note/siyuan/commit/41b14025b4ac4a8379d1200580344ca18ad152b7",
+      "https://github.com/siyuan-note/siyuan/commit/48c354e7de130aaada9d7120125bbc768344fd3b",
+      "https://github.com/siyuan-note/siyuan/commit/8641553a1f07374001902d3ce773285db1292b2d",
+      "https://github.com/siyuan-note/siyuan/security/advisories/GHSA-2mmf-4xwm-55rm",
+      "https://www.vulncheck.com/advisories/siyuan-before-3.8.4-stored-xss-via-unescaped-flashcard-content"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.6,
+    "tags": [
+      "auth_bypass",
+      "rce",
+      "xss"
+    ],
+    "intel_score": 113.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "auth_bypass+25",
+      "xss+8"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-10644",
     "published": "2025-09-17T21:15:37.807",
     "last_modified": "2026-09-26T00:10:00.127",
@@ -176,6 +180,37 @@
       "recently modified (last 48h)",
       "rce+30",
       "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-18948",
+    "published": "2026-08-10T21:17:21.290",
+    "last_modified": "2026-09-28T10:16:44.017",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A flaw was found in Feast. The system improperly deserializes user-defined functions (UDFs) stored in its registry, which are serialized using the 'dill' library. This allows a remote attacker to store a malicious UDF, leading to unauthenticated arbitrary code execution on the feature server in default configurations. An authenticated attacker can also achieve arbitrary code execution on the registry server by bypassing authorization checks during deserialization. This vulnerability can result in cross-tenant data access and lateral movement within the system.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:53261",
+      "https://access.redhat.com/errata/RHSA-2026:53262",
+      "https://access.redhat.com/errata/RHSA-2026:53263",
+      "https://access.redhat.com/errata/RHSA-2026:60520",
+      "https://access.redhat.com/security/cve/CVE-2026-18948",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2511167"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.1,
+    "epss_percentile": 63.7,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 109.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -258,32 +293,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-6721",
-    "published": "2026-09-23T21:17:01.927",
-    "last_modified": "2026-09-25T04:17:38.660",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Concert 1.0.0 through 3.0.0 allows an unauthenticated remote attacker can supply specially crafted input that is incorporated into OS commands, resulting in arbitrary command execution on the underlying system. Successful exploitation allows remote code execution with the privileges of the affected application.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7288830"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.4,
-    "epss_percentile": 72.3,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 107.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
     ]
   },
   {
@@ -667,32 +676,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-5430",
-    "published": "2026-08-06T08:16:33.240",
-    "last_modified": "2026-09-25T12:53:05.517",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The JWT authentication mechanism accepts tokens signed with algorithms other than those explicitly configured or supported. This allows an attacker to craft a JWT with an unsupported algorithm, which is then incorrectly validated, leading to unauthorized access.\n\nSuccessful exploitation of this vulnerability may result in unauthorized access to the system, including the potential compromise of administrative accounts and full account takeover. The CVSS score is adjusted to 9.8 (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H) in single-tenant deployments, reflecting that the impact is contained within a single security authority boundary.",
-    "references": [
-      "https://security.docs.wso2.com/en/latest/security-announcements/security-advisories/2026/WSO2-2026-5328/",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-5430"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.6,
-    "epss_percentile": 46.0,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 100.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-76460",
     "published": "2026-09-16T21:17:21.430",
     "last_modified": "2026-09-25T16:53:35.463",
@@ -913,6 +896,33 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-100682",
+    "published": "2026-09-26T14:16:52.433",
+    "last_modified": "2026-09-26T14:16:52.433",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Budibase Server before 3.45.0 contains an arbitrary file write vulnerability in the PWA icon upload endpoint that extracts user-supplied ZIP archives without proper symlink validation. Attackers with BUILDER role can craft a malicious ZIP with leaf symlink entries followed by duplicate file entries to write arbitrary files as root, enabling remote code execution.",
+    "references": [
+      "https://github.com/Budibase/budibase/security/advisories/GHSA-37r6-5jxh-vm83",
+      "https://www.vulncheck.com/advisories/budibase-server-before-3.45.0-arbitrary-file-write-via-zip-symlink"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 44.8,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
     ]
   },
   {
@@ -1510,58 +1520,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-89078",
-    "published": "2026-09-24T00:17:22.060",
-    "last_modified": "2026-09-25T04:17:48.843",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 19.2 before 19.2.7, 19.3 before 19.3.3, and 19.4 before 19.4.1 that under certain conditions could have allowed an authenticated user to execute arbitrary code on the GitLab server due to a double free issue when parsing a specially crafted regular expression in a CI/CD configuration.",
-    "references": [
-      "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-1-released/",
-      "https://gitlab.com/gitlab-org/gitlab/-/work_items/628577",
-      "https://hackerone.com/reports/4019059"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 27.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93577",
-    "published": "2026-09-24T00:17:22.850",
-    "last_modified": "2026-09-25T04:17:49.330",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 19.2 before 19.2.7, 19.3 before 19.3.3, and 19.4 before 19.4.1 that under certain conditions could have allowed an authenticated user to execute arbitrary code on the GitLab server due to an integer overflow issue when compiling a specially crafted regular expression in a CI/CD configuration.",
-    "references": [
-      "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-1-released/",
-      "https://gitlab.com/gitlab-org/gitlab/-/work_items/629758",
-      "https://hackerone.com/reports/3995696"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 34.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-34522",
     "published": "2025-08-27T22:15:58.040",
     "last_modified": "2026-09-26T00:10:00.127",
@@ -1723,54 +1681,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 22.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-6730",
-    "published": "2026-09-23T21:17:02.053",
-    "last_modified": "2026-09-25T04:17:38.957",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Concert 1.0.0 through 3.0.0 is vulnerable to a buffer overflow, caused by improper bounds checking. A local user could overflow the buffer and execute arbitrary code on the system.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7288830"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-6928",
-    "published": "2026-09-23T21:17:02.430",
-    "last_modified": "2026-09-25T04:17:39.860",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Concert 1.0.0 through 3.0.0 references or accesses memory after it has been freed. This allows an attacker who can influence program execution or input may exploit this condition to corrupt memory, cause application crashes, or execute arbitrary code.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7288830"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 36.6,
     "tags": [
       "rce"
     ],
@@ -2647,6 +2557,91 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-16526",
+    "published": "2026-07-30T06:25:02.663",
+    "last_modified": "2026-09-28T10:16:43.420",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw in the PCP linux_sockets module exposes an unsecured internal connection.\nAn attacker with initial code execution can exploit this to escalate privileges and execute arbitrary commands as root.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:55560",
+      "https://access.redhat.com/errata/RHSA-2026:55617",
+      "https://access.redhat.com/errata/RHSA-2026:55740",
+      "https://access.redhat.com/errata/RHSA-2026:72272",
+      "https://access.redhat.com/errata/RHSA-2026:72273",
+      "https://access.redhat.com/security/cve/CVE-2026-16526",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2506026"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 36.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-18951",
+    "published": "2026-08-10T21:17:21.710",
+    "last_modified": "2026-09-28T10:16:44.640",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the Red Hat OpenShift AI (RHOAI) overlay for the training operator. The RHOAI overlay incorrectly aggregates `trainjobs` management permissions into the native Kubernetes `edit ClusterRole`. This allows any user with `edit ClusterRole` permissions in a namespace to create, modify, and delete `TrainJobs`. When combined with a separate vulnerability (TRN-01) that permits arbitrary pod configurations, a remote attacker with namespace editor privileges could exploit this to escalate privileges, potentially leading to arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:53262",
+      "https://access.redhat.com/errata/RHSA-2026:53263",
+      "https://access.redhat.com/errata/RHSA-2026:60367",
+      "https://access.redhat.com/errata/RHSA-2026:60520",
+      "https://access.redhat.com/security/cve/CVE-2026-18951",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2511187"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 57.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-76425",
+    "published": "2026-09-16T21:17:14.107",
+    "last_modified": "2026-09-28T12:27:36.030",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability in the APIs of Cisco ISE could allow an authenticated, remote attacker to conduct SQL injection attacks against the backend database.\r\n\r\nThis vulnerability is due to insufficient validation of certain parameters that are concatenated directly into an SQL query. An attacker could exploit this vulnerability by sending a crafted request that contains SQL statements to an affected endpoint. A successful exploit could allow the attacker to read arbitrary content from the SQL database and conduct server-side request forgery (SSRF) attacks. To exploit this vulnerability, the attacker must have valid administrative credentials.",
+    "references": [
+      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-multi-hrP9jQSQ"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.3,
+    "tags": [
+      "sqli",
+      "ssrf"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18",
+      "ssrf+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-88418",
     "published": "2026-09-22T20:17:10.960",
     "last_modified": "2026-09-26T00:16:37.843",
@@ -2696,20 +2691,48 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-70125",
-    "published": "2026-09-23T23:18:12.510",
-    "last_modified": "2026-09-25T04:17:40.740",
+    "cve_id": "CVE-2026-51997",
+    "published": "2026-09-24T15:17:23.397",
+    "last_modified": "2026-09-25T17:17:09.083",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Microsoft Office Outlook Remote Code Execution Vulnerability",
+    "summary": "An issue in geelen mcp-remote 0.1.16 through 0.1.38 allows a remote attacker to execute arbitrary code via the open() functions",
     "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70125"
+      "https://github.com/geelen/mcp-remote",
+      "https://github.com/geelen/mcp-remote/security/advisories",
+      "https://github.com/playb0t/mcp-remote-oauth-security/blob/v1.0.1/advisories/F-08-browser-url-validation.md"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.9,
+    "epss": 0.5,
+    "epss_percentile": 42.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-96883",
+    "published": "2026-09-24T20:17:35.240",
+    "last_modified": "2026-09-25T13:16:34.693",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "pgcollection is an open source extension to PostgreSQL. A type confusion issue in AWS pgcollection 2.0.0 through 2.1.1 might allow an authenticated remote user to execute arbitrary code as the postgres operating system user via crafted SQL statements that rely on mismatched type metadata in collection value retrieval and array conversion functions.\n\n\n\nTo remediate this issue, users should upgrade to version 2.1.2 or later.",
+    "references": [
+      "https://aws.amazon.com/security/security-bulletins/2026-118-aws/",
+      "https://github.com/aws/pgcollection/releases/tag/v2.1.2",
+      "https://github.com/aws/pgcollection/security/advisories/GHSA-g539-cj32-hv6r"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 49.1,
     "tags": [
       "rce"
     ],
