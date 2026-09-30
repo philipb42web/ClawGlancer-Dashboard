@@ -71,66 +71,33 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86950",
-    "published": "2026-09-28T20:17:11.193",
-    "last_modified": "2026-09-30T04:18:33.497",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
+    "cve_id": "CVE-2025-71333",
+    "published": "2026-06-25T22:16:59.010",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "An out-of-bounds write issue was addressed with improved bounds checking. This issue is fixed in iOS 26.7.1 and iPadOS 26.7.1, macOS Sequoia 15.8.1, macOS Tahoe 26.7.1. Processing a maliciously crafted file may lead to arbitrary code execution. Apple is aware of a report that this issue may have been exploited in an extremely sophisticated attack against specific targeted individuals on versions of iOS before iOS 27.",
+    "summary": "Flowise through 2.2.4 contains an unauthenticated arbitrary file upload vulnerability in the /api/v1/attachments endpoint when storageType is set to local. Attackers can exploit path traversal in the chatId and chatflowId parameters to upload malicious files to arbitrary directories, potentially enabling remote code execution and server compromise.",
     "references": [
-      "https://support.apple.com/en-us/149226",
-      "https://support.apple.com/en-us/149228",
-      "https://support.apple.com/en-us/149229",
-      "http://seclists.org/fulldisclosure/2026/Sep/89",
-      "http://seclists.org/fulldisclosure/2026/Sep/90",
-      "http://seclists.org/fulldisclosure/2026/Sep/91",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-86950"
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-h42x-xx2q-6v6g",
+      "https://www.vulncheck.com/advisories/flowise-arbitrary-file-upload-via-unauthenticated-api-v1-attachments-endpoint",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-h42x-xx2q-6v6g"
     ],
     "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.8,
-    "epss_percentile": 55.3,
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 58.1,
     "tags": [
-      "cisa_kev",
-      "in_the_wild",
+      "file_write",
+      "path_traversal",
       "rce"
     ],
-    "intel_score": 124.0,
+    "intel_score": 119.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-88772",
-    "published": "2026-09-27T17:16:56.390",
-    "last_modified": "2026-09-28T12:26:47.670",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23 leading to Remote Code Execution or Denial of Service",
-    "references": [
-      "https://support.citrix.com/support-home/kbsearch/article?articleNumber=CTX697096&articleTitle=Citrix_NetScaler_ADC_and_Citrix_NetScaler_Gateway_Security_Bulletin_for_CVE_2026_88771_CVE_2026_88772_CVE_2026_88773_CVE_2026_88774_CVE_2026_88775_CVE_2026_88776_CVE_2026_88777_and_CVE_2026_88778",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-88772"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 1.3,
-    "epss_percentile": 69.3,
-    "tags": [
-      "cisa_kev",
-      "dos",
-      "in_the_wild",
-      "rce"
-    ],
-    "intel_score": 123.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3",
-      "CISA KEV active exploitation (+40)"
+      "path_traversal+15",
+      "file_write+15"
     ]
   },
   {
@@ -167,36 +134,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-100721",
-    "published": "2026-09-27T02:17:17.547",
-    "last_modified": "2026-09-28T17:17:46.057",
-    "cvss_v3": 9.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "vm2 before 3.12.2 contains an authorization bypass in the NodeVM external-module resolver. When an embedder configures `require.external` with a custom resolver (and `context: 'host'`), `LegacyResolver.customResolve` in lib/resolver-compat.js records the resolved module directory in `this.externals` as `new RegExp('^' + escapeRegExp(resolvedPath))`, without requiring a path separator or end-of-string boundary. Untrusted guest code can therefore require the allowlisted module (e.g. `foo`) and then require the absolute path of a non-allowlisted sibling whose path merely shares the resolved prefix (e.g. `.../node_modules/foo2/index.js`); the sibling passes `isPathAllowedForModule` and is loaded through `hostRequire`, so its top-level code runs in the host process before the exports are wrapped with `vm.readonly`, resulting in a sandbox escape and arbitrary code execution in the host context.",
-    "references": [
-      "https://github.com/patriksimek/vm2/commit/6ac3916da84e060c403e407b6b6318fcc66b0e72",
-      "https://github.com/patriksimek/vm2/commit/91034466bfb7f56b95fd48083ec6ca36d058f164",
-      "https://github.com/patriksimek/vm2/commit/ab4ee7d803e8c80155e9eb3672226bddbca4aa9c",
-      "https://github.com/patriksimek/vm2/security/advisories/GHSA-5h3f-q97h-ccvc",
-      "https://www.vulncheck.com/advisories/vm2-before-3.12.2-authorization-bypass-via-custom-resolver"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.6,
-    "tags": [
-      "auth_bypass",
-      "rce"
-    ],
-    "intel_score": 110.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "auth_bypass+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-18948",
     "published": "2026-08-10T21:17:21.290",
     "last_modified": "2026-09-28T10:16:44.017",
@@ -228,22 +165,22 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-82384",
-    "published": "2026-09-28T08:16:42.273",
-    "last_modified": "2026-09-29T04:18:00.500",
+    "cve_id": "CVE-2025-71323",
+    "published": "2026-06-17T17:16:41.110",
+    "last_modified": "2026-09-30T16:10:00.223",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Deserialization of Untrusted Data in Apache Roller 6.1.5 allows an unauthenticated remote attacker to cause deserialization of attacker-controlled bytes, because the XML-RPC endpoint accepts vendor extension types that are deserialized during request parsing, before authentication. The servlet is mapped unconditionally, so parsing occurs even when the global XML-RPC feature is set to disabled; no non-default configuration is required for this path. This can lead to remote code execution. Users are recommended to upgrade to Apache Roller 6.1.6 or later, which disables the extension types and rejects requests when the XML-RPC feature is disabled.",
+    "summary": "picklescan before 0.0.33 fails to block the ctypes module, allowing attackers to achieve remote code execution by invoking direct syscalls and accessing raw memory. Attackers can craft malicious pickle files using ctypes.WinDLL to load kernel32.dll and execute arbitrary commands, bypassing sandbox protections and gadget chain detection.",
     "references": [
-      "https://github.com/apache/roller/pull/171",
-      "https://lists.apache.org/thread/21p1dh6x179gmcdpw84kkx9yclrdp410",
-      "http://www.openwall.com/lists/oss-security/2026/09/25/17"
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4675-36f9-wf6r",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-unblocked-ctypes-module",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4675-36f9-wf6r"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 53.8,
+    "epss_percentile": 53.4,
     "tags": [
       "deserialization",
       "rce"
@@ -253,6 +190,102 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-16745",
+    "published": "2026-07-23T11:16:40.043",
+    "last_modified": "2026-09-30T17:16:44.840",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in odh-dashboard, the web console component of Red Hat OpenShift AI (RHOAI). Due to incorrect network binding, a malicious actor within the cluster can bypass authentication and impersonate any user by providing an arbitrary access token. This allows an attacker to gain unauthorized access to the Kubernetes API, potentially leading to arbitrary code execution, privilege escalation, or information disclosure.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:53261",
+      "https://access.redhat.com/errata/RHSA-2026:53262",
+      "https://access.redhat.com/errata/RHSA-2026:53263",
+      "https://access.redhat.com/errata/RHSA-2026:60520",
+      "https://access.redhat.com/errata/RHSA-2026:65126",
+      "https://access.redhat.com/errata/RHSA-2026:73987",
+      "https://access.redhat.com/security/cve/CVE-2026-16745",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2506350"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 37.0,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-80428",
+    "published": "2026-08-26T16:16:45.100",
+    "last_modified": "2026-09-30T17:16:50.173",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "ILIAS before versions 9.22, 10.10, and 11.3 contains an unauthenticated PHP object injection vulnerability that allows unauthenticated attackers to execute arbitrary code by injecting serialized objects through the LTI authentication endpoint and triggering deserialization via the Shibboleth back-channel logout endpoint. Attackers can write arbitrary serialized objects into session storage, then exploit an available POP gadget through the logout endpoint's unrestricted deserialization to write attacker-controlled PHP content to a web-accessible path and achieve remote code execution as the web server user.",
+    "references": [
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225630&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225631&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=illmpresentationgui&obj_id=225632&ref_id=35",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=934",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=935",
+      "https://docu.ilias.de/ilias.php?baseClass=ilrepositorygui&cmdNode=wy:ll:6t&cmdClass=ilBlogPostingGUI&cmd=previewFullscreen&ref_id=15821&blpg=936",
+      "https://schweigertit.de/en/advisories/SIT-2026-002.html",
+      "https://schweigertit.de/en/writeups/php-object-injection-shibboleth-logout.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 4.5,
+    "epss_percentile": 91.1,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71321",
+    "published": "2026-06-17T17:16:40.847",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "picklescan before 0.0.33 contains an arbitrary file writing vulnerability that allows attackers to bypass the dangerous blocklist by using distutils.file_util.write_file. Attackers can construct malicious pickle objects to overwrite critical system files and achieve denial of service or remote code execution.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-m273-6v24-x4m4",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-file-writing-via-distutils-module-bypass",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-m273-6v24-x4m4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.9,
+    "tags": [
+      "dos",
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15",
+      "dos+3"
     ]
   },
   {
@@ -309,6 +342,35 @@
       "rce+30",
       "sqli+18",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-14174",
+    "published": "2025-12-12T20:15:39.663",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Out of bounds memory access in ANGLE in Google Chrome on Mac prior to 143.0.7499.110 allowed a remote attacker to perform out of bounds memory access via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2025/12/stable-channel-update-for-desktop_10.html",
+      "https://issues.chromium.org/issues/466192044",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnotes-security",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-14174"
+    ],
+    "source": "NVD",
+    "cisa_kev": true,
+    "epss": 22.3,
+    "epss_percentile": 97.6,
+    "tags": [
+      "cisa_kev",
+      "in_the_wild"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "CISA KEV active exploitation (+40)",
+      "Moderate EPSS prob 22.3% (+10)"
     ]
   },
   {
@@ -371,26 +433,24 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-82901",
-    "published": "2026-09-26T19:16:28.427",
-    "last_modified": "2026-09-28T15:16:04.793",
+    "cve_id": "CVE-2025-71334",
+    "published": "2026-06-25T22:16:59.127",
+    "last_modified": "2026-09-30T16:10:00.223",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "The Ultra Addons for Contact Form 7 plugin for WordPress is vulnerable to Arbitrary File Upload due to insufficient file type validation in the 'uacf7_wpcf7_mail_components' function in all versions up to, and including, 3.5.50. This makes it possible for unauthenticated attackers to upload arbitrary files on the affected site's server which may make remote code execution possible. Note: This is only exploitable when the plugin's PDF Generator module is enabled, which is disabled by default.",
+    "summary": "Flowise before 3.0.6 (affected versions 2.2.8 and earlier) contains an arbitrary file access vulnerability due to missing validation that the chatflowId and chatId parameters are UUIDs or numbers in file handling operations. By supplying a path-traversal value (e.g., '../../../../../tmp') as the chatflow id, an unauthenticated attacker can use the /api/v1/chatflows endpoint (via addBase64FilesToStorage) to write arbitrary files, and the /api/v1/get-upload-file and /api/v1/openai-assistants-file/download endpoints (via streamStorageFile) to read arbitrary files. Arbitrary file write may lead to remote code execution.",
     "references": [
-      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/pdf-generator/pdf-generator.php#L608",
-      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/pdf-generator/pdf-generator.php#L807",
-      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/signature/ultimate-signature.php#L133",
-      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/signature/ultimate-signature.php#L192",
-      "https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/signature/ultimate-signature.php#L300",
-      "https://plugins.trac.wordpress.org/changeset/3698232/ultimate-addons-for-contact-form-7",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/872e1a05-aacc-44fa-93c1-8c3f7b2fb46d?source=cve"
+      "https://github.com/FlowiseAI/Flowise/commit/8bd3de41533de78e4ef6c980e5704a1f9cb7ae6f",
+      "https://github.com/FlowiseAI/Flowise/commit/c2b830f279e454e8b758da441016b2234f220ac7",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-q67q-549q-p849",
+      "https://www.vulncheck.com/advisories/flowise-arbitrary-file-access-via-missing-chat-flow-id-validation",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-q67q-549q-p849"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 64.6,
+    "epss": 4.4,
+    "epss_percentile": 90.9,
     "tags": [
       "file_write",
       "rce"
@@ -465,32 +525,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-12268",
-    "published": "2026-09-28T11:16:44.063",
-    "last_modified": "2026-09-29T21:39:02.570",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ManageEngine DDI Central versions below 6201 are vulnerable to PowerShell command injection in Windows DNS SPF/TXT record push leading to remote code execution.",
-    "references": [
-      "https://www.manageengine.com/dns-dhcp-ipam/security-updates/security-updates.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 4.7,
-    "epss_percentile": 91.5,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-65130",
     "published": "2026-09-22T15:17:13.430",
     "last_modified": "2026-09-29T15:49:21.760",
@@ -518,6 +552,200 @@
       "rce+30",
       "command_injection+18",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71363",
+    "published": "2026-06-30T23:16:51.533",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.30 fails to detect cProfile.run function calls in pickle reduce methods, allowing attackers to execute arbitrary code. Remote attackers can craft malicious pickle files with cProfile.run payloads that bypass picklescan detection and achieve code execution upon deserialization.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-49gj-c84q-6qm9",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-cprofile-run-in-pickle-deserialization",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-49gj-c84q-6qm9"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.5,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71374",
+    "published": "2026-06-30T23:16:51.903",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.29 fails to detect the built-in python profile.Profile.run function when used in pickle reduce methods, allowing attackers to execute arbitrary code. Remote attackers can craft malicious pickle files that bypass picklescan detection and achieve code execution upon deserialization.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-x696-vm39-cp64",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-profile-profile-run",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-x696-vm39-cp64"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.5,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71345",
+    "published": "2026-07-04T02:16:21.670",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.30 fails to detect malicious pickle files that invoke torch.utils.bottleneck.__main__.run_autograd_prof function. Attackers can embed undetected code in pickle files that executes during deserialization, enabling remote code execution.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4whj-rm5r-c2v8",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-torch-utils-bottleneck-main-run-autograd-prof",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4whj-rm5r-c2v8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.3,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71347",
+    "published": "2026-07-04T02:16:21.803",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.33 fails to detect malicious pickle files using numpy.f2py.crackfortran.param_eval function in reduce methods, allowing attackers to bypass security checks. Remote attackers can embed undetected code in pickle files that executes during deserialization, enabling arbitrary code execution in applications loading untrusted pickle data.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cffc-mxrf-mhh4",
+      "https://www.vulncheck.com/advisories/picklescan-undetected-remote-code-execution-via-numpy-f2py-crackfortran-param-eval",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cffc-mxrf-mhh4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.5,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71359",
+    "published": "2026-07-04T02:16:22.197",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.29 fails to detect malicious pickle payloads that utilize lib2to3.pgen2.grammar.Grammar.loads in the reduce method, allowing remote code execution. Attackers can craft pickle files embedding dangerous code that evades picklescan detection and executes during pickle.load() deserialization.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-f54q-57x4-jg88",
+      "https://www.vulncheck.com/advisories/picklescan-unsafe-deserialization-via-lib2to3-pgen2-grammar-grammar-loads",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-f54q-57x4-jg88"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.3,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71369",
+    "published": "2026-07-04T02:16:22.963",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.28 fails to detect malicious pickle files that use torch.utils.data.datapipes.utils.decoder.basichandlers in reduce methods, allowing attackers to bypass safety checks. Remote attackers can embed undetected malicious code in pickle files that executes during deserialization, enabling remote code execution.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-h3qp-7fh3-f8h4",
+      "https://www.vulncheck.com/advisories/picklescan-unsafe-deserialization-via-torch-utils-data-datapipes-utils-decoder-basichandlers",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-h3qp-7fh3-f8h4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.5,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-53828",
+    "published": "2026-07-06T16:16:26.903",
+    "last_modified": "2026-09-30T15:10:00.560",
+    "cvss_v3": 8.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SharePoint for ownCloud is an application for using SharePoint with the file storage, synchronization, and sharing application ownCloud Classic. In SharePoint for ownCloud prior to version 0.4.1, which corresponds to ownCloud 10 prior to 10.15.3, an attacker with administrative privileges can use a SSRF vulnerability in the SharePoint app to execute arbitrary code on the system. Upgrade ownCloud 10 to version 10.15.3 or later to receive SharePoint for ownCloud 0.4.1, the fixed version.",
+    "references": [
+      "https://github.com/owncloud/security-advisories/security/advisories/GHSA-4m66-rpfj-m5f6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 30.9,
+    "tags": [
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "ssrf+18"
     ]
   },
   {
@@ -549,7 +777,7 @@
   {
     "cve_id": "CVE-2026-100310",
     "published": "2026-09-25T20:17:05.833",
-    "last_modified": "2026-09-30T01:16:31.887",
+    "last_modified": "2026-09-30T17:31:44.573",
     "cvss_v3": 7.0,
     "severity": "HIGH",
     "affected": [],
@@ -578,30 +806,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-100706",
-    "published": "2026-09-26T14:16:55.843",
-    "last_modified": "2026-09-28T15:20:06.633",
-    "cvss_v3": 9.9,
+    "cve_id": "CVE-2025-26319",
+    "published": "2025-03-04T22:15:40.993",
+    "last_modified": "2026-09-30T17:10:00.187",
+    "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "kyverno before 1.19.1 fails to properly validate URL-encoded path segments in Policy apiCall urlPath, allowing namespace tenants to bypass the per-namespace clamp and create objects in other namespaces as the admission-controller ServiceAccount. Attackers can exploit this by using percent-encoded directory traversal sequences to create MutatingWebhookConfiguration objects cluster-wide or PolicyException objects in the kyverno namespace, enabling privilege escalation to cluster admin.",
+    "summary": "FlowiseAI Flowise v2.2.6 was discovered to contain an arbitrary file upload vulnerability in /api/v1/attachments.",
     "references": [
-      "https://github.com/kyverno/kyverno/security/advisories/GHSA-5qq8-67g6-4h2w",
-      "https://www.vulncheck.com/advisories/kyverno-before-1.19.1-privilege-escalation-via-policy-apicall-urlpath"
+      "https://github.com/dorattias/CVE-2025-26319",
+      "https://github.com/dorattias/CVE-2025-26319"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.3,
+    "epss": 55.9,
+    "epss_percentile": 99.0,
     "tags": [
-      "path_traversal",
-      "priv_esc"
+      "file_write"
     ],
-    "intel_score": 99.5,
+    "intel_score": 99.0,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25",
-      "path_traversal+15"
+      "file_write+15",
+      "High EPSS exploit prob 55.9% (+25)"
     ]
   },
   {
@@ -636,14 +863,15 @@
   {
     "cve_id": "CVE-2026-100682",
     "published": "2026-09-26T14:16:52.433",
-    "last_modified": "2026-09-28T16:36:05.010",
+    "last_modified": "2026-09-30T16:17:00.303",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "Budibase Server before 3.45.0 contains an arbitrary file write vulnerability in the PWA icon upload endpoint that extracts user-supplied ZIP archives without proper symlink validation. Attackers with BUILDER role can craft a malicious ZIP with leaf symlink entries followed by duplicate file entries to write arbitrary files as root, enabling remote code execution.",
     "references": [
       "https://github.com/Budibase/budibase/security/advisories/GHSA-37r6-5jxh-vm83",
-      "https://www.vulncheck.com/advisories/budibase-server-before-3.45.0-arbitrary-file-write-via-zip-symlink"
+      "https://www.vulncheck.com/advisories/budibase-server-before-3.45.0-arbitrary-file-write-via-zip-symlink",
+      "https://github.com/Budibase/budibase/security/advisories/GHSA-37r6-5jxh-vm83"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -658,140 +886,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100843",
-    "published": "2026-09-27T02:17:22.853",
-    "last_modified": "2026-09-28T20:53:43.443",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "MONAI versions before 1.6.0 contain a remote code execution vulnerability in the algo_from_pickle() function due to unsafe pickle.loads() deserialization in monai/auto3dseg/utils.py. Attackers can craft malicious pickle files that execute arbitrary system commands when deserialized by the vulnerable function.",
-    "references": [
-      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-qxq5-qhx6-94qw",
-      "https://www.vulncheck.com/advisories/monai-before-1.6.0-remote-code-execution-via-algo-from-pickle"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 7.6,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100845",
-    "published": "2026-09-27T02:17:23.140",
-    "last_modified": "2026-09-28T21:03:04.910",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "MONAI before 1.6.0 contains an unsafe deserialization vulnerability in the NumpyReader class that unconditionally uses numpy.load with allow_pickle=True when loading .npy and .npz files. Attackers can craft malicious .npy files with pickle payloads that execute arbitrary code when loaded through MONAI's standard data pipeline.",
-    "references": [
-      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-wg9g-w2j2-8pgr",
-      "https://www.vulncheck.com/advisories/monai-before-1.6.0-remote-code-execution-via-numpyreader",
-      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-wg9g-w2j2-8pgr"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.5,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-88771",
-    "published": "2026-09-27T17:16:56.260",
-    "last_modified": "2026-09-29T04:18:01.603",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper input validation vulnerability in Citrix NetScaler ADC and Citrix NetScaler Gateway.\n\nThis issue affects ADC: before 14.1-73.37, before 13.1-64.23, before 14.1-73.37 FIPS, and before 13.1.37.279 FIPS and NDcPP; Gateway: before 14.1-73.37 and before 13.1-64.23 leading to an unauthenticated attacker to execute arbitrary commands.",
-    "references": [
-      "https://support.citrix.com/support-home/kbsearch/article?articleNumber=CTX697096",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-88771"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 1.1,
-    "epss_percentile": 63.3,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-12264",
-    "published": "2026-09-28T12:17:36.597",
-    "last_modified": "2026-09-29T21:39:02.570",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Zohocorp ManageEngine DDI Central versions before 6201 are vulnerable to Arbitrary file write via HA Failover Config sync upload leading to remote code execution.",
-    "references": [
-      "https://www.manageengine.com/dns-dhcp-ipam/security-updates/security-updates.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.0,
-    "epss_percentile": 79.4,
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100846",
-    "published": "2026-09-27T02:17:23.283",
-    "last_modified": "2026-09-28T20:53:43.443",
-    "cvss_v3": 7.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "MONAI before 1.5.2 contains a deserialization of untrusted data vulnerability in the algo_from_pickle function in monai/auto3dseg/utils.py. The function reads a .pkl file and passes its contents to pickle.loads without validating the data source or content. If an application invokes algo_from_pickle on an attacker-supplied pickle file, an object defining __reduce__ is executed during deserialization, resulting in arbitrary code execution in the context of the application.",
-    "references": [
-      "https://github.com/Project-MONAI/MONAI/security/advisories/GHSA-89gg-p5r5-q6r4",
-      "https://www.vulncheck.com/advisories/monai-before-1.5.2-remote-code-execution-via-pickle-deserialization"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 17.4,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 98.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
     ]
   },
   {
@@ -939,6 +1033,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-53829",
+    "published": "2026-07-06T16:16:27.033",
+    "last_modified": "2026-09-30T15:10:00.560",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ownCloud is a file storage, synchronization, and sharing application. In ownCloud 10 prior to version 10.15.3, an attacker with administrative privileges can exploit a path traversal vulnerability in the system to execute arbitrary code. Upgrade ownCloud 10 to version 10.15.3 or later to receive a patch.",
+    "references": [
+      "https://github.com/owncloud/security-advisories/security/advisories/GHSA-4439-4wxm-c9px"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.2,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 95.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-76690",
     "published": "2026-09-15T20:17:51.043",
     "last_modified": "2026-09-28T13:52:50.370",
@@ -953,32 +1073,6 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 63.1,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-12267",
-    "published": "2026-09-28T11:16:43.943",
-    "last_modified": "2026-09-29T21:39:02.570",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ManageEngine DDI Central versions below 6201 are vulnerable to Command injection in Windows DNS Query Resolution Policy name field leading to remote code execution.",
-    "references": [
-      "https://www.manageengine.com/dns-dhcp-ipam/security-updates/security-updates.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 3.6,
-    "epss_percentile": 89.1,
     "tags": [
       "command_injection",
       "rce"
@@ -1018,35 +1112,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-4556",
-    "published": "2026-09-28T15:17:17.723",
-    "last_modified": "2026-09-29T21:27:41.130",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Exam4 is affected by a local privilege escalation vulnerability in the com.extegrity.LogTool privileged helper, which communicates with the application via XPC. The [ConsoleLogHelper copyConsoleIntoFileFromStartDate:] method executes a syslog command using attacker-controlled parameters without proper sanitization, enabling command injection. Successful exploitation allows a local attacker to execute arbitrary commands with root privileges through LaunchSynchronous.",
-    "references": [
-      "https://pentraze.com/vulnerability-reports"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 57.8,
-    "tags": [
-      "command_injection",
-      "priv_esc"
-    ],
-    "intel_score": 92.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-100372",
     "published": "2026-09-25T20:17:06.143",
-    "last_modified": "2026-09-29T18:17:04.963",
+    "last_modified": "2026-09-30T16:31:54.923",
     "cvss_v3": 7.2,
     "severity": "HIGH",
     "affected": [],
@@ -1072,6 +1140,33 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71338",
+    "published": "2026-06-25T22:16:59.520",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Flowise through 2.2.7 fails to sanitize path segments in the document-store loader endpoint, allowing unauthenticated attackers to write files outside the storage directory. Attackers can use parent-directory sequences to escape the storage directory and overwrite application files loaded at boot for remote code execution.",
+    "references": [
+      "https://github.com/FlowiseAI/Flowise/releases/tag/flowise%402.2.7-patch.1",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-8vvx-qvq9-5948",
+      "https://www.vulncheck.com/advisories/flowise-arbitrary-file-write-to-remote-code-execution-via-document-store-api",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-8vvx-qvq9-5948"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.2,
+    "epss_percentile": 65.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 90.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -1128,28 +1223,27 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-100886",
-    "published": "2026-09-27T23:16:59.020",
-    "last_modified": "2026-09-28T15:16:04.793",
-    "cvss_v3": 10.0,
+    "cve_id": "CVE-2025-34267",
+    "published": "2025-10-14T20:15:34.147",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.9,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "A vulnerability was identified in Seetong T8108, T8108P, T8116 and T8232 4.6.1.4-build202604241011. The affected element is an unknown function of the component Debug Service. Such manipulation leads to improper authentication. The attack may be launched remotely. The exploit is publicly available and might be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "summary": "Flowise v3.0.1 < 3.0.8 and all versions after with 'ALLOW_BUILTIN_DEP' enabled contain an authenticated remote code execution vulnerability and node VM sandbox escape due to insecure use of integrated modules (Puppeteer and Playwright) within the nodevm execution environment. An authenticated attacker able to create or run a tool that leverages Puppeteer/Playwright can specify attacker-controlled browser binary paths and parameters. When the tool executes, the attacker-controlled executable/parameters are run on the host and circumvent the intended nodevm sandbox restrictions, resulting in execution of arbitrary code in the context of the host. This vulnerability was incorrectly assigned as a duplicate CVE-2025-26319 by the developers and should be considered distinct from that identifier.",
     "references": [
-      "https://github.com/heapframe/seetong-ts81xxd3x-rce",
-      "https://vuldb.com/cve/CVE-2026-100886",
-      "https://vuldb.com/submit/916434",
-      "https://vuldb.com/vuln/410835",
-      "https://vuldb.com/vuln/410835/cti"
+      "https://flowiseai.com/",
+      "https://github.com/FlowiseAI/Flowise/pull/5231",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-5w3r-f6gm-c25w",
+      "https://www.vulncheck.com/advisories/flowise-auth-command-execution-and-sandbox-bypass-via-puppeteer-and-playwright-packages"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 53.8,
+    "epss": 6.6,
+    "epss_percentile": 93.6,
     "tags": [
       "rce"
     ],
-    "intel_score": 90.0,
+    "intel_score": 89.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1208,6 +1302,57 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-48572",
+    "published": "2025-12-08T17:16:15.003",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In multiple locations, there is a possible way to launch activities from the background due to a permissions bypass. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
+    "references": [
+      "https://android.googlesource.com/platform/frameworks/base/+/e707f6600330691f9c67dc023c09f4cd2fc59192",
+      "https://source.android.com/security/bulletin/2025-12-01",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-48572"
+    ],
+    "source": "NVD",
+    "cisa_kev": true,
+    "epss": 0.3,
+    "epss_percentile": 15.8,
+    "tags": [
+      "cisa_kev",
+      "in_the_wild"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "CISA KEV active exploitation (+40)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-36937",
+    "published": "2025-12-11T20:15:58.243",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In AudioDecoder::HandleProduceRequest of audio_decoder.cc, there is a possible out of bounds write due to an incorrect bounds check. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
+    "references": [
+      "https://source.android.com/security/bulletin/pixel/2025-12-01"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2020-37239",
     "published": "2026-05-16T16:16:20.097",
     "last_modified": "2026-09-29T10:10:00.263",
@@ -1235,6 +1380,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-71320",
+    "published": "2026-06-17T17:16:40.697",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "picklescan before 0.0.33 contains an incomplete deny-list that fails to block pydoc.locate and operator.methodcaller functions, allowing attackers to bypass security checks. Remote attackers can craft malicious pickle files using these unblocked functions to achieve arbitrary code execution when the pickle is deserialized.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-84r2-jw7c-4r5q",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-incomplete-disallowed-inputs",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-84r2-jw7c-4r5q"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2022-50972",
     "published": "2026-06-20T14:16:18.960",
     "last_modified": "2026-09-29T09:10:00.157",
@@ -1251,6 +1422,32 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 65.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71336",
+    "published": "2026-06-25T22:16:59.390",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Flowise before 3.0.6 (affected versions 2.2.7-patch.1 and earlier) contains an unsandboxed remote code execution vulnerability in the Custom MCP feature, which is designed to execute OS commands such as launching local MCP servers. Because Flowise's authentication and authorization model is minimal and lacks role-based access control, and the default installation runs without authentication unless FLOWISE_USERNAME and FLOWISE_PASSWORD are set, an attacker can send a crafted JSON payload with the header 'x-request-from: internal' to the /api/v1/node-load-method/customMCP endpoint to execute arbitrary OS commands, resulting in complete compromise of the platform container or server.",
+    "references": [
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-6933-jpx5-q87q",
+      "https://www.vulncheck.com/advisories/flowise-unsandboxed-remote-code-execution-via-custom-mcp",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-6933-jpx5-q87q"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.1,
+    "epss_percentile": 65.5,
     "tags": [
       "rce"
     ],
@@ -1383,30 +1580,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-12342",
-    "published": "2026-09-28T16:17:13.460",
-    "last_modified": "2026-09-29T04:17:55.873",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "This vulnerability\nimpacts all versions of IdentityIQ and allows an unauthenticated user remote\ncode execution on the IdentityIQ server due to improper input validation of\nsubmitted web service API content.",
-    "references": [
-      "https://www.sailpoint.com/security-advisories/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-65179",
     "published": "2026-09-22T15:17:13.670",
     "last_modified": "2026-09-29T15:42:32.170",
@@ -1435,24 +1608,20 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-101894",
-    "published": "2026-09-28T17:17:48.830",
-    "last_modified": "2026-09-28T18:17:17.730",
+    "cve_id": "CVE-2025-53827",
+    "published": "2026-07-06T16:16:26.740",
+    "last_modified": "2026-09-30T15:10:00.560",
     "cvss_v3": 9.1,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "The decompress package for Node.js extracts archives. Prior to 10.2.2 and 11.1.4, the default decompress(input, output) API relies on lexical containment checks that do not account for the kernel following a planted symlink chain. An attacker can supply a crafted archive containing chained symlink entries so that a later entry resolves outside the output directory. This allows files outside output to be read or written, and overwriting startup scripts or configuration can lead to remote code execution. The maintained @xhmikosr/decompress package is fixed in 10.2.2 and 11.1.4, but the separately affected unmaintained decompress package remains unpatched through 4.2.1. This vulnerability results from a bypass of the incomplete hardening for CVE-2026-53486. @xhmikosr/decompress is fixed in versions 10.2.2 and 11.1.4.",
+    "summary": "ownCloud Core is the server-side component of the file storage, synchronization, and sharing application ownCloud Classic. In versions prior to 10.15.3, the Updater on ownCloud 10 before 10.15.3 has an exposed dangerous method or function. Attackers with administrative privileges may leverage functionality to execute arbitrary code. This issue has been fixed in version 10.15.3.",
     "references": [
-      "https://github.com/XhmikosR/decompress/commit/5f4b2f64abb31bbaf1fef8975b595fd7df2558d8",
-      "https://github.com/XhmikosR/decompress/commit/f6c88c668216d6a12c6cecf4fe0b6c70bf77050a",
-      "https://github.com/XhmikosR/decompress/releases/tag/v10.2.2",
-      "https://github.com/XhmikosR/decompress/releases/tag/v11.1.4",
-      "https://github.com/XhmikosR/decompress/security/advisories/GHSA-hrh2-vp3x-79xf"
+      "https://github.com/owncloud/security-advisories/security/advisories/GHSA-hvcx-ph66-mmvw"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.3,
+    "epss": 0.6,
+    "epss_percentile": 47.4,
     "tags": [
       "rce"
     ],
@@ -1603,6 +1772,107 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-11460",
+    "published": "2025-11-06T23:15:35.347",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Use after free in Storage in Google Chrome prior to 141.0.7390.65 allowed a remote attacker to execute arbitrary code via a crafted video file. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2025/10/stable-channel-update-for-desktop.html",
+      "https://issues.chromium.org/issues/446722008"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-12907",
+    "published": "2025-11-08T00:15:35.443",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Insufficient validation of untrusted input in Devtools in Google Chrome prior to 140.0.7339.80 allowed a remote attacker to execute arbitrary code via user action in Devtools. (Chromium security severity: Low)",
+    "references": [
+      "https://chromereleases.googleblog.com/2025/09/stable-channel-update-for-desktop.html",
+      "https://issues.chromium.org/issues/427367145"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-14861",
+    "published": "2025-12-18T15:15:53.157",
+    "last_modified": "2026-09-30T17:10:00.187",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Memory safety bugs present in Firefox 146. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability was fixed in Firefox 146.0.1.",
+    "references": [
+      "https://bugzilla.mozilla.org/buglist.cgi?bug_id=1996570%2C1999700",
+      "https://www.mozilla.org/security/advisories/mfsa2025-98/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 15.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71322",
+    "published": "2026-06-17T17:16:40.980",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PickleScan before 0.0.33 fails to include the pty.spawn function in its unsafe globals list, allowing attackers to bypass security checks. Malicious actors can craft pickle payloads using pty.spawn to achieve arbitrary code execution when files are processed by PickleScan.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-hgrh-qx5j-jfwx",
+      "https://www.vulncheck.com/advisories/picklescan-unsafe-globals-check-bypass-via-pty-spawn-function",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-hgrh-qx5j-jfwx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 29.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2019-25763",
     "published": "2026-06-20T14:16:17.783",
     "last_modified": "2026-09-29T09:10:00.157",
@@ -1688,7 +1958,7 @@
   {
     "cve_id": "CVE-2026-18951",
     "published": "2026-08-10T21:17:21.710",
-    "last_modified": "2026-09-28T10:16:44.640",
+    "last_modified": "2026-09-30T17:16:45.010",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1698,6 +1968,7 @@
       "https://access.redhat.com/errata/RHSA-2026:53263",
       "https://access.redhat.com/errata/RHSA-2026:60367",
       "https://access.redhat.com/errata/RHSA-2026:60520",
+      "https://access.redhat.com/errata/RHSA-2026:73987",
       "https://access.redhat.com/security/cve/CVE-2026-18951",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2511187"
     ],
@@ -1844,6 +2115,55 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-76183",
+    "published": "2026-09-23T12:17:06.537",
+    "last_modified": "2026-09-30T15:22:34.470",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Authentication Bypass by Alternate Name vulnerability in Apache Tomcat allowed the security constraints for any WebSocket endpoint to be bypassed.\n\n\n\nThis issue affects Apache Tomcat: from 11.0.0-M1 through 11.0.25, from 10.1.0-M1 through 10.1.59, from 9.0.0.M1 through 9.0.121.\n\n\n\nThe following versions were EOS at the time the CVE was created but are \nknown to be affected: from 8.5.0 through 8.5.100, from 7.0.43 through 7.0.109. Other unsupported versions may also be affected.\n\n\n\n\nUsers are recommended to upgrade to version 11.0.26, 10.1.60 or 9.0.122, which fix the issue.",
+    "references": [
+      "https://lists.apache.org/thread/45mxk8nj2q8pkhct6lfxkvtm2jpywrsp",
+      "http://www.openwall.com/lists/oss-security/2026/09/23/21"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 30.5,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-70125",
+    "published": "2026-09-23T23:18:12.510",
+    "last_modified": "2026-09-30T16:18:40.357",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Microsoft Office Outlook Remote Code Execution Vulnerability",
+    "references": [
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70125"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-94445",
     "published": "2026-09-25T17:17:19.963",
     "last_modified": "2026-09-29T21:36:39.547",
@@ -1885,59 +2205,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 38.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85984",
-    "published": "2026-09-26T18:16:31.010",
-    "last_modified": "2026-09-28T15:16:04.793",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The miniOrange OTP Login, Verification and SMS Notifications plugin for WordPress is vulnerable to Authentication Bypass via the mo_wp_login_intent parameter in all versions up to, and including, 5.5.5. This is due to a missing password-intent guard in the skip_pass_fallback-enabled configuration branch of the mo_by_pass_login() function, which treats administrator role membership alone as sufficient authentication whenever the unauthenticated, unverified POST parameter mo_wp_login_intent is submitted with the value otp, causing mo_get_user() to skip wp_authenticate_username_password() and resolve a WP_User purely from a username lookup. This makes it possible for unauthenticated attackers to log in as any existing administrator account by supplying only a known username and an empty password alongside mo_wp_login_intent=otp, with no password or OTP verification required. Exploitation is conditional on a site administrator having simultaneously enabled the following plugin options: WP Login OTP, Login with Only OTP, Allow Users to Login with Username and Password, and Admin OTP Bypass.",
-    "references": [
-      "https://plugins.trac.wordpress.org/browser/miniorange-otp-verification/tags/5.5.5/includes/js/loginform.js#L176",
-      "https://plugins.trac.wordpress.org/browser/miniorange-otp-verification/tags/5.5.5/views/forms/mowploginform.php#L134",
-      "https://plugins.trac.wordpress.org/changeset/3687601/miniorange-otp-verification",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/2895f0c2-41b6-4b11-9865-3bded4402aa9?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.2,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100856",
-    "published": "2026-09-27T02:17:25.050",
-    "last_modified": "2026-09-28T21:02:16.150",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "AzuraCast before 0.23.6 contains a code injection vulnerability in the remote relay password field due to incomplete migration from the vulnerable cleanUpString method to toRawString. Attackers with RemoteRelays station permission can inject nested Liquidsoap interpolation syntax to execute arbitrary code in the Liquidsoap process, disclose internal API keys, or disrupt station operation.",
-    "references": [
-      "https://github.com/AzuraCast/AzuraCast/security/advisories/GHSA-q4ph-8x8g-95f8",
-      "https://www.vulncheck.com/advisories/azuracast-before-0.23.6-code-injection-via-remote-relay-password",
-      "https://github.com/AzuraCast/AzuraCast/security/advisories/GHSA-q4ph-8x8g-95f8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 28.4,
     "tags": [
       "rce"
     ],
@@ -2007,6 +2274,66 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-66758",
+    "published": "2026-07-27T19:17:23.613",
+    "last_modified": "2026-09-30T15:22:33.133",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the file-fits plugin in GIMP. When processing a FITS image file, the plugin calculates memory allocation sizes using signed 32-bit integers for width and height. If a crafted file sets both values to large values, their product exceeds 2^31 and overflows, resulting in an undersized heap-based buffer allocation. This integer overflow issue results in a heap-based buffer overflow when cfitsio subsequently writes a full row of pixels in the buffer, causing memory corruption, potentially leading to arbitrary code execution or a denial of service.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:50817",
+      "https://access.redhat.com/errata/RHSA-2026:62507",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/security/cve/CVE-2026-66758",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2507475",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16528"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 27.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-59090",
+    "published": "2026-08-10T13:19:51.573",
+    "last_modified": "2026-09-30T15:22:31.890",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's PSD file format plugin. This vulnerability, an unsigned integer underflow in the `block_rem` variable, occurs when a user opens a specially crafted `.psd` image file. The underflow leads to parser confusion, enabling an attacker to inject arbitrary data as layer resource blocks. This can ultimately result in arbitrary code execution, allowing the attacker to run malicious code on the victim's system.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:61587",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/security/cve/CVE-2026-59090",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2496584",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16509",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16509"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-59323",
     "published": "2026-08-12T15:17:30.880",
     "last_modified": "2026-09-29T11:10:00.150",
@@ -2030,6 +2357,30 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-6223",
+    "published": "2026-09-07T13:20:33.977",
+    "last_modified": "2026-09-30T14:17:29.163",
+    "cvss_v3": 9.4,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper restriction of excessive authentication attempts vulnerability in Bahçelievler Muncipality BiHayat App allows Authentication Bypass.\n\nThis issue affects BiHayat App: from 2.1.7 before 2.3.",
+    "references": [
+      "https://siberguvenlik.gov.tr/guvenlik-bildirimleri/detay/tr-26-1014"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.9,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
     ]
   },
   {
@@ -2061,50 +2412,32 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-100839",
-    "published": "2026-09-27T02:17:22.230",
-    "last_modified": "2026-09-28T15:23:38.510",
-    "cvss_v3": 8.4,
+    "cve_id": "CVE-2025-61687",
+    "published": "2025-10-06T16:15:35.223",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.3,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Contrast is a confidential-computing runtime for Kubernetes. In versions before 1.18.0, the guest kernel's ACPI/AML handling is vulnerable to an AML injection attack (\"BadAML\"). ACPI tables containing AML bytecode are passed from the untrusted host (QEMU) to the guest firmware (OVMF) and on to the Linux kernel, whose AML interpreter executes them. An attacker controlling the host — an assumed adversary in Contrast's threat model — can craft a table with malicious, Turing-complete AML bytecode that the guest kernel interprets with access to the full guest memory, including private pages, resulting in arbitrary code execution and disclosure or modification of confidential guest data. The issue affects the AMD SEV-SNP platforms Metal-QEMU-SNP and Metal-QEMU-SNP-GPU; Metal-QEMU-TDX is not affected because ACPI table contents are measured into RTMR 0 by OVMF on Intel TDX. Version v1.18.0 mitigates the attack by sandboxing the kernel AML interpreter so that it cannot read or write private memory pages. This weakness is not specific to Contrast but is generic to Confidential Computing setups that expose the ACPI interface to the host.",
+    "summary": "Flowise is a drag & drop user interface to build a customized large language model flow. A file upload vulnerability in version 3.0.7 of FlowiseAI allows authenticated users to upload arbitrary files without proper validation. This enables attackers to persistently store malicious Node.js web shells on the server, potentially leading to Remote Code Execution (RCE). The system fails to validate file extensions, MIME types, or file content during uploads. As a result, malicious scripts such as Node.js-based web shells can be uploaded and stored persistently on the server. These shells expose HTTP endpoints capable of executing arbitrary commands if triggered. The uploaded shell does not automatically execute, but its presence allows future exploitation via administrator error or chained vulnerabilities. This presents a high-severity threat to system integrity and confidentiality. As of time of publication, no known patched versions are available.",
     "references": [
-      "https://github.com/edgelesssys/contrast/security/advisories/GHSA-g9ww-x58f-9g6m",
-      "https://www.vulncheck.com/advisories/contrast-before-1.18.0-aml-injection-remote-code-execution"
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/components/src/storageUtils.ts#L1104-L1111",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/components/src/storageUtils.ts#L170-L175",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/components/src/storageUtils.ts#L533-L541",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/controllers/attachments/index.ts#L4-L11",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/routes/attachments/index.ts#L8",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/services/attachments/index.ts#L7-L16",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/utils/createAttachment.ts#L118-L126",
+      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/utils/index.ts#L1950-L1954",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-35g6-rrw3-v6xc"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.4,
+    "epss": 11.1,
+    "epss_percentile": 95.8,
     "tags": [
       "rce"
     ],
-    "intel_score": 82.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-42002",
-    "published": "2026-09-28T22:17:28.617",
-    "last_modified": "2026-09-29T18:56:13.190",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A code injection vulnerability has been discovered in the Robot Operating System 2 (ROS 2) 'ros2topic' command-line tool, affecting all ROS 2 distributions from Crystal Clemmys up to and including Lyrical Luth and Rolling Ridley. The vulnerability lies in the 'hz' verb, which reports the publishing rate of a topic and accepts a user-provided Python expression via the --filter option. This input is passed directly to the eval() function without sanitization, allowing a local user to craft and execute arbitrary code.",
-    "references": [
-      "https://github.com/ros2/ros2cli/pull/1001",
-      "https://github.com/ros2/ros2cli/pull/133#discussion_r223081766"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 4.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 82.0,
+    "intel_score": 81.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -2135,634 +2468,319 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-26237",
-    "published": "2026-08-24T19:16:34.307",
-    "last_modified": "2026-09-29T10:10:00.263",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
+    "cve_id": "CVE-2026-54053",
+    "published": "2026-09-17T18:16:45.857",
+    "last_modified": "2026-09-30T17:32:07.107",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "D-Link DI-7001 MINI_5G 19.10.31A1 contains a code execution vulnerability in the flag parameter of msp_info, which can be exploited to run arbitrary commands.",
+    "summary": "Many Notes is a Markdown note-taking web application designed for simplicity. Prior to 0.16.0, the ZIP vault import implemented in app/Actions/ProcessImportedVault.php accepts archive filenames containing parent-directory traversal segments. An authenticated user can write arbitrary files outside the importing user's vault and into other users' vaults, including overwriting existing files. Disguised SVG content can be placed in another user's vault and execute stored cross-site scripting when the victim opens that vault. This issue is fixed in version 0.16.0.",
     "references": [
-      "https://github.com/REYu6/iot/blob/main/CVE/dlink/DI_7001_MINI_5G.md/DI_7001_MINI_5G.md"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26238",
-    "published": "2026-08-24T19:16:35.290",
-    "last_modified": "2026-09-29T10:10:00.263",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In D-Link DI-8100G 17.12.20A1, the flag parameter in msp_info can be exploited to execute arbitrary code.",
-    "references": [
-      "https://github.com/REYu6/iot/blob/main/CVE/dlink/DI_8100G-17.12.20A1.md/DI_8100G-17.12.20A1.md"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78478",
-    "published": "2026-08-25T06:19:01.353",
-    "last_modified": "2026-09-28T23:10:00.143",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The Mane theme for WordPress is vulnerable to Local File Inclusion in all versions up to, and including, 1.7. This makes it possible for unauthenticated attackers to include and execute arbitrary files on the server, allowing the execution of any PHP code in those files. This can be used to bypass access controls, obtain sensitive data, or achieve code execution in cases where images and other “safe” file types can be uploaded and included.",
-    "references": [
-      "https://themeforest.net/item/mne-a-modern-portfolio-theme-for-creatives/21333576",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/a71e330e-8673-49b4-8c31-63771533476f?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76685",
-    "published": "2026-09-15T20:17:50.453",
-    "last_modified": "2026-09-28T13:57:43.163",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability exists in the proxy packet processing logic of the affected component where it improperly processes malformed or truncated input. An unauthenticated remote attacker could exploit this vulnerability by providing specially crafted input that triggers an integer overflow. Successful exploitation could result in a buffer overflow, potentially leading to remote code execution or denial-of-service.",
-    "references": [
-      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
+      "https://github.com/brufdev/many-notes/commit/1b3288fa9671002e72e38b7fcd5d226673ba0cae",
+      "https://github.com/brufdev/many-notes/releases/tag/v0.16.0",
+      "https://github.com/brufdev/many-notes/security/advisories/GHSA-wg8j-9c2g-xh6r"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 50.0,
+    "epss_percentile": 51.2,
     "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-94184",
-    "published": "2026-09-21T15:17:38.547",
-    "last_modified": "2026-09-29T20:17:28.287",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A stack-based buffer overflow flaw was found in fetchmail when built with NTLM support. A malicious or compromised mail server advertising NTLM authentication can send a crafted Type 2 challenge that causes fetchmail to write past a fixed stack buffer while building the NTLM authenticate response. This may lead to remote code execution depending on stack-frame layout, or to authentication failure or process termination under memory hardening.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-94184",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2537395",
-      "https://gitlab.com/fetchmail/fetchmail/-/commit/cb5be5c38471eec19e519ace0bc569176317ea92",
-      "https://www.fetchmail.info/fetchmail-SA-2026-01.txt",
-      "https://www.openwall.com/lists/oss-security/2026/06/27/8",
-      "http://www.openwall.com/lists/oss-security/2026/09/23/1"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100389",
-    "published": "2026-09-25T21:17:22.483",
-    "last_modified": "2026-09-29T19:17:19.183",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "GestSup versions before 3.2.61 contain a remote code execution vulnerability in the basic IMAP connector's attachment handling that fails to skip blocked file extensions. Unauthenticated attackers can send emails with PHP attachments to monitored mailboxes, which are written to the web-accessible upload/ticket directory and executed when accessed.",
-    "references": [
-      "https://gestsup.fr/index.php?page=changelog",
-      "https://gestsup.fr/index.php?page=download",
-      "https://www.vulncheck.com/advisories/gestsup-before-3.2.61-remote-code-execution-via-imap-attachment"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93348",
-    "published": "2026-09-28T16:17:17.643",
-    "last_modified": "2026-09-28T16:17:17.643",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Unsloth Zoo versions 2025.9.9 before 2026.8.14, as implemented in Unsloth 2025.9.9 through 2026.8.19, contains a code injection vulnerability in the model-loading compile path where the get_transformers_model_type() function in hf_utils.py collects model_type values from nested model configurations without enforcing a character allowlist, allowing newlines and arbitrary Python source to survive normalization. Attackers can embed a newline in a nested model_type value within a malicious model's config.json to terminate the generated import statement and execute arbitrary Python code via exec() in unsloth_compile_transformers(), achieving remote code execution as the loading user when the model is loaded for training or inference.",
-    "references": [
-      "https://github.com/unslothai/unsloth-zoo/pull/1083",
-      "https://github.com/unslothai/unsloth-zoo/pull/1108",
-      "https://github.com/unslothai/unsloth/commit/92ee0207a38ebc8af1a0e678aa92d7e7d901ea0d",
-      "https://www.vulncheck.com/advisories/unsloth-zoo-code-injection-via-model-type-in-config-json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-61823",
-    "published": "2026-09-24T19:17:15.350",
-    "last_modified": "2026-09-28T15:17:22.657",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "code16 Sharp is a Laravel-based framework for building content-management and administrative interfaces. Versions before 9.22.5 contain a stored cross-site scripting vulnerability in the rich-text editor because the HTML sanitizer permits the `srcdoc` attribute on iframe elements. Although markup inside `srcdoc` is HTML-encoded during sanitization, browsers decode attribute entities before interpreting the iframe document, allowing an authenticated user with permission to edit an Editor field to store executable JavaScript that runs when another user views the content. Successful exploitation can result in session hijacking, unauthorized actions, account takeover, privilege escalation, or disclosure of administrative data. Version 9.22.5 patches the vulnerability by removing `srcdoc` from the permitted iframe attributes. As a workaround, applications that cannot upgrade should manually sanitize all Editor field content and remove every iframe `srcdoc` attribute before storing or rendering it.",
-    "references": [
-      "https://github.com/code16/sharp/commit/ec509a22c808a5bd9dfad6a0a85c92ce6f411e21",
-      "https://github.com/code16/sharp/security/advisories/GHSA-qxg3-46rw-79j8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.2,
-    "tags": [
-      "priv_esc",
+      "path_traversal",
       "xss"
     ],
-    "intel_score": 79.5,
+    "intel_score": 81.0,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25",
+      "path_traversal+15",
       "xss+8"
     ]
   },
   {
-    "cve_id": "CVE-2025-14665",
-    "published": "2025-12-14T15:15:47.013",
-    "last_modified": "2026-09-28T10:10:00.473",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A security flaw has been discovered in Tenda WH450 1.0.0.18. Impacted is an unknown function of the file /goform/DhcpListClient of the component HTTP Request Handler. The manipulation of the argument page results in stack-based buffer overflow. The attack can be executed remotely. The exploit has been released to the public and may be used for attacks.",
-    "references": [
-      "https://github.com/z472421519/BinaryAudit/blob/main/PoC/BOF/Tenda_WH450/DhcpListClient/DhcpListClient.md",
-      "https://github.com/z472421519/BinaryAudit/blob/main/PoC/BOF/Tenda_WH450/DhcpListClient/DhcpListClient.md#reproduce",
-      "https://vuldb.com/?ctiid.336397",
-      "https://vuldb.com/?id.336397",
-      "https://vuldb.com/?submit.714400",
-      "https://vuldb.com/?submit.719220",
-      "https://www.tenda.com.cn/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.7,
-    "tags": [
-      "poc"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "poc+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2016-20087",
-    "published": "2026-06-19T15:16:32.403",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2025-14333",
+    "published": "2025-12-09T16:17:40.990",
+    "last_modified": "2026-09-30T17:10:00.187",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Fortitude HTTP 1.0.4.0 contains an unquoted service path vulnerability that allows local users to execute arbitrary code with elevated privileges by exploiting the service binary path. Attackers can insert malicious executables in the system root path that execute with SYSTEM privileges during service startup or system reboot.",
+    "summary": "Memory safety bugs present in Firefox ESR 140.5, Thunderbird ESR 140.5, Firefox 145 and Thunderbird 145. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability was fixed in Firefox 146, Firefox ESR 140.6, Thunderbird 146, and Thunderbird 140.6.",
     "references": [
-      "http://www.networkdls.com/",
-      "http://www.networkdls.com/Software/View/Fortitude_HTTP",
-      "https://www.exploit-db.com/exploits/40461",
-      "https://www.vulncheck.com/advisories/fortitude-http-unquoted-service-path-elevation-of-privilege"
+      "https://bugzilla.mozilla.org/buglist.cgi?bug_id=1966501%2C1997639",
+      "https://www.mozilla.org/security/advisories/mfsa2025-92/",
+      "https://www.mozilla.org/security/advisories/mfsa2025-94/",
+      "https://www.mozilla.org/security/advisories/mfsa2025-95/",
+      "https://www.mozilla.org/security/advisories/mfsa2025-96/"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
     "tags": [
       "rce"
     ],
-    "intel_score": 79.0,
+    "intel_score": 80.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2016-20088",
-    "published": "2026-06-19T15:16:32.530",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2025-71348",
+    "published": "2026-06-21T14:16:22.750",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Comodo Chromodo Browser 52.15.25.664 contains an unquoted service path vulnerability in the ChromodoUpdater service that runs with SYSTEM privileges. A local attacker can insert a malicious executable in the service path and execute arbitrary code with elevated privileges upon service restart or system reboot.",
+    "summary": "picklescan before 0.0.28 fails to detect malicious pickle files that invoke torch.utils._config_module.load_config function within reduce methods. Attackers can craft pickle files embedding arbitrary code that evades detection but executes during pickle.load, enabling remote code execution in supply chain attacks.",
     "references": [
-      "http://yildirimyunus.com",
-      "https://www.comodo.com",
-      "https://www.comodo.com/home/browsers-toolbars/chromodo-private-internet-browser.php",
-      "https://www.exploit-db.com/exploits/40473",
-      "https://www.vulncheck.com/advisories/comodo-chromodo-browser-unquoted-service-path-privilege-escalation"
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-vv6j-3g6g-2pvj",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-torch-utils-config-module-load-config-bypass",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-vv6j-3g6g-2pvj"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
+    "epss": 0.6,
+    "epss_percentile": 44.0,
     "tags": [
       "rce"
     ],
-    "intel_score": 79.0,
+    "intel_score": 80.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2016-20089",
-    "published": "2026-06-19T15:16:32.660",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2025-71378",
+    "published": "2026-06-21T14:16:23.140",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Iperius Remote 1.7.0 contains an unquoted service path vulnerability that allows local users to execute arbitrary code with SYSTEM privileges by exploiting the service installation path. When installed from directories containing spaces, attackers can place malicious executables in the path to be executed with elevated privileges during service startup or system reboot.",
+    "summary": "picklescan before 0.0.30 fails to detect cProfile.runctx function calls in pickle file reduce methods, allowing attackers to execute arbitrary code. Malicious pickle files bypass picklescan detection and execute remote code when loaded via pickle.load().",
     "references": [
-      "http://www.iperiusremote.com",
-      "https://www.exploit-db.com/exploits/40427",
-      "https://www.iperiusremote.com/download.aspx",
-      "https://www.vulncheck.com/advisories/iperius-remote-unquoted-service-path-elevation-of-privilege"
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-9w88-8rmg-7g2p",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-undetected-cprofile-runctx-in-pickle-files",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-9w88-8rmg-7g2p"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
+    "epss": 0.5,
+    "epss_percentile": 39.0,
     "tags": [
       "rce"
     ],
-    "intel_score": 79.0,
+    "intel_score": 80.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2016-20093",
-    "published": "2026-06-19T15:16:33.183",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2025-71339",
+    "published": "2026-06-22T22:16:45.053",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Wise Care 365 4.27 and Wise Disk Cleaner 9.29 contain unquoted service path vulnerabilities in the WiseBootAssistant and SpyHunter 4 Service respectively, allowing local users to execute arbitrary code with SYSTEM privileges. Attackers can insert malicious executables in the system root path that execute during service startup or system reboot with elevated privileges.",
+    "summary": "Picklescan before 0.0.33 fails to detect the numpy.f2py.crackfortran._eval_length gadget in pickle __reduce__ methods, allowing arbitrary code execution. Attackers can craft malicious pickle files that execute arbitrary Python code when loaded by victims who trust Picklescan's safety validation.",
     "references": [
-      "http://www.wisecleaner.com",
-      "http://www.wisecleaner.com/wise-disk-cleaner.html",
-      "https://www.exploit-db.com/exploits/40417",
-      "https://www.vulncheck.com/advisories/wise-care-365-and-wise-disk-cleaner-unquoted-service-path-privilege-escalation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2016-20094",
-    "published": "2026-06-19T15:16:33.310",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "AnyDesk 2.5.0 contains an unquoted service path vulnerability that allows local users to execute arbitrary code with SYSTEM privileges by exploiting the service installation. Attackers can insert malicious executables in the system root path that execute with elevated privileges during application startup or system reboot.",
-    "references": [
-      "http://anydesk.com",
-      "http://anydesk.com/download",
-      "https://www.exploit-db.com/exploits/40410",
-      "https://www.vulncheck.com/advisories/anydesk-unquoted-service-path-elevation-of-privilege"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2016-20095",
-    "published": "2026-06-19T15:16:33.440",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Matrix42 Remote Control Host 3.20.0031 contains an unquoted service path vulnerability in the FastViewerRemoteService and FastViewerRemoteProxy services that allows local users to execute arbitrary code with SYSTEM privileges. Attackers can place a malicious executable in the Program Files directory with a crafted name to be executed by the service during startup, gaining elevated privileges.",
-    "references": [
-      "https://www.exploit-db.com/exploits/39908",
-      "https://www.matrix42.com/",
-      "https://www.vulncheck.com/advisories/matrix42-remote-control-host-unquoted-path-privilege-escalation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2019-25747",
-    "published": "2026-06-19T15:16:33.597",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Network Inventory Advisor 5.0.26.0 installs the niaservice service with an unquoted binary path that allows local attackers to escalate privileges by placing malicious executables in intermediate directories. Attackers can exploit the unquoted path in the service configuration to execute arbitrary code with LocalSystem privileges when the service starts or restarts.",
-    "references": [
-      "https://www.exploit-db.com/exploits/47584",
-      "https://www.network-inventory-advisor.com/",
-      "https://www.network-inventory-advisor.com/download.html",
-      "https://www.vulncheck.com/advisories/network-inventory-advisor-unquoted-service-path-privilege-escalation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2020-37250",
-    "published": "2026-06-19T15:16:33.740",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "TFTP Broadband 4.3.0.1465 contains an unquoted service path vulnerability in the tftpt.exe service binary that allows local attackers to execute arbitrary code with system privileges. Attackers can place a malicious executable in the Program Files directory path that will be executed during service startup or system reboot with LocalSystem privileges.",
-    "references": [
-      "https://www.exploit-db.com/exploits/49852",
-      "https://www.vulncheck.com/advisories/tftp-broadband-unquoted-service-path-privilege-escalation",
-      "https://www.weird-solutions.com"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2020-37251",
-    "published": "2026-06-19T15:16:33.877",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "RealTimes Desktop Service 18.1.4 contains an unquoted service path vulnerability in the rpdsvc.exe binary that allows local attackers to escalate privileges. Attackers can place malicious executables in unquoted path directories to execute arbitrary code with LocalSystem privileges during service startup or system reboot.",
-    "references": [
-      "https://www.exploit-db.com/exploits/49021",
-      "https://www.real.com/",
-      "https://www.vulncheck.com/advisories/realtimes-desktop-service-unquoted-service-path-privilege-escalation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2020-37252",
-    "published": "2026-06-19T15:16:34.017",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Realtek Audio Service 1.0.0.55 contains an unquoted service path vulnerability in RtkAudioService64.exe that allows local attackers to escalate privileges by injecting malicious code. Attackers can place executable files in the unquoted service path directory to execute arbitrary code with LocalSystem privileges during service startup or system reboot.",
-    "references": [
-      "https://www.exploit-db.com/exploits/49015",
-      "https://www.realtek.com/en/",
-      "https://www.vulncheck.com/advisories/realtek-audio-service-unquoted-service-path-privilege-escalation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2020-9695",
-    "published": "2026-06-23T18:17:31.403",
-    "last_modified": "2026-09-29T09:10:00.157",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Acrobat Reader versions 2020.009.20074, 2020.001.30002, 2017.011.30171, 2015.006.30523 and earlier are affected by an out-of-bounds write vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
-    "references": [
-      "https://helpx.adobe.com/security/products/acrobat/apsb20-48.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 15.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71408",
-    "published": "2026-07-24T22:16:50.063",
-    "last_modified": "2026-09-29T19:10:00.160",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NLTK (Natural Language Toolkit) before version 3.9.3 contains an eval injection vulnerability in the nltk.collocations module that allows an attacker who controls command-line arguments to execute arbitrary Python code. When collocations.py is invoked directly, the __main__ block passes command-line arguments directly to eval() as suffixes of BigramAssocMeasures without allowlist validation or sanitization, enabling an attacker to supply a Python expression that escapes the intended attribute lookup and executes arbitrary code including OS commands via the os module.",
-    "references": [
-      "https://aydinnyunus.github.io/2026/06/07/command-injection-nltk-collocations-eval/",
-      "https://github.com/nltk/nltk/commit/66f14096d952ec8f04934f515e027534bd4eb0ac",
-      "https://github.com/nltk/nltk/pull/3465",
-      "https://github.com/nltk/nltk/releases/tag/3.9.3",
-      "https://www.vulncheck.com/advisories/nltk-eval-injection-via-collocations-py-command-line-arguments"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 16.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-18950",
-    "published": "2026-08-10T21:17:21.583",
-    "last_modified": "2026-09-28T10:16:44.233",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in odh-dashboard. An authenticated user of the dashboard can exploit a vulnerability related to how RoleBindings are created. The system does not properly validate the `roleRef` field, allowing a user to specify an arbitrary role, including highly privileged ones like `cluster-admin`. This can lead to privilege escalation, where an attacker gains unauthorized elevated access within their namespace and potentially persistent control over the system.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:53261",
-      "https://access.redhat.com/errata/RHSA-2026:53262",
-      "https://access.redhat.com/errata/RHSA-2026:53263",
-      "https://access.redhat.com/security/cve/CVE-2026-18950",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2511170"
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-6556-fwc2-fg2p",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-numpy-f2py-crackfortran-eval-length-gadget",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-6556-fwc2-fg2p"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 42.1,
     "tags": [
-      "priv_esc"
+      "rce"
     ],
-    "intel_score": 79.0,
+    "intel_score": 80.5,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25"
+      "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2025-36940",
-    "published": "2026-08-24T17:17:21.303",
-    "last_modified": "2026-09-29T10:10:00.263",
-    "cvss_v3": 8.8,
+    "cve_id": "CVE-2025-71344",
+    "published": "2026-06-22T22:16:45.220",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Use-After-Free vulnerability in a zircon kernel pager proxy (Fuchsia), which could lead to a Privilege Escalation from Userspace to Kernel (AP)",
+    "summary": "picklescan before 0.0.30 (affected versions 0.0.26 and earlier) fails to detect the ensurepip._run_pip built-in function when scanning pickle files, allowing attackers to execute arbitrary code. Malicious pickle files embedding ensurepip._run_pip calls in __reduce__ methods bypass picklescan detection and achieve remote code execution upon pickle.load() invocation.",
     "references": [
-      "https://support.google.com/product-documentation/answer/17072818?hl=en&ref_topic=12974021&sjid=10451061435205708316-NC"
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-xp4f-hrf8-rxw7",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-ensurepip-run-pip-function",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-xp4f-hrf8-rxw7"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.8,
+    "epss": 0.6,
+    "epss_percentile": 48.5,
     "tags": [
-      "priv_esc"
+      "rce"
     ],
-    "intel_score": 79.0,
+    "intel_score": 80.5,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25"
+      "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2026-76677",
-    "published": "2026-09-15T20:17:49.540",
-    "last_modified": "2026-09-28T13:49:08.003",
-    "cvss_v3": 8.8,
+    "cve_id": "CVE-2025-71341",
+    "published": "2026-06-23T13:16:38.370",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "A privilege escalation vulnerability exists in the API of EdgeConnect SD-WAN Gateways. Successful exploitation could allow a remote low-privileged authenticated user to achieve administrative privilege on the web-management interface leading to complete system compromise.",
+    "summary": "picklescan before 0.0.29 fails to detect the profile.Profile.runctx function when analyzing pickle files, allowing attackers to embed undetected malicious code. Remote attackers can craft malicious pickle files using profile.Profile.runctx in the reduce method to achieve remote code execution when the pickle file is loaded.",
     "references": [
-      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05135en_us&docLocale=en_US"
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-6vqj-c2q5-j97w",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-undetected-profile-profile-runctx",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-6vqj-c2q5-j97w"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71365",
+    "published": "2026-06-23T13:16:38.617",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.33 fails to detect malicious pickle files that invoke numpy.f2py.crackfortran.myeval function through the reduce method. Attackers can craft malicious pickle files embedding arbitrary code that evades picklescan detection and executes remote code when loaded.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-3329-ghmp-jmv5",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-numpy-f2py-crackfortran-myeval-detection-bypass",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-3329-ghmp-jmv5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 34.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71370",
+    "published": "2026-06-23T13:16:38.743",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.28 fails to detect malicious torch.jit.unsupported_tensor_ops.execWrapper function calls embedded in pickle files. Attackers can craft malicious pickle files that bypass picklescan detection and execute arbitrary code when loaded via pickle.load().",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-vr7h-p6mm-wpmh",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-torch-jit-unsupported-tensor-ops-execwrapper",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-vr7h-p6mm-wpmh"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.3,
+    "epss_percentile": 43.5,
     "tags": [
-      "priv_esc"
+      "rce"
     ],
-    "intel_score": 79.0,
+    "intel_score": 80.5,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25"
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71361",
+    "published": "2026-06-24T13:16:30.543",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.29 fails to detect malicious idlelib.calltip.Calltip.fetch_tip calls in pickle files, allowing remote code execution. Attackers can embed undetected payloads in pickle files that execute arbitrary code when loaded via pickle.load().",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-8r4j-24qv-fmq9",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-undetected-idlelib-calltip-calltip-fetch-tip",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-8r4j-24qv-fmq9"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71327",
+    "published": "2026-06-25T22:16:58.740",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Flowise contains an authentication bypass vulnerability in the unprotected /api/v1/account/register endpoint that allows unauthenticated attackers to create user accounts. Remote attackers can exploit this endpoint to register arbitrary accounts and authenticate to the system, gaining full API access without credentials.",
+    "references": [
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-v5w9-prxf-w882",
+      "https://www.vulncheck.com/advisories/flowise-authentication-bypass-via-unprotected-registration-endpoint",
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-v5w9-prxf-w882"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 50.3,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71349",
+    "published": "2026-06-30T23:16:51.010",
+    "last_modified": "2026-09-30T16:10:00.223",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.29 fails to detect the built-in trace.Trace.run function when analyzing pickle files, allowing attackers to embed undetected malicious code. Remote attackers can craft malicious pickle files using trace.Trace.run in the reduce method to achieve arbitrary code execution when pickle.load processes the file.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-5qwp-399c-mjwf",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-trace-trace-run-in-pickle-files",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-5qwp-399c-mjwf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   }
 ]
