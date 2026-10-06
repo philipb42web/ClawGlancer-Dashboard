@@ -516,6 +516,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-105773",
+    "published": "2026-10-05T21:16:36.093",
+    "last_modified": "2026-10-05T21:16:36.093",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Canimaan Software ClamXAV versions 3.3 - 3.11 contains a local privilege escalation vulnerability in the Privileged Helper Tool caused by a race condition and insufficient file validation, allowing a local attacker to execute arbitrary code with system privileges. Fixed in 3.11.1.",
+    "references": [
+      "https://clamxav.com/version-history",
+      "https://raw.githubusercontent.com/cisagov/CSAF/develop/csaf_files/IT/white/2026/va-26-278-01.json",
+      "https://www.cve.org/CVERecord?id=CVE-2026-105773"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 100.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-12540",
     "published": "2026-10-01T17:17:20.053",
     "last_modified": "2026-10-06T02:17:04.803",
@@ -654,36 +682,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "in_the_wild+35"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-97602",
-    "published": "2026-09-25T11:17:11.573",
-    "last_modified": "2026-10-03T11:18:06.690",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ninet: frags: invalidate queues before flushing them\n\nfqdir_pre_exit() flushes the skbs from incomplete queues without\nchanging their completion state. A fragment which found a queue before\nhigh_thresh was cleared can then acquire the queue lock and reuse stale\nreassembly metadata. A queue concurrently killed after fqdir->dead is\nset can instead become INET_FRAG_COMPLETE|INET_FRAG_HASH_DEAD while\nstill holding its old skbs; skipping it because it is complete leaves\nthose references behind until asynchronous fqdir teardown.\n\nFor IPv6, stale metadata can make ip6_frag_reasm() use the old\nnhoffset with a new skb and access memory out of bounds. The resulting\nheap corruption can be leveraged for local privilege escalation when\nunprivileged network namespaces are available. Unflushed fragments can\nalso keep conntrack references alive after the conntrack per-net\ncleanup point.\n\nKill each incomplete queue, then flush every queue still owned by the\ndying rhashtable. HASH_DEAD identifies that ownership, while complete\nqueues without it are already owned by another destroy path and must be\nleft alone. Releasing a timer reference removed by inet_frag_kill() is\ndeferred to inet_frag_putn(), after the queue lock is dropped.\n\nKASAN report:\n\n  BUG: KASAN: slab-out-of-bounds in ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  Write of size 1 at addr ff110001039c6e00 by task poc/771\n  Call Trace:\n  ? ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  ipv6_frag_rcv (net/ipv6/reassembly.c:289 (discriminator 2) net/ipv6/reassembly.c:229 (discriminator 2) net/ipv6/reassembly.c:391 (discriminator 2))\n  ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:479 (discriminator 5))\n  ip6_input_finish (net/ipv6/ip6_input.c:534)\n  ipv6_rcv (include/net/dst.h:480 (discriminator 3) net/ipv6/ip6_input.c:119 (discriminator 3) net/ipv6/ip6_input.c:109 (discriminator 3) include/linux/netfilter.h:325 (discriminator 3) include/linux/netfilter.h:319 (discriminator 3) net/ipv6/ip6_input.c:351 (discriminator 3))\n  packet_sendmsg (net/packet/af_packet.c:3110 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  The buggy address belongs to the object at ff110001039c6b40\n  which belongs to the cache skbuff_small_head of size 704\n  The buggy address is located 0 bytes to the right of\n  allocated 704-byte region [ff110001039c6b40, ff110001039c6e00)\n\n  BUG: KASAN: slab-out-of-bounds in ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  Read of size 1 at addr ff110001039c6e08 by task poc/771\n  Call Trace:\n  ? ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  ip6_protocol_deliver_rcu (net/ipv6/ip6_input.c:423 (discriminator 1))\n  ip6_input_finish (net/ipv6/ip6_input.c:534)\n  ipv6_rcv (include/net/dst.h:480 (discriminator 3) net/ipv6/ip6_input.c:119 (discriminator 3) net/ipv6/ip6_input.c:109 (discriminator 3) include/linux/netfilter.h:325 (discriminator 3) include/linux/netfilter.h:319 (discriminator 3) net/ipv6/ip6_input.c:351 (discriminator 3))\n  packet_sendmsg (net/packet/af_packet.c:3110 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  packet_sendmsg (net/packet/af_packet.c:2959 net/packet/af_packet.c:3053 net/packet/af_packet.c:3142)\n  __x64_sys_sendmmsg (net/socket.c:2883 net/socket.c:2880 net/socket.c:2880)\n  The buggy address belongs to the object at ff110001039c6b40\n  which belongs to the cache skbuff_small_head of size 704\n  The buggy address is located 8 bytes to the right of\n  allocated 704-byte region [ff110001039c6b40, ff110001039c6e00)",
-    "references": [
-      "https://git.kernel.org/stable/c/7cb5f4643a7fcdbfbee1fad3cdfc678add62d378",
-      "https://git.kernel.org/stable/c/b824476c56a153934c67c9e0f873e1fd967743d6",
-      "https://git.kernel.org/stable/c/b9d77f1652e79e58eac48430d0431c329137efcc",
-      "https://git.kernel.org/stable/c/bf3d6c44c84c57e8a4bb7f40ad95b64f9b0198ba",
-      "https://git.kernel.org/stable/c/ff83367cda8eefbd62007ef1dff4f8104226d18a"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 4.0,
-    "tags": [
-      "poc",
-      "priv_esc"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "poc+20"
     ]
   },
   {
@@ -897,6 +895,57 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 54.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-105740",
+    "published": "2026-10-05T21:16:35.567",
+    "last_modified": "2026-10-05T21:16:35.567",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to 1.9.0, any authenticated Langflow user can achieve Remote Code Execution (RCE) on the server by adding an MCP server with the \"Stdio\" transport. The user-supplied command field is passed directly to bash -c \"exec {command}\" with zero validation, no allowlisting, and no sandboxing. The command executes immediately when the server list is fetched. Additionally, the env field allows arbitrary environment variable injection (e.g., LD_PRELOAD, PATH override). This vulnerability is fixed in 1.9.0.",
+    "references": [
+      "https://github.com/langflow-ai/langflow/commit/efbc4a16e639409d938a4883463d27ef0bc637a0",
+      "https://github.com/langflow-ai/langflow/pull/12290",
+      "https://github.com/langflow-ai/langflow/security/advisories/GHSA-7w94-79vh-5mr2",
+      "https://github.com/langflow-ai/langflow/security/advisories/GHSA-w794-rj3p-xv45"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-32568",
+    "published": "2026-10-06T09:17:42.230",
+    "last_modified": "2026-10-06T11:17:17.883",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Subscriber Remote Code Execution (RCE) in WooCommerce Designer Pro <= 1.9.33 versions.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wc-designer-pro/vulnerability/wordpress-woocommerce-designer-pro-plugin-1-9-33-remote-code-execution-rce-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "rce"
     ],
@@ -1257,6 +1306,30 @@
     "reasons": [
       "recently modified (last 48h)",
       "CISA KEV active exploitation (+40)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39773",
+    "published": "2026-10-06T09:17:49.900",
+    "last_modified": "2026-10-06T11:17:24.673",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Unauthenticated Privilege Escalation in Doctreat Core <= 1.7.0 versions.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/doctreat_core/vulnerability/wordpress-doctreat-core-plugin-1-7-0-privilege-escalation-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 85.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
     ]
   },
   {
@@ -1991,60 +2064,124 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-34393",
-    "published": "2024-05-02T19:15:06.480",
-    "last_modified": "2026-10-03T09:17:03.720",
-    "cvss_v3": 8.1,
+    "cve_id": "CVE-2026-58835",
+    "published": "2026-10-05T19:17:24.650",
+    "last_modified": "2026-10-06T04:18:22.890",
+    "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "libxmljs2 is vulnerable to a type confusion vulnerability when parsing a specially crafted XML while invoking a function on the result of attrs() that was called on a parsed node. This vulnerability might lead to denial of service (on both 32-bit systems and 64-bit systems), data leak, infinite loop and remote code execution (on 32-bit systems with the XML_PARSE_HUGE flag enabled).",
+    "summary": "In cfg2prop of btif_storage.cc, there is a possible out-of-bounds write due to a heap buffer overflow. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
     "references": [
-      "https://research.jfrog.com/vulnerabilities/libxmljs2-attrs-type-confusion-rce-jfsa-2024-001034097/",
-      "https://github.com/marudor/libxmljs2/issues/204",
-      "https://research.jfrog.com/vulnerabilities/libxmljs2-attrs-type-confusion-rce-jfsa-2024-001034097/"
+      "https://source.android.com/docs/security/bulletin/2026/2026-10-01"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 60.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "dos",
       "rce"
     ],
-    "intel_score": 83.5,
+    "intel_score": 84.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
+      "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2024-34394",
-    "published": "2024-05-02T19:15:06.630",
-    "last_modified": "2026-10-03T10:16:38.343",
-    "cvss_v3": 8.1,
+    "cve_id": "CVE-2026-105701",
+    "published": "2026-10-06T07:16:56.207",
+    "last_modified": "2026-10-06T07:16:56.207",
+    "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "libxmljs2 is vulnerable to a type confusion vulnerability when parsing a specially crafted XML while invoking the namespaces() function (which invokes XmlNode::get_local_namespaces()) on a grand-child of a node that refers to an entity. This vulnerability can lead to denial of service and remote code execution.",
+    "summary": "The ACPT (Premium) plugin for WordPress is vulnerable to Remote Code Execution in all versions up to, and including, 2.0.66 via the render function. This is due to missing capability check on the REST API form creation endpoint and unsandboxed Twig environment rendering email templates. This makes it possible for authenticated attackers, with subscriber-level access and above, to execute code on the server. The exploit requires the attacker to first create a form with malicious email_settings via the REST API endpoint, then trigger form submission to execute the injected Twig expressions.",
     "references": [
-      "https://github.com/marudor/libxmljs2/issues/205",
-      "https://research.jfrog.com/vulnerabilities/libxmljs2-namespaces-type-confusion-rce-jfsa-2024-001034098/",
-      "https://github.com/marudor/libxmljs2/issues/205",
-      "https://research.jfrog.com/vulnerabilities/libxmljs2-namespaces-type-confusion-rce-jfsa-2024-001034098/"
+      "https://acpt.io/changelog/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/9cd544ed-493e-4d4a-9eb8-ea83c47f3857?source=cve"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 61.5,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "dos",
       "rce"
     ],
-    "intel_score": 83.5,
+    "intel_score": 84.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39725",
+    "published": "2026-10-06T09:17:44.683",
+    "last_modified": "2026-10-06T11:17:20.230",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Contributor Remote Code Execution (RCE) in Content Visibility for Divi Builder <= 5.03 versions.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/content-visibility-for-divi-builder/vulnerability/wordpress-content-visibility-for-divi-builder-plugin-5-03-remote-code-execution-rce-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39753",
+    "published": "2026-10-06T09:17:46.940",
+    "last_modified": "2026-10-06T11:17:22.440",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Unauthenticated Privilege Escalation in Taskbot <= 6.6 versions.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/taskbot/vulnerability/wordpress-taskbot-plugin-6-6-privilege-escalation-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39761",
+    "published": "2026-10-06T09:17:48.010",
+    "last_modified": "2026-10-06T11:17:23.317",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Unauthenticated Privilege Escalation in Meta Box AIO <= 3.7.1 versions.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/meta-box-aio/vulnerability/wordpress-meta-box-aio-plugin-3-7-1-privilege-escalation-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
     ]
   },
   {
@@ -2686,162 +2823,6 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 47.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71352",
-    "published": "2026-06-30T23:16:51.290",
-    "last_modified": "2026-10-05T16:10:00.443",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.29 fails to detect the built-in Python trace.Trace.runctx function when used in pickle file reduce methods, allowing attackers to execute arbitrary code. Remote attackers can craft malicious pickle files with trace.Trace.runctx payloads that bypass picklescan detection and execute code upon pickle.load() invocation.",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-g344-hcph-8vgg",
-      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-undetected-trace-trace-runctx-in-pickle-files",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-g344-hcph-8vgg"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71368",
-    "published": "2026-06-30T23:16:51.653",
-    "last_modified": "2026-10-05T16:10:00.443",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.30 fails to detect the doctest.debug_script function when analyzing pickle files, allowing attackers to execute arbitrary code. Remote attackers can craft malicious pickle files embedding doctest.debug_script calls that bypass picklescan detection and execute arbitrary commands upon pickle.load invocation.",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-fqq6-7vqf-w3fg",
-      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-doctest-debug-script",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-fqq6-7vqf-w3fg"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 56.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71371",
-    "published": "2026-06-30T23:16:51.773",
-    "last_modified": "2026-10-05T16:10:00.443",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.29 fails to detect malicious pickle files using code.InteractiveInterpreter.runcode in reduce methods. Attackers can craft pickle payloads that bypass picklescan detection and execute arbitrary code when loaded via pickle.load().",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cj3c-v495-4xqh",
-      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-code-interactiveinterpreter-detection-bypass",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cj3c-v495-4xqh"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71342",
-    "published": "2026-07-04T02:16:21.387",
-    "last_modified": "2026-10-05T16:10:00.443",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.30 fails to detect malicious pickle files using idlelib.run.Executive.runcode in reduce methods. Attackers can embed undetected code in pickle files that executes during pickle.load, enabling remote code execution in PyTorch models and supply chain attacks.",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-m869-42cg-3xwr",
-      "https://www.vulncheck.com/advisories/picklescan-undetected-remote-code-execution-via-idlelib-run-executive-runcode",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-m869-42cg-3xwr"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71364",
-    "published": "2026-07-04T02:16:22.583",
-    "last_modified": "2026-10-05T16:10:00.443",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.30 fails to detect the asyncio.unix_events._UnixSubprocessTransport._start function in pickle reduce methods, allowing remote code execution. Attackers can craft malicious pickle files embedding this built-in function that evade detection but execute arbitrary commands when loaded.",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-q77w-mwjj-7mqx",
-      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-asyncio-unix-events-unixsubprocesstransport-start",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-q77w-mwjj-7mqx"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71366",
-    "published": "2026-07-04T02:16:22.707",
-    "last_modified": "2026-10-05T16:10:00.443",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.28 fails to detect malicious torch.utils.bottleneck.__main__.run_cprofile function calls in pickle files, allowing attackers to bypass safety checks. Remote attackers can embed undetected code in pickle files to achieve arbitrary code execution when victims load the files.",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4r9r-ch6f-vxmx",
-      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-torch-utils-bottleneck-main-run-cprofile",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4r9r-ch6f-vxmx"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.0,
     "tags": [
       "rce"
     ],
