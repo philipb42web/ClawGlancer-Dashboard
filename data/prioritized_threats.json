@@ -33,42 +33,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2021-3199",
-    "published": "2021-01-26T18:16:28.507",
-    "last_modified": "2026-10-09T14:20:47.350",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Directory traversal with remote code execution can occur in /upload in ONLYOFFICE Document Server before 5.6.3, when JWT is used, via a /.. sequence in an image upload parameter.",
-    "references": [
-      "https://github.com/ONLYOFFICE/DocumentServer/blob/903fe5ab7a275bd69c3c3346af2d21cf87ebeabf/CHANGELOG.md#563",
-      "https://github.com/moehw/poc_exploits/tree/master/CVE-2021-3199/poc_uploadImageFile.py",
-      "https://github.com/nola-milkin/poc_exploits/blob/master/CVE-2021-3199/poc_uploadImageFile.py",
-      "https://github.com/ONLYOFFICE/DocumentServer/blob/903fe5ab7a275bd69c3c3346af2d21cf87ebeabf/CHANGELOG.md#563",
-      "https://github.com/moehw/poc_exploits/tree/master/CVE-2021-3199/poc_uploadImageFile.py",
-      "https://github.com/nola-milkin/poc_exploits/blob/master/CVE-2021-3199/poc_uploadImageFile.py",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2021-3199"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 19.4,
-    "epss_percentile": 97.3,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild",
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 154.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15",
-      "CISA KEV active exploitation (+40)",
-      "Moderate EPSS prob 19.4% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2016-3081",
     "published": "2016-04-26T14:59:02.207",
     "last_modified": "2026-10-09T14:43:05.703",
@@ -116,6 +80,39 @@
       "rce+30",
       "CISA KEV active exploitation (+40)",
       "High EPSS exploit prob 96.1% (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-87690",
+    "published": "2026-10-12T05:17:03.250",
+    "last_modified": "2026-10-12T05:17:03.250",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Metasploit Framework post module post/apple_ios/gather/ios_image_gather is affected by a relative path traversal vulnerability (CWE-22). The module interpolates file names taken from a Meterpreter directory listing — data fully controlled by a hostile or tampered iOS device — directly into the local destination path passed to client.fs.file.download_file(), with no sanitization. The underlying stdapi sink (lib/rex/post/meterpreter/extensions/stdapi/fs/file.rb) writes to whatever path is supplied, so a listing entry such as ../../msfconsole.rc escapes the intended ~/.msf4/loot/<random> directory and overwrites ~/.msf4/msfconsole.rc, a resource file that every msfconsole invocation automatically executes at startup (lib/msf/ui/console/driver.rb:196). An attacker-controlled device that lures an operator into running this gather module achieves an arbitrary file write as the operator; because the written msfconsole.rc can load a second written file (a Ruby plugin whose top-level code runs on require), this converts into persistent code execution and an interactive shell as the operator (frequently root) on the pentester's workstation at the next console launch. The same traversal was previously fixed upstream in the recursive downloader (stdapi/fs/dir.rb scrubs separators); this module omitted the equivalent scrub. The fix applies the same separator scrub (or File.basename) to listing entries before building the local path.",
+    "references": [
+      "https://github.com/rapid7/metasploit-framework",
+      "https://github.com/rapid7/metasploit-framework/pull/21880",
+      "https://github.com/rapid7/metasploit-framework/releases/tag/6.5.5",
+      "https://www.rapid7.com/blog/post/pt-metasploit-wrap-up-belgian-waffles-chocolates-and-modules-frites/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "path_traversal",
+      "poc",
+      "rce"
+    ],
+    "intel_score": 134.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15",
+      "file_write+15",
+      "poc+20"
     ]
   },
   {
@@ -201,63 +198,6 @@
       "recently modified (last 48h)",
       "CISA KEV active exploitation (+40)",
       "High EPSS exploit prob 99.5% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-61882",
-    "published": "2025-10-05T04:15:40.340",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Concurrent Processing product of Oracle E-Business Suite (component: BI Publisher Integration).  Supported versions that are affected are 12.2.3-12.2.14. Easily exploitable vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle Concurrent Processing.  Successful attacks of this vulnerability can result in takeover of Oracle Concurrent Processing. CVSS 3.1 Base Score 9.8 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H).",
-    "references": [
-      "https://www.oracle.com/security-alerts/alert-cve-2025-61882.html",
-      "https://blogs.oracle.com/security/post/apply-july-2025-cpu",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-61882",
-      "https://www.crowdstrike.com/en-us/blog/crowdstrike-identifies-campaign-targeting-oracle-e-business-suite-zero-day-CVE-2025-61882/"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 99.7,
-    "epss_percentile": 100.0,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 124.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)",
-      "High EPSS exploit prob 99.7% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-61622",
-    "published": "2025-10-01T10:15:34.080",
-    "last_modified": "2026-10-09T09:10:00.213",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Deserialization of untrusted data in python in pyfory versions 0.12.0 through 0.12.2, or the legacy pyfury versions from 0.1.0 through 0.10.3: allows arbitrary code execution. An application is vulnerable if it reads pyfory serialized data from untrusted sources. An attacker can craft a data stream that selects pickle-fallback serializer during deserialization, leading to the execution of `pickle.loads`, which is vulnerable to remote code execution.\n\nUsers are recommended to upgrade to pyfory version 0.12.3 or later, which has removed pickle fallback serializer and thus fixes this issue.",
-    "references": [
-      "https://lists.apache.org/thread/vfn9hp9qt06db5yo1gmj3l114o3o2csd",
-      "http://www.openwall.com/lists/oss-security/2025/09/29/3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 43.5,
-    "epss_percentile": 98.7,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 119.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20",
-      "Moderate EPSS prob 43.5% (+10)"
     ]
   },
   {
@@ -370,33 +310,6 @@
       "dos+3",
       "CISA KEV active exploitation (+40)",
       "High EPSS exploit prob 99.4% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-54539",
-    "published": "2025-10-16T09:15:34.680",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A Deserialization of Untrusted Data vulnerability exists in the Apache ActiveMQ NMS AMQP Client.\n\nThis issue affects all versions of Apache ActiveMQ NMS AMQP up to and including 2.3.0, when establishing connections to untrusted AMQP servers. Malicious servers could exploit unbounded deserialization logic present in the client to craft responses that may lead to arbitrary code execution on the client side.\n\nAlthough version 2.1.0 introduced a mechanism to restrict deserialization via allow/deny lists, the protection was found to be bypassable under certain conditions.\n\nIn line with Microsoft’s deprecation of binary serialization in .NET 9, the project is evaluating the removal of .NET binary serialization support from the NMS API entirely in future releases.\n\nMitigation and Recommendations:\nUsers are strongly encouraged to upgrade to version 2.4.0 or later, which resolves the issue. Additionally, projects depending on NMS-AMQP should migrate away from .NET binary serialization as part of a long-term hardening strategy.",
-    "references": [
-      "https://lists.apache.org/thread/9k684j07ljrshy3hxwhj5m0xjmkz1g2n",
-      "http://www.openwall.com/lists/oss-security/2025/10/15/3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.1,
-    "epss_percentile": 81.1,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
     ]
   },
   {
@@ -545,35 +458,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-34513",
-    "published": "2025-10-16T18:15:35.617",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Ilevia EVE X1 Server firmware versions ≤ 4.7.18.0.eden contain an OS command injection vulnerability in mbus_build_from_csv.php that allows an unauthenticated attacker to execute arbitrary code. Ilevia has declined to service this vulnerability, and recommends that customers not expose port 8080 to the internet.",
-    "references": [
-      "https://www.ilevia.com/",
-      "https://www.vulncheck.com/advisories/ilevia-eve-x1-server-unauth-command-injection",
-      "https://www.zeroscience.mk/en/vulnerabilities/ZSL-2025-5962.php",
-      "https://www.zeroscience.mk/en/vulnerabilities/ZSL-2025-5962.php"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 7.6,
-    "epss_percentile": 94.4,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 107.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-10147",
     "published": "2025-09-23T09:15:30.920",
     "last_modified": "2026-10-11T20:10:00.200",
@@ -617,34 +501,6 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 48.0,
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-11391",
-    "published": "2025-10-18T07:15:35.010",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The PPOM – Product Addons & Custom Fields for WooCommerce plugin for WordPress is vulnerable to arbitrary file uploads due to missing file type validation in the image cropper functionality in all versions up to, and including, 33.0.15. This makes it possible for unauthenticated attackers to upload arbitrary files on the affected site's server which may make remote code execution possible. While the vulnerable code is in the free version, this only affected users with the paid version of the software installed and activated.",
-    "references": [
-      "https://plugins.trac.wordpress.org/browser/woocommerce-product-addon/trunk/inc/hooks.php#L45",
-      "https://plugins.trac.wordpress.org/changeset?sfp_email=&sfph_mail=&reponame=&old=3379431%40woocommerce-product-addon&new=3379431%40woocommerce-product-addon&sfp_email=&sfph_mail=",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/cf851bed-f5d8-44e2-810d-906ba3d3c1c5?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 61.6,
     "tags": [
       "file_write",
       "rce"
@@ -715,6 +571,64 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-108707",
+    "published": "2026-10-11T02:16:39.477",
+    "last_modified": "2026-10-11T02:16:39.477",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Wukong_HRM through commit 186115e contains an authentication bypass vulnerability in ParamAspect that allows unauthenticated attackers to call every HRM API endpoint by omitting the AUTH-TOKEN header. Attackers gain HR administrator access to read payslips, salary history and employee personal data, download attachments, and modify or delete company-wide HR records.",
+    "references": [
+      "https://github.com/AnkesKasty/cve-request-poc/blob/a7b6d1423555812d8efa26c91c5d0683164b31e5/Wukong_HRM/poc_attachment_download_idor.py",
+      "https://github.com/AnkesKasty/cve-request-poc/blob/a7b6d1423555812d8efa26c91c5d0683164b31e5/Wukong_HRM/poc_employee_export_pii.py",
+      "https://github.com/AnkesKasty/cve-request-poc/blob/a7b6d1423555812d8efa26c91c5d0683164b31e5/Wukong_HRM/poc_salary_slip_detail_read.py",
+      "https://github.com/WuKongOpenSource/Wukong_HRM/blob/186115e1a5a0b827ad9596ff8c2f3a876fb0cc55/common/common-web/src/main/java/com/kakarote/core/config/ParamAspect.java#L35-L55",
+      "https://github.com/WuKongOpenSource/Wukong_HRM/blob/186115e1a5a0b827ad9596ff8c2f3a876fb0cc55/hrm/hrm-web/src/main/java/com/kakarote/hrm/common/EmployeeAspect.java#L28-L45",
+      "https://www.vulncheck.com/advisories/wukong-hrm-through-commit-186115e-authentication-bypass-via-paramaspect"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 44.5,
+    "tags": [
+      "auth_bypass",
+      "poc"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-52903",
+    "published": "2026-10-12T13:17:32.757",
+    "last_modified": "2026-10-12T13:17:32.757",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A deserialization of untrusted data vulnerability was found in ManageIQ. The YamlLoadAliases module overrides YAML.safe_load to silently fall back to YAML.unsafe_load in production when a Psych::DisallowedClass error occurs. An authenticated attacker with dialog import access can exploit this to achieve remote code execution by uploading a crafted YAML payload that triggers the fallback and deserializes arbitrary Ruby objects.\n\nRed Hat CloudForms, which was based on ManageIQ, has reached End of Life and is no longer supported. No errata or patches will be issued. This CVE is being assigned for the benefit of the ManageIQ community and downstream consumers.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-52903",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2486730"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-104081",
     "published": "2026-10-09T15:17:06.940",
     "last_modified": "2026-10-09T18:17:01.517",
@@ -744,31 +658,33 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-96890",
-    "published": "2026-10-06T19:18:17.167",
-    "last_modified": "2026-10-09T14:04:56.293",
+    "cve_id": "CVE-2026-108963",
+    "published": "2026-10-11T20:16:32.853",
+    "last_modified": "2026-10-11T20:16:34.063",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "A Server-Side Request Forgery (SSRF) vulnerability was identified in GitHub Enterprise Server that allowed a repository contributor to cause the appliance to issue requests to attacker-controlled internal hosts, which could be chained to achieve remote code execution on the appliance. The secret scanning validator for GCP service account credentials trusted the token endpoint embedded in a committed credential and issued a request to it without restricting the destination. Exploitation required an authenticated user with permission to push to a repository on an instance with GitHub Advanced Security and secret scanning validity checks enabled, a non-default configuration. This vulnerability affected GitHub Enterprise Server 3.20, 3.21, and 3.22 and was fixed in versions 3.20.9, 3.21.7, and 3.22.2. This vulnerability was reported through the GitHub Bug Bounty program.",
+    "summary": "databasement before 1.8.2 allows remote code execution because it runs certain commands (e.g., mariadb-dump) with a database name that can be specified by any authenticated user. For example, --result-file=/app/public/index.php can write to index.php. In other words, quoting prevents OS command injection in mariadb-dump, but the argument injection alone is sufficient for code execution indirectly. NOTE: the project's composer.json file does not indicate an independently published databasement Composer package.",
     "references": [
-      "https://docs.github.com/en/enterprise-server@3.20/admin/release-notes#3.20.9",
-      "https://docs.github.com/en/enterprise-server@3.21/admin/release-notes#3.21.7",
-      "https://docs.github.com/en/enterprise-server@3.22/admin/release-notes#3.22.2"
+      "https://github.com/David-Crty/databasement/blob/bcee6f0e62796337aaac26961c41f7eb9578dd76/app/Services/Backup/Databases/MysqlDatabase.php#L22",
+      "https://github.com/David-Crty/databasement/blob/bcee6f0e62796337aaac26961c41f7eb9578dd76/composer.json#L3",
+      "https://github.com/David-Crty/databasement/commit/22258e3eac594e653f9d04a69d93e83923d61499",
+      "https://github.com/David-Crty/databasement/commit/2d2761905594a2fa2c3d81d48a7c8b6a1784862c",
+      "https://github.com/David-Crty/databasement/security/advisories/GHSA-hm57-pvxc-4pcm"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.3,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
-      "rce",
-      "ssrf"
+      "command_injection",
+      "rce"
     ],
     "intel_score": 102.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "ssrf+18"
+      "command_injection+18"
     ]
   },
   {
@@ -800,33 +716,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-101024",
-    "published": "2026-10-08T21:17:51.240",
-    "last_modified": "2026-10-09T14:17:10.363",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Satel Netco Design versions prior to v2.1.7 contains a relative path traversal vulnerability in its data export functionality. An authenticated user with Viewer privileges could write attacker influenced content to file system locations accessible to the application service. Successful exploitation could result in unauthorized file creation or modification and, under certain conditions, arbitrary code execution.",
-    "references": [
-      "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-281-03.json",
-      "https://www.cisa.gov/news-events/ics-advisories/icsa-26-281-03"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 36.0,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
     ]
   },
   {
@@ -863,6 +752,34 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-108980",
+    "published": "2026-10-12T02:16:57.297",
+    "last_modified": "2026-10-12T02:16:57.297",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Blinko through 1.8.8 allows directory traversal, overwriting startup files as root, via installPlugin. It builds the plugin install path from an unsanitized name in server/routerTrpc/plugin.ts, and the plugin.installPlugin tRPC procedure is open to any authenticated user. Thus, a name containing ../ sequences writes the downloaded plugin files outside the plugins directory. Because the official Docker image runs as root, an authenticated attacker overwrites a root-owned startup file and achieves remote code execution as root. Self-registration for an account may be possible.",
+    "references": [
+      "https://github.com/blinkospace/blinko/blob/178e4b3538a21823a50ac2481e653d56cb1ffa86/app/src/pages/signin.tsx#L238-L243",
+      "https://github.com/blinkospace/blinko/blob/178e4b3538a21823a50ac2481e653d56cb1ffa86/server/routerTrpc/plugin.ts#L273",
+      "https://github.com/kashishtopi/blinko-plugin-path-traversal-rce"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
     ]
   },
   {
@@ -1052,50 +969,20 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-5759",
-    "published": "2026-10-09T05:16:44.920",
-    "last_modified": "2026-10-09T05:16:45.043",
+    "cve_id": "CVE-2026-66086",
+    "published": "2026-10-12T02:16:57.600",
+    "last_modified": "2026-10-12T02:16:57.600",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "A double free and use-after-free vulnerability in the RdbLoadDeletedNodes function of the RDB graph decoders (src/serializers/decoders/*/decode_graph_entities.c) in FalkorDB before 4.18.1 allows a remote attacker who can issue Redis replication commands (for example, against an instance with no password configured) to cause a denial of service or execute arbitrary code in the redis-server process by supplying a crafted RDB stream whose deleted-nodes buffer length is not a multiple of sizeof(NodeID). The length check relies on ASSERT(), which is compiled out in release builds, so the function continues after freeing the buffer, reading it and freeing it a second time.",
+    "summary": "In the modem OTA stack, there is a possible stack-based buffer overflow due to improper validation of scheduling information in SIB1 messages. This could lead to remote code execution or denial of service with no additional execution privileges needed.",
     "references": [
-      "https://github.com/FalkorDB/FalkorDB/commit/523d98ac7ffe99f11a9c95c258025c235f0dff4c",
-      "https://github.com/FalkorDB/FalkorDB/pull/1843",
-      "https://github.com/FalkorDB/FalkorDB/releases/tag/v4.18.1"
+      "https://www.unisoc.com/en/support/product-security-bulletin/2109454821805424641"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.6,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 92.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-107908",
-    "published": "2026-10-09T06:17:10.777",
-    "last_modified": "2026-10-09T06:17:12.243",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A heap-based out-of-bounds write in the BoltReadHandler function (src/bolt/bolt_api.c) in FalkorDB before 4.20.0 allows a remote unauthenticated attacker to cause a denial of service and possibly execute arbitrary code by sending a Bolt RESET message with an attacker-chosen chunk size to the Bolt port. The handler checks the size only with ASSERT(), which is compiled out in release builds, then computes a destination pointer from the wire-supplied 16-bit size and moves buffered data up to about 64 KiB backwards past the start of the read buffer. Only deployments that enable the Bolt endpoint (BOLT_PORT, disabled by default) are affected.",
-    "references": [
-      "https://github.com/FalkorDB/FalkorDB/commit/0b11a00b34b25c4d4fdfe55f0a35c8a00593bd7d",
-      "https://github.com/FalkorDB/FalkorDB/pull/2170",
-      "https://github.com/FalkorDB/FalkorDB/releases/tag/v4.20.0"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.9,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "dos",
       "rce"
@@ -1218,35 +1105,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-102490",
-    "published": "2026-09-30T17:16:40.707",
-    "last_modified": "2026-10-09T14:21:05.030",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Zammad packages built with packager.io (DEB and RPM) could have allowed a local attacker who already had file system write privileges as the unprivileged zammad service account to escalate to full root privileges on the host. Service processes began running as root and executed files that were owned and writable by the zammad account before dropping their identity to that account. An attacker holding that foothold could have escalated within seconds, because the affected services were restarted automatically whenever they stopped; no administrator interaction was required. Only installations from the DEB and RPM packages were affected — installations from source or the official container images were not. All released packaged versions were affected.",
-    "references": [
-      "https://csirt.divd.nl/CVE-2026-102490",
-      "https://csirt.divd.nl/DIVD-2026-00015",
-      "https://github.com/zammad/zammad/security/advisories/GHSA-p97w-927q-8vxq",
-      "https://zammad.com/en/advisories/cve-2026-102489-cve-2026-102490",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-102490"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.5,
-    "epss_percentile": 44.4,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-14991",
     "published": "2026-10-08T14:16:51.740",
     "last_modified": "2026-10-10T13:17:31.747",
@@ -1292,6 +1150,30 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 53.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-104028",
+    "published": "2026-10-11T07:17:22.440",
+    "last_modified": "2026-10-11T12:16:51.367",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Anton Extensions WordPress plugin through 1.2.2 does not perform any capability check, nonce verification, or file-type validation before writing attacker-supplied content to an attacker-chosen path, allowing unauthenticated attackers to upload arbitrary PHP files and achieve remote code execution.",
+    "references": [
+      "https://wpscan.com/vulnerability/0be8a03e-d854-48db-bdc0-1beead3d7b91/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.5,
     "tags": [
       "rce"
     ],
@@ -1412,36 +1294,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "xss+8"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-11315",
-    "published": "2025-10-06T02:15:39.910",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was found in Tipray 厦门天锐科技股份有限公司 Data Leakage Prevention System 天锐数据泄露防护系统 1.0. Affected by this vulnerability is the function findUserPage of the file findUserPage.do. Performing manipulation of the argument sort results in sql injection. Remote exploitation of the attack is possible. The exploit has been made public and could be used. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://github.com/FightingLzn9/vul/blob/main/%E5%A4%A9%E9%94%90%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E9%98%B2%E6%8A%A4%E7%B3%BB%E7%BB%9F-7.md",
-      "https://github.com/FightingLzn9/vul/blob/main/%E5%A4%A9%E9%94%90%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E9%98%B2%E6%8A%A4%E7%B3%BB%E7%BB%9F-7.md#3-proof-of-concept-poc",
-      "https://vuldb.com/?ctiid.327196",
-      "https://vuldb.com/?id.327196",
-      "https://vuldb.com/?submit.663494"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.1,
-    "tags": [
-      "poc",
-      "sqli"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "poc+20"
     ]
   },
   {
@@ -2015,38 +1867,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-61687",
-    "published": "2025-10-06T16:15:35.223",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Flowise is a drag & drop user interface to build a customized large language model flow. A file upload vulnerability in version 3.0.7 of FlowiseAI allows authenticated users to upload arbitrary files without proper validation. This enables attackers to persistently store malicious Node.js web shells on the server, potentially leading to Remote Code Execution (RCE). The system fails to validate file extensions, MIME types, or file content during uploads. As a result, malicious scripts such as Node.js-based web shells can be uploaded and stored persistently on the server. These shells expose HTTP endpoints capable of executing arbitrary commands if triggered. The uploaded shell does not automatically execute, but its presence allows future exploitation via administrator error or chained vulnerabilities. This presents a high-severity threat to system integrity and confidentiality. As of time of publication, no known patched versions are available.",
-    "references": [
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/components/src/storageUtils.ts#L1104-L1111",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/components/src/storageUtils.ts#L170-L175",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/components/src/storageUtils.ts#L533-L541",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/controllers/attachments/index.ts#L4-L11",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/routes/attachments/index.ts#L8",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/services/attachments/index.ts#L7-L16",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/utils/createAttachment.ts#L118-L126",
-      "https://github.com/FlowiseAI/Flowise/blob/d29db16bfcf9a4be8febc3d19d52263e8c3d0055/packages/server/src/utils/index.ts#L1950-L1954",
-      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-35g6-rrw3-v6xc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 11.0,
-    "epss_percentile": 95.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 81.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-56208",
     "published": "2026-06-19T17:16:30.297",
     "last_modified": "2026-10-09T18:17:08.653",
@@ -2151,31 +1971,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-107510",
-    "published": "2026-10-08T10:17:09.553",
-    "last_modified": "2026-10-09T07:17:18.097",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An authenticated high privilege user can inject arguments in troubleshooting commands resulting in privilege escalation.",
-    "references": [
-      "https://aumlayer.com/insights/administrator-is-not-root-infoblox-nios-privilege-escalation/",
-      "https://support.infoblox.com/s/article/Security-Advisory-NIOS-Maintenance-Mode-Permits-Root-Shell"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.3,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
     ]
   },
   {
@@ -2381,6 +2176,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-108860",
+    "published": "2026-10-11T14:17:05.933",
+    "last_modified": "2026-10-11T14:17:05.933",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "BotSharp through 5.2.0 contains an authentication bypass vulnerability that allows unauthenticated remote attackers to forge bearer tokens using the hard-coded Jwt:Key in WebStarter appsettings.json. Attackers can sign tokens with the committed HMAC secret and fixed botsharp issuer and audience to impersonate any known user, including administrators, on Authorize-protected API routes.",
+    "references": [
+      "https://github.com/SciSharp/BotSharp",
+      "https://github.com/SciSharp/BotSharp/blob/a11ee0317cab5c619df1cb5d0c4fc39d1b6e30b4/src/Infrastructure/BotSharp.OpenAPI/BotSharpOpenApiExtensions.cs#L46-L57",
+      "https://github.com/SciSharp/BotSharp/blob/a11ee0317cab5c619df1cb5d0c4fc39d1b6e30b4/src/WebStarter/appsettings.json#L16-L20",
+      "https://hackmd.io/@1ExmmukzRMWN7B4gQ4W-4Q/scisharp-botsharp-public-jwt-signing-key",
+      "https://www.vulncheck.com/advisories/botsharp-through-5.2.0-authentication-bypass-via-hard-coded-jwt-signing-key"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-58379",
     "published": "2026-07-03T19:16:37.040",
     "last_modified": "2026-10-12T03:17:19.427",
@@ -2575,39 +2398,16 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-57781",
-    "published": "2025-10-06T06:15:36.203",
-    "last_modified": "2026-10-09T10:10:00.193",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The installers of DENSO TEN drive recorder viewer contain an issue with the DLL search path, which may lead to insecurely loading Dynamic Link Libraries. As a result, arbitrary code may be executed with the privilege of the user invoking the installer.",
-    "references": [
-      "https://jvn.jp/en/jp/JVN95806263/",
-      "https://www.denso-ten.com/jp/information/topics/2025/1002"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 5.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-79992",
     "published": "2026-08-25T18:18:06.973",
-    "last_modified": "2026-10-11T19:16:34.097",
+    "last_modified": "2026-10-12T08:17:25.537",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in Emacs TRAMP. A local attacker could exploit this vulnerability by processing maliciously crafted filenames. This occurs because TRAMP concatenates login arguments without proper sanitization, which are then passed to a local shell. Successful exploitation could lead to arbitrary code execution.",
     "references": [
+      "https://access.redhat.com/errata/RHSA-2026:80506",
+      "https://access.redhat.com/errata/RHSA-2026:80507",
       "https://access.redhat.com/security/cve/CVE-2026-79992",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2523665",
       "http://www.openwall.com/lists/oss-security/2026/08/26/15",
@@ -2758,12 +2558,13 @@
   {
     "cve_id": "CVE-2026-104084",
     "published": "2026-10-09T16:17:21.153",
-    "last_modified": "2026-10-09T20:17:09.050",
+    "last_modified": "2026-10-12T14:17:09.200",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "SmarterMail before build 9777 contains a privilege escalation vulnerability where JWT access and refresh tokens embed a role claim at issuance that is not revalidated against the account's current role when redeemed through POST /api/v1/auth/refresh-token. Attackers who capture a refresh token issued before an administrator demotion, or a demoted user whose session was not actively polling at the time of demotion, can replay the stale token to obtain a new access token retaining the higher-privilege role (such as DomainAdmin or SysAdmin) until natural token expiry.",
     "references": [
+      "https://blog.evan.lat/posts/sm/",
       "https://www.smartertools.com/smartermail/release-notes/current#/9526:~:text=Build%209777%20(Oct%208%2C%202026)",
       "https://www.vulncheck.com/advisories/smartermail-build-9777-stale-jwt-role-claim-privilege-escalation-via-refresh-token"
     ],
@@ -3030,6 +2831,174 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 22.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93931",
+    "published": "2026-10-10T08:17:05.427",
+    "last_modified": "2026-10-11T13:17:26.997",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group Smash smash allows Object Injection.This issue affects Smash: from n/a through 1.12.0.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/smash/vulnerability/wordpress-smash-theme-1-12-0-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93932",
+    "published": "2026-10-10T08:17:05.547",
+    "last_modified": "2026-10-11T13:17:27.100",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group Smart Casa smart-casa allows Object Injection.This issue affects Smart Casa: from n/a through 1.0.12.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/smart-casa/vulnerability/wordpress-smart-casa-theme-1-0-12-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93933",
+    "published": "2026-10-10T08:17:05.680",
+    "last_modified": "2026-10-11T13:17:27.210",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group Rosalinda rosalinda allows Object Injection.This issue affects Rosalinda: from n/a through 1.2.4.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/rosalinda/vulnerability/wordpress-rosalinda-theme-1-2-4-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93934",
+    "published": "2026-10-10T08:17:05.810",
+    "last_modified": "2026-10-11T13:17:27.323",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group Partiso partiso allows Object Injection.This issue affects Partiso: from n/a through 1.1.13.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/partiso/vulnerability/wordpress-partiso-theme-1-1-13-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93935",
+    "published": "2026-10-10T08:17:05.933",
+    "last_modified": "2026-10-11T13:17:27.427",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group Let's Play playhockey allows Object Injection.This issue affects Let's Play: from n/a through 1.1.15.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/playhockey/vulnerability/wordpress-let-s-play-theme-1-1-15-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93936",
+    "published": "2026-10-10T08:17:06.060",
+    "last_modified": "2026-10-11T13:17:27.533",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group IPharm ipharm allows Object Injection.This issue affects IPharm: from n/a through 1.2.4.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/ipharm/vulnerability/wordpress-ipharm-theme-1-2-4-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.4,
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-93937",
+    "published": "2026-10-10T08:17:06.187",
+    "last_modified": "2026-10-11T13:17:27.643",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in ThemeREX Group Hygia hygia allows Object Injection.This issue affects Hygia: from n/a through 1.21.0.",
+    "references": [
+      "https://patchstack.com/database/wordpress/theme/hygia/vulnerability/wordpress-hygia-theme-1-21-0-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.4,
     "tags": [
       "deserialization"
     ],
