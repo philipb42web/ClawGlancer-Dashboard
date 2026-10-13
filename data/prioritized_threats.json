@@ -33,34 +33,95 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-102489",
-    "published": "2026-09-30T17:16:40.550",
-    "last_modified": "2026-10-10T04:18:08.040",
-    "cvss_v3": 9.8,
+    "cve_id": "CVE-2025-68613",
+    "published": "2025-12-19T23:15:52.083",
+    "last_modified": "2026-10-13T11:10:00.203",
+    "cvss_v3": 9.9,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Zammad versions 6.3.0 to 6.5.4 are vulnerable a session hijack vulnerability that leads to remote code execution as the zammad user. The bug is also present in version 7.0.0 to version 7.1.2, but not exploitable due to changes in the underlying framework.",
+    "summary": "n8n is an open source workflow automation platform. Versions starting with 0.211.0 and prior to 1.120.4, 1.121.1, and 1.122.0 contain a critical Remote Code Execution (RCE) vulnerability in their workflow expression evaluation system. Under certain conditions, expressions supplied by authenticated users during workflow configuration may be evaluated in an execution context that is not sufficiently isolated from the underlying runtime. An authenticated attacker could abuse this behavior to execute arbitrary code with the privileges of the n8n process. Successful exploitation may lead to full compromise of the affected instance, including unauthorized access to sensitive data, modification of workflows, and execution of system-level operations. This issue has been fixed in versions 1.120.4, 1.121.1, and 1.122.0. Users are strongly advised to upgrade to a patched version, which introduces additional safeguards to restrict expression evaluation. If upgrading is not immediately possible, administrators should consider the following temporary mitigations: Limit workflow creation and editing permissions to fully trusted users only; and/or deploy n8n in a hardened environment with restricted operating system privileges and network access to reduce the impact of potential exploitation. These workarounds do not fully eliminate the risk and should only be used as short-term measures.",
     "references": [
-      "https://community.zammad.org/t/take-care-local-privilege-escalation-cve-2026-102490-is-reported-as-being-actively-exploited/21297/2",
-      "https://csirt.divd.nl/CVE-2026-102489",
-      "https://csirt.divd.nl/DIVD-2026-00015",
-      "https://zammad.com/en/advisories/cve-2026-102489-cve-2026-102490",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-102489"
+      "https://github.com/n8n-io/n8n/commit/08f332015153decdda3c37ad4fcb9f7ba13a7c79",
+      "https://github.com/n8n-io/n8n/commit/1c933358acef527ff61466e53268b41a04be1000",
+      "https://github.com/n8n-io/n8n/commit/39a2d1d60edde89674ca96dcbb3eb076ffff6316",
+      "https://github.com/n8n-io/n8n/security/advisories/GHSA-v98v-ff95-f3cp",
+      "https://www.akamai.com/blog/security-research/2026/feb/zerobot-malware-targets-n8n-automation-platform",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-68613"
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 1.3,
-    "epss_percentile": 68.7,
+    "epss": 99.0,
+    "epss_percentile": 99.9,
     "tags": [
       "cisa_kev",
       "in_the_wild",
       "rce"
     ],
-    "intel_score": 129.0,
+    "intel_score": 154.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "CISA KEV active exploitation (+40)"
+      "CISA KEV active exploitation (+40)",
+      "High EPSS exploit prob 99.0% (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-67164",
+    "published": "2025-12-17T17:15:50.927",
+    "last_modified": "2026-10-13T11:10:00.203",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An authenticated arbitrary file upload vulnerability in the /storage/poc.php component of Pagekit CMS v1.0.18 allows attackers to execute arbitrary code via uploading a crafted PHP file.",
+    "references": [
+      "https://github.com/mbiesiad/vulnerability-research/tree/main/CVE-2025-67164"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.5,
+    "tags": [
+      "file_write",
+      "poc",
+      "rce"
+    ],
+    "intel_score": 124.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-50455",
+    "published": "2026-07-27T16:16:58.860",
+    "last_modified": "2026-10-13T10:10:00.193",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "SQL injection vulnerability exists in the order_by parameter of the /customers/search endpoint in Alex Tselegidis EasyAppointments <= 1.5.1. The vulnerability arises from unsanitized user input passed to the order_by method of the CodeIgniter Query Builder, enabling attackers to perform time-based queries and schema enumeration. Under certain MySQL configurations, the flaw may lead to remote code execution by writing a PHP shell using INTO OUTFILE.",
+    "references": [
+      "https://github.com/threatlance-org/security-advisories/blob/main/CVE-2025-50455/advisory.md",
+      "https://github.com/threatlance-org/security-advisories/blob/main/CVE-2025-50455/poc.py",
+      "https://www.linkedin.com/posts/michael-chesang_cve-securityadvisory-appsec-activity-7360754900827365376-Z-IY",
+      "https://github.com/threatlance-org/security-advisories/blob/main/CVE-2025-50455/advisory.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.2,
+    "epss_percentile": 68.6,
+    "tags": [
+      "poc",
+      "rce",
+      "sqli"
+    ],
+    "intel_score": 123.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "sqli+18",
+      "poc+20"
     ]
   },
   {
@@ -175,58 +236,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-78401",
-    "published": "2026-10-08T21:18:03.043",
-    "last_modified": "2026-10-10T13:17:32.900",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Security Verify Access 10.0 through 10.0.9.2 and IBM Verify Identity Access 11.0 through 11.0.3 could allow a remote unauthenticated attacker to execute arbitrary code on the system due to the deserialization of untrusted data.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7291628"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.5,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78406",
-    "published": "2026-10-08T21:18:03.190",
-    "last_modified": "2026-10-10T04:18:15.970",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Security Verify Access 10.0 through 10.0.9.2 and IBM Verify Identity Access 11.0 through 11.0.3 could allow a remote unauthenticated attacker to execute arbitrary code on the system due to the deserialization of untrusted data.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7291628"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.0,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-100730",
     "published": "2026-10-09T14:17:09.607",
     "last_modified": "2026-10-11T17:16:56.753",
@@ -256,7 +265,7 @@
   {
     "cve_id": "CVE-2026-108598",
     "published": "2026-10-10T19:16:58.347",
-    "last_modified": "2026-10-10T19:16:58.347",
+    "last_modified": "2026-10-13T12:17:13.100",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -401,35 +410,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-75875",
-    "published": "2026-10-08T22:17:32.223",
-    "last_modified": "2026-10-10T04:18:13.577",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Guardium Data Protection 12.0, 12.1, and 12.2 could allow a remote attacker to execute arbitrary code due to path traversal.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7291674"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.1,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-94589",
     "published": "2026-10-10T04:18:19.713",
-    "last_modified": "2026-10-11T17:17:07.727",
+    "last_modified": "2026-10-13T13:29:12.567",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -456,37 +439,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-108707",
-    "published": "2026-10-11T02:16:39.477",
-    "last_modified": "2026-10-11T02:16:39.477",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Wukong_HRM through commit 186115e contains an authentication bypass vulnerability in ParamAspect that allows unauthenticated attackers to call every HRM API endpoint by omitting the AUTH-TOKEN header. Attackers gain HR administrator access to read payslips, salary history and employee personal data, download attachments, and modify or delete company-wide HR records.",
-    "references": [
-      "https://github.com/AnkesKasty/cve-request-poc/blob/a7b6d1423555812d8efa26c91c5d0683164b31e5/Wukong_HRM/poc_attachment_download_idor.py",
-      "https://github.com/AnkesKasty/cve-request-poc/blob/a7b6d1423555812d8efa26c91c5d0683164b31e5/Wukong_HRM/poc_employee_export_pii.py",
-      "https://github.com/AnkesKasty/cve-request-poc/blob/a7b6d1423555812d8efa26c91c5d0683164b31e5/Wukong_HRM/poc_salary_slip_detail_read.py",
-      "https://github.com/WuKongOpenSource/Wukong_HRM/blob/186115e1a5a0b827ad9596ff8c2f3a876fb0cc55/common/common-web/src/main/java/com/kakarote/core/config/ParamAspect.java#L35-L55",
-      "https://github.com/WuKongOpenSource/Wukong_HRM/blob/186115e1a5a0b827ad9596ff8c2f3a876fb0cc55/hrm/hrm-web/src/main/java/com/kakarote/hrm/common/EmployeeAspect.java#L28-L45",
-      "https://www.vulncheck.com/advisories/wukong-hrm-through-commit-186115e-authentication-bypass-via-paramaspect"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.5,
-    "tags": [
-      "auth_bypass",
-      "poc"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "poc+20"
     ]
   },
   {
@@ -771,7 +723,7 @@
   {
     "cve_id": "CVE-2026-104801",
     "published": "2026-10-10T07:16:40.560",
-    "last_modified": "2026-10-11T17:17:00.820",
+    "last_modified": "2026-10-13T13:30:21.620",
     "cvss_v3": 9.1,
     "severity": "CRITICAL",
     "affected": [],
@@ -830,7 +782,7 @@
   {
     "cve_id": "CVE-2026-83526",
     "published": "2026-10-10T06:16:43.340",
-    "last_modified": "2026-10-11T17:17:05.980",
+    "last_modified": "2026-10-13T13:29:12.567",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -919,7 +871,7 @@
   {
     "cve_id": "CVE-2026-91136",
     "published": "2026-10-10T09:16:39.360",
-    "last_modified": "2026-10-11T17:17:07.010",
+    "last_modified": "2026-10-13T13:29:12.567",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -941,6 +893,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-67073",
+    "published": "2025-12-17T20:15:56.357",
+    "last_modified": "2026-10-13T11:10:00.203",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A Buffer overflow vulnerability in function fromAdvSetMacMtuWan of bin httpd in Tenda AC10V4.0 V16.03.10.20 allows remote attackers to cause denial of service and possibly code execution by sending a post request with a crafted payload (field `serviceName`) to /goform/AdvSetMacMtuWan.",
+    "references": [
+      "https://github.com/johnathanhuutri/CVEReport/tree/master/CVE-2025-67073"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 51.5,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
     ]
   },
   {
@@ -1063,6 +1041,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-102119",
+    "published": "2026-09-30T21:16:59.900",
+    "last_modified": "2026-10-13T12:00:17.210",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal weakness in an optional, non-default administrative feature allowed an authenticated administrator to move files to unintended locations outside the feature's designated directory. This could potentially be leveraged to execute arbitrary code on the underlying system.",
+    "references": [
+      "https://github.com/kiteworks/security-advisories/security/advisories/GHSA-3r3r-hp4c-pxmh",
+      "https://raw.githubusercontent.com/cisagov/CSAF/develop/csaf_files/VA/white/2026/va-26-274-01.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 37.6,
+    "tags": [
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 91.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-71338",
     "published": "2026-06-25T22:16:59.520",
     "last_modified": "2026-10-12T21:10:00.227",
@@ -1092,11 +1097,11 @@
   {
     "cve_id": "CVE-2026-42696",
     "published": "2026-10-10T20:16:35.313",
-    "last_modified": "2026-10-11T13:17:23.040",
+    "last_modified": "2026-10-13T13:28:15.717",
     "cvss_v3": 10.0,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Unauthenticated Remote Code Execution (RCE) in SiteVault – Backup, Restore, Migration &amp; Cloning <= 1.5.19 versions.",
+    "summary": "Improper Control of Generation of Code ('Code Injection') vulnerability in Royal Plugins SiteVault – Backup, Restore, Migration &amp; Cloning sitevault-backup-restore-migration allows Remote Code Inclusion.This issue affects SiteVault – Backup, Restore, Migration &amp; Cloning: from n/a through 1.5.19.",
     "references": [
       "https://patchstack.com/database/wordpress/plugin/sitevault-backup-restore-migration/vulnerability/wordpress-sitevault-backup-restore-migration-cloning-plugin-1-5-18-remote-code-execution-rce-vulnerability?_s_id=cve"
     ],
@@ -1130,6 +1135,111 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 50.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66647",
+    "published": "2025-12-17T21:16:15.483",
+    "last_modified": "2026-10-13T11:10:00.203",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "RIOT is an open-source microcontroller operating system, designed to match the requirements of Internet of Things (IoT) devices and other embedded devices. A vulnerability was discovered in the IPv6 fragmentation reassembly implementation of RIOT OS v2025.07. When copying the contents of the first fragment (offset=0) into the reassembly buffer, no size check is performed. It is possible to force the creation of a small reassembly buffer by first sending a shorter fragment (also with offset=0). Overflowing the reassembly buffer corrupts the state of other packet buffers which an attacker might be able to used to achieve further memory corruption (potentially resulting in remote code execution). To trigger the vulnerability, the `gnrc_ipv6_ext_frag` module must be included and the attacker must be able to send arbitrary IPv6 packets to the victim. Version 2025.10 fixes the issue.",
+    "references": [
+      "https://github.com/RIOT-OS/RIOT/blob/eb65305cf9f1b7affb50b17af5c12341b83a8636/sys/net/gnrc/network_layer/ipv6/ext/frag/gnrc_ipv6_ext_frag.c#L411",
+      "https://github.com/RIOT-OS/RIOT/blob/eb65305cf9f1b7affb50b17af5c12341b83a8636/sys/net/gnrc/network_layer/ipv6/ext/frag/gnrc_ipv6_ext_frag.c#L481",
+      "https://github.com/RIOT-OS/RIOT/blob/eb65305cf9f1b7affb50b17af5c12341b83a8636/sys/net/gnrc/network_layer/ipv6/ext/frag/gnrc_ipv6_ext_frag.c#L532",
+      "https://github.com/RIOT-OS/RIOT/blob/eb65305cf9f1b7affb50b17af5c12341b83a8636/sys/net/gnrc/network_layer/ipv6/ext/frag/gnrc_ipv6_ext_frag.c#L544",
+      "https://github.com/RIOT-OS/RIOT/releases/tag/2025.10",
+      "https://github.com/RIOT-OS/RIOT/security/advisories/GHSA-wh3v-q6vr-j79r"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.0,
+    "epss_percentile": 60.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-68952",
+    "published": "2025-12-27T01:15:42.853",
+    "last_modified": "2026-10-13T09:10:00.323",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Eigent is a multi-agent Workforce. In version 0.0.60, a 1-click Remote Code Execution (RCE) vulnerability has been identified in Eigent. This vulnerability allows an attacker to execute arbitrary code on the victim's machine or server through a specific interaction (1-click). This issue has been patched in version 0.0.61.",
+    "references": [
+      "https://github.com/eigent-ai/eigent/security/advisories/GHSA-pwcx-28p4-rmq4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-65570",
+    "published": "2025-12-29T15:16:01.763",
+    "last_modified": "2026-10-13T09:10:00.323",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A type confusion in jsish 2.0 allows incorrect control flow during execution of the OP_NEXT opcode. When an “instanceof” expression uses an array element access as the left-hand operand inside a for-in loop, the instructions implementation leaves an additional array reference on the stack rather than consuming it during OP_INSTANCEOF. As a result, OP_NEXT interprets the array as an iterator object and reads the iterCmd function pointer from an invalid structure, potentially causing a crash or enabling code execution depending on heap layout.",
+    "references": [
+      "https://blog.mcsky.ro/writeups/2025/11/15/inline8-writeup.html",
+      "https://blog.mcsky.ro/writeups/2025/11/15/inline8-writeup.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-68706",
+    "published": "2025-12-29T19:15:57.090",
+    "last_modified": "2026-10-13T10:10:00.193",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A stack-based buffer overflow exists in the GoAhead-Webs HTTP daemon on KuWFi 4G LTE AC900 devices with firmware 1.0.13. The /goform/formMultiApnSetting handler uses sprintf() to copy the user-supplied pincode parameter into a fixed 132-byte stack buffer with no bounds checks. This allows an attacker to corrupt adjacent stack memory, crash the web server, and (under certain conditions) may enable arbitrary code execution.",
+    "references": [
+      "https://drive.proton.me/urls/HJCJYAC7JM#XtHcm3P7QaYk",
+      "https://github.com/actuator/cve/blob/main/Kuwfi/CVE-2025-68706.txt",
+      "https://github.com/actuator/cve/tree/main/Kuwfi",
+      "https://kuwfi.com/products/kuwfi-gigabit-wireless-router-4g-lte-wifi-router-dual-band-portable-wifi-modem-hotspot-64-user-with-gigabit-wan-lan-rj11-port"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 5.0,
+    "epss_percentile": 92.0,
     "tags": [
       "rce"
     ],
@@ -1182,6 +1292,32 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 65.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-50329",
+    "published": "2026-07-22T21:17:11.873",
+    "last_modified": "2026-10-13T09:10:00.323",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue in ConeXware, Inc Power Archiver v.22.00.11 and before allows a remote attacker to escalate privileges and execute arbitrary code via the powerarc.exe.",
+    "references": [
+      "https://github.com/OV-0-VO/Public-references/blob/main/CVE-2025-50329.md",
+      "https://github.com/OV-0-VO/Public-references/commit/20437207859288ad1502fed2caebc38be27a3450",
+      "https://www.powerarchiver.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.1,
+    "epss_percentile": 63.4,
     "tags": [
       "rce"
     ],
@@ -1323,33 +1459,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-14991",
-    "published": "2026-10-08T14:16:51.740",
-    "last_modified": "2026-10-10T13:17:31.747",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM DataPower Gateway 10.5.0.0 through 10.5.0.22, 10.6.1 through 10.6.6, 10.6.0.0 through 10.6.0.10, and 11.0.0.0 through 11.0.0.2 is vulnerable to a buffer overflow, caused by improper bounds checking. A local user could overflow the buffer and execute arbitrary code on the system.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7289775"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-103889",
     "published": "2026-10-10T05:16:39.130",
-    "last_modified": "2026-10-11T17:16:58.193",
+    "last_modified": "2026-10-13T13:30:21.620",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -1368,30 +1480,6 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 53.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104028",
-    "published": "2026-10-11T07:17:22.440",
-    "last_modified": "2026-10-11T12:16:51.367",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The Anton Extensions WordPress plugin through 1.2.2 does not perform any capability check, nonce verification, or file-type validation before writing attacker-supplied content to an attacker-chosen path, allowing unauthenticated attackers to upload arbitrary PHP files and achieve remote code execution.",
-    "references": [
-      "https://wpscan.com/vulnerability/0be8a03e-d854-48db-bdc0-1beead3d7b91/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 44.6,
     "tags": [
       "rce"
     ],
@@ -1534,24 +1622,26 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-16916",
-    "published": "2026-10-08T21:17:56.500",
-    "last_modified": "2026-10-10T13:17:31.900",
-    "cvss_v3": 9.1,
+    "cve_id": "CVE-2025-68929",
+    "published": "2025-12-29T15:16:02.033",
+    "last_modified": "2026-10-13T09:10:00.323",
+    "cvss_v3": 9.0,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "IBM Security Verify Access 10.0 through 10.0.9.2 and IBM Verify Identity Access 11.0 through 11.0.3 could allow a remote authenticated attacker to execute arbitrary code due to a protection mechanism failure.",
+    "summary": "Frappe is a full-stack web application framework. Prior to versions 14.99.6 and 15.88.1, an authenticated user with specific permissions could be tricked into accessing a specially crafted link. This could lead to a malicious template being executed on the server, resulting in remote code execution. Versions 14.99.6 and 15.88.1 fix the issue. No known workarounds are available.",
     "references": [
-      "https://www.ibm.com/support/pages/node/7291628"
+      "https://github.com/frappe/frappe/releases/tag/v14.99.6",
+      "https://github.com/frappe/frappe/releases/tag/v15.88.1",
+      "https://github.com/frappe/frappe/security/advisories/GHSA-qq98-vfv9-xmxh"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 34.6,
+    "epss": 0.5,
+    "epss_percentile": 41.3,
     "tags": [
       "rce"
     ],
-    "intel_score": 85.5,
+    "intel_score": 85.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1605,30 +1695,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-94510",
-    "published": "2026-10-08T23:17:05.427",
-    "last_modified": "2026-10-10T04:18:19.577",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Authorization bypass through user-controlled key in Microsoft Bookings allows an unauthorized attacker to elevate privileges over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-94510"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.5,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
     ]
   },
   {
@@ -1706,6 +1772,82 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66953",
+    "published": "2025-12-17T19:16:12.467",
+    "last_modified": "2026-10-13T11:10:00.203",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "CSRF vulnerability in narda miteq Uplink Power Contril Unit UPC2 v.1.17 allows a remote attacker to execute arbitrary code via the Web-based management interface and specifically the /system_setup.htm, /set_clock.htm, /receiver_setup.htm, /cal.htm?..., and /channel_setup.htm endpoints",
+    "references": [
+      "https://github.com/shiky8/my--cve-vulnerability-research/tree/main/CVE-2025-66953%20_%20narda%20miteq%20Uplink%20Power%20Contril%20Unitl%20UPC2%20_%20CSRF",
+      "https://www.nardamiteq.com/",
+      "https://github.com/shiky8/my--cve-vulnerability-research/tree/main/CVE-2025-66953%20_%20narda%20miteq%20Uplink%20Power%20Contril%20Unitl%20UPC2%20_%20CSRF"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-63389",
+    "published": "2025-12-18T16:15:54.760",
+    "last_modified": "2026-10-13T11:10:00.203",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A critical authentication bypass vulnerability exists in Ollama platform's API endpoints in versions prior to and including v0.12.3. The platform exposes multiple API endpoints without requiring authentication, enabling remote attackers to perform unauthorized model management operations.",
+    "references": [
+      "https://gist.github.com/Cristliu/48dae561696374744d9fced07a544ecd",
+      "https://gist.github.com/Cristliu/b6f4d070fb27932f581be1aadc0923e7",
+      "https://github.com/ollama/ollama/issues"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.2,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-68860",
+    "published": "2025-12-29T22:15:43.597",
+    "last_modified": "2026-10-13T09:10:00.323",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Authentication Bypass Using an Alternate Path or Channel vulnerability in Mobile Builder Mobile builder mobile-builder allows Authentication Abuse.This issue affects Mobile builder: from n/a through <= 1.4.2.",
+    "references": [
+      "https://patchstack.com/database/Wordpress/Plugin/mobile-builder/vulnerability/wordpress-mobile-builder-plugin-1-4-2-broken-authentication-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.7,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
     ]
   },
   {
@@ -1935,71 +2077,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-106558",
-    "published": "2026-10-07T15:17:15.713",
-    "last_modified": "2026-10-10T03:17:04.400",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Backstage is an open framework for building developer portals. Prior to 1.14.8, 1.15.6, and 2.0.1, the @backstage/plugin-techdocs-node package improperly validated mapping-style markdown_extensions configuration. An authenticated attacker who can register or influence an SCM-backed documentation source may bypass TechDocs sanitization and cause Python objects to be imported and instantiated in the generator runtime, leading to arbitrary code execution. Earlier fixes in versions 1.14.6 and 1.15.4 did not fully address the supported mapping representation of markdown_extensions. Impact is greatest when documentation generation runs with backend credentials, filesystem access, or internal network access. This issue is fixed in versions 1.14.8, 1.15.6, and 2.0.1.",
-    "references": [
-      "https://github.com/backstage/backstage/commit/32723a0fe4e12ed80535fc65d5331765c55aa91b",
-      "https://github.com/backstage/backstage/commit/944edb51c8524d3664b18f2d57ba101b1c93b709",
-      "https://github.com/backstage/backstage/commit/f18e9abcc6051491862b15e4fc60e69f8d52310c",
-      "https://github.com/backstage/backstage/releases/tag/v1.50.7",
-      "https://github.com/backstage/backstage/releases/tag/v1.54.9",
-      "https://github.com/backstage/backstage/releases/tag/v1.55.2",
-      "https://github.com/backstage/backstage/security/advisories/GHSA-qmw3-745m-w99g"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-107639",
-    "published": "2026-10-08T15:17:47.117",
-    "last_modified": "2026-10-10T04:18:09.920",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ILIAS before 9.24, 10.x before 10.12 and 11.x before 11.5 contains an argument injection vulnerability in assImagemapQuestionGUI that allows question authors to inject ImageMagick convert options via uploaded image filenames. Attackers can embed tab-separated options, which escapeshellcmd() does not neutralise, to write a PHP file under the web root and achieve remote code execution.",
-    "references": [
-      "https://docu.ilias.de/go/blog/15821/950",
-      "https://docu.ilias.de/go/blog/15821/951",
-      "https://docu.ilias.de/go/blog/15821/952",
-      "https://github.com/ILIAS-eLearning/ILIAS",
-      "https://github.com/ILIAS-eLearning/ILIAS/blob/v10.11/components/ILIAS/TestQuestionPool/classes/class.assImagemapQuestion.php#L290-L306",
-      "https://github.com/ILIAS-eLearning/ILIAS/blob/v10.11/components/ILIAS/TestQuestionPool/classes/class.assImagemapQuestionGUI.php#L130",
-      "https://github.com/ILIAS-eLearning/ILIAS/blob/v10.11/components/ILIAS/TestQuestionPool/classes/class.ilImagemapPreview.php#L208-L238",
-      "https://github.com/ILIAS-eLearning/ILIAS/commit/ad1423c365a7ffd25bac711d995c643ce2af65c6",
-      "https://www.vulncheck.com/advisories/ilias-before-9.24-10.12-and-11.5-argument-injection-via-image-map-question-upload-filename"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-104732",
     "published": "2026-10-10T04:18:08.493",
-    "last_modified": "2026-10-11T17:16:59.780",
+    "last_modified": "2026-10-13T13:30:21.620",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2029,7 +2109,7 @@
   {
     "cve_id": "CVE-2026-104803",
     "published": "2026-10-10T08:17:04.210",
-    "last_modified": "2026-10-11T17:17:00.970",
+    "last_modified": "2026-10-13T13:30:21.620",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2058,7 +2138,7 @@
   {
     "cve_id": "CVE-2026-106610",
     "published": "2026-10-10T19:16:57.187",
-    "last_modified": "2026-10-11T13:17:12.430",
+    "last_modified": "2026-10-13T13:28:15.717",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2082,7 +2162,7 @@
   {
     "cve_id": "CVE-2026-39801",
     "published": "2026-10-10T20:16:33.483",
-    "last_modified": "2026-10-11T13:17:22.313",
+    "last_modified": "2026-10-13T13:28:15.717",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2106,7 +2186,7 @@
   {
     "cve_id": "CVE-2026-62022",
     "published": "2026-10-10T20:16:38.630",
-    "last_modified": "2026-10-11T13:17:23.773",
+    "last_modified": "2026-10-13T13:28:15.717",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -2152,87 +2232,9 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-82335",
-    "published": "2026-10-08T20:17:36.873",
-    "last_modified": "2026-10-10T04:18:16.577",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM Guardium Data Protection 12.0, 12.1, 12.2 is vulnerable to a heap-based buffer overflow in the MongoDB protocol parser. A remote attacker could send a specially crafted MongoDB SCRAM username containing an excessive length and cause memory corruption, potentially resulting in denial of service or arbitrary code execution.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7291674"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.1,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 83.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-82344",
-    "published": "2026-10-08T20:17:37.020",
-    "last_modified": "2026-10-10T04:18:16.730",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM Guardium Data Protection 12.0, 12.1 is vulnerable to a heap-based buffer overflow in the S-TAP TrafficTap TDS login reassembly functionality. An unauthenticated remote attacker can send crafted TDS login fragments that exceed the fixed-size reassembly buffer, potentially resulting in denial of service or arbitrary code execution on the affected system.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7291670"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.9,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 83.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-84058",
-    "published": "2026-10-08T22:17:33.313",
-    "last_modified": "2026-10-10T04:18:17.540",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM Guardium Data Protection 12.0, 12.1, and 12.2 is vulnerable to a buffer overrun in the TDS (Microsoft SQL Server) PRELOGIN packet decoder. A remote attacker who can send a specially crafted TDS PRELOGIN packet to a network monitored by an IBM Guardium Collector may cause a denial of service or potentially execute arbitrary code on the Collector appliance.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7291674"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 27.7,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 83.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-97670",
     "published": "2026-10-10T05:16:40.850",
-    "last_modified": "2026-10-11T17:17:08.290",
+    "last_modified": "2026-10-13T13:29:12.567",
     "cvss_v3": 9.1,
     "severity": "CRITICAL",
     "affected": [],
@@ -2367,6 +2369,30 @@
       "rce"
     ],
     "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-54678",
+    "published": "2025-08-12T12:15:34.360",
+    "last_modified": "2026-10-13T10:17:12.603",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability has been identified in SIMATIC PCS neo V4.1 (All versions), SIMATIC PCS neo V5.0 (All versions), SIMATIC PCS neo V6.0 (All versions < V6.0 SP1 Update 1), SIMATIC S7-PLCSIM V17 (All versions), SIMATIC STEP 7 V17 (All versions < V17 Update 9), SIMATIC STEP 7 V18 (All versions < V18 Update 6), SIMATIC STEP 7 V19 (All versions < V19 Update 4), SIMATIC STEP 7 V20 (All versions < V20 Update 4), SIMATIC WinCC V17 (All versions < V17 Update 9), SIMATIC WinCC V18 (All versions < V18 Update 6), SIMATIC WinCC V19 (All versions < V19 Update 4), SIMATIC WinCC V20 (All versions < V20 Update 4), SIMOCODE ES V17 (All versions), SIMOCODE ES V18 (All versions), SIMOCODE ES V19 (All versions), SIMOCODE ES V20 (All versions), SIMOTION SCOUT TIA V5.4 (All versions), SIMOTION SCOUT TIA V5.5 (All versions), SIMOTION SCOUT TIA V5.6 (All versions < V5.6 SP1 HF7), SIMOTION SCOUT TIA V5.7 (All versions), SINAMICS Startdrive V17 (All versions), SINAMICS Startdrive V18 (All versions), SINAMICS Startdrive V19 (All versions), SINAMICS Startdrive V20 (All versions), SIRIUS Safety ES V17 (TIA Portal) (All versions), SIRIUS Safety ES V18 (TIA Portal) (All versions), SIRIUS Safety ES V19 (TIA Portal) (All versions), SIRIUS Safety ES V20 (TIA Portal) (All versions), SIRIUS Soft Starter ES V17 (TIA Portal) (All versions), SIRIUS Soft Starter ES V18 (TIA Portal) (All versions), SIRIUS Soft Starter ES V19 (TIA Portal) (All versions), SIRIUS Soft Starter ES V20 (TIA Portal) (All versions), TIA Portal Cloud V17 (All versions), TIA Portal Cloud V18 (All versions < V6.3.0.2), TIA Portal Cloud V19 (All versions < V5.2.1.1), TIA Portal Cloud V20 (All versions < V5.2.2.2), TIA Portal Test Suite V20 (All versions < V20 Update 4). Affected products do not properly sanitize Interprocess Communication input received through a Windows Named Pipe accessible to all local users. This could allow an authenticated local attacker to cause a type confusion and execute arbitrary code within the affected application.",
+    "references": [
+      "https://cert-portal.siemens.com/productcert/html/ssa-693808.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 81.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -2675,32 +2701,6 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 56.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-71371",
-    "published": "2026-06-30T23:16:51.773",
-    "last_modified": "2026-10-12T21:10:00.227",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "picklescan before 0.0.29 fails to detect malicious pickle files using code.InteractiveInterpreter.runcode in reduce methods. Attackers can craft pickle payloads that bypass picklescan detection and execute arbitrary code when loaded via pickle.load().",
-    "references": [
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cj3c-v495-4xqh",
-      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-code-interactiveinterpreter-detection-bypass",
-      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cj3c-v495-4xqh"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.4,
     "tags": [
       "rce"
     ],
