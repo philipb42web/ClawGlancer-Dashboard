@@ -79,7 +79,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.6,
+    "epss_percentile": 43.8,
     "tags": [
       "file_write",
       "poc",
@@ -110,7 +110,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.1,
-    "epss_percentile": 64.9,
+    "epss_percentile": 65.1,
     "tags": [
       "poc",
       "rce",
@@ -186,7 +186,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 58.7,
+    "epss_percentile": 58.9,
     "tags": [
       "file_write",
       "path_traversal",
@@ -198,6 +198,32 @@
       "rce+30",
       "path_traversal+15",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-65213",
+    "published": "2025-12-15T19:16:05.207",
+    "last_modified": "2026-10-14T13:10:00.187",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "MooreThreads torch_musa through all versions contains an unsafe deserialization vulnerability in torch_musa.utils.compare_tool. The compare_for_single_op() and nan_inf_track_for_single_op() functions use pickle.load() on user-controlled file paths without validation, allowing arbitrary code execution. An attacker can craft a malicious pickle file that executes arbitrary Python code when loaded, enabling remote code execution with the privileges of the victim process.",
+    "references": [
+      "https://github.com/MooreThreads/torch_musa/issues/110#issuecomment-3475809588"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 53.5,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -215,7 +241,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.0,
+    "epss_percentile": 52.1,
     "tags": [
       "deserialization",
       "rce"
@@ -243,7 +269,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 61.6,
+    "epss_percentile": 61.8,
     "tags": [
       "deserialization",
       "rce"
@@ -253,32 +279,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-59567",
-    "published": "2026-08-24T14:16:56.080",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Multiple vulnerabilities on affected versions of Zscaler Client Connector allow local privilege escalation, giving an unprivileged user the ability to execute arbitrary code in a privileged context.",
-    "references": [
-      "https://help.zscaler.com/zscaler-client-connector/client-connector-app-release-summary-2026"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.7,
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
     ]
   },
   {
@@ -297,7 +297,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 56.2,
+    "epss_percentile": 56.4,
     "tags": [
       "dos",
       "file_write",
@@ -309,6 +309,53 @@
       "rce+30",
       "file_write+15",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2021-22901",
+    "published": "2021-06-11T16:15:11.120",
+    "last_modified": "2026-10-14T11:16:53.157",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "curl 7.75.0 through 7.76.1 suffers from a use-after-free vulnerability resulting in already freed memory being used when a TLS 1.3 session ticket arrives over a connection. A malicious server can use this in rare unfortunate circumstances to potentially reach remote code execution in the client. When libcurl at run-time sets up support for TLS 1.3 session tickets on a connection using OpenSSL, it stores pointers to the transfer in-memory object for later retrieval when a session ticket arrives. If the connection is used by multiple transfers (like with a reused HTTP/1.1 connection or multiplexed HTTP/2 connection) that first transfer object might be freed before the new session is established on that connection and then the function will access a memory buffer that might be freed. When using that memory, libcurl might even call a function pointer in the object, making it possible for a remote code execution if the server could somehow manage to get crafted memory content into the correct place in memory.",
+    "references": [
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-732250.pdf",
+      "https://curl.se/docs/CVE-2021-22901.html",
+      "https://github.com/curl/curl/commit/7f4a9a9b2a49547eae24d2e19bc5c346e9026479",
+      "https://hackerone.com/reports/1180380",
+      "https://security.netapp.com/advisory/ntap-20210723-0001/",
+      "https://security.netapp.com/advisory/ntap-20210727-0007/",
+      "https://www.oracle.com//security-alerts/cpujul2021.html",
+      "https://www.oracle.com/security-alerts/cpuapr2022.html",
+      "https://www.oracle.com/security-alerts/cpujan2022.html",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-732250.pdf",
+      "https://curl.se/docs/CVE-2021-22901.html",
+      "https://github.com/curl/curl/commit/7f4a9a9b2a49547eae24d2e19bc5c346e9026479",
+      "https://hackerone.com/reports/1180380",
+      "https://security.netapp.com/advisory/ntap-20210723-0001/",
+      "https://security.netapp.com/advisory/ntap-20210727-0007/",
+      "https://www.oracle.com//security-alerts/cpujul2021.html",
+      "https://www.oracle.com/security-alerts/cpuapr2022.html",
+      "https://www.oracle.com/security-alerts/cpujan2022.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-389290.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-732250.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 60.1,
+    "epss_percentile": 99.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 105.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "High EPSS exploit prob 60.1% (+25)"
     ]
   },
   {
@@ -327,7 +374,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 59.8,
+    "epss_percentile": 60.0,
     "tags": [
       "file_write",
       "rce"
@@ -354,7 +401,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.1,
+    "epss_percentile": 48.2,
     "tags": [
       "file_write",
       "rce"
@@ -384,7 +431,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 4.4,
-    "epss_percentile": 91.0,
+    "epss_percentile": 91.1,
     "tags": [
       "file_write",
       "rce"
@@ -394,32 +441,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86360",
-    "published": "2026-10-06T19:18:16.430",
-    "last_modified": "2026-10-13T18:18:06.647",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Dell System Update, versions prior to 2.3.0.0, contains an Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability. An unauthenticated attacker with remote access could potentially exploit this vulnerability, leading to Filesystem access for attacker. This vulnerability is considered critical because it can be leveraged by an unauthenticated attacker to execute arbitrary code with root privileges. Successful exploitation may allow complete compromise of the vulnerable application and underlying operating system. Dell recommends customers upgrade at the earliest opportunity.",
-    "references": [
-      "https://www.dell.com/support/kbdoc/en-us/000515843/dsa-2026-324-security-update-for-dell-system-update-dsu-vulnerabilities"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.9,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 103.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
     ]
   },
   {
@@ -443,7 +464,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.4,
+    "epss_percentile": 39.6,
     "tags": [
       "priv_esc",
       "rce"
@@ -453,84 +474,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78315",
-    "published": "2026-08-24T10:16:40.510",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SQL Injection in Delta DIAEnergie v1.11.00.002 allows attacker to \nremote code execution.",
-    "references": [
-      "https://filecenter.deltaww.com/news/download/doc/Delta-PCSA-2026-00015_DIAEnergie%20SQL%20Injection%20Vulberabilities_v1.0.pdf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.0,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78316",
-    "published": "2026-08-24T10:16:40.667",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SQL Injection in Delta DIAEnergie v1.11.00.002 allows attacker to \nremote code execution.",
-    "references": [
-      "https://filecenter.deltaww.com/news/download/doc/Delta-PCSA-2026-00015_DIAEnergie%20SQL%20Injection%20Vulberabilities_v1.0.pdf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.0,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78317",
-    "published": "2026-08-24T10:16:40.810",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SQL Injection in Delta DIAEnergie v1.11.00.002 allows attacker to \nremote code execution.",
-    "references": [
-      "https://filecenter.deltaww.com/news/download/doc/Delta-PCSA-2026-00015_DIAEnergie%20SQL%20Injection%20Vulberabilities_v1.0.pdf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.0,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
     ]
   },
   {
@@ -549,7 +492,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 50.6,
+    "epss_percentile": 50.8,
     "tags": [
       "deserialization",
       "rce"
@@ -577,7 +520,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.6,
+    "epss_percentile": 52.7,
     "tags": [
       "deserialization",
       "rce"
@@ -605,7 +548,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 44.1,
+    "epss_percentile": 44.2,
     "tags": [
       "deserialization",
       "rce"
@@ -633,7 +576,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 45.4,
+    "epss_percentile": 45.6,
     "tags": [
       "deserialization",
       "rce"
@@ -661,7 +604,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.0,
+    "epss_percentile": 48.1,
     "tags": [
       "deserialization",
       "rce"
@@ -689,7 +632,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 45.4,
+    "epss_percentile": 45.6,
     "tags": [
       "deserialization",
       "rce"
@@ -728,7 +671,7 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 23.3,
+    "epss": 23.0,
     "epss_percentile": 97.7,
     "tags": [
       "rce"
@@ -737,7 +680,7 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Moderate EPSS prob 23.3% (+10)"
+      "Moderate EPSS prob 23.0% (+10)"
     ]
   },
   {
@@ -809,8 +752,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 23.3,
-    "epss_percentile": 97.7,
+    "epss": 24.2,
+    "epss_percentile": 97.8,
     "tags": [
       "rce"
     ],
@@ -818,7 +761,42 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Moderate EPSS prob 23.3% (+10)"
+      "Moderate EPSS prob 24.2% (+10)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2022-2274",
+    "published": "2022-07-01T08:15:07.687",
+    "last_modified": "2026-10-14T13:17:20.920",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The OpenSSL 3.0.4 release introduced a serious bug in the RSA implementation for X86_64 CPUs supporting the AVX512IFMA instructions. This issue makes the RSA implementation with 2048 bit private keys incorrect on such machines and memory corruption will happen during the computation. As a consequence of the memory corruption an attacker may be able to trigger a remote code execution on the machine performing the computation. SSL/TLS servers or other servers using 2048 bit RSA private keys running on machines supporting AVX512IFMA instructions of the X86_64 architecture are affected by this issue.",
+    "references": [
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=4d8a88c134df634ba610ff8db1eb8478ac5fd345",
+      "https://github.com/openssl/openssl/issues/18625",
+      "https://security.netapp.com/advisory/ntap-20220715-0010/",
+      "https://www.openssl.org/news/secadv/20220705.txt",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=4d8a88c134df634ba610ff8db1eb8478ac5fd345",
+      "https://github.com/openssl/openssl/issues/18625",
+      "https://security.netapp.com/advisory/ntap-20220715-0010/",
+      "https://www.openssl.org/news/secadv/20220705.txt",
+      "https://cert-portal.siemens.com/productcert/html/ssa-332410.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-794697.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 45.7,
+    "epss_percentile": 98.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Moderate EPSS prob 45.7% (+10)"
     ]
   },
   {
@@ -837,7 +815,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.9,
+    "epss_percentile": 49.0,
     "tags": [
       "file_write",
       "rce"
@@ -847,35 +825,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49243",
-    "published": "2026-09-29T15:17:26.173",
-    "last_modified": "2026-10-13T15:17:44.357",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Webmin is a web-based system administration tool for Unix-like servers. Prior to version 2.650, Webmin users who click on a malicious link to their server are vulnerable to this XSS vulnerability that could be used to execute attacker-controlled commands. This issue has been patched in version 2.650.",
-    "references": [
-      "https://beaksec.github.io/posts/webmin-one-click-rce-via-xss",
-      "https://github.com/webmin/webmin/commit/2d016751399ed0f4159e72a6cbcd63694a84dabf",
-      "https://github.com/webmin/webmin/releases/tag/2.650",
-      "https://github.com/webmin/webmin/security/advisories/GHSA-hv4w-p8jq-2rp5"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.7,
-    "tags": [
-      "rce",
-      "xss"
-    ],
-    "intel_score": 96.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "xss+8"
     ]
   },
   {
@@ -892,7 +841,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 19.3,
+    "epss_percentile": 19.4,
     "tags": [
       "file_write",
       "rce"
@@ -919,7 +868,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.0,
+    "epss_percentile": 42.2,
     "tags": [
       "file_write",
       "rce"
@@ -1039,6 +988,78 @@
     ]
   },
   {
+    "cve_id": "CVE-2022-23218",
+    "published": "2022-01-14T07:15:08.800",
+    "last_modified": "2026-10-14T16:17:26.663",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The deprecated compatibility function svcunix_create in the sunrpc module of the GNU C Library (aka glibc) through 2.34 copies its path argument on the stack without validating its length, which may result in a buffer overflow, potentially resulting in a denial of service or (if an application is not built with a stack protector enabled) arbitrary code execution.",
+    "references": [
+      "https://lists.debian.org/debian-lts-announce/2022/10/msg00021.html",
+      "https://security.gentoo.org/glsa/202208-24",
+      "https://sourceware.org/bugzilla/show_bug.cgi?id=28768",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://lists.debian.org/debian-lts-announce/2022/10/msg00021.html",
+      "https://security.gentoo.org/glsa/202208-24",
+      "https://sourceware.org/bugzilla/show_bug.cgi?id=28768",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-099606.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-831302.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 4.8,
+    "epss_percentile": 91.8,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2022-23219",
+    "published": "2022-01-14T07:15:08.867",
+    "last_modified": "2026-10-14T16:17:26.867",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The deprecated compatibility function clnt_create in the sunrpc module of the GNU C Library (aka glibc) through 2.34 copies its hostname argument on the stack without validating its length, which may result in a buffer overflow, potentially resulting in a denial of service or (if an application is not built with a stack protector enabled) arbitrary code execution.",
+    "references": [
+      "https://lists.debian.org/debian-lts-announce/2022/10/msg00021.html",
+      "https://security.gentoo.org/glsa/202208-24",
+      "https://sourceware.org/bugzilla/show_bug.cgi?id=22542",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://lists.debian.org/debian-lts-announce/2022/10/msg00021.html",
+      "https://security.gentoo.org/glsa/202208-24",
+      "https://sourceware.org/bugzilla/show_bug.cgi?id=22542",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-099606.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-831302.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 4.3,
+    "epss_percentile": 91.0,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-67073",
     "published": "2025-12-17T20:15:56.357",
     "last_modified": "2026-10-13T11:10:00.203",
@@ -1052,7 +1073,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 51.6,
+    "epss_percentile": 51.8,
     "tags": [
       "dos",
       "rce"
@@ -1086,7 +1107,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 55.1,
+    "epss_percentile": 55.3,
     "tags": [
       "path_traversal",
       "ssrf"
@@ -1114,7 +1135,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 38.0,
+    "epss_percentile": 38.2,
     "tags": [
       "rce",
       "xss"
@@ -1143,7 +1164,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 50.4,
+    "epss_percentile": 50.6,
     "tags": [
       "file_write",
       "rce"
@@ -1153,61 +1174,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-56703",
-    "published": "2026-08-25T02:16:42.043",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Adminer before 5.4.3 contains a remote code execution vulnerability in SQLite query handling where VACUUM INTO is not blocked despite ATTACH restrictions. Authenticated attackers can execute VACUUM INTO to write PHP code to arbitrary file paths and execute commands on the server.",
-    "references": [
-      "https://github.com/vrana/adminer/security/advisories/GHSA-gmx3-g29w-77wf",
-      "https://www.vulncheck.com/advisories/adminer-before-remote-code-execution-via-sqlite-vacuum-into",
-      "https://github.com/vrana/adminer/security/advisories/GHSA-gmx3-g29w-77wf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 66.6,
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 91.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-102119",
-    "published": "2026-09-30T21:16:59.900",
-    "last_modified": "2026-10-13T12:00:17.210",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A path traversal weakness in an optional, non-default administrative feature allowed an authenticated administrator to move files to unintended locations outside the feature's designated directory. This could potentially be leveraged to execute arbitrary code on the underlying system.",
-    "references": [
-      "https://github.com/kiteworks/security-advisories/security/advisories/GHSA-3r3r-hp4c-pxmh",
-      "https://raw.githubusercontent.com/cisagov/CSAF/develop/csaf_files/VA/white/2026/va-26-274-01.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 37.7,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 91.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
     ]
   },
   {
@@ -1253,7 +1219,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.2,
-    "epss_percentile": 66.2,
+    "epss_percentile": 66.4,
     "tags": [
       "rce"
     ],
@@ -1261,6 +1227,113 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2022-1292",
+    "published": "2022-05-03T16:15:18.823",
+    "last_modified": "2026-10-14T13:17:18.103",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The c_rehash script does not properly sanitise shell metacharacters to prevent command injection. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.3 (Affected 3.0.0,3.0.1,3.0.2). Fixed in OpenSSL 1.1.1o (Affected 1.1.1-1.1.1n). Fixed in OpenSSL 1.0.2ze (Affected 1.0.2-1.0.2zd).",
+    "references": [
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-953464.pdf",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=1ad73b4d27bd8c1b369a3cd453681d3a4f1bb9b2",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=548d3f280a6e737673f5b61fce24bb100108dfeb",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=e5fd1728ef4c7a5bf7c7a7163ca60370460a6e23",
+      "https://lists.debian.org/debian-lts-announce/2022/05/msg00019.html",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VX4KWHPMKYJL6ZLW4M5IU7E5UV5ZWJQU/",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZNU5M7BXMML26G3GPYKFGQYPQDRSNKDD/",
+      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2022-0011",
+      "https://security.gentoo.org/glsa/202210-02",
+      "https://security.netapp.com/advisory/ntap-20220602-0009/",
+      "https://security.netapp.com/advisory/ntap-20220729-0004/",
+      "https://www.debian.org/security/2022/dsa-5139",
+      "https://www.openssl.org/news/secadv/20220503.txt",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-953464.pdf",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=1ad73b4d27bd8c1b369a3cd453681d3a4f1bb9b2",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=548d3f280a6e737673f5b61fce24bb100108dfeb",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=e5fd1728ef4c7a5bf7c7a7163ca60370460a6e23",
+      "https://gitlab.com/fraf0/cve-2022-1292-re_score-analysis",
+      "https://lists.debian.org/debian-lts-announce/2022/05/msg00019.html",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VX4KWHPMKYJL6ZLW4M5IU7E5UV5ZWJQU/",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZNU5M7BXMML26G3GPYKFGQYPQDRSNKDD/",
+      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2022-0011",
+      "https://security.gentoo.org/glsa/202210-02",
+      "https://security.netapp.com/advisory/ntap-20220602-0009/",
+      "https://security.netapp.com/advisory/ntap-20220729-0004/",
+      "https://www.debian.org/security/2022/dsa-5139",
+      "https://www.openssl.org/news/secadv/20220503.txt",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-146325.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-419740.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-794697.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-942865.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-953464.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 82.6,
+    "epss_percentile": 99.7,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18",
+      "High EPSS exploit prob 82.6% (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2022-2068",
+    "published": "2022-06-21T15:15:09.060",
+    "last_modified": "2026-10-14T13:17:20.110",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In addition to the c_rehash shell command injection identified in CVE-2022-1292, further circumstances where the c_rehash script does not properly sanitise shell metacharacters to prevent command injection were found by code review. When the CVE-2022-1292 was fixed it was not discovered that there are other places in the script where the file names of certificates being hashed were possibly passed to a command executed through the shell. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.4 (Affected 3.0.0,3.0.1,3.0.2,3.0.3). Fixed in OpenSSL 1.1.1p (Affected 1.1.1-1.1.1o). Fixed in OpenSSL 1.0.2zf (Affected 1.0.2-1.0.2ze).",
+    "references": [
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-332410.pdf",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=2c9c35870601b4a44d86ddbf512b38df38285cfa",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=7a9c027159fe9e1bbc2cd38a8a2914bff0d5abd9",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=9639817dac8bbbaa64d09efad7464ccc405527c7",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6WZZBKUHQFGSKGNXXKICSRPL7AMVW5M5/",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VCMNWKERPBKOEBNL7CLTTX3ZZCZLH7XA/",
+      "https://security.netapp.com/advisory/ntap-20220707-0008/",
+      "https://www.debian.org/security/2022/dsa-5169",
+      "https://www.openssl.org/news/secadv/20220621.txt",
+      "http://seclists.org/fulldisclosure/2024/Nov/0",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-332410.pdf",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=2c9c35870601b4a44d86ddbf512b38df38285cfa",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=7a9c027159fe9e1bbc2cd38a8a2914bff0d5abd9",
+      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=9639817dac8bbbaa64d09efad7464ccc405527c7",
+      "https://gitlab.com/fraf0/cve-2022-1292-re_score-analysis",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6WZZBKUHQFGSKGNXXKICSRPL7AMVW5M5/",
+      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VCMNWKERPBKOEBNL7CLTTX3ZZCZLH7XA/",
+      "https://security.netapp.com/advisory/ntap-20220707-0008/",
+      "https://www.debian.org/security/2022/dsa-5169",
+      "https://www.openssl.org/news/secadv/20220621.txt",
+      "https://cert-portal.siemens.com/productcert/html/ssa-146325.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-332410.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-794697.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 95.4,
+    "epss_percentile": 99.9,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18",
+      "High EPSS exploit prob 95.4% (+25)"
     ]
   },
   {
@@ -1279,7 +1352,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 50.2,
+    "epss_percentile": 50.4,
     "tags": [
       "rce"
     ],
@@ -1308,7 +1381,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 60.9,
+    "epss_percentile": 61.1,
     "tags": [
       "rce"
     ],
@@ -1331,8 +1404,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.4,
+    "epss": 0.6,
+    "epss_percentile": 45.8,
     "tags": [
       "rce"
     ],
@@ -1357,7 +1430,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.1,
+    "epss_percentile": 43.3,
     "tags": [
       "rce"
     ],
@@ -1383,8 +1456,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 4.9,
-    "epss_percentile": 91.9,
+    "epss": 5.0,
+    "epss_percentile": 92.1,
     "tags": [
       "rce"
     ],
@@ -1410,7 +1483,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 56.2,
+    "epss_percentile": 56.4,
     "tags": [
       "rce"
     ],
@@ -1436,7 +1509,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.1,
-    "epss_percentile": 66.0,
+    "epss_percentile": 66.2,
     "tags": [
       "rce"
     ],
@@ -1462,7 +1535,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.1,
-    "epss_percentile": 63.4,
+    "epss_percentile": 63.6,
     "tags": [
       "rce"
     ],
@@ -1502,137 +1575,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-76070",
-    "published": "2026-08-24T16:17:22.963",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Netis NC63 firmware through V3.0.0.3327 contains a stack-based buffer overflow vulnerability that allows unauthenticated remote attackers to overwrite saved stack state by submitting an oversized Base64-encoded password to the login handler in /bin/netis.cgi. Attackers can exploit the custom Base64 decoder's lack of output length validation against the fixed-size stack buffer to achieve remote code execution with root privileges, as the Boa web server executes the CGI environment as root.",
-    "references": [
-      "https://github.com/ozcanpng/CVE-2026-76070",
-      "https://ozcanpng.dev/blog/cve-2026-76070-netis-nc63-login-stack-buffer-overflow/",
-      "https://www.netis-systems.com/products/NC63.html",
-      "https://www.vulncheck.com/advisories/netis-nc63-stack-buffer-overflow-via-login-password-parameter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76071",
-    "published": "2026-08-24T16:17:23.117",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Netis NC63 firmware through V3.0.0.3327 contains a stack-based buffer overflow vulnerability that allows unauthenticated remote attackers to overwrite saved stack state by supplying an oversized destHost parameter to the ipFilterList=mod action in netis.cgi. Attackers can exploit widthless sscanf conversions that copy user-supplied input into fixed-size stack buffers before authentication is verified, achieving remote code execution as root due to the Boa web server executing the CGI environment with root privileges.",
-    "references": [
-      "https://github.com/ozcanpng/CVE-2026-76071",
-      "https://ozcanpng.dev/blog/cve-2026-76071-netis-nc63-ipfilter-stack-buffer-overflow/",
-      "https://www.netis-systems.com/products/NC63.html",
-      "https://www.vulncheck.com/advisories/netis-nc63-stack-buffer-overflow-via-desthost-parameter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.4,
-    "epss_percentile": 72.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52490",
-    "published": "2026-08-24T21:17:19.803",
-    "last_modified": "2026-10-12T21:10:00.227",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An issue in libtiff 85f2ac8e0b01cb7db2bbecf4a3b891bdbef67938 allows an attacker to execute arbitrary code via the process_command_opts() function in tools/tiffcrop.c",
-    "references": [
-      "https://gist.github.com/okyfh/122c2d72e991a78c8af80a3af3be8671",
-      "https://gitlab.com/libtiff/libtiff/-/work_items/846",
-      "https://gitlab.com/libtiff/libtiff/-/work_items/846"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-56705",
-    "published": "2026-08-25T02:16:42.330",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adminer before 5.4.3 fails to sanitize the server field before constructing a PDO DSN string, allowing unauthenticated attackers to inject ODBC parameters via semicolons. Attackers can inject TraceFile and TraceOn parameters to write PHP code to the web root, achieving remote code execution when the trace file is accessed.",
-    "references": [
-      "https://github.com/vrana/adminer/security/advisories/GHSA-r4x9-5m63-3vxw",
-      "https://www.vulncheck.com/advisories/adminer-before-remote-code-execution-via-mssql-pdo-dsn-injection",
-      "https://github.com/vrana/adminer/security/advisories/GHSA-r4x9-5m63-3vxw"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78676",
-    "published": "2026-08-25T02:16:52.030",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "GitPython before 3.1.59 fails to safely re-serialize multi-line git-config values during write operations, corrupting dormant quoted values into injected directives like core.hooksPath. Attackers can craft config files with embedded newlines that become live git directives after any unrelated GitPython config write, enabling arbitrary code execution via hook invocation.",
-    "references": [
-      "https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-284h-m62q-gf8w",
-      "https://www.vulncheck.com/advisories/gitpython-before-remote-code-execution-via-config-injection"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-11020",
     "published": "2025-10-02T06:15:34.177",
     "last_modified": "2026-10-12T15:10:00.207",
@@ -1646,7 +1588,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 21.2,
+    "epss_percentile": 21.3,
     "tags": [
       "path_traversal",
       "sqli"
@@ -1674,7 +1616,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 32.8,
+    "epss_percentile": 32.9,
     "tags": [
       "dos",
       "rce"
@@ -1704,57 +1646,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 61.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 85.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-59568",
-    "published": "2026-08-24T14:16:56.210",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Multiple vulnerabilities on affected versions of Zscaler Client Connector allow remote code execution, giving an unauthenticated, unprivileged user the ability to execute arbitrary code in the ZCC context.",
-    "references": [
-      "https://help.zscaler.com/zscaler-client-connector/client-connector-app-release-summary-2026"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 50.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 85.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-19874",
-    "published": "2026-08-24T15:16:37.577",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A heap-based buffer overflow vulnerability exists in Konami's Metal Gear Online 3, originating from improper validation of lobby data fields related to kicked players. The affected function processes a list of kicked player identifiers using the lobby data key \"kick_num\" to determine the number of entries, and individual kicked player IDs supplied via keys in the format \"kicked_id_%i\". The function does not validate that \"kick_num\" falls within the expected bounds. The game design limits matches to a maximum of 16 players, and the corresponding buffer for storing kicked player IDs is sized accordingly. If \"kick_num\" exceeds this limit, the function continues writing the provided player IDs past the end of the intended buffer and into adjacent memory regions. These adjacent regions contain Steam callback handler structures responsible for processing lobby data updates, lobby messages, and other related events. By supplying an oversized \"kick_num\" value and appropriate \"kicked_id_%i\" fields, an attacker can overwrite fields within the callback handler structures, including function pointers and callback argument values. Successful exploitation may enable control-flow hijacking, potentially allowing arbitrary code execution within the game process.",
-    "references": [
-      "https://cwe.mitre.org/data/definitions/122.html",
-      "https://kb.cert.org/vuls/id/728712",
-      "https://www.kb.cert.org/vuls/id/728712"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 59.4,
+    "epss_percentile": 61.8,
     "tags": [
       "rce"
     ],
@@ -1780,7 +1672,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 41.4,
+    "epss_percentile": 41.6,
     "tags": [
       "rce"
     ],
@@ -1806,31 +1698,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 49.8,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78155",
-    "published": "2026-08-23T10:16:28.757",
-    "last_modified": "2026-10-12T16:10:00.220",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "privilege escalation in StackGres operator allows a low-privilege tenant who owns a database to gain administrator privileges",
-    "references": [
-      "https://gitlab.com/ongresinc/stackgres/-/work_items/3177"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.4,
+    "epss_percentile": 50.0,
     "tags": [
       "priv_esc"
     ],
@@ -1855,7 +1723,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 44.9,
+    "epss_percentile": 45.0,
     "tags": [
       "auth_bypass"
     ],
@@ -1880,7 +1748,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 2.3,
-    "epss_percentile": 83.1,
+    "epss_percentile": 83.2,
     "tags": [
       "auth_bypass"
     ],
@@ -1907,7 +1775,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 38.7,
+    "epss_percentile": 38.9,
     "tags": [
       "priv_esc"
     ],
@@ -1915,6 +1783,56 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66434",
+    "published": "2025-12-15T17:15:53.737",
+    "last_modified": "2026-10-14T13:10:00.187",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An SSTI (Server-Side Template Injection) vulnerability exists in the get_dunning_letter_text method of Frappe ERPNext through 15.89.0. The function renders attacker-controlled Jinja2 templates (body_text) using frappe.render_template() with a user-supplied context (doc). Although Frappe uses a custom SandboxedEnvironment, several dangerous globals such as frappe.db.sql are still available in the execution context via get_safe_globals(). An authenticated attacker with access to configure Dunning Type and its child table Dunning Letter Text can inject arbitrary Jinja expressions, resulting in server-side code execution within a restricted but still unsafe context. This can leak database information.",
+    "references": [
+      "https://iamanc.github.io/post/erpnext-ssti-bug-1",
+      "https://www.notion.so/SSTI-bug-1-239e6086eadc8096bfcfe90551a3a483?source=copy_link"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-66437",
+    "published": "2025-12-15T18:15:48.290",
+    "last_modified": "2026-10-14T13:10:00.187",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An SSTI (Server-Side Template Injection) vulnerability exists in the get_address_display method of Frappe ERPNext through 15.89.0. This function renders address templates using frappe.render_template() with a context derived from the address_dict parameter, which can be either a dictionary or a string referencing an Address document. Although ERPNext uses a custom Jinja2 SandboxedEnvironment, dangerous functions like frappe.db.sql remain accessible via get_safe_globals(). An authenticated attacker with permission to create or modify an Address Template can inject arbitrary Jinja expressions into the template field. By creating an Address document with a matching country, and then calling the get_address_display API with address_dict=\"address_name\", the system will render the malicious template using attacker-controlled data. This leads to server-side code execution or database information disclosure.",
+    "references": [
+      "https://iamanc.github.io/post/erpnext-ssti-bug-4",
+      "https://www.notion.so/SSTI-bug-4-239e6086eadc80aa9331fba874c674a5?source=copy_link"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -1933,7 +1851,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 21.3,
+    "epss_percentile": 21.4,
     "tags": [
       "rce"
     ],
@@ -1959,7 +1877,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.2,
+    "epss_percentile": 52.4,
     "tags": [
       "auth_bypass"
     ],
@@ -1983,7 +1901,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.8,
+    "epss_percentile": 44.0,
     "tags": [
       "auth_bypass"
     ],
@@ -1991,6 +1909,58 @@
     "reasons": [
       "recently modified (last 48h)",
       "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-69264",
+    "published": "2026-01-07T22:15:43.890",
+    "last_modified": "2026-10-14T16:10:00.250",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "pnpm is a package manager. Versions 10.0.0 through 10.25 allow git-hosted dependencies to execute arbitrary code during pnpm install, circumventing the v10 security feature \"Dependency lifecycle scripts execution disabled by default\". While pnpm v10 blocks postinstall scripts via the onlyBuiltDependencies mechanism, git dependencies can still execute prepare, prepublish, and prepack scripts during the fetch phase, enabling remote code execution without user consent or approval. This issue is fixed in version 10.26.0.",
+    "references": [
+      "https://github.com/pnpm/pnpm/commit/73cc63504d9bc360c43e4b2feb9080677f03c5b5",
+      "https://github.com/pnpm/pnpm/security/advisories/GHSA-379q-355j-w6rj",
+      "https://access.redhat.com/security/cve/CVE-2025-69264",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2427709",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2025/cve-2025-69264.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.0,
+    "epss_percentile": 62.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-41669",
+    "published": "2026-05-27T08:16:39.710",
+    "last_modified": "2026-10-14T13:10:00.187",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Web-based Management allows a remote low privileged Engineer user to install additional APPs on the device downloaded from the PLCnext Store without implementing any data verification mechanism, leading to the capability for an Engineer user to reach arbitrary code execution with root privileges on the PLC device. A successful exploitation may allow to install a manipulated APP package, potentially impacting integrity and availability of the PLCnext Control.",
+    "references": [
+      "https://www.certvde.com/en/advisories/VDE-2026-050/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 11.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -2009,7 +1979,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 30.5,
+    "epss_percentile": 30.7,
     "tags": [
       "rce"
     ],
@@ -2020,275 +1990,31 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-28165",
-    "published": "2026-08-24T12:16:50.600",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-62388",
+    "published": "2026-08-22T15:16:18.967",
+    "last_modified": "2026-10-14T13:10:00.187",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "Unauthenticated Privilege Escalation in Digits <= 9.2 versions.",
+    "summary": "NLTK versions before 3.10.0 default to ENFORCE=False in pathsec.py, causing all security validation functions to emit warnings instead of raising exceptions. Attackers can bypass path traversal and pickle deserialization protections by exploiting the disabled security controls that are only active when manually enabled.",
     "references": [
-      "https://patchstack.com/database/wordpress/plugin/digits/vulnerability/wordpress-digits-plugin-9-2-privilege-escalation-vulnerability?_s_id=cve"
+      "https://github.com/nltk/nltk/security/advisories/GHSA-p3m8-78j2-g5p3",
+      "https://www.vulncheck.com/advisories/nltk-before-insecure-default-configuration-pathsec",
+      "https://github.com/nltk/nltk/security/advisories/GHSA-p3m8-78j2-g5p3"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.9,
+    "epss_percentile": 42.2,
     "tags": [
-      "priv_esc"
+      "deserialization",
+      "path_traversal"
     ],
-    "intel_score": 84.0,
+    "intel_score": 82.5,
     "reasons": [
       "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-32558",
-    "published": "2026-08-24T12:16:51.877",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Unauthenticated Privilege Escalation in Affiliate Pro - Affiliate Program for WooCommerce & WordPress <= 8.9.1 versions.",
-    "references": [
-      "https://patchstack.com/database/wordpress/plugin/wp-wc-affiliate-program/vulnerability/wordpress-affiliate-pro-affiliate-program-for-woocommerce-wordpress-plugin-8-9-1-privilege-escalation-vulnerability?_s_id=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.9,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-66648",
-    "published": "2026-08-24T12:16:53.433",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Unauthenticated Privilege Escalation in Jawn <= 1.4.2 versions.",
-    "references": [
-      "https://patchstack.com/database/wordpress/theme/jawn/vulnerability/wordpress-jawn-theme-1-4-2-privilege-escalation-vulnerability?_s_id=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.9,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76841",
-    "published": "2026-08-24T14:17:01.760",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Xinference loads models with Hugging Face remote code execution unconditionally enabled, and before version 2.12.0 exposes no setting to disable it. Six loader call sites pass trust_remote_code=True as a literal or as an unconditional default: RerankModel._get_tokenizer in xinference/model/rerank/core.py, SentenceTransformerRerankModel.load in xinference/model/rerank/sentence_transformers/core.py, SentenceTransformerEmbeddingModel.load in xinference/model/embedding/sentence_transformers/core.py, FlagEmbeddingModel.load in xinference/model/embedding/flag/core.py, and two sites in xinference/model/llm/transformers/core.py where PytorchModel._sanitize_model_config and PytorchModel._get_components default the value to True. Because a caller with model launch access can register a model whose type is unknown and supply an arbitrary model path, the server reaches _auto_detect_type and then AutoTokenizer.from_pretrained, which imports and executes Python declared by the model directory's own tokenizer_config.json auto_map, running attacker-supplied code with the privileges of the worker process. Version 2.12.0 gates every site behind allow_trust_remote_code and the XINFERENCE_TRUST_REMOTE_CODE setting, permitting remote code only for bundled built-in models.",
-    "references": [
-      "https://github.com/xorbitsai/inference",
-      "https://github.com/xorbitsai/inference/blob/v2.11.0/xinference/model/rerank/core.py",
-      "https://github.com/xorbitsai/inference/issues/5023",
-      "https://github.com/xorbitsai/inference/pull/5027",
-      "https://www.vulncheck.com/advisories/xinference-through-remote-code-execution-via-hardcoded-trust-remote-code-in-model-loaders"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 62.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-13212",
-    "published": "2026-08-24T16:16:55.393",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The Zephyr virtio driver does not validate the descriptor-chain head id that the virtio device writes into the used ring. In virtio_isr() (drivers/virtio/virtio_common.c), the device-written vq->used->ring[idx].id is used directly as an index into vq->recv_cbs[] and vq->desc[], which are both allocated with exactly vq->num entries. recv_cbs[] holds {cb, opaque} callback entries, and the indexed callback pointer is then invoked as cbe.cb(cbe.opaque, used_len).\n\nBecause the id is consumed as a 16-bit value with no bound check, a malicious or compromised virtio backend (an untrusted hypervisor, or an untrusted hardware/peer-processor virtio device on a PCI or MMIO transport) can supply an id far beyond vq->num. This causes an out-of-bounds read of a {function pointer, argument} pair from heap memory beyond recv_cbs[], after which the driver calls that attacker-shaped pointer in the guest's interrupt context. No guest privileges or user interaction are required; the backend triggers it by writing the shared used ring and raising the queue interrupt.\n\nThe result is an arbitrary / attacker-influenced function-pointer call in the Zephyr guest, i.e. a control-flow-hijack primitive that can lead to code execution or, at minimum, a reliable crash. The fix rejects any used-ring id >= vq->num before indexing recv_cbs[]/desc[] or invoking the callback. This affects builds using CONFIG_VIRTIO with the PCI or MMIO transport.",
-    "references": [
-      "https://github.com/zephyrproject-rtos/zephyr/commit/fe47dbca080957c425383cc1d5bdc7d48a41d4a5",
-      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-7884-373w-qqhx"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 12.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78267",
-    "published": "2026-08-24T22:17:20.670",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Unauthenticated Privilege Escalation in TranslatePress <= 3.3.2 versions.",
-    "references": [
-      "https://patchstack.com/database/wordpress/plugin/translatepress-multilingual/vulnerability/wordpress-translatepress-plugin-3-3-2-privilege-escalation-vulnerability?_s_id=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.9,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-56702",
-    "published": "2026-08-25T02:16:41.900",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Adminer versions before 5.4.3 contain an unrestricted file upload vulnerability in the AdminerFileUpload plugin that allows authenticated users to upload PHP files by exploiting a permissive default extension allowlist. Attackers can upload PHP webshells to columns ending in _path and execute arbitrary code as the web-server user when uploadPath is web-served.",
-    "references": [
-      "https://github.com/vrana/adminer/security/advisories/GHSA-vcvj-rwwm-x6g5",
-      "https://www.vulncheck.com/advisories/adminer-before-unrestricted-file-upload-via-adminerfileupload",
-      "https://github.com/vrana/adminer/security/advisories/GHSA-vcvj-rwwm-x6g5"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-78685",
-    "published": "2026-08-25T03:16:58.740",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Medical Practice Management System developed by Le-yan has a Remote Code Execution vulnerability. Unauthenticated remote attackers can execute arbitrary OS commamnds via a crafted HTML page.",
-    "references": [
-      "https://www.twcert.org.tw/en/cp-139-11128-8bd30-2.html",
-      "https://www.twcert.org.tw/tw/cp-132-11127-cda76-1.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 49.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-77532",
-    "published": "2026-08-26T11:16:38.343",
-    "last_modified": "2026-10-14T02:17:00.317",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A malicious actor with access to an adjacent network could exploit a Buffer Overflow vulnerability found in a DHCPv6-enabled EdgeMAX EdgeSwitch to initiate a Remote Code Execution on such device.",
-    "references": [
-      "https://uisp.community.ui.com/releases/Security-Advisory-Bulletin-068-068/b95ea5e8-1a80-4ffc-ad42-625eae300cc9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-65643",
-    "published": "2026-09-01T03:16:50.807",
-    "last_modified": "2026-10-14T04:18:24.863",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Eval injection in cPanel 11.138.0.0 and earlier allows remote authenticated users to execute arbitrary code as root.",
-    "references": [
-      "https://support.cpanel.net/hc/en-us/articles/42959571221527-Security-CVE-2026-65643-Park-API-Vulnerability-August-27-2026"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 57.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-40877",
-    "published": "2026-08-24T19:16:38.647",
-    "last_modified": "2026-10-12T15:10:00.207",
-    "cvss_v3": 8.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Combodo iTop is a web-based IT service management tool. Prior to 3.2.3, iTop is vulnerable to PHP object injection in the user preference functionality, which can lead to remote code execution. This issue has been fixed in version 3.2.3.",
-    "references": [
-      "https://github.com/Combodo/iTop/security/advisories/GHSA-3mq5-p5vh-cw7r"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 83.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
+      "deserialization+20",
+      "path_traversal+15"
     ]
   },
   {
@@ -2325,7 +2051,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 22.3,
-    "epss_percentile": 97.6,
+    "epss_percentile": 97.7,
     "tags": [
       "auth_bypass"
     ],
@@ -2410,7 +2136,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 20.6,
+    "epss_percentile": 20.7,
     "tags": [
       "dos",
       "rce"
@@ -2442,7 +2168,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 49.5,
+    "epss_percentile": 49.7,
     "tags": [
       "rce"
     ],
@@ -2490,7 +2216,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 10.1,
+    "epss_percentile": 10.2,
     "tags": [
       "dos",
       "rce"
@@ -2565,8 +2291,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 5.4,
-    "epss_percentile": 92.5,
+    "epss": 5.5,
+    "epss_percentile": 92.6,
     "tags": [
       "rce"
     ],
@@ -2592,7 +2318,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 44.7,
+    "epss_percentile": 44.9,
     "tags": [
       "rce"
     ],
@@ -2618,7 +2344,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.7,
+    "epss_percentile": 39.9,
     "tags": [
       "rce"
     ],
@@ -2644,7 +2370,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 30.3,
+    "epss_percentile": 30.4,
     "tags": [
       "rce"
     ],
@@ -2670,7 +2396,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 38.7,
+    "epss_percentile": 38.9,
     "tags": [
       "rce"
     ],
@@ -2696,7 +2422,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 46.3,
+    "epss_percentile": 46.5,
     "tags": [
       "rce"
     ],
@@ -2722,7 +2448,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 30.1,
+    "epss_percentile": 30.3,
     "tags": [
       "rce"
     ],
@@ -2748,7 +2474,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.7,
+    "epss_percentile": 39.8,
     "tags": [
       "rce"
     ],
@@ -2774,7 +2500,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 35.5,
+    "epss_percentile": 35.7,
     "tags": [
       "rce"
     ],
@@ -2800,7 +2526,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 50.9,
+    "epss_percentile": 51.1,
     "tags": [
       "auth_bypass"
     ],
@@ -2826,7 +2552,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.0,
+    "epss_percentile": 48.1,
     "tags": [
       "rce"
     ],
@@ -2852,11 +2578,461 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.5,
+    "epss_percentile": 52.7,
     "tags": [
       "rce"
     ],
     "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71368",
+    "published": "2026-06-30T23:16:51.653",
+    "last_modified": "2026-10-12T21:10:00.227",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.30 fails to detect the doctest.debug_script function when analyzing pickle files, allowing attackers to execute arbitrary code. Remote attackers can craft malicious pickle files embedding doctest.debug_script calls that bypass picklescan detection and execute arbitrary commands upon pickle.load invocation.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-fqq6-7vqf-w3fg",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-doctest-debug-script",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-fqq6-7vqf-w3fg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 56.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71371",
+    "published": "2026-06-30T23:16:51.773",
+    "last_modified": "2026-10-12T21:10:00.227",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.29 fails to detect malicious pickle files using code.InteractiveInterpreter.runcode in reduce methods. Attackers can craft pickle payloads that bypass picklescan detection and execute arbitrary code when loaded via pickle.load().",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cj3c-v495-4xqh",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-code-interactiveinterpreter-detection-bypass",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-cj3c-v495-4xqh"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71342",
+    "published": "2026-07-04T02:16:21.387",
+    "last_modified": "2026-10-12T21:10:00.227",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.30 fails to detect malicious pickle files using idlelib.run.Executive.runcode in reduce methods. Attackers can embed undetected code in pickle files that executes during pickle.load, enabling remote code execution in PyTorch models and supply chain attacks.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-m869-42cg-3xwr",
+      "https://www.vulncheck.com/advisories/picklescan-undetected-remote-code-execution-via-idlelib-run-executive-runcode",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-m869-42cg-3xwr"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 44.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71364",
+    "published": "2026-07-04T02:16:22.583",
+    "last_modified": "2026-10-12T19:10:00.217",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.30 fails to detect the asyncio.unix_events._UnixSubprocessTransport._start function in pickle reduce methods, allowing remote code execution. Attackers can craft malicious pickle files embedding this built-in function that evade detection but execute arbitrary commands when loaded.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-q77w-mwjj-7mqx",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-undetected-asyncio-unix-events-unixsubprocesstransport-start",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-q77w-mwjj-7mqx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71366",
+    "published": "2026-07-04T02:16:22.707",
+    "last_modified": "2026-10-12T19:10:00.217",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.28 fails to detect malicious torch.utils.bottleneck.__main__.run_cprofile function calls in pickle files, allowing attackers to bypass safety checks. Remote attackers can embed undetected code in pickle files to achieve arbitrary code execution when victims load the files.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4r9r-ch6f-vxmx",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-torch-utils-bottleneck-main-run-cprofile",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-4r9r-ch6f-vxmx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71367",
+    "published": "2026-07-04T02:16:22.833",
+    "last_modified": "2026-10-12T19:10:00.217",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.34 fails to detect _operator.attrgetter function calls in pickle payloads, allowing attackers to bypass security checks. Remote attackers can craft malicious pickle files using _operator.attrgetter in reduce methods to execute arbitrary code when pickle.load() processes the file.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-46h3-79wf-xr6c",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-operator-attrgetter-detection-bypass",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-46h3-79wf-xr6c"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71372",
+    "published": "2026-07-04T02:16:23.097",
+    "last_modified": "2026-10-12T19:10:00.217",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Picklescan before 0.0.33 fails to detect the numpy.f2py.crackfortran.getlincoef gadget in pickle __reduce__ methods, allowing arbitrary code execution. Attackers can craft malicious pickle files that execute arbitrary Python code when loaded, bypassing Picklescan's safety checks and enabling supply-chain poisoning of shared model files.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-rrxm-2pvv-m66x",
+      "https://www.vulncheck.com/advisories/picklescan-arbitrary-code-execution-via-numpy-f2py-crackfortran-getlincoef-gadget",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-rrxm-2pvv-m66x"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71373",
+    "published": "2026-07-04T02:16:23.220",
+    "last_modified": "2026-10-12T19:10:00.217",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.33 fails to detect operator.methodcaller function calls in pickle files, allowing attackers to bypass security checks. Remote attackers can craft malicious pickle payloads using operator.methodcaller that execute arbitrary code when loaded, compromising systems relying on picklescan for validation.",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-x843-g5mx-g377",
+      "https://www.vulncheck.com/advisories/picklescan-remote-code-execution-via-operator-methodcaller-detection-bypass",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-x843-g5mx-g377"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 45.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-71375",
+    "published": "2026-07-04T02:16:23.347",
+    "last_modified": "2026-10-12T19:10:00.217",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "picklescan before 0.0.34 fails to detect the _operator.methodcaller built-in function when scanning pickle files for malicious code. Attackers can craft malicious pickle payloads using _operator.methodcaller that evade detection and execute arbitrary code when loaded by pickle.load().",
+    "references": [
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-955r-x9j8-7rhh",
+      "https://www.vulncheck.com/advisories/picklescan-undetected-remote-code-execution-via-operator-methodcaller",
+      "https://github.com/mmaitre314/picklescan/security/advisories/GHSA-955r-x9j8-7rhh"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58379",
+    "published": "2026-07-03T19:16:37.040",
+    "last_modified": "2026-10-12T03:17:19.427",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's Paint Shop Pro (PSP) file format parser. This heap buffer overflow vulnerability allows a remote attacker to cause arbitrary code execution or a denial of service (DoS) by tricking a user into opening a specially crafted PSP image file. The vulnerability occurs because the software incorrectly calculates buffer sizes when processing low bit-depth images, leading to an overwrite of adjacent memory.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:38496",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/errata/RHSA-2026:80509",
+      "https://access.redhat.com/security/cve/CVE-2026-58379",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2495997",
+      "https://gitlab.gnome.org/GNOME/gimp/-/commit/b630f167",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16205"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 79.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58380",
+    "published": "2026-07-06T15:16:40.020",
+    "last_modified": "2026-10-12T03:17:19.653",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's PNM file format parser. When parsing a specially crafted PNM file, the pnmscanner_gettoken() function writes a null terminator one byte past the end of a stack-allocated buffer due to an off-by-one error in the loop boundary check. This could lead to memory corruption, potentially resulting in denial of service or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:40751",
+      "https://access.redhat.com/errata/RHSA-2026:62507",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/errata/RHSA-2026:80509",
+      "https://access.redhat.com/security/cve/CVE-2026-58380",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2496135",
+      "https://gitlab.gnome.org/GNOME/gimp/-/commit/83699817",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16206"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 16.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 79.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58384",
+    "published": "2026-07-07T09:16:30.003",
+    "last_modified": "2026-10-12T03:17:19.860",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's PSD parser. An integer overflow in read_RLE_channel() can cause an undersized heap allocation for the RLE row-length table, after which subsequent per-row writes corrupt heap memory. This could lead to memory corruption, potentially resulting in denial of service or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:40751",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/errata/RHSA-2026:80509",
+      "https://access.redhat.com/security/cve/CVE-2026-58384",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2497431",
+      "https://gitlab.gnome.org/GNOME/gimp/-/commit/da29e217",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16216"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 16.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 79.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2017-0663",
+    "published": "2017-06-14T13:29:00.687",
+    "last_modified": "2026-10-14T07:16:39.053",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A remote code execution vulnerability in libxml2 could enable an attacker using a specially crafted file to execute arbitrary code within the context of an unprivileged process. This issue is rated as High due to the possibility of remote code execution in an application that uses this library. Product: Android. Versions: 4.4.4, 5.0.2, 5.1.1, 6.0, 6.0.1, 7.0, 7.1.1, 7.1.2. Android ID: A-37104170.",
+    "references": [
+      "http://www.debian.org/security/2017/dsa-3952",
+      "http://www.securityfocus.com/bid/98877",
+      "http://www.securitytracker.com/id/1038623",
+      "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b%40%3Cissues.bookkeeper.apache.org%3E",
+      "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4%40%3Cissues.bookkeeper.apache.org%3E",
+      "https://security.gentoo.org/glsa/201711-01",
+      "https://source.android.com/security/bulletin/2017-06-01",
+      "http://www.debian.org/security/2017/dsa-3952",
+      "http://www.securityfocus.com/bid/98877",
+      "http://www.securitytracker.com/id/1038623",
+      "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b%40%3Cissues.bookkeeper.apache.org%3E",
+      "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4%40%3Cissues.bookkeeper.apache.org%3E",
+      "https://security.gentoo.org/glsa/201711-01",
+      "https://source.android.com/security/bulletin/2017-06-01",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.3,
+    "epss_percentile": 83.0,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2019-1010180",
+    "published": "2019-07-24T13:15:10.997",
+    "last_modified": "2026-10-14T09:17:16.020",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "GNU gdb All versions is affected by: Buffer Overflow - Out of bound memory access. The impact is: Deny of Service, Memory Disclosure, and Possible Code Execution. The component is: The main gdb module. The attack vector is: Open an ELF for debugging. The fixed version is: Not fixed yet.",
+    "references": [
+      "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00072.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00008.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00028.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00029.html",
+      "http://www.securityfocus.com/bid/109367",
+      "https://security.gentoo.org/glsa/202003-31",
+      "https://sourceware.org/bugzilla/show_bug.cgi?id=23657",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-10/msg00072.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00008.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00028.html",
+      "http://lists.opensuse.org/opensuse-security-announce/2019-11/msg00029.html",
+      "http://www.securityfocus.com/bid/109367",
+      "https://security.gentoo.org/glsa/202003-31",
+      "https://sourceware.org/bugzilla/show_bug.cgi?id=23657",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.6,
+    "epss_percentile": 85.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2019-16905",
+    "published": "2019-10-09T20:15:23.503",
+    "last_modified": "2026-10-14T07:16:48.583",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenSSH 7.7 through 7.9 and 8.x before 8.1, when compiled with an experimental key type, has a pre-authentication integer overflow if a client or server is configured to use a crafted XMSS key. This leads to memory corruption and local code execution because of an error in the XMSS key parsing algorithm. NOTE: the XMSS implementation is considered experimental in all released OpenSSH versions, and there is no supported way to enable it when building portable OpenSSH.",
+    "references": [
+      "https://bugzilla.suse.com/show_bug.cgi?id=1153537",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-412672.pdf",
+      "https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/sshkey-xmss.c",
+      "https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/sshkey-xmss.c.diff?r1=1.5&r2=1.6&f=h",
+      "https://security.gentoo.org/glsa/201911-01",
+      "https://security.netapp.com/advisory/ntap-20191024-0003/",
+      "https://ssd-disclosure.com/archives/4033/ssd-advisory-openssh-pre-auth-xmss-integer-overflow",
+      "https://www.openssh.com/releasenotes.html",
+      "https://www.openwall.com/lists/oss-security/2019/10/09/1",
+      "https://bugzilla.suse.com/show_bug.cgi?id=1153537",
+      "https://cert-portal.siemens.com/productcert/pdf/ssa-412672.pdf",
+      "https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/sshkey-xmss.c",
+      "https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/sshkey-xmss.c.diff?r1=1.5&r2=1.6&f=h",
+      "https://security.gentoo.org/glsa/201911-01",
+      "https://security.netapp.com/advisory/ntap-20191024-0003/",
+      "https://ssd-disclosure.com/archives/4033/ssd-advisory-openssh-pre-auth-xmss-integer-overflow",
+      "https://www.openssh.com/releasenotes.html",
+      "https://www.openwall.com/lists/oss-security/2019/10/09/1",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-412672.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.2,
+    "epss_percentile": 82.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
