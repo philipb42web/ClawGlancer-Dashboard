@@ -1,35 +1,5 @@
 [
   {
-    "cve_id": "CVE-2025-58045",
-    "published": "2025-09-15T16:15:39.590",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Dataease is an open source data analytics and visualization platform. In Dataease versions up to 2.10.12, the patch introduced to mitigate DB2 JDBC deserialization remote code execution attacks only blacklisted the rmi parameter. The ldap parameter in the DB2 JDBC connection string was not filtered, allowing attackers to exploit the DB2 JDBC connection string to trigger server-side request forgery (SSRF). In higher versions of Java, ldap deserialization (autoDeserialize) is disabled by default, preventing remote code execution, but SSRF remains exploitable. Versions up to 2.10.12 are affected. The issue is fixed in version 2.10.13. Updating to 2.10.13 or later is recommended. No known workarounds are documented aside from upgrading.",
-    "references": [
-      "https://github.com/dataease/dataease/commit/77078658715bd85af5867afbfd5f1fcc37cf03c8",
-      "https://github.com/dataease/dataease/security/advisories/GHSA-fmq3-6xhc-r845",
-      "https://github.com/dataease/dataease/security/advisories/GHSA-fmq3-6xhc-r845"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.7,
-    "tags": [
-      "deserialization",
-      "rce",
-      "ssrf"
-    ],
-    "intel_score": 127.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20",
-      "ssrf+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-21762",
     "published": "2024-02-09T09:15:08.087",
     "last_modified": "2026-10-22T14:17:34.393",
@@ -58,6 +28,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-58045",
+    "published": "2025-09-15T16:15:39.590",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Dataease is an open source data analytics and visualization platform. In Dataease versions up to 2.10.12, the patch introduced to mitigate DB2 JDBC deserialization remote code execution attacks only blacklisted the rmi parameter. The ldap parameter in the DB2 JDBC connection string was not filtered, allowing attackers to exploit the DB2 JDBC connection string to trigger server-side request forgery (SSRF). In higher versions of Java, ldap deserialization (autoDeserialize) is disabled by default, preventing remote code execution, but SSRF remains exploitable. Versions up to 2.10.12 are affected. The issue is fixed in version 2.10.13. Updating to 2.10.13 or later is recommended. No known workarounds are documented aside from upgrading.",
+    "references": [
+      "https://github.com/dataease/dataease/commit/77078658715bd85af5867afbfd5f1fcc37cf03c8",
+      "https://github.com/dataease/dataease/security/advisories/GHSA-fmq3-6xhc-r845",
+      "https://github.com/dataease/dataease/security/advisories/GHSA-fmq3-6xhc-r845"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.7,
+    "tags": [
+      "deserialization",
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 117.0,
+    "reasons": [
+      "rce+30",
+      "deserialization+20",
+      "ssrf+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-58163",
     "published": "2025-09-03T02:15:37.193",
     "last_modified": "2026-10-19T17:10:00.173",
@@ -79,41 +78,11 @@
       "deserialization",
       "rce"
     ],
-    "intel_score": 122.0,
+    "intel_score": 112.0,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30",
       "deserialization+20",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-58762",
-    "published": "2025-09-09T20:15:49.950",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Tautulli is a Python based monitoring and tracking tool for Plex Media Server. In Tautulli v2.15.3 and earlier, an attacker with administrative access can use the `pms_image_proxy` endpoint to write arbitrary python scripts into the application filesystem. This leads to remote code execution when combined with the `Script` notification agent. If an attacker with administrative access changes the URL of the PMS to a server they control, they can then abuse the `pms_image_proxy` to obtain a file write into the application filesystem. This can be done by making a `pms_image_proxy` request with a URL in the `img` parameter and the desired file name in the `img_format` parameter. Tautulli then uses a hash of the desired metadata together with the `img_format` in order to construct a file path. Since the attacker controls `img_format` which occupies the end of the file path, and `img_format` is not sanitised, the attacker can then use path traversal characters to specify filename of their choosing. If the specified file does not exist, Tautaulli will then attempt to fetch the image from the configured PMS. Since the attacker controls the PMS, they can return arbitrary content in response to this request, which will then be written into the specified file. An attacker can write an arbitrary python script into a location on the application file system. The attacker can then make use of the built-in `Script` notification agent to run the local script, obtaining remote code execution on the application server. Users should upgrade to version 2.16.0 to receive a patch.",
-    "references": [
-      "https://github.com/Tautulli/Tautulli/commit/26e6b328112eb2cf35c164f981e0718f3a3d31a7",
-      "https://github.com/Tautulli/Tautulli/security/advisories/GHSA-pxhr-29gv-4j8v"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 56.8,
-    "tags": [
-      "file_write",
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 115.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15",
-      "file_write+15"
     ]
   },
   {
@@ -136,34 +105,6 @@
       "rce"
     ],
     "intel_score": 110.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-58046",
-    "published": "2025-09-15T16:15:39.757",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Dataease is an open-source data visualization and analysis platform. In versions up to and including 2.10.12, the Impala data source is vulnerable to remote code execution due to insufficient filtering in the getJdbc method of the io.dataease.datasource.type.Impala class. Attackers can construct malicious JDBC connection strings that exploit JNDI injection and trigger RMI deserialization, ultimately enabling remote command execution. The vulnerability can be exploited by editing the data source and providing a crafted JDBC connection string that references a remote configuration file, leading to RMI-based deserialization attacks. This issue has been patched in version 2.10.13. It is recommended to upgrade to the latest version. No known workarounds exist for affected versions.",
-    "references": [
-      "https://github.com/dataease/dataease/commit/8d04e92d44e1bac9284e9e64df5afd7f96d9373c",
-      "https://github.com/dataease/dataease/security/advisories/GHSA-mvwc-x8x9-46c3",
-      "https://github.com/dataease/dataease/security/advisories/GHSA-mvwc-x8x9-46c3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.4,
-    "epss_percentile": 72.8,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
@@ -227,30 +168,31 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-8614",
-    "published": "2025-09-02T20:15:39.547",
+    "cve_id": "CVE-2025-58762",
+    "published": "2025-09-09T20:15:49.950",
     "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "NoMachine Uncontrolled Search Path Element Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of NoMachine.  An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the configuration of OpenSSL. The product loads an OpenSSL configuration file from an unsecured location. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of the service account. Was ZDI-CAN-26766.",
+    "summary": "Tautulli is a Python based monitoring and tracking tool for Plex Media Server. In Tautulli v2.15.3 and earlier, an attacker with administrative access can use the `pms_image_proxy` endpoint to write arbitrary python scripts into the application filesystem. This leads to remote code execution when combined with the `Script` notification agent. If an attacker with administrative access changes the URL of the PMS to a server they control, they can then abuse the `pms_image_proxy` to obtain a file write into the application filesystem. This can be done by making a `pms_image_proxy` request with a URL in the `img` parameter and the desired file name in the `img_format` parameter. Tautulli then uses a hash of the desired metadata together with the `img_format` in order to construct a file path. Since the attacker controls `img_format` which occupies the end of the file path, and `img_format` is not sanitised, the attacker can then use path traversal characters to specify filename of their choosing. If the specified file does not exist, Tautaulli will then attempt to fetch the image from the configured PMS. Since the attacker controls the PMS, they can return arbitrary content in response to this request, which will then be written into the specified file. An attacker can write an arbitrary python script into a location on the application file system. The attacker can then make use of the built-in `Script` notification agent to run the local script, obtaining remote code execution on the application server. Users should upgrade to version 2.16.0 to receive a patch.",
     "references": [
-      "https://kb.nomachine.com/TR04W11314",
-      "https://www.zerodayinitiative.com/advisories/ZDI-25-835/"
+      "https://github.com/Tautulli/Tautulli/commit/26e6b328112eb2cf35c164f981e0718f3a3d31a7",
+      "https://github.com/Tautulli/Tautulli/security/advisories/GHSA-pxhr-29gv-4j8v"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 18.3,
+    "epss": 0.8,
+    "epss_percentile": 56.8,
     "tags": [
-      "priv_esc",
+      "file_write",
+      "path_traversal",
       "rce"
     ],
-    "intel_score": 104.0,
+    "intel_score": 105.5,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30",
-      "priv_esc+25"
+      "path_traversal+15",
+      "file_write+15"
     ]
   },
   {
@@ -593,60 +535,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-59050",
-    "published": "2025-09-16T17:15:41.433",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Greenshot is an open source Windows screenshot utility. Greenshot 1.3.300 and earlier deserializes attacker-controlled data received in a WM_COPYDATA message using BinaryFormatter.Deserialize without prior validation or authentication, allowing a local process at the same integrity level to trigger arbitrary code execution inside the Greenshot process. The vulnerable logic resides in a WinForms WndProc handler for WM_COPYDATA (message 74) that copies the supplied bytes into a MemoryStream and invokes BinaryFormatter.Deserialize, and only afterward checks whether the specified channel is authorized. Because the authorization check occurs after deserialization, any gadget chain embedded in the serialized payload executes regardless of channel membership. A local attacker who can send WM_COPYDATA to the Greenshot main window can achieve in-process code execution, which may aid evasion of application control policies by running payloads within the trusted, signed Greenshot.exe process. This issue is fixed in version 1.3.301. No known workarounds exist.",
-    "references": [
-      "https://github.com/greenshot/greenshot/commit/f5a29a2ed3b0eb49231c0f4618300f488cf1b04d",
-      "https://github.com/greenshot/greenshot/security/advisories/GHSA-8f7f-x7ww-xx5w",
-      "https://github.com/greenshot/greenshot/security/advisories/GHSA-8f7f-x7ww-xx5w"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.6,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-61591",
-    "published": "2025-10-03T17:15:47.853",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Cursor is a code editor built for programming with AI. In versions 1.7 and below, when MCP uses OAuth authentication with an untrusted MCP server, an attacker can impersonate a malicious MCP server and return crafted, maliciously injected commands during the interaction process, leading to command injection and potential remote code execution. If chained with an untrusted MCP service via OAuth, this command injection vulnerability could allow arbitrary code execution on the host by the agent. This can then be used to directly compromise the system by executing malicious commands with full user privileges. This issue does not currently have a fixed release version, but there is a patch, 2025.09.17-25b418f.",
-    "references": [
-      "https://github.com/cursor/cursor/security/advisories/GHSA-wj33-264c-j9cq"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 66.8,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-66210",
     "published": "2025-12-23T22:15:52.217",
     "last_modified": "2026-10-19T22:10:00.130",
@@ -793,35 +681,30 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-39682",
-    "published": "2025-09-05T18:15:44.670",
-    "last_modified": "2026-10-19T21:10:00.160",
+    "cve_id": "CVE-2025-58046",
+    "published": "2025-09-15T16:15:39.757",
+    "last_modified": "2026-10-19T17:10:00.173",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ntls: fix handling of zero-length records on the rx_list\n\nEach recvmsg() call must process either\n - only contiguous DATA records (any number of them)\n - one non-DATA record\n\nIf the next record has different type than what has already been\nprocessed we break out of the main processing loop. If the record\nhas already been decrypted (which may be the case for TLS 1.3 where\nwe don't know type until decryption) we queue the pending record\nto the rx_list. Next recvmsg() will pick it up from there.\n\nQueuing the skb to rx_list after zero-copy decrypt is not possible,\nsince in that case we decrypted directly to the user space buffer,\nand we don't have an skb to queue (darg.skb points to the ciphertext\nskb for access to metadata like length).\n\nOnly data records are allowed zero-copy, and we break the processing\nloop after each non-data record. So we should never zero-copy and\nthen find out that the record type has changed. The corner case\nwe missed is when the initial record comes from rx_list, and it's\nzero length.",
+    "summary": "Dataease is an open-source data visualization and analysis platform. In versions up to and including 2.10.12, the Impala data source is vulnerable to remote code execution due to insufficient filtering in the getJdbc method of the io.dataease.datasource.type.Impala class. Attackers can construct malicious JDBC connection strings that exploit JNDI injection and trigger RMI deserialization, ultimately enabling remote command execution. The vulnerability can be exploited by editing the data source and providing a crafted JDBC connection string that references a remote configuration file, leading to RMI-based deserialization attacks. This issue has been patched in version 2.10.13. It is recommended to upgrade to the latest version. No known workarounds exist for affected versions.",
     "references": [
-      "https://git.kernel.org/stable/c/2902c3ebcca52ca845c03182000e8d71d3a5196f",
-      "https://git.kernel.org/stable/c/29c0ce3c8cdb6dc5d61139c937f34cb888a6f42e",
-      "https://git.kernel.org/stable/c/3439c15ae91a517cf3c650ea15a8987699416ad9",
-      "https://git.kernel.org/stable/c/62708b9452f8eb77513115b17c4f8d1a22ebf843",
-      "https://git.kernel.org/stable/c/c09dd3773b5950e9cfb6c9b9a5f6e36d06c62677",
-      "https://lists.debian.org/debian-lts-announce/2025/10/msg00008.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-032379.html",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-39682"
+      "https://github.com/dataease/dataease/commit/8d04e92d44e1bac9284e9e64df5afd7f96d9373c",
+      "https://github.com/dataease/dataease/security/advisories/GHSA-mvwc-x8x9-46c3",
+      "https://github.com/dataease/dataease/security/advisories/GHSA-mvwc-x8x9-46c3"
     ],
     "source": "NVD",
-    "cisa_kev": true,
-    "epss": 2.9,
-    "epss_percentile": 86.8,
+    "cisa_kev": false,
+    "epss": 1.4,
+    "epss_percentile": 72.8,
     "tags": [
-      "cisa_kev",
-      "in_the_wild"
+      "deserialization",
+      "rce"
     ],
     "intel_score": 99.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -1304,32 +1187,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-58763",
-    "published": "2025-09-09T21:15:38.563",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 8.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Tautulli is a Python based monitoring and tracking tool for Plex Media Server. A command injection vulnerability in Tautulli v2.15.3 and prior allows attackers with administrative privileges to obtain remote code execution on the application server. This vulnerability requires the application to have been cloned from GitHub and installed manually. When Tautulli is cloned directly from GitHub and installed manually, the application manages updates and versioning through calls to the `git` command. In the code, this is performed through the `runGit` function in `versioncheck.py`. Since `shell=True` is passed to `subproces.Popen`, this call is vulnerable to subject to command injection, as shell characters within arguments will be passed to the underlying shell. A concrete location where this can be triggered is in the `checkout_git_branch` endpoint. This endpoint stores a user-supplied remote and branch name into the `GIT_REMOTE` and `GIT_BRANCH` configuration keys without sanitization. Downstream, these keys are then fetched and passed directly into `runGit` using a format string. Hence, code execution can be obtained by using `$()` interpolation in a command. Version 2.16.0 contains a fix for the issue.",
-    "references": [
-      "https://github.com/Tautulli/Tautulli/security/advisories/GHSA-jrm9-r57q-6cvf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.7,
-    "epss_percentile": 76.7,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 98.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-1961",
     "published": "2026-03-26T13:16:27.650",
     "last_modified": "2026-10-20T16:03:34.363",
@@ -1395,6 +1252,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-8614",
+    "published": "2025-09-02T20:15:39.547",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "NoMachine Uncontrolled Search Path Element Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of NoMachine.  An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the configuration of OpenSSL. The product loads an OpenSSL configuration file from an unsecured location. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of the service account. Was ZDI-CAN-26766.",
+    "references": [
+      "https://kb.nomachine.com/TR04W11314",
+      "https://www.zerodayinitiative.com/advisories/ZDI-25-835/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.3,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "rce+30",
+      "priv_esc+25"
     ]
   },
   {
@@ -1477,30 +1360,55 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-58447",
-    "published": "2025-09-09T23:15:36.497",
+    "cve_id": "CVE-2025-59050",
+    "published": "2025-09-16T17:15:41.433",
     "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "rAthena is an open-source cross-platform massively multiplayer online role playing game (MMORPG) server. Versions prior to commit 2f5248b have a heap-based buffer overflow in the login server, remote attacker to overwrite adjacent session fields by sending a crafted `CA_SSO_LOGIN_REQ` with an oversized token length. This leads to immediate denial of service (crash) and it is possible to achieve remote code execution via heap corruption. Commit 2f5248b fixes the issue.",
+    "summary": "Greenshot is an open source Windows screenshot utility. Greenshot 1.3.300 and earlier deserializes attacker-controlled data received in a WM_COPYDATA message using BinaryFormatter.Deserialize without prior validation or authentication, allowing a local process at the same integrity level to trigger arbitrary code execution inside the Greenshot process. The vulnerable logic resides in a WinForms WndProc handler for WM_COPYDATA (message 74) that copies the supplied bytes into a MemoryStream and invokes BinaryFormatter.Deserialize, and only afterward checks whether the specified channel is authorized. Because the authorization check occurs after deserialization, any gadget chain embedded in the serialized payload executes regardless of channel membership. A local attacker who can send WM_COPYDATA to the Greenshot main window can achieve in-process code execution, which may aid evasion of application control policies by running payloads within the trusted, signed Greenshot.exe process. This issue is fixed in version 1.3.301. No known workarounds exist.",
     "references": [
-      "https://github.com/rathena/rathena/commit/2f5248b9cd9a8c6b42422ddecfc4cc2cd0e69e4b",
-      "https://github.com/rathena/rathena/security/advisories/GHSA-4p33-6xqr-cm6x"
+      "https://github.com/greenshot/greenshot/commit/f5a29a2ed3b0eb49231c0f4618300f488cf1b04d",
+      "https://github.com/greenshot/greenshot/security/advisories/GHSA-8f7f-x7ww-xx5w",
+      "https://github.com/greenshot/greenshot/security/advisories/GHSA-8f7f-x7ww-xx5w"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.6,
+    "epss": 0.3,
+    "epss_percentile": 20.6,
     "tags": [
-      "dos",
+      "deserialization",
       "rce"
     ],
     "intel_score": 92.0,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30",
-      "dos+3"
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-61591",
+    "published": "2025-10-03T17:15:47.853",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Cursor is a code editor built for programming with AI. In versions 1.7 and below, when MCP uses OAuth authentication with an untrusted MCP server, an attacker can impersonate a malicious MCP server and return crafted, maliciously injected commands during the interaction process, leading to command injection and potential remote code execution. If chained with an untrusted MCP service via OAuth, this command injection vulnerability could allow arbitrary code execution on the host by the agent. This can then be used to directly compromise the system by executing malicious commands with full user privileges. This issue does not currently have a fixed release version, but there is a patch, 2025.09.17-25b418f.",
+    "references": [
+      "https://github.com/cursor/cursor/security/advisories/GHSA-wj33-264c-j9cq"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.2,
+    "epss_percentile": 66.8,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -1615,61 +1523,33 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-58748",
-    "published": "2025-09-15T17:15:35.937",
-    "last_modified": "2026-10-19T17:10:00.173",
+    "cve_id": "CVE-2025-39682",
+    "published": "2025-09-05T18:15:44.670",
+    "last_modified": "2026-10-19T21:10:00.160",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Dataease is an open source data analytics and visualization platform. In Dataease versions up to 2.10.12 the H2 data source implementation (H2.java) does not verify that a provided JDBC URL starts with jdbc:h2. This lack of validation allows a crafted JDBC configuration that substitutes the Amazon Redshift driver and leverages the socketFactory and socketFactoryArg parameters to invoke org.springframework.context.support.FileSystemXmlApplicationContext or ClassPathXmlApplicationContext with an attacker‑controlled remote XML resource, resulting in remote code execution. Versions up to and including 2.10.12 are affected. The issue is fixed in version 2.10.13. Updating to version 2.10.13 or later is the recommended remediation. No known workarounds exist.",
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ntls: fix handling of zero-length records on the rx_list\n\nEach recvmsg() call must process either\n - only contiguous DATA records (any number of them)\n - one non-DATA record\n\nIf the next record has different type than what has already been\nprocessed we break out of the main processing loop. If the record\nhas already been decrypted (which may be the case for TLS 1.3 where\nwe don't know type until decryption) we queue the pending record\nto the rx_list. Next recvmsg() will pick it up from there.\n\nQueuing the skb to rx_list after zero-copy decrypt is not possible,\nsince in that case we decrypted directly to the user space buffer,\nand we don't have an skb to queue (darg.skb points to the ciphertext\nskb for access to metadata like length).\n\nOnly data records are allowed zero-copy, and we break the processing\nloop after each non-data record. So we should never zero-copy and\nthen find out that the record type has changed. The corner case\nwe missed is when the initial record comes from rx_list, and it's\nzero length.",
     "references": [
-      "https://github.com/dataease/dataease/commit/23a45e72a7abc37d5680b0a7cf691b8df378d4ef",
-      "https://github.com/dataease/dataease/security/advisories/GHSA-23qw-9qrh-9rr8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 57.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-39964",
-    "published": "2025-10-13T14:15:34.737",
-    "last_modified": "2026-10-19T21:10:00.160",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: af_alg - Disallow concurrent writes in af_alg_sendmsg\n\nIssuing two writes to the same af_alg socket is bogus as the\ndata will be interleaved in an unpredictable fashion.  Furthermore,\nconcurrent writes may create inconsistencies in the internal\nsocket state.\n\nDisallow this by adding a new ctx->write field that indiciates\nexclusive ownership for writing.",
-    "references": [
-      "https://git.kernel.org/stable/c/0f28c4adbc4a97437874c9b669fd7958a8c6d6ce",
-      "https://git.kernel.org/stable/c/1b34cbbf4f011a121ef7b2d7d6e6920a036d5285",
-      "https://git.kernel.org/stable/c/1f323a48e9b5ebfe6dc7d130fdf5c3c0e92a07c8",
-      "https://git.kernel.org/stable/c/45bcf60fe49b37daab1acee57b27211ad1574042",
-      "https://git.kernel.org/stable/c/7c4491b5644e3a3708f3dbd7591be0a570135b84",
-      "https://git.kernel.org/stable/c/9aee87da5572b3a14075f501752e209801160d3d",
-      "https://git.kernel.org/stable/c/e4c1ec11132ec466f7362a95f36a506ce4dc08c9",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-457936.html",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-39964"
+      "https://git.kernel.org/stable/c/2902c3ebcca52ca845c03182000e8d71d3a5196f",
+      "https://git.kernel.org/stable/c/29c0ce3c8cdb6dc5d61139c937f34cb888a6f42e",
+      "https://git.kernel.org/stable/c/3439c15ae91a517cf3c650ea15a8987699416ad9",
+      "https://git.kernel.org/stable/c/62708b9452f8eb77513115b17c4f8d1a22ebf843",
+      "https://git.kernel.org/stable/c/c09dd3773b5950e9cfb6c9b9a5f6e36d06c62677",
+      "https://lists.debian.org/debian-lts-announce/2025/10/msg00008.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-032379.html",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-39682"
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 1.4,
-    "epss_percentile": 71.5,
+    "epss": 2.9,
+    "epss_percentile": 86.8,
     "tags": [
       "cisa_kev",
       "in_the_wild"
     ],
     "intel_score": 89.0,
     "reasons": [
-      "recently modified (last 48h)",
       "CISA KEV active exploitation (+40)"
     ]
   },
@@ -1701,6 +1581,31 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-58763",
+    "published": "2025-09-09T21:15:38.563",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tautulli is a Python based monitoring and tracking tool for Plex Media Server. A command injection vulnerability in Tautulli v2.15.3 and prior allows attackers with administrative privileges to obtain remote code execution on the application server. This vulnerability requires the application to have been cloned from GitHub and installed manually. When Tautulli is cloned directly from GitHub and installed manually, the application manages updates and versioning through calls to the `git` command. In the code, this is performed through the `runGit` function in `versioncheck.py`. Since `shell=True` is passed to `subproces.Popen`, this call is vulnerable to subject to command injection, as shell characters within arguments will be passed to the underlying shell. A concrete location where this can be triggered is in the `checkout_git_branch` endpoint. This endpoint stores a user-supplied remote and branch name into the `GIT_REMOTE` and `GIT_BRANCH` configuration keys without sanitization. Downstream, these keys are then fetched and passed directly into `runGit` using a format string. Hence, code execution can be obtained by using `$()` interpolation in a command. Version 2.16.0 contains a fix for the issue.",
+    "references": [
+      "https://github.com/Tautulli/Tautulli/security/advisories/GHSA-jrm9-r57q-6cvf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.7,
+    "epss_percentile": 76.7,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 88.0,
+    "reasons": [
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -1791,35 +1696,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-10115",
-    "published": "2025-09-09T01:15:31.760",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was determined in SiempreCMS up to 1.3.6. This affects an unknown part of the file user_search_ajax.php. This manipulation of the argument name/userName causes sql injection. The attack may be initiated remotely. The exploit has been publicly disclosed and may be utilized.",
-    "references": [
-      "https://github.com/drew-byte/SiempreCMS-SQLi-POC",
-      "https://vuldb.com/?ctiid.323084",
-      "https://vuldb.com/?id.323084",
-      "https://vuldb.com/?submit.645531"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 24.6,
-    "tags": [
-      "poc",
-      "sqli"
-    ],
-    "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "poc+20"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-15048",
     "published": "2025-12-23T23:15:44.167",
     "last_modified": "2026-10-19T22:10:00.130",
@@ -1880,55 +1756,86 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-61592",
-    "published": "2025-10-03T18:15:36.067",
+    "cve_id": "CVE-2025-58447",
+    "published": "2025-09-09T23:15:36.497",
     "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "Cursor is a code editor built for programming with AI. In versions 1.7 and below, automatic loading of project-specific CLI configuration from the current working directory (<project>/.cursor/cli.json) could override certain global configurations in Cursor CLI. This allowed users running the CLI inside a malicious repository to be vulnerable to Remote Code Execution through a combination of permissive configuration (allowing shell commands) and prompt injection delivered via project-specific Rules (<project>/.cursor/rules/rule.mdc) or other mechanisms. The fix for this issue is currently available as a patch 2025.09.17-25b418f. As of October 3, 2025 there is no release version.",
+    "summary": "rAthena is an open-source cross-platform massively multiplayer online role playing game (MMORPG) server. Versions prior to commit 2f5248b have a heap-based buffer overflow in the login server, remote attacker to overwrite adjacent session fields by sending a crafted `CA_SSO_LOGIN_REQ` with an oversized token length. This leads to immediate denial of service (crash) and it is possible to achieve remote code execution via heap corruption. Commit 2f5248b fixes the issue.",
     "references": [
-      "https://github.com/cursor/cursor/security/advisories/GHSA-v64q-396f-7m79"
+      "https://github.com/rathena/rathena/commit/2f5248b9cd9a8c6b42422ddecfc4cc2cd0e69e4b",
+      "https://github.com/rathena/rathena/security/advisories/GHSA-4p33-6xqr-cm6x"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 38.5,
+    "epss": 0.9,
+    "epss_percentile": 58.6,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-58748",
+    "published": "2025-09-15T17:15:35.937",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Dataease is an open source data analytics and visualization platform. In Dataease versions up to 2.10.12 the H2 data source implementation (H2.java) does not verify that a provided JDBC URL starts with jdbc:h2. This lack of validation allows a crafted JDBC configuration that substitutes the Amazon Redshift driver and leverages the socketFactory and socketFactoryArg parameters to invoke org.springframework.context.support.FileSystemXmlApplicationContext or ClassPathXmlApplicationContext with an attacker‑controlled remote XML resource, resulting in remote code execution. Versions up to and including 2.10.12 are affected. The issue is fixed in version 2.10.13. Updating to version 2.10.13 or later is the recommended remediation. No known workarounds exist.",
+    "references": [
+      "https://github.com/dataease/dataease/commit/23a45e72a7abc37d5680b0a7cf691b8df378d4ef",
+      "https://github.com/dataease/dataease/security/advisories/GHSA-23qw-9qrh-9rr8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 57.2,
     "tags": [
       "rce"
     ],
-    "intel_score": 84.0,
+    "intel_score": 79.0,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30"
     ]
   },
   {
-    "cve_id": "CVE-2025-58180",
-    "published": "2025-09-09T20:15:48.257",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 8.8,
+    "cve_id": "CVE-2025-39964",
+    "published": "2025-10-13T14:15:34.737",
+    "last_modified": "2026-10-19T21:10:00.160",
+    "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "OctoPrint provides a web interface for controlling consumer 3D printers. OctoPrint versions up until and including 1.11.2 contain a vulnerability that allows an authenticated attacker to upload a file under a specially crafted filename that will allow arbitrary command execution if said filename becomes included in a command defined in a system event handler and said event gets triggered. If no event handlers executing system commands with uploaded filenames as parameters have been configured, this vulnerability does not have an impact. The vulnerability is patched in version 1.11.3. As a workaround, OctoPrint administrators who have event handlers configured that include any kind of filename based placeholders should disable those by setting their `enabled` property to `False` or unchecking the \"Enabled\" checkbox in the GUI based Event Manager. Alternatively, OctoPrint administrators should set `feature.enforceReallyUniversalFilenames` to `true` in `config.yaml` and restart OctoPrint, then vet the existing uploads and make sure to delete any suspicious looking files. As always, OctoPrint administrators are advised to not expose OctoPrint on hostile networks like the public internet, and to vet who has access to their instance.",
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: af_alg - Disallow concurrent writes in af_alg_sendmsg\n\nIssuing two writes to the same af_alg socket is bogus as the\ndata will be interleaved in an unpredictable fashion.  Furthermore,\nconcurrent writes may create inconsistencies in the internal\nsocket state.\n\nDisallow this by adding a new ctx->write field that indiciates\nexclusive ownership for writing.",
     "references": [
-      "https://github.com/OctoPrint/OctoPrint/commit/be4201ef58d9a7c03593252398c16eada90a258b",
-      "https://github.com/OctoPrint/OctoPrint/commit/c3a940962f4658a8e035a00388781b1cbd768841",
-      "https://github.com/OctoPrint/OctoPrint/releases/tag/1.11.3",
-      "https://github.com/OctoPrint/OctoPrint/security/advisories/GHSA-49mj-x8jp-qvfc"
+      "https://git.kernel.org/stable/c/0f28c4adbc4a97437874c9b669fd7958a8c6d6ce",
+      "https://git.kernel.org/stable/c/1b34cbbf4f011a121ef7b2d7d6e6920a036d5285",
+      "https://git.kernel.org/stable/c/1f323a48e9b5ebfe6dc7d130fdf5c3c0e92a07c8",
+      "https://git.kernel.org/stable/c/45bcf60fe49b37daab1acee57b27211ad1574042",
+      "https://git.kernel.org/stable/c/7c4491b5644e3a3708f3dbd7591be0a570135b84",
+      "https://git.kernel.org/stable/c/9aee87da5572b3a14075f501752e209801160d3d",
+      "https://git.kernel.org/stable/c/e4c1ec11132ec466f7362a95f36a506ce4dc08c9",
+      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-457936.html",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-39964"
     ],
     "source": "NVD",
-    "cisa_kev": false,
-    "epss": 22.1,
-    "epss_percentile": 97.7,
+    "cisa_kev": true,
+    "epss": 1.4,
+    "epss_percentile": 71.5,
     "tags": [
-      "command_injection"
+      "cisa_kev",
+      "in_the_wild"
     ],
-    "intel_score": 82.0,
+    "intel_score": 79.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Moderate EPSS prob 22.1% (+10)"
+      "CISA KEV active exploitation (+40)"
     ]
   },
   {
@@ -2025,30 +1932,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 19.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-10213",
-    "published": "2025-09-10T12:15:31.250",
-    "last_modified": "2026-10-19T17:10:00.173",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "DLL search path hijacking vulnerability in the UPDF.exe executable for Windows version 1.8.5.0 allows attackers with local access to execute arbitrary code by placing a dxtn.dll file of their choice in the 'C:\\Users\\<user>\\AppData\\Local\\Microsoft\\WindowsApps\\' directory, which could lead to arbitrary code execution and persistence.",
-    "references": [
-      "https://www.incibe.es/en/incibe-cert/notices/aviso/multiple-vulnerabilities-updf"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
     "tags": [
       "rce"
     ],
@@ -2673,6 +2556,107 @@
     "intel_score": 79.0,
     "reasons": [
       "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-10115",
+    "published": "2025-09-09T01:15:31.760",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was determined in SiempreCMS up to 1.3.6. This affects an unknown part of the file user_search_ajax.php. This manipulation of the argument name/userName causes sql injection. The attack may be initiated remotely. The exploit has been publicly disclosed and may be utilized.",
+    "references": [
+      "https://github.com/drew-byte/SiempreCMS-SQLi-POC",
+      "https://vuldb.com/?ctiid.323084",
+      "https://vuldb.com/?id.323084",
+      "https://vuldb.com/?submit.645531"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.6,
+    "tags": [
+      "poc",
+      "sqli"
+    ],
+    "intel_score": 74.5,
+    "reasons": [
+      "sqli+18",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-61592",
+    "published": "2025-10-03T18:15:36.067",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Cursor is a code editor built for programming with AI. In versions 1.7 and below, automatic loading of project-specific CLI configuration from the current working directory (<project>/.cursor/cli.json) could override certain global configurations in Cursor CLI. This allowed users running the CLI inside a malicious repository to be vulnerable to Remote Code Execution through a combination of permissive configuration (allowing shell commands) and prompt injection delivered via project-specific Rules (<project>/.cursor/rules/rule.mdc) or other mechanisms. The fix for this issue is currently available as a patch 2025.09.17-25b418f. As of October 3, 2025 there is no release version.",
+    "references": [
+      "https://github.com/cursor/cursor/security/advisories/GHSA-v64q-396f-7m79"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 74.0,
+    "reasons": [
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-58180",
+    "published": "2025-09-09T20:15:48.257",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OctoPrint provides a web interface for controlling consumer 3D printers. OctoPrint versions up until and including 1.11.2 contain a vulnerability that allows an authenticated attacker to upload a file under a specially crafted filename that will allow arbitrary command execution if said filename becomes included in a command defined in a system event handler and said event gets triggered. If no event handlers executing system commands with uploaded filenames as parameters have been configured, this vulnerability does not have an impact. The vulnerability is patched in version 1.11.3. As a workaround, OctoPrint administrators who have event handlers configured that include any kind of filename based placeholders should disable those by setting their `enabled` property to `False` or unchecking the \"Enabled\" checkbox in the GUI based Event Manager. Alternatively, OctoPrint administrators should set `feature.enforceReallyUniversalFilenames` to `true` in `config.yaml` and restart OctoPrint, then vet the existing uploads and make sure to delete any suspicious looking files. As always, OctoPrint administrators are advised to not expose OctoPrint on hostile networks like the public internet, and to vet who has access to their instance.",
+    "references": [
+      "https://github.com/OctoPrint/OctoPrint/commit/be4201ef58d9a7c03593252398c16eada90a258b",
+      "https://github.com/OctoPrint/OctoPrint/commit/c3a940962f4658a8e035a00388781b1cbd768841",
+      "https://github.com/OctoPrint/OctoPrint/releases/tag/1.11.3",
+      "https://github.com/OctoPrint/OctoPrint/security/advisories/GHSA-49mj-x8jp-qvfc"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 22.1,
+    "epss_percentile": 97.7,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 72.0,
+    "reasons": [
+      "command_injection+18",
+      "Moderate EPSS prob 22.1% (+10)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-10213",
+    "published": "2025-09-10T12:15:31.250",
+    "last_modified": "2026-10-19T17:10:00.173",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DLL search path hijacking vulnerability in the UPDF.exe executable for Windows version 1.8.5.0 allows attackers with local access to execute arbitrary code by placing a dxtn.dll file of their choice in the 'C:\\Users\\<user>\\AppData\\Local\\Microsoft\\WindowsApps\\' directory, which could lead to arbitrary code execution and persistence.",
+    "references": [
+      "https://www.incibe.es/en/incibe-cert/notices/aviso/multiple-vulnerabilities-updf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 69.0,
+    "reasons": [
       "rce+30"
     ]
   }
