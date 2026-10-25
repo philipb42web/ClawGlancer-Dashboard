@@ -1,38 +1,5 @@
 [
   {
-    "cve_id": "CVE-2026-9586",
-    "published": "2026-07-17T17:17:18.150",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An unauthenticated SQL injection vulnerability exists in Sangoma Switchvox SMB Edition 8.3 (104997). The /pa endpoint processes XML content beginning with <PolycomIPPhone> and directly concatenates the user-controlled PhoneIP value into PostgreSQL queries without sanitization or parameterization. An unauthenticated remote attacker can execute arbitrary SQL statements against the backend PostgreSQL database using a single crafted request, including database operations and remote code execution.",
-    "references": [
-      "https://labs.sra.io/posts/switchvox/",
-      "https://sangomakb.atlassian.net/wiki/spaces/Switchvox/pages/1802371073/Switchvox+-+Release+Notes+Version+8.4.0.2+July+14+2026",
-      "https://horizon3.ai/attack-research/disclosures/cve-2026-9586-sangoma-switchvox-rce/#",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-9586"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 19.0,
-    "epss_percentile": 97.3,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild",
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 157.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18",
-      "CISA KEV active exploitation (+40)",
-      "Moderate EPSS prob 19.0% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-29525",
     "published": "2023-04-19T00:15:09.127",
     "last_modified": "2026-10-24T13:10:00.147",
@@ -67,35 +34,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-9198",
-    "published": "2026-07-17T18:17:17.340",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 allows unauthenticated attackers to chain /api/v1/auto_login (mints SUPERUSER tokens to any network caller) with /api/v1/validate/code (executes user code via exec()) to achieve full RCE on default Langflow deployments",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278927",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-9198"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 28.7,
-    "epss_percentile": 98.1,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild",
-      "rce"
-    ],
-    "intel_score": 139.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "CISA KEV active exploitation (+40)",
-      "Moderate EPSS prob 28.7% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-21762",
     "published": "2024-02-09T09:15:08.087",
     "last_modified": "2026-10-22T19:20:41.990",
@@ -110,7 +48,7 @@
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "epss": 83.4,
+    "epss": 84.6,
     "epss_percentile": 99.7,
     "tags": [
       "cisa_kev",
@@ -120,7 +58,7 @@
     "reasons": [
       "recently modified (last 48h)",
       "CISA KEV active exploitation (+40)",
-      "High EPSS exploit prob 83.4% (+25)"
+      "High EPSS exploit prob 84.6% (+25)"
     ]
   },
   {
@@ -192,7 +130,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 49.5,
+    "epss_percentile": 49.8,
     "tags": [
       "deserialization",
       "rce"
@@ -205,23 +143,47 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-63767",
-    "published": "2026-07-20T20:16:46.323",
-    "last_modified": "2026-10-24T20:10:00.137",
+    "cve_id": "CVE-2026-12481",
+    "published": "2026-07-03T21:16:54.737",
+    "last_modified": "2026-10-25T15:10:00.147",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "ktransformers through 0.6.3, fixed in commit def0f93, contains an unauthenticated pickle deserialization vulnerability that allows remote attackers to execute arbitrary commands by sending crafted pickle payloads to the SchedulerServer ZMQ ROUTER socket bound to all interfaces. Attackers can exploit malicious __reduce__ methods embedded in crafted pickle payloads to execute arbitrary shell commands as the server process.",
+    "summary": "A vulnerability in keras-team/keras version 3.14.0 allows for arbitrary code execution due to improper handling of deserialization in the `Lambda` layer. Specifically, the `_raise_for_lambda_deserialization()` function fails to enforce the safe-mode guard when `safe_mode` is set to `None`, which is the default value when `from_config()` is called outside of a `SafeModeScope` context. This logic error conflates `None` (unset/default-deny) with `False` (explicitly disabled), bypassing the guard and allowing attacker-controlled `marshal` bytecode to be deserialized. Affected call sites include `keras.layers.deserialize(config)`, `keras.models.clone_model(model)`, and any direct invocation of `Lambda.from_config(config)` without an enclosing `SafeModeScope(True)`. This vulnerability can be exploited to achieve arbitrary OS-level code execution in the context of the server or user process.",
     "references": [
-      "https://github.com/kvcache-ai/ktransformers/commit/def0f9313d6e063b5c5ccdfa1f6707f7a40dfdca",
-      "https://github.com/kvcache-ai/ktransformers/issues/2087",
-      "https://github.com/kvcache-ai/ktransformers/pull/2091",
-      "https://www.vulncheck.com/advisories/ktransformers-unauthenticated-pickle-deserialization-rce-via-zmq"
+      "https://huntr.com/bounties/59ceaed1-c8a3-4135-8f94-169ade02823d",
+      "https://huntr.com/bounties/59ceaed1-c8a3-4135-8f94-169ade02823d"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 65.9,
+    "epss": 0.7,
+    "epss_percentile": 53.6,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43867",
+    "published": "2026-07-06T09:16:36.057",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in Apache Camel PQC Component.\n\nThe camel-pqc component persists post-quantum key metadata (KeyMetadata) through pluggable KeyLifecycleManager implementations. AwsSecretsManagerKeyLifecycleManager.deserializeMetadata() reads that metadata back from the configured AWS Secrets Manager secret by Base64-decoding the stored value and deserializing it with a raw java.io.ObjectInputStream.readObject() and no ObjectInputFilter or class allow-list; the cast to KeyMetadata happens only after readObject() returns, so any readObject() side effects in a crafted object run before the type check. A principal who can write to the AWS Secrets Manager secret that holds this metadata (requiring secretsmanager:PutSecretValue on that secret) could store a crafted serialized object that is deserialized during normal key-lifecycle operations, potentially leading to code execution in the context of the application that manages the keys. This is the same underlying defect, in the same code path and remediated by the same fix, as CVE-2026-46590, which was reported independently and additionally covers the HashiCorp Vault and file-based sibling managers; both are incomplete-remediation follow-ons to CVE-2026-40048 (CAMEL-23200).\nThis issue affects Apache Camel: from 4.18.0 before 4.18.3, from 4.19.0 before 4.21.0.\n\nUsers are recommended to upgrade to version 4.21.0, which fixes the issue. If users are on the 4.18.x LTS releases stream, then they are suggested to upgrade to 4.18.3. For deployments that cannot upgrade immediately, restrict write access to the AWS Secrets Manager secret that holds the camel-pqc key metadata so that only the application’s own identity holds secretsmanager:PutSecretValue on it (least-privilege IAM), and keep the PQC key material in a secret separate from any data that less-trusted principals can write.",
+    "references": [
+      "https://camel.apache.org/security/CVE-2026-43867.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 60.2,
     "tags": [
       "deserialization",
       "rce"
@@ -277,8 +239,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.2,
+    "epss": 0.7,
+    "epss_percentile": 52.3,
     "tags": [
       "rce",
       "sqli"
@@ -331,7 +293,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.1,
-    "epss_percentile": 2.3,
+    "epss_percentile": 2.5,
     "tags": [
       "priv_esc",
       "rce"
@@ -357,7 +319,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.1,
-    "epss_percentile": 1.7,
+    "epss_percentile": 1.8,
     "tags": [
       "priv_esc",
       "rce"
@@ -367,6 +329,85 @@
       "recently modified (last 48h)",
       "rce+30",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-46590",
+    "published": "2026-07-06T09:16:37.147",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in Apache Camel PQC component.\n\nThe camel-pqc component persists post-quantum key metadata (KeyMetadata) through pluggable KeyLifecycleManager implementations. HashicorpVaultKeyLifecycleManager and AwsSecretsManagerKeyLifecycleManager read that metadata back from the configured secret backend by deserializing a Base64-wrapped value with a raw java.io.ObjectInputStream.readObject() and no ObjectInputFilter or class allow-list; the cast to KeyMetadata happens only after readObject() returns, so any readObject() side effects in a crafted object run before the type check. The same unfiltered legacy-migration read also remained in FileBasedKeyLifecycleManager (for the stored KeyPair and KeyMetadata). A principal who can write to the operator-controlled backend that holds these values - the HashiCorp Vault KV path, or the AWS Secrets Manager secret (requiring a Vault token or secretsmanager:PutSecretValue) - could store a crafted serialized object that is deserialized during normal key-lifecycle operations, potentially leading to code execution in the context of the application that manages the keys. This is an incomplete-remediation follow-on to CVE-2026-40048 (CAMEL-23200), which changed FileBasedKeyLifecycleManager to store metadata as JSON / PKCS#8 / X.509 but did not add an ObjectInputFilter, did not cover the Vault and AWS sibling managers, and left FileBasedKeyLifecycleManager's own legacy-migration deserialization unfiltered.\nThis issue affects Apache Camel: from 4.18.0 before 4.18.3, from 4.19.0 before 4.21.0.\n\nUsers are recommended to upgrade to version 4.21.0, which fixes the issue. If users are on the 4.18.x LTS releases stream, then they are suggested to upgrade to 4.18.3. For deployments that cannot upgrade immediately, restrict write access to the key backend so that only the application's own identity can write the camel-pqc secrets (least-privilege HashiCorp Vault policies and secretsmanager:PutSecretValue IAM), and keep the PQC key material in a backend separate from any data that less-trusted principals can write.",
+    "references": [
+      "https://camel.apache.org/security/CVE-2026-46590.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 57.6,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-2398",
+    "published": "2026-07-10T17:16:56.320",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Authorization bypass through User-Controlled key vulnerability in Adam Retail Automation Ltd. MobilMen 20T allows Privilege Escalation.\n\nThis issue affects MobilMen 20T: from v3 through 10072026. NOTE: The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://siberguvenlik.gov.tr/guvenlik-bildirimleri/detay/tr-26-0526"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 38.9,
+    "tags": [
+      "auth_bypass",
+      "priv_esc"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-57827",
+    "published": "2026-07-11T10:16:34.057",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Joomla Extension - rsjoomla.com - Unauthenticated file upload in RSFiles component < 1.17.12 - The Joomla extension RSFiles is vulnerable to an unauthenticated arbitrary file upload that allows uploading executable files and leads to full RCE.",
+    "references": [
+      "https://mysites.guru/blog/rsfiles-unauthenticated-file-upload-rce/",
+      "https://www.rsjoomla.com/joomla-extensions/joomla-download-manager.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.3,
+    "epss_percentile": 83.4,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
     ]
   },
   {
@@ -545,7 +586,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.3,
+    "epss_percentile": 48.7,
     "tags": [
       "path_traversal",
       "rce"
@@ -599,7 +640,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 32.0,
+    "epss_percentile": 32.8,
     "tags": [
       "deserialization",
       "rce"
@@ -626,7 +667,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 27.2,
+    "epss_percentile": 28.1,
     "tags": [
       "deserialization",
       "dos",
@@ -654,7 +695,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.7,
+    "epss_percentile": 9.0,
     "tags": [
       "priv_esc",
       "rce"
@@ -682,8 +723,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 4.0,
-    "epss_percentile": 90.6,
+    "epss": 3.9,
+    "epss_percentile": 90.1,
     "tags": [
       "poc",
       "rce"
@@ -693,6 +734,60 @@
       "recently modified (last 48h)",
       "rce+30",
       "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-40859",
+    "published": "2026-07-06T09:16:35.520",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in Apache Camel.\n\nThe camel-vertx-http component deserializes HTTP response bodies carrying the Content-Type application/x-java-serialized-object using a raw java.io.ObjectInputStream, without applying any ObjectInputFilter (VertxHttpHelper.deserializeJavaObjectFromStream) This deserialization path is reached only when the producer endpoint is configured with transferException=true (or the component-level allowJavaSerializedObject=true) and throwExceptionOnFailure is left at its default value of true; in that case a backend HTTP response with a 5xx status and the application/x-java-serialized-object content type has its body deserialized with no class restrictions. An attacker who controls the backend the Camel producer talks to - through a man-in-the-middle position on an unencrypted (plain HTTP) connection, or by compromising the backend service - can return a crafted serialized Java object and, if a suitable gadget chain is present on the classpath, achieve remote code execution on the Camel application host. The path is not reachable in the default configuration, where transferException is false.\nThis issue affects Apache Camel: from 4.0.0 before 4.14.8, from 4.15.0 before 4.18.3, from 4.19.0 before 4.20.0.\n\nUsers are recommended to upgrade to version 4.20.0, which fixes the issue. If users are on the 4.14.x LTS releases stream, then they are suggested to upgrade to 4.14.8. If users are on the 4.18.x releases stream, then they are suggested to upgrade to 4.18.3. After upgrading, the deserialization performed by both helper utilities is constrained by a default ObjectInputFilter (allow-list java.**;javax.**;org.apache.camel.**;!*), which can be customised through the new deserializationFilter endpoint option or the JVM-wide -Djdk.serialFilter system property. For deployments that cannot upgrade immediately: do not enable transferException=true (or allowJavaSerializedObject=true) on producers that talk to untrusted or network-reachable backends; ensure producer connections use TLS (https) so that a response cannot be substituted by a man-in-the-middle; and, where the option is required, set an explicit -Djdk.serialFilter allow-list (for example java.**;org.apache.camel.**;!*) to constrain deserialization.",
+    "references": [
+      "https://camel.apache.org/security/CVE-2026-40859.html",
+      "http://www.openwall.com/lists/oss-security/2026/07/05/3"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.0,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43865",
+    "published": "2026-07-06T09:16:35.787",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in Apache Camel Hazelcast component.\n\nThe camel-hazelcast component creates and manages Hazelcast instances using a default configuration that applies no Java deserialization filter. When Camel builds the Hazelcast Config itself - that is, when no user-supplied HazelcastInstance, hazelcastConfigUri, or referenced Config bean is provided - neither Hazelcast's JavaSerializationFilterConfig nor a Camel-side ObjectInputFilter is configured, so objects received over the Hazelcast cluster protocol are deserialized inside Hazelcast's own serialization layer (ObjectInputStream.readObject) before Camel ever processes them. An attacker who can join or otherwise reach the Hazelcast cluster can publish a crafted serialized Java object that is then deserialized on every Camel node, resulting in remote code execution. The exposure is present by default and requires no opt-in endpoint configuration: any route using a hazelcast consumer (hazelcast-topic, hazelcast-queue, hazelcast-seda, hazelcast-map, hazelcast-multimap, hazelcast-replicatedmap, hazelcast-list, hazelcast-set), as well as the HazelcastAggregationRepository and HazelcastIdempotentRepository, is affected whenever the managed instance is created from Camel's default configuration.\nThis issue affects Apache Camel: from 4.0.0 before 4.14.8, from 4.15.0 before 4.18.3, from 4.19.0 before 4.21.0.\n\nUsers are recommended to upgrade to version 4.21.0, which fixes the issue. If users are on the 4.14.x LTS releases stream, then they are suggested to upgrade to 4.14.8. If users are on the 4.18.x releases stream, then they are suggested to upgrade to 4.18.3. The fix makes Camel apply a default Hazelcast JavaSerializationFilterConfig (whitelisting the java., javax. and org.apache.camel. class-name prefixes and blacklisting java.net.) to instances it creates from its own default configuration, while leaving any user-supplied Config or HazelcastInstance untouched. For deployments that cannot upgrade immediately, configure a deserialization filter on the Hazelcast instance (Hazelcast JavaSerializationFilterConfig, or the JVM-wide system property -Djdk.serialFilter=!java.net.**;java.**;javax.**;org.apache.camel.**;!*) and enable Hazelcast cluster authentication and TLS to restrict who can reach the cluster.",
+    "references": [
+      "https://camel.apache.org/security/CVE-2026-43865.html",
+      "http://www.openwall.com/lists/oss-security/2026/07/05/5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.0,
+    "epss_percentile": 62.1,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -709,7 +804,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 45.7,
+    "epss_percentile": 46.2,
     "tags": [
       "path_traversal",
       "rce"
@@ -773,7 +868,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.3,
+    "epss_percentile": 48.6,
     "tags": [
       "auth_bypass",
       "path_traversal"
@@ -799,8 +894,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.5,
-    "epss_percentile": 74.1,
+    "epss": 1.0,
+    "epss_percentile": 61.7,
     "tags": [
       "command_injection",
       "rce"
@@ -830,7 +925,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 47.7,
+    "epss_percentile": 48.0,
     "tags": [
       "rce",
       "ssrf"
@@ -859,7 +954,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 61.8,
+    "epss_percentile": 61.9,
     "tags": [
       "path_traversal",
       "rce"
@@ -869,6 +964,33 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-57828",
+    "published": "2026-07-11T10:16:35.710",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Joomla Extension - phoca.cz - Authenticated file upload in Phoca Downloads component < 6.1.3 - The Joomla extension Phoca Downloads is vulnerable to an authenticated arbitrary file upload that allows registered users uploading executable files and leads to full RCE.",
+    "references": [
+      "https://mysites.guru/blog/phoca-download-authenticated-file-upload-rce/",
+      "https://www.phoca.cz/phocadownload"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 45.3,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
     ]
   },
   {
@@ -887,7 +1009,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 63.3,
+    "epss_percentile": 63.4,
     "tags": [
       "path_traversal",
       "rce"
@@ -900,30 +1022,32 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-12484",
-    "published": "2026-07-19T20:16:28.800",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
+    "cve_id": "CVE-2026-58122",
+    "published": "2026-07-09T22:17:09.363",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "A vulnerability in keras-team/keras version 3.15.0 allows unsafe deserialization of attacker-controlled PyTorch pickle data through the public `keras.layers.TorchModuleWrapper.from_config` method. This method invokes `torch.load(..., weights_only=False)` without requiring an explicit unsafe opt-in, such as a `safe_mode=False` parameter. When called outside a `SafeModeScope(True)` context, the absence of an ambient safe mode state permits unsafe deserialization by default. This issue can lead to arbitrary code execution if untrusted Keras layer configurations are processed using this method. The vulnerability arises because the method does not enforce safe deserialization practices unless explicitly guarded by Keras safe mode.",
+    "summary": "Hermes WebUI before 0.51.307 contains an authentication bypass vulnerability that allows unauthenticated remote attackers to circumvent local-origin IP restrictions on onboarding endpoints by supplying a spoofed X-Forwarded-For header with a loopback address. Attackers can exploit this bypass to perform server-side request forgery against internal services including cloud metadata endpoints, overwrite LLM provider configuration and API keys with attacker-controlled values, or initiate OAuth device-code flows to obtain persistent access tokens stored in auth.json.",
     "references": [
-      "https://huntr.com/bounties/ab14df49-13b5-4442-b754-3189430bfa28",
-      "https://huntr.com/bounties/ab14df49-13b5-4442-b754-3189430bfa28"
+      "https://github.com/nesquena/hermes-webui/commit/70596e6993be0d4cee083c1c1a86f5e7ad5d57b7",
+      "https://github.com/nesquena/hermes-webui/pull/3758",
+      "https://github.com/nesquena/hermes-webui/releases/tag/v0.51.307",
+      "https://www.vulncheck.com/advisories/hermes-webui-authentication-bypass-via-x-forwarded-for-header-spoofing"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 32.3,
+    "epss_percentile": 31.0,
     "tags": [
-      "deserialization",
-      "rce"
+      "auth_bypass",
+      "ssrf"
     ],
-    "intel_score": 99.0,
+    "intel_score": 98.5,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
+      "auth_bypass+25",
+      "ssrf+18"
     ]
   },
   {
@@ -941,7 +1065,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 45.7,
+    "epss_percentile": 46.1,
     "tags": [
       "deserialization",
       "rce"
@@ -968,7 +1092,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 24.4,
+    "epss_percentile": 25.3,
     "tags": [
       "path_traversal",
       "rce"
@@ -978,37 +1102,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-57860",
-    "published": "2026-07-17T17:17:16.777",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ForgeCode (tailcallhq/forgecode), an AI pair-programming CLI, automatically loads and executes the MCP servers defined in a repository's .mcp.json file on startup without user confirmation. A malicious repository can supply a crafted .mcp.json whose mcpServers entries specify arbitrary command and args values (for example, command: bash with args: ['-c', 'touch /tmp/pwned']). When a user runs the forge CLI inside a cloned untrusted repository, the specified commands are spawned with the invoking user's privileges, resulting in arbitrary code execution. This provides a reliable initial-access and persistence primitive against developers who evaluate untrusted repositories with ForgeCode.",
-    "references": [
-      "https://github.com/tailcallhq/forgecode",
-      "https://github.com/tailcallhq/forgecode/commit/68ca3a3a26c73c38a700453d3d021b5bbdc15dbd",
-      "https://github.com/tailcallhq/forgecode/issues/3022",
-      "https://github.com/tailcallhq/forgecode/issues/3252",
-      "https://www.vulncheck.com/advisories/forgecode-arbitrary-code-execution-via-unvetted-mcp-json-in-untrusted-repository",
-      "https://github.com/tailcallhq/forgecode/issues/3022"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.8,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 97.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
     ]
   },
   {
@@ -1026,8 +1119,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.2,
+    "epss": 0.5,
+    "epss_percentile": 43.5,
     "tags": [
       "path_traversal",
       "rce"
@@ -1037,6 +1130,38 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-35029",
+    "published": "2026-04-06T17:17:12.353",
+    "last_modified": "2026-10-23T23:10:00.157",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "LiteLLM is a proxy server (AI Gateway) to call LLM APIs in OpenAI (or native) format. Prior to 1.83.0, the /config/update endpoint does not enforce admin role authorization. A user who is already authenticated into the platform can then use this endpoint to modify proxy configuration and environment variables, register custom pass-through endpoint handlers pointing to attacker-controlled Python code, achieving remote code execution, read arbitrary server files by setting UI_LOGO_PATH and fetching via /get_image, and take over other privileged accounts by overwriting UI_USERNAME and UI_PASSWORD environment variables. Fixed in v1.83.0.",
+    "references": [
+      "https://github.com/BerriAI/litellm/security/advisories/GHSA-53mr-6c8q-9789",
+      "http://seclists.org/fulldisclosure/2026/Apr/17",
+      "https://access.redhat.com/errata/RHSA-2026:13545",
+      "https://access.redhat.com/errata/RHSA-2026:28960",
+      "https://access.redhat.com/errata/RHSA-2026:30056",
+      "https://access.redhat.com/security/cve/CVE-2026-35029",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2455474",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-35029.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 38.6,
+    "epss_percentile": 98.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Moderate EPSS prob 38.6% (+10)"
     ]
   },
   {
@@ -1054,7 +1179,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 56.6,
+    "epss_percentile": 56.7,
     "tags": [
       "dos",
       "rce"
@@ -1080,7 +1205,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 7.0,
+    "epss_percentile": 7.4,
     "tags": [
       "path_traversal",
       "rce"
@@ -1133,7 +1258,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 53.5,
+    "epss_percentile": 53.7,
     "tags": [
       "dos",
       "rce"
@@ -1159,7 +1284,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 58.1,
+    "epss_percentile": 58.2,
     "tags": [
       "command_injection",
       "deserialization"
@@ -1169,66 +1294,6 @@
       "recently modified (last 48h)",
       "deserialization+20",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58195",
-    "published": "2026-07-17T19:17:17.410",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Agentic-Flow is an AI agent orchestration platform. Prior to 2.0.14, agentic-flow MCP server tools in src/mcp/standalone-stdio.ts, src/mcp/fastmcp/servers/claude-flow-sdk.ts, src/mcp/fastmcp/servers/stdio-full.ts, src/mcp/fastmcp/servers/http-streaming-updated.ts, src/mcp/fastmcp/servers/http-sse.ts, src/mcp/fastmcp/servers/poc-stdio.ts, src/mcp/fastmcp/tools/agent/{execute,list,parallel}.ts, src/mcp/fastmcp/tools/swarm/orchestrate.ts, and src/mcp/fastmcp/tools/hooks/pretrain.ts interpolated attacker-influenceable tool parameters such as agent, task, name, language, and agentdb directly into shell command strings passed to execSync(), allowing arbitrary OS command execution with the privileges of the MCP server user. This issue is fixed in version 2.0.14.",
-    "references": [
-      "https://github.com/ruvnet/agentic-flow/commit/0c2ec967736a8b6b85832c6bae2a3e74989705ec",
-      "https://github.com/ruvnet/agentic-flow/issues/169",
-      "https://github.com/ruvnet/agentic-flow/pull/170",
-      "https://github.com/ruvnet/agentic-flow/security/advisories/GHSA-vcv2-r9jh-99m5",
-      "https://github.com/ruvnet/ruflo/issues/2414",
-      "https://github.com/ruvnet/ruflo/pull/2415",
-      "https://github.com/ruvnet/ruflo/releases/tag/v3.12.4",
-      "https://github.com/ruvnet/agentic-flow/security/advisories/GHSA-vcv2-r9jh-99m5"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.3,
-    "tags": [
-      "command_injection",
-      "poc"
-    ],
-    "intel_score": 92.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "poc+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41252",
-    "published": "2026-07-20T17:17:08.310",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "xrdp is an open source RDP server. Versions 0.10.6 and prior contain a missing bounds check in xrdp, which allows a heap-based buffer overflow when operating in vnc-any mode. The issue occurs during the handling of RFB protocol color map messages from a VNC server, where incoming color indices are not properly validated. A malicious VNC server can exploit this flaw by sending crafted messages with out-of-range values, leading to an out-of-bounds write on the heap. This memory corruption can result in a denial of service (DoS) or potentially allow remote code execution (RCE) prior to authentication. This issue has been fixed in version 0.10.6.1.",
-    "references": [
-      "https://github.com/neutrinolabs/xrdp/releases/tag/v0.10.6.1",
-      "https://github.com/neutrinolabs/xrdp/security/advisories/GHSA-w5vg-6qmv-j63j"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 65.6,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 92.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
     ]
   },
   {
@@ -1247,7 +1312,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 15.4,
+    "epss_percentile": 16.1,
     "tags": [
       "path_traversal",
       "rce"
@@ -1273,7 +1338,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 7.3,
+    "epss_percentile": 7.7,
     "tags": [
       "path_traversal",
       "rce"
@@ -1283,6 +1348,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-61447",
+    "published": "2026-07-11T14:16:23.377",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "PraisonAI before 1.6.78 contains a remote code execution vulnerability in CodeAgent._execute_python() that executes LLM-generated Python code without AST validation, import restrictions, or sandbox enforcement. Attackers can influence LLM output through prompt injection to exfiltrate all environment secrets and execute arbitrary code on the host system.",
+    "references": [
+      "https://github.com/MervinPraison/PraisonAI/security/advisories/GHSA-2xv2-w8cq-5gxw",
+      "https://www.vulncheck.com/advisories/praisonai-before-remote-code-execution-via-codeagent",
+      "https://github.com/MervinPraison/PraisonAI/security/advisories/GHSA-2xv2-w8cq-5gxw"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.5,
+    "epss_percentile": 84.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 90.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -1299,135 +1390,11 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 46.2,
+    "epss_percentile": 46.6,
     "tags": [
       "rce"
     ],
     "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-9135",
-    "published": "2026-07-17T19:17:19.390",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 Langflow versions up to 1.9.2 (commit 94981c443d4918517b9e8163d70fc598dc33a32d) contain a code injection vulnerability in the Policies component's ToolGuard integration that bypasses the allow_custom_components=false security control. The vulnerability exists because the validation mechanism only checks the main component source code in node_template[\"code\"][\"value\"] but fails to validate dynamic CodeInput fields that store generated ToolGuard Python files. Attackers can embed malicious Python code in these unvalidated dynamic fields, which are persisted in Flow.data and later executed server-side when a guarded tool is invoked through the ToolGuard runtime. This allows authenticated users with flow creation privileges to achieve arbitrary Python code execution on the backend despite custom component restrictions. The vulnerability can be escalated through cross-tenant flow manipulation via the agentic MCP update_flow_component_field tool, which accepts attacker-controlled user_id parameters, enabling attackers to inject malicious code into victim users' flows. When combined with publicly accessible flows and specific misconfigurations (AUTO_LOGIN=true, NEW_USER_IS_ACTIVE=true), the attack can be conducted with reduced authentication requirements.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278920"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 57.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-8476",
-    "published": "2026-07-17T20:17:30.623",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 contain a critical remote code execution vulnerability in the disk-based caching mechanism. The AsyncDiskCache class uses Python's unsafe pickle.loads() function to deserialize cached objects from disk without validation, integrity verification, or authentication, enabling arbitrary code execution when malicious pickle payloads are processed. Attackers who can influence cached data through file system access, malicious workflow inputs, custom components, or API manipulation can achieve complete system compromise with the privileges of the Langflow server process.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278922"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 61.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-8481",
-    "published": "2026-07-17T20:17:30.747",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 contain a critical remote code execution vulnerability in the code validation API endpoint. The POST /api/v1/validate/code endpoint accepts user-supplied Python code and executes it directly using Python's built-in exec() function without sandboxing, input validation, or privilege restrictions, enabling any authenticated user to execute arbitrary system commands with the full privileges of the Langflow server process.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278923"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-8859",
-    "published": "2026-07-17T20:17:31.643",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 Langflow could allow an attacker to write arbitrary files to unintended locations due to improper input validation in the APIRequest component. A path traversal vulnerability exists when the \"Save to File\" feature is enabled, where filenames extracted from HTTP response Content-Disposition headers are not sanitized before being joined to the temporary directory path. An attacker controlling an external HTTP server can supply crafted filename values containing path traversal sequences (e.g., ../), enabling arbitrary file writes to locations accessible by the Langflow process.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278924"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 45.9,
-    "tags": [
-      "file_write",
-      "path_traversal"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-54051",
-    "published": "2026-07-20T17:17:57.643",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Network-AI is a TypeScript/Node.js multi-agent orchestrator. Prior to version 5.9.1, the agent sandbox gates shell commands behind an allowlist (`SandboxPolicy.isCommandAllowed`), which THREAT_MODEL.md calls the main control against a compromised agent (Adversary 3.2). The allowlist glob-matches the whole command string, but `ShellExecutor` runs that string through `/bin/sh -c`. So any wildcard allow such as `git *`, `npm *` or `node *` also matches `git status; <anything>`, and a scoped command becomes arbitrary execution. The issue is fixed in v5.9.1. `ShellExecutor` now executes via `spawn(file, args, { shell: false })` using a quote-aware parsed argv, so no shell is invoked. `SandboxPolicy.isCommandAllowed` and the new `SandboxPolicy.tokenizeCommand` reject any unquoted shell metacharacter (`; & | $ ` ` ` ( ) < > { }` newline) or unterminated quote before the allowlist glob match; quoted metacharacters are preserved as literal argument data. Users should upgrade to `network-ai@5.9.1` or later. As defense in depth, avoid broad wildcard allowlist entries such as `node *` / `npm *` which are direct code execution by design.",
-    "references": [
-      "https://github.com/Jovancoding/Network-AI/commit/379f77656b578144e03415c5b134d8309a4b5792",
-      "https://github.com/Jovancoding/Network-AI/security/advisories/GHSA-qw6v-5fcf-5666",
-      "https://github.com/Jovancoding/Network-AI/security/advisories/GHSA-qw6v-5fcf-5666"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1475,7 +1442,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.5,
-    "epss_percentile": 74.5,
+    "epss_percentile": 74.4,
     "tags": [
       "rce"
     ],
@@ -1534,7 +1501,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 45.7,
+    "epss_percentile": 46.1,
     "tags": [
       "rce"
     ],
@@ -1564,8 +1531,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 67.1,
+    "epss": 0.8,
+    "epss_percentile": 55.5,
     "tags": [
       "rce"
     ],
@@ -1590,8 +1557,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 62.6,
+    "epss": 0.6,
+    "epss_percentile": 46.0,
     "tags": [
       "rce"
     ],
@@ -1614,8 +1581,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.1,
+    "epss": 0.6,
+    "epss_percentile": 49.5,
     "tags": [
       "rce"
     ],
@@ -1670,8 +1637,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.6,
+    "epss": 0.3,
+    "epss_percentile": 27.2,
     "tags": [
       "rce"
     ],
@@ -1725,8 +1692,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.6,
+    "epss": 0.3,
+    "epss_percentile": 25.8,
     "tags": [
       "rce"
     ],
@@ -1754,8 +1721,62 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.0,
+    "epss": 0.3,
+    "epss_percentile": 17.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-24014",
+    "published": "2026-07-06T09:16:35.270",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Apache IoTDB DataNode’s internal RPC interface for creating Trigger instances uses the uploaded Trigger JAR name to build a file path without sufficient validation. If the internal DataNode RPC port is exposed to an untrusted network, an attacker may use path traversal sequences in the JAR name to write files outside the intended Trigger installation directory. This could allow arbitrary file write with the permissions of the IoTDB process.\n\nThis issue affects Apache IoTDB: from 1.3.3 before 2.0.8.\n\nUsers are recommended to upgrade to version 2.0.8, which fixes the issue.",
+    "references": [
+      "https://lists.apache.org/thread/38298f803gb5j9nlhf0l9zkf34o90h3m",
+      "http://www.openwall.com/lists/oss-security/2026/07/06/12"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.5,
+    "tags": [
+      "file_write",
+      "path_traversal"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58123",
+    "published": "2026-07-09T22:17:09.517",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Hermes WebUI before 0.51.788 contains an unauthenticated remote code execution vulnerability that allows remote attackers to execute arbitrary shell commands by accessing the embedded terminal API endpoints without credentials. Attackers can create a session, attach a PTY shell, and write arbitrary commands through the terminal input endpoint to achieve full command execution as the server process user via four sequential unauthenticated HTTP requests.",
+    "references": [
+      "https://github.com/nesquena/hermes-webui/commit/d257e5f36cfa9328600c8bde6f0de09a6ad9b6f4",
+      "https://github.com/nesquena/hermes-webui/pull/5268",
+      "https://github.com/nesquena/hermes-webui/releases/tag/v0.51.788",
+      "https://www.vulncheck.com/advisories/hermes-webui-unauthenticated-rce-via-terminal-api"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 4.6,
+    "epss_percentile": 91.7,
     "tags": [
       "rce"
     ],
@@ -1779,8 +1800,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 62.1,
+    "epss": 1.9,
+    "epss_percentile": 79.6,
     "tags": [
       "rce"
     ],
@@ -1806,8 +1827,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 66.3,
+    "epss": 1.0,
+    "epss_percentile": 63.8,
     "tags": [
       "rce"
     ],
@@ -1818,153 +1839,30 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-44180",
-    "published": "2026-07-16T22:17:02.237",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
+    "cve_id": "CVE-2026-40047",
+    "published": "2026-07-06T09:16:35.377",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.1,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Jupyter Enterprise Gateway launches remote Jupyter Notebook kernels across distributed clusters like Apache Spark, Kubernetes, and Docker Swarm. Versions 2.0.0rc1 and above prior to 3.3.0 have a prohibited UID and GID feature that by default prevents launching kernels with UID or GID 0 (root), and this restriction can be bypassed using a specially crafted KERNEL_UID or KERNEL_GID value. This input validation vulnerability allows running Jupyter kernels as root, which can be dangerous as it allows more attack surface, and may lead to container escapes, compromising the worker node and all workloads running on it. Repeated exploitation can compromise all worker nodes, and thus the entire Kubernetes cluster. It is possible to specify volume mounts, so one vector for a container escape is to use a hostPath R/W volume mount, use this UID/GID bypass to run as root, and then gain code execution in the underlying worker node by creating a crontab entry in the mounted host file system. This issue has been fixed in version 3.0.0.",
+    "summary": "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection') vulnerability in Apache Camel Docling component.\n\nThe camel-docling component invokes the external `docling` command-line tool by assembling an argument list in DoclingProducer and executing it through java.lang.ProcessBuilder. Custom CLI arguments supplied through the `CamelDoclingCustomArguments` exchange header (a List<String>) were appended to that argument list with insufficient validation: the original implementation relied on a denylist of disallowed flags and only rejected path values that contained a literal `../` sequence. As a result, a Camel route that forwards externally-influenced data into the `CamelDoclingCustomArguments` header (or into the path-bearing headers used to build the invocation) could cause the producer to pass unrecognized or unintended `docling` CLI flags to the subprocess, and could supply path-like argument values that resolved outside the intended directory through traversal sequences not caught by the literal `../` check. Because Camel itself builds the `docling` invocation from these values, the component is responsible for constraining them, and the weak validation allowed CLI-argument injection and directory traversal in the arguments passed to the external tool. The invocation uses the list-based form of ProcessBuilder, so a shell does not interpret the argument values; OS command injection through shell metacharacters was not possible, and the metacharacter rejection added by the fix is defense-in-depth.\nThis issue affects Apache Camel: from 4.15.0 before 4.18.3.\n\nUsers are recommended to upgrade to a release that contains the CAMEL-23212 fix. On the mainline the fix is included from Apache Camel 4.19.0 (and later releases such as 4.20.0). For users on the 4.18.x LTS releases stream, upgrade to 4.18.3. The fix replaces the denylist with a strict allowlist of recognized `docling` CLI flags (rejecting any unrecognized flag, and rejecting producer-managed flags such as the output-directory flags), defensively rejects shell metacharacters in argument values, and normalizes path-like values with Path.normalize() before validating them so that traversal sequences which bypass a literal `../` check are detected. As defence in depth, route authors should avoid mapping untrusted message content into the `CamelDoclingCustomArguments` header and the path-bearing headers, and should strip Camel-internal headers from messages that arrive from untrusted producers.",
     "references": [
-      "https://github.com/jupyter-server/enterprise_gateway/releases/tag/v3.3.0",
-      "https://github.com/jupyter-server/enterprise_gateway/security/advisories/GHSA-chq7-94j8-cj28",
-      "https://github.com/jupyter-server/enterprise_gateway/security/advisories/GHSA-chq7-94j8-cj28"
+      "https://camel.apache.org/security/CVE-2026-40047.html",
+      "http://www.openwall.com/lists/oss-security/2026/07/05/2"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.3,
+    "epss": 2.4,
+    "epss_percentile": 84.1,
     "tags": [
-      "rce"
+      "command_injection",
+      "path_traversal"
     ],
-    "intel_score": 89.0,
+    "intel_score": 88.5,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-9202",
-    "published": "2026-07-17T18:17:17.490",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 allows unauthenticated attackers to create unlimited user accounts on any Langflow instance; when NEW_USER_IS_ACTIVE=true (documented deployment option), newly created accounts are immediately active and can authenticate to reach RCE endpoints, bypassing the need for AUTO_LOGIN.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278929"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-8505",
-    "published": "2026-07-17T20:17:31.417",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "IBM Langflow OSS 1.0.0 through 1.10.0 has a vulnerability in Langflow's webhook authentication logic allows unauthenticated users to trigger the execution of any flow. The system incorrectly bypasses API key validation when the WEBHOOK_AUTH_ENABLE configuration is set to False (which is the default setting). This allows a remote attacker who knows a flow's UUID to execute it as if they were the owner, potentially leading to Remote Code Execution (RCE).",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7278921"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-53421",
-    "published": "2026-07-20T15:16:43.117",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper Isolation or Compartmentalization vulnerability in Apache Syncope.\n\n\n\nAn administrator with adequate entitlements can achieve remote code execution through the connector subsystem by relying on scripted connectors' (REST and SQL) capability to run Groovy scripts.\n\nThis issue affects Apache Syncope: from 3.0.0-M0 through 3.0.16, from 4.0.0-M0 Through 4.0.6, from 4.1.0-M0 through 4.1.1.\n\n\n\n\nUsers are recommended to upgrade to version 4.0.7 / 4.1.2, which fix this issue by hardening the Groovy security sandbox.",
-    "references": [
-      "https://lists.apache.org/thread/nmzvz6gb2ldm30wvyk613r8dfrb6r8yx",
-      "http://www.openwall.com/lists/oss-security/2026/07/20/7"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 66.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52656",
-    "published": "2026-07-20T22:17:15.900",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An issue in SJCAM AllWinner Tech products SJ4000-Air V1.4C and before and Whitelabel based v.1.4C and before allows an attacker to execute arbitrary code via a crafted FEX file",
-    "references": [
-      "https://keowu.re/posts/Lelouch--Reverse-Engineering-of-an-SJCAM-Action-Camera-with-proprietary-Android--based-firmware-and-Rewriting-a-completely-OpenSource-CFW",
-      "https://sjcam.com"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-65008",
-    "published": "2026-07-21T12:19:01.183",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Grav 2.0.4 (fixed in 2.0.7) contains a remote code execution vulnerability in Blueprint::dynamicData() (system/src/Grav/Common/Data/Blueprint.php), which passes a Class::method callable string and its arguments directly to call_user_func_array() without any allowlist. Because the form plugin routes page frontmatter through this path, an authenticated account with the admin.pages (or api.pages.write) permission can plant a malicious callable directive in a page. The command then executes as the web-server user whenever anyone — including an unauthenticated visitor — accesses the page.",
-    "references": [
-      "https://github.com/getgrav/grav/security/advisories/GHSA-fj2p-qj2f-74v5",
-      "https://www.vulncheck.com/advisories/grav-before-remote-code-execution-via-blueprint-dynamicdata",
-      "https://github.com/getgrav/grav/security/advisories/GHSA-fj2p-qj2f-74v5"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.5,
-    "epss_percentile": 84.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
+      "command_injection+18",
+      "path_traversal+15"
     ]
   },
   {
@@ -1981,7 +1879,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 57.4,
+    "epss_percentile": 57.5,
     "tags": [
       "rce"
     ],
@@ -1989,33 +1887,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-44178",
-    "published": "2026-07-20T17:17:09.060",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "xrdp is an open source RDP server. Versions 0.10.6 and prior contain a heap-based buffer overflow vulnerability within the virtual channel forwarding mechanism. When forwarding data from a remote client to the internal channel server, the xrdp process utilizes a fixed-size buffer without adequate bounds checking on the incoming payload. An authenticated remote attacker can exploit this flaw by sending a specially crafted virtual channel message that exceeds the buffer capacity, leading to heap memory corruption. This may result in a denial of service or the execution of arbitrary code with the privileges of the xrdp process. This issue has been fixed in version 0.10.6.1.",
-    "references": [
-      "https://github.com/neutrinolabs/xrdp/releases/tag/v0.10.6.1",
-      "https://github.com/neutrinolabs/xrdp/security/advisories/GHSA-hh7r-2rmq-q4g4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.8,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 87.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
     ]
   },
   {
@@ -2033,7 +1904,7 @@
     "source": "NVD",
     "cisa_kev": true,
     "epss": 11.8,
-    "epss_percentile": 96.1,
+    "epss_percentile": 96.0,
     "tags": [
       "cisa_kev",
       "in_the_wild"
@@ -2058,8 +1929,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 54.9,
+    "epss": 0.6,
+    "epss_percentile": 46.9,
     "tags": [
       "rce"
     ],
@@ -2085,32 +1956,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 55.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 85.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-52199",
-    "published": "2026-07-17T20:17:25.100",
-    "last_modified": "2026-10-24T20:10:00.137",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An issue in Generic OEM UZ801_v2.1 4G LTE Router V3.4.3 allows a remote attacker to execute arbitrary code via the sbin/adbd component",
-    "references": [
-      "https://github.com/lamaper/CVE-2026-52199",
-      "https://github.com/lamaper/CVE-2026-52199"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.2,
+    "epss_percentile": 55.7,
     "tags": [
       "rce"
     ],
@@ -2134,7 +1980,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.6,
+    "epss_percentile": 48.9,
     "tags": [
       "auth_bypass"
     ],
@@ -2161,7 +2007,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 34.9,
+    "epss_percentile": 35.6,
     "tags": [
       "dos",
       "rce"
@@ -2187,8 +2033,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.4,
+    "epss": 0.5,
+    "epss_percentile": 42.4,
     "tags": [
       "dos",
       "rce"
@@ -2219,7 +2065,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 2.1,
-    "epss_percentile": 81.3,
+    "epss_percentile": 81.2,
     "tags": [
       "rce"
     ],
@@ -2276,7 +2122,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.8,
+    "epss_percentile": 53.0,
     "tags": [
       "rce"
     ],
@@ -2305,7 +2151,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 51.6,
+    "epss_percentile": 51.8,
     "tags": [
       "rce"
     ],
@@ -2334,7 +2180,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 51.4,
+    "epss_percentile": 51.6,
     "tags": [
       "rce"
     ],
@@ -2365,7 +2211,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 53.4,
+    "epss_percentile": 53.6,
     "tags": [
       "rce"
     ],
@@ -2396,7 +2242,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 53.0,
+    "epss_percentile": 53.2,
     "tags": [
       "rce"
     ],
@@ -2421,7 +2267,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.9,
+    "epss_percentile": 53.1,
     "tags": [
       "dos",
       "rce"
@@ -2452,7 +2298,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.5,
-    "epss_percentile": 74.1,
+    "epss_percentile": 74.0,
     "tags": [
       "auth_bypass"
     ],
@@ -2491,7 +2337,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 54.6,
+    "epss_percentile": 54.8,
     "tags": [
       "rce"
     ],
@@ -2521,7 +2367,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 24.7,
+    "epss_percentile": 25.6,
     "tags": [
       "rce"
     ],
@@ -2552,7 +2398,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 25.8,
+    "epss_percentile": 26.7,
     "tags": [
       "rce"
     ],
@@ -2582,7 +2428,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 24.7,
+    "epss_percentile": 25.6,
     "tags": [
       "rce"
     ],
@@ -2606,7 +2452,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 53.8,
+    "epss_percentile": 54.0,
     "tags": [
       "auth_bypass"
     ],
@@ -2630,7 +2476,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 37.9,
+    "epss_percentile": 38.6,
     "tags": [
       "auth_bypass"
     ],
@@ -2638,37 +2484,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-35029",
-    "published": "2026-04-06T17:17:12.353",
-    "last_modified": "2026-10-23T23:10:00.157",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "LiteLLM is a proxy server (AI Gateway) to call LLM APIs in OpenAI (or native) format. Prior to 1.83.0, the /config/update endpoint does not enforce admin role authorization. A user who is already authenticated into the platform can then use this endpoint to modify proxy configuration and environment variables, register custom pass-through endpoint handlers pointing to attacker-controlled Python code, achieving remote code execution, read arbitrary server files by setting UI_LOGO_PATH and fetching via /get_image, and take over other privileged accounts by overwriting UI_USERNAME and UI_PASSWORD environment variables. Fixed in v1.83.0.",
-    "references": [
-      "https://github.com/BerriAI/litellm/security/advisories/GHSA-53mr-6c8q-9789",
-      "http://seclists.org/fulldisclosure/2026/Apr/17",
-      "https://access.redhat.com/errata/RHSA-2026:13545",
-      "https://access.redhat.com/errata/RHSA-2026:28960",
-      "https://access.redhat.com/errata/RHSA-2026:30056",
-      "https://access.redhat.com/security/cve/CVE-2026-35029",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2455474",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-35029.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 4.0,
-    "epss_percentile": 90.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -2685,8 +2500,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.4,
+    "epss": 0.7,
+    "epss_percentile": 53.2,
     "tags": [
       "rce"
     ],
@@ -2709,8 +2524,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.7,
+    "epss": 0.3,
+    "epss_percentile": 24.8,
     "tags": [
       "priv_esc"
     ],
@@ -2733,8 +2548,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.7,
+    "epss": 0.3,
+    "epss_percentile": 27.7,
     "tags": [
       "priv_esc"
     ],
@@ -2742,6 +2557,106 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-28564",
+    "published": "2026-07-10T08:16:21.897",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Insufficient Session Expiration, Authentication Bypass by Capture-replay vulnerability in Apache IoTDB.\nREST Basic Authentication Accepts Stale Cached Credentials\n\n\nThis issue affects Apache IoTDB: from 1.0.0 before 2.0.10.\n\nUsers are recommended to upgrade to version 2.0.10, which fixes the issue.",
+    "references": [
+      "https://lists.apache.org/thread/l38wpy7flvvfwv4rkps87l5z8gprnfy0",
+      "http://www.openwall.com/lists/oss-security/2026/07/10/1"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 52.2,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-57807",
+    "published": "2026-07-10T21:16:59.947",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Authentication Bypass Using an Alternate Path or Channel vulnerability in miniOrange Security Software Pvt Ltd. OAuth Single Sign On - SSO (OAuth Client) allows Password Recovery Exploitation.\n\nThis issue affects OAuth Single Sign On - SSO (OAuth Client): from n/a through 38.5.8.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/miniorange-oauth-oidc-single-sign-on/vulnerability/wordpress-oauth-single-sign-on-sso-oauth-client-plugin-38-5-8-broken-authentication-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 54.0,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-20744",
+    "published": "2026-07-10T23:16:47.683",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The charging station websocket endpoint accepts connections without \nproper authentication, which could lead to privilege escalation.",
+    "references": [
+      "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-188-01.json",
+      "https://www.cisa.gov/news-events/ics-advisories/icsa-26-188-01",
+      "https://www.hydroquebec.com/nous-joindre/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 54.9,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-56271",
+    "published": "2026-07-12T12:16:45.290",
+    "last_modified": "2026-10-25T15:10:00.147",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Flowise before 3.1.0 (affected versions 3.0.13 and earlier) uses weak hardcoded default JWT secrets ('auth_token', 'refresh_token') and default audience and issuer values ('AUDIENCE', 'ISSUER') in the enterprise passport authentication middleware (packages/server/src/enterprise/middleware/passport/index.ts). When the corresponding environment variables (JWT_AUTH_TOKEN_SECRET, JWT_REFRESH_TOKEN_SECRET, JWT_AUDIENCE, JWT_ISSUER) are not set, the application silently falls back to these publicly known defaults, allowing an attacker to forge valid JWTs and impersonate any user, including administrators, resulting in authentication bypass.",
+    "references": [
+      "https://github.com/FlowiseAI/Flowise/security/advisories/GHSA-cc4f-hjpj-g9p8",
+      "https://www.vulncheck.com/advisories/flowise-weak-default-jwt-secrets-in-authentication-middleware"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 51.1,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
     ]
   },
   {
@@ -2758,7 +2673,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 40.7,
+    "epss_percentile": 41.3,
     "tags": [
       "priv_esc"
     ],
@@ -2785,6 +2700,82 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 64.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-15767",
+    "published": "2026-07-14T21:16:42.187",
+    "last_modified": "2026-10-24T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Heap buffer overflow in libyuv in Google Chrome on Windows prior to 150.0.7871.125 allowed a remote attacker to execute arbitrary code inside a sandbox via a crafted video file. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/07/stable-channel-update-for-desktop_0353146366.html",
+      "https://issues.chromium.org/issues/514748734"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-15776",
+    "published": "2026-07-14T21:16:43.393",
+    "last_modified": "2026-10-24T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Inappropriate implementation in V8 in Google Chrome prior to 150.0.7871.125 allowed a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/07/stable-channel-update-for-desktop_0353146366.html",
+      "https://issues.chromium.org/issues/532595489"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-61457",
+    "published": "2026-07-15T12:18:20.480",
+    "last_modified": "2026-10-24T21:10:00.130",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Grav API plugin (getgrav/grav-plugin-api) before 1.0.3 contains a file upload extension bypass in the API media controller. HandlesMediaUploads::validateFileExtension() inspects only the final file extension via pathinfo($filename, PATHINFO_EXTENSION), so a user with api.media.write permission can upload a file with a double extension such as shell.php.jpg to bypass the dangerous extensions blocklist. The web server may then execute the file as PHP, resulting in remote code execution.",
+    "references": [
+      "https://github.com/getgrav/grav/security/advisories/GHSA-66v2-vxxf-xc3v",
+      "https://www.vulncheck.com/advisories/grav-before-remote-code-execution-via-file-upload-extension-bypass",
+      "https://github.com/getgrav/grav/security/advisories/GHSA-66v2-vxxf-xc3v"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 49.0,
     "tags": [
       "rce"
     ],
