@@ -588,6 +588,37 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-39973",
+    "published": "2026-04-21T02:16:07.903",
+    "last_modified": "2026-10-26T22:10:00.163",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Apktool is a tool for reverse engineering Android APK files. In versions 3.0.0 and 3.0.1, a path traversal vulnerability in `brut/androlib/res/decoder/ResFileDecoder.java` allows a maliciously crafted APK to write arbitrary files to the filesystem during standard decoding (`apktool d`). This is a security regression introduced in commit e10a045 (PR #4041, December 12, 2025), which removed the `BrutIO.sanitizePath()` call that previously prevented path traversal in resource file output paths. An attacker can embed `../` sequences in the `resources.arsc` Type String Pool to escape the output directory and write files to arbitrary locations, including `~/.ssh/config`, `~/.bashrc`, or Windows Startup folders, escalating to RCE. The fix in version 3.0.2 re-introduces `BrutIO.sanitizePath()` in `ResFileDecoder.java` before file write operations.",
+    "references": [
+      "https://github.com/iBotPeaches/Apktool/commit/e10a0450c7afcd9462c0b76bcbff0e7428b92bdd#diff-cd531ebe1014bfd18185bf21585ca5cdb16fbcb07703ebc47949a1b4e4e36bc3",
+      "https://github.com/iBotPeaches/Apktool/pull/4041",
+      "https://github.com/iBotPeaches/Apktool/releases/tag/v3.0.2",
+      "https://github.com/iBotPeaches/Apktool/security/advisories/GHSA-m8mh-x359-vm8m"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 7.8,
+    "tags": [
+      "file_write",
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 105.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-40342",
     "published": "2026-04-17T20:16:35.930",
     "last_modified": "2026-10-26T22:10:00.163",
@@ -811,6 +842,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-21571",
+    "published": "2026-04-21T17:16:22.950",
+    "last_modified": "2026-10-26T22:10:00.163",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "This Critical severity OS Command Injection vulnerability was introduced in versions 9.6.0, 10.0.0, 10.1.0, 10.2.0,\r\n11.0.0, 11.1.0, 12.0.0, and 12.1.0 of Bamboo Data Center.\r\n \r\nThis RCE (Remote Code Execution) vulnerability, with a CVSS Score of 9.4 and a CVSS Vector of\r\nCVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H allows an authenticated attacker to execute commands\r\non the remote system, which has high impact to confidentiality, high impact to integrity, high impact to availability,\r\nand requires no user interaction.\r\n \r\nAtlassian recommends that Bamboo Data Center customers upgrade to latest version, if you are unable to do so, upgrade\r\nyour instance to one of the specified supported fixed versions:\r\n Bamboo Data Center 9.6.0: Upgrade to a release greater than or equal to 9.6.25\r\n Bamboo Data Center 10.2: Upgrade to a release greater than or equal to 10.2.18 \r\n Bamboo Data Center 12.1: Upgrade to a release greater than or equal to 12.1.6\r\n\r\nSee the release notes ([https://confluence.atlassian.com/bambooreleases/bamboo-release-notes-1189793869.html]). You can download the latest version of Bamboo Data Center from the download center ([https://www.atlassian.com/software/bamboo/download-archives]).",
+    "references": [
+      "https://confluence.atlassian.com/pages/viewpage.action?pageId=1770913890",
+      "https://jira.atlassian.com/browse/BAM-26364"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.3,
+    "epss_percentile": 71.3,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-35573",
     "published": "2026-04-07T18:16:41.760",
     "last_modified": "2026-10-26T22:10:00.163",
@@ -865,32 +923,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-3517",
-    "published": "2026-04-20T14:16:19.330",
-    "last_modified": "2026-10-25T23:10:00.167",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OS Command Injection Remote Code Execution Vulnerability in API in Progress ADC Products allows an authenticated attacker with “Geo Administration” permissions to execute arbitrary commands on the LoadMaster appliance by exploiting unsanitized input in the 'addcountry' command",
-    "references": [
-      "https://community.progress.com/s/article/LoadMaster-Security-Vulnerabilites-CVE-2026-3517-CVE-2026-3518-CVE-2026-3519-CVE-2026-4048-CVE-2026-21876"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 15.5,
-    "epss_percentile": 96.8,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 100.0,
-    "reasons": [
-      "rce+30",
-      "command_injection+18",
-      "Moderate EPSS prob 15.5% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-3519",
     "published": "2026-04-20T14:16:19.683",
     "last_modified": "2026-10-26T21:10:00.170",
@@ -940,32 +972,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-40044",
-    "published": "2026-04-13T19:16:52.290",
-    "last_modified": "2026-10-25T23:10:00.167",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Pachno 1.0.6 contains a deserialization vulnerability that allows unauthenticated attackers to execute arbitrary code by injecting malicious serialized objects into cache files. Attackers can write PHP object payloads to world-writable cache files with predictable names in the cache directory, which are unserialized during framework bootstrap before authentication checks occur.",
-    "references": [
-      "https://www.vulncheck.com/advisories/pachno-filecache-deserialization-remote-code-execution",
-      "https://www.zeroscience.mk/en/vulnerabilities/ZSL-2026-5986.php"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.6,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "rce+30",
-      "deserialization+20"
     ]
   },
   {
@@ -1034,6 +1040,42 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-0631",
+    "published": "2026-02-02T18:16:13.620",
+    "last_modified": "2026-10-28T22:17:11.427",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An OS Command Injection vulnerability exists in the Surfshark VPN login functionality in TP-Link Archer BE230 v1.2, BE3600v1, AX10 v3 and AXE75 v1, allowing an adjacent \n\nauthenticated \n\nattacker to execute arbitrary code. Successful exploitation could allow an attacker to gain full administrative control of the device, resulting in severe compromise of configuration integrity, network security, and service availability.\n\nThis CVE covers one of multiple distinct OS command injection issues identified across separate code paths. Although similar in nature, each instance is tracked under a unique CVE ID.\n\nThis issue affects Archer BE230 v1.2 < 1.2.4 Build 20251218 rel.70420 and Archer AXE75 v1 < 1.5.6 Build 20260623.",
+    "references": [
+      "https://www.tp-link.com/en/support/download/archer-ax10/v3/#Firmware",
+      "https://www.tp-link.com/en/support/download/archer-axe75/v1/#Firmware",
+      "https://www.tp-link.com/en/support/download/archer-be230/v1.20/#Firmware",
+      "https://www.tp-link.com/en/support/download/archer-be3600/v1/#Firmware",
+      "https://www.tp-link.com/kr/support/download/archer-be3600/v1/#Firmware",
+      "https://www.tp-link.com/sg/support/download/archer-be230/v1.20/#Firmware",
+      "https://www.tp-link.com/us/support/download/archer-ax10/v3/#Firmware",
+      "https://www.tp-link.com/us/support/download/archer-axe75/v1/#Firmware",
+      "https://www.tp-link.com/us/support/download/archer-be230/v1.20/#Firmware",
+      "https://www.tp-link.com/us/support/download/archer-be3600/v1.26/#Firmware",
+      "https://www.tp-link.com/us/support/faq/4935/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.6,
+    "epss_percentile": 75.8,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 98.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
     ]
   },
   {
@@ -1140,36 +1182,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-22666",
-    "published": "2026-04-07T13:16:45.200",
-    "last_modified": "2026-10-26T00:10:00.150",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Dolibarr ERP/CRM versions prior to 23.0.2 contain an authenticated remote code execution vulnerability in the dol_eval_standard() function that fails to apply forbidden string checks in whitelist mode and does not detect PHP dynamic callable syntax. Attackers with administrator privileges can inject malicious payloads through computed extrafields or other evaluation paths using PHP dynamic callable syntax to bypass validation and achieve arbitrary command execution via eval().",
-    "references": [
-      "https://github.com/Dolibarr/dolibarr/commit/6f425521b3e6f9f27eca05228e02093dbaa40dea",
-      "https://github.com/Dolibarr/dolibarr/releases/tag/23.0.2",
-      "https://github.com/Dolibarr/dolibarr/security/advisories/GHSA-vmvw-qq8w-wqhg",
-      "https://jivasecurity.com/writeups/dolibarr-remote-code-execution-cve-2026-22666",
-      "https://www.vulncheck.com/advisories/dolibarr-erp-crm-authenticated-rce-via-dol-eval-standard"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 15.5,
-    "epss_percentile": 96.8,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "rce+30",
-      "command_injection+18",
-      "Moderate EPSS prob 15.5% (+10)"
     ]
   },
   {
@@ -1524,6 +1536,30 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 53.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 90.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39861",
+    "published": "2026-04-21T01:16:06.647",
+    "last_modified": "2026-10-26T22:10:00.163",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Claude Code is an agentic coding tool. Prior to version 2.1.64, Claude Code's sandbox did not prevent sandboxed processes from creating symlinks pointing to locations outside the workspace. When Claude Code subsequently wrote to a path within such a symlink, its unsandboxed process followed the symlink and wrote to the target location outside the workspace without prompting the user for confirmation. This allowed a sandbox escape where neither the sandboxed command nor the unsandboxed app could independently write outside the workspace, but their combination could write to arbitrary locations, potentially leading to code execution outside the sandbox. Reliably exploiting this required the ability to add untrusted content into a Claude Code context window to trigger sandboxed code execution via prompt injection. Users on standard Claude Code auto-update have received this fix automatically. Users performing manual updates are advised to update to version 2.1.64 or later.",
+    "references": [
+      "https://github.com/anthropics/claude-code/security/advisories/GHSA-vp62-r36r-9xqp"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 53.4,
     "tags": [
       "rce"
     ],
@@ -2644,105 +2680,78 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-33955",
-    "published": "2026-03-27T22:16:22.083",
-    "last_modified": "2026-10-25T23:10:00.167",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Notesnook is a note-taking app. Prior to version 3.3.11 on Web/Desktop, a cross-site scripting vulnerability stored in the note history comparison viewer can escalate to remote code execution in a desktop application. The issue is triggered when an attacker-controlled note header is displayed using `dangerouslySetInnerHTML` without secure handling. When combined with the full backup and restore feature in the desktop application, this becomes remote code execution because Electron is configured with `nodeIntegration: true` and `contextIsolation: false`. Version 3.3.11 patches the issue.",
-    "references": [
-      "https://github.com/streetwriters/notesnook/security/advisories/GHSA-45g3-cv93-q59v"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 28.7,
-    "tags": [
-      "rce",
-      "xss"
-    ],
-    "intel_score": 81.0,
-    "reasons": [
-      "rce+30",
-      "xss+8"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-32956",
-    "published": "2026-04-20T04:16:34.810",
-    "last_modified": "2026-10-26T00:10:00.150",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SD-330AC and AMC Manager provided by silex technology, Inc. contain a heap-based buffer overflow vulnerability in processing the redirect URLs. Arbitrary code may be executed on the device.",
-    "references": [
-      "https://jvn.jp/en/vu/JVNVU94271449/",
-      "https://www.silex.jp/support/security-advisories/2026-001",
-      "https://www.silex.jp/support/security-advisories/en/2026-001"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-26026",
-    "published": "2026-04-06T15:17:07.093",
-    "last_modified": "2026-10-26T00:10:00.150",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "GLPI is a free asset and IT management software package. From 11.0.0 to before 11.0.6, template injection by an administrator lead to RCE. This vulnerability is fixed in 11.0.6.",
-    "references": [
-      "https://github.com/glpi-project/glpi/security/advisories/GHSA-2c98-648q-h27h"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 11.5,
-    "epss_percentile": 96.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-33943",
-    "published": "2026-03-27T22:16:21.393",
-    "last_modified": "2026-10-26T00:10:00.150",
+    "cve_id": "CVE-2026-0233",
+    "published": "2026-04-13T08:16:22.150",
+    "last_modified": "2026-10-26T22:10:00.163",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Happy DOM is a JavaScript implementation of a web browser without its graphical user interface. In versions 15.10.0 through 20.8.7, a code injection vulnerability in `ECMAScriptModuleCompiler` allows an attacker to achieve Remote Code Execution (RCE) by injecting arbitrary JavaScript expressions inside `export { }` declarations in ES module scripts processed by happy-dom. The compiler directly interpolates unsanitized content into generated code as an executable expression, and the quote filter does not strip backticks, allowing template literal-based payloads to bypass sanitization. Version 20.8.8 fixes the issue.",
+    "summary": "A certificate validation vulnerability in Palo Alto Networks Autonomous Digital Experience Manager on Windows allows an unauthenticated attacker with adjacent network access to execute arbitrary code with NT AUTHORITY\\SYSTEM  privileges.",
     "references": [
-      "https://github.com/capricorn86/happy-dom/commit/5437fdf8f13adb9590f9f52616d9f69c3ee8db3c",
-      "https://github.com/capricorn86/happy-dom/releases/tag/v20.8.8",
-      "https://github.com/capricorn86/happy-dom/security/advisories/GHSA-6q6h-j7hj-3r64",
-      "https://access.redhat.com/security/cve/CVE-2026-33943",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2452522",
-      "https://github.com/capricorn86/happy-dom/security/advisories/GHSA-6q6h-j7hj-3r64",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-33943.json"
+      "https://security.paloaltonetworks.com/CVE-2026-0233"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-33858",
+    "published": "2026-04-13T15:17:33.343",
+    "last_modified": "2026-10-26T22:10:00.163",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dag Authors, who normally should not be able to execute code in the webserver context could craft XCom payload causing the webserver to execute arbitrary code. Since Dag Authors are already highly trusted, severity of this issue is Low.\n\n\nUsers are recommended to upgrade to Apache Airflow 3.2.0, which resolves this issue.",
+    "references": [
+      "https://github.com/apache/airflow/pull/64148",
+      "https://lists.apache.org/thread/1npt3o2x81s0gw9tmfcv4n7p1z9hdmy0",
+      "http://www.openwall.com/lists/oss-security/2026/04/13/7"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 50.8,
+    "epss_percentile": 48.2,
     "tags": [
       "rce"
     ],
-    "intel_score": 74.0,
+    "intel_score": 84.0,
     "reasons": [
+      "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39813",
+    "published": "2026-04-14T16:16:45.680",
+    "last_modified": "2026-10-26T21:10:00.170",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A path traversal: '../filedir' vulnerability in Fortinet FortiSandbox 5.0.0 through 5.0.5, FortiSandbox 4.4.0 through 4.4.8 may allow attacker to escalation of privilege via specially crafted HTTP requests.",
+    "references": [
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-112"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 22.2,
+    "epss_percentile": 97.7,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "Moderate EPSS prob 22.2% (+10)"
     ]
   }
 ]
