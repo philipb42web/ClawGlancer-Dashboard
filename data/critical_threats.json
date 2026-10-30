@@ -2,7 +2,7 @@
   {
     "cve_id": "CVE-2026-97229",
     "published": "2026-10-13T02:17:00.840",
-    "last_modified": "2026-10-29T20:17:37.330",
+    "last_modified": "2026-10-30T04:18:31.240",
     "cvss_v3": 10.0,
     "severity": "CRITICAL",
     "affected": [],
@@ -313,7 +313,7 @@
   {
     "cve_id": "CVE-2026-92982",
     "published": "2026-10-15T16:18:23.657",
-    "last_modified": "2026-10-29T15:17:25.330",
+    "last_modified": "2026-10-30T04:18:29.683",
     "cvss_v3": 8.5,
     "severity": "HIGH",
     "affected": [],
@@ -422,6 +422,33 @@
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-111357",
+    "published": "2026-10-15T21:17:13.190",
+    "last_modified": "2026-10-30T04:18:10.020",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Ivanti Connect Secure 22.8R2.4 mishandles the manner in which the dsinvoked broker trusts DSCache configuration data, leading to privilege escalation to root, as exploited in the wild in October 2026.",
+    "references": [
+      "https://hub.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935",
+      "https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 16.0,
+    "tags": [
+      "in_the_wild",
+      "priv_esc"
+    ],
+    "intel_score": 105.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "in_the_wild+35"
     ]
   },
   {
@@ -2429,7 +2456,7 @@
   {
     "cve_id": "CVE-2026-96889",
     "published": "2026-09-23T20:17:27.587",
-    "last_modified": "2026-10-29T20:17:37.103",
+    "last_modified": "2026-10-30T01:16:48.203",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -2446,6 +2473,7 @@
       "https://access.redhat.com/errata/RHSA-2026:92336",
       "https://access.redhat.com/errata/RHSA-2026:92353",
       "https://access.redhat.com/errata/RHSA-2026:92382",
+      "https://access.redhat.com/errata/RHSA-2026:92573",
       "https://access.redhat.com/errata/RHSA-2026:92579",
       "https://access.redhat.com/security/cve/CVE-2026-96889",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
@@ -2877,7 +2905,7 @@
   {
     "cve_id": "CVE-2026-86320",
     "published": "2026-09-17T08:17:02.200",
-    "last_modified": "2026-10-28T19:19:06.060",
+    "last_modified": "2026-10-30T01:16:47.843",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -2892,6 +2920,7 @@
       "https://access.redhat.com/errata/RHSA-2026:84842",
       "https://access.redhat.com/errata/RHSA-2026:86714",
       "https://access.redhat.com/errata/RHSA-2026:90896",
+      "https://access.redhat.com/errata/RHSA-2026:92220",
       "https://access.redhat.com/security/cve/CVE-2026-86320",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
       "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv",
@@ -3691,30 +3720,6 @@
       "recently modified (last 48h)",
       "command_injection+18",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-74014",
-    "published": "2026-08-20T12:16:37.187",
-    "last_modified": "2026-10-26T23:10:00.183",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Subscriber Arbitrary File Upload in IT Residence <= 3.2.1 versions.",
-    "references": [
-      "https://patchstack.com/database/wordpress/theme/it-residence/vulnerability/wordpress-it-residence-theme-3-2-1-arbitrary-file-upload-vulnerability?_s_id=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.3,
-    "tags": [
-      "file_write"
-    ],
-    "intel_score": 74.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "file_write+15"
     ]
   },
   {
@@ -6495,6 +6500,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-98432",
+    "published": "2026-10-15T13:17:13.987",
+    "last_modified": "2026-10-30T02:17:10.480",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nipv4: free inet_opt and ireq_opt after an RCU grace period\n\ntcp_v4_syn_recv_sock() transfers ownership of ireq->ireq_opt to the\nchild socket (newinet->inet_opt) without copying it.\n\nAnother cpu can concurrently process a retransmitted SYN for the same\nrequest socket, and send a SYNACK from tcp_check_req().\ntcp_v4_send_synack() and inet_csk_route_req() read ireq->ireq_opt\nunder rcu_read_lock() only, and ip_build_and_send_pkt() and\nip_options_build() then read opt->optlen twice.\n\nNote that the SYNACK timer itself is not an issue: it holds a\nreference on its request socket, and inet_csk_reqsk_queue_drop()\ncalls timer_delete_sync() before the child can be freed.\n\nSince commit 079096f103fa (\"tcp/dccp: install syn_recv requests\ninto ehash table\"), request sockets are processed without holding\nthe listener lock, so nothing prevents the child socket from being\nfreed while the SYNACK is still being built. TCP child sockets do\nnot have SOCK_RCU_FREE, and inet_sock_destruct() frees inet_opt\nwith a plain kfree(), leading to a use-after-free in\nip_options_build().\n\nA similar issue exists with request socket migration\n(net.ipv4.tcp_migrate_req=1, or a BPF_SK_REUSEPORT_SELECT_OR_MIGRATE\nprogram). reqsk_timer_handler() clones the request socket with\ninet_reqsk_clone(), so that the old request socket and its clone\nshare the same ireq_opt, then reqsk_migrate_reset() clears the\npointer in the old one. Another cpu holding a reference on the old\nrequest socket can still be using these options (sending a SYNACK,\nor creating a child in tcp_v4_syn_recv_sock()) when the clone is\nfreed, and tcp_v4_reqsk_destructor() also uses a plain kfree().\n\nReaders already use RCU, and other paths replacing inet_opt\n(do_ip_setsockopt(), cipso_v4_sock_setattr()...) already use\nkfree_rcu(). Use kfree_rcu() in inet_sock_destruct() and\ntcp_v4_reqsk_destructor() as well.\n\nIPv6 is not affected by the first issue, because tcp_v6_syn_recv_sock()\nduplicates the options. tcp_v6_reqsk_destructor() has the same\nmigration issue with ipv6_opt, which is only set by CALIPSO. This\nwill be addressed in a separate patch.",
+    "references": [
+      "https://git.kernel.org/stable/c/11a03ce3c4a62d84c10ccdfe47f8075006498568",
+      "https://git.kernel.org/stable/c/26d4c36d318cffbbd160884a0e4cec0da4da4936",
+      "https://git.kernel.org/stable/c/742f73df544e03744f2981c467d6542fe8172a2a",
+      "https://git.kernel.org/stable/c/89b5b1eb7d633c33832b7ff2c02e19a144705036",
+      "https://git.kernel.org/stable/c/95a8c8fa9f27dce64c40c41c062de7728bf34ab5",
+      "https://git.kernel.org/stable/c/a47406c769f72c070386985488f1c4d057df86b2",
+      "https://git.kernel.org/stable/c/b3b027ef0cd322bfa839b9aaf5b27551eea54cf6",
+      "https://git.kernel.org/stable/c/e3f33b0a1d89d738e2b913dab519226eaf76e15b",
+      "http://www.openwall.com/lists/oss-security/2026/10/30/1"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.8,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-112296",
     "published": "2026-10-19T14:17:08.510",
     "last_modified": "2026-10-27T11:17:27.733",
@@ -7026,7 +7060,7 @@
   {
     "cve_id": "CVE-2026-74860",
     "published": "2026-09-08T12:16:58.083",
-    "last_modified": "2026-10-29T20:17:35.133",
+    "last_modified": "2026-10-30T01:16:46.517",
     "cvss_v3": 8.5,
     "severity": "HIGH",
     "affected": [],
@@ -7068,6 +7102,7 @@
       "https://access.redhat.com/errata/RHSA-2026:91248",
       "https://access.redhat.com/errata/RHSA-2026:91249",
       "https://access.redhat.com/errata/RHSA-2026:92352",
+      "https://access.redhat.com/errata/RHSA-2026:92589",
       "https://access.redhat.com/security/cve/CVE-2026-74860",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529697"
     ],
@@ -7271,7 +7306,7 @@
   {
     "cve_id": "CVE-2026-87302",
     "published": "2026-10-20T22:20:07.320",
-    "last_modified": "2026-10-29T13:17:14.530",
+    "last_modified": "2026-10-30T04:18:27.790",
     "cvss_v3": 9.1,
     "severity": "CRITICAL",
     "affected": [],
@@ -7308,30 +7343,6 @@
     "intel_score": 55.0,
     "reasons": [
       "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-101648",
-    "published": "2026-10-20T22:18:19.140",
-    "last_modified": "2026-10-27T04:17:36.383",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Partner Management product of Oracle E-Business Suite (component: Internal Operations).  Supported versions that are affected are 12.2.3-12.2.15. Difficult to exploit vulnerability allows low privileged attacker with network access via HTTP to compromise Oracle Partner Management.  While the vulnerability is in Oracle Partner Management, attacks may significantly impact additional products (scope change).  Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all Oracle Partner Management accessible data as well as  unauthorized access to critical data or complete access to all Oracle Partner Management accessible data and unauthorized ability to cause a partial denial of service (partial DOS) of Oracle Partner Management. CVSS 3.1 Base Score 8.4 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:L).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 25.1,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 55.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
     ]
   },
   {
@@ -7397,30 +7408,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 33.1,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 54.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-101684",
-    "published": "2026-10-20T22:18:22.923",
-    "last_modified": "2026-10-27T04:17:36.870",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle E-Business Suite Integrated SOA Gateway product of Oracle E-Business Suite (component: Internal Operations).  Supported versions that are affected are 12.2.3-12.2.15. Easily exploitable vulnerability allows low privileged attacker with network access via HTTP to compromise Oracle E-Business Suite Integrated SOA Gateway.  Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all Oracle E-Business Suite Integrated SOA Gateway accessible data as well as  unauthorized access to critical data or complete access to all Oracle E-Business Suite Integrated SOA Gateway accessible data and unauthorized ability to cause a partial denial of service (partial DOS) of Oracle E-Business Suite Integrated SOA Gateway. CVSS 3.1 Base Score 8.3 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.9,
     "tags": [
       "dos"
     ],
@@ -8197,6 +8184,27 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 41.7,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-20586",
+    "published": "2026-10-05T02:16:53.803",
+    "last_modified": "2026-10-30T03:16:40.527",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In vdec, there is a possible out of bounds write due to a missing bounds check. This could lead to remote escalation of privilege with no additional execution privileges needed. User interaction is needed for exploitation. Patch ID: ALPS11383899; Issue ID: MSV-9614.",
+    "references": [
+      "https://www.mediatek.com/product-security-bulletin/October-2026"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.0,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -9483,6 +9491,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-28367",
+    "published": "2026-03-27T17:16:27.750",
+    "last_modified": "2026-10-30T03:16:41.440",
+    "cvss_v3": 8.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Undertow. A remote attacker can exploit this vulnerability by sending `\\r\\r\\r` as a header block terminator. This can be used for request smuggling with certain proxy servers, such as older versions of Apache Traffic Server and Google Cloud Classic Application Load Balancer, potentially leading to unauthorized access or manipulation of web requests.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:25125",
+      "https://access.redhat.com/errata/RHSA-2026:25126",
+      "https://access.redhat.com/security/cve/CVE-2026-28367",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2443260"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 53.8,
+    "tags": [],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-72769",
     "published": "2026-08-11T13:19:07.220",
     "last_modified": "2026-10-29T20:17:34.837",
@@ -9646,48 +9678,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "xss+8"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-101824",
-    "published": "2026-10-20T22:18:38.383",
-    "last_modified": "2026-10-27T04:17:37.357",
-    "cvss_v3": 8.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Document Management and Collaboration product of Oracle E-Business Suite (component: Attachments).  Supported versions that are affected are 12.2.3-12.2.15. Easily exploitable vulnerability allows low privileged attacker with network access via HTTP to compromise Document Management and Collaboration.  Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in Document Management and Collaboration, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all Document Management and Collaboration accessible data as well as  unauthorized access to critical data or complete access to all Document Management and Collaboration accessible data. CVSS 3.1 Base Score 8.7 (Confidentiality and Integrity impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:N).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 21.4,
-    "tags": [],
-    "intel_score": 53.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-83379",
-    "published": "2026-10-20T22:19:54.153",
-    "last_modified": "2026-10-27T04:17:55.980",
-    "cvss_v3": 8.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Weblogic Server Proxy Plug-in product of Oracle Fusion Middleware (component: WebLogic Server Proxy Plug-In for Third-Party Web Servers).  Supported versions that are affected are 12.2.1.4.0, 14.1.1.0.0 and  14.1.2.0.0. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle Weblogic Server Proxy Plug-in.  While the vulnerability is in Oracle Weblogic Server Proxy Plug-in, attacks may significantly impact additional products (scope change).  Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all Oracle Weblogic Server Proxy Plug-in accessible data as well as  unauthorized access to critical data or complete access to all Oracle Weblogic Server Proxy Plug-in accessible data. CVSS 3.1 Base Score 8.7 (Confidentiality and Integrity impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:N).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.8,
-    "tags": [],
-    "intel_score": 53.5,
-    "reasons": [
-      "recently modified (last 48h)"
     ]
   },
   {
@@ -10692,27 +10682,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-101704",
-    "published": "2026-10-20T22:18:24.843",
-    "last_modified": "2026-10-27T04:17:37.163",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Concurrent Processing product of Oracle E-Business Suite (component: Other).  Supported versions that are affected are 12.2.3-12.2.15. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle Concurrent Processing executes to compromise Oracle Concurrent Processing.  While the vulnerability is in Oracle Concurrent Processing, attacks may significantly impact additional products (scope change).  Successful attacks of this vulnerability can result in takeover of Oracle Concurrent Processing. CVSS 3.1 Base Score 8.2 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.6,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-101833",
     "published": "2026-10-20T22:18:39.397",
     "last_modified": "2026-10-27T12:16:47.523",
@@ -11164,36 +11133,6 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 65.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-60467",
-    "published": "2026-06-24T23:16:39.523",
-    "last_modified": "2026-10-27T01:19:03.260",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free in the gf_filter_pid_inst_swap_delete_task function (/filter_core/filter_pid.c) of GPAC Project/MP4Box before 26.02.0 allows attackers to cause a Denial of Service (DoS) via supplying a crafted media file.",
-    "references": [
-      "https://github.com/gpac/gpac/commit/976dacf65cb6986a4e4f350fb8d3ed0a17dc3a77",
-      "https://github.com/gpac/gpac/issues/3286",
-      "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/37/37_gf_filter_pid_inst_swap_delete_task_filter_core_filter_pid_c_574",
-      "https://github.com/sigdevel/pocs/blob/main/res/gpac/MP4Box/37/README.md",
-      "https://infosec.exchange/@sigdevel/116780518074911144",
-      "http://www.openwall.com/lists/oss-security/2026/06/27/4",
-      "http://www.openwall.com/lists/oss-security/2026/10/26/18"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 54.7,
     "tags": [
       "dos"
     ],
@@ -12834,69 +12773,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-101665",
-    "published": "2026-10-20T22:18:20.697",
-    "last_modified": "2026-10-27T04:17:36.547",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Mobile Field Service product of Oracle E-Business Suite (component: Admin UI).  Supported versions that are affected are 12.2.3-12.2.15. Easily exploitable vulnerability allows low privileged attacker with network access via HTTP to compromise Oracle Mobile Field Service.  Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all Oracle Mobile Field Service accessible data as well as  unauthorized access to critical data or complete access to all Oracle Mobile Field Service accessible data. CVSS 3.1 Base Score 8.1 (Confidentiality and Integrity impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.0,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-101672",
-    "published": "2026-10-20T22:18:21.543",
-    "last_modified": "2026-10-27T04:17:36.727",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Call Center Technology product of Oracle E-Business Suite (component: Internal Operations).  Supported versions that are affected are 12.2.3-12.2.15. Difficult to exploit vulnerability allows unauthenticated attacker with network access via RMI to compromise Oracle Call Center Technology.  Successful attacks of this vulnerability can result in takeover of Oracle Call Center Technology. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.8,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-101700",
-    "published": "2026-10-20T22:18:24.510",
-    "last_modified": "2026-10-27T04:17:37.020",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle Application Object Library product of Oracle E-Business Suite (component: Core).  Supported versions that are affected are 12.2.3-12.2.15. Difficult to exploit vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle Application Object Library.  Successful attacks of this vulnerability can result in takeover of Oracle Application Object Library. CVSS 3.1 Base Score 8.1 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.8,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-101772",
     "published": "2026-10-20T22:18:32.640",
     "last_modified": "2026-10-29T16:27:49.607",
@@ -13065,6 +12941,28 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-15801",
+    "published": "2026-09-21T09:17:05.743",
+    "last_modified": "2026-10-30T01:16:46.330",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was found in CRI-O related to the container checkpoint and restore feature. When CRI-O is configured to restore containers from checkpoint archives, insufficient validation of restore metadata may allow a user with sufficient privileges to perform unintended operations on the host filesystem. Successful exploitation requires that container checkpoint and restore functionality is enabled, which is not the default configuration. An attacker must also be able to trigger restoration of a container from untrusted checkpoint content.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-15801",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2500823"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.3,
+    "tags": [],
+    "intel_score": 50.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-83838",
     "published": "2026-10-13T19:20:31.923",
     "last_modified": "2026-10-27T20:06:13.937",
@@ -13130,7 +13028,7 @@
   {
     "cve_id": "CVE-2026-58014",
     "published": "2026-06-30T13:19:17.580",
-    "last_modified": "2026-10-29T06:17:22.683",
+    "last_modified": "2026-10-29T23:17:00.980",
     "cvss_v3": 7.3,
     "severity": "HIGH",
     "affected": [],
@@ -13217,6 +13115,8 @@
       "https://access.redhat.com/errata/RHSA-2026:82857",
       "https://access.redhat.com/errata/RHSA-2026:82888",
       "https://access.redhat.com/errata/RHSA-2026:89725",
+      "https://access.redhat.com/errata/RHSA-2026:92449",
+      "https://access.redhat.com/errata/RHSA-2026:92452",
       "https://access.redhat.com/security/cve/CVE-2026-58014",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2492255",
       "https://gitlab.gnome.org/GNOME/glib/-/issues/3930",
@@ -14092,6 +13992,31 @@
     "cisa_kev": false,
     "epss": 1.4,
     "epss_percentile": 71.9,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43961",
+    "published": "2026-08-19T14:17:31.793",
+    "last_modified": "2026-10-30T04:18:24.583",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Vim's netrw plugin. A crafted filename containing quote characters and expression fragments can break out of the quoted context during mark/unmark operations, allowing arbitrary Vimscript execution. This can be leveraged to run shell commands with the privileges of the user running Vim.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:57614",
+      "https://access.redhat.com/security/cve/CVE-2026-43961",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2460434",
+      "https://github.com/vim/vim/security/advisories/GHSA-66hr-7p6x-x5j3",
+      "http://www.openwall.com/lists/oss-security/2026/05/14/7"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.0,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -21239,48 +21164,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-1249",
-    "published": "2024-04-17T14:15:08.160",
-    "last_modified": "2026-10-27T03:16:26.273",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Keycloak's OIDC component in the \"checkLoginIframe,\" which allows unvalidated cross-origin messages. This flaw allows attackers to coordinate and send millions of requests in seconds using simple code, significantly impacting the application's availability without proper origin validation for incoming messages.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:1860",
-      "https://access.redhat.com/errata/RHSA-2024:1861",
-      "https://access.redhat.com/errata/RHSA-2024:1862",
-      "https://access.redhat.com/errata/RHSA-2024:1864",
-      "https://access.redhat.com/errata/RHSA-2024:1866",
-      "https://access.redhat.com/errata/RHSA-2024:1867",
-      "https://access.redhat.com/errata/RHSA-2024:1868",
-      "https://access.redhat.com/errata/RHSA-2024:2945",
-      "https://access.redhat.com/errata/RHSA-2024:4057",
-      "https://access.redhat.com/security/cve/CVE-2024-1249",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2262918",
-      "https://access.redhat.com/errata/RHSA-2024:1860",
-      "https://access.redhat.com/errata/RHSA-2024:1861",
-      "https://access.redhat.com/errata/RHSA-2024:1862",
-      "https://access.redhat.com/errata/RHSA-2024:1864",
-      "https://access.redhat.com/errata/RHSA-2024:1866",
-      "https://access.redhat.com/errata/RHSA-2024:1867",
-      "https://access.redhat.com/errata/RHSA-2024:1868",
-      "https://access.redhat.com/errata/RHSA-2024:2945",
-      "https://access.redhat.com/errata/RHSA-2024:4057",
-      "https://access.redhat.com/security/cve/CVE-2024-1249",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2262918"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.9,
-    "tags": [],
-    "intel_score": 47.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-42011",
     "published": "2026-05-07T15:16:09.760",
     "last_modified": "2026-10-29T06:17:21.030",
@@ -21958,6 +21841,104 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 24.8,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-16118",
+    "published": "2026-07-17T20:17:16.167",
+    "last_modified": "2026-10-29T23:16:55.880",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in xdgmime. A heap-based buffer overflow can be triggered in _xdg_mime_magic_parse_magic_line() in the xdgmimemagic.c file on little-endian systems when an attacker-controlled MIME magic file in a user-writable XDG data location (e.g., in the $XDG_DATA_HOME/mime/magic path) is parsed by an application performing MIME type detection (e.g., via g_content_type_guess()). When performing byte-swap, incorrect pointer arithmetic on the write side causes an out-of-bounds write of 2 bytes, resulting in an application crash or memory corruption.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:64799",
+      "https://access.redhat.com/errata/RHSA-2026:64800",
+      "https://access.redhat.com/errata/RHSA-2026:66451",
+      "https://access.redhat.com/errata/RHSA-2026:67956",
+      "https://access.redhat.com/errata/RHSA-2026:70636",
+      "https://access.redhat.com/errata/RHSA-2026:71403",
+      "https://access.redhat.com/errata/RHSA-2026:71404",
+      "https://access.redhat.com/errata/RHSA-2026:71405",
+      "https://access.redhat.com/errata/RHSA-2026:72394",
+      "https://access.redhat.com/errata/RHSA-2026:72395",
+      "https://access.redhat.com/errata/RHSA-2026:72399",
+      "https://access.redhat.com/errata/RHSA-2026:72470",
+      "https://access.redhat.com/errata/RHSA-2026:72475",
+      "https://access.redhat.com/errata/RHSA-2026:72476",
+      "https://access.redhat.com/errata/RHSA-2026:72502",
+      "https://access.redhat.com/errata/RHSA-2026:73859",
+      "https://access.redhat.com/errata/RHSA-2026:73909",
+      "https://access.redhat.com/errata/RHSA-2026:73929",
+      "https://access.redhat.com/errata/RHSA-2026:73930",
+      "https://access.redhat.com/errata/RHSA-2026:73959",
+      "https://access.redhat.com/errata/RHSA-2026:73960",
+      "https://access.redhat.com/errata/RHSA-2026:73961",
+      "https://access.redhat.com/errata/RHSA-2026:73962",
+      "https://access.redhat.com/errata/RHSA-2026:74359",
+      "https://access.redhat.com/errata/RHSA-2026:74360",
+      "https://access.redhat.com/errata/RHSA-2026:74361",
+      "https://access.redhat.com/errata/RHSA-2026:74362",
+      "https://access.redhat.com/errata/RHSA-2026:74363",
+      "https://access.redhat.com/errata/RHSA-2026:74364",
+      "https://access.redhat.com/errata/RHSA-2026:74365",
+      "https://access.redhat.com/errata/RHSA-2026:74450",
+      "https://access.redhat.com/errata/RHSA-2026:74458",
+      "https://access.redhat.com/errata/RHSA-2026:74459",
+      "https://access.redhat.com/errata/RHSA-2026:74460",
+      "https://access.redhat.com/errata/RHSA-2026:74461",
+      "https://access.redhat.com/errata/RHSA-2026:74462",
+      "https://access.redhat.com/errata/RHSA-2026:74463",
+      "https://access.redhat.com/errata/RHSA-2026:74674",
+      "https://access.redhat.com/errata/RHSA-2026:74677",
+      "https://access.redhat.com/errata/RHSA-2026:74678",
+      "https://access.redhat.com/errata/RHSA-2026:74679",
+      "https://access.redhat.com/errata/RHSA-2026:74681",
+      "https://access.redhat.com/errata/RHSA-2026:74683",
+      "https://access.redhat.com/errata/RHSA-2026:74685",
+      "https://access.redhat.com/errata/RHSA-2026:74687",
+      "https://access.redhat.com/errata/RHSA-2026:74688",
+      "https://access.redhat.com/errata/RHSA-2026:74771",
+      "https://access.redhat.com/errata/RHSA-2026:75652",
+      "https://access.redhat.com/errata/RHSA-2026:75654",
+      "https://access.redhat.com/errata/RHSA-2026:75655",
+      "https://access.redhat.com/errata/RHSA-2026:75657",
+      "https://access.redhat.com/errata/RHSA-2026:75658",
+      "https://access.redhat.com/errata/RHSA-2026:75659",
+      "https://access.redhat.com/errata/RHSA-2026:75660",
+      "https://access.redhat.com/errata/RHSA-2026:76042",
+      "https://access.redhat.com/errata/RHSA-2026:79357",
+      "https://access.redhat.com/errata/RHSA-2026:80756",
+      "https://access.redhat.com/errata/RHSA-2026:81127",
+      "https://access.redhat.com/errata/RHSA-2026:82059",
+      "https://access.redhat.com/errata/RHSA-2026:82061",
+      "https://access.redhat.com/errata/RHSA-2026:82066",
+      "https://access.redhat.com/errata/RHSA-2026:82304",
+      "https://access.redhat.com/errata/RHSA-2026:82322",
+      "https://access.redhat.com/errata/RHSA-2026:82336",
+      "https://access.redhat.com/errata/RHSA-2026:82347",
+      "https://access.redhat.com/errata/RHSA-2026:82354",
+      "https://access.redhat.com/errata/RHSA-2026:82368",
+      "https://access.redhat.com/errata/RHSA-2026:82371",
+      "https://access.redhat.com/errata/RHSA-2026:82372",
+      "https://access.redhat.com/errata/RHSA-2026:82415",
+      "https://access.redhat.com/errata/RHSA-2026:82857",
+      "https://access.redhat.com/errata/RHSA-2026:82888",
+      "https://access.redhat.com/errata/RHSA-2026:92449",
+      "https://access.redhat.com/errata/RHSA-2026:92452",
+      "https://access.redhat.com/security/cve/CVE-2026-16118",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2501732",
+      "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41",
+      "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.8,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
