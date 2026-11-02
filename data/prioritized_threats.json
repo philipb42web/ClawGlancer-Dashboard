@@ -233,36 +233,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-92982",
-    "published": "2026-10-15T16:18:23.657",
-    "last_modified": "2026-10-30T04:18:29.683",
-    "cvss_v3": 8.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Ansible Operator Plugins. A low-privileged Kubernetes user can exploit a Jinja2 template injection vulnerability by crafting malicious custom resource (CR) specification values. These values are processed by Ansible without proper sanitization, allowing embedded Jinja2 expressions to be executed within the operator pod. This can lead to arbitrary code execution and privilege escalation, granting the attacker control over the operator's service account with cluster-wide permissions.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:68695",
-      "https://access.redhat.com/errata/RHSA-2026:87120",
-      "https://access.redhat.com/errata/RHSA-2026:87124",
-      "https://access.redhat.com/security/cve/CVE-2026-92982",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2522227"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.9,
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 107.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-66208",
     "published": "2025-12-03T19:15:57.793",
     "last_modified": "2026-10-30T16:32:56.197",
@@ -837,6 +807,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-102649",
+    "published": "2026-10-26T18:17:21.803",
+    "last_modified": "2026-10-31T02:17:29.003",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Burrito is a Terraform Automation Collaboration Software (TACoS) Kubernetes operator. Prior to 0.13.0, `POST /api/webhook` accepts unsigned GitHub and GitLab events when a `TerraformRepository`'s credentials omit `webhookSecret` or set it to an empty value, including credentials configured for git authentication and polling. `Credential.WebhookSecret` is optional, and `go-playground/webhooks` skips signature or token verification when the secret is empty. Anyone who can reach `burrito-server`'s endpoint and knows a tracked repository's URL can forge events to create or delete `TerraformPullRequest` custom resources with attacker-chosen `Branch`, `Base`, and `ID` fields. For GitHub `pull_request` events, the controller fetches changed files using the real pull request number but does not cross-check the payload's branch against that pull request. Pairing a real, existing pull request number with an unrelated existing branch in the same repository can therefore cause an unauthorized `terraform plan` for affected layers using the operator's stored git and cloud credentials. Code analysis also indicates that the resulting plan can be posted to the real pull request's comment thread, exposing and misattributing another branch's infrastructure changes. Auto-apply is disabled for these temporary layers, so this vulnerability alone cannot force a `terraform apply`; plan-time provider and data-source code execution depends on the selected branch's contents. This issue is fixed in version 0.13.0.",
+    "references": [
+      "https://github.com/padok-team/burrito/commit/1d48432a4a0126429c99f5fa42567bf3711d1ca1",
+      "https://github.com/padok-team/burrito/releases/tag/v0.13.0",
+      "https://github.com/padok-team/burrito/security/advisories/GHSA-7m68-72r6-3jx8",
+      "https://github.com/padok-team/burrito/security/advisories/GHSA-7m68-72r6-3jx8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-13204",
     "published": "2025-11-14T17:16:01.603",
     "last_modified": "2026-10-30T19:17:39.940",
@@ -1256,50 +1253,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-96889",
-    "published": "2026-09-23T20:17:27.587",
-    "last_modified": "2026-10-30T01:16:48.203",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in librsvg. When processing an SVG document containing nested XML inclusions (Xincludes) with duplicate entity declarations, a use-after-free error can occur. This vulnerability arises because the library incorrectly frees an XML entity that is still in use by the parser. An attacker could potentially exploit this to cause a denial of service or execute arbitrary code.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:86331",
-      "https://access.redhat.com/errata/RHSA-2026:86841",
-      "https://access.redhat.com/errata/RHSA-2026:86842",
-      "https://access.redhat.com/errata/RHSA-2026:86921",
-      "https://access.redhat.com/errata/RHSA-2026:92212",
-      "https://access.redhat.com/errata/RHSA-2026:92213",
-      "https://access.redhat.com/errata/RHSA-2026:92214",
-      "https://access.redhat.com/errata/RHSA-2026:92218",
-      "https://access.redhat.com/errata/RHSA-2026:92336",
-      "https://access.redhat.com/errata/RHSA-2026:92353",
-      "https://access.redhat.com/errata/RHSA-2026:92382",
-      "https://access.redhat.com/errata/RHSA-2026:92573",
-      "https://access.redhat.com/errata/RHSA-2026:92579",
-      "https://access.redhat.com/security/cve/CVE-2026-96889",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
-      "https://crates.io/crates/librsvg",
-      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241",
-      "https://rustsec.org/advisories/RUSTSEC-2026-0305.html",
-      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.9,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 82.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-112408",
     "published": "2026-10-21T20:17:23.877",
     "last_modified": "2026-10-30T16:17:38.947",
@@ -1394,44 +1347,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86320",
-    "published": "2026-09-17T08:17:02.200",
-    "last_modified": "2026-10-30T01:16:47.843",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in flatpak-builder where Git hooks are not disabled when applying patch sources with use-git-am: true. An attacker who can provide a malicious source containing a Git post-applypatch hook can cause the hook to execute on the host during the build process, resulting in arbitrary code execution with the privileges of the user running flatpak-builder.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:80495",
-      "https://access.redhat.com/errata/RHSA-2026:80496",
-      "https://access.redhat.com/errata/RHSA-2026:80973",
-      "https://access.redhat.com/errata/RHSA-2026:84832",
-      "https://access.redhat.com/errata/RHSA-2026:84833",
-      "https://access.redhat.com/errata/RHSA-2026:84834",
-      "https://access.redhat.com/errata/RHSA-2026:84842",
-      "https://access.redhat.com/errata/RHSA-2026:86714",
-      "https://access.redhat.com/errata/RHSA-2026:90896",
-      "https://access.redhat.com/errata/RHSA-2026:92220",
-      "https://access.redhat.com/security/cve/CVE-2026-86320",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
-      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
-      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-108771",
     "published": "2026-10-19T10:16:44.690",
     "last_modified": "2026-10-30T17:17:13.363",
@@ -1484,7 +1399,7 @@
   {
     "cve_id": "CVE-2026-13097",
     "published": "2026-08-20T11:16:20.293",
-    "last_modified": "2026-10-30T18:17:28.027",
+    "last_modified": "2026-11-02T04:16:53.643",
     "cvss_v3": 8.7,
     "severity": "HIGH",
     "affected": [],
@@ -1500,6 +1415,7 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-13097",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2515974"
     ],
@@ -1589,38 +1505,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-96280",
-    "published": "2026-09-27T21:17:04.200",
-    "last_modified": "2026-10-29T22:17:12.277",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The OCI delta stream parser read sizes as guint64 but passed them to GLib I/O and allocation functions expecting gsize (32 bits on 32-bit systems), causing undersized allocations while subsequent operations use the original 64-bit size, leading to heap buffer overflows. An attacker controlling an OCI registry can craft a delta stream that triggers this during flatpak install/update, potentially achieving code execution on 32-bit systems.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:80497",
-      "https://access.redhat.com/errata/RHSA-2026:80498",
-      "https://access.redhat.com/errata/RHSA-2026:80687",
-      "https://access.redhat.com/errata/RHSA-2026:89733",
-      "https://access.redhat.com/errata/RHSA-2026:90364",
-      "https://access.redhat.com/errata/RHSA-2026:92369",
-      "https://access.redhat.com/security/cve/CVE-2026-96280",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2539419",
-      "https://github.com/flatpak/flatpak/security/advisories/GHSA-jr92-2v97-wgvc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -2329,6 +2213,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-115924",
+    "published": "2026-10-26T20:17:52.250",
+    "last_modified": "2026-10-31T02:17:29.783",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Rembg is a tool to remove images background. Prior to 2.0.82, the public /api/remove endpoint passes attacker-controlled extras.sam_model through rembg/commands/s_command.py to rembg/sessions/sam.py, where it is interpolated into SAM filenames and GitHub download URLs passed to pooch.retrieve() without a pinned hash. An unauthenticated attacker can supply a sam_model value combining path traversal with URL fragment syntax to exploit the HTTP request discarding the fragment while the local POSIX path retains it. The first request primes the attacker-selected path tree, and an identical repeated request downloads malicious ONNX encoder and decoder files beside a readable target file. The graphs can load the target through ONNX external data and encode its bytes into the returned PNG mask, disclosing complete files accessible to the rembg process and allowing arbitrary ONNX computation. This issue is fixed in version 2.0.82.",
+    "references": [
+      "https://github.com/danielgatis/rembg/commit/b2758c6b39bb2b02df90a03128110339476984d3",
+      "https://github.com/danielgatis/rembg/releases/tag/v2.0.82",
+      "https://github.com/danielgatis/rembg/security/advisories/GHSA-qr6x-7v33-6qmg",
+      "https://github.com/danielgatis/rembg/security/advisories/GHSA-qr6x-7v33-6qmg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.6,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 68.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-75888",
     "published": "2026-10-12T17:17:35.723",
     "last_modified": "2026-10-30T05:16:59.470",
@@ -2959,6 +2870,54 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 46.2,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-53179",
+    "published": "2024-12-27T14:15:25.307",
+    "last_modified": "2026-10-30T13:17:44.720",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nsmb: client: fix use-after-free of signing key\n\nCustomers have reported use-after-free in @ses->auth_key.response with\nSMB2.1 + sign mounts which occurs due to following race:\n\ntask A                         task B\ncifs_mount()\n dfs_mount_share()\n  get_session()\n   cifs_mount_get_session()    cifs_send_recv()\n    cifs_get_smb_ses()          compound_send_recv()\n     cifs_setup_session()        smb2_setup_request()\n      kfree_sensitive()           smb2_calc_signature()\n                                   crypto_shash_setkey() *UAF*\n\nFix this by ensuring that we have a valid @ses->auth_key.response by\nchecking whether @ses->ses_status is SES_GOOD or SES_EXITING with\n@ses->ses_lock held.  After commit 24a9799aa8ef (\"smb: client: fix UAF\nin smb2_reconnect_server()\"), we made sure to call ->logoff() only\nwhen @ses was known to be good (e.g. valid ->auth_key.response), so\nit's safe to access signing key when @ses->ses_status == SES_EXITING.",
+    "references": [
+      "https://git.kernel.org/stable/c/0944c2596c2a3442735b5bb6714a17a16188a68f",
+      "https://git.kernel.org/stable/c/0e2b654a3848bf9da3b0d54c1ccf3f1b8c635591",
+      "https://git.kernel.org/stable/c/343d7fe6df9e247671440a932b6a73af4fa86d95",
+      "https://git.kernel.org/stable/c/39619c65ab4bbb3e78c818f537687653e112764d"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 49.6,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-21673",
+    "published": "2025-01-31T12:15:28.463",
+    "last_modified": "2026-10-30T13:17:51.270",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nsmb: client: fix double free of TCP_Server_Info::hostname\n\nWhen shutting down the server in cifs_put_tcp_session(), cifsd thread\nmight be reconnecting to multiple DFS targets before it realizes it\nshould exit the loop, so @server->hostname can't be freed as long as\ncifsd thread isn't done.  Otherwise the following can happen:\n\n  RIP: 0010:__slab_free+0x223/0x3c0\n  Code: 5e 41 5f c3 cc cc cc cc 4c 89 de 4c 89 cf 44 89 44 24 08 4c 89\n  1c 24 e8 fb cf 8e 00 44 8b 44 24 08 4c 8b 1c 24 e9 5f fe ff ff <0f>\n  0b 41 f7 45 08 00 0d 21 00 0f 85 2d ff ff ff e9 1f ff ff ff 80\n  RSP: 0018:ffffb26180dbfd08 EFLAGS: 00010246\n  RAX: ffff8ea34728e510 RBX: ffff8ea34728e500 RCX: 0000000000800068\n  RDX: 0000000000800068 RSI: 0000000000000000 RDI: ffff8ea340042400\n  RBP: ffffe112041ca380 R08: 0000000000000001 R09: 0000000000000000\n  R10: 6170732e31303000 R11: 70726f632e786563 R12: ffff8ea34728e500\n  R13: ffff8ea340042400 R14: ffff8ea34728e500 R15: 0000000000800068\n  FS: 0000000000000000(0000) GS:ffff8ea66fd80000(0000)\n  000000\n  CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033\n  CR2: 00007ffc25376080 CR3: 000000012a2ba001 CR4:\n  PKRU: 55555554\n  Call Trace:\n   <TASK>\n   ? show_trace_log_lvl+0x1c4/0x2df\n   ? show_trace_log_lvl+0x1c4/0x2df\n   ? __reconnect_target_unlocked+0x3e/0x160 [cifs]\n   ? __die_body.cold+0x8/0xd\n   ? die+0x2b/0x50\n   ? do_trap+0xce/0x120\n   ? __slab_free+0x223/0x3c0\n   ? do_error_trap+0x65/0x80\n   ? __slab_free+0x223/0x3c0\n   ? exc_invalid_op+0x4e/0x70\n   ? __slab_free+0x223/0x3c0\n   ? asm_exc_invalid_op+0x16/0x20\n   ? __slab_free+0x223/0x3c0\n   ? extract_hostname+0x5c/0xa0 [cifs]\n   ? extract_hostname+0x5c/0xa0 [cifs]\n   ? __kmalloc+0x4b/0x140\n   __reconnect_target_unlocked+0x3e/0x160 [cifs]\n   reconnect_dfs_server+0x145/0x430 [cifs]\n   cifs_handle_standard+0x1ad/0x1d0 [cifs]\n   cifs_demultiplex_thread+0x592/0x730 [cifs]\n   ? __pfx_cifs_demultiplex_thread+0x10/0x10 [cifs]\n   kthread+0xdd/0x100\n   ? __pfx_kthread+0x10/0x10\n   ret_from_fork+0x29/0x50\n   </TASK>",
+    "references": [
+      "https://git.kernel.org/stable/c/1ea68070338518a1d31ce71e6abfe1b30001b27a",
+      "https://git.kernel.org/stable/c/35455f6c9326a8d10e91f3d5ba9260ab795b7d9a",
+      "https://git.kernel.org/stable/c/a2be5f2ba34d0c6d5ef2624b24e3d852561fcd6a",
+      "https://git.kernel.org/stable/c/fa2f9906a7b333ba757a7dbae0713d8a5396186e"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.4,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [

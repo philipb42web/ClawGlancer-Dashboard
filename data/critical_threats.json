@@ -233,36 +233,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-92982",
-    "published": "2026-10-15T16:18:23.657",
-    "last_modified": "2026-10-30T04:18:29.683",
-    "cvss_v3": 8.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Ansible Operator Plugins. A low-privileged Kubernetes user can exploit a Jinja2 template injection vulnerability by crafting malicious custom resource (CR) specification values. These values are processed by Ansible without proper sanitization, allowing embedded Jinja2 expressions to be executed within the operator pod. This can lead to arbitrary code execution and privilege escalation, granting the attacker control over the operator's service account with cluster-wide permissions.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:68695",
-      "https://access.redhat.com/errata/RHSA-2026:87120",
-      "https://access.redhat.com/errata/RHSA-2026:87124",
-      "https://access.redhat.com/security/cve/CVE-2026-92982",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2522227"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.9,
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 107.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-66208",
     "published": "2025-12-03T19:15:57.793",
     "last_modified": "2026-10-30T16:32:56.197",
@@ -837,6 +807,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-102649",
+    "published": "2026-10-26T18:17:21.803",
+    "last_modified": "2026-10-31T02:17:29.003",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Burrito is a Terraform Automation Collaboration Software (TACoS) Kubernetes operator. Prior to 0.13.0, `POST /api/webhook` accepts unsigned GitHub and GitLab events when a `TerraformRepository`'s credentials omit `webhookSecret` or set it to an empty value, including credentials configured for git authentication and polling. `Credential.WebhookSecret` is optional, and `go-playground/webhooks` skips signature or token verification when the secret is empty. Anyone who can reach `burrito-server`'s endpoint and knows a tracked repository's URL can forge events to create or delete `TerraformPullRequest` custom resources with attacker-chosen `Branch`, `Base`, and `ID` fields. For GitHub `pull_request` events, the controller fetches changed files using the real pull request number but does not cross-check the payload's branch against that pull request. Pairing a real, existing pull request number with an unrelated existing branch in the same repository can therefore cause an unauthorized `terraform plan` for affected layers using the operator's stored git and cloud credentials. Code analysis also indicates that the resulting plan can be posted to the real pull request's comment thread, exposing and misattributing another branch's infrastructure changes. Auto-apply is disabled for these temporary layers, so this vulnerability alone cannot force a `terraform apply`; plan-time provider and data-source code execution depends on the selected branch's contents. This issue is fixed in version 0.13.0.",
+    "references": [
+      "https://github.com/padok-team/burrito/commit/1d48432a4a0126429c99f5fa42567bf3711d1ca1",
+      "https://github.com/padok-team/burrito/releases/tag/v0.13.0",
+      "https://github.com/padok-team/burrito/security/advisories/GHSA-7m68-72r6-3jx8",
+      "https://github.com/padok-team/burrito/security/advisories/GHSA-7m68-72r6-3jx8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-13204",
     "published": "2025-11-14T17:16:01.603",
     "last_modified": "2026-10-30T19:17:39.940",
@@ -1256,50 +1253,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-96889",
-    "published": "2026-09-23T20:17:27.587",
-    "last_modified": "2026-10-30T01:16:48.203",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in librsvg. When processing an SVG document containing nested XML inclusions (Xincludes) with duplicate entity declarations, a use-after-free error can occur. This vulnerability arises because the library incorrectly frees an XML entity that is still in use by the parser. An attacker could potentially exploit this to cause a denial of service or execute arbitrary code.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:86331",
-      "https://access.redhat.com/errata/RHSA-2026:86841",
-      "https://access.redhat.com/errata/RHSA-2026:86842",
-      "https://access.redhat.com/errata/RHSA-2026:86921",
-      "https://access.redhat.com/errata/RHSA-2026:92212",
-      "https://access.redhat.com/errata/RHSA-2026:92213",
-      "https://access.redhat.com/errata/RHSA-2026:92214",
-      "https://access.redhat.com/errata/RHSA-2026:92218",
-      "https://access.redhat.com/errata/RHSA-2026:92336",
-      "https://access.redhat.com/errata/RHSA-2026:92353",
-      "https://access.redhat.com/errata/RHSA-2026:92382",
-      "https://access.redhat.com/errata/RHSA-2026:92573",
-      "https://access.redhat.com/errata/RHSA-2026:92579",
-      "https://access.redhat.com/security/cve/CVE-2026-96889",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
-      "https://crates.io/crates/librsvg",
-      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241",
-      "https://rustsec.org/advisories/RUSTSEC-2026-0305.html",
-      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 46.9,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 82.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-112408",
     "published": "2026-10-21T20:17:23.877",
     "last_modified": "2026-10-30T16:17:38.947",
@@ -1394,44 +1347,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86320",
-    "published": "2026-09-17T08:17:02.200",
-    "last_modified": "2026-10-30T01:16:47.843",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in flatpak-builder where Git hooks are not disabled when applying patch sources with use-git-am: true. An attacker who can provide a malicious source containing a Git post-applypatch hook can cause the hook to execute on the host during the build process, resulting in arbitrary code execution with the privileges of the user running flatpak-builder.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:80495",
-      "https://access.redhat.com/errata/RHSA-2026:80496",
-      "https://access.redhat.com/errata/RHSA-2026:80973",
-      "https://access.redhat.com/errata/RHSA-2026:84832",
-      "https://access.redhat.com/errata/RHSA-2026:84833",
-      "https://access.redhat.com/errata/RHSA-2026:84834",
-      "https://access.redhat.com/errata/RHSA-2026:84842",
-      "https://access.redhat.com/errata/RHSA-2026:86714",
-      "https://access.redhat.com/errata/RHSA-2026:90896",
-      "https://access.redhat.com/errata/RHSA-2026:92220",
-      "https://access.redhat.com/security/cve/CVE-2026-86320",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
-      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
-      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-108771",
     "published": "2026-10-19T10:16:44.690",
     "last_modified": "2026-10-30T17:17:13.363",
@@ -1484,7 +1399,7 @@
   {
     "cve_id": "CVE-2026-13097",
     "published": "2026-08-20T11:16:20.293",
-    "last_modified": "2026-10-30T18:17:28.027",
+    "last_modified": "2026-11-02T04:16:53.643",
     "cvss_v3": 8.7,
     "severity": "HIGH",
     "affected": [],
@@ -1500,6 +1415,7 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-13097",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2515974"
     ],
@@ -1589,38 +1505,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-96280",
-    "published": "2026-09-27T21:17:04.200",
-    "last_modified": "2026-10-29T22:17:12.277",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The OCI delta stream parser read sizes as guint64 but passed them to GLib I/O and allocation functions expecting gsize (32 bits on 32-bit systems), causing undersized allocations while subsequent operations use the original 64-bit size, leading to heap buffer overflows. An attacker controlling an OCI registry can craft a delta stream that triggers this during flatpak install/update, potentially achieving code execution on 32-bit systems.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:80497",
-      "https://access.redhat.com/errata/RHSA-2026:80498",
-      "https://access.redhat.com/errata/RHSA-2026:80687",
-      "https://access.redhat.com/errata/RHSA-2026:89733",
-      "https://access.redhat.com/errata/RHSA-2026:90364",
-      "https://access.redhat.com/errata/RHSA-2026:92369",
-      "https://access.redhat.com/security/cve/CVE-2026-96280",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2539419",
-      "https://github.com/flatpak/flatpak/security/advisories/GHSA-jr92-2v97-wgvc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -2319,6 +2203,33 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 50.6,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 68.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-115924",
+    "published": "2026-10-26T20:17:52.250",
+    "last_modified": "2026-10-31T02:17:29.783",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Rembg is a tool to remove images background. Prior to 2.0.82, the public /api/remove endpoint passes attacker-controlled extras.sam_model through rembg/commands/s_command.py to rembg/sessions/sam.py, where it is interpolated into SAM filenames and GitHub download URLs passed to pooch.retrieve() without a pinned hash. An unauthenticated attacker can supply a sam_model value combining path traversal with URL fragment syntax to exploit the HTTP request discarding the fragment while the local POSIX path retains it. The first request primes the attacker-selected path tree, and an identical repeated request downloads malicious ONNX encoder and decoder files beside a readable target file. The graphs can load the target through ONNX external data and encode its bytes into the returned PNG mask, disclosing complete files accessible to the rembg process and allowing arbitrary ONNX computation. This issue is fixed in version 2.0.82.",
+    "references": [
+      "https://github.com/danielgatis/rembg/commit/b2758c6b39bb2b02df90a03128110339476984d3",
+      "https://github.com/danielgatis/rembg/releases/tag/v2.0.82",
+      "https://github.com/danielgatis/rembg/security/advisories/GHSA-qr6x-7v33-6qmg",
+      "https://github.com/danielgatis/rembg/security/advisories/GHSA-qr6x-7v33-6qmg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.6,
     "tags": [
       "path_traversal"
     ],
@@ -4083,7 +3994,7 @@
   {
     "cve_id": "CVE-2026-76578",
     "published": "2026-09-07T13:20:36.850",
-    "last_modified": "2026-10-30T18:18:13.143",
+    "last_modified": "2026-11-02T04:16:55.440",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -4099,6 +4010,7 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-76578",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2519522"
     ],
@@ -4861,7 +4773,7 @@
   {
     "cve_id": "CVE-2026-18147",
     "published": "2026-09-09T17:17:17.007",
-    "last_modified": "2026-10-30T18:17:29.317",
+    "last_modified": "2026-11-02T04:16:53.913",
     "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
@@ -4877,6 +4789,7 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-18147",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2508181"
     ],
@@ -4945,7 +4858,7 @@
   {
     "cve_id": "CVE-2026-11861",
     "published": "2026-08-20T11:16:19.270",
-    "last_modified": "2026-10-30T19:18:22.557",
+    "last_modified": "2026-11-02T04:16:52.560",
     "cvss_v3": 9.6,
     "severity": "CRITICAL",
     "affected": [],
@@ -4961,6 +4874,7 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-11861",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2487472"
     ],
@@ -5962,7 +5876,7 @@
   {
     "cve_id": "CVE-2026-74860",
     "published": "2026-09-08T12:16:58.083",
-    "last_modified": "2026-10-30T01:16:46.517",
+    "last_modified": "2026-11-02T04:16:54.940",
     "cvss_v3": 8.5,
     "severity": "HIGH",
     "affected": [],
@@ -6005,6 +5919,8 @@
       "https://access.redhat.com/errata/RHSA-2026:91249",
       "https://access.redhat.com/errata/RHSA-2026:92352",
       "https://access.redhat.com/errata/RHSA-2026:92589",
+      "https://access.redhat.com/errata/RHSA-2026:93463",
+      "https://access.redhat.com/errata/RHSA-2026:93473",
       "https://access.redhat.com/security/cve/CVE-2026-74860",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529697"
     ],
@@ -6396,27 +6312,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 27.3,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-87302",
-    "published": "2026-10-20T22:20:07.320",
-    "last_modified": "2026-10-30T04:18:27.790",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Vulnerability in the Oracle WebLogic Server product of Oracle Fusion Middleware (component: Core).  Supported versions that are affected are 12.2.1.4.0, 14.1.1.0.0, 14.1.2.0.0 and  15.1.1.0.0. Easily exploitable vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle WebLogic Server.  Successful attacks of this vulnerability can result in  unauthorized creation, deletion or modification access to critical data or all Oracle WebLogic Server accessible data as well as  unauthorized access to critical data or complete access to all Oracle WebLogic Server accessible data. CVSS 3.1 Base Score 9.1 (Confidentiality and Integrity impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N).",
-    "references": [
-      "https://www.oracle.com/security-alerts/cpuoct2026.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.9,
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -8438,27 +8333,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-20586",
-    "published": "2026-10-05T02:16:53.803",
-    "last_modified": "2026-10-30T03:16:40.527",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In vdec, there is a possible out of bounds write due to a missing bounds check. This could lead to remote escalation of privilege with no additional execution privileges needed. User interaction is needed for exploitation. Patch ID: ALPS11383899; Issue ID: MSV-9614.",
-    "references": [
-      "https://www.mediatek.com/product-security-bulletin/October-2026"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.1,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-98171",
     "published": "2026-10-06T09:17:58.773",
     "last_modified": "2026-10-30T13:21:11.360",
@@ -8888,30 +8762,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-28367",
-    "published": "2026-03-27T17:16:27.750",
-    "last_modified": "2026-10-30T03:16:41.440",
-    "cvss_v3": 8.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Undertow. A remote attacker can exploit this vulnerability by sending `\\r\\r\\r` as a header block terminator. This can be used for request smuggling with certain proxy servers, such as older versions of Apache Traffic Server and Google Cloud Classic Application Load Balancer, potentially leading to unauthorized access or manipulation of web requests.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:25125",
-      "https://access.redhat.com/errata/RHSA-2026:25126",
-      "https://access.redhat.com/security/cve/CVE-2026-28367",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2443260"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.9,
-    "tags": [],
-    "intel_score": 53.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-53230",
     "published": "2026-06-25T09:16:40.907",
     "last_modified": "2026-10-30T13:19:12.927",
@@ -8935,6 +8785,41 @@
     "intel_score": 53.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-79678",
+    "published": "2026-09-07T13:20:38.380",
+    "last_modified": "2026-11-02T04:16:55.723",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in FreeIPA's idp-add command, where insufficiently validated --organization/--base-url input reaches a constrained eval() call before the corresponding LDAP access control check is enforced. This allows any authenticated IPA principal, regardless of privilege level, to enumerate and read the environment variables of the affected server process and to cause denial of service via memory exhaustion.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:70564",
+      "https://access.redhat.com/errata/RHSA-2026:72279",
+      "https://access.redhat.com/errata/RHSA-2026:82935",
+      "https://access.redhat.com/errata/RHSA-2026:83083",
+      "https://access.redhat.com/errata/RHSA-2026:83084",
+      "https://access.redhat.com/errata/RHSA-2026:83085",
+      "https://access.redhat.com/errata/RHSA-2026:83460",
+      "https://access.redhat.com/errata/RHSA-2026:83461",
+      "https://access.redhat.com/errata/RHSA-2026:89836",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
+      "https://access.redhat.com/security/cve/CVE-2026-79678",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2523356"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.6,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -9081,6 +8966,148 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 30.4,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102556",
+    "published": "2026-09-29T17:17:06.460",
+    "last_modified": "2026-11-02T04:16:51.750",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When handling an incoming WebSocket Pong frame, SoupWebsocketConnection emitted the ::pong signal with a GByteArray pointer even though the signal is declared to pass a GBytes. Applications connecting a handler that follows the documented GBytes API can trigger heap corruption or a crash upon receiving a crafted Pong.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/security/cve/CVE-2026-102556",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543229"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.5,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102557",
+    "published": "2026-09-29T17:17:06.600",
+    "last_modified": "2026-11-02T04:16:51.943",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When reassembling fragmented WebSocket messages into a GByteArray, libsoup did not adequately cap total message size against the limits of the underlying buffer type. A remote peer could send fragments that caused size truncation while the implementation still used the full length, leading to heap corruption or a crash.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/security/cve/CVE-2026-102557",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543231"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.5,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102558",
+    "published": "2026-09-29T18:17:08.340",
+    "last_modified": "2026-11-02T04:16:52.153",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When max-incoming-payload-size is unlimited (0), SoupWebsocketConnection could grow its incoming GByteArray based on an attacker-controlled frame length until the length wrapped, causing a heap buffer overflow while reading frame data.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/security/cve/CVE-2026-102558",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543274"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 34.1,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102559",
+    "published": "2026-09-29T18:17:08.503",
+    "last_modified": "2026-11-02T04:16:52.350",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When constructing a masked WebSocket client frame for a very large outgoing payload, size values passed to GByteArray allocation APIs could be truncated while the masking routine still used the full length, causing a heap buffer overflow.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/security/cve/CVE-2026-102559",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543285"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.1,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102560",
+    "published": "2026-09-29T18:17:08.750",
+    "last_modified": "2026-11-02T03:17:27.800",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When the permessage-deflate WebSocket extension compresses a very large outgoing message, truncated size calculations used for GByteArray growth could wrap, causing zlib to write past the allocated buffer and resulting in a heap buffer overflow.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/security/cve/CVE-2026-102560",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543296"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.2,
     "tags": [],
     "intel_score": 53.0,
     "reasons": [
@@ -9766,7 +9793,7 @@
   {
     "cve_id": "CVE-2026-19550",
     "published": "2026-08-11T21:17:35.087",
-    "last_modified": "2026-10-30T18:17:29.463",
+    "last_modified": "2026-11-02T04:16:54.120",
     "cvss_v3": 8.2,
     "severity": "HIGH",
     "affected": [],
@@ -9782,6 +9809,7 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-19550",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2514019"
     ],
@@ -10447,7 +10475,7 @@
   {
     "cve_id": "CVE-2026-73197",
     "published": "2026-08-20T11:16:21.553",
-    "last_modified": "2026-10-30T18:18:12.363",
+    "last_modified": "2026-11-02T04:16:54.413",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -10463,8 +10491,44 @@
       "https://access.redhat.com/errata/RHSA-2026:83461",
       "https://access.redhat.com/errata/RHSA-2026:89836",
       "https://access.redhat.com/errata/RHSA-2026:93071",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
       "https://access.redhat.com/security/cve/CVE-2026-73197",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2474697"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 45.4,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-73198",
+    "published": "2026-08-20T11:16:21.687",
+    "last_modified": "2026-11-02T04:16:54.673",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in FreeIPA. A remote, unauthenticated attacker can exploit a vulnerability in the `/ipa/i18n_messages` endpoint by sending an arbitrarily large request body. This can cause the service to consume excessive memory, leading to memory exhaustion, degraded responsiveness, and a denial of service (DoS) condition.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:70564",
+      "https://access.redhat.com/errata/RHSA-2026:72279",
+      "https://access.redhat.com/errata/RHSA-2026:82935",
+      "https://access.redhat.com/errata/RHSA-2026:83083",
+      "https://access.redhat.com/errata/RHSA-2026:83084",
+      "https://access.redhat.com/errata/RHSA-2026:83085",
+      "https://access.redhat.com/errata/RHSA-2026:83460",
+      "https://access.redhat.com/errata/RHSA-2026:83461",
+      "https://access.redhat.com/errata/RHSA-2026:89836",
+      "https://access.redhat.com/errata/RHSA-2026:93452",
+      "https://access.redhat.com/security/cve/CVE-2026-73198",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2472960"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -11402,28 +11466,6 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 55.6,
-    "tags": [],
-    "intel_score": 50.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-15801",
-    "published": "2026-09-21T09:17:05.743",
-    "last_modified": "2026-10-30T01:16:46.330",
-    "cvss_v3": 8.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was found in CRI-O related to the container checkpoint and restore feature. When CRI-O is configured to restore containers from checkpoint archives, insufficient validation of restore metadata may allow a user with sufficient privileges to perform unintended operations on the host filesystem. Successful exploitation requires that container checkpoint and restore functionality is enabled, which is not the default configuration. An attacker must also be able to trigger restoration of a container from untrusted checkpoint content.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-15801",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2500823"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.4,
     "tags": [],
     "intel_score": 50.0,
     "reasons": [
@@ -16940,31 +16982,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-43961",
-    "published": "2026-08-19T14:17:31.793",
-    "last_modified": "2026-10-30T04:18:24.583",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Vim's netrw plugin. A crafted filename containing quote characters and expression fragments can break out of the quoted context during mark/unmark operations, allowing arbitrary Vimscript execution. This can be leveraged to run shell commands with the privileges of the user running Vim.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:57614",
-      "https://access.redhat.com/security/cve/CVE-2026-43961",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2460434",
-      "https://github.com/vim/vim/security/advisories/GHSA-66hr-7p6x-x5j3",
-      "http://www.openwall.com/lists/oss-security/2026/05/14/7"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 5.1,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-74687",
     "published": "2026-08-22T16:16:43.080",
     "last_modified": "2026-10-30T13:20:03.793",
@@ -21828,6 +21845,80 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-115907",
+    "published": "2026-10-26T17:17:18.147",
+    "last_modified": "2026-10-30T15:16:45.727",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "zip is a zip library for Rust that supports reading and writing simple ZIP files. From 5.1.0 until 9.0.0, applications built with the legacy-zip feature can reserve output capacity from an attacker-controlled ZIP64 uncompressed size before validating the compressed stream. The ShrinkDecoder path in src/legacy/shrink.rs can panic with a capacity overflow during ZipArchive::extract, and the Reduce and Implode decoders contain the same unbounded preallocation pattern. An unhandled panic can terminate an archive-processing service. This issue is fixed in version 9.0.0.",
+    "references": [
+      "https://github.com/zip-rs/zip2/commit/8b4991288b79ad11cce201c2d785d5baa795bd3e",
+      "https://github.com/zip-rs/zip2/pull/991",
+      "https://github.com/zip-rs/zip2/releases/tag/v9.0.0",
+      "https://github.com/zip-rs/zip2/security/advisories/GHSA-9hj8-73fh-9963",
+      "https://github.com/zip-rs/zip2/security/advisories/GHSA-9hj8-73fh-9963"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 28.7,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-104594",
+    "published": "2026-10-26T19:16:28.700",
+    "last_modified": "2026-10-30T18:17:15.367",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "libosmocore through 1.14.1 contains out-of-bounds reads in the IPA CCM identity-tag parsers in src/gsm/ipa.c. This allows a remote attacker to obtain sensitive information.",
+    "references": [
+      "https://github.com/osmocom/libosmocore/commit/325ffb5204d7e1659ca2fec3b2f14c33b969ee71",
+      "https://github.com/osmocom/libosmocore/commit/8ba652bca2f28ec05ff5979846199e2c46657633",
+      "https://github.com/osmocom/libosmocore/commit/afd18bf00147e17c495fc909ac4583b3bf734d53",
+      "https://osmocom.org/issues/7050",
+      "https://osmocom.org/issues/7050"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.4,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-116638",
+    "published": "2026-10-26T19:16:31.117",
+    "last_modified": "2026-10-30T18:17:24.057",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Windows Recovery Environment (WinRE) in Windows 10 and 11 may allow an attacker to bypass firmware security controls, including administrator-configured UEFI/BIOS passwords. An attacker with physical or administrative access to a device may be able to leverage WinRE-related boot mechanisms to circumvent firmware protections and gain unauthorized access to system resources.",
+    "references": [
+      "https://beafn28.es/articulos/winre-uefi-bypass",
+      "https://kb.cert.org/vuls/id/226679",
+      "https://www.kb.cert.org/vuls/id/226679",
+      "https://beafn28.es/articulos/winre-uefi-bypass"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.2,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2024-12397",
     "published": "2024-12-12T09:15:05.570",
     "last_modified": "2026-10-30T19:17:29.283",
@@ -22018,35 +22109,6 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 6.7,
-    "tags": [],
-    "intel_score": 47.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-89058",
-    "published": "2026-09-18T08:17:01.653",
-    "last_modified": "2026-10-29T22:17:11.550",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in RESTEasy's CorsFilter, which, when configured to allow all origins (\"*\"), reflects the request's Origin header back in the Access-Control-Allow-Origin response together with Access-Control-Allow-Credentials: true. This permissive cross-origin policy allows a malicious website to make credentialed cross-origin requests and read authenticated responses from a victim's session, resulting in a loss of confidentiality.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:83082",
-      "https://access.redhat.com/errata/RHSA-2026:83520",
-      "https://access.redhat.com/errata/RHSA-2026:85234",
-      "https://access.redhat.com/errata/RHSA-2026:92408",
-      "https://access.redhat.com/security/cve/CVE-2026-89058",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2519775",
-      "https://github.com/resteasy/resteasy/commit/efeb2b7",
-      "https://github.com/resteasy/resteasy/security/advisories/GHSA-972r-f3fv-whm3",
-      "https://github.com/resteasy/resteasy/security/advisories/GHSA-972r-f3fv-whm3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 18.3,
     "tags": [],
     "intel_score": 47.0,
     "reasons": [
@@ -23314,104 +23376,6 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 2.8,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-16118",
-    "published": "2026-07-17T20:17:16.167",
-    "last_modified": "2026-10-29T23:16:55.880",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in xdgmime. A heap-based buffer overflow can be triggered in _xdg_mime_magic_parse_magic_line() in the xdgmimemagic.c file on little-endian systems when an attacker-controlled MIME magic file in a user-writable XDG data location (e.g., in the $XDG_DATA_HOME/mime/magic path) is parsed by an application performing MIME type detection (e.g., via g_content_type_guess()). When performing byte-swap, incorrect pointer arithmetic on the write side causes an out-of-bounds write of 2 bytes, resulting in an application crash or memory corruption.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:64799",
-      "https://access.redhat.com/errata/RHSA-2026:64800",
-      "https://access.redhat.com/errata/RHSA-2026:66451",
-      "https://access.redhat.com/errata/RHSA-2026:67956",
-      "https://access.redhat.com/errata/RHSA-2026:70636",
-      "https://access.redhat.com/errata/RHSA-2026:71403",
-      "https://access.redhat.com/errata/RHSA-2026:71404",
-      "https://access.redhat.com/errata/RHSA-2026:71405",
-      "https://access.redhat.com/errata/RHSA-2026:72394",
-      "https://access.redhat.com/errata/RHSA-2026:72395",
-      "https://access.redhat.com/errata/RHSA-2026:72399",
-      "https://access.redhat.com/errata/RHSA-2026:72470",
-      "https://access.redhat.com/errata/RHSA-2026:72475",
-      "https://access.redhat.com/errata/RHSA-2026:72476",
-      "https://access.redhat.com/errata/RHSA-2026:72502",
-      "https://access.redhat.com/errata/RHSA-2026:73859",
-      "https://access.redhat.com/errata/RHSA-2026:73909",
-      "https://access.redhat.com/errata/RHSA-2026:73929",
-      "https://access.redhat.com/errata/RHSA-2026:73930",
-      "https://access.redhat.com/errata/RHSA-2026:73959",
-      "https://access.redhat.com/errata/RHSA-2026:73960",
-      "https://access.redhat.com/errata/RHSA-2026:73961",
-      "https://access.redhat.com/errata/RHSA-2026:73962",
-      "https://access.redhat.com/errata/RHSA-2026:74359",
-      "https://access.redhat.com/errata/RHSA-2026:74360",
-      "https://access.redhat.com/errata/RHSA-2026:74361",
-      "https://access.redhat.com/errata/RHSA-2026:74362",
-      "https://access.redhat.com/errata/RHSA-2026:74363",
-      "https://access.redhat.com/errata/RHSA-2026:74364",
-      "https://access.redhat.com/errata/RHSA-2026:74365",
-      "https://access.redhat.com/errata/RHSA-2026:74450",
-      "https://access.redhat.com/errata/RHSA-2026:74458",
-      "https://access.redhat.com/errata/RHSA-2026:74459",
-      "https://access.redhat.com/errata/RHSA-2026:74460",
-      "https://access.redhat.com/errata/RHSA-2026:74461",
-      "https://access.redhat.com/errata/RHSA-2026:74462",
-      "https://access.redhat.com/errata/RHSA-2026:74463",
-      "https://access.redhat.com/errata/RHSA-2026:74674",
-      "https://access.redhat.com/errata/RHSA-2026:74677",
-      "https://access.redhat.com/errata/RHSA-2026:74678",
-      "https://access.redhat.com/errata/RHSA-2026:74679",
-      "https://access.redhat.com/errata/RHSA-2026:74681",
-      "https://access.redhat.com/errata/RHSA-2026:74683",
-      "https://access.redhat.com/errata/RHSA-2026:74685",
-      "https://access.redhat.com/errata/RHSA-2026:74687",
-      "https://access.redhat.com/errata/RHSA-2026:74688",
-      "https://access.redhat.com/errata/RHSA-2026:74771",
-      "https://access.redhat.com/errata/RHSA-2026:75652",
-      "https://access.redhat.com/errata/RHSA-2026:75654",
-      "https://access.redhat.com/errata/RHSA-2026:75655",
-      "https://access.redhat.com/errata/RHSA-2026:75657",
-      "https://access.redhat.com/errata/RHSA-2026:75658",
-      "https://access.redhat.com/errata/RHSA-2026:75659",
-      "https://access.redhat.com/errata/RHSA-2026:75660",
-      "https://access.redhat.com/errata/RHSA-2026:76042",
-      "https://access.redhat.com/errata/RHSA-2026:79357",
-      "https://access.redhat.com/errata/RHSA-2026:80756",
-      "https://access.redhat.com/errata/RHSA-2026:81127",
-      "https://access.redhat.com/errata/RHSA-2026:82059",
-      "https://access.redhat.com/errata/RHSA-2026:82061",
-      "https://access.redhat.com/errata/RHSA-2026:82066",
-      "https://access.redhat.com/errata/RHSA-2026:82304",
-      "https://access.redhat.com/errata/RHSA-2026:82322",
-      "https://access.redhat.com/errata/RHSA-2026:82336",
-      "https://access.redhat.com/errata/RHSA-2026:82347",
-      "https://access.redhat.com/errata/RHSA-2026:82354",
-      "https://access.redhat.com/errata/RHSA-2026:82368",
-      "https://access.redhat.com/errata/RHSA-2026:82371",
-      "https://access.redhat.com/errata/RHSA-2026:82372",
-      "https://access.redhat.com/errata/RHSA-2026:82415",
-      "https://access.redhat.com/errata/RHSA-2026:82857",
-      "https://access.redhat.com/errata/RHSA-2026:82888",
-      "https://access.redhat.com/errata/RHSA-2026:92449",
-      "https://access.redhat.com/errata/RHSA-2026:92452",
-      "https://access.redhat.com/security/cve/CVE-2026-16118",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2501732",
-      "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41",
-      "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 12.9,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
