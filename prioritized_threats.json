@@ -120,36 +120,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-111357",
-    "published": "2026-10-15T21:17:13.190",
-    "last_modified": "2026-10-31T04:18:16.040",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Ivanti Connect Secure 22.8R2.4 mishandles the manner in which the dsinvoked broker trusts DSCache configuration data, leading to privilege escalation to root, as exploited in the wild in October 2026.",
-    "references": [
-      "https://hub.ivanti.com/s/article/Security-Advisory-Ivanti-Connect-Secure-CVE-2026-104935",
-      "https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-111357"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 0.5,
-    "epss_percentile": 45.0,
-    "tags": [
-      "cisa_kev",
-      "in_the_wild",
-      "priv_esc"
-    ],
-    "intel_score": 145.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "in_the_wild+35",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-102435",
     "published": "2026-11-02T20:17:26.287",
     "last_modified": "2026-11-02T20:17:26.440",
@@ -674,6 +644,38 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-120518",
+    "published": "2026-11-03T05:18:31.380",
+    "last_modified": "2026-11-03T05:18:31.657",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The BuddyPress XProfile Image Field plugin for WordPress is vulnerable to arbitrary file deletion in all versions up to, and including, 3.1.0. This is due to bpxp_image_field_update_on_user_activation() calling unlink() on a path built from visitor-supplied signup metadata with no realpath() resolution, no containment check against the profile-image directory and no extension allow-list. Submitting a zero-byte file with the 'field_N_hidden' parameter during registration makes the plugin store the raw value, which is then resolved against the document root when the pending signup is activated. This makes it possible for unauthenticated attackers to delete arbitrary files on the server, which can easily lead to remote code execution when the right file (such as wp-config.php) is deleted. Requires open registration and an image-type profile field on the signup form.",
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-48158",
+      "https://plugins.trac.wordpress.org/browser/buddypress-xprofile-image-field/tags/3.1.0/bp-xprofile-image-field.php#L488",
+      "https://plugins.trac.wordpress.org/browser/buddypress-xprofile-image-field/tags/3.1.0/bp-xprofile-image-field.php#L494",
+      "https://plugins.trac.wordpress.org/browser/buddypress-xprofile-image-field/tags/3.1.0/bp-xprofile-image-field.php#L507",
+      "https://plugins.trac.wordpress.org/browser/buddypress-xprofile-image-field/tags/3.1.0/bp-xprofile-image-field.php#L526",
+      "https://plugins.trac.wordpress.org/browser/buddypress-xprofile-image-field/tags/3.1.0/bp-xprofile-image-field.php#L587",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/1a53bcf5-61ed-427c-9efd-29c9309d2426?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-77880",
     "published": "2026-11-02T16:17:43.973",
     "last_modified": "2026-11-02T19:35:33.347",
@@ -701,35 +703,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-93834",
-    "published": "2026-09-25T14:17:24.063",
-    "last_modified": "2026-10-31T08:16:49.610",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free vulnerability was found in QEMU's 9pfs subsystem. A race condition between the main thread and a worker thread when processing concurrent Tlcreate and Twalk requests allows a malicious guest user to craft a fid path containing stale heap data, bypassing directory traversal restrictions and escaping the shared directory boundary. This can lead to arbitrary host file read/write and code execution (VM escape) as the QEMU process user.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-93834",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2537939",
-      "https://gitlab.com/qemu-project/qemu/-/work_items/4491",
-      "https://gitlab.com/qemu-project/qemu/-/work_items/4491"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 34.7,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-16760",
     "published": "2026-10-30T22:16:54.193",
     "last_modified": "2026-11-02T19:34:23.993",
@@ -747,6 +720,65 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 39.5,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-120833",
+    "published": "2026-11-03T01:16:52.260",
+    "last_modified": "2026-11-03T01:16:52.260",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "labbench before 0.46.1 contains a deserialization of untrusted data vulnerability in read() and read_relational() that passes any file with a .p or .pickle extension to pandas.read_pickle based on the extension alone. Attackers who supply a crafted data file or relational data archive can execute arbitrary code when a user loads it with these functions.",
+    "references": [
+      "https://github.com/usnistgov/labbench",
+      "https://github.com/usnistgov/labbench/blob/0.46.0/src/labbench/_data.py#L1664-L1666",
+      "https://github.com/usnistgov/labbench/blob/0.46.1/ChangeLog.md",
+      "https://github.com/usnistgov/labbench/commit/ac9b9b18cba67cb8e85eb563b6bb7dc1092b4c54",
+      "https://github.com/usnistgov/labbench/pull/32",
+      "https://pypi.org/project/labbench/0.46.1/",
+      "https://www.vulncheck.com/advisories/labbench-before-0.46.1-deserialization-of-untrusted-data-via-read-pickle-auto-dispatch"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-76124",
+    "published": "2026-11-03T13:17:23.413",
+    "last_modified": "2026-11-03T13:17:23.547",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The BuddyBoss App plugin for WordPress is vulnerable to Arbitrary File Upload in all versions up to, and including, 3.2.1 via the send_feedback function. This is due to insufficient file type validation that relies solely on the client-supplied Content-Type header without server-side content inspection or extension validation. This makes it possible for authenticated attackers, with subscriber-level access and above, to upload files that may be executable, which makes remote code execution possible. While uploaded files are deleted after email transmission, a race condition exists during SMTP execution that allows access to the file, and files persist indefinitely when wp_mail() fails.",
+    "references": [
+      "https://buddyboss.com/resources/buddyboss-app-plugin-releases/3-2-2/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/56a1219c-1163-4867-b426-7ffe9ca5dcb5?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
     "tags": [
       "file_write",
       "rce"
@@ -864,6 +896,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-120577",
+    "published": "2026-11-03T05:18:34.257",
+    "last_modified": "2026-11-03T05:18:34.417",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The FluentCart A New Era of eCommerce – Faster, Lighter, and Simpler plugin for WordPress is vulnerable to arbitrary file deletion due to insufficient file path validation in the deleteFile function in all versions up to, and including, 1.6.2. This makes it possible for authenticated attackers, with custom-level access and above, to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php).",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/fluent-cart/tags/1.6.2/app/Http/Controllers/FileUploadController.php#L141",
+      "https://plugins.trac.wordpress.org/browser/fluent-cart/tags/1.6.2/app/Http/Routes/api.php#L832",
+      "https://plugins.trac.wordpress.org/browser/fluent-cart/tags/1.6.2/app/Services/FileSystem/Drivers/Local/LocalDriver.php#L243",
+      "https://plugins.trac.wordpress.org/changeset?reponame=&old=3661075%40fluent-cart&new=3661075%40fluent-cart",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/f20ead74-6db0-4bd2-82f6-0eb792288d70?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 95.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-63184",
     "published": "2026-10-30T22:16:58.447",
     "last_modified": "2026-11-02T19:35:33.347",
@@ -902,6 +964,38 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-120559",
+    "published": "2026-11-03T05:18:33.230",
+    "last_modified": "2026-11-03T05:18:33.397",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Contact Form Extender for Divi Builder plugin for WordPress is vulnerable to Arbitrary File Deletion due to insufficient file path validation in the cfefd_remove_uploaded_file() function in all versions up to, and including, 1.0.6. This makes it possible for unauthenticated attackers to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php). The nonce protecting this AJAX action is rendered into the public page source via wp_localize_script and is therefore retrievable by any unauthenticated visitor.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/contact-form-extender-for-divi-builder/tags/1.0.3/includes/module/addons/divi-4/file-upload/class-cfefd-file-upload-ajax.php#L159",
+      "https://plugins.trac.wordpress.org/browser/contact-form-extender-for-divi-builder/tags/1.0.3/includes/module/addons/divi-4/file-upload/class-cfefd-file-upload-ajax.php#L18",
+      "https://plugins.trac.wordpress.org/browser/contact-form-extender-for-divi-builder/tags/1.0.7/includes/module/addons/divi-4/file-upload/class-cfefd-file-upload-ajax.php#L166",
+      "https://plugins.trac.wordpress.org/changeset?old_path=contact-form-extender-for-divi-builder%2Ftags%2F1.0.6&new_path=contact-form-extender-for-divi-builder%2Ftags%2F1.0.7",
+      "https://plugins.trac.wordpress.org/changeset?sfp_email=&sfph_mail=&reponame=&new=3499767%40contact-form-extender-for-divi-builder%2Ftrunk&old=3499766%40contact-form-extender-for-divi-builder%2Ftrunk&sfp_email=&sfph_mail=",
+      "https://wordpress.org/plugins/contact-form-extender-for-divi-builder/#developers",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/7bbead7c-47b9-473f-b335-6fae4b5998d6?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "file_write",
+      "rce"
+    ],
+    "intel_score": 92.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "file_write+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-119737",
     "published": "2026-11-02T20:17:38.143",
     "last_modified": "2026-11-02T21:17:29.267",
@@ -926,58 +1020,6 @@
       "recently modified (last 48h)",
       "priv_esc+25",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-48383",
-    "published": "2026-10-13T20:17:29.017",
-    "last_modified": "2026-10-31T00:59:34.607",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Experience Manager is affected by an Incorrect Authorization vulnerability that could result in arbitrary code execution in the context of the current user, potentially gaining elevated access or control over the victim's account or session. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://helpx.adobe.com/security/products/experience-manager/apsb26-152.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 62.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-84243",
-    "published": "2026-10-30T18:18:13.650",
-    "last_modified": "2026-10-31T04:18:21.890",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The gettext family of functions in the GNU C Library version 2.0 and later accept LANGUAGE environment variable entries that contain '/' or that are equal to \"..\", unless the program is setuid or setgid (AT_SECURE).  An attacker who can set LANGUAGE in the environment of a program that uses gettext can make it load a message catalog (.mo file) from an arbitrary location in the file system.  A crafted .mo file can crash the program through out-of-range offsets, or supply translations whose format directives do not match the arguments passed by the program.  That causes undefined behaviour in the printf family of functions and may allow arbitrary code execution with the privileges of the program.  The safety of message catalogs relies on them being installed in trusted, read-only locations, and the directory traversal bypasses this.\n\nThe fix for CVE-2014-0475 rejects \"..\" path components in locale names passed to setlocale or taken from the LC_ALL, LC_* and LANG environment variables.  gettext reads LANGUAGE directly and appends each colon-separated entry to the message catalog directory, so that fix did not cover LANGUAGE.\n\nLANGUAGE is only used when the LC_MESSAGES locale is not \"C\", \"C.<encoding>\" or \"POSIX\", so the attacker must also be able to select another installed locale, for example through LANG or LC_ALL.  Exploitation also requires that the attacker can place the crafted file in a location readable by the target program, and that the environment crosses a trust boundary without the program running as AT_SECURE.  An example is an SSH server that accepts LANGUAGE and LANG from clients through the AcceptEnv directive and restricts an account to a forced command; the attacker may use this to escape the restriction.",
-    "references": [
-      "https://inbox.sourceware.org/libc-alpha/20261012112453.47383-1-avinal.xlvii@gmail.com",
-      "https://sourceware.org/bugzilla/show_bug.cgi?id=17142",
-      "https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=advisories/GLIBC-SA-2026-0025"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.4,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
     ]
   },
   {
@@ -1007,57 +1049,6 @@
       "rce"
     ],
     "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-75732",
-    "published": "2026-10-13T20:18:04.200",
-    "last_modified": "2026-10-31T00:57:58.487",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Experience Manager is affected by an Incorrect Authorization vulnerability that could result in arbitrary code execution in the context of the current user, potentially gaining elevated access or control over the victim's account or session. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://helpx.adobe.com/security/products/experience-manager/apsb26-152.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-102649",
-    "published": "2026-10-26T18:17:21.803",
-    "last_modified": "2026-10-31T02:17:29.003",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Burrito is a Terraform Automation Collaboration Software (TACoS) Kubernetes operator. Prior to 0.13.0, `POST /api/webhook` accepts unsigned GitHub and GitLab events when a `TerraformRepository`'s credentials omit `webhookSecret` or set it to an empty value, including credentials configured for git authentication and polling. `Credential.WebhookSecret` is optional, and `go-playground/webhooks` skips signature or token verification when the secret is empty. Anyone who can reach `burrito-server`'s endpoint and knows a tracked repository's URL can forge events to create or delete `TerraformPullRequest` custom resources with attacker-chosen `Branch`, `Base`, and `ID` fields. For GitHub `pull_request` events, the controller fetches changed files using the real pull request number but does not cross-check the payload's branch against that pull request. Pairing a real, existing pull request number with an unrelated existing branch in the same repository can therefore cause an unauthorized `terraform plan` for affected layers using the operator's stored git and cloud credentials. Code analysis also indicates that the resulting plan can be posted to the real pull request's comment thread, exposing and misattributing another branch's infrastructure changes. Auto-apply is disabled for these temporary layers, so this vulnerability alone cannot force a `terraform apply`; plan-time provider and data-source code execution depends on the selected branch's contents. This issue is fixed in version 0.13.0.",
-    "references": [
-      "https://github.com/padok-team/burrito/commit/1d48432a4a0126429c99f5fa42567bf3711d1ca1",
-      "https://github.com/padok-team/burrito/releases/tag/v0.13.0",
-      "https://github.com/padok-team/burrito/security/advisories/GHSA-7m68-72r6-3jx8",
-      "https://github.com/padok-team/burrito/security/advisories/GHSA-7m68-72r6-3jx8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -1215,22 +1206,23 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-78845",
-    "published": "2026-10-27T15:17:00.003",
-    "last_modified": "2026-10-31T03:17:31.390",
+    "cve_id": "CVE-2026-33264",
+    "published": "2026-07-07T10:16:40.443",
+    "last_modified": "2026-11-03T07:19:34.410",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Aidot products Linkind Matter Smart Plug 1.01.32, OREiN Matter Smart Light Bulb 3.15.21, and Linkind Wi-Fi Smart Light Bulb 3.30.17 are vulnerable to Remote Code Execution (RCE) via UPnP root description parsing.",
+    "summary": "A bug in `BaseSerialization.deserialize()` allowed unrestricted `import_string()` of attacker-controlled class paths when the Scheduler / API Server loaded a serialized DAG: a DAG author could embed a malicious trigger into a DAG to gain remote code execution on the API Server / Scheduler process, crossing the Airflow security boundary that DAG-author code must never execute in those processes. Users are advised to upgrade to `apache-airflow` 3.3.0 or later. As a defense-in-depth mitigation, deployments where DAG-author trust is limited can restrict the `[core] allowed_deserialization_classes` config to a narrow allowlist.",
     "references": [
-      "https://github.com/0xee9f00/AiDot-SSDP-UPnP-Vulnerabilities",
-      "https://www.aidot.com/vulnerability-disclosure-policy",
-      "https://github.com/0xee9f00/AiDot-SSDP-UPnP-Vulnerabilities"
+      "https://github.com/apache/airflow/pull/66002",
+      "https://github.com/apache/airflow/pull/68528",
+      "https://lists.apache.org/thread/otvdw8qt2y7xy2n5nq9xby9ky4rf5ltj",
+      "http://www.openwall.com/lists/oss-security/2026/07/07/1"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.8,
+    "epss": 1.6,
+    "epss_percentile": 76.5,
     "tags": [
       "rce"
     ],
@@ -1404,56 +1396,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-119261",
-    "published": "2026-10-30T01:16:44.797",
-    "last_modified": "2026-10-31T04:18:17.910",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper input validation in Skia in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/574213633"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119263",
-    "published": "2026-10-30T01:16:45.047",
-    "last_modified": "2026-10-31T04:18:18.300",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Memory corruption in GarbageCollection in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/575143870"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-79872",
     "published": "2026-10-22T19:17:59.600",
     "last_modified": "2026-11-02T15:17:37.987",
@@ -1531,6 +1473,32 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58256",
+    "published": "2026-10-27T23:17:06.140",
+    "last_modified": "2026-11-03T13:17:22.797",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "GRR is a resource management and reservation application. Prior to the advisory-reported fixed version 4.5.0, an administrator can inject malicious PHP through LDAP connector configuration parameters such as `ldap_filter`, poisoning `/personnalisation/config_ldap.inc.php` and permitting remote code execution. The administrator must first successfully connect to an LDAP server, which can be attacker-controlled, and then submit malicious input on the subsequent connector settings page. The advisory reports this issue as fixed in version 4.5.0.",
+    "references": [
+      "https://github.com/JeromeDevome/GRR/commit/3ff9504ae557da1e8e208149acbf8c7f04de645f",
+      "https://github.com/JeromeDevome/GRR/security/advisories/GHSA-fp4f-xmw6-5jf8",
+      "https://github.com/JeromeDevome/GRR/tree/v4.5.0"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 85.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
     ]
   },
   {
@@ -1700,6 +1668,58 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-33858",
+    "published": "2026-04-13T15:17:33.343",
+    "last_modified": "2026-11-03T07:19:41.870",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dag Authors, who normally should not be able to execute code in the webserver context could craft XCom payload causing the webserver to execute arbitrary code. Since Dag Authors are already highly trusted, severity of this issue is Low.\n\n\nUsers are recommended to upgrade to Apache Airflow 3.2.0, which resolves this issue.",
+    "references": [
+      "https://github.com/apache/airflow/pull/64148",
+      "https://lists.apache.org/thread/1npt3o2x81s0gw9tmfcv4n7p1z9hdmy0",
+      "http://www.openwall.com/lists/oss-security/2026/04/13/7"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-42359",
+    "published": "2026-06-01T09:16:18.907",
+    "last_modified": "2026-11-03T07:20:20.853",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A bug in Apache Airflow's XCom PATCH endpoint `PATCH /api/v2/xcomEntries/{key}` allowed an authenticated UI/API user with XCom write permission on a Dag to set XCom entries under reserved key names (e.g. `return_value`) that the matching POST endpoint already validated against `FORBIDDEN_XCOM_KEYS`. The endpoint also accepted serialized payload shapes the triggerer's deserializer treats as code; combined, this allowed RCE on the triggerer when the affected task next deferred. Affects deployments where untrusted users have XCom write permission on Dags that defer to the triggerer. This is a fix-bypass of CVE-2026-33858: PR #64148 added the `FORBIDDEN_XCOM_KEYS` validator only on the POST/set path; the PATCH path was not covered. Users who already upgraded for CVE-2026-33858 should additionally upgrade to `apache-airflow` 3.2.2 or later to cover the PATCH-path bypass.",
+    "references": [
+      "https://github.com/apache/airflow/pull/65915",
+      "https://lists.apache.org/thread/g8dqykpf1p90tysq8tln4qtkqwb1038s",
+      "https://www.cve.org/CVERecord?id=CVE-2026-33858"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-25784",
     "published": "2026-10-23T09:17:06.943",
     "last_modified": "2026-11-02T14:17:37.227",
@@ -1779,7 +1799,7 @@
   {
     "cve_id": "CVE-2026-112626",
     "published": "2026-10-26T21:17:55.980",
-    "last_modified": "2026-11-02T18:27:34.580",
+    "last_modified": "2026-11-03T05:18:29.693",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1809,7 +1829,7 @@
   {
     "cve_id": "CVE-2026-112637",
     "published": "2026-10-26T21:17:57.297",
-    "last_modified": "2026-11-02T18:25:01.470",
+    "last_modified": "2026-11-03T05:18:29.967",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1838,7 +1858,7 @@
   {
     "cve_id": "CVE-2026-112639",
     "published": "2026-10-26T21:17:57.620",
-    "last_modified": "2026-11-02T20:20:10.003",
+    "last_modified": "2026-11-03T05:18:30.200",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1952,7 +1972,7 @@
   {
     "cve_id": "CVE-2026-112688",
     "published": "2026-10-26T21:18:03.177",
-    "last_modified": "2026-11-02T15:45:20.680",
+    "last_modified": "2026-11-03T05:18:30.470",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -1980,7 +2000,7 @@
   {
     "cve_id": "CVE-2026-112697",
     "published": "2026-10-26T21:18:04.537",
-    "last_modified": "2026-11-02T20:17:05.907",
+    "last_modified": "2026-11-03T05:18:30.730",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -2026,62 +2046,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 39.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116748",
-    "published": "2026-10-26T22:16:59.610",
-    "last_modified": "2026-10-31T03:17:17.027",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Transmission 4.0.0 before 4.1.3 contains a permissive CORS vulnerability in handle_request() in rpc-server.cc that exposes the X-Transmission-Session-Id anti-CSRF token to any web origin. Malicious web pages can read the token from the 409 handshake response and replay it to issue RPC calls, enabling script-torrent-done execution, download-dir changes, or torrent and data deletion.",
-    "references": [
-      "https://github.com/transmission/transmission",
-      "https://github.com/transmission/transmission/blob/4.1.2/libtransmission/rpc-server.cc#L560",
-      "https://github.com/transmission/transmission/commit/c6a1bd2017a0fea9c956737c213f23e4b0f7929e",
-      "https://github.com/transmission/transmission/pull/8938",
-      "https://github.com/transmission/transmission/releases/tag/4.1.3",
-      "https://joshua.hu/transmission-cors-rpc-csrf-rce-drive-by-exploit",
-      "https://www.vulncheck.com/advisories/transmission-4.0.0-before-4.1.3-permissive-cors-leaks-rpc-anti-csrf-token"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 69.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116811",
-    "published": "2026-10-27T00:17:14.263",
-    "last_modified": "2026-10-31T03:17:17.433",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenPanel before 3.0.0 contains a sandbox escape vulnerability in the js-runtime validator that allows a project member to bypass the AST allowlist by aliasing the Function constructor. Attackers with write access can read payload.constructor.constructor into a local and call it to run arbitrary code in the worker process.",
-    "references": [
-      "https://github.com/Openpanel-dev/openpanel/commit/42fc8623b5c5c30f0b89686451c0c5ab13046b81",
-      "https://github.com/Openpanel-dev/openpanel/security/advisories/GHSA-mc99-9jf5-22cq",
-      "https://www.vulncheck.com/advisories/openpanel-before-3.0.0-sandbox-escape-rce-via-webhook-javascript-template"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.4,
     "tags": [
       "rce"
     ],
@@ -2160,406 +2124,6 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 11.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119260",
-    "published": "2026-10-30T01:16:44.663",
-    "last_modified": "2026-10-31T04:18:17.700",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Frames in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/573264074"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119262",
-    "published": "2026-10-30T01:16:44.920",
-    "last_modified": "2026-10-31T04:18:18.113",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper input validation in V8 in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/574660146"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119264",
-    "published": "2026-10-30T01:16:45.177",
-    "last_modified": "2026-10-31T04:18:18.487",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption in Dawn in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/575150692"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119265",
-    "published": "2026-10-30T01:16:45.303",
-    "last_modified": "2026-10-31T04:18:18.687",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption in Quota in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/575201795"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119266",
-    "published": "2026-10-30T01:16:45.430",
-    "last_modified": "2026-10-31T04:18:18.873",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Quota in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/575202553"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119267",
-    "published": "2026-10-30T01:16:45.553",
-    "last_modified": "2026-10-31T04:18:19.067",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption in DOM in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/576203565"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119268",
-    "published": "2026-10-30T01:16:45.680",
-    "last_modified": "2026-10-31T04:18:19.253",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Integer overflow in Editing in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/576984708"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119269",
-    "published": "2026-10-30T01:16:45.807",
-    "last_modified": "2026-10-31T04:18:19.433",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Blink in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/577072000"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119270",
-    "published": "2026-10-30T01:16:45.937",
-    "last_modified": "2026-10-31T04:18:19.630",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper input validation in CacheStorage in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/577333729"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 16.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-119271",
-    "published": "2026-10-30T01:16:46.063",
-    "last_modified": "2026-10-31T04:18:19.800",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Skia in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/577403270"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76025",
-    "published": "2026-10-30T01:16:46.970",
-    "last_modified": "2026-10-31T04:18:20.650",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in FileSystem in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/559780982"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76026",
-    "published": "2026-10-30T01:16:47.093",
-    "last_modified": "2026-10-31T04:18:20.850",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption in Autofill in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/567673200"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76028",
-    "published": "2026-10-30T01:16:47.337",
-    "last_modified": "2026-10-31T04:18:21.043",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in FileSystem in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/569012015"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76029",
-    "published": "2026-10-30T01:16:47.467",
-    "last_modified": "2026-10-31T04:18:21.257",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption in Network in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/572055997"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76030",
-    "published": "2026-10-30T01:16:47.593",
-    "last_modified": "2026-10-31T04:18:21.477",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption in FileSystem in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/572269631"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-76031",
-    "published": "2026-10-30T01:16:47.717",
-    "last_modified": "2026-10-31T04:18:21.700",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Input in Google Chrome prior to 156.0.8078.79 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02107719452.html",
-      "https://issues.chromium.org/issues/572556403"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.2,
     "tags": [
       "rce"
     ],
@@ -2686,7 +2250,7 @@
   {
     "cve_id": "CVE-2026-18199",
     "published": "2026-11-02T08:17:36.083",
-    "last_modified": "2026-11-02T20:17:41.190",
+    "last_modified": "2026-11-03T05:18:34.920",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -2766,7 +2330,7 @@
   {
     "cve_id": "CVE-2026-8923",
     "published": "2026-11-02T11:17:33.380",
-    "last_modified": "2026-11-02T20:18:03.050",
+    "last_modified": "2026-11-03T05:18:53.573",
     "cvss_v3": 8.7,
     "severity": "HIGH",
     "affected": [],
@@ -2923,6 +2487,540 @@
       "rce"
     ],
     "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-96889",
+    "published": "2026-09-23T20:17:27.587",
+    "last_modified": "2026-11-03T10:17:20.437",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in librsvg. When processing an SVG document containing nested XML inclusions (Xincludes) with duplicate entity declarations, a use-after-free error can occur. This vulnerability arises because the library incorrectly frees an XML entity that is still in use by the parser. An attacker could potentially exploit this to cause a denial of service or execute arbitrary code.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:86331",
+      "https://access.redhat.com/errata/RHSA-2026:86841",
+      "https://access.redhat.com/errata/RHSA-2026:86842",
+      "https://access.redhat.com/errata/RHSA-2026:86921",
+      "https://access.redhat.com/errata/RHSA-2026:92212",
+      "https://access.redhat.com/errata/RHSA-2026:92213",
+      "https://access.redhat.com/errata/RHSA-2026:92214",
+      "https://access.redhat.com/errata/RHSA-2026:92218",
+      "https://access.redhat.com/errata/RHSA-2026:92336",
+      "https://access.redhat.com/errata/RHSA-2026:92353",
+      "https://access.redhat.com/errata/RHSA-2026:92382",
+      "https://access.redhat.com/errata/RHSA-2026:92573",
+      "https://access.redhat.com/errata/RHSA-2026:92579",
+      "https://access.redhat.com/errata/RHSA-2026:94452",
+      "https://access.redhat.com/errata/RHSA-2026:94453",
+      "https://access.redhat.com/errata/RHSA-2026:94454",
+      "https://access.redhat.com/errata/RHSA-2026:94455",
+      "https://access.redhat.com/errata/RHSA-2026:94457",
+      "https://access.redhat.com/errata/RHSA-2026:94458",
+      "https://access.redhat.com/errata/RHSA-2026:94459",
+      "https://access.redhat.com/errata/RHSA-2026:94460",
+      "https://access.redhat.com/errata/RHSA-2026:94461",
+      "https://access.redhat.com/errata/RHSA-2026:94462",
+      "https://access.redhat.com/errata/RHSA-2026:94463",
+      "https://access.redhat.com/errata/RHSA-2026:94464",
+      "https://access.redhat.com/errata/RHSA-2026:94465",
+      "https://access.redhat.com/errata/RHSA-2026:94466",
+      "https://access.redhat.com/errata/RHSA-2026:94468",
+      "https://access.redhat.com/errata/RHSA-2026:94469",
+      "https://access.redhat.com/security/cve/CVE-2026-96889",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
+      "https://crates.io/crates/librsvg",
+      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241",
+      "https://rustsec.org/advisories/RUSTSEC-2026-0305.html",
+      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 46.9,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-56828",
+    "published": "2026-10-28T16:17:08.220",
+    "last_modified": "2026-11-03T13:17:22.427",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Shopper is a Headless e-commerce Admin Panel. From 2.8.0 until 2.8.1, three Shopper Livewire admin components retain authorization gaps after the earlier team-settings authorization fix. A staff member with only `view_users` and `access_dashboard` can mutate permissions, create an administrator, or delete roles. In `packages/admin/src/Livewire/Components/Settings/Team/Permissions.php`, `togglePermission` and `removePermission` authorize `view_users` rather than the stronger `access_setting` permission; `packages/admin/resources/views/livewire/components/settings/team/permissions.blade.php` exposes permission IDs in `wire:click` handlers. The attacker can grant arbitrary permissions to the bound role, including `access_setting` on the attacker's own role, or delete permission definitions. In `packages/admin/src/Livewire/SlideOvers/CreateTeamMember.php`, `mount()` and `store()` also accept `view_users`, and the client-selected `role_id` can identify the admin role, allowing creation of a pre-verified administrator with an attacker-chosen password. In `packages/admin/src/Livewire/Pages/Settings/Team/RolePermission.php`, `deleteAction` has no action authorization and is only conditioned on `can_be_removed`, while page access requires `view_users`. Deleting a removable role removes access for assigned users, enabling RBAC denial of service as well as privilege escalation. This issue is fixed in version 2.8.1.",
+    "references": [
+      "https://github.com/shopperlabs/shopper/commit/ac9a76044a8e4a2b570b438d66cf3007f3dc479e",
+      "https://github.com/shopperlabs/shopper/compare/v2.8.1...v2.9.2",
+      "https://github.com/shopperlabs/shopper/pull/514",
+      "https://github.com/shopperlabs/shopper/releases/tag/v2.8.1",
+      "https://github.com/shopperlabs/shopper/security/advisories/GHSA-j328-xmgp-j4q3"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 38.3,
+    "tags": [
+      "dos",
+      "priv_esc"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-116964",
+    "published": "2026-10-31T09:16:33.357",
+    "last_modified": "2026-11-02T21:17:25.623",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in konflux-ci. An attacker with repository write access can achieve arbitrary code execution within the Continuous Integration and Continuous Delivery (CI/CD) workflow environment. By injecting shell commands into environment export scripts, the attacker causes manifest synchronization scripts to dynamically evaluate unvalidated script output. Successful exploitation allows the attacker to compromise CI/CD pipelines, steal sensitive authentication tokens and deployment credentials, and gain unauthorized access to production systems.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-116964",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2564209"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-79873",
+    "published": "2026-10-22T19:17:59.727",
+    "last_modified": "2026-11-02T15:17:38.130",
+    "cvss_v3": 9.3,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Authentication bypass vulnerabilities in the PAPI protocol of AOS-10 could allow an unauthenticated adjacent attacker to circumvent existing authentication controls. Successful exploitation could allow an attacker to gain administrative access, modify system configurations, and access or manipulate sensitive data on affected devices.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05162en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 15.6,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 81.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-79874",
+    "published": "2026-10-22T19:17:59.837",
+    "last_modified": "2026-11-02T15:17:38.280",
+    "cvss_v3": 9.3,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An authentication bypass in the API of AOS-10 allows an unauthenticated adjacent attacker to circumvent existing authentication controls. Successful exploitation could allow an attacker to gain administrative access, modify system configurations, and access or manipulate sensitive data.",
+    "references": [
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05162en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 15.6,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 81.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-70388",
+    "published": "2026-10-26T09:16:35.860",
+    "last_modified": "2026-11-02T19:18:10.600",
+    "cvss_v3": 8.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SOEM version 2.0.0 and earlier contains vulnerabilities where a malicious device on the network can send specially crafted messages that cause the master to write data outside allocated memory boundaries. The software performs arithmetic on message length values without proper validation, allowing negative or extremely large values to bypass safety checks. This can corrupt memory and potentially allow an attacker to execute arbitrary code on the master system.",
+    "references": [
+      "https://rt-labs.com/wp-content/uploads/2026/10/RRTL-260921-01.pdf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 11.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 81.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-51954",
+    "published": "2026-10-22T16:17:36.180",
+    "last_modified": "2026-11-02T19:18:06.083",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue in Webasyst Framework 4.0.3 and before allows a remote attacker to execute arbitrary code via a crafted OAuth authorization URL with an arbitrary redirect_uri.",
+    "references": [
+      "https://github.com/Envincion/CVE-2026-51954",
+      "https://github.com/webasyst/webasyst-framework/issues/389",
+      "https://support.webasyst.com/forum/48658/unvalidated-redirect_uri-in-oauth-authorization-flow-allows-authorization-code-interception-and-permanent-api-access/",
+      "https://support.webasyst.com/forum/48658/unvalidated-redirect_uri-in-oauth-authorization-flow-allows-authorization-code-interception-and-permanent-api-access/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90717",
+    "published": "2026-10-28T09:17:08.297",
+    "last_modified": "2026-11-02T19:18:11.933",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Dell PowerProtect Data Domain Management Center, Feature Release versions 7.7.1.0 through 8.8, LTS2024 release versions 7.13.1.0 through 7.13.1.80, LTS2025 release versions 8.3.1.0 through 8.3.1.40, LTS2026 release versions 8.6.1.0 through 8.6.1.20, contain an Authentication Bypass by Spoofing vulnerability. A low privileged attacker with remote access could potentially exploit this vulnerability, leading to Elevation of privileges. This vulnerability could impact other managed Data Domain systems.",
+    "references": [
+      "https://www.dell.com/support/kbdoc/en-us/000515178/dsa-2026-416-security-update-for-dell-powerprotect-data-domain-multiple-vulnerabilities"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 14.2,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-119977",
+    "published": "2026-10-31T06:16:34.550",
+    "last_modified": "2026-11-02T16:19:19.997",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "WordPress Core is vulnerable to Remote Code Execution in versions 4.7 through 7.1.3. This is due to predictable, web-accessible staging paths used during full-package core upgrades. This makes it possible for unauthenticated attackers to execute code on the server during the upgrade window.",
+    "references": [
+      "https://core.trac.wordpress.org/browser/tags/7.1.3/src/wp-admin/includes/class-core-upgrader.php#L162",
+      "https://core.trac.wordpress.org/browser/tags/7.1.3/src/wp-admin/includes/class-wp-upgrader.php#L378",
+      "https://core.trac.wordpress.org/browser/tags/7.1.3/src/wp-admin/includes/update-core.php#L1549",
+      "https://core.trac.wordpress.org/browser/tags/7.1.3/src/wp-admin/setup-config.php#L282",
+      "https://core.trac.wordpress.org/browser/tags/7.1.4/src/wp-admin/includes/class-wp-upgrader.php#L346",
+      "https://core.trac.wordpress.org/browser/tags/7.1.4/src/wp-admin/includes/update-core.php#L1545",
+      "https://wordpress.org/news/2026/10/wordpress-7-1-4/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/4b4da0cf-d9f4-47c4-a0e8-6c4dc5a6f250?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-89270",
+    "published": "2026-10-31T07:16:37.707",
+    "last_modified": "2026-11-02T18:18:56.643",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Popup Builder – Create highly converting, mobile friendly marketing popups. plugin for WordPress is vulnerable to authorization bypass in all versions up to, and including, 4.4.5 This is due to the plugin not properly verifying that a user is authorized to perform an action. This makes it possible for unauthenticated attackers to trash all published popups on the site with a single unauthenticated GET request. The attack is amplified by a second flaw in SGPopup::find(), which returns false for every normally published popup when the sg_popup_preview_id parameter is present, causing the trash branch to fire against every popup on the site simultaneously.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/popup-builder/tags/4.4.5/com/classes/Filters.php#L43",
+      "https://plugins.trac.wordpress.org/browser/popup-builder/tags/4.4.5/com/classes/Filters.php#L435",
+      "https://plugins.trac.wordpress.org/browser/popup-builder/tags/4.4.5/com/classes/popups/SGPopup.php#L1826",
+      "https://plugins.trac.wordpress.org/browser/popup-builder/tags/4.4.5/com/classes/popups/SGPopup.php#L1830",
+      "https://plugins.trac.wordpress.org/browser/popup-builder/tags/4.4.5/com/classes/popups/SGPopup.php#L257",
+      "https://plugins.trac.wordpress.org/changeset/3755160/popup-builder/trunk/com/classes/popups/SGPopup.php",
+      "https://wordpress.org/plugins/popup-builder/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/13af3a6e-d3ef-41f0-9424-fe2c9b17c8bb?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.6,
+    "tags": [
+      "auth_bypass"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-91898",
+    "published": "2026-11-02T20:18:04.390",
+    "last_modified": "2026-11-03T05:18:54.233",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dell Alienware Command Center (AWCC), versions prior to 6.14.54.0, contain an Improper Verification of Cryptographic Signature vulnerability. An unauthenticated attacker with adjacent network access could potentially exploit this vulnerability, leading to Arbitrary Code Execution and Elevation of Privilege.",
+    "references": [
+      "https://www.dell.com/support/kbdoc/en-us/000512248/dsa-2026-429-security-update-for-dell-alienware-command-center-6-x-for-multiple-vulnerabilities"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": null,
+    "epss_percentile": null,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2022-2625",
+    "published": "2022-08-18T19:15:14.500",
+    "last_modified": "2026-11-02T19:17:48.630",
+    "cvss_v3": 8.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was found in PostgreSQL. This attack requires permission to create non-temporary objects in at least one schema, the ability to lure or wait for an administrator to create or update an affected extension in that schema, and the ability to lure or wait for a victim to use the object targeted in CREATE OR REPLACE or CREATE IF NOT EXISTS. Given all three prerequisites, this flaw allows an attacker to run arbitrary code as the victim role, which may be a superuser.",
+    "references": [
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2113825",
+      "https://security.gentoo.org/glsa/202211-04",
+      "https://www.postgresql.org/about/news/postgresql-145-138-1212-1117-1022-and-15-beta-3-released-2496/",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2113825",
+      "https://security.gentoo.org/glsa/202211-04",
+      "https://www.postgresql.org/about/news/postgresql-145-138-1212-1117-1022-and-15-beta-3-released-2496/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.0,
+    "epss_percentile": 81.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 80.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-95508",
+    "published": "2026-09-22T09:17:06.073",
+    "last_modified": "2026-11-03T05:18:55.623",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A heap-based buffer overflow was found in the DHCPv6 and TFTP response builders of libslirp. When the host is configured with a small interface MTU, a guest-supplied DHCPv6 CLIENTID option or TFTP blksize option can overflow the reply buffer with attacker-controlled content and length, resulting in denial of service and potentially arbitrary code execution in the host process. The default interface MTU is not affected.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-95508",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537748"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 80.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-120189",
+    "published": "2026-11-01T01:17:16.877",
+    "last_modified": "2026-11-02T16:19:19.997",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was identified in D-Link DIR-505 1.10B02. Affected is the function save_upload_file/mp_upload_file of the file /usr/bin/tftpd of the component TFTP Upload Filename Handler. The manipulation leads to stack-based buffer overflow. The attack is possible to be carried out remotely. The exploit is publicly available and might be used.",
+    "references": [
+      "https://github.com/Walnut1337/DIR-505_filename_rce/tree/main/poc",
+      "https://vuldb.com/cve/CVE-2026-120189",
+      "https://vuldb.com/submit/1027185",
+      "https://vuldb.com/vuln/429528",
+      "https://vuldb.com/vuln/429528/cti",
+      "https://www.dlink.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.3,
+    "epss_percentile": 71.4,
+    "tags": [
+      "poc"
+    ],
+    "intel_score": 80.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "poc+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58379",
+    "published": "2026-07-03T19:16:37.040",
+    "last_modified": "2026-11-02T10:17:11.730",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's Paint Shop Pro (PSP) file format parser. This heap buffer overflow vulnerability allows a remote attacker to cause arbitrary code execution or a denial of service (DoS) by tricking a user into opening a specially crafted PSP image file. The vulnerability occurs because the software incorrectly calculates buffer sizes when processing low bit-depth images, leading to an overwrite of adjacent memory.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:38496",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/errata/RHSA-2026:80509",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/security/cve/CVE-2026-58379",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2495997",
+      "https://gitlab.gnome.org/GNOME/gimp/-/commit/b630f167",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16205"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 79.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58380",
+    "published": "2026-07-06T15:16:40.020",
+    "last_modified": "2026-11-02T10:17:11.940",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's PNM file format parser. When parsing a specially crafted PNM file, the pnmscanner_gettoken() function writes a null terminator one byte past the end of a stack-allocated buffer due to an off-by-one error in the loop boundary check. This could lead to memory corruption, potentially resulting in denial of service or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:40751",
+      "https://access.redhat.com/errata/RHSA-2026:62507",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/errata/RHSA-2026:80509",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/security/cve/CVE-2026-58380",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2496135",
+      "https://gitlab.gnome.org/GNOME/gimp/-/commit/83699817",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16206"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.4,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 79.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-58384",
+    "published": "2026-07-07T09:16:30.003",
+    "last_modified": "2026-11-02T10:17:12.197",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's PSD parser. An integer overflow in read_RLE_channel() can cause an undersized heap allocation for the RLE row-length table, after which subsequent per-row writes corrupt heap memory. This could lead to memory corruption, potentially resulting in denial of service or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:40751",
+      "https://access.redhat.com/errata/RHSA-2026:73768",
+      "https://access.redhat.com/errata/RHSA-2026:80509",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/security/cve/CVE-2026-58384",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2497431",
+      "https://gitlab.gnome.org/GNOME/gimp/-/commit/da29e217",
+      "https://gitlab.gnome.org/GNOME/gimp/-/issues/16216"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.4,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 79.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2019-7364",
+    "published": "2019-08-23T20:15:10.690",
+    "last_modified": "2026-11-02T18:18:27.803",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DLL preloading vulnerability in versions 2017, 2018, 2019, and 2020 of Autodesk Advanced Steel, Civil 3D, AutoCAD, AutoCAD LT, AutoCAD Architecture, AutoCAD Electrical, AutoCAD Map 3D, AutoCAD Mechanical, AutoCAD MEP, AutoCAD Plant 3D and version 2017 of AutoCAD P&ID. An attacker may trick a user into opening a malicious DWG file that may leverage a DLL preloading vulnerability in AutoCAD which may result in code execution.",
+    "references": [
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2019-0002",
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2019-0002"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.9,
+    "epss_percentile": 79.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
