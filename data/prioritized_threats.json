@@ -38,7 +38,7 @@
   {
     "cve_id": "CVE-2026-111497",
     "published": "2026-10-22T14:17:37.190",
-    "last_modified": "2026-11-03T22:17:44.223",
+    "last_modified": "2026-11-04T12:53:08.993",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -446,30 +446,30 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-117532",
-    "published": "2026-10-27T11:17:33.597",
-    "last_modified": "2026-11-02T19:18:01.147",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-9771",
+    "published": "2026-08-17T17:16:57.720",
+    "last_modified": "2026-11-04T05:19:07.243",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "REDAXO core from 5.3.0 before 5.21.4 contains an authentication bypass vulnerability in the structure/history plugin that allows unauthenticated attackers to forge temporary login tokens. Attackers can force the session-tied secret into a predictable state and forge tokens for accounts like admin, gaining backend access and code execution outside live mode.",
+    "summary": "The flash_copy() system call is verified by z_vrfy_flash_copy() in drivers/flash/flash_util.c. On builds with CONFIG_USERSPACE enabled, this handler is the kernel-side trust boundary for a user-mode caller. Prior to the fix it validated only the output buffer (K_SYSCALL_MEMORY_WRITE) and passed the two struct device * arguments, src_dev and dst_dev, directly into the implementation without any object validation — unlike every sibling flash syscall, which guards its device pointer with K_SYSCALL_DRIVER_FLASH.\n\nA user-mode thread fully controls the values of src_dev/dst_dev and the contents of its own address space. The implementation z_impl_flash_copy() dereferences these pointers and calls through their driver-API function tables (e.g. api->get_parameters(dst_dev), flash_read(src_dev, ...), flash_write(dst_dev, ...)). By supplying a pointer to a forged struct device whose api table contains attacker-chosen function pointers, an unprivileged thread can cause the kernel to call arbitrary code in supervisor mode; passing any arbitrary or invalid address otherwise yields a kernel crash or out-of-bounds read.\n\nThe result is a local privilege escalation out of the userspace sandbox (with kernel denial-of-service and information disclosure as lesser outcomes). The fix adds K_SYSCALL_DRIVER_FLASH(src_dev, read) and K_SYSCALL_DRIVER_FLASH(dst_dev, write) to z_vrfy_flash_copy(), which verify each device is a registered flash-driver kernel object the calling thread is permitted to use before any dereference, closing the path completely.",
     "references": [
-      "https://github.com/redaxo/core/security/advisories/GHSA-px8f-whj8-hrpq",
-      "https://www.vulncheck.com/advisories/redaxo-core-5.3.0-before-5.21.4-authentication-bypass-via-history-plugin"
+      "https://github.com/zephyrproject-rtos/zephyr/commit/1b1ecdc438092cdd469319a0d51cba6cf82e06f4",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-68cj-3hg4-5vpm"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.4,
+    "epss": 0.1,
+    "epss_percentile": 3.6,
     "tags": [
-      "auth_bypass",
+      "priv_esc",
       "rce"
     ],
-    "intel_score": 114.0,
+    "intel_score": 109.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "auth_bypass+25"
+      "priv_esc+25"
     ]
   },
   {
@@ -503,87 +503,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116692",
-    "published": "2026-10-27T21:18:05.013",
-    "last_modified": "2026-11-02T20:17:33.240",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "MLflow is an open source AI engineering platform for agents, large language models, and machine learning models. From 3.12.0rc0 until 3.17.0, third-party scorer deserialization in mlflow/genai/scorers/base.py accepts request-selected descendants of THIRD_PARTY_SCORER_ALLOWED_MODULES rather than requiring an exact allowed module. A caller can use MLflow artifact endpoints to place a Python module beneath a writable allowed package and submit its module and class through /ajax-api/3.0/mlflow/scorer/invoke. Scorer.model_validate_json() imports the module and constructs the class before trace processing. Authentication-disabled deployments permit this code execution without credentials, while basic-auth deployments require a principal capable of creating an experiment and run and uploading artifacts. In either configuration, the allowed scorer package must be writable by the server process. This issue is fixed in version 3.17.0.",
-    "references": [
-      "https://github.com/mlflow/mlflow/commit/a732443e695c3c677680c54320efc394c81654ab",
-      "https://github.com/mlflow/mlflow/pull/25906",
-      "https://github.com/mlflow/mlflow/releases/tag/v3.17.0",
-      "https://github.com/mlflow/mlflow/security/advisories/GHSA-26p8-2jq9-3vq9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.4,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-105781",
-    "published": "2026-10-27T17:16:56.430",
-    "last_modified": "2026-11-02T21:17:22.827",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability that could result in arbitrary code execution in the context of the current user. An attacker could exploit this vulnerability to execute arbitrary SQL commands, potentially gaining elevated access or control over the victim's account or session. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.1,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 108.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104353",
-    "published": "2026-10-27T17:16:55.717",
-    "last_modified": "2026-11-02T21:17:22.410",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.5,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 107.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
     ]
   },
   {
@@ -1162,6 +1081,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-13214",
+    "published": "2026-08-25T05:17:20.060",
+    "last_modified": "2026-11-04T05:18:41.540",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The OCPP 1.6 client in subsys/net/lib/ocpp/ocpp_j.c contains a stack buffer overflow in parse_getconfig_msg(). When handling a GetConfiguration request from the central system, the handler copied the attacker-controlled JSON \"key\" string into the caller's fixed 50-byte stack buffer (skey[CISTR50], declared in subsys/net/lib/ocpp/ocpp.c) using an unbounded strcpy(). The parsed key value points directly into the receive buffer, so its length is bounded only by the message size (CONFIG_OCPP_RECV_BUFFER_SIZE, default 2048).\n\nThe GetConfiguration message is delivered over the WebSocket connection that the charge point opens to its configured central system. The reader thread ocpp_wsreader() reads the message into ui->recv_buf and dispatches it to parse_getconfig_msg() via the PDU function table. An attacker who controls the central system endpoint, or a man-in-the-middle on an unencrypted connection, can send a GetConfiguration request whose \"key\" field exceeds 50 bytes and overflow the reader thread's stack with attacker-chosen bytes.\n\nThe consequence is a remotely triggerable stack smash on the OCPP reader thread: at minimum a denial of service, and plausibly remote code execution depending on build-time hardening such as stack canaries and MPU configuration. The fix replaces the strcpy() with a bounded strncpy(key, payload.key[0], CISTR50 - 1) followed by explicit NUL termination, matching the bounded copies already used by the sibling handlers.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/afbf880b04188ae53451a0ade4ac62b654fdff34",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fqhf-6v24-4px2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.7,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-12944",
     "published": "2026-09-14T22:16:56.950",
     "last_modified": "2026-11-03T18:27:56.130",
@@ -1395,54 +1341,6 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 65.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104351",
-    "published": "2026-10-27T17:16:55.593",
-    "last_modified": "2026-11-02T20:17:26.953",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Control of Generation of Code ('Code Injection') vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-105780",
-    "published": "2026-10-27T17:16:56.313",
-    "last_modified": "2026-11-02T20:17:27.643",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Incorrect Authorization vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.2,
     "tags": [
       "rce"
     ],
@@ -1810,106 +1708,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-118305",
-    "published": "2026-10-27T23:16:58.987",
-    "last_modified": "2026-11-03T22:19:18.260",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Type confusion in Turbolev in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/568348290"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118306",
-    "published": "2026-10-27T23:16:59.097",
-    "last_modified": "2026-11-03T22:19:18.453",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Use after free in FileSystem in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Critical)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/571156746"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118308",
-    "published": "2026-10-27T23:16:59.323",
-    "last_modified": "2026-11-03T22:19:18.820",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Use after free in SVG in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574791952"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118310",
-    "published": "2026-10-27T23:16:59.543",
-    "last_modified": "2026-11-03T22:19:19.180",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Use after free in Views in Google Chrome on on Windows prior to 156.0.8078.73 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574516887"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-6671",
     "published": "2024-08-29T22:15:05.767",
     "last_modified": "2026-11-03T22:17:29.660",
@@ -2059,6 +1857,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-15894",
+    "published": "2026-10-07T09:17:05.157",
+    "last_modified": "2026-11-04T05:18:44.190",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Bluetooth Mesh On-Demand Private Proxy solicitation handler in subsys/bluetooth/mesh/solicitation.c copies a received Solicitation PDU into a fixed 17-byte stack buffer without bounding the source length. In sol_pdu_decrypt(), out is allocated as NET_BUF_SIMPLE(17) and then filled with net_buf_simple_add_mem(out, in->data, in->len); net_buf_simple_add() guards its tailroom only with __ASSERT_NO_MSG, which is compiled out in production builds, so when in->len > 17 the underlying memcpy writes attacker-controlled bytes past the 17-byte stack buffer. The copy occurs before any decryption or authentication, so no key material is required to trigger it.\n\nThe oversized length arises because the mesh scan callback in subsys/bluetooth/mesh/adv.c calls net_buf_simple_restore() before dispatching to bt_mesh_sol_recv(), leaving buf->len covering the entire remaining advertising payload rather than just the Solicitation Service Data. After the parser locates the Service Data AD and consumes the Identification Type byte, the remaining buf->len is the 17-octet Network PDU plus any trailing advertising bytes, and prior to this fix there was no maximum-length check (only a minimum). An attacker can therefore append extra AD structures or padding after the Solicitation Service Data to make buf->len exceed 17.\n\nbt_mesh_scan_cb() is registered directly as the BLE scan callback, so buf is raw, unauthenticated advertising data received over the air. Any device in radio range can send a non-connectable advertisement carrying a crafted mesh Proxy Solicitation to a node that has CONFIG_BT_MESH_OD_PRIV_PROXY_SRV enabled and is currently eligible to be solicited (GATT proxy disabled, On-Demand Private Proxy enabled), with no pairing, bonding, or provisioning. The result is an attacker-controlled stack overwrite — plausibly leading to remote code execution and at minimum a reliable remote denial of service. The fix trims buf->len to the spec-fixed 17 octets (dropping the PDU if fewer remain) before decryption.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/4416ad13677259d180f35ce44338578694e48184",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-x37p-38wq-cgwj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 23.6,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 87.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-79872",
     "published": "2026-10-22T19:17:59.600",
     "last_modified": "2026-11-02T15:17:37.987",
@@ -2085,7 +1910,7 @@
   {
     "cve_id": "CVE-2026-79982",
     "published": "2026-10-23T20:17:28.167",
-    "last_modified": "2026-11-02T16:17:44.307",
+    "last_modified": "2026-11-04T05:19:03.027",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -2706,6 +2531,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-13212",
+    "published": "2026-08-24T16:16:55.393",
+    "last_modified": "2026-11-04T05:18:41.180",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Zephyr virtio driver does not validate the descriptor-chain head id that the virtio device writes into the used ring. In virtio_isr() (drivers/virtio/virtio_common.c), the device-written vq->used->ring[idx].id is used directly as an index into vq->recv_cbs[] and vq->desc[], which are both allocated with exactly vq->num entries. recv_cbs[] holds {cb, opaque} callback entries, and the indexed callback pointer is then invoked as cbe.cb(cbe.opaque, used_len).\n\nBecause the id is consumed as a 16-bit value with no bound check, a malicious or compromised virtio backend (an untrusted hypervisor, or an untrusted hardware/peer-processor virtio device on a PCI or MMIO transport) can supply an id far beyond vq->num. This causes an out-of-bounds read of a {function pointer, argument} pair from heap memory beyond recv_cbs[], after which the driver calls that attacker-shaped pointer in the guest's interrupt context. No guest privileges or user interaction are required; the backend triggers it by writing the shared used ring and raising the queue interrupt.\n\nThe result is an arbitrary / attacker-influenced function-pointer call in the Zephyr guest, i.e. a control-flow-hijack primitive that can lead to code execution or, at minimum, a reliable crash. The fix rejects any used-ring id >= vq->num before indexing recv_cbs[]/desc[] or invoking the callback. This affects builds using CONFIG_VIRTIO with the PCI or MMIO transport.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/fe47dbca080957c425383cc1d5bdc7d48a41d4a5",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-7884-373w-qqhx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 30.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-65643",
     "published": "2026-09-01T03:16:50.807",
     "last_modified": "2026-11-03T23:17:52.380",
@@ -2745,6 +2595,56 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 46.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19569",
+    "published": "2026-10-09T08:16:54.563",
+    "last_modified": "2026-11-04T05:18:48.063",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "dynamic_object_create() in kernel/userspace/userspace.c computed the backing allocation for a dynamically allocated kernel object as obj_size_get(otype) + size, and for thread stack elements as STACK_ELEMENT_DATA_SIZE(size) (a round-up plus fixed overhead), without checking either expression for unsigned wrap-around. A size close to SIZE_MAX makes the computed total wrap to a very small value, so the heap chunk handed out is a few bytes while the object descriptor is still tagged with the full requested type and registered in the kernel object table.\n\nThe size argument reaches that arithmetic directly from user mode. k_object_alloc_size() is declared __syscall in include/zephyr/sys/kobject.h, its verifier z_vrfy_k_object_alloc_size() in kernel/userspace/userspace_handler.c is a bare pass-through, and z_object_alloc() only range-checks otype — nothing bounds size. The stack-element branch is additionally reachable through the k_thread_stack_alloc() syscall via kernel/dynamic.c. Because subsequent kernel-object validation checks only the object's type and initialization state, the undersized handle passes K_SYSCALL_OBJ_INIT()/K_SYSCALL_OBJ_NEVER_INIT(), and the matching init syscall (for example k_mutex_init(), k_sem_init(), or k_thread_create()) then writes a complete object over the truncated allocation.\n\nAn unprivileged user-mode thread can therefore trigger a supervisor-mode out-of-bounds write into the kernel resource-pool heap, of a size and content it substantially controls, corrupting sys_heap chunk metadata and adjacent kernel objects. Under CONFIG_GEN_PRIV_STACKS the thread-stack branch additionally stores an attacker-influenced wild pointer as a user thread's privileged stack base. The practical result is escape from the CONFIG_USERSPACE sandbox — kernel-level code execution or at minimum kernel memory corruption and system compromise.\n\nExploitation requires CONFIG_USERSPACE together with CONFIG_DYNAMIC_OBJECTS (also selected by CONFIG_DYNAMIC_THREAD under userspace), and a calling thread with an assigned resource pool. The fix rejects both overflowing computations and frees the partially built descriptor.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/85c1c4c21945d9b8fcef03216f1ccb2b27794e3d",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fg8c-9fhq-q7hv"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 7.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19570",
+    "published": "2026-10-09T08:16:54.693",
+    "last_modified": "2026-11-04T05:18:48.303",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The LE Audio Broadcast Sink in subsys/bluetooth/audio/bap_broadcast_sink.c copies subgroup metadata from a received Basic Audio Announcement (BASE) into the static Broadcast Audio Scan Service parameter structure mod_src_param without any bounds check. In base_subgroup_meta_cb() the destination element was selected as mod_src_param.subgroups[mod_src_param.num_subgroups] with no test against ARRAY_SIZE(mod_src_param.subgroups) (sized by CONFIG_BT_BAP_BASS_MAX_SUBGROUPS, default 1), and the metadata was copied with memcpy() using the raw on-air length returned by bt_bap_base_get_subgroup_codec_meta() into a metadata array sized by CONFIG_BT_AUDIO_CODEC_CFG_MAX_METADATA_SIZE (default 4). The BASE validator bt_bap_base_get_base_from_ad() only checks structural consistency and permits up to ~24 subgroups and metadata LTVs of ~240 octets.\n\nThe defect is reached from the periodic advertising receive callback: pa_recv() → bt_data_parse() → pa_decode_base() → update_recv_state_base() → bt_bap_base_foreach_subgroup() → base_subgroup_meta_cb(). Every broadcast sink registers a scan-delegator receive state at creation (bt_bap_broadcast_sink_create() calls broadcast_sink_add_src()), and CONFIG_BT_BAP_BROADCAST_SINK depends on CONFIG_BT_BAP_SCAN_DELEGATOR, so the path is active in every broadcast-sink build once the device is periodic-advertising-synced. An attacker in radio range who operates a broadcast source the device syncs to — or who impersonates the advertiser address and SID of one already in use, periodic advertising data being unauthenticated — can change the BASE at will; each new BASE is re-parsed.\n\nA crafted BASE therefore writes attacker-chosen bytes past the end of a fixed static object in .bss: up to roughly 236 bytes for an oversized metadata LTV, plus whole struct bt_bap_bass_subgroup records for each subgroup beyond CONFIG_BT_BAP_BASS_MAX_SUBGROUPS. This is memory corruption of adjacent Bluetooth-audio state reachable with no pairing, bonding or GATT connection, with a potential for remote code execution in the Bluetooth RX thread; in addition, the unvalidated metadata_len is forwarded to bt_bap_scan_delegator_mod_src(), which neither clamps it nor rejects it, leading to a further copy into the receive state and to out-of-bounds memory being disclosed in the BASS receive-state notification sent to a connected Broadcast Assistant.\n\nThe fix rejects a BASE carrying more subgroups than the receive state can hold (discarding the update entirely) and omits metadata that does not fit rather than copying it, and additionally honours the previously-ignored error return of the subgroup decode pass.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/5738f61f4128bb38508bab57342b1f7bf218d127",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4qwc-2qfq-w2fj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.8,
     "tags": [
       "rce"
     ],
@@ -3066,6 +2966,106 @@
     "references": [
       "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html",
       "https://issues.chromium.org/issues/568906040"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-113044",
+    "published": "2026-10-20T22:18:55.570",
+    "last_modified": "2026-11-03T22:18:20.243",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Type confusion in V8 in Google Chrome prior to 156.0.8078.47 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html",
+      "https://issues.chromium.org/issues/559266116"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-113052",
+    "published": "2026-10-20T22:18:56.467",
+    "last_modified": "2026-11-03T22:18:21.603",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Race condition in V8 in Google Chrome prior to 156.0.8078.47 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html",
+      "https://issues.chromium.org/issues/564326756"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-113059",
+    "published": "2026-10-20T22:18:57.277",
+    "last_modified": "2026-11-03T22:18:23.203",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Race condition in Sensor in Google Chrome prior to 156.0.8078.47 allowed a remote attacker who had compromised the renderer process to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html",
+      "https://issues.chromium.org/issues/513620385"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.3,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-113065",
+    "published": "2026-10-20T22:18:57.957",
+    "last_modified": "2026-11-03T22:18:24.977",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper input validation in Media in Google Chrome prior to 156.0.8078.47 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted media file. (Chromium security severity: Medium)",
+    "references": [
+      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_02018666648.html",
+      "https://issues.chromium.org/issues/562223549"
     ],
     "source": "NVD",
     "cisa_kev": false,

@@ -38,7 +38,7 @@
   {
     "cve_id": "CVE-2026-111497",
     "published": "2026-10-22T14:17:37.190",
-    "last_modified": "2026-11-03T22:17:44.223",
+    "last_modified": "2026-11-04T12:53:08.993",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
@@ -446,30 +446,30 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-117532",
-    "published": "2026-10-27T11:17:33.597",
-    "last_modified": "2026-11-02T19:18:01.147",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-9771",
+    "published": "2026-08-17T17:16:57.720",
+    "last_modified": "2026-11-04T05:19:07.243",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "REDAXO core from 5.3.0 before 5.21.4 contains an authentication bypass vulnerability in the structure/history plugin that allows unauthenticated attackers to forge temporary login tokens. Attackers can force the session-tied secret into a predictable state and forge tokens for accounts like admin, gaining backend access and code execution outside live mode.",
+    "summary": "The flash_copy() system call is verified by z_vrfy_flash_copy() in drivers/flash/flash_util.c. On builds with CONFIG_USERSPACE enabled, this handler is the kernel-side trust boundary for a user-mode caller. Prior to the fix it validated only the output buffer (K_SYSCALL_MEMORY_WRITE) and passed the two struct device * arguments, src_dev and dst_dev, directly into the implementation without any object validation — unlike every sibling flash syscall, which guards its device pointer with K_SYSCALL_DRIVER_FLASH.\n\nA user-mode thread fully controls the values of src_dev/dst_dev and the contents of its own address space. The implementation z_impl_flash_copy() dereferences these pointers and calls through their driver-API function tables (e.g. api->get_parameters(dst_dev), flash_read(src_dev, ...), flash_write(dst_dev, ...)). By supplying a pointer to a forged struct device whose api table contains attacker-chosen function pointers, an unprivileged thread can cause the kernel to call arbitrary code in supervisor mode; passing any arbitrary or invalid address otherwise yields a kernel crash or out-of-bounds read.\n\nThe result is a local privilege escalation out of the userspace sandbox (with kernel denial-of-service and information disclosure as lesser outcomes). The fix adds K_SYSCALL_DRIVER_FLASH(src_dev, read) and K_SYSCALL_DRIVER_FLASH(dst_dev, write) to z_vrfy_flash_copy(), which verify each device is a registered flash-driver kernel object the calling thread is permitted to use before any dereference, closing the path completely.",
     "references": [
-      "https://github.com/redaxo/core/security/advisories/GHSA-px8f-whj8-hrpq",
-      "https://www.vulncheck.com/advisories/redaxo-core-5.3.0-before-5.21.4-authentication-bypass-via-history-plugin"
+      "https://github.com/zephyrproject-rtos/zephyr/commit/1b1ecdc438092cdd469319a0d51cba6cf82e06f4",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-68cj-3hg4-5vpm"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.4,
+    "epss": 0.1,
+    "epss_percentile": 3.6,
     "tags": [
-      "auth_bypass",
+      "priv_esc",
       "rce"
     ],
-    "intel_score": 114.0,
+    "intel_score": 109.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "auth_bypass+25"
+      "priv_esc+25"
     ]
   },
   {
@@ -503,87 +503,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116692",
-    "published": "2026-10-27T21:18:05.013",
-    "last_modified": "2026-11-02T20:17:33.240",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "MLflow is an open source AI engineering platform for agents, large language models, and machine learning models. From 3.12.0rc0 until 3.17.0, third-party scorer deserialization in mlflow/genai/scorers/base.py accepts request-selected descendants of THIRD_PARTY_SCORER_ALLOWED_MODULES rather than requiring an exact allowed module. A caller can use MLflow artifact endpoints to place a Python module beneath a writable allowed package and submit its module and class through /ajax-api/3.0/mlflow/scorer/invoke. Scorer.model_validate_json() imports the module and constructs the class before trace processing. Authentication-disabled deployments permit this code execution without credentials, while basic-auth deployments require a principal capable of creating an experiment and run and uploading artifacts. In either configuration, the allowed scorer package must be writable by the server process. This issue is fixed in version 3.17.0.",
-    "references": [
-      "https://github.com/mlflow/mlflow/commit/a732443e695c3c677680c54320efc394c81654ab",
-      "https://github.com/mlflow/mlflow/pull/25906",
-      "https://github.com/mlflow/mlflow/releases/tag/v3.17.0",
-      "https://github.com/mlflow/mlflow/security/advisories/GHSA-26p8-2jq9-3vq9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.4,
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-105781",
-    "published": "2026-10-27T17:16:56.430",
-    "last_modified": "2026-11-02T21:17:22.827",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability that could result in arbitrary code execution in the context of the current user. An attacker could exploit this vulnerability to execute arbitrary SQL commands, potentially gaining elevated access or control over the victim's account or session. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.1,
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 108.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104353",
-    "published": "2026-10-27T17:16:55.717",
-    "last_modified": "2026-11-02T21:17:22.410",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.5,
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 107.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
     ]
   },
   {
@@ -1162,6 +1081,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-13214",
+    "published": "2026-08-25T05:17:20.060",
+    "last_modified": "2026-11-04T05:18:41.540",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The OCPP 1.6 client in subsys/net/lib/ocpp/ocpp_j.c contains a stack buffer overflow in parse_getconfig_msg(). When handling a GetConfiguration request from the central system, the handler copied the attacker-controlled JSON \"key\" string into the caller's fixed 50-byte stack buffer (skey[CISTR50], declared in subsys/net/lib/ocpp/ocpp.c) using an unbounded strcpy(). The parsed key value points directly into the receive buffer, so its length is bounded only by the message size (CONFIG_OCPP_RECV_BUFFER_SIZE, default 2048).\n\nThe GetConfiguration message is delivered over the WebSocket connection that the charge point opens to its configured central system. The reader thread ocpp_wsreader() reads the message into ui->recv_buf and dispatches it to parse_getconfig_msg() via the PDU function table. An attacker who controls the central system endpoint, or a man-in-the-middle on an unencrypted connection, can send a GetConfiguration request whose \"key\" field exceeds 50 bytes and overflow the reader thread's stack with attacker-chosen bytes.\n\nThe consequence is a remotely triggerable stack smash on the OCPP reader thread: at minimum a denial of service, and plausibly remote code execution depending on build-time hardening such as stack canaries and MPU configuration. The fix replaces the strcpy() with a bounded strncpy(key, payload.key[0], CISTR50 - 1) followed by explicit NUL termination, matching the bounded copies already used by the sibling handlers.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/afbf880b04188ae53451a0ade4ac62b654fdff34",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fqhf-6v24-4px2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.7,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 92.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-12944",
     "published": "2026-09-14T22:16:56.950",
     "last_modified": "2026-11-03T18:27:56.130",
@@ -1395,54 +1341,6 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 65.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104351",
-    "published": "2026-10-27T17:16:55.593",
-    "last_modified": "2026-11-02T20:17:26.953",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Control of Generation of Code ('Code Injection') vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-105780",
-    "published": "2026-10-27T17:16:56.313",
-    "last_modified": "2026-11-02T20:17:27.643",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Incorrect Authorization vulnerability that could result in arbitrary code execution in the context of the current user. A low-privileged attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.2,
     "tags": [
       "rce"
     ],
@@ -1810,106 +1708,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-118305",
-    "published": "2026-10-27T23:16:58.987",
-    "last_modified": "2026-11-03T22:19:18.260",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Type confusion in Turbolev in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/568348290"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118306",
-    "published": "2026-10-27T23:16:59.097",
-    "last_modified": "2026-11-03T22:19:18.453",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Use after free in FileSystem in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: Critical)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/571156746"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118308",
-    "published": "2026-10-27T23:16:59.323",
-    "last_modified": "2026-11-03T22:19:18.820",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Use after free in SVG in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574791952"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118310",
-    "published": "2026-10-27T23:16:59.543",
-    "last_modified": "2026-11-03T22:19:19.180",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Use after free in Views in Google Chrome on on Windows prior to 156.0.8078.73 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574516887"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 88.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-6671",
     "published": "2024-08-29T22:15:05.767",
     "last_modified": "2026-11-03T22:17:29.660",
@@ -2059,6 +1857,33 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-15894",
+    "published": "2026-10-07T09:17:05.157",
+    "last_modified": "2026-11-04T05:18:44.190",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Bluetooth Mesh On-Demand Private Proxy solicitation handler in subsys/bluetooth/mesh/solicitation.c copies a received Solicitation PDU into a fixed 17-byte stack buffer without bounding the source length. In sol_pdu_decrypt(), out is allocated as NET_BUF_SIMPLE(17) and then filled with net_buf_simple_add_mem(out, in->data, in->len); net_buf_simple_add() guards its tailroom only with __ASSERT_NO_MSG, which is compiled out in production builds, so when in->len > 17 the underlying memcpy writes attacker-controlled bytes past the 17-byte stack buffer. The copy occurs before any decryption or authentication, so no key material is required to trigger it.\n\nThe oversized length arises because the mesh scan callback in subsys/bluetooth/mesh/adv.c calls net_buf_simple_restore() before dispatching to bt_mesh_sol_recv(), leaving buf->len covering the entire remaining advertising payload rather than just the Solicitation Service Data. After the parser locates the Service Data AD and consumes the Identification Type byte, the remaining buf->len is the 17-octet Network PDU plus any trailing advertising bytes, and prior to this fix there was no maximum-length check (only a minimum). An attacker can therefore append extra AD structures or padding after the Solicitation Service Data to make buf->len exceed 17.\n\nbt_mesh_scan_cb() is registered directly as the BLE scan callback, so buf is raw, unauthenticated advertising data received over the air. Any device in radio range can send a non-connectable advertisement carrying a crafted mesh Proxy Solicitation to a node that has CONFIG_BT_MESH_OD_PRIV_PROXY_SRV enabled and is currently eligible to be solicited (GATT proxy disabled, On-Demand Private Proxy enabled), with no pairing, bonding, or provisioning. The result is an attacker-controlled stack overwrite — plausibly leading to remote code execution and at minimum a reliable remote denial of service. The fix trims buf->len to the spec-fixed 17 octets (dropping the PDU if fewer remain) before decryption.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/4416ad13677259d180f35ce44338578694e48184",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-x37p-38wq-cgwj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 23.6,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 87.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-79872",
     "published": "2026-10-22T19:17:59.600",
     "last_modified": "2026-11-02T15:17:37.987",
@@ -2085,7 +1910,7 @@
   {
     "cve_id": "CVE-2026-79982",
     "published": "2026-10-23T20:17:28.167",
-    "last_modified": "2026-11-02T16:17:44.307",
+    "last_modified": "2026-11-04T05:19:03.027",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -2706,6 +2531,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-13212",
+    "published": "2026-08-24T16:16:55.393",
+    "last_modified": "2026-11-04T05:18:41.180",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Zephyr virtio driver does not validate the descriptor-chain head id that the virtio device writes into the used ring. In virtio_isr() (drivers/virtio/virtio_common.c), the device-written vq->used->ring[idx].id is used directly as an index into vq->recv_cbs[] and vq->desc[], which are both allocated with exactly vq->num entries. recv_cbs[] holds {cb, opaque} callback entries, and the indexed callback pointer is then invoked as cbe.cb(cbe.opaque, used_len).\n\nBecause the id is consumed as a 16-bit value with no bound check, a malicious or compromised virtio backend (an untrusted hypervisor, or an untrusted hardware/peer-processor virtio device on a PCI or MMIO transport) can supply an id far beyond vq->num. This causes an out-of-bounds read of a {function pointer, argument} pair from heap memory beyond recv_cbs[], after which the driver calls that attacker-shaped pointer in the guest's interrupt context. No guest privileges or user interaction are required; the backend triggers it by writing the shared used ring and raising the queue interrupt.\n\nThe result is an arbitrary / attacker-influenced function-pointer call in the Zephyr guest, i.e. a control-flow-hijack primitive that can lead to code execution or, at minimum, a reliable crash. The fix rejects any used-ring id >= vq->num before indexing recv_cbs[]/desc[] or invoking the callback. This affects builds using CONFIG_VIRTIO with the PCI or MMIO transport.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/fe47dbca080957c425383cc1d5bdc7d48a41d4a5",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-7884-373w-qqhx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 30.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-65643",
     "published": "2026-09-01T03:16:50.807",
     "last_modified": "2026-11-03T23:17:52.380",
@@ -2745,6 +2595,56 @@
     "cisa_kev": false,
     "epss": 0.6,
     "epss_percentile": 46.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19569",
+    "published": "2026-10-09T08:16:54.563",
+    "last_modified": "2026-11-04T05:18:48.063",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "dynamic_object_create() in kernel/userspace/userspace.c computed the backing allocation for a dynamically allocated kernel object as obj_size_get(otype) + size, and for thread stack elements as STACK_ELEMENT_DATA_SIZE(size) (a round-up plus fixed overhead), without checking either expression for unsigned wrap-around. A size close to SIZE_MAX makes the computed total wrap to a very small value, so the heap chunk handed out is a few bytes while the object descriptor is still tagged with the full requested type and registered in the kernel object table.\n\nThe size argument reaches that arithmetic directly from user mode. k_object_alloc_size() is declared __syscall in include/zephyr/sys/kobject.h, its verifier z_vrfy_k_object_alloc_size() in kernel/userspace/userspace_handler.c is a bare pass-through, and z_object_alloc() only range-checks otype — nothing bounds size. The stack-element branch is additionally reachable through the k_thread_stack_alloc() syscall via kernel/dynamic.c. Because subsequent kernel-object validation checks only the object's type and initialization state, the undersized handle passes K_SYSCALL_OBJ_INIT()/K_SYSCALL_OBJ_NEVER_INIT(), and the matching init syscall (for example k_mutex_init(), k_sem_init(), or k_thread_create()) then writes a complete object over the truncated allocation.\n\nAn unprivileged user-mode thread can therefore trigger a supervisor-mode out-of-bounds write into the kernel resource-pool heap, of a size and content it substantially controls, corrupting sys_heap chunk metadata and adjacent kernel objects. Under CONFIG_GEN_PRIV_STACKS the thread-stack branch additionally stores an attacker-influenced wild pointer as a user thread's privileged stack base. The practical result is escape from the CONFIG_USERSPACE sandbox — kernel-level code execution or at minimum kernel memory corruption and system compromise.\n\nExploitation requires CONFIG_USERSPACE together with CONFIG_DYNAMIC_OBJECTS (also selected by CONFIG_DYNAMIC_THREAD under userspace), and a calling thread with an assigned resource pool. The fix rejects both overflowing computations and frees the partially built descriptor.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/85c1c4c21945d9b8fcef03216f1ccb2b27794e3d",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fg8c-9fhq-q7hv"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 7.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19570",
+    "published": "2026-10-09T08:16:54.693",
+    "last_modified": "2026-11-04T05:18:48.303",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The LE Audio Broadcast Sink in subsys/bluetooth/audio/bap_broadcast_sink.c copies subgroup metadata from a received Basic Audio Announcement (BASE) into the static Broadcast Audio Scan Service parameter structure mod_src_param without any bounds check. In base_subgroup_meta_cb() the destination element was selected as mod_src_param.subgroups[mod_src_param.num_subgroups] with no test against ARRAY_SIZE(mod_src_param.subgroups) (sized by CONFIG_BT_BAP_BASS_MAX_SUBGROUPS, default 1), and the metadata was copied with memcpy() using the raw on-air length returned by bt_bap_base_get_subgroup_codec_meta() into a metadata array sized by CONFIG_BT_AUDIO_CODEC_CFG_MAX_METADATA_SIZE (default 4). The BASE validator bt_bap_base_get_base_from_ad() only checks structural consistency and permits up to ~24 subgroups and metadata LTVs of ~240 octets.\n\nThe defect is reached from the periodic advertising receive callback: pa_recv() → bt_data_parse() → pa_decode_base() → update_recv_state_base() → bt_bap_base_foreach_subgroup() → base_subgroup_meta_cb(). Every broadcast sink registers a scan-delegator receive state at creation (bt_bap_broadcast_sink_create() calls broadcast_sink_add_src()), and CONFIG_BT_BAP_BROADCAST_SINK depends on CONFIG_BT_BAP_SCAN_DELEGATOR, so the path is active in every broadcast-sink build once the device is periodic-advertising-synced. An attacker in radio range who operates a broadcast source the device syncs to — or who impersonates the advertiser address and SID of one already in use, periodic advertising data being unauthenticated — can change the BASE at will; each new BASE is re-parsed.\n\nA crafted BASE therefore writes attacker-chosen bytes past the end of a fixed static object in .bss: up to roughly 236 bytes for an oversized metadata LTV, plus whole struct bt_bap_bass_subgroup records for each subgroup beyond CONFIG_BT_BAP_BASS_MAX_SUBGROUPS. This is memory corruption of adjacent Bluetooth-audio state reachable with no pairing, bonding or GATT connection, with a potential for remote code execution in the Bluetooth RX thread; in addition, the unvalidated metadata_len is forwarded to bt_bap_scan_delegator_mod_src(), which neither clamps it nor rejects it, leading to a further copy into the receive state and to out-of-bounds memory being disclosed in the BASS receive-state notification sent to a connected Broadcast Assistant.\n\nThe fix rejects a BASE carrying more subgroups than the receive state can hold (discarding the update entirely) and omits metadata that does not fit rather than copying it, and additionally honours the previously-ignored error return of the subgroup decode pass.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/5738f61f4128bb38508bab57342b1f7bf218d127",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4qwc-2qfq-w2fj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 21.8,
     "tags": [
       "rce"
     ],
@@ -4617,184 +4517,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-116837",
-    "published": "2026-10-27T01:19:06.860",
-    "last_modified": "2026-11-03T21:17:02.693",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A malicious actor with access to the adjacent network could exploit a Heap-based Buffer Overflow vulnerability found in airMAX M, LTU, SolarPoint, and SolarSwitch devices to execute arbitrary code on the device.",
-    "references": [
-      "https://uisp.community.ui.com/releases/Security-Advisory-Bulletin-071/7d4d42cf-09e4-44d3-9c19-649cac8c6af3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 11.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116843",
-    "published": "2026-10-27T01:19:07.730",
-    "last_modified": "2026-11-02T19:17:59.443",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Mistral Vibe before 3.0.3 contains a remote code execution vulnerability that allows attackers to run commands by defining git filter drivers in an untrusted repository's .git/config. When started with --worktree, git worktree add applies .gitattributes and runs filter smudge, clean, or process commands before the trusted-folder check, executing attacker commands with user privileges.",
-    "references": [
-      "https://github.com/mistralai/mistral-vibe/blob/v2.24.1/vibe/core/worktree.py#L303-L317",
-      "https://github.com/mistralai/mistral-vibe/commit/7bb48f213ac677f943d5c791199ed3dddf302f00",
-      "https://github.com/mistralai/mistral-vibe/issues/997",
-      "https://github.com/mistralai/mistral-vibe/releases/tag/v3.0.3",
-      "https://www.vulncheck.com/advisories/mistral-vibe-before-3.0.3-rce-via-git-filter-drivers-in-worktree-mode",
-      "https://github.com/mistralai/mistral-vibe/issues/997"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 37.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118304",
-    "published": "2026-10-27T23:16:58.863",
-    "last_modified": "2026-11-03T22:19:18.060",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in SVG in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574101376"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118307",
-    "published": "2026-10-27T23:16:59.203",
-    "last_modified": "2026-11-03T22:19:18.630",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Paint in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/570675085"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118311",
-    "published": "2026-10-27T23:16:59.650",
-    "last_modified": "2026-11-03T22:19:19.373",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in Media in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/573938968"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118313",
-    "published": "2026-10-27T23:16:59.863",
-    "last_modified": "2026-11-03T22:19:19.743",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Out of bounds write in Video in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574032795"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118315",
-    "published": "2026-10-27T23:17:00.087",
-    "last_modified": "2026-11-03T22:19:20.120",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Type confusion in SVG in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to potentially execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/575184164"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 18.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-42533",
     "published": "2026-07-15T15:16:33.480",
     "last_modified": "2026-11-03T23:17:43.553",
@@ -4961,7 +4683,7 @@
   {
     "cve_id": "CVE-2026-96889",
     "published": "2026-09-23T20:17:27.587",
-    "last_modified": "2026-11-03T10:17:20.437",
+    "last_modified": "2026-11-04T06:17:07.680",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -4994,8 +4716,15 @@
       "https://access.redhat.com/errata/RHSA-2026:94464",
       "https://access.redhat.com/errata/RHSA-2026:94465",
       "https://access.redhat.com/errata/RHSA-2026:94466",
+      "https://access.redhat.com/errata/RHSA-2026:94467",
       "https://access.redhat.com/errata/RHSA-2026:94468",
       "https://access.redhat.com/errata/RHSA-2026:94469",
+      "https://access.redhat.com/errata/RHSA-2026:94470",
+      "https://access.redhat.com/errata/RHSA-2026:94471",
+      "https://access.redhat.com/errata/RHSA-2026:94472",
+      "https://access.redhat.com/errata/RHSA-2026:94473",
+      "https://access.redhat.com/errata/RHSA-2026:94474",
+      "https://access.redhat.com/errata/RHSA-2026:94476",
       "https://access.redhat.com/security/cve/CVE-2026-96889",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
       "https://crates.io/crates/librsvg",
@@ -5302,31 +5031,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-112352",
-    "published": "2026-10-27T20:17:12.997",
-    "last_modified": "2026-11-03T16:21:02.150",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Sunhillo SureLine before 9.1.5 contains an authentication bypass vulnerability that allows an unauthenticated remote attacker to impersonate any user with an active web session by forging a session cookie containing only a cleartext username with no random identifier or integrity protection. Attackers can guess default account names such as Admin or sftp_user and submit a forged username cookie to satisfy the login check in checkLogin (libwebcmn.so) and networkDiag.cgi, chaining into root command execution.",
-    "references": [
-      "https://www.sunhillo.com/product/sureline/",
-      "https://www.vulncheck.com/advisories/sunhillo-sureline-authentication-bypass-via-session-cookie"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.9,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
     ]
   },
   {
@@ -6010,6 +5714,56 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-19575",
+    "published": "2026-10-09T08:16:55.057",
+    "last_modified": "2026-11-04T05:18:48.960",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The user-mode verification handler for the device_deinit() system call, z_vrfy_device_deinit() in kernel/device.c, validated its dev argument with K_SYSCALL_OBJ_INIT(dev, K_OBJ_ANY). k_object_validate() short-circuits its type comparison when the requested type is K_OBJ_ANY, so the check reduced to \"this pointer is the base address of some kernel object the calling thread has been granted\" — the object's actual type was never compared, and K_SYSCALL_OBJ_INIT also skips the initialization-state check. The sibling handlers z_vrfy_device_init() and z_vrfy_device_is_ready() already used K_OBJ_DRIVER_ANY and were unaffected.\n\nA thread running in user mode can therefore pass any kernel object it holds permission on — most usefully a thread stack object obtained from the k_thread_stack_alloc() syscall or a statically defined K_THREAD_STACK it was granted in order to spawn a child user thread — whose backing memory is writable from user mode. z_impl_device_deinit() then interprets those attacker-written bytes as a struct device: it dereferences the state pointer read out of the object, calls the function pointer read out of ops.deinit, and on success writes through state again. The result is an indirect call to an arbitrary address executed in supervisor mode, plus an arbitrary kernel read and a single-byte kernel write.\n\nExploitation gives a local unprivileged thread full kernel code execution, defeating the CONFIG_USERSPACE isolation boundary entirely; a less precise attempt yields a supervisor-mode fault and a system crash. The defect is only reachable in builds that enable both CONFIG_USERSPACE and CONFIG_DEVICE_DEINIT_SUPPORT — with de-initialization support disabled, z_impl_device_deinit() returns -ENOTSUP without ever dereferencing the pointer. In v4.2.x and v4.3.x, CONFIG_DEVICE_DEINIT_SUPPORT defaulted to y, so every CONFIG_USERSPACE build of those releases is exposed unless the option was explicitly turned off. From v4.4.0 the option is opt-in (no default, and not selected by any in-tree subsystem), so a v4.4.x build is exposed only if it enables the option explicitly. The v4.2 line is no longer maintained and receives no backport.\n\nThe fix changes the object check to K_OBJ_DRIVER_ANY, which constrains the argument to the build-generated driver object type range (K_OBJ_DRIVER_FIRST..K_OBJ_DRIVER_LAST) — the real struct device instances placed by the linker — so the state and ops.deinit fields are once again kernel-controlled.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/1036694889ab33996db41b4141ddf66aa786d267",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-j9m4-fr5f-49wm"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19669",
+    "published": "2026-10-11T18:16:58.563",
+    "last_modified": "2026-11-04T05:18:49.633",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The user-mode syscall verifiers z_vrfy_fuel_gauge_get_props() and z_vrfy_fuel_gauge_set_props() in drivers/fuel_gauge/fuel_gauge_syscall_handlers.c declared two variable-length arrays, union fuel_gauge_prop_val k_vals[len] and fuel_gauge_prop_t k_props[len], sized directly by the caller-supplied len argument. len is an unvalidated size_t taken straight from the syscall ABI, and the VLAs were allocated before any check at all — including before the K_SYSCALL_DRIVER_FUEL_GAUGE() object-permission check. The subsequent k_usermode_from_copy() calls validated only that the user source buffer was readable; the kernel destination was never bounds-checked, since it was sized by the same attacker-chosen len.\n\nAny thread running in user mode with CONFIG_USERSPACE enabled can invoke fuel_gauge_get_props() or fuel_gauge_set_props() with a large len. This first displaces the supervisor stack pointer by an arbitrary attacker-chosen amount — Zephyr does not build with stack-clash probing, so the displacement itself does not fault, and the nested calls made by the verifier then write frames below the privileged stack. If the caller has been granted access to a fuel-gauge device object, the memcpy inside k_usermode_from_copy() additionally writes len * sizeof(union fuel_gauge_prop_val) bytes of fully attacker-controlled data starting well below the stack base. CONFIG_PRIVILEGED_STACK_SIZE defaults to 1024 bytes, so a len of roughly 170 already exhausts it.\n\nThe result is an out-of-bounds write in supervisor mode with attacker-controlled length and, on the permitted path, attacker-controlled content — a break out of the user-mode sandbox into kernel memory, leading to kernel code execution or a system crash. A stack guard region does not contain it, because the copy begins below the guard and walks upward, corrupting unprotected memory before the guard is reached. The fix removes the kernel-side copies entirely and validates the caller's arrays in place with K_SYSCALL_MEMORY_ARRAY_READ() / K_SYSCALL_MEMORY_ARRAY_WRITE(), which also handle the len * size multiplication overflow; this is safe because neither fuel_gauge_prop_t nor union fuel_gauge_prop_val contains embedded pointers.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/0d65ce46dda0626164503c50f37e6e1f59d310a9",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6ghg-cmrw-8gw5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 7.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-112257",
     "published": "2026-10-19T22:17:05.420",
     "last_modified": "2026-11-02T19:17:52.063",
@@ -6078,6 +5832,31 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 6.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19676",
+    "published": "2026-10-21T19:17:02.650",
+    "last_modified": "2026-11-04T05:18:49.827",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The user-mode verifier for the peci_transfer() system call, z_vrfy_peci_transfer() in drivers/peci/peci_handlers.c, checked only the device object permission and copied the caller-supplied struct peci_msg with k_usermode_from_copy(). That copy validates the outer structure only; the buf pointers and len values inside the embedded struct peci_buf members tx_buffer and rx_buffer remained fully caller-controlled and were passed unchecked to the driver.\n\nEvery in-tree PECI driver dereferences those pointers in supervisor mode: peci_npcx_transfer() in drivers/peci/peci_npcx.c and peci_it8xxx2_transfer() in drivers/peci/peci_ite_it8xxx2.c copy hardware bytes into rx_buffer.buf[i] and read command bytes out of tx_buffer.buf[i], and peci_xec_read()/peci_xec_write() in drivers/peci/peci_mchp_xec.c do the same with no bound on rx_buffer.len at all. A user-mode thread that has been granted the PECI device object — the normal way an application exposes a device under CONFIG_USERSPACE — could therefore point rx_buffer.buf at kernel data structures and have the driver write hardware-supplied bytes there, or point tx_buffer.buf at kernel memory and have its contents pushed onto the PECI/eSPI out-of-band bus.\n\nThe impact is a full user-mode-to-kernel escape: an arbitrary kernel write primitive (integrity and, through it, code execution at supervisor privilege), an arbitrary kernel read disclosed to a PECI bus observer, and a trivially reachable supervisor-mode fault if an unmapped address is supplied. Exploitation requires CONFIG_USERSPACE=y, one of the PECI drivers enabled (CONFIG_PECI_NPCX, CONFIG_PECI_XEC or CONFIG_PECI_ITE_IT8XXX2), and local code execution in a user-mode thread holding the PECI device.\n\nThe fix adds K_SYSCALL_MEMORY_READ() and K_SYSCALL_MEMORY_WRITE() checks over the two embedded buffers, with a size_add_overflow() guard on the frame-check-sequence byte accounted for in the RX length.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/d7faf323d52b7e8845a63b1f854a82bdda44c261",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-g66q-frxm-3hfg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 9.8,
     "tags": [
       "rce"
     ],
@@ -6421,6 +6200,34 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-10667",
+    "published": "2026-07-12T17:16:24.670",
+    "last_modified": "2026-11-04T05:18:25.287",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Zephyr's dynamic kernel-object tracking (kernel/userspace/userspace.c, formerly kernel/userspace.c) maintains a doubly-linked list (obj_list) of dynamically allocated kernel objects. Iteration over this list in k_object_wordlist_foreach() was performed under lists_lock using the SAFE iterator (which caches the next node), but list removal and freeing of nodes was performed under different, disjoint spinlocks: objfree_lock in k_object_free() and obj_lock in unref_check(). On an SMP system, while one CPU iterated obj_list under lists_lock, another CPU could unlink and k_free() the dyn_obj node that the iterator had cached as its next pointer, causing the iterator to dereference freed kernel memory (use-after-free / dangling list traversal). All of the racing operations are reachable from unprivileged user-mode threads via system calls: k_object_alloc/k_object_alloc_size and k_object_release drive removals through unref_check() (under obj_lock), while k_thread_abort and thread creation drive the iteration through k_thread_perms_all_clear()/k_thread_perms_inherit() (under lists_lock). A deprivileged user thread on a CONFIG_SMP + CONFIG_USERSPACE build can therefore corrupt the kernel's object-tracking structures across the userspace security boundary, yielding kernel memory corruption (potential privilege escalation) or a kernel crash (denial of service). The fix removes objfree_lock and serializes every obj_list modification under lists_lock, including holding it across find+remove in k_object_free() and around unref_check() in k_thread_perms_clear(). Affects CONFIG_SMP+CONFIG_USERSPACE+CONFIG_DYNAMIC_OBJECTS configurations; the defect dates to the 2019 spinlockification (commit 8a3d57b6cc6, first released in v1.14.0) and shipped through v4.4.0.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/fdc42fa256b8c2a7b27790f032d5385f8058c4a9",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-9x5j-h3rh-x579",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-9x5j-h3rh-x579"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 4.1,
+    "tags": [
+      "dos",
+      "priv_esc"
+    ],
+    "intel_score": 77.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-49845",
     "published": "2026-08-25T11:16:53.410",
     "last_modified": "2026-11-03T23:17:45.880",
@@ -6445,6 +6252,31 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19184",
+    "published": "2026-10-05T09:17:12.907",
+    "last_modified": "2026-11-04T05:18:47.413",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The NXP GAU ADC driver (drivers/adc/adc_mcux_gau_adc.c) validated the caller-supplied sequence->buffer_size, which is expressed in bytes, against the number of active channels, which is a sample count. It then stored that byte count directly in data->results_length and used it in mcux_gau_adc_read_samples() as the number of uint16_t slots available. Because each conversion result occupies sizeof(uint16_t) bytes, a buffer that was accepted as \"large enough\" could be written with up to twice its size in bytes, so every sample past the buffer's midpoint was written out of bounds.\n\nadc_read() and adc_read_async() are Zephyr system calls. The syscall verifier in drivers/adc/adc_handlers.c only confirms that the caller owns buffer_size writable bytes (K_SYSCALL_MEMORY_WRITE); deciding whether that size is sufficient for the requested channels and extra_samplings is delegated entirely to the driver. On a build with CONFIG_USERSPACE=y, a user-mode thread that has been granted the ADC device object could therefore submit a deliberately half-sized buffer and cause the driver's work-queue handler — which runs in supervisor mode, outside the caller's MPU restrictions — to write ADC conversion results past the end of that buffer, at an address and for a length of the caller's choosing.\n\nThe overrun is bounded by the requested sequence: with sequence->options->extra_samplings set, the sampling loop walks the buffer pointer forward across every sampling, so the total overrun can reach the full size of the supplied buffer (kilobytes for a large extra_samplings). The written words are 16-bit ADC conversion results, so the content is only partially attacker-influenced (via the selected analog input, gain and resolution), but the destination and length are fully controlled — sufficient for kernel memory corruption, a crash, or a userspace-to-kernel privilege escalation. Builds without CONFIG_USERSPACE, or on SoCs other than NXP RW61x with the GAU ADC node enabled, are not exposed to the privilege boundary; there the same defect only causes a silent overflow when the application itself passes an undersized buffer.\n\nThe fix replaces the ad-hoc check with the shared adc_sequence_validate_buffer() helper (validating against num_channels * sizeof(uint16_t)), stores buffer_size / sizeof(uint16_t) in results_length, and corrects the loop bound to a post-decrement so exactly the available number of slots may be written.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/82b11958065aa85f8644ddc318ff4a328d1443c8",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-j86w-mfgw-fxj9"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.0,
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 77.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
     ]
   },
   {
@@ -6631,7 +6463,7 @@
   {
     "cve_id": "CVE-2026-76561",
     "published": "2026-09-08T08:17:12.020",
-    "last_modified": "2026-11-02T13:17:37.830",
+    "last_modified": "2026-11-04T13:17:31.813",
     "cvss_v3": 7.2,
     "severity": "HIGH",
     "affected": [],
@@ -6645,6 +6477,7 @@
       "https://access.redhat.com/errata/RHSA-2026:86624",
       "https://access.redhat.com/errata/RHSA-2026:86625",
       "https://access.redhat.com/errata/RHSA-2026:93668",
+      "https://access.redhat.com/errata/RHSA-2026:95097",
       "https://access.redhat.com/security/cve/CVE-2026-76561",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2519523"
     ],
@@ -7072,30 +6905,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-105779",
-    "published": "2026-10-27T17:16:56.193",
-    "last_modified": "2026-11-02T20:17:27.510",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by an Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability that could result in a Security feature bypass. A low-privileged attacker could leverage this vulnerability to bypass security measures and gain unauthorized read and limited write access. Exploitation of this issue does not require user interaction. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 22.2,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 73.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2022-36062",
     "published": "2022-09-22T18:15:10.307",
     "last_modified": "2026-11-03T22:17:11.073",
@@ -7174,33 +6983,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-117604",
-    "published": "2026-10-27T15:16:57.817",
-    "last_modified": "2026-11-02T20:17:36.210",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grav from 1.7.53.3 before 1.7.53.6 contains an authorization bypass in Debugger::isDebuggerRequestAuthorized() that allows unauthenticated visitors to read /__clockwork/ profiler data via a loopback REMOTE_ADDR fallback. Behind a same-host reverse proxy, remote requests appear as loopback, letting attackers read stored records including administrator plaintext passwords and configuration credentials.",
-    "references": [
-      "https://github.com/getgrav/grav/commit/4d9fca043f990a818d65cea61c928203b9e19641",
-      "https://github.com/getgrav/grav/releases/tag/1.7.53.6",
-      "https://github.com/getgrav/grav/security/advisories/GHSA-xprx-c7jf-cp6g",
-      "https://www.vulncheck.com/advisories/grav-from-1.7.53.3-before-1.7.53.6-clockwork-profiler-authorization-bypass-via-loopback-fallback"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.5,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-27275",
     "published": "2024-06-15T14:15:09.443",
     "last_modified": "2026-11-03T22:17:16.420",
@@ -7269,55 +7051,6 @@
     "cisa_kev": false,
     "epss": 1.0,
     "epss_percentile": 63.8,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 72.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116838",
-    "published": "2026-10-27T01:19:06.973",
-    "last_modified": "2026-11-03T21:17:02.827",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A malicious actor who lures an authenticated user to a malicious page could exploit a Cross-Site Request Forgery (CSRF) vulnerability found in airMAX M devices to execute a Command Injection on the device.",
-    "references": [
-      "https://uisp.community.ui.com/releases/Security-Advisory-Bulletin-071/7d4d42cf-09e4-44d3-9c19-649cac8c6af3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.1,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 72.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-112351",
-    "published": "2026-10-27T20:17:12.853",
-    "last_modified": "2026-11-03T16:21:26.610",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Sunhillo SureLine before 9.1.5 contains an OS command injection vulnerability in the networkDiag.cgi endpoint that allows an authenticated remote attacker with any web account to execute arbitrary commands as root by injecting shell metacharacters into the ipAddr or dnsAddr parameters. Attackers can bypass the incomplete character denylist from the prior CVE-2021-36380 fix using URL-encoded newline (%0a) or ampersand (%26) sequences that act as command separators after decoding in the ping, nslookup, or traceroute diagnostic modes, leading to full system compromise.",
-    "references": [
-      "https://www.sunhillo.com/product/sureline/",
-      "https://www.vulncheck.com/advisories/sunhillo-sureline-os-command-injection-via-networkdiag-cgi"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.7,
-    "epss_percentile": 85.9,
     "tags": [
       "command_injection"
     ],
@@ -7688,120 +7421,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-117558",
-    "published": "2026-10-27T14:16:37.840",
-    "last_modified": "2026-11-02T16:17:30.580",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The ai-sdlc plugin MCP server through 0.31.2 contains an OS command injection vulnerability that allows attackers to execute commands by supplying shell metacharacters in the repo argument. The unvalidated repo value is interpolated into gh issue view or gh pr view commands run via execSync(), letting prompt-injected agents execute commands as the MCP server user.",
-    "references": [
-      "https://github.com/ai-sdlc-framework/ai-sdlc",
-      "https://github.com/ai-sdlc-framework/ai-sdlc/blob/ai-sdlc-plugin-v0.31.2/ai-sdlc-plugin/mcp-server/src/tools/check-issue.ts#L15-L19",
-      "https://github.com/ai-sdlc-framework/ai-sdlc/commit/717d7ecf068b714f65955e50fcf5cb4f9a0b5070",
-      "https://github.com/ai-sdlc-framework/ai-sdlc/issues/1970",
-      "https://www.vulncheck.com/advisories/ai-sdlc-mcp-server-through-0.31.2-command-injection-via-check-issue-and-check-pr-status",
-      "https://github.com/ai-sdlc-framework/ai-sdlc/issues/1970"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.7,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 67.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117559",
-    "published": "2026-10-27T14:16:37.987",
-    "last_modified": "2026-11-02T20:17:35.580",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "DroidMind through 0.4.0 contains a command injection vulnerability that allows MCP clients to bypass the shell command allowlist by using $(...) or backtick substitution. Attackers, including prompt-injected agents, can inject commands through parameters interpolated into Device.run_shell() or unvalidated Device.list_directory() to run blocked commands such as reboot on connected Android devices.",
-    "references": [
-      "https://github.com/hyperb1iss/droidmind",
-      "https://github.com/hyperb1iss/droidmind/blob/v0.4.0/droidmind/security.py#L338-L402",
-      "https://github.com/hyperb1iss/droidmind/issues/17",
-      "https://www.vulncheck.com/advisories/droidmind-through-0.4.0-command-injection-via-shell-allowlist-bypass",
-      "https://github.com/hyperb1iss/droidmind/issues/17"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 52.6,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 67.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117567",
-    "published": "2026-10-27T14:16:39.173",
-    "last_modified": "2026-11-02T20:17:35.897",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "esp-mcp through commit 28afddf contains an OS command injection vulnerability that allows attackers to run arbitrary commands by supplying shell metacharacters in MCP tool parameters. Attackers influencing agent tool calls through prompt injection can inject metacharacters into target, port, project_path, or project_name values passed to asyncio.create_subprocess_shell, executing commands as the MCP server user.",
-    "references": [
-      "https://github.com/horw/esp-mcp",
-      "https://github.com/horw/esp-mcp/blob/28afddf9ff41ada117bb45fd49b526d3bf89749e/main.py#L80",
-      "https://github.com/horw/esp-mcp/issues/49",
-      "https://www.vulncheck.com/advisories/esp-mcp-through-commit-28afddf-os-command-injection-via-mcp-tool-parameters",
-      "https://github.com/horw/esp-mcp/issues/49"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.3,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 67.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117573",
-    "published": "2026-10-27T14:16:39.800",
-    "last_modified": "2026-11-02T20:17:36.053",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "hagent through commit 761eec6 contains an OS command injection vulnerability that allows MCP clients to execute shell commands by injecting metacharacters into the args parameter of the hagent_arduino and hagent_esp32 tools. Attackers or prompt-injected agents can supply crafted args interpolated into arduino-cli and idf.py commands run with subprocess.run(shell=True) to execute commands as the MCP server user.",
-    "references": [
-      "https://github.com/masc-ucsc/hagent",
-      "https://github.com/masc-ucsc/hagent/blob/761eec627a1e6fb128a2a8ce9245aa595cc2f7af/hagent/mcp/mcp_arduino.py#L776",
-      "https://github.com/masc-ucsc/hagent/blob/761eec627a1e6fb128a2a8ce9245aa595cc2f7af/hagent/mcp/mcp_esp32.py#L682",
-      "https://github.com/masc-ucsc/hagent/issues/98",
-      "https://www.vulncheck.com/advisories/hagent-through-commit-761eec6-os-command-injection-via-arduino-and-esp32-mcp-tools",
-      "https://github.com/masc-ucsc/hagent/issues/98"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 53.3,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 67.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-67260",
     "published": "2026-08-12T16:17:14.813",
     "last_modified": "2026-11-03T07:20:56.523",
@@ -7959,146 +7578,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-117511",
-    "published": "2026-10-27T16:17:31.050",
-    "last_modified": "2026-11-02T20:17:34.470",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been found in desmondmorris node-tesseract up to 0.2.7. Affected by this issue is the function process of the file lib/tesseract.js of the component Command Builder. Such manipulation of the argument image leads to os command injection. The attack can be executed remotely. The exploit has been disclosed to the public and may be used. The project was informed of the problem early through an issue report but has not responded yet.",
-    "references": [
-      "https://github.com/desmondmorris/node-tesseract/",
-      "https://github.com/desmondmorris/node-tesseract/issues/72",
-      "https://vuldb.com/cve/CVE-2026-117511",
-      "https://vuldb.com/submit/1024535",
-      "https://vuldb.com/vuln/427077",
-      "https://vuldb.com/vuln/427077/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 76.3,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104350",
-    "published": "2026-10-27T17:16:55.457",
-    "last_modified": "2026-11-02T20:17:26.797",
-    "cvss_v3": 9.3,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Adobe Campaign Classic (ACC) is affected by a reflected Cross-Site Scripting (XSS) vulnerability. An attacker could exploit this vulnerability to inject malicious scripts into a web page, potentially gaining elevated access or control over the victim's account or session. Exploitation of this issue requires user interaction in that a victim must visit a maliciously crafted URL or interact with a compromised web page. Scope is changed.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/campaign/apsb26-162.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 49.0,
-    "tags": [
-      "xss"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "xss+8"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117513",
-    "published": "2026-10-27T17:16:59.947",
-    "last_modified": "2026-11-02T20:17:34.640",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was determined in oretnom23 php-travel-agency-system. This vulnerability affects unknown code of the file admin/customer_search.php of the component Admin Search Pages. Executing a manipulation of the argument customer_name/voucher_no/emp_name can lead to sql injection. The attack may be performed from remote. The exploit has been publicly disclosed and may be utilized. The project was informed of the problem early through an issue report but has not responded yet.",
-    "references": [
-      "https://github.com/oretnom23/php-travel-agency-system/",
-      "https://github.com/oretnom23/php-travel-agency-system/issues/7",
-      "https://vuldb.com/cve/CVE-2026-117513",
-      "https://vuldb.com/submit/1024621",
-      "https://vuldb.com/vuln/427079",
-      "https://vuldb.com/vuln/427079/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 18.2,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117514",
-    "published": "2026-10-27T17:17:00.153",
-    "last_modified": "2026-11-02T20:17:34.863",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was identified in oretnom23 php-travel-agency-system. This issue affects some unknown processing of the file admin/customer_detail.php of the component Admin Record Pages. The manipulation of the argument costomer_id/ticket_id/emp_id/salary_id/page_id leads to sql injection. It is possible to initiate the attack remotely. The exploit is publicly available and might be used. The project was informed of the problem early through an issue report but has not responded yet.",
-    "references": [
-      "https://github.com/oretnom23/php-travel-agency-system/",
-      "https://github.com/oretnom23/php-travel-agency-system/issues/8",
-      "https://vuldb.com/cve/CVE-2026-117514",
-      "https://vuldb.com/submit/1024622",
-      "https://vuldb.com/vuln/427080",
-      "https://vuldb.com/vuln/427080/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.6,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117516",
-    "published": "2026-10-27T18:17:36.343",
-    "last_modified": "2026-11-02T20:17:35.110",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A weakness has been identified in oretnom23 php-travel-agency-system. The affected element is an unknown function of the file contact_insert.php of the component Contact Form Handler. This manipulation of the argument name/company/email/topic/phone/comments causes sql injection. The attack can be initiated remotely. The exploit has been made available to the public and could be used for attacks. The project was informed of the problem early through an issue report but has not responded yet.",
-    "references": [
-      "https://github.com/oretnom23/php-travel-agency-system/",
-      "https://github.com/oretnom23/php-travel-agency-system/issues/10",
-      "https://vuldb.com/cve/CVE-2026-117516",
-      "https://vuldb.com/submit/1024624",
-      "https://vuldb.com/vuln/427082",
-      "https://vuldb.com/vuln/427082/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.6,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-6235",
     "published": "2024-07-10T19:15:11.973",
     "last_modified": "2026-11-03T22:17:29.180",
@@ -8173,33 +7652,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-116808",
-    "published": "2026-10-27T00:17:13.347",
-    "last_modified": "2026-11-02T19:17:58.530",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenPanel before 3.0.0 contains an sql injection vulnerability that allows authenticated users to read cross-tenant data by supplying a crafted property parameter to profile.values. Attackers can inject a SELECT expression with their own FROM/WHERE clauses and comment out the project_id scope to exfiltrate other projects' profiles, events, and sessions.",
-    "references": [
-      "https://github.com/Openpanel-dev/openpanel/commit/a2aa053cb23e92967e812d3be5fb0f1d606d9fdc",
-      "https://github.com/Openpanel-dev/openpanel/security/advisories/GHSA-4j6c-j6vc-xq96",
-      "https://www.vulncheck.com/advisories/openpanel-before-3.0.0-clickhouse-sql-injection-via-profile-values",
-      "https://github.com/Openpanel-dev/openpanel/security/advisories/GHSA-4j6c-j6vc-xq96"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 32.6,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-32558",
     "published": "2023-09-12T02:15:12.067",
     "last_modified": "2026-11-02T23:17:16.480",
@@ -8226,21 +7678,26 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-112350",
-    "published": "2026-10-27T20:17:12.693",
-    "last_modified": "2026-11-03T16:22:48.187",
+    "cve_id": "CVE-2024-33605",
+    "published": "2024-11-26T08:15:05.650",
+    "last_modified": "2026-11-04T07:17:10.300",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Sunhillo SureLine before 9.1.5 contains a path traversal vulnerability in the radarUpdater.cgi endpoint that allows unauthenticated remote attackers to read arbitrary files with root privileges due to missing authentication checks and insufficient sanitization of the filename parameter. Attackers can use directory traversal sequences to access sensitive files such as /etc/shadow, the web user database, the root SSH private key, and the device's TLS private key, leading to full system compromise.",
+    "summary": "Improper processing of some parameters of installed_emanual_list.html and installed_emanual_down.html leads to a path traversal vulnerability. As for the details of affected product names, model numbers, and versions, refer to the information provided by the respective vendors listed under [References].",
     "references": [
-      "https://www.sunhillo.com/product/sureline/",
-      "https://www.vulncheck.com/advisories/sunhillo-sureline-path-traversal-via-radarupdater-cgi"
+      "https://global.sharp/products/copier/info/info_security_2024-05.html",
+      "https://jp.sharp/business/print/information/info_security_2024-05.html",
+      "https://jvn.jp/en/vu/JVNVU93051062/",
+      "https://pierrekim.github.io/blog/2024-06-27-sharp-mfp-17-vulnerabilities.html",
+      "https://www.toshibatec.co.jp/information/20240531_02.html",
+      "https://www.toshibatec.com/information/20240531_02.html",
+      "http://seclists.org/fulldisclosure/2024/Jul/0"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 61.3,
+    "epss": 6.0,
+    "epss_percentile": 93.4,
     "tags": [
       "path_traversal"
     ],
@@ -8306,30 +7763,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-116836",
-    "published": "2026-10-27T01:19:06.733",
-    "last_modified": "2026-11-03T21:17:02.560",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A malicious actor with access to the adjacent network and under certain conditions could exploit a Stored Cross-Site Scripting (XSS) vulnerability found in airMAX M devices to escalate privileges on the device.",
-    "references": [
-      "https://uisp.community.ui.com/releases/Security-Advisory-Bulletin-071/7d4d42cf-09e4-44d3-9c19-649cac8c6af3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 9.2,
-    "tags": [
-      "xss"
-    ],
-    "intel_score": 62.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "xss+8"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-50053",
     "published": "2026-10-23T14:17:53.060",
     "last_modified": "2026-11-02T16:07:36.880",
@@ -8352,6 +7785,70 @@
     "reasons": [
       "recently modified (last 48h)",
       "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-97023",
+    "published": "2026-09-28T19:16:50.710",
+    "last_modified": "2026-11-04T13:17:33.730",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal vulnerability in Flatpak's handling of the export/bin directory during app deployment allows a malicious Flatpak app to cause deletion of attacker-chosen files outside the deployment directory when the app is installed or upgraded. In system-wide installations, the deletion is performed as root.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:89849",
+      "https://access.redhat.com/errata/RHSA-2026:89850",
+      "https://access.redhat.com/errata/RHSA-2026:89859",
+      "https://access.redhat.com/errata/RHSA-2026:95061",
+      "https://access.redhat.com/errata/RHSA-2026:95062",
+      "https://access.redhat.com/errata/RHSA-2026:95063",
+      "https://access.redhat.com/security/cve/CVE-2026-97023",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2542606",
+      "https://github.com/flatpak/flatpak/security/advisories/GHSA-5p67-xh8x-rq54"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.1,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 60.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-97024",
+    "published": "2026-09-29T04:18:02.397",
+    "last_modified": "2026-11-04T13:17:33.910",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal vulnerability in Flatpak's handling of the files/etc directory during app deployment allows a malicious Flatpak app to cause certain host system files (such as passwd, group, machine-id, or resolv.conf) to be emptied or replaced with a symlink when the app is installed or upgraded. In system-wide installations, the write is performed as root.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:89849",
+      "https://access.redhat.com/errata/RHSA-2026:89850",
+      "https://access.redhat.com/errata/RHSA-2026:89859",
+      "https://access.redhat.com/errata/RHSA-2026:95061",
+      "https://access.redhat.com/errata/RHSA-2026:95062",
+      "https://access.redhat.com/errata/RHSA-2026:95063",
+      "https://access.redhat.com/security/cve/CVE-2026-97024",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2542625",
+      "https://github.com/flatpak/flatpak/security/advisories/GHSA-8xgq-v545-vgvf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 31.9,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 60.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
     ]
   },
   {
@@ -10563,50 +10060,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-118309",
-    "published": "2026-10-27T23:16:59.433",
-    "last_modified": "2026-11-03T22:19:18.997",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Incorrect reference resolution in UI in Google Chrome on on Android prior to 156.0.8078.73 allowed a remote attacker leveraging social engineering to obtain sensitive information via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/576133777"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [],
-    "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118312",
-    "published": "2026-10-27T23:16:59.757",
-    "last_modified": "2026-11-03T22:19:19.557",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Observable discrepancy in Paint in Google Chrome prior to 156.0.8078.73 allowed a remote attacker to potentially obtain cross-origin data via a crafted HTML page. (Chromium security severity: Medium)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/540025369"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [],
-    "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2017-5647",
     "published": "2017-04-17T16:59:00.320",
     "last_modified": "2026-11-02T18:18:19.767",
@@ -10743,6 +10196,29 @@
     "cisa_kev": false,
     "epss": 14.9,
     "epss_percentile": 96.7,
+    "tags": [],
+    "intel_score": 56.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-112521",
+    "published": "2026-10-26T21:17:44.127",
+    "last_modified": "2026-11-04T13:17:23.037",
+    "cvss_v3": 9.3,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A buffer overflow was addressed with improved bounds checking. This issue is fixed in macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2. A sandboxed process may be able to circumvent sandbox restrictions.",
+    "references": [
+      "https://support.apple.com/en-us/149521",
+      "https://support.apple.com/en-us/149522",
+      "https://support.apple.com/en-us/149523"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 14.3,
     "tags": [],
     "intel_score": 56.5,
     "reasons": [
@@ -10906,7 +10382,7 @@
   {
     "cve_id": "CVE-2026-74860",
     "published": "2026-09-08T12:16:58.083",
-    "last_modified": "2026-11-03T10:17:18.447",
+    "last_modified": "2026-11-04T06:17:05.460",
     "cvss_v3": 8.5,
     "severity": "HIGH",
     "affected": [],
@@ -10954,6 +10430,8 @@
       "https://access.redhat.com/errata/RHSA-2026:93791",
       "https://access.redhat.com/errata/RHSA-2026:94459",
       "https://access.redhat.com/errata/RHSA-2026:94468",
+      "https://access.redhat.com/errata/RHSA-2026:94474",
+      "https://access.redhat.com/errata/RHSA-2026:94476",
       "https://access.redhat.com/security/cve/CVE-2026-74860",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529697"
     ],
@@ -11125,6 +10603,31 @@
     "intel_score": 55.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12364",
+    "published": "2026-08-14T18:17:21.820",
+    "last_modified": "2026-11-04T05:18:39.043",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The user-space system-call verifier z_vrfy_z_log_msg_static_create() in subsys/logging/log_msg.c was a pure pass-through: it forwarded the caller-supplied source, desc, package, and data arguments directly to the kernel-mode implementation z_impl_z_log_msg_static_create() without performing any of the mandatory K_SYSCALL_* checks. Because z_log_msg_static_create() is declared __syscall, under CONFIG_USERSPACE any unprivileged user-mode thread can invoke it directly with fully attacker-controlled arguments.\n\nThe kernel-mode handler dereferences each of these untrusted values: frontend_runtime_filtering() reads through the source pointer as a struct log_source_dynamic_data, cbprintf_package_copy() reads desc.package_len bytes from the package pointer, and z_log_msg_finalize() performs a memcpy() of desc.data_len bytes from the data pointer. With no verification, a user thread can supply arbitrary kernel addresses and arbitrary lengths, and the kernel will read from them.\n\nThe impact is a kernel-mode denial of service (the kernel faults dereferencing an attacker-chosen pointer) and, where a log backend output is observable to the attacker, disclosure of arbitrary kernel memory copied into the emitted log message — a confidentiality breach across the user/kernel boundary that the userspace sandbox is meant to enforce. The reads do not corrupt kernel memory, so there is no out-of-bounds write primitive.\n\nThe fix adds the required validation to the verifier: it bounds desc.package_len against Z_LOG_MSG_MAX_PACKAGE, rejects non-NULL/length mismatches, and applies K_SYSCALL_MEMORY_READ() to package, data, and (when runtime filtering with a frontend is enabled) source, so any out-of-bounds or kernel pointer now raises K_OOPS instead of being honored.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/77aa26d8b940f39778154f02563caf15d02efdac",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-h7rf-g9mg-g23f"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.1,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 55.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -11472,6 +10975,64 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-54099",
+    "published": "2026-06-22T14:17:40.820",
+    "last_modified": "2026-11-04T06:17:05.153",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the Windows Machine Config Operator (WMCO) for Red Hat OpenShift Container Platform. The WICD CSR auto-approver validates that a Certificate Signing Request contains the organization system:wicd-nodes but does not reject additional organization values such as system:masters. A compromised Windows worker node that holds WICD credentials can submit a CSR that is auto-approved and signed by the cluster, yielding a client certificate that grants cluster-administrator privileges and enabling full cluster takeover.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:47173",
+      "https://access.redhat.com/errata/RHSA-2026:61780",
+      "https://access.redhat.com/errata/RHSA-2026:81397",
+      "https://access.redhat.com/errata/RHSA-2026:82440",
+      "https://access.redhat.com/errata/RHSA-2026:94562",
+      "https://access.redhat.com/security/cve/CVE-2026-54099",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2487950",
+      "https://access.redhat.com/errata/RHSA-2026:47173",
+      "https://access.redhat.com/errata/RHSA-2026:61780",
+      "https://access.redhat.com/security/cve/CVE-2026-54099",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2487950",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-54099.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.6,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-10672",
+    "published": "2026-07-14T15:16:55.560",
+    "last_modified": "2026-11-04T05:18:25.730",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "subsys/net/lib/lwm2m/lwm2m_pull_context.c copied the firmware-update Package URI into a fixed static buffer (context.uri, size CONFIG_LWM2M_SWMGMT_PACKAGE_URI_LEN, default 128) with memcpy(context.uri, uri, LWM2M_PACKAGE_URI_LEN), copying exactly the destination size with no length validation. The Firmware-Update object stores the server-supplied Package URI (/5/0/1) in a 255-byte buffer, so a LwM2M management server (or an on-path attacker on a session lacking strong DTLS) can WRITE a URI of 128-254 characters; only the first 128 bytes are then copied into context.uri with no NUL terminator. That buffer is subsequently consumed as a C string by http_parser_parse_url(context.uri, strlen(context.uri), ...), strlen-based CoAP URI-path/PROXY-URI option appends, and lwm2m_parse_peerinfo(), causing an out-of-bounds read of adjacent static memory. The over-read bytes are appended to outbound CoAP requests (information disclosure of adjacent device memory to the server/proxy) and can crash the device (denial of service). The vulnerable copy was introduced by the pull-context refactor (first released in v3.0.0) and is present through v4.4.0; the default-on CONFIG_LWM2M_FIRMWARE_UPDATE_PULL_SUPPORT path is affected. The fix adds a strlen(uri) >= sizeof(context.uri) check returning -ENOMEM and switches to strcpy(), guaranteeing a bounded, NUL-terminated buffer.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/99a164df5cea5af76e32b57c6d51854f018969a2",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-rf6j-4mpp-j9mf",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-rf6j-4mpp-j9mf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.7,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-64467",
     "published": "2026-07-25T10:17:32.003",
     "last_modified": "2026-11-03T18:15:39.353",
@@ -11646,6 +11207,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-10849",
+    "published": "2026-08-03T22:16:47.963",
+    "last_modified": "2026-11-04T05:18:27.247",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The hawkBit device management client in subsys/mgmt/hawkbit accumulates the body of an HTTP response from the update server into a heap buffer in response_json_cb() (subsys/mgmt/hawkbit/hawkbit.c). The buffer is sized to hold the received body bytes but reserves no space for a terminating NUL. When the full response has arrived, the code writes response_data[downloaded_size] = '\\0' — and whenever the accumulated body length equals the allocation, that terminator lands one byte past the end of the heap object (a heap-based out-of-bounds write, CWE-122 / CWE-787).\n\nThe body length and fragmentation are taken directly from the parsed HTTP response (rsp->body_frag_start / rsp->body_frag_len) and are fully controlled by the remote hawkBit server, which chooses its own response length. The precise trigger depends on how the buffer grows, and both forms are remotely reachable. Since v4.0.0 the reallocation is sized to exactly downloaded_size + body_len, so any response body larger than the 1100-byte initial buffer makes the out-of-bounds write deterministic; such response sizes are normal for hawkBit deployment metadata. Before v4.0.0 the buffer grew by doubling and the growth check ((downloaded_size + body_len) > response_buffer_size) is false at equality, so a response body whose length is exactly the current allocation — 1100 bytes with the default initial buffer — skips the reallocation entirely and writes the terminator at response_data[1100] of an 1100-byte object. The HTTP length-mismatch check does not catch this, because the declared and received lengths genuinely agree. Either form is reachable by a malicious, compromised, or man-in-the-middle update server (TLS is optional and, when enabled, does not protect against a hostile server), with no authentication of response content and no client-side length cap protecting the write.\n\nThe out-of-bounds write is a fixed single NUL byte immediately following the allocation, corrupting adjacent allocator metadata or the next allocation. The practical impact is heap corruption leading to denial of service (fault on a subsequent allocation or free), with the bounded, allocator-dependent possibility of further corruption. The fix sizes the buffer to the body length plus one and copies with memcpy, ensuring the terminator always lands within the allocation.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/59d7ab58d853489e6134081cadb11733730264ac",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-39h3-7phx-pwhv"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-64561",
     "published": "2026-08-04T07:16:30.937",
     "last_modified": "2026-11-03T18:15:39.353",
@@ -11718,6 +11304,28 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 41.8,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12522",
+    "published": "2026-08-19T21:16:53.507",
+    "last_modified": "2026-11-04T05:18:39.860",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The HL7800 cellular modem driver's +CGCONTRDP: response handler on_cmd_atcmdinfo_ipaddr() in drivers/modem/vendor_standalone/hl7800.c parses the PDP-context dynamic parameters (local address, subnet mask, gateway, and DNS servers) that the cellular network assigns to the device. The response is linearized into a 256-byte stack buffer, after which each address field length is computed from comma/. delimiter positions in the network-supplied data and used directly as the length argument to strncpy() into the fixed 64-byte stack buffer temp_addr_str (and the 16-byte iface_ctx.dns_v4_string).\n\nBecause the field length is derived from attacker-controlled delimiter positions and was not bounded against the destination buffer, a single field can be far larger than 64 bytes. A malicious or impersonated cellular network (for example a rogue base station) can return a crafted +CGCONTRDP response with an overlong address field, causing strncpy() to write past temp_addr_str on the modem worker thread's stack, plus an out-of-bounds NUL write at temp_addr_str[addr_len].\n\nNo device-side privileges or user interaction are required: the device itself issues the AT+CGCONTRDP=1 query during normal network attach and parses whatever the network returns. The overflow corrupts adjacent stack memory in supervisor context, yielding at minimum a remotely triggerable crash and potentially control-flow hijacking on targets without stack protection.\n\nThe fix bounds every field length against its destination buffer (temp_addr_str and dns_v4_string) before each copy, rejecting overlong fields.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/a1cbced64181bc0bdf95e1fd7118f2bb70cf679b",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-hchc-6489-w66v"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.6,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -11947,7 +11555,7 @@
   {
     "cve_id": "CVE-2026-86567",
     "published": "2026-10-14T18:19:18.390",
-    "last_modified": "2026-11-03T19:18:13.020",
+    "last_modified": "2026-11-04T11:17:16.840",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -11971,7 +11579,7 @@
   {
     "cve_id": "CVE-2026-86848",
     "published": "2026-10-14T18:19:19.223",
-    "last_modified": "2026-11-03T19:18:13.853",
+    "last_modified": "2026-11-04T11:17:17.923",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -11986,6 +11594,28 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 0.8,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-76788",
+    "published": "2026-10-19T21:18:01.380",
+    "last_modified": "2026-11-04T05:19:01.180",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The OSDP Control Panel reply parser cp_decode_response() in subsys/mgmt/osdp/src/osdp_cp.c decodes replies from a Peripheral Device into a stack-allocated struct osdp_event. For the REPLY_KEYPPAD and REPLY_RAW reply types, the payload length is taken from the received frame and the only validation performed is that the declared length is self-consistent with the number of payload bytes present in the frame. Because the attacker controls both the length field and the frame length, that check imposes no bound, and the subsequent memcpy() writes into the fixed 64-byte data arrays of struct osdp_event_keypress / struct osdp_event_cardread (OSDP_EVENT_MAX_DATALEN). The sibling REPLY_FMT handler in the same switch already carried the missing > OSDP_EVENT_MAX_DATALEN bound.\n\nThe defect is reached from cp_process_reply(), which reads bytes from the OSDP RS-485 channel and passes them through osdp_phy_check_packet() and osdp_phy_decode_packet() before dispatching on the reply ID. Triggering it requires CONFIG_OSDP with CONFIG_OSDP_MODE_CP and an application event callback registered (the normal Control Panel integration), plus a frame carrying a correct SOM, a valid CRC-16, and a matching 2-bit sequence number — all of which are computable or observable by anyone on the bus. No check ties the reply ID to the outstanding command, so an oversized REPLY_KEYPPAD or REPLY_RAW is accepted as the answer to a routine CMD_POLL. A malicious or compromised card reader, or anyone with access to the RS-485 wiring, can supply such a frame; CONFIG_OSDP_SC_ENABLED only helps while a secure channel is active, and a single unauthenticated frame carrying a bad MAC causes sc_deactivate(), after which plaintext replies are again accepted.\n\nWith the default CONFIG_OSDP_UART_BUFFER_LENGTH of 256, roughly 180 bytes of fully attacker-chosen data can be written past the end of the stack-allocated event object, over saved registers and the return address on typical Cortex-M and RISC-V frame layouts (Zephyr does not enable stack canaries by default). The impact ranges from a hard crash of the access-control panel to potential control-flow hijack in the context of the OSDP receive thread. The fix adds an OSDP_EVENT_MAX_DATALEN bound to both handlers, capping each memcpy() at the size of its destination.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/f10d55f47c6970e95d3a7c6ba08e6adec3c79acd",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fgg7-h8p9-9q3w"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 16.3,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -16875,7 +16505,7 @@
   {
     "cve_id": "CVE-2026-84545",
     "published": "2026-10-26T21:20:06.613",
-    "last_modified": "2026-11-03T16:19:52.253",
+    "last_modified": "2026-11-04T05:19:04.487",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -16896,115 +16526,129 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-117536",
-    "published": "2026-10-27T11:17:34.200",
-    "last_modified": "2026-11-02T20:17:35.270",
-    "cvss_v3": 8.8,
+    "cve_id": "CVE-2026-10643",
+    "published": "2026-06-28T00:16:24.637",
+    "last_modified": "2026-11-04T05:18:23.177",
+    "cvss_v3": 8.7,
     "severity": "HIGH",
     "affected": [],
-    "summary": "REDAXO before 5.21.3 contains a cross-site request forgery vulnerability in the backend user administration page (users/users) because the CSRF token check only runs when the save parameter is set, while the update path triggered by FUNC_UPDATE does not require it. Attackers can lure a logged-in backend user with the users[] permission to a crafted GET link to grant administrator rights, deactivate accounts, or lock out the sole administrator.",
+    "summary": "Zephyr's IP socket recvmsg() implementation (subsys/net/lib/sockets/sockets_inet.c, insert_pktinfo()) validated the user-supplied ancillary (msg_control) buffer using only the payload length (msg->msg_controllen < pktinfo_len) before writing a full control message consisting of an aligned cmsg header plus the payload. Because the check omitted the cmsg header size, a control buffer whose length falls in the under-checked window (e.g. 16-27 bytes for IPv4 IP_PKTINFO on a 64-bit target, where a single element actually occupies 28 bytes) passes the guard yet causes a fixed-size out-of-bounds write of up to one cmsg header (~12 bytes) past the end of the buffer.\n\nUnder CONFIG_USERSPACE the recvmsg verifier allocates a kernel-heap copy of the control buffer sized to msg_controllen and runs the implementation against it, so the overflow corrupts kernel heap memory and is triggerable from an unprivileged userspace thread; in supervisor mode it corrupts the caller's buffer.\n\nThe path is reachable on a UDP/IP socket with IP_PKTINFO/IPV6_RECVPKTINFO (or hoplimit/timestamping) enabled when the application calls recvmsg() with an undersized control buffer and a datagram is received; part of the overwritten bytes (the destination IP in ipi_addr) is influenced by the received packet.\n\nThe fix makes the capacity check use NET_CMSG_SPACE(pktinfo_len) (aligned header + aligned data) and returns -ENOMEM when the buffer is too small. Affected: v3.6.0 through v4.4.0.",
     "references": [
-      "https://github.com/redaxo/core/security/advisories/GHSA-mrrj-4f5x-j958",
-      "https://www.vulncheck.com/advisories/redaxo-before-5.21.3-csrf-token-bypass-via-users-users-privilege-escalation"
+      "https://github.com/zephyrproject-rtos/zephyr/commit/01fe77b2ec3885583f709a17c5203ce02bd77012",
+      "https://github.com/zephyrproject-rtos/zephyr/commit/91db82a245b731166c547a598029884cb32debe4",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-pvf7-7mrp-35w7"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.0,
+    "epss": 0.2,
+    "epss_percentile": 5.6,
     "tags": [],
-    "intel_score": 54.0,
+    "intel_score": 53.5,
     "reasons": [
       "recently modified (last 48h)"
     ]
   },
   {
-    "cve_id": "CVE-2026-116676",
-    "published": "2026-10-27T18:17:35.220",
-    "last_modified": "2026-11-03T12:17:28.717",
-    "cvss_v3": 8.8,
+    "cve_id": "CVE-2026-7656",
+    "published": "2026-06-29T23:16:43.650",
+    "last_modified": "2026-11-04T05:19:03.387",
+    "cvss_v3": 8.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Atlantis is a self-hosted golang application that listens for Terraform pull request events via webhooks. From version 0.4.0 until 0.47.1, Atlantis passes the pull-request-controlled workspace value from atlantis.yaml into Terraform command arguments that are joined with strings.Join(args, \" \") and executed through sh -c. An authenticated contributor whose pull request is eligible for an Atlantis plan can include shell metacharacters in the workspace name, causing arbitrary commands to execute as the Atlantis service account without custom workflows, apply permission, or a malicious Terraform provider. External contributors can reach the flaw through fork pull requests only when --allow-fork-prs is enabled, while eligible same-repository branches do not require that option. The commands inherit the Atlantis process environment and can access cloud-provider, Terraform, and version-control credentials as well as files, state, and network resources available to the service. This issue is fixed in version 0.47.1.",
+    "summary": "The IPv6 Neighbor Discovery handlers in subsys/net/ip/ipv6_nbr.c (handle_ra_input, handle_ns_input, handle_na_input) used an incorrect boolean expression that combined the RFC 4861 validity checks with the ICMPv6 code check using the wrong operator precedence: the form was ((length/hop/source/target checks) && (icmp_hdr->code != 0)). Because every legitimate ND message carries ICMPv6 code 0, an attacker setting code == 0 (the normal value) caused the entire predicate to evaluate false, so the packet was never dropped and all of the other checks were silently skipped. The bypassed checks include the mandatory Hop Limit == 255 verification (which proves an ND packet originated on-link and was not forwarded) and, for Router Advertisements, the requirement that the source be a link-local address, as well as multicast-target sanity checks. As a result, an adjacent on-link attacker — and, because the Hop-Limit-255 guard is bypassed, potentially a remote/off-link attacker whose packets would otherwise be rejected — can have forged Router Advertisement, Neighbor Solicitation, and Neighbor Advertisement messages accepted. A forged RA lets the attacker reconfigure the victim's default router, on-link prefixes (SLAAC), MTU, reachable/retransmit timers, and (with CONFIG_NET_IPV6_RA_RDNSS) DNS servers, while forged NS/NA enable neighbor-cache poisoning, enabling man-in-the-middle, traffic redirection, and denial of service. The flaw is an input-validation/authentication weakness rather than a memory-safety issue: the underlying packet-parsing primitives (net_pkt_get_data, net_pkt_read, net_pkt_skip) are independently bounds-safe and the validated length is the true buffer length, so skipping the length check causes no out-of-bounds access. The defect has existed since the logic was introduced in 2018 and shipped in all releases through v4.4.0; it is fixed by splitting the condition so any failing check drops the packet.",
     "references": [
-      "https://github.com/runatlantis/atlantis/commit/8dd22b4d0a9d7c129fdbf6a3398dd1c4cf8c3a59",
-      "https://github.com/runatlantis/atlantis/commit/f04df0d53f0544d9eb6f5026dd8b74fbefd82ac8",
-      "https://github.com/runatlantis/atlantis/pull/6792",
-      "https://github.com/runatlantis/atlantis/releases/tag/v0.47.1",
-      "https://github.com/runatlantis/atlantis/security/advisories/GHSA-rjh2-4xgw-p2hj",
-      "https://github.com/runatlantis/atlantis/security/advisories/GHSA-rjh2-4xgw-p2hj"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.4,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-83831",
-    "published": "2026-10-27T21:19:08.030",
-    "last_modified": "2026-11-03T18:09:25.067",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Double free in Microsoft Edge (Chromium-based) allows an unauthorized attacker to execute code over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-83831"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.0,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-85898",
-    "published": "2026-10-27T21:19:34.117",
-    "last_modified": "2026-11-03T18:09:29.550",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Access of resource using incompatible type ('type confusion') in Microsoft Edge (Chromium-based) allows an unauthorized attacker to execute code over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-85898"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 55.0,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118314",
-    "published": "2026-10-27T23:16:59.970",
-    "last_modified": "2026-11-03T22:19:19.937",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Incorrect reference resolution in UI in Google Chrome on on Android prior to 156.0.8078.73 allowed a local attacker leveraging social engineering to obtain sensitive information via a co-installed app. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop_0562499947.html",
-      "https://issues.chromium.org/issues/574803484"
+      "https://github.com/zephyrproject-rtos/zephyr/commit/095f064c94b95f9c35e05602e693dc268f0cb865",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-cpjw-rvwx-ph9f",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-cpjw-rvwx-ph9f"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 20.0,
-    "tags": [],
-    "intel_score": 54.0,
+    "epss_percentile": 26.1,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 53.5,
     "reasons": [
-      "recently modified (last 48h)"
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-10666",
+    "published": "2026-07-12T17:16:24.550",
+    "last_modified": "2026-11-04T05:18:25.110",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "parse_ipv4() in subsys/net/ip/utils.c (reached via net_ipaddr_parse() for strings of the form \"a.b.c.d:port\") copies the port substring into a fixed 17-byte stack buffer (char ipaddr[NET_IPV4_ADDR_LEN + 1]) using a length of str_len - end - 1, where str_len is the full, unbounded input length and end is only the (<=15-byte) offset of the ':' delimiter. Because the destination size is never consulted, a crafted address string with a long suffix after the colon (e.g. \"1.2.3.4:\" followed by hundreds of bytes) causes an out-of-bounds stack write whose length and contents are fully attacker-controlled (memcpy of the suffix plus a trailing NUL), enabling memory corruption and at minimum a denial of service, and potentially control-flow hijack. The parser is reached from the standard socket API (zsock_getaddrinfo / literal-address resolution), DNS server-string configuration, and the eswifi Wi-Fi co-processor DNS-response path, so an application that resolves a network-influenced address string is exposed. The bug was introduced when the parser was added (Zephyr v1.9.0) and shipped in all releases through v4.4.0. The fix removes the unbounded copy and validates the port length before copying into a small dedicated buffer. Note: the equivalent IPv6 \"[addr]:port\" path in parse_ipv6() retains the same unbounded copy at this commit and remains a separate, still-reachable instance of the defect.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/1c8d19a51f9a3c1be6de53854c8ad8c2720a0f48",
+      "https://github.com/zephyrproject-rtos/zephyr/commit/6e119a636a57be449ea21e73cad762ebc6f5ff7a",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-532c-7g7f-jhmh",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-532c-7g7f-jhmh"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 51.4,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-10678",
+    "published": "2026-07-21T22:17:00.047",
+    "last_modified": "2026-11-04T05:18:26.117",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The MCTP-over-I2C+GPIO target binding in Zephyr (subsys/pmci/mctp/mctp_i2c_gpio_target.c) processes pseudo-register writes from an I2C bus master byte-by-byte in mctp_i2c_gpio_target_write_received() without validating the order or the receive buffer. In the affected versions the MCTP_I2C_GPIO_RX_MSG_ADDR (data) handler dereferences and writes through b->rx_pkt without checking that the receive buffer was allocated: a controller that selects the data register and writes a byte without first sending the length register (which is what allocates the buffer) causes a write of an attacker-chosen byte through a NULL/unallocated mctp_pktbuf pointer (i.e. into a small attacker-advanceable offset above address 0), producing memory corruption or a hard fault.\n\nThe same handler also performs a write-then-check bounds test, allowing a one-byte heap overflow at data[255] when more than 255 data bytes are sent.\n\nBecause the I2C target callback is invoked with raw bytes supplied by whatever device is the bus master and the binding performs no authentication, a malicious or malfunctioning controller on the bus can trigger these without any prior protocol state, leading to memory corruption and/or denial of service on the target device.\n\nThe vulnerable code was introduced when the I2C+GPIO target binding was added and shipped in Zephyr v4.3.0 and v4.4.0. The fix defers allocation to the first data byte with a NULL check, treats a missing length as a zero-sized packet rejected by libmctp, and moves the bounds check before the store.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/9e23364261a2188c171d734d6947e02ee2a9510f",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-pmwm-5rcm-39rr"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 33.2,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-12633",
+    "published": "2026-08-19T21:16:53.633",
+    "last_modified": "2026-11-04T05:18:40.707",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The IPv6 neighbor-discovery code in subsys/net/ip/ipv6_nbr.c processes the 6LoWPAN Context Option (6CO, RFC 6775) carried inside ICMPv6 Router Advertisements. In handle_ra_6co() the 8-bit context_len field is taken directly from the packet and was never bounded to the RFC maximum of 128. The function computes context->context_len / 8 and then performs memset(context->prefix + context_len, 0, sizeof(context->prefix) - context_len), where context->prefix is a fixed 16-byte array.\n\nWith context_len between 136 and 255 (and the option length field set to 3, which the pre-fix validation accepts), context_len / 8 evaluates to 17..31, so the memset length 16 - context_len/8 underflows the unsigned size_t argument to roughly SIZE_MAX. This produces an unbounded out-of-bounds memset that zeroes kernel memory well past the 6lo context structure.\n\nThe defect is reachable from unauthenticated, link-local input: any host on the same link can send a crafted Router Advertisement with a 6CO option. The RA handler validates only the option length field before calling handle_ra_6co(), so a single packet triggers the wild write. The code is compiled when CONFIG_NET_6LO_CONTEXT is enabled.\n\nThe impact is a reliable remote (adjacent) denial of service via memory corruption, with collateral integrity loss as the memset zeroes contiguous memory before the system faults. Router Advertisements are link-scoped and not forwarded, so the attacker must be on the same link (AV:A). The fix rejects any context_len greater than 128 before the length computation.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/15e838c739be637bf23fd56a5c26f2b32079551b",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-h5m5-hm6j-cgpf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 24.2,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -17033,6 +16677,31 @@
     "cisa_kev": false,
     "epss": 0.9,
     "epss_percentile": 59.7,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19186",
+    "published": "2026-10-07T09:17:05.290",
+    "last_modified": "2026-11-04T05:18:47.843",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ieee802154_decipher_data_frame() in subsys/net/l2/ieee802154/ieee802154_frame.c computed payload_len = net_pkt_get_len(pkt) - ll_hdr_len - authtag_len without first checking that the received frame is at least ll_hdr_len + authtag_len bytes long. All three variables are uint8_t, so a frame whose payload is shorter than the configured authentication tag makes the subtraction wrap around to a large value (up to 255).\n\nThe wrapped length is passed unchanged to ieee802154_decrypt_auth() and on to the CCM operation as cipher_pkt.in_len/out_buf_max, with apkt->tag pointing at frame + ll_hdr_len + payload_len. Because the receive buffer is allocated to the exact length of the frame received from the radio driver, the crypto layer then reads several hundred bytes past the end of the packet buffer and writes the same number of decrypted bytes back over it in place. The frame's authentication tag is only verified after this processing has taken place, so no key material, association or prior authentication is needed — a single crafted short frame from any device in radio range is sufficient. Frame validation in ieee802154_validate_frame() does not prevent it: a data frame is accepted with a one-byte payload.\n\nThe result is an out-of-bounds read and an out-of-bounds write of up to roughly 240 bytes into the adjacent network-buffer pool, corrupting other packets or allocator metadata and typically faulting the target. The out-of-bounds content is not attacker-chosen (it is ciphertext XOR keystream over out-of-bounds memory) and the frame is dropped when tag verification fails, so the primary impact is memory corruption and denial of service rather than information disclosure.\n\nExposure is limited to configurations that enable the experimental CONFIG_NET_L2_IEEE802154_SECURITY option, select a crypto device via CONFIG_NET_L2_IEEE802154_SECURITY_CRYPTO_DEV_NAME, and have established a security session with a level other than IEEE802154_SECURITY_LEVEL_NONE; with security disabled or at level NONE the tag length is zero and no underflow occurs. The fix rejects frames shorter than ll_hdr_len + authtag_len before the subtraction, and adds the matching guard on the transmit side in ieee802154_create_data_frame().",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/6d721de13a6026808f75578ecfee95a3592d5264",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6x64-rwq6-j8x3"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 11.6,
     "tags": [
       "dos"
     ],
@@ -17428,34 +17097,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-116682",
-    "published": "2026-10-27T18:17:36.003",
-    "last_modified": "2026-11-02T20:17:32.797",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "FileBrowser Quantum is a free, self-hosted, web-based file manager. Prior to 1.5.2-stable and 2.0.1-beta, file read handling in backend/pkg/indexing/indexingFiles.go resolves symbolic links through GetRealPath without confirming that the resolved target remains inside the source root and the user's authorized scope. Download, preview, media, OnlyOffice, and public-share read flows that enable FollowSymlinks can therefore serve an out-of-scope target through a reachable in-scope symlink. An authenticated user with download access can read server-accessible files outside the assigned scope, and a holder of a public share link can do the same without an account when the shared directory exposes such a symlink. This issue is fixed in 1.5.2-stable and 2.0.1-beta.",
-    "references": [
-      "https://github.com/gtsteffaniak/filebrowser/commit/3c8c02414eefd3351ffe437fa39ff6eb150ffa67",
-      "https://github.com/gtsteffaniak/filebrowser/commit/4126edeb07a015c3809a89249b283e07a4e50c38",
-      "https://github.com/gtsteffaniak/filebrowser/pull/2795",
-      "https://github.com/gtsteffaniak/filebrowser/pull/2800",
-      "https://github.com/gtsteffaniak/filebrowser/releases/tag/v1.5.2-stable",
-      "https://github.com/gtsteffaniak/filebrowser/releases/tag/v2.0.1-beta",
-      "https://github.com/gtsteffaniak/filebrowser/security/advisories/GHSA-mgqf-5mf5-prfj",
-      "https://github.com/gtsteffaniak/filebrowser/security/advisories/GHSA-mgqf-5mf5-prfj"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 45.3,
-    "tags": [],
-    "intel_score": 53.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-82993",
     "published": "2026-09-15T20:18:05.790",
     "last_modified": "2026-11-03T21:26:56.970",
@@ -17678,6 +17319,29 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 3.6,
+    "tags": [],
+    "intel_score": 52.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-8718",
+    "published": "2026-08-10T23:16:51.587",
+    "last_modified": "2026-11-04T05:19:05.607",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "tls_opt_dtls_peer_connection_id_value_get() in subsys/net/lib/sockets/sockets_tls.c, which handles getsockopt(SOL_TLS, TLS_DTLS_PEER_CID_VALUE), passed the caller-supplied optval directly to mbedtls_ssl_get_peer_cid() without verifying the buffer was at least MBEDTLS_SSL_CID_OUT_LEN_MAX (default 32) bytes. mbedtls_ssl_get_peer_cid() copies the peer-negotiated DTLS Connection ID (length 1..MBEDTLS_SSL_CID_OUT_LEN_MAX) into that buffer without a destination-size parameter, so a caller-supplied optlen smaller than the CID causes a write of up to 31 bytes past the buffer end.\n\nIn CONFIG_USERSPACE builds the getsockopt syscall verifier (z_vrfy_zsock_getsockopt) bounce-buffers the user's optval into a kernel allocation of exactly optlen bytes (k_usermode_alloc_from_copy -> z_thread_malloc), so an unprivileged user thread that passes a small optlen on a connected DTLS socket with Connection ID enabled induces a kernel-heap buffer overflow, with the overflowing content being the remote peer's CID.\n\nThe defect requires CONFIG_MBEDTLS_SSL_DTLS_CONNECTION_ID, an established DTLS session with a negotiated peer CID, and (for the kernel-crossing case) CONFIG_USERSPACE. Introduced when the TLS_DTLS_CID option was added (v3.5.0).\n\nThe fix rejects callers whose optlen is below MBEDTLS_SSL_CID_OUT_LEN_MAX with -EINVAL.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/aa317825a55a401315e8e17f620c70c02e8f176d",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-p3r6-mx6c-33gq",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-p3r6-mx6c-33gq"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.5,
     "tags": [],
     "intel_score": 52.0,
     "reasons": [
@@ -17960,6 +17624,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-10685",
+    "published": "2026-07-31T15:16:27.433",
+    "last_modified": "2026-11-04T05:18:26.797",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Zephyr Bluetooth GATT client CCC-write response handler gatt_write_ccc_rsp() in subsys/bluetooth/host/gatt.c invoked the application's params->subscribe() callback after it had already called params->notify(conn, params, NULL, 0).\n\nPer the public GATT API, a notify callback with NULL data is the documented signal that the subscription has terminated and the bt_gatt_subscribe_params struct may be freed or reused by the application; calling subscribe() on the struct afterwards is a use-after-free, including an indirect call through the freed params->subscribe function pointer.\n\nThe error branch is remotely (adjacent) reachable: a Zephyr device acting as a GATT client that calls bt_gatt_subscribe() can be driven into this ordering when a connected GATT server peer answers the CCC write with an ATT Error Response (the peer-supplied error code flows through att_error_rsp -> att_handle_rsp into gatt_write_ccc_rsp).\n\nFor applications that free or recycle subscription parameters in their notification-termination handler, this results in memory corruption, a crash (denial of service), or potentially attacker-influenced control flow. The fix reorders the handler so the subscribe() callback runs before the terminating notify(NULL) in both the error and unsubscribe paths.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/c7292f20223637232b6f962141725611a38f6a52",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-29xh-jm2m-4qvx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 23.2,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 51.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-19550",
     "published": "2026-08-11T21:17:35.087",
     "last_modified": "2026-11-02T04:16:54.120",
@@ -18019,7 +17708,7 @@
   {
     "cve_id": "CVE-2026-86565",
     "published": "2026-10-14T17:20:05.770",
-    "last_modified": "2026-11-03T19:18:12.610",
+    "last_modified": "2026-11-04T13:17:32.583",
     "cvss_v3": 8.2,
     "severity": "HIGH",
     "affected": [],
@@ -18155,7 +17844,7 @@
   {
     "cve_id": "CVE-2026-79977",
     "published": "2026-10-23T20:17:27.523",
-    "last_modified": "2026-11-02T14:17:38.563",
+    "last_modified": "2026-11-04T05:19:02.650",
     "cvss_v3": 8.2,
     "severity": "HIGH",
     "affected": [],
@@ -18597,6 +18286,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-11810",
+    "published": "2026-08-10T21:17:19.223",
+    "last_modified": "2026-11-04T05:18:30.157",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The UpdateHub firmware-update agent's probe handler (z_impl_updatehub_probe() in subsys/mgmt/updatehub/updatehub.c) parses the JSON metadata returned by the update server into a fixed two-level nested-array struct. After parsing it validates only the outer array length (objects_len != 2) and then dereferences objects[1].objects[0].objects.sha256sum via strlen() without checking that the inner object array of element [1] is non-empty.\n\nThe metadata is attacker-influenceable network input: the agent fetches it over CoAP from the configured UpdateHub server during its routine OTA probe. A malicious or compromised update server (or, when DTLS is disabled, a network man-in-the-middle) can return a response whose second outer object array is empty. Because the parse target is zero-initialised, the corresponding objects[1].objects[0].objects.sha256sum pointer is NULL, and the subsequent strlen() dereferences address zero. The same defect exists in both the 'any boards' and 'some boards' metadata layouts.\n\nThe resulting CPU fault is fatal under Zephyr's default error handling, halting or resetting the device, so the flaw is a remotely triggerable denial of service. Impact is limited to availability; it is a read from NULL with no out-of-bounds write, memory corruption, or information disclosure. The fix rejects metadata whose inner object array is empty before any dereference, on both layouts.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/3424082022cb39d568434021b1d6f68b6a7fb3bf",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-jfpc-324j-84ww"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.5,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-70464",
     "published": "2026-08-13T15:20:01.667",
     "last_modified": "2026-11-03T21:39:22.710",
@@ -18768,6 +18482,31 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 35.9,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-15891",
+    "published": "2026-09-13T23:16:27.870",
+    "last_modified": "2026-11-04T05:18:43.757",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The MQTT-SN client keepalive handler process_ping() in subsys/net/lib/mqtt_sn/mqtt_sn.c removes the gateway record after PINGREQ retries are exhausted. It invoked SYS_SLIST_PEEK_HEAD_CONTAINER(&client->gateways, gw, next) but discarded the result. That macro is a pure expression that does not assign to gw, so gw retained its NULL initializer regardless of the list contents.\n\nThe code then dereferences the NULL gw (gw->gw_id) and passes it to mqtt_sn_gw_destroy(), reaching k_mem_slab_free(&gateways, NULL). With CONFIG_MEM_SLAB_POINTER_VALIDATE enabled this triggers k_panic(); in the default configuration it performs a write through the NULL pointer ((char )mem = slab->free_list;) and corrupts the slab free list. The outcome is a crash/kernel panic or, on targets where address 0 is writable, silent memory-allocator corruption.\n\nThe vulnerable branch runs whenever the connected MQTT-SN gateway fails to answer keepalive PINGREQs for the configured number of retries. This condition is controlled by the remote peer: a malicious or compromised gateway, or an on-path/adjacent attacker that advertises itself as a gateway and then stops responding (or blackholes the real gateway's PINGRESPs), forces the client into the defect. MQTT-SN runs over UDP and no authentication is required.\n\nThe impact is a remotely triggerable denial of service (availability) of the affected MQTT-SN client; there is no attacker-controlled data written. The sibling remover process_advertise() uses SYS_SLIST_FOR_EACH_CONTAINER_SAFE and is not affected. The fix assigns the macro's return value to gw.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/bd21e954c36be105a374bbc090623810f1a17ee3",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-c4g8-4f9p-4746"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.5,
     "tags": [
       "dos"
     ],
@@ -19186,58 +18925,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-117540",
-    "published": "2026-10-27T11:17:34.833",
-    "last_modified": "2026-11-02T19:18:01.290",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "svg-sanitizer from 0.5.3 before 1.1.0 contains a denial of service vulnerability in Sanitizer::sanitize() that repeatedly rescans the whole input while stripping PHP tags. Unauthenticated attackers can upload SVGs with many overlapping PHP tag openers and closers, forcing quadratic preg_replace passes that exhaust worker CPU for minutes.",
-    "references": [
-      "https://github.com/darylldoyle/svg-sanitizer/commit/9ba9001493f5da737759303f13bd965ebdaa778c",
-      "https://github.com/darylldoyle/svg-sanitizer/security/advisories/GHSA-2v7c-jx29-jprp",
-      "https://www.vulncheck.com/advisories/svg-sanitizer-before-1.1.0-quadratic-cpu-exhaustion-dos-via-php-tag-stripping-loop",
-      "https://github.com/darylldoyle/svg-sanitizer/security/advisories/GHSA-2v7c-jx29-jprp"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116688",
-    "published": "2026-10-27T20:17:14.037",
-    "last_modified": "2026-11-02T20:17:33.097",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "CKEditor 5 is a modern JavaScript rich-text editor with an MVC architecture. From 45.0.0 until 47.7.4 and 48.5.1, the engine uses a vulnerable es-toolkit version whose prototype-pollution behavior can be reached while CKEditor processes incoming style attribute values. Crafted editor content can thereby cause unauthorized JavaScript execution in the browser. This issue is fixed in versions 47.7.4 and 48.5.1.",
-    "references": [
-      "https://github.com/ckeditor/ckeditor5/commit/4d9c5bb34f63cd956d15ccafbe584e14280c86a0",
-      "https://github.com/ckeditor/ckeditor5/commit/a750e38635db6a18c5b11599c09f4fd702850423",
-      "https://github.com/ckeditor/ckeditor5/releases/tag/v47.7.4",
-      "https://github.com/ckeditor/ckeditor5/releases/tag/v48.5.1",
-      "https://github.com/ckeditor/ckeditor5/security/advisories/GHSA-rh54-vffm-5fvp"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 42.7,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
     ]
   },
   {
@@ -21215,6 +20902,140 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-17052",
+    "published": "2026-09-21T19:17:04.080",
+    "last_modified": "2026-11-04T05:18:45.737",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Time-aware GPIO syscall verification handler z_vrfy_tgpio_pin_read_ts_ec() in drivers/timeaware_gpio/timeaware_gpio_handlers.c validated only the port device object and passed the caller-supplied timestamp and event_count output pointers to the driver without a K_SYSCALL_MEMORY_WRITE() check. The other handlers in the same file (z_vrfy_tgpio_port_get_time(), z_vrfy_tgpio_port_get_cycles_per_second()) already performed that check, so the omission left one syscall unguarded.\n\ntgpio_pin_read_ts_ec() is declared __syscall, so with CONFIG_USERSPACE=y an unprivileged user-mode thread that has been granted access to the TGPIO device object can invoke it with arbitrary pointer values. tgpio_intel_read_ts_ec() in drivers/timeaware_gpio/timeaware_gpio_intel.c bounds-checks only the pin index and then unconditionally performs timestamp = ... and event_count = ..., executing two 8-byte stores in supervisor mode at addresses chosen by the user-mode caller.\n\nThe result is a write-what-where primitive that crosses the userspace/kernel boundary: the target address is fully attacker-chosen and the stored values are the hardware time-capture and event-counter register contents. Corrupting kernel data structures this way can escalate the calling thread to supervisor privilege or crash the system; the device-object permission required is a narrow capability that is not intended to confer any kernel-memory access. The fix adds the two missing K_SYSCALL_MEMORY_WRITE() validations before the driver call.\n\nExposure is narrow in practice. Only builds with CONFIG_USERSPACE=y and CONFIG_TIMEAWARE_GPIO=y compile the affected file, and from v3.6.0 onward the file additionally referenced a relocated header (<zephyr/syscall_handler.h>) and removed Z_SYSCALL_* macros, so such a configuration failed to build until those were repaired after v4.4.0. Downstream trees that locally corrected that breakage, and v3.5.0 builds where it did not exist, are the exposed population.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/26264fffc17c2174319394ffa274af3f6efdc221",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-8qw6-x76h-8mpc"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.8,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-16513",
+    "published": "2026-09-28T21:17:16.910",
+    "last_modified": "2026-11-04T05:18:45.030",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The userspace verifier z_vrfy_rtio_sqe_copy_in_get_handles() in subsys/rtio/rtio_syscalls.c (subsys/rtio/rtio_handlers.c before v4.3.0) validated the RTIO object handle and the sqes input array, but not the handle out-parameter. On the first loop iteration it executed *handle = sqe, storing the kernel address of the newly acquired submission-queue entry through a pointer taken verbatim from user mode, with no K_SYSCALL_MEMORY_WRITE check in front of it.\n\nAny user-mode thread that has been granted a struct rtio kernel object can invoke the syscall with an arbitrary address in handle. That is the ordinary way an unprivileged thread uses the RTIO API, for example via sensor_read_async_mempool() or the async ADC helpers, which call rtio_sqe_copy_in_get_handles() internally. The store happens in supervisor mode before any submission-entry validation, so it fires regardless of whether the SQE contents are subsequently rejected. Only builds with CONFIG_USERSPACE and CONFIG_RTIO are affected; without CONFIG_USERSPACE the verifier is not compiled and the caller is already privileged.\n\nThe write address is fully attacker-chosen and the written value is a pointer into the caller's own RTIO ring, whose contents the caller controls (the following *sqe = sqes[i] copies an attacker-supplied struct rtio_sqe into that slot). This yields a write-what-where primitive placing a pointer to attacker-controlled data at any kernel address, sufficient to corrupt kernel function pointers, thread structures, or memory-domain partition tables, and thus to escalate from user mode to kernel mode, defeating the isolation boundary CONFIG_USERSPACE is meant to enforce. At minimum it is a reliable kernel memory-corruption and crash primitive. The reporter reproduced the write on qemu_x86: a K_USER thread changed a supervisor global from NULL to a live kernel SQE pointer.\n\nThe fix adds K_SYSCALL_MEMORY_WRITE(handle, sizeof(*handle)) (guarded by the existing optional-NULL semantics) before the loop, so the destination must lie in the calling thread's writable memory domain or the thread is terminated by K_OOPS. The neighbouring verifier z_vrfy_rtio_cqe_get_mempool_buffer(), which checked its buff/buff_len out-parameters only for read although the implementation writes through them, was hardened separately by bea93400138 (\"rtio: syscalls: validate output params as writable\"); that residual was materially weaker, since a read check still confines the target to the caller's own memory domain.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/95c355c425763fbe5e735b9ef54dacce2c4ce21f",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fwmc-q8qg-jcxq"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.8,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-18413",
+    "published": "2026-09-28T21:17:17.090",
+    "last_modified": "2026-11-04T05:18:46.050",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The ADC API requires each driver to reject a sampling sequence whose destination buffer is too small: the buffer_size field of struct adc_sequence in include/zephyr/drivers/adc.h documents that \"the driver must ensure that samples are not written beyond the limit and it must return an error if the buffer turns out to be not large enough\". The NXP MCUX LPADC driver did not honour that contract. mcux_lpadc_start_read() in drivers/adc/adc_mcux_lpadc.c performed no buffer-size check at all before assigning data->buffer = sequence->buffer. Each completed conversion then stores one 16-bit sample per enabled channel per sampling round through an unbounded *data->buffer++: in mcux_lpadc_isr() for interrupt-driven builds, and in mcux_lpadc_dma_callback() for DMA-driven builds on releases that have the DMA path. A sequence selecting two channels with a two-byte buffer, for example, has its second sample written past the end of the buffer.\n\nOn a build with CONFIG_USERSPACE, adc_read() and adc_read_async() are system calls. The handler in drivers/adc/adc_handlers.c copies the sequence in from user memory, verifies only that [buffer, buffer + buffer_size) is writable by the calling thread, and rejects a user-supplied options->callback; it deliberately leaves the size arithmetic to the driver. A user-mode thread that has been granted access to an LPADC device object therefore fully controls channels, buffer, buffer_size and options->extra_samplings, and can request far more samples than its buffer can hold: up to channels * 65536 samples into a two-byte buffer, since the sample pointer is only rewound on a repeat sampling, never on the extra samplings of a sequence.\n\nThe resulting stores are performed by the driver in kernel mode (in the ADC interrupt handler or the DMA completion callback), where the MPU does not restrict the thread's memory domain, so the write walks linearly out of the user partition and into adjacent memory such as other partitions, kernel data or thread stacks. The impact is kernel-memory corruption of attacker-chosen length at an attacker-chosen offset, a plausible privilege-escalation and denial-of-service primitive from an unprivileged user-mode thread. Builds without CONFIG_USERSPACE are affected only as a caller-side robustness defect, since the application itself supplies the buffer.\n\nThe fix calls the new shared helper adc_sequence_validate_buffer() in drivers/adc/adc_common.c from mcux_lpadc_start_read(). The helper computes active_channels  sizeof(uint16_t)  (1 + extra_samplings) and returns -ENOMEM before any sampling is started.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/3bda971a52ddbbec28f6fcfe3b006d34e8b9e5a9",
+      "https://github.com/zephyrproject-rtos/zephyr/commit/9338c518bf2b6a396f166d4dbe9985ce7e44379c",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-7jqq-2g5q-hcrp"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.2,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-18414",
+    "published": "2026-09-28T21:17:17.250",
+    "last_modified": "2026-11-04T05:18:46.220",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The ADC API requires each driver to reject a sampling sequence whose destination buffer is too small: the buffer_size field of struct adc_sequence in include/zephyr/drivers/adc.h documents that \"the driver must ensure that samples are not written beyond the limit and it must return an error if the buffer turns out to be not large enough\". The ADI MAX32 driver did not honour that contract. start_read() in drivers/adc/adc_max32.c compared buffer_size, a byte count, against a sample count ((1 + extra_samplings)  channels), ignoring sizeof(uint16_t), so it accepted a buffer half the required size. The samples are then stored through the uint16_t  data->buffer by Wrap_MXC_ADC_GetData(), which writes two bytes per sample and advances the pointer by one uint16_t: in adc_max32_start_channel() for synchronous reads, and in adc_max32_isr() for asynchronous ones. A sequence selecting two channels with a two-byte buffer, for example, passes the check and has its second sample written past the end of the buffer.\n\nOn a build with CONFIG_USERSPACE, adc_read() and adc_read_async() are system calls. The handler in drivers/adc/adc_handlers.c copies the sequence in from user memory, verifies only that [buffer, buffer + buffer_size) is writable by the calling thread, and rejects a user-supplied options->callback; it deliberately leaves the size arithmetic to the driver. A user-mode thread that has been granted access to a MAX32 ADC device object therefore fully controls channels, buffer, buffer_size and options->extra_samplings, and can make the driver write twice as many bytes as its buffer holds. Because the check scales with extra_samplings, the overrun equals the length of the buffer itself, up to channels * 65536 bytes past its end, since the sample pointer is only rewound on a repeat sampling, never on the extra samplings of a sequence.\n\nThe resulting stores are performed by the driver in kernel mode (in the system call itself, the ADC context timer, or the ADC interrupt handler for asynchronous reads), where the MPU does not restrict the thread's memory domain, so the write walks linearly out of the user partition and into adjacent memory such as other partitions, kernel data or thread stacks. The impact is kernel-memory corruption of attacker-chosen length at an attacker-chosen offset, a plausible privilege-escalation and denial-of-service primitive from an unprivileged user-mode thread. Builds without CONFIG_USERSPACE are affected only as a caller-side robustness defect, since the application itself supplies the buffer.\n\nThe fix replaces that check in start_read() with a call to the new shared helper adc_sequence_validate_buffer() in drivers/adc/adc_common.c, passing sizeof(uint16_t) as the sample size. The helper computes active_channels  sizeof(uint16_t)  (1 + extra_samplings) and returns -ENOMEM before any sampling is started.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/3bda971a52ddbbec28f6fcfe3b006d34e8b9e5a9",
+      "https://github.com/zephyrproject-rtos/zephyr/commit/9338c518bf2b6a396f166d4dbe9985ce7e44379c",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-ghm4-78mm-8v2c"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.2,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19185",
+    "published": "2026-10-05T09:17:13.077",
+    "last_modified": "2026-11-04T05:18:47.637",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The system-call verifier for i3c_do_ccc() in drivers/i3c/i3c_handlers.c validated the outer struct i3c_ccc_payload, the broadcast ccc.data buffer and the targets.payloads[] array, but did not validate the per-target data buffers those array elements point at. Each struct i3c_ccc_target_payload carries its own data pointer and data_len, and neither was passed through K_SYSCALL_MEMORY() before the payload was handed to z_impl_i3c_do_ccc() and on to the controller driver. The verifier also operated on the caller's live structure rather than a snapshot, so validated fields could be changed by a second user thread between the check and the driver's use — unlike the sibling z_vrfy_i3c_transfer(), which has always copied its message array first.\n\nThe defect is only present in CONFIG_USERSPACE builds, where drivers/i3c/i3c_handlers.c is compiled. An unprivileged user-mode thread that has been granted access to the I3C controller device object — the ordinary way an application lets a user thread talk to I3C peripherals — can issue a direct CCC whose target payload data pointer names an arbitrary kernel address. Controller drivers dereference that pointer directly (for example drivers/i3c/i3c_mcux.c, drivers/i3c/i3c_cdns.c, drivers/i3c/i3c_stm32.c, drivers/i3c/i3c_npcx.c), using rnw to decide direction.\n\nA read CCC therefore causes the kernel-mode driver to write bus-received bytes into an attacker-chosen kernel address for an attacker-chosen length, and a write CCC transmits kernel memory out onto the I3C bus. The result is an out-of-bounds kernel write plus a kernel memory disclosure, i.e. escalation from a user-mode thread to supervisor privilege, defeating the isolation CONFIG_USERSPACE is meant to provide.\n\nThe fix introduces copy_ccc_and_do(), which snapshots the payload, copies the target array into kernel memory with k_usermode_alloc_from_copy() (bounding num_targets to fewer than 32), validates each per-target buffer with K_SYSCALL_MEMORY() according to rnw, and copies the driver-written num_xfer and err fields back to the caller.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/35562f22f40c6d2f31969a31f0a4902e5b067f27",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-pcrr-29j7-8w57"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.1,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19736",
+    "published": "2026-10-11T18:16:58.810",
+    "last_modified": "2026-11-04T05:18:50.213",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The NXP MCUX TRNG entropy driver in drivers/entropy/entropy_mcux_trng.c passed the caller's byte count straight to the vendor SDK routine TRNG_GetRandomData(). On i.MX RT5xx and RT6xx parts the SDK compiles its TRNG_SW_HEALTH_TESTS variant, which always copies whole 32-bit words and draws entropy rounded up to a multiple of 128 bytes. Its \"caller buffer is full\" guard tests dataSize == 0, so a request whose length is not a multiple of four makes dataSize underflow past zero and the SDK keeps writing into the caller's buffer for the entire extraction: a 1-byte request results in 128 bytes written, and any non-word-multiple length overflows by up to 127 bytes.\n\nentropy_get_entropy() is a syscall, and its verifier in drivers/entropy/entropy_handlers.c validates only the requested length via K_SYSCALL_MEMORY_WRITE(). With CONFIG_USERSPACE enabled, an unprivileged user-mode thread that has merely been granted the entropy device can therefore choose both the destination address and a length such as 1, and cause the kernel to write up to 127 bytes beyond the region it proved it owns. On these Cortex-M33 targets there is no MMU, so user partitions and kernel data share one SRAM and the overflow can land in adjacent kernel state. The same defect is reached from kernel mode by any caller requesting a non-word-multiple length, including getentropy() and, in builds where sys_csrand_get()/sys_rand_get() resolve to the hardware generator, sys_rand8_get() and sys_rand16_get().\n\nImpact is memory corruption of up to 127 bytes immediately following the supplied buffer — typically the caller's stack in kernel-mode use, or memory outside the caller's partition when driven through the syscall. The overflow offset is fully determined by the requested length and is therefore deterministic, while the written content is uncontrolled TRNG output; the practical consequences range from crashes and unpredictable state corruption to opportunistic escalation when kernel bookkeeping such as object permission bitmaps is overwritten. The affected devices are those where the MCUX SDK enables TRNG_SW_HEALTH_TESTS (MIMXRT595S, MIMXRT555S, MIMXRT533S, MIMXRT685S, MIMXRT633S), on which the TRNG is the zephyr,entropy chosen node; other SoCs using this driver take the SDK path that clamps the copy size and are unaffected.\n\nThe fix routes any unaligned prefix and any sub-word tail through a local bounce word and hands the SDK only word-multiple sizes, so the SDK's word-granular writes can no longer pass the end of the caller's buffer.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/2c132efaf03a5d45aeaf7b0531c1107db7a36a3d",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-3f6q-3949-rqph"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 1.4,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-69867",
     "published": "2026-10-13T19:19:00.587",
     "last_modified": "2026-11-02T21:10:28.310",
@@ -21322,7 +21143,7 @@
   {
     "cve_id": "CVE-2026-86562",
     "published": "2026-10-14T17:20:05.420",
-    "last_modified": "2026-11-03T19:18:12.193",
+    "last_modified": "2026-11-04T13:17:32.140",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -21347,7 +21168,7 @@
   {
     "cve_id": "CVE-2026-86563",
     "published": "2026-10-14T17:20:05.600",
-    "last_modified": "2026-11-03T19:18:12.413",
+    "last_modified": "2026-11-04T13:17:32.360",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -21691,7 +21512,7 @@
   {
     "cve_id": "CVE-2026-112434",
     "published": "2026-10-26T21:17:33.337",
-    "last_modified": "2026-11-03T18:36:22.050",
+    "last_modified": "2026-11-04T05:18:27.437",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -21714,7 +21535,7 @@
   {
     "cve_id": "CVE-2026-112437",
     "published": "2026-10-26T21:17:33.520",
-    "last_modified": "2026-11-03T18:36:31.327",
+    "last_modified": "2026-11-04T05:18:27.680",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -21863,7 +21684,7 @@
   {
     "cve_id": "CVE-2026-112493",
     "published": "2026-10-26T21:17:40.377",
-    "last_modified": "2026-11-03T20:01:23.120",
+    "last_modified": "2026-11-04T05:18:27.903",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -21909,7 +21730,7 @@
   {
     "cve_id": "CVE-2026-112530",
     "published": "2026-10-26T21:17:45.300",
-    "last_modified": "2026-11-03T15:17:24.050",
+    "last_modified": "2026-11-04T05:18:28.183",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -21932,7 +21753,7 @@
   {
     "cve_id": "CVE-2026-112541",
     "published": "2026-10-26T21:17:46.883",
-    "last_modified": "2026-11-03T15:17:24.237",
+    "last_modified": "2026-11-04T05:18:28.503",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -22001,7 +21822,7 @@
   {
     "cve_id": "CVE-2026-112668",
     "published": "2026-10-26T21:18:00.137",
-    "last_modified": "2026-11-03T20:51:42.240",
+    "last_modified": "2026-11-04T05:18:28.810",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -22337,53 +22158,54 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86936",
-    "published": "2026-10-26T21:20:31.087",
-    "last_modified": "2026-11-03T16:29:28.280",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2026-10641",
+    "published": "2026-06-17T14:17:37.070",
+    "last_modified": "2026-11-04T05:18:22.707",
+    "cvss_v3": 7.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "A logic issue was addressed with improved checks. This issue is fixed in macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2. An app may be able to gain root privileges.",
+    "summary": "Zephyr's Bluetooth Classic Hands-Free Profile (HFP) Hands-Free role parser (subsys/bluetooth/host/classic/hfp_hf.c) contains an out-of-bounds write. During Service Level Connection setup the HF sends AT+CIND=? and parses the AG's +CIND: response in cind_handle(), which assigns a per-entry counter index and calls cind_handle_values() for each list element. cind_handle_values() then wrote hf->ind_table[index] = i without verifying that index is within the 20-element int8_t ind_table[] array of struct bt_hfp_hf. Because the parser places no cap on the number of +CIND: list entries, a remote Attendant Gateway (a malicious, compromised, or spoofed peer the device connects to over Bluetooth) can send a response with more than 20 recognized indicator entries and drive index arbitrarily large, writing a small attacker-positioned value past the array into adjacent struct fields (feature masks, SDP/version state, the calls[] array, work/atomic bookkeeping) and potentially beyond the static connection pool slot. This yields memory corruption and at least denial of service of the Bluetooth host, triggered by a single malformed AT response with no user interaction. The sibling consumer ag_indicator_handle_values() already performed the equivalent bounds check; this commit adds the same index >= ARRAY_SIZE(hf->ind_table) guard to close the gap. Affects builds with CONFIG_BT_HFP_HF enabled; introduced with the original HFP HF CIND parser (~v1.7) and present through v4.4.0.",
     "references": [
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523"
+      "https://github.com/zephyrproject-rtos/zephyr/commit/cf7693a8261ae363c9cf46cfd51005486637173e",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-wx5j-q6f2-59p3",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-wx5j-q6f2-59p3"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 13.7,
-    "tags": [],
-    "intel_score": 49.0,
+    "epss": 0.3,
+    "epss_percentile": 20.8,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 48.5,
     "reasons": [
-      "recently modified (last 48h)"
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
-    "cve_id": "CVE-2026-86972",
-    "published": "2026-10-26T21:20:35.437",
-    "last_modified": "2026-11-03T21:17:44.830",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2026-10651",
+    "published": "2026-06-23T01:16:26.747",
+    "last_modified": "2026-11-04T05:18:23.850",
+    "cvss_v3": 7.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "A buffer overflow was addressed with improved size validation. This issue is fixed in iOS 26.7.2 and iPadOS 26.7.2, iOS 27.2 and iPadOS 27.2, macOS Golden Gate 27.2, macOS Tahoe 26.7.2, tvOS 27.2, visionOS 27.2, watchOS 27.2. Processing a maliciously crafted audio file may lead to memory corruption.",
+    "summary": "bt_sdp_parse_attribute() in subsys/bluetooth/host/classic/sdp.c validated only that the SDP record buffer held the type-marker byte plus the 2-byte attribute ID (a check of buf->len < 3) but then read a fourth byte, the data-element descriptor (type), via net_buf_simple_pull_u8(). Because net_buf_simple_pull_u8() dereferences buf->data[0] before its only bounds guard (an __ASSERT_NO_MSG that compiles out when CONFIG_ASSERT is disabled, the production default), a record of exactly three bytes (0x09 followed by a 2-byte attribute ID) causes a one-byte read past the end of the logical buffer. The parser is reachable from inbound, remote-controlled data: a Bluetooth BR/EDR peer acting as an SDP server returns discovery-response records that are stored verbatim in the client receive buffer and parsed via the public bt_sdp_get_attr()/bt_sdp_has_attr()/bt_sdp_record_parse() helpers. The over-read is bounded to a single byte that is used only as an internal length selector and is never leaked to the attacker; subsequent length checks then reject the malformed record. Realistic impact is therefore limited to an edge-case denial of service (a fault only if the record ends exactly at a mapped-memory boundary, or a deterministic assert panic when CONFIG_ASSERT=y). Affects Zephyr v4.3.0 and v4.4.0; fixed by adding sizeof(type) to the length check.",
     "references": [
-      "https://support.apple.com/en-us/149227",
-      "https://support.apple.com/en-us/149230",
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149524",
-      "https://support.apple.com/en-us/149525",
-      "https://support.apple.com/en-us/149526"
+      "https://github.com/zephyrproject-rtos/zephyr/commit/dfac5224ab65fc7b81be2926386173c169318335",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-p93g-3r68-cj53"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 15.7,
-    "tags": [],
-    "intel_score": 49.0,
+    "epss": 0.3,
+    "epss_percentile": 22.6,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 48.5,
     "reasons": [
-      "recently modified (last 48h)"
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -22583,31 +22405,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-95619",
-    "published": "2026-09-22T13:17:13.300",
-    "last_modified": "2026-11-01T05:18:59.483",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in libstdc++. An integer overflow can occur when processing large inputs to the aligned operator new in the C++ library. This vulnerability could lead to an undersized memory allocation, potentially causing memory corruption or application instability.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:58503",
-      "https://access.redhat.com/errata/RHSA-2026:67275",
-      "https://access.redhat.com/errata/RHSA-2026:89830",
-      "https://access.redhat.com/security/cve/CVE-2026-95619",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2537811"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.7,
-    "tags": [],
-    "intel_score": 48.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-112260",
     "published": "2026-10-19T20:17:52.970",
     "last_modified": "2026-11-02T19:17:52.430",
@@ -22677,6 +22474,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-79976",
+    "published": "2026-10-21T19:17:04.060",
+    "last_modified": "2026-11-04T05:19:02.493",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The MCTP-over-I2C+GPIO target binding in subsys/pmci/mctp/mctp_i2c_gpio_target.c emulates a small pseudo-register file, where the bus controller first writes a register number and then writes or reads payload bytes. The selected register (b->reg_addr) and the data-phase flag (b->rxtx) were never cleared when the controller issued an I2C STOP, so after a completed transfer the target still had a data register selected while the packet buffer that register refers to had already been consumed and set to NULL by mctp_i2c_gpio_target_stop().\n\nA controller on the bus can re-enter the same branch of mctp_i2c_gpio_target_stop() with a NULL buffer using two ordinary transactions and no authentication: first a normal packet write to MCTP_I2C_GPIO_RX_MSG_ADDR followed by STOP (which delivers and frees b->rx_pkt), then a bare read transaction followed by STOP. The failing read_requested() call leaves the stale state untouched and the I2C driver still delivers the STOP callback, which then calls mctp_bus_rx() with a NULL packet. The symmetric case exists on the transmit side, where the stale MCTP_I2C_GPIO_TX_MSG_ADDR selection dereferences b->tx_pkt->end after b->tx_pkt has been cleared and additionally signals b->tx_complete a second time, causing the next outbound packet to be dropped.\n\nThe dereference happens in the I2C target interrupt handler, so on any target that traps accesses to address 0 the result is a fatal exception and a device reset or halt — a denial of service inflicted by any device able to act as controller on the shared management bus (for example compromised firmware on a peer MCTP endpoint or on the BMC). On parts where address 0 is readable, the impact degrades to a malformed packet buffer being handed to the MCTP stack and lost transmit packets. No attacker-controlled value is written and no confidentiality or integrity boundary is crossed.\n\nThe fix resets b->reg_addr to MCTP_I2C_GPIO_INVALID_ADDR and clears b->rxtx at every STOP, so a new register must be selected before any data phase can run again. Only builds that opt into the experimental CONFIG_MCTP subsystem with CONFIG_MCTP_I2C_GPIO_TARGET=y are affected.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/60f7fee438504de29f2473d7a8d0535235b983ef",
+      "https://github.com/zephyrproject-rtos/zephyr/commit/a097178023785f3bc0a925ac489e490521ca84ea",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-76fx-m4mf-24gq"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-115416",
     "published": "2026-10-22T17:16:58.913",
     "last_modified": "2026-11-02T13:17:36.507",
@@ -22695,6 +22518,31 @@
     "intel_score": 48.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-81038",
+    "published": "2026-10-26T17:17:30.350",
+    "last_modified": "2026-11-04T05:19:03.580",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Object Transfer Service server builds its Object Action Control Point (OACP) response indication in oacp_ind_send() (subsys/bluetooth/services/ots/ots_oacp.c). Before this fix the four-byte Checksum Value field was appended whenever the requested op code was BT_GATT_OTS_OACP_PROC_CHECKSUM_CALC, regardless of the result code. The response payload is a bare, uninitialized four-byte stack buffer declared with NET_BUF_SIMPLE_DEFINE(resp_param, sizeof(uint32_t)) in bt_gatt_ots_oacp_write(), and it is filled only on the success path of oacp_checksum_proc_validate(). On every failure path the buffer is still empty, so net_buf_simple_pull_le32() was invoked on a zero-length buffer.\n\nThe OACP characteristic and its client characteristic configuration descriptor are declared with BT_GATT_PERM_WRITE and BT_GATT_PERM_READ | BT_GATT_PERM_WRITE, so no pairing, encryption, or authentication is required. Any peer within radio range that can connect to a device running the OTS server can enable OACP indications and write a nine-byte Calculate Checksum command that fails validation — for example by issuing it with no object selected, which returns BT_GATT_OTS_OACP_RES_INV_OBJ. Because oacp_command_decode() accepts the Calculate Checksum op code unconditionally (it is not guarded by CONFIG_BT_OTS_OACP_CHECKSUM_SUPPORT), builds without checksum support are reachable too: they answer BT_GATT_OTS_OACP_RES_OPCODE_NOT_SUP and take the same bad path.\n\nOn builds with CONFIG_ASSERT enabled, the zero-length pull trips the assertion inside net_buf_simple_pull_mem() and panics the device, giving a remotely triggered denial of service. On builds with assertions disabled there is no check: the pull returns the untouched stack array and four bytes of uninitialized stack memory are copied into the indication and transmitted to the peer, repeatable on every request. The disclosure is bounded to four bytes per request and the write stays inside the seven-byte res indication buffer, so there is no memory corruption; the impact is uninitialized-memory disclosure plus an availability loss in assertion-enabled configurations.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/36145a6f1164e2e0a18c8c83d5b1be6e7d3f6e23",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-7c9w-mhqw-5g86"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 4.0,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -22794,29 +22642,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86946",
-    "published": "2026-10-26T21:20:32.490",
-    "last_modified": "2026-11-03T20:12:22.377",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free issue was addressed with improved memory management. This issue is fixed in macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2. An app may be able to cause unexpected system termination or corrupt kernel memory.",
-    "references": [
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 12.4,
-    "tags": [],
-    "intel_score": 48.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-36049",
     "published": "2023-11-14T21:15:10.083",
     "last_modified": "2026-11-02T23:17:17.080",
@@ -22857,36 +22682,6 @@
     "intel_score": 48.0,
     "reasons": [
       "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-102010",
-    "published": "2026-09-28T19:16:48.830",
-    "last_modified": "2026-11-01T05:18:55.760",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in GCC. When an application calls the erase_if function on a binary heap priority queue in libstdc++, the library reallocates storage but fails to update its internal entry pointer. An attacker capable of triggering this operation can exploit this use-after-free condition, leading to a Denial of Service (DoS) via an application crash or potential memory corruption.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:73642",
-      "https://access.redhat.com/errata/RHSA-2026:74569",
-      "https://access.redhat.com/errata/RHSA-2026:89830",
-      "https://access.redhat.com/errata/RHSA-2026:89891",
-      "https://access.redhat.com/errata/RHSA-2026:90915",
-      "https://access.redhat.com/security/cve/CVE-2026-102010",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2478395"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 48.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
     ]
   },
   {
@@ -23782,6 +23577,29 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-8023",
+    "published": "2026-06-29T23:16:43.777",
+    "last_modified": "2026-11-04T05:19:05.440",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Zephyr's HTTP server (subsys/net/lib/http) provides a static-filesystem resource type (HTTP_RESOURCE_TYPE_STATIC_FS, available when CONFIG_FILE_SYSTEM is enabled) that serves files from a configured root directory. Before this fix, both the HTTP/1 and HTTP/2 front-ends placed the raw, attacker-controlled request path into client->url_buffer (assembled in on_url() for HTTP/1 and copied verbatim from the :path pseudo-header for HTTP/2) without resolving ./.. segments. The static-FS handler then built the on-disk filename by directly concatenating the configured root with that raw URL (snprintk(fname, ..., \"%s%s\", static_fs_detail->fs_path, client->url_buffer) at http_server_http1.c:603 and http_server_http2.c:490) and opened it with fs_open(fname, FS_O_READ). Because the handler is reached via wildcard/leading-dir (fnmatch FNM_LEADING_DIR) or fallback resource matching, a request such as GET /<prefix>/../../<file> is dispatched to the handler and, after the underlying filesystem (e.g. LittleFS/FAT) resolves the .. segments, escapes the configured web root, letting an unauthenticated remote client read arbitrary readable files on the mounted volume (information disclosure). The HTTP server requires no TLS or authentication to reach this path. The fix adds http_server_remove_dot_segments(), which canonicalizes the path portion of the URL before resource lookup in both protocol handlers, neutralizing the traversal. Affects releases v4.0.0 through v4.4.0 for deployments that register a static-filesystem resource.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/f4a423c98554f209c5d2f22f041822422c9263b8",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-hch3-53g6-jj3h",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-hch3-53g6-jj3h"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 58.8,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-59937",
     "published": "2026-07-08T18:16:34.963",
     "last_modified": "2026-11-02T16:06:04.477",
@@ -24269,6 +24087,27 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-102728",
+    "published": "2026-09-29T18:17:12.497",
+    "last_modified": "2026-11-04T11:17:12.590",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In Eclipse ThreadX NetX Duo versions 6.0 through 6.5.2.202603a, the NetX Secure TLS client's ServerHello parser and DTLS client's HelloVerifyRequest parser read fields before checking that the message is long enough to contain them. A malicious server or an on-path attacker can make the client read up to three bytes past a handshake message, which can fault the client on targets with memory protection.",
+    "references": [
+      "https://github.com/eclipse-threadx/netxduo/security/advisories/GHSA-4q67-8385-j6m5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 15.8,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-102993",
     "published": "2026-09-30T20:17:27.630",
     "last_modified": "2026-11-02T16:06:04.477",
@@ -24454,6 +24293,28 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 28.9,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19935",
+    "published": "2026-10-11T18:16:59.410",
+    "last_modified": "2026-11-04T05:18:51.360",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Bluetooth LE host queues received L2CAP connection-oriented channel (CoC) data for deferred processing through a struct k_work embedded in the channel object (le_chan->rx_work, handler l2cap_rx_process()) whenever the channel uses a dynamic PSM (0x0080-0x00FF). Channel teardown in l2cap_chan_destroy() in subsys/bluetooth/host/l2cap.c cancels the retransmission-timeout work and drains the RX FIFO, but never cancels rx_work. Because that work item was submitted to the system workqueue while HCI receive processing runs on the dedicated Bluetooth RX workqueue (CONFIG_BT_RECV_WORKQ_BT, the default), a queued rx_work item can outlive the channel it points into.\n\nA remote, unauthenticated peer with an established CoC channel triggers this by sending a data K-frame immediately followed by an L2CAP Disconnect Request. The K-frame submits rx_work to the system workqueue; because both workqueue threads are cooperative and the Bluetooth RX workqueue runs at the higher priority (K_PRIO_COOP(CONFIG_BT_RX_PRIO) versus CONFIG_SYSTEM_WORKQUEUE_PRIORITY), the pending item cannot run before the following Disconnect Request is processed in le_disconn_req() -> l2cap_chan_del() -> l2cap_chan_destroy(). The stack then invokes the released() callback, which the API documents as meaning the stack has dropped all references and the application may free the channel memory.\n\nThe application therefore frees or re-accepts into an object that the system workqueue still holds in its pending list. If the memory is freed and reallocated, the workqueue later dereferences a list node and a handler function pointer read from reused memory; if the object is re-used for a later connection, l2cap_chan_add() calls k_work_init() on a still-enqueued work item, corrupting the workqueue's pending list so that unrelated work items are dropped or the queue spins on a looped list. A related variant lets l2cap_rx_process() run concurrently with teardown, racing the net_buf unref of le_chan->_sdu and the clearing of chan->conn.\n\nThe fix routes the channel RX work to the Bluetooth workqueue - the same context in which every teardown path runs - and adds an explicit k_work_cancel() of le_chan->rx_work in l2cap_chan_destroy(), so no reference to the channel survives the released() callback. Configurations without CONFIG_BT_L2CAP_DYNAMIC_CHANNEL, or that only use SIG-assigned PSMs (EATT 0x0027, OTS 0x0025) which take the inline receive path, are not affected.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/22896cb8d6f23feffe4b637119fb3e974ac3bed8",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6gp4-cwf7-2vp8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 7.5,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -25013,7 +24874,7 @@
   {
     "cve_id": "CVE-2026-19741",
     "published": "2026-10-23T20:17:21.867",
-    "last_modified": "2026-11-02T14:17:37.000",
+    "last_modified": "2026-11-04T05:18:50.977",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -25608,6 +25469,29 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-112595",
+    "published": "2026-10-26T21:17:52.110",
+    "last_modified": "2026-11-04T13:17:23.533",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "This issue was addressed with improved authentication. This issue is fixed in iOS 27.2 and iPadOS 27.2, macOS Golden Gate 27.2, tvOS 27.2. An attacker in physical proximity may be able to craft malicious network traffic to gain access to a Thread network.",
+    "references": [
+      "https://support.apple.com/en-us/149230",
+      "https://support.apple.com/en-us/149521",
+      "https://support.apple.com/en-us/149524"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 19.3,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-112619",
     "published": "2026-10-26T21:17:54.850",
     "last_modified": "2026-11-03T23:17:29.403",
@@ -25835,237 +25719,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-86964",
-    "published": "2026-10-26T21:20:34.460",
-    "last_modified": "2026-11-03T21:17:44.580",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A null pointer dereference was addressed with improved input validation. This issue is fixed in iOS 27 and iPadOS 27, macOS Golden Gate 27, macOS Tahoe 26.7.2, tvOS 27, visionOS 27, watchOS 27. An app may be able to cause unexpected system termination.",
-    "references": [
-      "https://support.apple.com/en-us/149034",
-      "https://support.apple.com/en-us/149035",
-      "https://support.apple.com/en-us/149036",
-      "https://support.apple.com/en-us/149037",
-      "https://support.apple.com/en-us/149038",
-      "https://support.apple.com/en-us/149522"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 12.7,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86968",
-    "published": "2026-10-26T21:20:34.780",
-    "last_modified": "2026-11-03T22:19:49.870",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An access issue was addressed with improved access control. This issue is fixed in iOS 27.2 and iPadOS 27.2, macOS Golden Gate 27.2, visionOS 27.2. A malicious app may be able to access restricted system interfaces or launder launch attribution.",
-    "references": [
-      "https://support.apple.com/en-us/149230",
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149526"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 13.7,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86991",
-    "published": "2026-10-26T21:20:38.060",
-    "last_modified": "2026-11-03T22:19:50.117",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A buffer overflow was addressed with improved bounds checking. This issue is fixed in iOS 26.7.2 and iPadOS 26.7.2, iOS 27.2 and iPadOS 27.2, macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2, visionOS 27.2. Processing a maliciously crafted file may lead to unexpected process termination.",
-    "references": [
-      "https://support.apple.com/en-us/149227",
-      "https://support.apple.com/en-us/149230",
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523",
-      "https://support.apple.com/en-us/149526"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 18.1,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86992",
-    "published": "2026-10-26T21:20:38.220",
-    "last_modified": "2026-11-03T23:17:58.987",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The issue was addressed with improved memory handling. This issue is fixed in iOS 26.7.2 and iPadOS 26.7.2, iOS 27.2 and iPadOS 27.2, macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2, tvOS 27.2, visionOS 27.2, watchOS 27.2. Processing a maliciously crafted video file may lead to unexpected app termination.",
-    "references": [
-      "https://support.apple.com/en-us/149227",
-      "https://support.apple.com/en-us/149230",
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523",
-      "https://support.apple.com/en-us/149524",
-      "https://support.apple.com/en-us/149525",
-      "https://support.apple.com/en-us/149526"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.2,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116871",
-    "published": "2026-10-27T11:17:28.813",
-    "last_modified": "2026-11-03T16:42:28.817",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Semantic MediaWiki 3.0.0 before 7.3.1 contains an uncontrolled recursion vulnerability in LegacyParser::getSubqueryDescription() that processes nested query tokens before depth limits apply. Unauthenticated attackers can submit deeply nested query elements to the action=ask API to consume substantial CPU and memory, tying up request workers.",
-    "references": [
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/commit/756492002752f937a9e115e14330b1181bd8c60c",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/commit/e642f38c708dee7da5e885b8d40be8ffc56f3e87",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-f8vw-wvm6-h2qq",
-      "https://www.vulncheck.com/advisories/semantic-mediawiki-3.0.0-before-7.3.1-uncontrolled-recursion-via-special-ask"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.5,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116872",
-    "published": "2026-10-27T11:17:28.970",
-    "last_modified": "2026-11-04T01:22:07.183",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Semantic MediaWiki from 3.0.0 before 7.3.1 contains an algorithmic complexity vulnerability in TermParser::normalize_compact_form() that allows unauthenticated attackers to cause quadratic CPU consumption. Attackers can submit long search terms with many distinct in:(...) or has:(...) expressions to Special:Search to exhaust PHP search workers when the extended search engine is enabled.",
-    "references": [
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/commit/c2bf1699dec4016e21ce52613152bda799ce87d4",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-j2r2-7qpg-p675",
-      "https://www.vulncheck.com/advisories/semantic-mediawiki-3.0.0-before-7.3.1-denial-of-service-via-special-search-compact-filters",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-j2r2-7qpg-p675"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.2,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-104189",
-    "published": "2026-10-27T16:17:28.640",
-    "last_modified": "2026-11-02T20:17:26.480",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The 3D Viewer for Nextcloud is a comprehensive 3D model viewer application for Nextcloud that supports multiple 3D file formats. In versions 1.7.9 through 3.3.1, the app's public file endpoint performed no share authorization. Anyone who knows a share token could read the shared file's contents even when the link share was protected by a password. `PublicFileController` extended `OCP\\AppFramework\\Controller` and marked its routes `#[PublicPage]`. Nextcloud only enforces share passwords through `PublicShareMiddleware`, which returns early for any controller that is not an `OCP\\AppFramework\\PublicShareController` instance — so no password, expiry, or share-type check ran for these routes. `ShareFileService::loadLinkShare()` compounded this by treating any token that `getShareByToken()` matched as authorised. A share token is the part of the URL that people paste into chats, emails, and tickets. Password protection exists precisely for the case where holding the token should not by itself grant access, and that guarantee did not hold. Requests to `GET /ocs/v2.php/apps/threedviewer/public/file/{token}/{fileId}` returned `200` with the full file body for password-protected shares, with no password and no session. Nextcloud's own share page correctly redirected such requests to the password prompt. Scope is limited to files in the formats this app handles (STL, GLB/glTF, OBJ, STEP, IFC, and the other supported 3D types). Non-3D files in the same share are unaffected. Expired shares returned `500` rather than leaking contents. This issue is fixed in 3.3.2. `PublicFileController` now extends `PublicShareController` and implements `isValidToken()`, `isPasswordProtected()`, and `getPasswordHash()`, delegating password and token validation to the framework and gaining brute-force throttling. `ShareFileService::findValidLinkShare()` additionally rejects share types other than link and email, rejects expired shares, and treats a `ShareNotFound` from the share manager as \"no share\" instead of letting it surface as a 500. As a workaround, disable the 3D Viewer app (`occ app:disable threedviewer`), or avoid relying on passwords to protect link shares that contain 3D model files, until you can upgrade.",
-    "references": [
-      "https://github.com/maz1987in/3Dviewer-Nextcloud/commit/1b0ca86ff9a96b4e045cb379bc8b8c2fe05f2fae",
-      "https://github.com/maz1987in/3Dviewer-Nextcloud/commit/2cfef0326afc56112b948b3fdf7e5c873fab4104",
-      "https://github.com/maz1987in/3Dviewer-Nextcloud/releases/tag/v3.3.2",
-      "https://github.com/maz1987in/3Dviewer-Nextcloud/security/advisories/GHSA-gjh8-x4wm-3cfj"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.0,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-57195",
-    "published": "2026-10-27T21:18:06.633",
-    "last_modified": "2026-11-02T20:17:45.970",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Asterisk is an open source private branch exchange and telephony toolkit. Prior to Asterisk 20.20.1, 21.12.3, 22.10.1, 23.4.1 and Certified Asterisk 20.7-cert11, 22.8-cert3, a NULL pointer dereference in the `Asterisk Manager Interface (AMI)` may allow an unauthenticated attacker to crash Asterisk when `Digest Authentication` is used via `HTTP`. The Asterisk `HTTP` web server, AMI, and AMI access via `HTTP` must all be enabled; each is disabled by default. The attacker must be able to connect to the `HTTP` server, which binds only to `127.0.0.1` by default even when enabled. This issue is fixed in Asterisk 20.20.1, 21.12.3, 22.10.1, 23.4.1 and Certified Asterisk 20.7-cert11, 22.8-cert3.",
-    "references": [
-      "https://github.com/asterisk/asterisk/commit/10c5b2efcacab03bf04a229f81cc24e76fe42c41",
-      "https://github.com/asterisk/asterisk/commit/362ef847e7e057b7626e476ddcfe7328ea314db4",
-      "https://github.com/asterisk/asterisk/commit/5d5d8d8ef7f16774820b1889ae73d8d2ab14af45",
-      "https://github.com/asterisk/asterisk/commit/87a1f43e4c465b885163665aa89172ed0f392663",
-      "https://github.com/asterisk/asterisk/commit/a1fcfdf9b91ed58cc8fb9da8d135da60bae7345d",
-      "https://github.com/asterisk/asterisk/commit/abba42c58fee2226a709583afdbeec75cf1dde8b",
-      "https://github.com/asterisk/asterisk/commit/fff89162cdd702e8a143701f138edd8dceab154f",
-      "https://github.com/asterisk/asterisk/releases/tag/20.20.1",
-      "https://github.com/asterisk/asterisk/releases/tag/21.12.3",
-      "https://github.com/asterisk/asterisk/releases/tag/22.10.1",
-      "https://github.com/asterisk/asterisk/releases/tag/23.4.1",
-      "https://github.com/asterisk/asterisk/releases/tag/certified-20.7-cert11",
-      "https://github.com/asterisk/asterisk/releases/tag/certified-22.8-cert3",
-      "https://github.com/asterisk/asterisk/security/advisories/GHSA-3rhj-hhw7-m6fw",
-      "https://github.com/asterisk/asterisk/tree/24.0.0-pre1"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 47.4,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-62765",
-    "published": "2026-10-27T22:17:29.267",
-    "last_modified": "2026-11-03T18:09:36.307",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Access of resource using incompatible type ('type confusion') in Microsoft Edge (Chromium-based) allows an unauthorized attacker to execute code over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-62765"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 37.2,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2019-1543",
     "published": "2019-03-06T21:29:00.247",
     "last_modified": "2026-11-02T18:18:26.603",
@@ -26250,7 +25903,7 @@
   {
     "cve_id": "CVE-2026-42784",
     "published": "2026-09-16T17:17:18.380",
-    "last_modified": "2026-11-03T12:17:30.273",
+    "last_modified": "2026-11-04T06:17:04.870",
     "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
@@ -26264,6 +25917,7 @@
       "https://access.redhat.com/errata/RHSA-2026:76735",
       "https://access.redhat.com/errata/RHSA-2026:76737",
       "https://access.redhat.com/errata/RHSA-2026:79357",
+      "https://access.redhat.com/errata/RHSA-2026:94791",
       "https://access.redhat.com/security/cve/CVE-2026-42784",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2464122"
     ],
@@ -26271,6 +25925,28 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 24.3,
+    "tags": [],
+    "intel_score": 47.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-16460",
+    "published": "2026-10-19T07:16:31.253",
+    "last_modified": "2026-11-04T13:17:30.237",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in bootc and ostree. Already-staged deployments are finalized without revalidating the deployment's container image against the current containers signature policy. Unsigned OS content staged under a prior permissive policy can remain bootable after policy is hardened to reject unsigned images, leading to full host compromise on reboot.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-16460",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2503167"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 0.8,
     "tags": [],
     "intel_score": 47.0,
     "reasons": [
@@ -26655,51 +26331,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-116873",
-    "published": "2026-10-27T11:17:29.120",
-    "last_modified": "2026-11-04T01:20:16.450",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Semantic MediaWiki from 7.3.0 before 7.3.1 contains a missing authorization vulnerability in the smwtask API module that allows unauthenticated attackers to run queued jobs and force store updates. Attackers can use the public anonymous CSRF token with run-joblist to execute arbitrary job types in unbounded counts, or invoke update on sysop-protected pages, leaking page titles and exhausting resources.",
-    "references": [
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-rjqv-6r83-pg8v",
-      "https://www.vulncheck.com/advisories/semantic-mediawiki-7.3.0-missing-authorization-via-smwtask-api-run-joblist-and-update",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-rjqv-6r83-pg8v"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.8,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116890",
-    "published": "2026-10-27T11:17:31.533",
-    "last_modified": "2026-11-03T16:23:30.600",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Semantic MediaWiki from 3.0.0 before 7.3.0 contains a missing authorization vulnerability in the api.php smwtask module that allows unauthenticated attackers to run admin-only maintenance tasks. Attackers can use the public anonymous CSRF token to read internal store statistics, enqueue jobs like smw.entityIdDisposer, and execute queued jobs, degrading performance and altering semantic data.",
-    "references": [
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-jr78-w6w5-m8f8",
-      "https://www.vulncheck.com/advisories/semantic-mediawiki-3.0.0-before-7.3.0-missing-authorization-via-smwtask-api"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.8,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-40961",
     "published": "2026-06-01T09:16:18.010",
     "last_modified": "2026-11-03T07:19:55.147",
@@ -26866,6 +26497,28 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 29.1,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-10658",
+    "published": "2026-06-23T01:16:26.867",
+    "last_modified": "2026-11-04T05:18:24.410",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "bt_iso_recv() in subsys/bluetooth/host/iso.c pulled the ISO SDU header (4 bytes) or, when the timestamp flag is set, the timestamped SDU header (8 bytes) from the inbound HCI ISO Data buffer via net_buf_pull_mem() without first checking buf->len. The upstream hci_iso() handler enforces buf->len == the controller-declared ISO Data_Load length, so a malicious or buggy controller / adjacent BLE peer on an established CIS/BIS can present a first-fragment (BT_ISO_START) or single (BT_ISO_SINGLE) PDU shorter than the SDU header. Because net_buf_simple_pull_mem only guards length with __ASSERT_NO_MSG (compiled out when CONFIG_ASSERT is disabled, the production default), the pull underflows buf->len (uint16_t, e.g. 0 - 8 = 0xFFF8) and advances buf->data past valid data: the subsequent reads of hdr->slen and hdr->sn are out-of-bounds reads of adjacent pool memory. For the multi-fragment (START) case the corrupted buffer is retained as iso->rx, and a following CONT/END fragment's net_buf_tailroom() guard underflows to a near-SIZE_MAX value, defeating the bounds check and causing net_buf_add_mem() to memcpy attacker-supplied fragment data far past the RX pool buffer (out-of-bounds write). The flaw affects ISO receive builds (CONFIG_BT_ISO_RX, selected by the default-off LE Audio options BT_ISO_PERIPHERAL/BT_ISO_CENTRAL/BT_ISO_SYNC_RECEIVER) and has existed since the ISO subsystem was introduced (v2.6.0) through v4.4.0. The fix adds explicit buf->len < sizeof(ts_hdr) and buf->len < sizeof(hdr) checks that drop the buffer before pulling.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/756b16b64317defefad36fc994316cf96e418708",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-26g8-rmpf-j6cw"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.8,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -27336,7 +26989,7 @@
   {
     "cve_id": "CVE-2026-113941",
     "published": "2026-10-26T21:18:10.160",
-    "last_modified": "2026-11-02T20:39:08.773",
+    "last_modified": "2026-11-04T13:17:25.547",
     "cvss_v3": 7.1,
     "severity": "HIGH",
     "affected": [],
@@ -27441,30 +27094,6 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 8.8,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116876",
-    "published": "2026-10-27T11:17:29.543",
-    "last_modified": "2026-11-04T01:16:58.183",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Semantic MediaWiki from 2.5.0 before 7.3.1 contains an improper authorization vulnerability that allows ordinary editors to permanently protect pages by adding an Is edit protected annotation. When $smwgEditProtectionRight is enabled, EditProtectionUpdater applies indefinite edit and move restrictions without checking the author's rights, locking other editors and administrators out.",
-    "references": [
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/commit/d2a198f42184373bb8604450c46a13a2c28eafa3",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-9824-67pm-c29j",
-      "https://www.vulncheck.com/advisories/semantic-mediawiki-2.5.0-before-7.3.1-missing-authorization-via-is-edit-protected",
-      "https://github.com/SemanticMediaWiki/SemanticMediaWiki/security/advisories/GHSA-9824-67pm-c29j"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.5,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -27610,6 +27239,28 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 0.8,
+    "tags": [],
+    "intel_score": 45.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19574",
+    "published": "2026-10-09T08:16:54.940",
+    "last_modified": "2026-11-04T05:18:48.740",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The ARM64 MMU back-end allocated address space identifiers (ASIDs) for memory domains with a bare round-robin counter in arch_mem_domain_init() (arch/arm64/core/mmu.c). VM_ASID_BITS is 8, so only 255 ASIDs exist; once the counter wrapped, arch_mem_domain_init() could hand an ASID to a new domain while a still-live domain held the same one. Domain-private mappings are installed non-global (MT_NG), so the ASID is the only tag separating one domain's cached translations from another's in the TLB.\n\nThe context-switch path in z_arm64_swap_ptables() only flushes the TLB when the outgoing and incoming domains carry the same ASID, which does not cover a duplicate reached through a third domain: for domains A and C sharing an ASID and an unrelated domain B, the schedule A -> B -> C never takes the flush branch, so the ASID-tagged entries A populated remain resident while C runs. Under SMP two live domains sharing an ASID can additionally be resident on two CPUs at once, which the architecture does not allow for distinct translation-table sets.\n\nTriggering the wrap requires a CONFIG_USERSPACE application on ARM64 that creates more than 255 memory domains over its lifetime; k_mem_domain_init() and k_mem_domain_deinit() are supervisor-only APIs and are not exposed as syscalls, so an unprivileged thread cannot drive the counter directly. Once two live domains alias, however, a user-mode thread in one domain can read and write memory belonging to the other domain's partitions and thread stacks with that domain's permissions, defeating the memory-domain isolation boundary.\n\nThe fix scans the live domain_list before assigning an ASID, advances the round-robin counter past ASIDs already in use, and returns -ENOMEM when all are taken, so domain creation fails closed instead of silently aliasing.",
+    "references": [
+      "https://github.com/zephyrproject-rtos/zephyr/commit/805054b8ed89dd5441fbca36b3cd3be7e4fb4100",
+      "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-923h-8c2j-pcm5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 0.7,
     "tags": [],
     "intel_score": 45.0,
     "reasons": [
