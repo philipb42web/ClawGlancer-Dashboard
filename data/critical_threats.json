@@ -60,35 +60,37 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-32030",
-    "published": "2024-06-19T17:15:57.863",
-    "last_modified": "2026-11-03T22:17:19.060",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
+    "cve_id": "CVE-2024-4741",
+    "published": "2024-11-13T11:15:04.480",
+    "last_modified": "2026-11-06T22:17:46.797",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "Kafka UI is an Open-Source Web UI for Apache Kafka Management. Kafka UI API allows users to connect to different Kafka brokers by specifying their network address and port. As a separate feature, it also provides the ability to monitor the performance of Kafka brokers by connecting to their JMX ports. JMX is based on the RMI protocol, so it is inherently susceptible to deserialization attacks. A potential attacker can exploit this feature by connecting Kafka UI backend to its own malicious broker. This vulnerability affects the deployments where one of the following occurs: 1. dynamic.config.enabled property is set in settings. It's not enabled by default, but it's suggested to be enabled in many tutorials for Kafka UI, including its own README.md. OR  2. an attacker has access to the Kafka cluster that is being connected to Kafka UI. In this scenario the attacker can exploit this vulnerability to expand their access and execute code on Kafka UI as well. Instead of setting up a legitimate JMX port, an attacker can create an RMI listener that returns a malicious serialized object for any RMI call. In the worst case it could lead to remote code execution as Kafka UI has the required gadget chains in its classpath. This issue may lead to post-auth remote code execution. This is particularly dangerous as Kafka-UI does not have authentication enabled by default. This issue has been addressed in version 0.7.2. All users are advised to upgrade. There are no known workarounds for this vulnerability. These issues were discovered and reported by the GitHub Security lab and is also tracked as GHSL-2023-230.",
+    "summary": "Issue summary: Calling the OpenSSL API function SSL_free_buffers may cause\nmemory to be accessed that was previously freed in some situations\n\nImpact summary: A use after free can have a range of potential consequences such\nas the corruption of valid data, crashes or execution of arbitrary code.\nHowever, only applications that directly call the SSL_free_buffers function are\naffected by this issue. Applications that do not call this function are not\nvulnerable. Our investigations indicate that this function is rarely used by\napplications.\n\nThe SSL_free_buffers function is used to free the internal OpenSSL buffer used\nwhen processing an incoming record from the network. The call is only expected\nto succeed if the buffer is not currently in use. However, two scenarios have\nbeen identified where the buffer is freed even when still in use.\n\nThe first scenario occurs where a record header has been received from the\nnetwork and processed by OpenSSL, but the full record body has not yet arrived.\nIn this case calling SSL_free_buffers will succeed even though a record has only\nbeen partially processed and the buffer is still in use.\n\nThe second scenario occurs where a full record containing application data has\nbeen received and processed by OpenSSL but the application has only read part of\nthis data. Again a call to SSL_free_buffers will succeed even though the buffer\nis still in use.\n\nWhile these scenarios could occur accidentally during normal operation a\nmalicious attacker could attempt to engineer a stituation where this occurs.\nWe are not aware of this issue being actively exploited.\n\nThe FIPS modules in 3.3, 3.2, 3.1 and 3.0 are not affected by this issue.",
     "references": [
-      "https://github.com/provectus/kafka-ui/commit/83b5a60cc08501b570a0c4d0b4cdfceb1b88d6b7#diff-37e769f4709c1e78c076a5949bbcead74e969725bfd89c7c4ba6d6f229a411e6R36",
-      "https://github.com/provectus/kafka-ui/pull/4427",
-      "https://securitylab.github.com/advisories/GHSL-2023-229_GHSL-2023-230_kafka-ui/",
-      "https://github.com/provectus/kafka-ui/commit/83b5a60cc08501b570a0c4d0b4cdfceb1b88d6b7#diff-37e769f4709c1e78c076a5949bbcead74e969725bfd89c7c4ba6d6f229a411e6R36",
-      "https://github.com/provectus/kafka-ui/pull/4427",
-      "https://securitylab.github.com/advisories/GHSL-2023-229_GHSL-2023-230_kafka-ui/"
+      "https://github.com/openssl/openssl/commit/704f725b96aa373ee45ecfb23f6abfe8be8d9177",
+      "https://github.com/openssl/openssl/commit/b3f0eb0a295f58f16ba43ba99dad70d4ee5c437d",
+      "https://github.com/openssl/openssl/commit/c88c3de51020c37e8706bf7a682a162593053aac",
+      "https://github.com/openssl/openssl/commit/e5093133c35ca82874ad83697af76f4b0f7e3bd8",
+      "https://github.openssl.org/openssl/extended-releases/commit/f7a045f3143fc6da2ee66bf52d8df04829590dd4",
+      "https://www.openssl.org/news/secadv/20240528.txt",
+      "https://lists.debian.org/debian-lts-announce/2024/10/msg00033.html",
+      "https://lists.debian.org/debian-lts-announce/2024/11/msg00000.html",
+      "https://security.netapp.com/advisory/ntap-20240621-0004/"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 51.1,
-    "epss_percentile": 98.9,
+    "epss": 2.9,
+    "epss_percentile": 87.1,
     "tags": [
-      "deserialization",
+      "in_the_wild",
       "rce"
     ],
-    "intel_score": 125.5,
+    "intel_score": 124.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "deserialization+20",
-      "High EPSS exploit prob 51.1% (+25)"
+      "in_the_wild+35"
     ]
   },
   {
@@ -119,195 +121,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2015-5477",
-    "published": "2015-07-29T14:59:05.397",
-    "last_modified": "2026-11-03T22:17:06.353",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "named in ISC BIND 9.x before 9.9.7-P2 and 9.10.x before 9.10.2-P3 allows remote attackers to cause a denial of service (REQUIRE assertion failure and daemon exit) via TKEY queries.",
-    "references": [
-      "http://kb.juniper.net/InfoCenter/index?page=content&id=JSA10718",
-      "http://lists.fedoraproject.org/pipermail/package-announce/2015-August/163006.html",
-      "http://lists.fedoraproject.org/pipermail/package-announce/2015-August/163007.html",
-      "http://lists.fedoraproject.org/pipermail/package-announce/2015-August/163015.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00043.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00044.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00045.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00048.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00050.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-08/msg00001.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2016-01/msg00033.html",
-      "http://marc.info/?l=bugtraq&m=144000632319155&w=2",
-      "http://marc.info/?l=bugtraq&m=144017354030745&w=2",
-      "http://marc.info/?l=bugtraq&m=144181171013996&w=2",
-      "http://marc.info/?l=bugtraq&m=144294073801304&w=2",
-      "http://packetstormsecurity.com/files/132926/BIND-TKEY-Query-Denial-Of-Service.html",
-      "http://rhn.redhat.com/errata/RHSA-2015-1513.html",
-      "http://rhn.redhat.com/errata/RHSA-2015-1514.html",
-      "http://rhn.redhat.com/errata/RHSA-2015-1515.html",
-      "http://rhn.redhat.com/errata/RHSA-2016-0078.html",
-      "http://rhn.redhat.com/errata/RHSA-2016-0079.html",
-      "http://www.debian.org/security/2015/dsa-3319",
-      "http://www.oracle.com/technetwork/topics/security/bulletinjul2015-2511963.html",
-      "http://www.oracle.com/technetwork/topics/security/ovmbulletinjul2016-3090546.html",
-      "http://www.securityfocus.com/bid/76092",
-      "http://www.securitytracker.com/id/1033100",
-      "http://www.ubuntu.com/usn/USN-2693-1",
-      "https://h20564.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c04789415",
-      "https://h20564.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c04952480",
-      "https://h20566.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c05095918",
-      "https://kb.isc.org/article/AA-01272",
-      "https://kb.isc.org/article/AA-01305",
-      "https://kb.isc.org/article/AA-01306",
-      "https://kb.isc.org/article/AA-01307",
-      "https://kb.isc.org/article/AA-01438",
-      "https://kb.juniper.net/JSA10783",
-      "https://kc.mcafee.com/corporate/index?page=content&id=SB10126",
-      "https://security.gentoo.org/glsa/201510-01",
-      "https://security.netapp.com/advisory/ntap-20160114-0001/",
-      "https://support.apple.com/kb/HT205032",
-      "https://www.exploit-db.com/exploits/37721/",
-      "https://www.exploit-db.com/exploits/37723/",
-      "http://kb.juniper.net/InfoCenter/index?page=content&id=JSA10718",
-      "http://lists.fedoraproject.org/pipermail/package-announce/2015-August/163006.html",
-      "http://lists.fedoraproject.org/pipermail/package-announce/2015-August/163007.html",
-      "http://lists.fedoraproject.org/pipermail/package-announce/2015-August/163015.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00043.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00044.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00045.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00048.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00050.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2015-08/msg00001.html",
-      "http://lists.opensuse.org/opensuse-security-announce/2016-01/msg00033.html",
-      "http://marc.info/?l=bugtraq&m=144000632319155&w=2",
-      "http://marc.info/?l=bugtraq&m=144017354030745&w=2",
-      "http://marc.info/?l=bugtraq&m=144181171013996&w=2",
-      "http://marc.info/?l=bugtraq&m=144294073801304&w=2",
-      "http://packetstormsecurity.com/files/132926/BIND-TKEY-Query-Denial-Of-Service.html",
-      "http://rhn.redhat.com/errata/RHSA-2015-1513.html",
-      "http://rhn.redhat.com/errata/RHSA-2015-1514.html",
-      "http://rhn.redhat.com/errata/RHSA-2015-1515.html",
-      "http://rhn.redhat.com/errata/RHSA-2016-0078.html",
-      "http://rhn.redhat.com/errata/RHSA-2016-0079.html",
-      "http://www.debian.org/security/2015/dsa-3319",
-      "http://www.oracle.com/technetwork/topics/security/bulletinjul2015-2511963.html",
-      "http://www.oracle.com/technetwork/topics/security/ovmbulletinjul2016-3090546.html",
-      "http://www.securityfocus.com/bid/76092",
-      "http://www.securitytracker.com/id/1033100",
-      "http://www.ubuntu.com/usn/USN-2693-1",
-      "https://h20564.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c04789415",
-      "https://h20564.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c04952480",
-      "https://h20566.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c05095918",
-      "https://kb.isc.org/article/AA-01272",
-      "https://kb.isc.org/article/AA-01305",
-      "https://kb.isc.org/article/AA-01306",
-      "https://kb.isc.org/article/AA-01307",
-      "https://kb.isc.org/article/AA-01438",
-      "https://kb.juniper.net/JSA10783",
-      "https://kc.mcafee.com/corporate/index?page=content&id=SB10126",
-      "https://security.gentoo.org/glsa/201510-01",
-      "https://security.netapp.com/advisory/ntap-20160114-0001/",
-      "https://support.apple.com/kb/HT205032",
-      "https://www.exploit-db.com/exploits/37721/",
-      "https://www.exploit-db.com/exploits/37723/",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2015-5477"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "epss": 99.6,
-    "epss_percentile": 99.9,
-    "tags": [
-      "cisa_kev",
-      "dos",
-      "in_the_wild"
-    ],
-    "intel_score": 115.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3",
-      "CISA KEV active exploitation (+40)",
-      "High EPSS exploit prob 99.6% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-34718",
-    "published": "2022-09-13T19:15:10.053",
-    "last_modified": "2026-11-03T22:17:10.513",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Windows TCP/IP Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-34718",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-34718"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 54.7,
-    "epss_percentile": 99.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "High EPSS exploit prob 54.7% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-53677",
-    "published": "2024-12-11T16:15:14.593",
-    "last_modified": "2026-11-03T22:17:27.083",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "File upload logic in Apache Struts is flawed. An attacker can manipulate file upload params to enable paths traversal and under some circumstances this can lead to uploading a malicious file which can be used to perform Remote Code Execution.\n\nThis issue affects Apache Struts: from 2.0.0 before 6.4.0.\n\nUsers are recommended to upgrade to version 6.4.0 at least and migrate to the new  file upload mechanism https://struts.apache.org/core-developers/file-upload . If you are not using an old file upload logic based on FileuploadInterceptor your application is safe.\n\nYou can find more details in  https://cwiki.apache.org/confluence/display/WW/S2-067",
-    "references": [
-      "https://cwiki.apache.org/confluence/display/WW/S2-067",
-      "https://security.netapp.com/advisory/ntap-20250103-0005/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 72.4,
-    "epss_percentile": 99.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "High EPSS exploit prob 72.4% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-49112",
-    "published": "2024-12-12T02:04:37.453",
-    "last_modified": "2026-11-03T22:17:25.303",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Windows Lightweight Directory Access Protocol (LDAP) Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49112"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 72.2,
-    "epss_percentile": 99.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "High EPSS exploit prob 72.2% (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-63408",
     "published": "2025-11-18T16:15:45.323",
     "last_modified": "2026-11-05T14:10:00.273",
@@ -322,7 +135,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 37.1,
+    "epss_percentile": 37.2,
     "tags": [
       "path_traversal",
       "rce",
@@ -435,7 +248,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 51.5,
+    "epss_percentile": 51.6,
     "tags": [
       "deserialization",
       "rce"
@@ -518,7 +331,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.2,
-    "epss_percentile": 68.5,
+    "epss_percentile": 68.6,
     "tags": [
       "command_injection",
       "dos",
@@ -546,7 +359,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.2,
-    "epss_percentile": 68.5,
+    "epss_percentile": 68.6,
     "tags": [
       "command_injection",
       "dos",
@@ -776,7 +589,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 50.4,
+    "epss_percentile": 50.5,
     "tags": [
       "file_write",
       "rce"
@@ -898,33 +711,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-23466",
-    "published": "2024-07-17T15:15:11.270",
-    "last_modified": "2026-11-03T22:17:14.823",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SolarWinds Access Rights Manager (ARM) is susceptible to a Directory Traversal Remote Code Execution vulnerability. If exploited, this vulnerability allows an unauthenticated user to perform the actions with SYSTEM privileges.  ",
-    "references": [
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm",
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.5,
-    "epss_percentile": 85.0,
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 103.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-23467",
     "published": "2024-07-17T15:15:11.500",
     "last_modified": "2026-11-04T00:17:17.013",
@@ -975,84 +761,6 @@
       "recently modified (last 48h)",
       "command_injection+18",
       "High EPSS exploit prob 97.6% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-29972",
-    "published": "2024-06-04T02:15:47.960",
-    "last_modified": "2026-11-03T22:17:17.650",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "** UNSUPPORTED WHEN ASSIGNED **\nThe command injection vulnerability in the CGI program \"remote_help-cgi\" in Zyxel NAS326 firmware versions before V5.21(AAZF.17)C0 and NAS542 firmware versions before V5.21(ABAG.14)C0 could allow an unauthenticated attacker to execute some operating system (OS) commands by sending a crafted HTTP POST request.",
-    "references": [
-      "https://outpost24.com/blog/zyxel-nas-critical-vulnerabilities/",
-      "https://www.zyxel.com/global/en/support/security-advisories/zyxel-security-advisory-for-multiple-vulnerabilities-in-nas-products-06-04-2024",
-      "https://outpost24.com/blog/zyxel-nas-critical-vulnerabilities/",
-      "https://www.zyxel.com/global/en/support/security-advisories/zyxel-security-advisory-for-multiple-vulnerabilities-in-nas-products-06-04-2024"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 90.3,
-    "epss_percentile": 99.8,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "High EPSS exploit prob 90.3% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-35286",
-    "published": "2024-10-21T21:15:05.367",
-    "last_modified": "2026-11-03T22:17:19.387",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A vulnerability in NuPoint Messenger (NPM) of Mitel MiCollab through 9.8.0.33 allows an unauthenticated attacker to conduct a SQL injection attack due to insufficient sanitization of user input. A successful exploit could allow an attacker to access sensitive information and execute arbitrary database and management operations.",
-    "references": [
-      "https://www.mitel.com/support/security-advisories/mitel-product-security-advisory-24-0014"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 65.7,
-    "epss_percentile": 99.3,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "High EPSS exploit prob 65.7% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-0107",
-    "published": "2025-01-11T03:15:22.637",
-    "last_modified": "2026-11-03T22:17:30.753",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An OS command injection vulnerability in Palo Alto Networks Expedition enables an unauthenticated attacker to run arbitrary OS commands as the www-data user in Expedition, which results in the disclosure of usernames, cleartext passwords, device configurations, and device API keys for firewalls running PAN-OS software.",
-    "references": [
-      "https://security.paloaltonetworks.com/PAN-SA-2025-0001"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 78.4,
-    "epss_percentile": 99.6,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "High EPSS exploit prob 78.4% (+25)"
     ]
   },
   {
@@ -1150,7 +858,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 60.4,
+    "epss_percentile": 60.5,
     "tags": [
       "command_injection",
       "dos",
@@ -1235,7 +943,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 28.2,
+    "epss_percentile": 28.1,
     "tags": [
       "deserialization",
       "rce"
@@ -1275,90 +983,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-20017",
-    "published": "2024-03-04T03:15:06.970",
-    "last_modified": "2026-11-03T22:17:13.007",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In wlan service, there is a possible out of bounds write due to improper input validation. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation Patch ID: WCNCR00350938; Issue ID: MSV-1132.",
-    "references": [
-      "https://corp.mediatek.com/product-security-bulletin/March-2024",
-      "https://blog.coffinsec.com/0day/2024/08/30/exploiting-CVE-2024-20017-four-different-ways.html",
-      "https://blog.sonicwall.com/en-us/2024/09/critical-exploit-in-mediatek-wi-fi-chipsets-zero-click-vulnerability-cve-2024-20017-threatens-routers-and-smartphones/",
-      "https://corp.mediatek.com/product-security-bulletin/March-2024",
-      "https://news.ycombinator.com/item?id=41605680"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 46.6,
-    "epss_percentile": 98.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Moderate EPSS prob 46.6% (+10)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-50379",
-    "published": "2024-12-17T13:15:18.810",
-    "last_modified": "2026-11-03T22:17:26.637",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Time-of-check Time-of-use (TOCTOU) Race Condition vulnerability during JSP compilation in Apache Tomcat permits an RCE on case insensitive file systems when the default servlet is enabled for write (non-default configuration).\n\nThis issue affects Apache Tomcat: from 11.0.0-M1 through 11.0.1, from 10.1.0-M1 through 10.1.33, from 9.0.0.M1 through 9.0.97.\n\nThe following versions were EOL at the time the CVE was created but are \nknown to be affected: 8.5.0 though 8.5.100. Other, older, EOL versions may also be affected.\n\nUsers are recommended to upgrade to version 11.0.2, 10.1.34 or 9.0.98, which fixes the issue.",
-    "references": [
-      "https://lists.apache.org/thread/y6lj6q1xnp822g6ro70tn19sgtjmr80r",
-      "http://www.openwall.com/lists/oss-security/2024/12/17/4",
-      "http://www.openwall.com/lists/oss-security/2024/12/18/2",
-      "https://lists.debian.org/debian-lts-announce/2025/01/msg00009.html",
-      "https://security.netapp.com/advisory/ntap-20250103-0003/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 31.8,
-    "epss_percentile": 98.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Moderate EPSS prob 31.8% (+10)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-23469",
-    "published": "2024-07-17T15:15:11.947",
-    "last_modified": "2026-11-03T22:17:15.167",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SolarWinds Access Rights Manager (ARM) is susceptible to a Remote Code Execution vulnerability. If exploited, this vulnerability allows an unauthenticated user to perform the actions with SYSTEM privileges. ",
-    "references": [
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm",
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 17.9,
-    "epss_percentile": 97.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 98.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Moderate EPSS prob 17.9% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-56683",
     "published": "2025-10-09T15:16:07.463",
     "last_modified": "2026-11-05T22:10:00.203",
@@ -1389,37 +1013,198 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-36104",
-    "published": "2024-06-04T08:15:10.733",
-    "last_modified": "2026-11-03T22:17:19.597",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2023-39417",
+    "published": "2023-08-11T13:15:09.870",
+    "last_modified": "2026-11-06T21:17:01.350",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability in Apache OFBiz. This issue affects Apache OFBiz: before 18.12.14.\n\nUsers are recommended to upgrade to version 18.12.14, which fixes the issue.",
+    "summary": "IN THE EXTENSION SCRIPT, a SQL Injection vulnerability was found in PostgreSQL if it uses @extowner@, @extschema@, or @extschema:...@ inside a quoting construct (dollar quoting, '', or \"\"). If an administrator has installed files of a vulnerable, trusted, non-bundled extension, an attacker with database-level CREATE privilege can execute arbitrary code as the bootstrap superuser.",
     "references": [
-      "http://www.openwall.com/lists/oss-security/2024/06/03/1",
-      "https://issues.apache.org/jira/browse/OFBIZ-13092",
-      "https://lists.apache.org/thread/sv0xr8b1j7mmh5p37yldy9vmnzbodz2o",
-      "https://ofbiz.apache.org/download.html",
-      "https://ofbiz.apache.org/security.html",
-      "http://www.openwall.com/lists/oss-security/2024/06/03/1",
-      "https://issues.apache.org/jira/browse/OFBIZ-13092",
-      "https://lists.apache.org/thread/sv0xr8b1j7mmh5p37yldy9vmnzbodz2o",
-      "https://ofbiz.apache.org/download.html",
-      "https://ofbiz.apache.org/security.html"
+      "https://access.redhat.com/errata/RHSA-2023:7545",
+      "https://access.redhat.com/errata/RHSA-2023:7579",
+      "https://access.redhat.com/errata/RHSA-2023:7580",
+      "https://access.redhat.com/errata/RHSA-2023:7581",
+      "https://access.redhat.com/errata/RHSA-2023:7616",
+      "https://access.redhat.com/errata/RHSA-2023:7656",
+      "https://access.redhat.com/errata/RHSA-2023:7666",
+      "https://access.redhat.com/errata/RHSA-2023:7667",
+      "https://access.redhat.com/errata/RHSA-2023:7694",
+      "https://access.redhat.com/errata/RHSA-2023:7695",
+      "https://access.redhat.com/errata/RHSA-2023:7714",
+      "https://access.redhat.com/errata/RHSA-2023:7770",
+      "https://access.redhat.com/errata/RHSA-2023:7772",
+      "https://access.redhat.com/errata/RHSA-2023:7784",
+      "https://access.redhat.com/errata/RHSA-2023:7785",
+      "https://access.redhat.com/errata/RHSA-2023:7883",
+      "https://access.redhat.com/errata/RHSA-2023:7884",
+      "https://access.redhat.com/errata/RHSA-2023:7885",
+      "https://access.redhat.com/errata/RHSA-2024:0304",
+      "https://access.redhat.com/errata/RHSA-2024:0332",
+      "https://access.redhat.com/errata/RHSA-2024:0337",
+      "https://access.redhat.com/security/cve/CVE-2023-39417",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2228111",
+      "https://www.postgresql.org/support/security/CVE-2023-39417",
+      "https://access.redhat.com/errata/RHSA-2023:7545",
+      "https://access.redhat.com/errata/RHSA-2023:7579",
+      "https://access.redhat.com/errata/RHSA-2023:7580",
+      "https://access.redhat.com/errata/RHSA-2023:7581",
+      "https://access.redhat.com/errata/RHSA-2023:7616",
+      "https://access.redhat.com/errata/RHSA-2023:7656",
+      "https://access.redhat.com/errata/RHSA-2023:7666",
+      "https://access.redhat.com/errata/RHSA-2023:7667",
+      "https://access.redhat.com/errata/RHSA-2023:7694",
+      "https://access.redhat.com/errata/RHSA-2023:7695",
+      "https://access.redhat.com/errata/RHSA-2023:7714",
+      "https://access.redhat.com/errata/RHSA-2023:7770",
+      "https://access.redhat.com/errata/RHSA-2023:7772",
+      "https://access.redhat.com/errata/RHSA-2023:7784",
+      "https://access.redhat.com/errata/RHSA-2023:7785",
+      "https://access.redhat.com/errata/RHSA-2023:7883",
+      "https://access.redhat.com/errata/RHSA-2023:7884",
+      "https://access.redhat.com/errata/RHSA-2023:7885",
+      "https://access.redhat.com/errata/RHSA-2024:0304",
+      "https://access.redhat.com/errata/RHSA-2024:0332",
+      "https://access.redhat.com/errata/RHSA-2024:0337",
+      "https://access.redhat.com/security/cve/CVE-2023-39417",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2228111",
+      "https://lists.debian.org/debian-lts-announce/2023/10/msg00003.html",
+      "https://lists.debian.org/debian-lts-announce/2026/09/msg00039.html",
+      "https://security.netapp.com/advisory/ntap-20230915-0002/",
+      "https://www.debian.org/security/2023/dsa-5553",
+      "https://www.debian.org/security/2023/dsa-5554",
+      "https://www.postgresql.org/support/security/CVE-2023-39417"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 87.9,
-    "epss_percentile": 99.8,
+    "epss": 1.7,
+    "epss_percentile": 77.0,
     "tags": [
-      "path_traversal"
+      "rce",
+      "sqli"
     ],
     "intel_score": 95.5,
     "reasons": [
       "recently modified (last 48h)",
-      "path_traversal+15",
-      "High EPSS exploit prob 87.9% (+25)"
+      "rce+30",
+      "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-6387",
+    "published": "2024-07-01T13:15:06.467",
+    "last_modified": "2026-11-06T21:17:02.587",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security regression (CVE-2006-5051) was discovered in OpenSSH's server (sshd). There is a race condition which can lead sshd to handle some signals in an unsafe manner. An unauthenticated, remote attacker may be able to trigger it by failing to authenticate within a set time period.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2024:4312",
+      "https://access.redhat.com/errata/RHSA-2024:4340",
+      "https://access.redhat.com/errata/RHSA-2024:4389",
+      "https://access.redhat.com/errata/RHSA-2024:4469",
+      "https://access.redhat.com/errata/RHSA-2024:4474",
+      "https://access.redhat.com/errata/RHSA-2024:4479",
+      "https://access.redhat.com/errata/RHSA-2024:4484",
+      "https://access.redhat.com/security/cve/CVE-2024-6387",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2294604",
+      "https://santandersecurityresearch.github.io/blog/sshing_the_masses.html",
+      "https://www.openssh.com/txt/release-9.8",
+      "https://www.qualys.com/2024/07/01/cve-2024-6387/regresshion.txt",
+      "http://seclists.org/fulldisclosure/2024/Jul/18",
+      "http://seclists.org/fulldisclosure/2024/Jul/19",
+      "http://seclists.org/fulldisclosure/2024/Jul/20",
+      "http://www.openwall.com/lists/oss-security/2024/07/01/12",
+      "http://www.openwall.com/lists/oss-security/2024/07/01/13",
+      "http://www.openwall.com/lists/oss-security/2024/07/02/1",
+      "http://www.openwall.com/lists/oss-security/2024/07/03/1",
+      "http://www.openwall.com/lists/oss-security/2024/07/03/11",
+      "http://www.openwall.com/lists/oss-security/2024/07/03/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/03/3",
+      "http://www.openwall.com/lists/oss-security/2024/07/03/4",
+      "http://www.openwall.com/lists/oss-security/2024/07/03/5",
+      "http://www.openwall.com/lists/oss-security/2024/07/04/1",
+      "http://www.openwall.com/lists/oss-security/2024/07/04/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/08/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/08/3",
+      "http://www.openwall.com/lists/oss-security/2024/07/09/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/09/5",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/1",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/3",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/4",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/6",
+      "http://www.openwall.com/lists/oss-security/2024/07/11/1",
+      "http://www.openwall.com/lists/oss-security/2024/07/11/3",
+      "http://www.openwall.com/lists/oss-security/2024/07/23/4",
+      "http://www.openwall.com/lists/oss-security/2024/07/23/6",
+      "http://www.openwall.com/lists/oss-security/2024/07/28/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/28/3",
+      "https://access.redhat.com/errata/RHSA-2024:4312",
+      "https://access.redhat.com/errata/RHSA-2024:4340",
+      "https://access.redhat.com/errata/RHSA-2024:4389",
+      "https://access.redhat.com/errata/RHSA-2024:4469",
+      "https://access.redhat.com/errata/RHSA-2024:4474",
+      "https://access.redhat.com/errata/RHSA-2024:4479",
+      "https://access.redhat.com/errata/RHSA-2024:4484",
+      "https://access.redhat.com/security/cve/CVE-2024-6387",
+      "https://archlinux.org/news/the-sshd-service-needs-to-be-restarted-after-upgrading-to-openssh-98p1/",
+      "https://arstechnica.com/security/2024/07/regresshion-vulnerability-in-openssh-gives-attackers-root-on-linux/",
+      "https://blog.qualys.com/vulnerabilities-threat-research/2024/07/01/regresshion-remote-unauthenticated-code-execution-vulnerability-in-openssh-server",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2294604",
+      "https://explore.alas.aws.amazon.com/CVE-2024-6387.html",
+      "https://forum.vmssoftware.com/viewtopic.php?f=8&t=9132",
+      "https://ftp.netbsd.org/pub/NetBSD/security/advisories/NetBSD-SA2024-002.txt.asc",
+      "https://github.com/AlmaLinux/updates/issues/629",
+      "https://github.com/Azure/AKS/issues/4379",
+      "https://github.com/PowerShell/Win32-OpenSSH/discussions/2248",
+      "https://github.com/PowerShell/Win32-OpenSSH/issues/2249",
+      "https://github.com/microsoft/azurelinux/issues/9555",
+      "https://github.com/openela-main/openssh/commit/e1f438970e5a337a17070a637c1b9e19697cad09",
+      "https://github.com/oracle/oracle-linux/issues/149",
+      "https://github.com/rapier1/hpn-ssh/issues/87",
+      "https://github.com/zgzhang/cve-2024-6387-poc",
+      "https://lists.almalinux.org/archives/list/announce@lists.almalinux.org/thread/23BF5BMGFVEVUI2WNVAGMLKT557EU7VY/",
+      "https://lists.mindrot.org/pipermail/openssh-unix-announce/2024-July/000158.html",
+      "https://lists.mindrot.org/pipermail/openssh-unix-dev/2024-July/041431.html",
+      "https://news.ycombinator.com/item?id=40843778",
+      "https://packetstorm.news/files/id/190587/",
+      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2024-0010",
+      "https://santandersecurityresearch.github.io/blog/sshing_the_masses.html",
+      "https://security-tracker.debian.org/tracker/CVE-2024-6387",
+      "https://security.netapp.com/advisory/ntap-20240701-0001/",
+      "https://sig-security.rocky.page/issues/CVE-2024-6387/",
+      "https://stackdiary.com/openssh-race-condition-in-sshd-allows-remote-code-execution/",
+      "https://support.apple.com/kb/HT214118",
+      "https://support.apple.com/kb/HT214119",
+      "https://support.apple.com/kb/HT214120",
+      "https://ubuntu.com/security/CVE-2024-6387",
+      "https://ubuntu.com/security/notices/USN-6859-1",
+      "https://www.akamai.com/blog/security-research/2024-openssh-vulnerability-regression-what-to-know-and-do",
+      "https://www.arista.com/en/support/advisories-notices/security-advisory/19904-security-advisory-0100",
+      "https://www.exploit-db.com/exploits/52269",
+      "https://www.freebsd.org/security/advisories/FreeBSD-SA-24:04.openssh.asc",
+      "https://www.openssh.com/txt/release-9.8",
+      "https://www.qualys.com/2024/07/01/cve-2024-6387/regresshion.txt",
+      "https://www.splunk.com/en_us/blog/security/cve-2024-6387-regresshion-vulnerability.html",
+      "https://www.suse.com/security/cve/CVE-2024-6387.html",
+      "https://www.theregister.com/2024/07/01/regresshion_openssh/",
+      "https://www.vicarius.io/vsociety/posts/regresshion-an-openssh-regression-error-cve-2024-6387",
+      "https://cert-portal.siemens.com/productcert/html/ssa-082556.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-446545.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 99.5,
+    "epss_percentile": 99.9,
+    "tags": [
+      "poc"
+    ],
+    "intel_score": 95.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "poc+20",
+      "High EPSS exploit prob 99.5% (+25)"
     ]
   },
   {
@@ -1450,36 +1235,6 @@
       "recently modified (last 48h)",
       "command_injection+18",
       "High EPSS exploit prob 97.5% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-1094",
-    "published": "2025-02-13T13:15:09.130",
-    "last_modified": "2026-11-03T22:17:33.650",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper neutralization of quoting syntax in PostgreSQL libpq functions PQescapeLiteral(), PQescapeIdentifier(), PQescapeString(), and PQescapeStringConn() allows a database input provider to achieve SQL injection in certain usage patterns.  Specifically, SQL injection requires the application to use the function result to construct input to psql, the PostgreSQL interactive terminal.  Similarly, improper neutralization of quoting syntax in PostgreSQL command line utility programs allows a source of command line arguments to achieve SQL injection when client_encoding is BIG5 and server_encoding is one of EUC_TW or MULE_INTERNAL.  Versions before PostgreSQL 17.3, 16.7, 15.11, 14.16, and 13.19 are affected.",
-    "references": [
-      "https://www.postgresql.org/support/security/CVE-2025-1094/",
-      "http://www.openwall.com/lists/oss-security/2025/02/16/3",
-      "http://www.openwall.com/lists/oss-security/2025/02/20/1",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00015.html",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00024.html",
-      "https://security.netapp.com/advisory/ntap-20250221-0010/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 90.0,
-    "epss_percentile": 99.8,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 93.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "High EPSS exploit prob 90.0% (+25)"
     ]
   },
   {
@@ -1582,7 +1337,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 41.3,
+    "epss_percentile": 41.4,
     "tags": [
       "file_write",
       "rce"
@@ -1592,34 +1347,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-38472",
-    "published": "2024-07-01T19:15:04.563",
-    "last_modified": "2026-11-03T22:17:21.750",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SSRF in Apache HTTP Server on Windows allows to potentially leak NTLM hashes to a malicious server via SSRF and malicious requests or content \nUsers are recommended to upgrade to version 2.4.60 which fixes this issue.  Note: Existing configurations that access UNC paths will have to configure new directive \"UNCList\" to allow access during request processing.",
-    "references": [
-      "https://httpd.apache.org/security/vulnerabilities_24.html",
-      "http://www.openwall.com/lists/oss-security/2024/07/01/5",
-      "https://httpd.apache.org/security/vulnerabilities_24.html",
-      "https://security.netapp.com/advisory/ntap-20240712-0001/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 69.5,
-    "epss_percentile": 99.4,
-    "tags": [
-      "ssrf"
-    ],
-    "intel_score": 90.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "ssrf+18",
-      "High EPSS exploit prob 69.5% (+25)"
     ]
   },
   {
@@ -1648,143 +1375,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2022-1292",
-    "published": "2022-05-03T16:15:18.823",
-    "last_modified": "2026-11-03T22:17:08.590",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The c_rehash script does not properly sanitise shell metacharacters to prevent command injection. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.3 (Affected 3.0.0,3.0.1,3.0.2). Fixed in OpenSSL 1.1.1o (Affected 1.1.1-1.1.1n). Fixed in OpenSSL 1.0.2ze (Affected 1.0.2-1.0.2zd).",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/pdf/ssa-953464.pdf",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=1ad73b4d27bd8c1b369a3cd453681d3a4f1bb9b2",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=548d3f280a6e737673f5b61fce24bb100108dfeb",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=e5fd1728ef4c7a5bf7c7a7163ca60370460a6e23",
-      "https://lists.debian.org/debian-lts-announce/2022/05/msg00019.html",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VX4KWHPMKYJL6ZLW4M5IU7E5UV5ZWJQU/",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZNU5M7BXMML26G3GPYKFGQYPQDRSNKDD/",
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2022-0011",
-      "https://security.gentoo.org/glsa/202210-02",
-      "https://security.netapp.com/advisory/ntap-20220602-0009/",
-      "https://security.netapp.com/advisory/ntap-20220729-0004/",
-      "https://www.debian.org/security/2022/dsa-5139",
-      "https://www.openssl.org/news/secadv/20220503.txt",
-      "https://www.oracle.com/security-alerts/cpujul2022.html",
-      "https://cert-portal.siemens.com/productcert/pdf/ssa-953464.pdf",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=1ad73b4d27bd8c1b369a3cd453681d3a4f1bb9b2",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=548d3f280a6e737673f5b61fce24bb100108dfeb",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=e5fd1728ef4c7a5bf7c7a7163ca60370460a6e23",
-      "https://gitlab.com/fraf0/cve-2022-1292-re_score-analysis",
-      "https://lists.debian.org/debian-lts-announce/2022/05/msg00019.html",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VX4KWHPMKYJL6ZLW4M5IU7E5UV5ZWJQU/",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/ZNU5M7BXMML26G3GPYKFGQYPQDRSNKDD/",
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2022-0011",
-      "https://security.gentoo.org/glsa/202210-02",
-      "https://security.netapp.com/advisory/ntap-20220602-0009/",
-      "https://security.netapp.com/advisory/ntap-20220729-0004/",
-      "https://www.debian.org/security/2022/dsa-5139",
-      "https://www.openssl.org/news/secadv/20220503.txt",
-      "https://www.oracle.com/security-alerts/cpujul2022.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-146325.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-419740.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-794697.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-942865.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-953464.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 82.6,
-    "epss_percentile": 99.7,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "High EPSS exploit prob 82.6% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-2068",
-    "published": "2022-06-21T15:15:09.060",
-    "last_modified": "2026-11-03T22:17:09.593",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In addition to the c_rehash shell command injection identified in CVE-2022-1292, further circumstances where the c_rehash script does not properly sanitise shell metacharacters to prevent command injection were found by code review. When the CVE-2022-1292 was fixed it was not discovered that there are other places in the script where the file names of certificates being hashed were possibly passed to a command executed through the shell. This script is distributed by some operating systems in a manner where it is automatically executed. On such operating systems, an attacker could execute arbitrary commands with the privileges of the script. Use of the c_rehash script is considered obsolete and should be replaced by the OpenSSL rehash command line tool. Fixed in OpenSSL 3.0.4 (Affected 3.0.0,3.0.1,3.0.2,3.0.3). Fixed in OpenSSL 1.1.1p (Affected 1.1.1-1.1.1o). Fixed in OpenSSL 1.0.2zf (Affected 1.0.2-1.0.2ze).",
-    "references": [
-      "https://cert-portal.siemens.com/productcert/pdf/ssa-332410.pdf",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=2c9c35870601b4a44d86ddbf512b38df38285cfa",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=7a9c027159fe9e1bbc2cd38a8a2914bff0d5abd9",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=9639817dac8bbbaa64d09efad7464ccc405527c7",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6WZZBKUHQFGSKGNXXKICSRPL7AMVW5M5/",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VCMNWKERPBKOEBNL7CLTTX3ZZCZLH7XA/",
-      "https://security.netapp.com/advisory/ntap-20220707-0008/",
-      "https://www.debian.org/security/2022/dsa-5169",
-      "https://www.openssl.org/news/secadv/20220621.txt",
-      "http://seclists.org/fulldisclosure/2024/Nov/0",
-      "https://cert-portal.siemens.com/productcert/pdf/ssa-332410.pdf",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=2c9c35870601b4a44d86ddbf512b38df38285cfa",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=7a9c027159fe9e1bbc2cd38a8a2914bff0d5abd9",
-      "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=9639817dac8bbbaa64d09efad7464ccc405527c7",
-      "https://gitlab.com/fraf0/cve-2022-1292-re_score-analysis",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/6WZZBKUHQFGSKGNXXKICSRPL7AMVW5M5/",
-      "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/VCMNWKERPBKOEBNL7CLTTX3ZZCZLH7XA/",
-      "https://security.netapp.com/advisory/ntap-20220707-0008/",
-      "https://www.debian.org/security/2022/dsa-5169",
-      "https://www.openssl.org/news/secadv/20220621.txt",
-      "https://cert-portal.siemens.com/productcert/html/ssa-146325.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-332410.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-794697.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 96.4,
-    "epss_percentile": 99.9,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "High EPSS exploit prob 96.4% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-0507",
-    "published": "2023-03-01T16:15:09.647",
-    "last_modified": "2026-11-03T22:17:11.460",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grafana is an open-source platform for monitoring and observability. \n\nStarting with the 8.1 branch, Grafana had a stored XSS vulnerability affecting the core plugin GeoMap. \n\nThe stored XSS vulnerability was possible due to map attributions weren't properly sanitized and allowed arbitrary JavaScript to be executed in the context of the currently authorized user of the Grafana instance. \n\nAn attacker needs to have the Editor role in order to change a panel to include a map attribution containing JavaScript. \n\nThis means that vertical privilege escalation is possible, where a user with Editor role can change to a known password for a user having Admin role if the user with Admin role executes malicious JavaScript viewing a dashboard. \n\nUsers may upgrade to version 8.5.21, 9.2.13 and 9.3.8 to receive a fix.",
-    "references": [
-      "https://grafana.com/security/security-advisories/cve-2023-0507/",
-      "https://security.netapp.com/advisory/ntap-20230413-0001/",
-      "https://grafana.com/security/security-advisories/cve-2023-0507/",
-      "https://security.netapp.com/advisory/ntap-20230413-0001/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 15.5,
-    "epss_percentile": 96.8,
-    "tags": [
-      "priv_esc",
-      "xss"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "xss+8",
-      "Moderate EPSS prob 15.5% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-2947",
     "published": "2024-03-28T19:15:48.693",
     "last_modified": "2026-11-05T13:17:02.003",
@@ -1808,7 +1398,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.2,
-    "epss_percentile": 67.8,
+    "epss_percentile": 67.9,
     "tags": [
       "command_injection",
       "priv_esc"
@@ -1818,33 +1408,6 @@
       "recently modified (last 48h)",
       "priv_esc+25",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-39700",
-    "published": "2024-07-16T18:15:07.857",
-    "last_modified": "2026-11-03T22:17:22.230",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "JupyterLab extension template is a  `copier` template for JupyterLab extensions. Repositories created using this template with `test` option include `update-integration-tests.yml` workflow which has an RCE vulnerability. Extension authors hosting their code on GitHub are urged to upgrade the template to the latest version. Users who made changes to `update-integration-tests.yml`, accept overwriting of this file and re-apply your changes later. Users may wish to temporarily disable GitHub Actions while working on the upgrade. We recommend rebasing all open pull requests from untrusted users as actions may run using the version from the `main` branch at the time when the pull request was created. Users who are upgrading from template version prior to 4.3.0 may wish to leave out proposed changes to the release workflow for now as it requires additional configuration.",
-    "references": [
-      "https://github.com/jupyterlab/extension-template/commit/035e78c1c65bcedee97c95bb683abe59c96bc4e6",
-      "https://github.com/jupyterlab/extension-template/security/advisories/GHSA-45gq-v5wm-82wg",
-      "https://github.com/jupyterlab/extension-template/commit/035e78c1c65bcedee97c95bb683abe59c96bc4e6",
-      "https://github.com/jupyterlab/extension-template/security/advisories/GHSA-45gq-v5wm-82wg"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 65.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -1864,40 +1427,11 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 51.0,
+    "epss_percentile": 51.1,
     "tags": [
       "rce"
     ],
     "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-47606",
-    "published": "2024-12-12T02:03:32.220",
-    "last_modified": "2026-11-03T22:17:24.583",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "GStreamer is a library for constructing graphs of media-handling components. An integer underflow has been detected in the function qtdemux_parse_theora_extension within qtdemux.c. The vulnerability occurs due to an underflow of the gint size variable, which causes size to hold a large unintended value when cast to an unsigned integer. This 32-bit negative value is then cast to a 64-bit unsigned integer (0xfffffffffffffffa) in a subsequent call to gst_buffer_new_and_alloc. The function gst_buffer_new_allocate then attempts to allocate memory, eventually calling _sysmem_new_block. The function _sysmem_new_block adds alignment and header size to the (unsigned) size, causing the overflow of the 'slice_size' variable. As a result, only 0x89 bytes are allocated, despite the large input size. When the following memcpy call occurs in gst_buffer_fill, the data from the input file will overwrite the content of the GstMapInfo info structure. Finally, during the call to gst_memory_unmap, the overwritten memory may cause a function pointer hijack, as the mem->allocator->mem_unmap_full function is called with a corrupted pointer. This function pointer overwrite could allow an attacker to alter the execution flow of the program, leading to arbitrary code execution. This vulnerability is fixed in 1.24.10.",
-    "references": [
-      "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/8032.patch",
-      "https://gstreamer.freedesktop.org/security/sa-2024-0014.html",
-      "https://securitylab.github.com/advisories/GHSL-2024-166_Gstreamer/",
-      "https://lists.debian.org/debian-lts-announce/2024/12/msg00016.html",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00035.html",
-      "https://security.netapp.com/advisory/ntap-20250418-0003/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.7,
-    "epss_percentile": 77.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -2153,58 +1687,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-6671",
-    "published": "2024-08-29T22:15:05.767",
-    "last_modified": "2026-11-03T22:17:29.660",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In WhatsUp Gold versions released before 2024.0.0, if the application is configured with only a single user, a SQL Injection vulnerability allows an unauthenticated attacker to retrieve the users encrypted password.",
-    "references": [
-      "https://community.progress.com/s/article/WhatsUp-Gold-Security-Bulletin-August-2024",
-      "https://www.progress.com/network-monitoring"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 19.0,
-    "epss_percentile": 97.3,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 87.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Moderate EPSS prob 19.0% (+10)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-49368",
-    "published": "2024-10-21T17:15:03.960",
-    "last_modified": "2026-11-03T22:17:26.010",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Nginx UI is a web user interface for the Nginx web server. Prior to version 2.0.0-beta.36, when Nginx UI configures logrotate, it does not verify the input and directly passes it to exec.Command, causing arbitrary command execution. Version 2.0.0-beta.36 fixes this issue.",
-    "references": [
-      "https://github.com/0xJacky/nginx-ui/releases/tag/v2.0.0-beta.36",
-      "https://github.com/0xJacky/nginx-ui/security/advisories/GHSA-66m6-27r9-77vm"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 27.7,
-    "epss_percentile": 98.1,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 87.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Moderate EPSS prob 27.7% (+10)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-9900",
     "published": "2025-09-23T17:15:38.357",
     "last_modified": "2026-11-04T22:17:41.203",
@@ -2338,7 +1820,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 55.4,
+    "epss_percentile": 55.5,
     "tags": [
       "dos",
       "rce"
@@ -2364,7 +1846,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 59.9,
+    "epss_percentile": 60.0,
     "tags": [
       "rce"
     ],
@@ -2482,7 +1964,7 @@
   {
     "cve_id": "CVE-2024-6409",
     "published": "2024-07-08T18:15:09.487",
-    "last_modified": "2026-11-03T22:17:29.350",
+    "last_modified": "2026-11-06T21:17:03.157",
     "cvss_v3": 7.0,
     "severity": "HIGH",
     "affected": [],
@@ -2530,30 +2012,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "Moderate EPSS prob 27.9% (+10)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-20419",
-    "published": "2024-07-17T17:15:14.143",
-    "last_modified": "2026-11-03T22:17:13.243",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A vulnerability in the authentication system of Cisco Smart Software Manager On-Prem (SSM On-Prem) could allow an unauthenticated, remote attacker to change the password of any user, including administrative users.\r\n\r This vulnerability is due to improper implementation of the password-change process. An attacker could exploit this vulnerability by sending crafted HTTP requests to an affected device. A successful exploit could allow an attacker to access the web UI or API with the privileges of the compromised user.",
-    "references": [
-      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-cssm-auth-sLw3uhUy",
-      "https://www.secpod.com/blog/critical-flaw-in-ciscos-secure-email-gateways-allows-attackers-to-control-the-device-completely/",
-      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-cssm-auth-sLw3uhUy"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 80.9,
-    "epss_percentile": 99.6,
-    "tags": [],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "High EPSS exploit prob 80.9% (+25)"
     ]
   },
   {
@@ -2795,31 +2253,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-30103",
-    "published": "2024-06-11T17:15:59.800",
-    "last_modified": "2026-11-03T22:17:18.583",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Microsoft Outlook Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30103",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30103"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 3.4,
-    "epss_percentile": 88.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-36984",
     "published": "2024-07-01T17:15:06.480",
     "last_modified": "2026-11-04T00:17:19.117",
@@ -2837,59 +2270,6 @@
     "cisa_kev": false,
     "epss": 1.4,
     "epss_percentile": 72.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-39877",
-    "published": "2024-07-17T08:15:02.073",
-    "last_modified": "2026-11-03T22:17:22.393",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Apache Airflow 2.4.0, and versions before 2.9.3, has a vulnerability that allows authenticated DAG authors to craft a doc_md parameter in a way that could execute arbitrary code in the scheduler context, which should be forbidden according to the Airflow Security model. Users should upgrade to version 2.9.3 or later which has removed the vulnerability.",
-    "references": [
-      "https://github.com/apache/airflow/pull/40522",
-      "https://lists.apache.org/thread/1xhj9dkp37d6pzn24ll2mf94wbqnb2y1",
-      "http://www.openwall.com/lists/oss-security/2024/07/16/7",
-      "https://github.com/apache/airflow/pull/40522",
-      "https://lists.apache.org/thread/1xhj9dkp37d6pzn24ll2mf94wbqnb2y1"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.7,
-    "epss_percentile": 77.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-29014",
-    "published": "2024-07-18T08:15:02.173",
-    "last_modified": "2026-11-03T22:17:17.283",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Vulnerability in SonicWall SMA100 NetExtender Windows (32 and 64-bit) client 10.2.339 and earlier versions allows an attacker to arbitrary code execution when processing an EPC Client update.",
-    "references": [
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2024-0011",
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2024-0011"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.9,
-    "epss_percentile": 79.4,
     "tags": [
       "rce"
     ],
@@ -2923,6 +2303,46 @@
     ]
   },
   {
+    "cve_id": "CVE-2024-9143",
+    "published": "2024-10-16T17:15:18.130",
+    "last_modified": "2026-11-06T22:17:47.097",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Issue summary: Use of the low-level GF(2^m) elliptic curve APIs with untrusted\nexplicit values for the field polynomial can lead to out-of-bounds memory reads\nor writes.\n\nImpact summary: Out of bound memory writes can lead to an application crash or\neven a possibility of a remote code execution, however, in all the protocols\ninvolving Elliptic Curve Cryptography that we're aware of, either only \"named\ncurves\" are supported, or, if explicit curve parameters are supported, they\nspecify an X9.62 encoding of binary (GF(2^m)) curves that can't represent\nproblematic input values. Thus the likelihood of existence of a vulnerable\napplication is low.\n\nIn particular, the X9.62 encoding is used for ECC keys in X.509 certificates,\nso problematic inputs cannot occur in the context of processing X.509\ncertificates.  Any problematic use-cases would have to be using an \"exotic\"\ncurve encoding.\n\nThe affected APIs include: EC_GROUP_new_curve_GF2m(), EC_GROUP_new_from_params(),\nand various supporting BN_GF2m_*() functions.\n\nApplications working with \"exotic\" explicit binary (GF(2^m)) curve parameters,\nthat make it possible to represent invalid field polynomials with a zero\nconstant term, via the above or similar APIs, may terminate abruptly as a\nresult of reading or writing outside of array bounds.  Remote code execution\ncannot easily be ruled out.\n\nThe FIPS modules in 3.3, 3.2, 3.1 and 3.0 are not affected by this issue.",
+    "references": [
+      "https://github.com/openssl/openssl/commit/72ae83ad214d2eef262461365a1975707f862712",
+      "https://github.com/openssl/openssl/commit/bc7e04d7c8d509fb78fc0e285aa948fb0da04700",
+      "https://github.com/openssl/openssl/commit/c0d3e4d32d2805f49bec30547f225bc4d092e1f4",
+      "https://github.com/openssl/openssl/commit/fdf6723362ca51bd883295efe206cb5b1cfa5154",
+      "https://github.openssl.org/openssl/extended-releases/commit/8efc0cbaa8ebba8e116f7b81a876a4123594d86a",
+      "https://github.openssl.org/openssl/extended-releases/commit/9d576994cec2b7aa37a91740ea7e680810957e41",
+      "https://openssl-library.org/news/secadv/20241016.txt",
+      "http://www.openwall.com/lists/oss-security/2024/10/16/1",
+      "http://www.openwall.com/lists/oss-security/2024/10/23/1",
+      "http://www.openwall.com/lists/oss-security/2024/10/24/1",
+      "https://lists.debian.org/debian-lts-announce/2024/10/msg00033.html",
+      "https://lists.debian.org/debian-lts-announce/2024/11/msg00000.html",
+      "https://security.netapp.com/advisory/ntap-20241101-0001/",
+      "https://cert-portal.siemens.com/productcert/html/ssa-265688.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-277137.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-769027.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 5.8,
+    "epss_percentile": 93.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2024-12084",
     "published": "2025-01-15T15:15:10.537",
     "last_modified": "2026-11-04T21:17:34.677",
@@ -2949,32 +2369,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "High EPSS exploit prob 72.5% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-48734",
-    "published": "2025-05-28T14:15:34.070",
-    "last_modified": "2026-11-03T22:17:41.467",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper Access Control vulnerability in Apache Commons.\n\n\n\nA special BeanIntrospector class was added in version 1.9.2. This can be used to stop attackers from using the declared class property of Java enum objects to get access to the classloader. However this protection was not enabled by default. PropertyUtilsBean (and consequently BeanUtilsBean) now disallows declared class level property access by default.\n\n\n\n\n\nReleases 1.11.0 and 2.0.0-M2 address a potential security issue when accessing enum properties in an uncontrolled way. If an application using Commons BeanUtils passes property paths from an external source directly to the getProperty() method of PropertyUtilsBean, an attacker can access the enum’s class loader via the “declaredClass” property available on all Java “enum” objects. Accessing the enum’s “declaredClass” allows remote attackers to access the ClassLoader and execute arbitrary code. The same issue exists with PropertyUtilsBean.getNestedProperty().\nStarting in versions 1.11.0 and 2.0.0-M2 a special BeanIntrospector suppresses the “declaredClass” property. Note that this new BeanIntrospector is enabled by default, but you can disable it to regain the old behavior; see section 2.5 of the user's guide and the unit tests.\n\nThis issue affects Apache Commons BeanUtils 1.x before 1.11.0, and 2.x before 2.0.0-M2.Users of the artifact commons-beanutils:commons-beanutils\n\n 1.x are recommended to upgrade to version 1.11.0, which fixes the issue.\n\n\nUsers of the artifact org.apache.commons:commons-beanutils2\n\n 2.x are recommended to upgrade to version 2.0.0-M2, which fixes the issue.",
-    "references": [
-      "https://lists.apache.org/thread/s0hb3jkfj5f3ryx6c57zqtfohb0of1g9",
-      "http://www.openwall.com/lists/oss-security/2025/05/28/6",
-      "https://lists.debian.org/debian-lts-announce/2025/06/msg00027.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.0,
-    "epss_percentile": 81.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -3139,7 +2533,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 56.9,
+    "epss_percentile": 57.0,
     "tags": [
       "rce"
     ],
@@ -3213,7 +2607,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 37.8,
+    "epss_percentile": 37.9,
     "tags": [
       "rce"
     ],
@@ -3264,7 +2658,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 47.1,
+    "epss_percentile": 47.2,
     "tags": [
       "auth_bypass"
     ],
@@ -3289,7 +2683,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.0,
+    "epss_percentile": 48.1,
     "tags": [
       "auth_bypass"
     ],
@@ -3374,29 +2768,28 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-23472",
-    "published": "2024-07-17T15:15:12.627",
-    "last_modified": "2026-11-03T22:17:15.457",
-    "cvss_v3": 9.6,
+    "cve_id": "CVE-2025-65276",
+    "published": "2025-11-26T20:15:49.660",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "SolarWinds Access Rights Manager (ARM) is susceptible to Directory Traversal vulnerability. This vulnerability allows an authenticated user to arbitrary  read and delete files in ARM.",
+    "summary": "An unauthenticated administrative access vulnerability exists in the open-source HashTech project (https://github.com/henzljw/hashtech) 1.0 thru commit 5919decaff2681dc250e934814fc3a35f6093ee5 (2021-07-02). Due to missing authentication checks on /admin_index.php, an attacker can directly access the admin dashboard without valid credentials. This allows full administrative control including viewing/modifying user accounts, managing orders, changing payments, and editing product listings. Successful exploitation can lead to information disclosure, data manipulation, and privilege escalation.",
     "references": [
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm",
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm"
+      "https://gist.github.com/whoisrushi/c3bfcd1adf96d80952edbd03d0310836",
+      "https://gist.github.com/whoisrushi/c3bfcd1adf96d80952edbd03d0310836"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 18.6,
-    "epss_percentile": 97.3,
+    "epss": 0.4,
+    "epss_percentile": 37.2,
     "tags": [
-      "path_traversal"
+      "priv_esc"
     ],
-    "intel_score": 83.0,
+    "intel_score": 84.0,
     "reasons": [
       "recently modified (last 48h)",
-      "path_traversal+15",
-      "Moderate EPSS prob 18.6% (+10)"
+      "priv_esc+25"
     ]
   },
   {
@@ -3549,82 +2942,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2023-24908",
-    "published": "2023-03-14T17:15:18.490",
-    "last_modified": "2026-11-03T19:17:42.157",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Remote Procedure Call Runtime Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-24908",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-24908"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 63.0,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-5805",
-    "published": "2024-06-25T15:15:15.603",
-    "last_modified": "2026-11-03T22:17:28.753",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper Authentication vulnerability in Progress MOVEit Gateway (SFTP modules) allows Authentication Bypass.This issue affects MOVEit Gateway: 2024.0.0.",
-    "references": [
-      "https://community.progress.com/s/article/MOVEit-Gateway-Critical-Security-Alert-Bulletin-June-2024-CVE-2024-5805",
-      "https://www.progress.com/moveit",
-      "https://community.progress.com/s/article/MOVEit-Gateway-Critical-Security-Alert-Bulletin-June-2024-CVE-2024-5805",
-      "https://www.progress.com/moveit"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 6.8,
-    "epss_percentile": 94.0,
-    "tags": [
-      "auth_bypass"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-43598",
-    "published": "2024-11-12T18:15:28.277",
-    "last_modified": "2026-11-03T22:17:23.853",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "LightGBM Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-43598"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.4,
-    "epss_percentile": 72.9,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-4404",
     "published": "2025-06-17T14:15:32.743",
     "last_modified": "2026-11-04T22:17:37.497",
@@ -3678,7 +2995,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 51.4,
+    "epss_percentile": 51.5,
     "tags": [
       "dos",
       "rce"
@@ -3850,42 +3167,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2022-23552",
-    "published": "2023-01-27T23:15:08.597",
-    "last_modified": "2026-11-03T22:17:09.407",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grafana is an open-source platform for monitoring and observability. Starting with the 8.1 branch and prior to versions 8.5.16, 9.2.10, and 9.3.4, Grafana had a stored XSS vulnerability affecting the core plugin GeoMap. The stored XSS vulnerability was possible because SVG files weren't properly sanitized and allowed arbitrary JavaScript to be executed in the context of the currently authorized user of the Grafana instance. \n\nAn attacker needs to have the Editor role in order to change a panel to include either an external URL to a SVG-file containing JavaScript, or use the `data:` scheme to load an inline SVG-file containing JavaScript. This means that vertical privilege escalation is possible, where a user with Editor role can change to a known password for a user having Admin role if the user with Admin role executes malicious JavaScript viewing a dashboard.   \n\nUsers may upgrade to version 8.5.16, 9.2.10, or 9.3.4 to receive a fix.",
-    "references": [
-      "https://github.com/grafana/grafana/commit/1c8a50b36973bd59a1cc5f34c30de8a9a6a431f0",
-      "https://github.com/grafana/grafana/commit/8b574e22b53aa4c5a35032a58844fd4aaaa12f5f",
-      "https://github.com/grafana/grafana/commit/c022534e3848a5d45c0b3face23b43aa44e4400a",
-      "https://github.com/grafana/grafana/pull/62143",
-      "https://github.com/grafana/grafana/security/advisories/GHSA-8xmm-x63g-f6xv",
-      "https://github.com/grafana/grafana/commit/1c8a50b36973bd59a1cc5f34c30de8a9a6a431f0",
-      "https://github.com/grafana/grafana/commit/8b574e22b53aa4c5a35032a58844fd4aaaa12f5f",
-      "https://github.com/grafana/grafana/commit/c022534e3848a5d45c0b3face23b43aa44e4400a",
-      "https://github.com/grafana/grafana/pull/62143",
-      "https://github.com/grafana/grafana/security/advisories/GHSA-8xmm-x63g-f6xv",
-      "https://security.netapp.com/advisory/ntap-20230302-0008/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 56.0,
-    "tags": [
-      "priv_esc",
-      "xss"
-    ],
-    "intel_score": 79.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "xss+8"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-62229",
     "published": "2025-10-30T06:15:45.300",
     "last_modified": "2026-11-05T17:17:17.680",
@@ -3936,7 +3217,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.5,
+    "epss_percentile": 43.6,
     "tags": [
       "dos",
       "rce"
@@ -3999,7 +3280,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.4,
-    "epss_percentile": 72.9,
+    "epss_percentile": 73.0,
     "tags": [
       "rce"
     ],
@@ -4060,7 +3341,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.4,
-    "epss_percentile": 72.9,
+    "epss_percentile": 73.0,
     "tags": [
       "rce"
     ],
@@ -4123,31 +3404,6 @@
     "cisa_kev": false,
     "epss": 1.9,
     "epss_percentile": 79.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-30104",
-    "published": "2024-06-11T17:16:00.030",
-    "last_modified": "2026-11-03T22:17:18.747",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Microsoft Office Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30104",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30104"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.5,
-    "epss_percentile": 74.6,
     "tags": [
       "rce"
     ],
@@ -4230,34 +3486,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-54529",
-    "published": "2024-12-12T02:15:32.140",
-    "last_modified": "2026-11-03T22:17:27.920",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A logic issue was addressed with improved checks. This issue is fixed in macOS Sequoia 15.2, macOS Sonoma 14.7.2, macOS Ventura 13.7.2. An app may be able to execute arbitrary code out of its sandbox or with certain elevated privileges.",
-    "references": [
-      "https://support.apple.com/en-us/121839",
-      "https://support.apple.com/en-us/121840",
-      "https://support.apple.com/en-us/121842",
-      "http://seclists.org/fulldisclosure/2024/Dec/7",
-      "http://seclists.org/fulldisclosure/2024/Dec/9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-0689",
     "published": "2025-03-03T15:15:16.147",
     "last_modified": "2026-11-05T15:17:07.347",
@@ -4273,7 +3501,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.8,
+    "epss_percentile": 42.9,
     "tags": [
       "rce"
     ],
@@ -4299,7 +3527,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.5,
+    "epss_percentile": 39.6,
     "tags": [
       "rce"
     ],
@@ -4437,7 +3665,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.3,
+    "epss_percentile": 42.4,
     "tags": [
       "rce"
     ],
@@ -4537,7 +3765,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 24.4,
+    "epss_percentile": 24.3,
     "tags": [
       "priv_esc"
     ],
@@ -4796,7 +4024,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 23.2,
+    "epss_percentile": 23.1,
     "tags": [
       "priv_esc"
     ],
@@ -4899,7 +4127,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.0,
+    "epss_percentile": 48.1,
     "tags": [
       "rce"
     ],
@@ -4923,7 +4151,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 49.3,
+    "epss_percentile": 49.4,
     "tags": [
       "rce"
     ],
@@ -4983,35 +4211,6 @@
       "recently modified (last 48h)",
       "path_traversal+15",
       "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-37385",
-    "published": "2024-06-07T04:15:30.720",
-    "last_modified": "2026-11-03T22:17:20.950",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Roundcube Webmail before 1.5.7 and 1.6.x before 1.6.7 on Windows allows command injection via im_convert_path and im_identify_path. NOTE: this issue exists because of an incomplete fix for CVE-2020-12641.",
-    "references": [
-      "https://github.com/roundcube/roundcubemail/commit/5ea9f37ce39374b6124586c0590fec7015d35d7f",
-      "https://github.com/roundcube/roundcubemail/releases/tag/1.5.7",
-      "https://github.com/roundcube/roundcubemail/releases/tag/1.6.7",
-      "https://github.com/roundcube/roundcubemail/commit/5ea9f37ce39374b6124586c0590fec7015d35d7f",
-      "https://github.com/roundcube/roundcubemail/releases/tag/1.5.7",
-      "https://github.com/roundcube/roundcubemail/releases/tag/1.6.7"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.5,
-    "epss_percentile": 74.0,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 77.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
     ]
   },
   {
@@ -5123,7 +4322,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 63.5,
+    "epss_percentile": 63.6,
     "tags": [
       "command_injection"
     ],
@@ -5246,7 +4445,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 50.6,
+    "epss_percentile": 50.7,
     "tags": [
       "sqli"
     ],
@@ -5270,7 +4469,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 47.7,
+    "epss_percentile": 47.8,
     "tags": [
       "sqli"
     ],
@@ -5392,7 +4591,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.9,
-    "epss_percentile": 79.9,
+    "epss_percentile": 80.0,
     "tags": [
       "command_injection"
     ],
@@ -5417,7 +4616,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 31.3,
+    "epss_percentile": 31.2,
     "tags": [
       "sqli"
     ],
@@ -5494,7 +4693,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 41.6,
+    "epss_percentile": 41.7,
     "tags": [
       "sqli"
     ],
@@ -5521,7 +4720,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 41.6,
+    "epss_percentile": 41.7,
     "tags": [
       "sqli"
     ],
@@ -5635,57 +4834,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-22274",
-    "published": "2024-05-21T18:15:09.190",
-    "last_modified": "2026-11-03T22:17:13.933",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The vCenter Server contains an authenticated remote code execution vulnerability. A malicious actor with administrative privileges on the vCenter appliance shell may exploit this issue to run arbitrary commands on the underlying operating system.",
-    "references": [
-      "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/24308",
-      "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/24308"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.5,
-    "epss_percentile": 84.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 76.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-41251",
-    "published": "2024-07-08T16:15:03.203",
-    "last_modified": "2026-11-03T22:17:12.307",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A stack-based buffer overflow vulnerability exists in the boa formRoute functionality of Realtek rtl819x Jungle SDK v3.4.11. A specially crafted series of HTTP requests can lead to remote code execution. An attacker can send an HTTP request to trigger this vulnerability.",
-    "references": [
-      "https://talosintelligence.com/vulnerability_reports/TALOS-2023-1894",
-      "https://talosintelligence.com/vulnerability_reports/TALOS-2023-1894",
-      "https://www.talosintelligence.com/vulnerability_reports/TALOS-2023-1894"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.2,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 76.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-60279",
     "published": "2025-10-17T16:15:38.917",
     "last_modified": "2026-11-05T22:10:00.203",
@@ -5700,7 +4848,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 37.5,
+    "epss_percentile": 38.5,
     "tags": [
       "ssrf"
     ],
@@ -5751,7 +4899,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.6,
+    "epss_percentile": 42.7,
     "tags": [
       "rce"
     ],
@@ -5778,7 +4926,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.6,
+    "epss_percentile": 42.7,
     "tags": [
       "rce"
     ],
@@ -5815,31 +4963,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-49113",
-    "published": "2024-12-12T02:04:37.610",
-    "last_modified": "2026-11-03T22:17:25.583",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Lightweight Directory Access Protocol (LDAP) Denial of Service Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49113"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 83.8,
-    "epss_percentile": 99.7,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3",
-      "High EPSS exploit prob 83.8% (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-61235",
     "published": "2025-10-28T20:15:49.500",
     "last_modified": "2026-11-05T21:10:00.183",
@@ -5861,41 +4984,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "poc+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-5700",
-    "published": "2024-06-11T13:15:51.417",
-    "last_modified": "2026-11-03T22:17:28.513",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory safety bugs present in Firefox 126, Firefox ESR 115.11, and Thunderbird 115.11. Some of these bugs showed evidence of memory corruption and we presume that with enough effort some of these could have been exploited to run arbitrary code. This vulnerability affects Firefox < 127, Firefox ESR < 115.12, and Thunderbird < 115.12.",
-    "references": [
-      "https://bugzilla.mozilla.org/buglist.cgi?bug_id=1862809%2C1889355%2C1893388%2C1895123",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00000.html",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00010.html",
-      "https://www.mozilla.org/security/advisories/mfsa2024-25/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-26/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-28/",
-      "https://bugzilla.mozilla.org/buglist.cgi?bug_id=1862809%2C1889355%2C1893388%2C1895123",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00000.html",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00010.html",
-      "https://www.mozilla.org/security/advisories/mfsa2024-25/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-26/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-28/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.4,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 75.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -5979,7 +5067,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 32.2,
+    "epss_percentile": 32.3,
     "tags": [
       "sqli"
     ],
@@ -6028,7 +5116,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 41.1,
+    "epss_percentile": 41.2,
     "tags": [
       "sqli"
     ],
@@ -6052,7 +5140,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 55.7,
+    "epss_percentile": 55.8,
     "tags": [
       "path_traversal"
     ],
@@ -6060,31 +5148,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-37081",
-    "published": "2024-06-18T06:15:11.900",
-    "last_modified": "2026-11-03T22:17:20.783",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The vCenter Server contains multiple local privilege escalation vulnerabilities due to misconfiguration of sudo. An authenticated local user with non-administrative privileges may exploit these issues to elevate privileges to root on vCenter Server Appliance.",
-    "references": [
-      "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/24453",
-      "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/24453"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 5.0,
-    "epss_percentile": 92.2,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 74.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
     ]
   },
   {
@@ -6137,7 +5200,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 7.8,
+    "epss_percentile": 7.7,
     "tags": [
       "priv_esc"
     ],
@@ -6166,7 +5229,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.1,
-    "epss_percentile": 65.8,
+    "epss_percentile": 65.9,
     "tags": [
       "priv_esc"
     ],
@@ -6262,33 +5325,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2022-36062",
-    "published": "2022-09-22T18:15:10.307",
-    "last_modified": "2026-11-03T22:17:11.073",
-    "cvss_v3": 7.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grafana is an open-source platform for monitoring and observability. In versions prior to 8.5.13, 9.0.9, and 9.1.6, Grafana is subject to Improper Preservation of Permissions resulting in privilege escalation on some folders where Admin is the only used permission. The vulnerability impacts Grafana instances where RBAC was disabled and enabled afterwards, as the migrations which are translating legacy folder permissions to RBAC permissions do not account for the scenario where the only user permission in the folder is Admin, as a result RBAC adds permissions for Editors and Viewers which allow them to edit and view folders accordingly. This issue has been patched in versions 8.5.13, 9.0.9, and 9.1.6. A workaround when the impacted folder/dashboard is known is to remove the additional permissions manually.",
-    "references": [
-      "https://github.com/grafana/grafana/security/advisories/GHSA-p978-56hq-r492",
-      "https://security.netapp.com/advisory/ntap-20221215-0001/",
-      "https://github.com/grafana/grafana/security/advisories/GHSA-p978-56hq-r492",
-      "https://security.netapp.com/advisory/ntap-20221215-0001/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 55.1,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 73.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2020-25720",
     "published": "2024-11-17T11:15:04.320",
     "last_modified": "2026-11-05T09:17:03.223",
@@ -6308,32 +5344,6 @@
       "priv_esc"
     ],
     "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-27275",
-    "published": "2024-06-15T14:15:09.443",
-    "last_modified": "2026-11-03T22:17:16.420",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IBM i 7.2, 7.3, 7.4, and 7.5 contains a local privilege escalation vulnerability caused by an insufficient authority requirement. A local user without administrator privilege can configure a physical file trigger to execute with the privileges of a user socially engineered to access the target file. The correction is to require administrator privilege to configure trigger support.",
-    "references": [
-      "https://www.ibm.com/support/pages/node/7157637",
-      "https://exchange.xforce.ibmcloud.com/vulnerabilities/285203",
-      "https://www.ibm.com/support/pages/node/7157637"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 4.7,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 72.0,
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
@@ -6395,7 +5405,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.2,
-    "epss_percentile": 67.6,
+    "epss_percentile": 67.7,
     "tags": [
       "command_injection"
     ],
@@ -6667,7 +5677,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.2,
+    "epss_percentile": 42.3,
     "tags": [
       "dos",
       "poc"
@@ -6693,7 +5703,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.8,
-    "epss_percentile": 78.2,
+    "epss_percentile": 78.3,
     "tags": [
       "dos",
       "poc"
@@ -6886,31 +5896,6 @@
       "recently modified (last 48h)",
       "deserialization+20",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-5907",
-    "published": "2024-06-12T17:15:53.127",
-    "last_modified": "2026-11-03T22:17:28.937",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A privilege escalation (PE) vulnerability in the Palo Alto Networks Cortex XDR agent on Windows devices enables a local user to execute programs with elevated privileges. However, execution does require the local user to successfully exploit a race condition, which makes this vulnerability difficult to exploit.",
-    "references": [
-      "https://security.paloaltonetworks.com/CVE-2024-5907",
-      "https://security.paloaltonetworks.com/CVE-2024-5907"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.7,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 70.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
     ]
   },
   {
@@ -7177,7 +6162,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 2.0,
-    "epss_percentile": 80.8,
+    "epss_percentile": 80.9,
     "tags": [
       "path_traversal"
     ],
@@ -7458,7 +6443,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 40.3,
+    "epss_percentile": 40.4,
     "tags": [
       "path_traversal"
     ],
@@ -7569,29 +6554,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-6235",
-    "published": "2024-07-10T19:15:11.973",
-    "last_modified": "2026-11-03T22:17:29.180",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Sensitive information disclosure in NetScaler Console",
-    "references": [
-      "https://support.citrix.com/article/CTX677998",
-      "https://support.citrix.com/article/CTX677998"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 21.2,
-    "epss_percentile": 97.6,
-    "tags": [],
-    "intel_score": 64.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Moderate EPSS prob 21.2% (+10)"
     ]
   },
   {
@@ -7774,6 +6736,46 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-9230",
+    "published": "2025-09-30T14:15:41.050",
+    "last_modified": "2026-11-06T22:17:47.537",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Issue summary: An application trying to decrypt CMS messages encrypted using\npassword based encryption can trigger an out-of-bounds read and write.\n\nImpact summary: This out-of-bounds read may trigger a crash which leads to\nDenial of Service for an application. The out-of-bounds write can cause\na memory corruption which can have various consequences including\na Denial of Service or Execution of attacker-supplied code.\n\nAlthough the consequences of a successful exploit of this vulnerability\ncould be severe, the probability that the attacker would be able to\nperform it is low. Besides, password based (PWRI) encryption support in CMS\nmessages is very rarely used. For that reason the issue was assessed as\nModerate severity according to our Security Policy.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the CMS implementation is outside the OpenSSL FIPS module\nboundary.",
+    "references": [
+      "https://github.com/openssl/openssl/commit/5965ea5dd6960f36d8b7f74f8eac67a8eb8f2b45",
+      "https://github.com/openssl/openssl/commit/9e91358f365dee6c446dcdcdb01c04d2743fd280",
+      "https://github.com/openssl/openssl/commit/a79c4ce559c6a3a8fd4109e9f33c1185d5bf2def",
+      "https://github.com/openssl/openssl/commit/b5282d677551afda7d20e9c00e09561b547b2dfd",
+      "https://github.com/openssl/openssl/commit/bae259a211ada6315dc50900686daaaaaa55f482",
+      "https://github.openssl.org/openssl/extended-releases/commit/c2b96348bfa662f25f4fabf81958ae822063dae3",
+      "https://github.openssl.org/openssl/extended-releases/commit/dfbaf161d8dafc1132dd88cd48ad990ed9b4c8ba",
+      "https://openssl-library.org/news/secadv/20250930.txt",
+      "http://www.openwall.com/lists/oss-security/2025/09/30/5",
+      "https://lists.debian.org/debian-lts-announce/2025/10/msg00001.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-032379.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-082556.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-089022.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-253495.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-265688.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-485750.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-585531.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 1.6,
+    "epss_percentile": 75.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 62.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-57393",
     "published": "2025-10-01T18:15:46.390",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -7917,7 +6919,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 22.3,
+    "epss_percentile": 22.2,
     "tags": [],
     "intel_score": 60.0,
     "reasons": [
@@ -7983,7 +6985,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.6,
+    "epss_percentile": 39.7,
     "tags": [],
     "intel_score": 59.5,
     "reasons": [
@@ -8004,7 +7006,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 34.3,
+    "epss_percentile": 34.4,
     "tags": [],
     "intel_score": 59.5,
     "reasons": [
@@ -8120,145 +7122,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-26230",
-    "published": "2024-04-09T17:15:43.027",
-    "last_modified": "2026-11-03T22:17:15.833",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Telephony Server Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-26230",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-26230"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 24.1,
-    "epss_percentile": 97.9,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Moderate EPSS prob 24.1% (+10)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-3863",
-    "published": "2024-04-16T16:15:08.870",
-    "last_modified": "2026-11-03T22:17:22.940",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The executable file warning was not presented when downloading .xrm-ms files.  \n*Note: This issue only affected Windows operating systems. Other operating systems are unaffected.* This vulnerability affects Firefox < 125, Firefox ESR < 115.10, and Thunderbird < 115.10.",
-    "references": [
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=1885855",
-      "https://www.mozilla.org/security/advisories/mfsa2024-18/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-19/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-20/",
-      "https://bugzilla.mozilla.org/show_bug.cgi?id=1885855",
-      "https://www.mozilla.org/security/advisories/mfsa2024-18/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-19/",
-      "https://www.mozilla.org/security/advisories/mfsa2024-20/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 57.1,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-3912",
-    "published": "2024-06-14T10:15:10.513",
-    "last_modified": "2026-11-03T22:17:23.200",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Certain models of ASUS routers have an arbitrary firmware upload vulnerability. An unauthenticated remote attacker can exploit this vulnerability to execute arbitrary system commands on the device.",
-    "references": [
-      "https://www.twcert.org.tw/en/cp-139-7876-396bd-2.html",
-      "https://www.twcert.org.tw/tw/cp-132-7875-872d3-1.html",
-      "https://www.twcert.org.tw/en/cp-139-7876-396bd-2.html",
-      "https://www.twcert.org.tw/tw/cp-132-7875-872d3-1.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 63.6,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-39331",
-    "published": "2024-06-23T22:15:09.370",
-    "last_modified": "2026-11-03T22:17:21.977",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In Emacs before 29.4, org-link-expand-abbrev in lisp/ol.el expands a %(...) link abbrev even when it specifies an unsafe function, such as shell-command-to-string. This affects Org Mode before 9.7.5.",
-    "references": [
-      "https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS?h=emacs-29",
-      "https://git.savannah.gnu.org/cgit/emacs/org-mode.git/commit/?id=f4cc61636947b5c2f0afc67174dd369fe3277aa8",
-      "https://list.orgmode.org/87sex5gdqc.fsf%40localhost/",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00023.html",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00024.html",
-      "https://lists.gnu.org/archive/html/info-gnu-emacs/2024-06/msg00000.html",
-      "https://news.ycombinator.com/item?id=40768225",
-      "https://www.openwall.com/lists/oss-security/2024/06/23/1",
-      "https://www.openwall.com/lists/oss-security/2024/06/23/2",
-      "https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS?h=emacs-29",
-      "https://git.savannah.gnu.org/cgit/emacs/org-mode.git/commit/?id=f4cc61636947b5c2f0afc67174dd369fe3277aa8",
-      "https://list.orgmode.org/87sex5gdqc.fsf%40localhost/",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00023.html",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00024.html",
-      "https://lists.gnu.org/archive/html/info-gnu-emacs/2024-06/msg00000.html",
-      "https://news.ycombinator.com/item?id=40768225",
-      "https://www.openwall.com/lists/oss-security/2024/06/23/1",
-      "https://www.openwall.com/lists/oss-security/2024/06/23/2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 71.0,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-27903",
-    "published": "2024-07-08T11:15:10.390",
-    "last_modified": "2026-11-03T22:17:16.907",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenVPN plug-ins on Windows with OpenVPN 2.6.9 and earlier could be loaded from any directory, which allows an attacker to load an arbitrary plug-in which can be used to interact with the privileged OpenVPN interactive service.",
-    "references": [
-      "https://community.openvpn.net/openvpn/wiki/CVE-2024-27903",
-      "https://openvpn.net/security-advisory/ovpnx-vulnerability-cve-2024-27903-cve-2024-27459-cve-2024-24974/",
-      "https://www.mail-archive.com/openvpn-users@lists.sourceforge.net/msg07534.html",
-      "https://community.openvpn.net/openvpn/wiki/CVE-2024-27903",
-      "https://openvpn.net/security-advisory/ovpnx-vulnerability-cve-2024-27903-cve-2024-27459-cve-2024-24974/",
-      "https://www.mail-archive.com/openvpn-users@lists.sourceforge.net/msg07534.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 8.9,
-    "epss_percentile": 95.3,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-6800",
     "published": "2024-08-20T20:15:09.910",
     "last_modified": "2026-11-04T01:17:18.267",
@@ -8319,7 +7182,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 51.5,
+    "epss_percentile": 51.6,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8518,7 +7381,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.7,
+    "epss_percentile": 48.8,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8539,7 +7402,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 35.6,
+    "epss_percentile": 35.7,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8560,7 +7423,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 35.6,
+    "epss_percentile": 35.7,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8624,7 +7487,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.6,
+    "epss_percentile": 42.7,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8668,7 +7531,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.1,
+    "epss_percentile": 43.2,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8712,7 +7575,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 52.4,
+    "epss_percentile": 52.5,
     "tags": [],
     "intel_score": 59.0,
     "reasons": [
@@ -8853,6 +7716,74 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-55469",
+    "published": "2025-11-26T18:15:48.607",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Incorrect access control in youlai-boot v2.21.1 allows attackers to escalate privileges and access the Administrator backend.",
+    "references": [
+      "https://gist.github.com/old6ma/d6e19c9efbe28431f4c27c063cc9cbb8",
+      "https://gitee.com/youlaiorg/youlai-boot",
+      "https://gitee.com/youlaiorg/youlai-boot/issues/ICFCOK",
+      "https://gitee.com/youlaiorg/youlai-boot/issues/ICFCOK"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 39.6,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-26155",
+    "published": "2025-11-26T19:15:46.967",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "NCP Secure Enterprise Client 13.18 and NCP Secure Entry Windows Client 13.19 have an Untrusted Search Path vulnerability.",
+    "references": [
+      "https://pentest.axians.de/viewer.html?file=cve-2025-26155/CVE-axians-eng.pdf",
+      "https://www.ncp-e.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 49.4,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-50433",
+    "published": "2025-11-26T20:15:49.367",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in imonnit.com (2025-04-24) allowing malicious actors to gain escalated privileges via crafted password reset to take over arbitrary user accounts.",
+    "references": [
+      "https://github.com/0xMandor/imonnit-ato-advisory/blob/main/CVE-2025-50433.md",
+      "https://youtu.be/-BqcdwHgMMA"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.2,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-49796",
     "published": "2025-06-16T16:15:19.370",
     "last_modified": "2026-11-04T22:17:37.073",
@@ -8936,49 +7867,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-28074",
-    "published": "2024-07-17T15:15:13.417",
-    "last_modified": "2026-11-03T22:17:17.127",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "It was discovered that a previous vulnerability was not completely fixed with SolarWinds Access Rights Manager. While some controls were implemented the researcher was able to bypass these and use a different method to exploit the vulnerability.",
-    "references": [
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm",
-      "https://documentation.solarwinds.com/en/success_center/arm/content/release_notes/arm_2024-3_release_notes.htm"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 10.9,
-    "epss_percentile": 95.9,
-    "tags": [],
-    "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-12108",
-    "published": "2024-12-31T11:15:06.780",
-    "last_modified": "2026-11-03T22:17:12.840",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In WhatsUp Gold versions released before 2024.0.2, an attacker can gain access to the WhatsUp Gold server via the public API.",
-    "references": [
-      "https://www.progress.com/network-monitoring"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 7.7,
-    "epss_percentile": 94.6,
-    "tags": [],
-    "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-63691",
     "published": "2025-11-07T16:15:42.820",
     "last_modified": "2026-11-05T14:10:00.273",
@@ -9048,60 +7936,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-37051",
-    "published": "2024-06-10T16:15:16.713",
-    "last_modified": "2026-11-03T22:17:20.393",
-    "cvss_v3": 9.3,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "GitHub access token could be exposed to third-party sites in JetBrains IDEs after version 2023.1 and less than: IntelliJ IDEA 2023.1.7, 2023.2.7, 2023.3.7, 2024.1.3, 2024.2 EAP3; Aqua 2024.1.2; CLion 2023.1.7, 2023.2.4, 2023.3.5, 2024.1.3, 2024.2 EAP2; DataGrip 2023.1.3, 2023.2.4, 2023.3.5, 2024.1.4; DataSpell 2023.1.6, 2023.2.7, 2023.3.6, 2024.1.2, 2024.2 EAP1; GoLand 2023.1.6, 2023.2.7, 2023.3.7, 2024.1.3, 2024.2 EAP3; MPS 2023.2.1, 2023.3.1, 2024.1 EAP2; PhpStorm 2023.1.6, 2023.2.6, 2023.3.7, 2024.1.3, 2024.2 EAP3; PyCharm 2023.1.6, 2023.2.7, 2023.3.6, 2024.1.3, 2024.2 EAP2; Rider 2023.1.7, 2023.2.5, 2023.3.6, 2024.1.3; RubyMine 2023.1.7, 2023.2.7, 2023.3.7, 2024.1.3, 2024.2 EAP4; RustRover 2024.1.1; WebStorm 2023.1.6, 2023.2.7, 2023.3.7, 2024.1.4",
-    "references": [
-      "https://security.netapp.com/advisory/ntap-20240705-0004/",
-      "https://www.jetbrains.com/privacy-security/issues-fixed/",
-      "https://security.netapp.com/advisory/ntap-20240705-0004/",
-      "https://www.jetbrains.com/privacy-security/issues-fixed/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 4.9,
-    "epss_percentile": 92.1,
-    "tags": [],
-    "intel_score": 56.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-38368",
-    "published": "2024-07-01T21:15:04.250",
-    "last_modified": "2026-11-03T22:17:21.537",
-    "cvss_v3": 9.3,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "trunk.cocoapods.org is the authentication server for the CoacoaPods dependency manager. A vulnerability affected older pods which migrated from the pre-2014 pull request workflow to trunk. If the pods had never been claimed then it was still possible to do so. It was also possible to have all owners removed from a pod, and that made the pod available for the same claiming system. This was patched server-side in commit 71be5440906b6bdfbc0bcc7f8a9fec33367ea0f4 in September 2023.",
-    "references": [
-      "https://blog.cocoapods.org/Claim-Your-Pods",
-      "https://blog.cocoapods.org/CocoaPods-Trunk-RCEs-2023",
-      "https://evasec.webflow.io/blog/eva-discovered-supply-chain-vulnerabities-in-cocoapods#1-taking-unauthorized-ownership-over-orphaned-pods",
-      "https://github.com/CocoaPods/CocoaPods/security/advisories/GHSA-j483-qm5c-7hqx",
-      "https://github.com/CocoaPods/trunk.cocoapods.org/commit/71be5440906b6bdfbc0bcc7f8a9fec33367ea0f4",
-      "https://blog.cocoapods.org/Claim-Your-Pods",
-      "https://blog.cocoapods.org/CocoaPods-Trunk-RCEs-2023",
-      "https://evasec.webflow.io/blog/eva-discovered-supply-chain-vulnerabities-in-cocoapods#1-taking-unauthorized-ownership-over-orphaned-pods",
-      "https://github.com/CocoaPods/CocoaPods/security/advisories/GHSA-j483-qm5c-7hqx",
-      "https://github.com/CocoaPods/trunk.cocoapods.org/commit/71be5440906b6bdfbc0bcc7f8a9fec33367ea0f4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 14.9,
-    "epss_percentile": 96.7,
-    "tags": [],
-    "intel_score": 56.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-54346",
     "published": "2025-11-14T18:15:48.897",
     "last_modified": "2026-11-05T14:10:00.273",
@@ -9116,7 +7950,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 19.7,
+    "epss_percentile": 19.6,
     "tags": [
       "xss"
     ],
@@ -9554,6 +8388,54 @@
     ]
   },
   {
+    "cve_id": "CVE-2024-5535",
+    "published": "2024-06-27T11:15:24.447",
+    "last_modified": "2026-11-06T17:39:09.780",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Issue summary: Calling the OpenSSL API function SSL_select_next_proto with an\nempty supported client protocols buffer may cause a crash or memory contents to\nbe sent to the peer.\n\nImpact summary: A buffer overread can have a range of potential consequences\nsuch as unexpected application beahviour or a crash. In particular this issue\ncould result in up to 255 bytes of arbitrary private data from memory being sent\nto the peer leading to a loss of confidentiality. However, only applications\nthat directly call the SSL_select_next_proto function with a 0 length list of\nsupported client protocols are affected by this issue. This would normally never\nbe a valid scenario and is typically not under attacker control but may occur by\naccident in the case of a configuration or programming error in the calling\napplication.\n\nThe OpenSSL API function SSL_select_next_proto is typically used by TLS\napplications that support ALPN (Application Layer Protocol Negotiation) or NPN\n(Next Protocol Negotiation). NPN is older, was never standardised and\nis deprecated in favour of ALPN. We believe that ALPN is significantly more\nwidely deployed than NPN. The SSL_select_next_proto function accepts a list of\nprotocols from the server and a list of protocols from the client and returns\nthe first protocol that appears in the server list that also appears in the\nclient list. In the case of no overlap between the two lists it returns the\nfirst item in the client list. In either case it will signal whether an overlap\nbetween the two lists was found. In the case where SSL_select_next_proto is\ncalled with a zero length client list it fails to notice this condition and\nreturns the memory immediately following the client list pointer (and reports\nthat there was no overlap in the lists).\n\nThis function is typically called from a server side application callback for\nALPN or a client side application callback for NPN. In the case of ALPN the list\nof protocols supplied by the client is guaranteed by libssl to never be zero in\nlength. The list of server protocols comes from the application and should never\nnormally be expected to be of zero length. In this case if the\nSSL_select_next_proto function has been called as expected (with the list\nsupplied by the client passed in the client/client_len parameters), then the\napplication will not be vulnerable to this issue. If the application has\naccidentally been configured with a zero length server list, and has\naccidentally passed that zero length server list in the client/client_len\nparameters, and has additionally failed to correctly handle a \"no overlap\"\nresponse (which would normally result in a handshake failure in ALPN) then it\nwill be vulnerable to this problem.\n\nIn the case of NPN, the protocol permits the client to opportunistically select\na protocol when there is no overlap. OpenSSL returns the first client protocol\nin the no overlap case in support of this. The list of client protocols comes\nfrom the application and should never normally be expected to be of zero length.\nHowever if the SSL_select_next_proto function is accidentally called with a\nclient_len of 0 then an invalid memory pointer will be returned instead. If the\napplication uses this output as the opportunistic protocol then the loss of\nconfidentiality will occur.\n\nThis issue has been assessed as Low severity because applications are most\nlikely to be vulnerable if they are using NPN instead of ALPN - but NPN is not\nwidely used. It also requires an application configuration or programming error.\nFinally, this issue would not typically be under attacker control making active\nexploitation unlikely.\n\nThe FIPS modules in 3.3, 3.2, 3.1 and 3.0 are not affected by this issue.\n\nDue to the low severity of this issue we are not issuing new releases of\nOpenSSL at this time. The fix will be included in the next releases when they\nbecome available.",
+    "references": [
+      "https://github.com/openssl/openssl/commit/4ada436a1946cbb24db5ab4ca082b69c1bc10f37",
+      "https://github.com/openssl/openssl/commit/99fb785a5f85315b95288921a321a935ea29a51e",
+      "https://github.com/openssl/openssl/commit/cf6f91f6121f4db167405db2f0de410a456f260c",
+      "https://github.com/openssl/openssl/commit/e86ac436f0bd54d4517745483e2315650fae7b2c",
+      "https://github.openssl.org/openssl/extended-releases/commit/9947251413065a05189a63c9b7a6c1d4e224c21c",
+      "https://github.openssl.org/openssl/extended-releases/commit/b78ec0824da857223486660177d3b1f255c65d87",
+      "https://www.openssl.org/news/secadv/20240627.txt",
+      "http://www.openwall.com/lists/oss-security/2024/06/27/1",
+      "http://www.openwall.com/lists/oss-security/2024/06/28/4",
+      "http://www.openwall.com/lists/oss-security/2024/08/15/1",
+      "https://github.com/openssl/openssl/commit/4ada436a1946cbb24db5ab4ca082b69c1bc10f37",
+      "https://github.com/openssl/openssl/commit/99fb785a5f85315b95288921a321a935ea29a51e",
+      "https://github.com/openssl/openssl/commit/cf6f91f6121f4db167405db2f0de410a456f260c",
+      "https://github.com/openssl/openssl/commit/e86ac436f0bd54d4517745483e2315650fae7b2c",
+      "https://github.openssl.org/openssl/extended-releases/commit/9947251413065a05189a63c9b7a6c1d4e224c21c",
+      "https://github.openssl.org/openssl/extended-releases/commit/b78ec0824da857223486660177d3b1f255c65d87",
+      "https://lists.debian.org/debian-lts-announce/2024/10/msg00033.html",
+      "https://lists.debian.org/debian-lts-announce/2024/11/msg00000.html",
+      "https://security.netapp.com/advisory/ntap-20240712-0005/",
+      "https://security.netapp.com/advisory/ntap-20241025-0006/",
+      "https://security.netapp.com/advisory/ntap-20241025-0010/",
+      "https://www.openssl.org/news/secadv/20240627.txt",
+      "https://cert-portal.siemens.com/productcert/html/ssa-265688.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-277137.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-613116.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-769027.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-915275.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 5.6,
+    "epss_percentile": 92.9,
+    "tags": [],
+    "intel_score": 55.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-49794",
     "published": "2025-06-16T16:15:18.997",
     "last_modified": "2026-11-04T22:17:36.413",
@@ -9691,7 +8573,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.7,
+    "epss_percentile": 39.8,
     "tags": [
       "xss"
     ],
@@ -9745,6 +8627,29 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-65669",
+    "published": "2025-11-26T19:15:47.483",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An issue was discovered in classroomio 0.1.13. Student accounts are able to delete courses from the Explore page without any authorization or authentication checks, bypassing the expected admin-only deletion restriction.",
+    "references": [
+      "https://github.com/Rivek619/CVE-2025-65669",
+      "https://github.com/classroomio/classroomio",
+      "https://github.com/Rivek619/CVE-2025-65669"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 43.2,
+    "tags": [],
+    "intel_score": 55.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-32911",
     "published": "2025-04-15T16:16:06.567",
     "last_modified": "2026-11-04T22:17:32.600",
@@ -9772,7 +8677,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.0,
-    "epss_percentile": 61.8,
+    "epss_percentile": 61.9,
     "tags": [],
     "intel_score": 55.0,
     "reasons": [
@@ -9882,7 +8787,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 18.9,
+    "epss_percentile": 18.8,
     "tags": [
       "xss"
     ],
@@ -10008,49 +8913,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-9121",
-    "published": "2024-09-25T01:15:48.797",
-    "last_modified": "2026-11-03T22:17:30.100",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Inappropriate implementation in V8 in Google Chrome prior to 129.0.6668.70 allowed a remote attacker to potentially perform out of bounds memory access via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2024/09/stable-channel-update-for-desktop_24.html",
-      "https://issues.chromium.org/issues/363538434"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 43.7,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-55579",
-    "published": "2024-12-09T03:15:05.197",
-    "last_modified": "2026-11-03T22:17:28.110",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An issue was discovered in Qlik Sense Enterprise for Windows before November 2024 IR. An unprivileged user with network access may be able to create connection objects that trigger execution of arbitrary EXE files. This is fixed in November 2024 IR, May 2024 Patch 10, February 2024 Patch 14, November 2023 Patch 16, August 2023 Patch 16, May 2023 Patch 18, and February 2023 Patch 15.",
-    "references": [
-      "https://community.qlik.com/t5/Official-Support-Articles/High-Security-fixes-for-Qlik-Sense-Enterprise-for-Windows-CVEs/tac-p/2496004"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 41.1,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-54505",
     "published": "2024-12-12T02:15:31.227",
     "last_modified": "2026-11-04T17:17:24.490",
@@ -10076,28 +8938,6 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 65.0,
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-25469",
-    "published": "2025-02-18T22:15:18.587",
-    "last_modified": "2026-11-03T22:17:37.013",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "FFmpeg git-master before commit d5873b was discovered to contain a memory leak in the component libavutil/iamf.c.",
-    "references": [
-      "https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/d5873be583ada9e1fb887e2fe8dcfd4b12e0efcd",
-      "https://trac.ffmpeg.org/ticket/11416"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 40.3,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -10140,7 +8980,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 36.6,
+    "epss_percentile": 36.7,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -10184,7 +9024,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 47.6,
+    "epss_percentile": 47.7,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -10229,7 +9069,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 36.2,
+    "epss_percentile": 36.3,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -10316,7 +9156,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 24.4,
+    "epss_percentile": 24.3,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -10338,7 +9178,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 24.4,
+    "epss_percentile": 24.3,
     "tags": [],
     "intel_score": 54.0,
     "reasons": [
@@ -10454,7 +9294,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 34.0,
+    "epss_percentile": 34.1,
     "tags": [
       "dos"
     ],
@@ -10506,7 +9346,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [
       "xss"
     ],
@@ -10537,7 +9377,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.7,
-    "epss_percentile": 54.0,
+    "epss_percentile": 54.1,
     "tags": [],
     "intel_score": 53.0,
     "reasons": [
@@ -10611,31 +9451,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-45717",
-    "published": "2024-12-04T07:15:06.167",
-    "last_modified": "2026-11-03T22:17:24.207",
-    "cvss_v3": 7.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The SolarWinds Platform was susceptible to a XSS vulnerability that affects the search and node information section of the user interface. This vulnerability requires authentication and requires user interaction.",
-    "references": [
-      "https://documentation.solarwinds.com/en/success_center/orionplatform/content/release_notes/solarwinds_platform_2024-4-1_release_notes.htm",
-      "https://www.solarwinds.com/trust-center/security-advisories/CVE-2024-45717"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 31.7,
-    "tags": [
-      "xss"
-    ],
-    "intel_score": 53.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "xss+8"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-11218",
     "published": "2025-01-22T05:15:08.903",
     "last_modified": "2026-11-04T21:17:32.713",
@@ -10681,7 +9496,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 30.6,
+    "epss_percentile": 30.5,
     "tags": [],
     "intel_score": 53.0,
     "reasons": [
@@ -10821,7 +9636,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 27.2,
+    "epss_percentile": 27.1,
     "tags": [
       "dos"
     ],
@@ -10829,27 +9644,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-23384",
-    "published": "2024-08-05T15:15:48.027",
-    "last_modified": "2026-11-03T22:17:14.143",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Memory corruption when the mapped pages in VBO are still mapped after reclaiming by shrinker.",
-    "references": [
-      "https://docs.qualcomm.com/product/publicresources/securitybulletin/august-2024-bulletin.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.5,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
     ]
   },
   {
@@ -10867,7 +9661,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.2,
+    "epss_percentile": 8.1,
     "tags": [
       "dos"
     ],
@@ -10995,27 +9789,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-49068",
-    "published": "2024-12-12T02:04:30.833",
-    "last_modified": "2026-11-03T22:17:25.170",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Microsoft SharePoint Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49068"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 76.1,
-    "tags": [],
-    "intel_score": 51.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-1675",
     "published": "2025-02-25T08:15:30.020",
     "last_modified": "2026-11-05T19:30:25.827",
@@ -11120,7 +9893,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 51.1,
+    "epss_percentile": 51.2,
     "tags": [],
     "intel_score": 51.0,
     "reasons": [
@@ -11282,7 +10055,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.4,
-    "epss_percentile": 72.4,
+    "epss_percentile": 72.5,
     "tags": [
       "dos"
     ],
@@ -11321,7 +10094,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 3.5,
-    "epss_percentile": 89.1,
+    "epss_percentile": 89.2,
     "tags": [
       "dos"
     ],
@@ -11462,7 +10235,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.2,
-    "epss_percentile": 67.4,
+    "epss_percentile": 67.5,
     "tags": [],
     "intel_score": 50.5,
     "reasons": [
@@ -11507,11 +10280,40 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 2.1,
-    "epss_percentile": 81.3,
+    "epss_percentile": 81.4,
     "tags": [],
     "intel_score": 50.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-6239",
+    "published": "2024-06-21T14:15:14.007",
+    "last_modified": "2026-11-06T21:17:02.387",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the Poppler's Pdfinfo utility. This issue occurs when using -dests parameter with pdfinfo utility. By using certain malformed input files, an attacker could cause the utility to crash, leading to a denial of service.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2024:5305",
+      "https://access.redhat.com/errata/RHSA-2024:9167",
+      "https://access.redhat.com/security/cve/CVE-2024-6239",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2293594",
+      "https://access.redhat.com/security/cve/CVE-2024-6239",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2293594"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 56.2,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -11805,8 +10607,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 59.5,
+    "epss": 1.1,
+    "epss_percentile": 65.1,
     "tags": [
       "dos"
     ],
@@ -11871,7 +10673,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 1.6,
-    "epss_percentile": 75.9,
+    "epss_percentile": 76.0,
     "tags": [
       "dos"
     ],
@@ -11908,8 +10710,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 57.1,
+    "epss": 1.1,
+    "epss_percentile": 66.3,
     "tags": [
       "dos"
     ],
@@ -11991,7 +10793,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 48.4,
+    "epss_percentile": 48.5,
     "tags": [
       "dos"
     ],
@@ -12065,6 +10867,32 @@
     "cisa_kev": false,
     "epss": 1.3,
     "epss_percentile": 70.6,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-4056",
+    "published": "2025-07-28T13:15:30.177",
+    "last_modified": "2026-11-06T18:17:19.590",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GLib. A denial of service on Windows platforms may occur if an application attempts to spawn a program using long command lines.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2025-4056",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2362826",
+      "https://gitlab.gnome.org/GNOME/glib/-/issues/3668"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 45.8,
     "tags": [
       "dos"
     ],
@@ -12159,7 +10987,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [
       "dos"
     ],
@@ -12185,7 +11013,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 36.7,
+    "epss_percentile": 36.8,
     "tags": [
       "dos"
     ],
@@ -12983,7 +11811,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [
       "dos"
     ],
@@ -13008,7 +11836,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [
       "dos"
     ],
@@ -13033,7 +11861,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [
       "dos"
     ],
@@ -13082,7 +11910,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 20.3,
+    "epss_percentile": 20.2,
     "tags": [
       "dos"
     ],
@@ -13108,7 +11936,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 42.2,
+    "epss_percentile": 42.3,
     "tags": [
       "dos"
     ],
@@ -13295,7 +12123,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 49.8,
+    "epss_percentile": 49.9,
     "tags": [
       "dos"
     ],
@@ -13411,94 +12239,6 @@
     "epss_percentile": 21.4,
     "tags": [],
     "intel_score": 50.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-34707",
-    "published": "2022-08-09T20:15:11.203",
-    "last_modified": "2026-11-03T22:17:10.027",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Kernel Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-34707",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-34707"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 71.3,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-35768",
-    "published": "2022-08-09T20:15:12.233",
-    "last_modified": "2026-11-03T22:17:10.790",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Kernel Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-35768",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-35768"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 65.4,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-20818",
-    "published": "2022-09-30T19:15:11.867",
-    "last_modified": "2026-11-03T22:17:08.990",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Multiple vulnerabilities in the CLI of Cisco SD-WAN Software could allow an authenticated, local attacker to gain elevated privileges. These vulnerabilities are due to improper access controls on commands within the application CLI. An attacker could exploit these vulnerabilities by running a malicious command on the application CLI. A successful exploit could allow the attacker to execute arbitrary commands as the root user.",
-    "references": [
-      "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sd-wan-priv-E6e8tEdF",
-      "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sd-wan-priv-E6e8tEdF"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 49.6,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-21748",
-    "published": "2023-01-10T22:15:18.240",
-    "last_modified": "2026-11-03T22:17:11.723",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Kernel Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-21748",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-21748"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 58.3,
-    "tags": [],
-    "intel_score": 49.0,
     "reasons": [
       "recently modified (last 48h)"
     ]
@@ -13699,47 +12439,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-26923",
-    "published": "2024-04-25T06:15:57.160",
-    "last_modified": "2026-11-03T22:17:16.107",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\naf_unix: Fix garbage collector racing against connect()\n\nGarbage collector does not take into account the risk of embryo getting\nenqueued during the garbage collection. If such embryo has a peer that\ncarries SCM_RIGHTS, two consecutive passes of scan_children() may see a\ndifferent set of children. Leading to an incorrectly elevated inflight\ncount, and then a dangling pointer within the gc_inflight_list.\n\nsockets are AF_UNIX/SOCK_STREAM\nS is an unconnected socket\nL is a listening in-flight socket bound to addr, not in fdtable\nV's fd will be passed via sendmsg(), gets inflight count bumped\n\nconnect(S, addr)\tsendmsg(S, [V]); close(V)\t__unix_gc()\n----------------\t-------------------------\t-----------\n\nNS = unix_create1()\nskb1 = sock_wmalloc(NS)\nL = unix_find_other(addr)\nunix_state_lock(L)\nunix_peer(S) = NS\n\t\t\t// V count=1 inflight=0\n\n \t\t\tNS = unix_peer(S)\n \t\t\tskb2 = sock_alloc()\n\t\t\tskb_queue_tail(NS, skb2[V])\n\n\t\t\t// V became in-flight\n\t\t\t// V count=2 inflight=1\n\n\t\t\tclose(V)\n\n\t\t\t// V count=1 inflight=1\n\t\t\t// GC candidate condition met\n\n\t\t\t\t\t\tfor u in gc_inflight_list:\n\t\t\t\t\t\t  if (total_refs == inflight_refs)\n\t\t\t\t\t\t    add u to gc_candidates\n\n\t\t\t\t\t\t// gc_candidates={L, V}\n\n\t\t\t\t\t\tfor u in gc_candidates:\n\t\t\t\t\t\t  scan_children(u, dec_inflight)\n\n\t\t\t\t\t\t// embryo (skb1) was not\n\t\t\t\t\t\t// reachable from L yet, so V's\n\t\t\t\t\t\t// inflight remains unchanged\n__skb_queue_tail(L, skb1)\nunix_state_unlock(L)\n\t\t\t\t\t\tfor u in gc_candidates:\n\t\t\t\t\t\t  if (u.inflight)\n\t\t\t\t\t\t    scan_children(u, inc_inflight_move_tail)\n\n\t\t\t\t\t\t// V count=1 inflight=2 (!)\n\nIf there is a GC-candidate listening socket, lock/unlock its state. This\nmakes GC wait until the end of any ongoing connect() to that socket. After\nflipping the lock, a possibly SCM-laden embryo is already enqueued. And if\nthere is another embryo coming, it can not possibly carry SCM_RIGHTS. At\nthis point, unix_inflight() can not happen because unix_gc_lock is already\ntaken. Inflight graph remains unaffected.",
-    "references": [
-      "https://git.kernel.org/stable/c/2e2a03787f4f0abc0072350654ab0ef3324d9db3",
-      "https://git.kernel.org/stable/c/343c5372d5e17b306db5f8f3c895539b06e3177f",
-      "https://git.kernel.org/stable/c/47d8ac011fe1c9251070e1bd64cb10b48193ec51",
-      "https://git.kernel.org/stable/c/507cc232ffe53a352847893f8177d276c3b532a9",
-      "https://git.kernel.org/stable/c/a36ae0ec2353015f0f6762e59f4c2dbc0c906423",
-      "https://git.kernel.org/stable/c/b75722be422c276b699200de90527d01c602ea7c",
-      "https://git.kernel.org/stable/c/dbdf7bec5c920200077d693193f989cb1513f009",
-      "https://git.kernel.org/stable/c/e76c2678228f6aec74b305ae30c9374cc2f28a51",
-      "https://git.kernel.org/stable/c/2e2a03787f4f0abc0072350654ab0ef3324d9db3",
-      "https://git.kernel.org/stable/c/343c5372d5e17b306db5f8f3c895539b06e3177f",
-      "https://git.kernel.org/stable/c/47d8ac011fe1c9251070e1bd64cb10b48193ec51",
-      "https://git.kernel.org/stable/c/507cc232ffe53a352847893f8177d276c3b532a9",
-      "https://git.kernel.org/stable/c/a36ae0ec2353015f0f6762e59f4c2dbc0c906423",
-      "https://git.kernel.org/stable/c/b75722be422c276b699200de90527d01c602ea7c",
-      "https://git.kernel.org/stable/c/dbdf7bec5c920200077d693193f989cb1513f009",
-      "https://git.kernel.org/stable/c/e76c2678228f6aec74b305ae30c9374cc2f28a51",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00017.html",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00020.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-265688.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-613116.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.9,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-36978",
     "published": "2024-06-19T07:15:46.437",
     "last_modified": "2026-11-04T17:17:23.790",
@@ -13778,28 +12477,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-38100",
-    "published": "2024-07-09T17:15:46.770",
-    "last_modified": "2026-11-03T22:17:21.183",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows File Explorer Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-38100",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-38100"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 4.5,
-    "epss_percentile": 91.6,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-7358",
     "published": "2024-08-01T14:15:03.820",
     "last_modified": "2026-11-05T14:01:14.983",
@@ -13817,34 +12494,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 13.3,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-46852",
-    "published": "2024-09-27T13:15:16.917",
-    "last_modified": "2026-11-03T22:17:24.360",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ndma-buf: heaps: Fix off-by-one in CMA heap fault handler\n\nUntil VM_DONTEXPAND was added in commit 1c1914d6e8c6 (\"dma-buf: heaps:\nDon't track CMA dma-buf pages under RssFile\") it was possible to obtain\na mapping larger than the buffer size via mremap and bypass the overflow\ncheck in dma_buf_mmap_internal. When using such a mapping to attempt to\nfault past the end of the buffer, the CMA heap fault handler also checks\nthe fault offset against the buffer size, but gets the boundary wrong by\n1. Fix the boundary check so that we don't read off the end of the pages\narray and insert an arbitrary page in the mapping.",
-    "references": [
-      "https://git.kernel.org/stable/c/79cce5e81d20fa9ad553be439d665ac3302d3c95",
-      "https://git.kernel.org/stable/c/84175dc5b2c932266a50c04e5ce342c30f817a2f",
-      "https://git.kernel.org/stable/c/e79050882b857c37634baedbdcf7c2047c24cbff",
-      "https://git.kernel.org/stable/c/ea5ff5d351b520524019f7ff7f9ce418de2dad87",
-      "https://git.kernel.org/stable/c/eb7fc8b65cea22f9038c52398c8b22849e9620ea",
-      "https://lists.debian.org/debian-lts-announce/2025/01/msg00001.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 12.0,
+    "epss": 0.3,
+    "epss_percentile": 22.2,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -13891,49 +12542,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 33.5,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-49019",
-    "published": "2024-11-12T18:15:41.863",
-    "last_modified": "2026-11-03T22:17:24.793",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Active Directory Certificate Services Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49019"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.0,
-    "epss_percentile": 80.6,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-49114",
-    "published": "2024-12-12T02:04:37.757",
-    "last_modified": "2026-11-03T22:17:25.823",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Cloud Files Mini Filter Driver Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49114"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 55.0,
+    "epss_percentile": 33.6,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -14009,7 +12618,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 12.3,
+    "epss_percentile": 12.2,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -14162,7 +12771,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 38.7,
+    "epss_percentile": 38.8,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -14657,7 +13266,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 13.9,
+    "epss_percentile": 13.8,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -15016,7 +13625,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 40.9,
+    "epss_percentile": 41.0,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -15299,7 +13908,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.7,
+    "epss_percentile": 9.2,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -15386,7 +13995,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.7,
+    "epss_percentile": 8.6,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -15685,7 +14294,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 6.9,
+    "epss_percentile": 8.1,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -15717,7 +14326,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 34.7,
+    "epss_percentile": 34.8,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -15778,7 +14387,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 36.1,
+    "epss_percentile": 36.2,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -16412,7 +15021,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.9,
+    "epss_percentile": 8.8,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -16571,7 +15180,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 49.2,
+    "epss_percentile": 49.3,
     "tags": [
       "dos"
     ],
@@ -16771,7 +15380,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 58.2,
+    "epss_percentile": 58.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -17076,32 +15685,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-24974",
-    "published": "2024-07-08T11:15:10.103",
-    "last_modified": "2026-11-03T22:17:15.597",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The interactive service in OpenVPN 2.6.9 and earlier allows the OpenVPN service pipe to be accessed remotely, which allows a remote attacker to interact with the privileged OpenVPN interactive service.",
-    "references": [
-      "https://community.openvpn.net/openvpn/wiki/CVE-2024-24974",
-      "https://openvpn.net/security-advisory/ovpnx-vulnerability-cve-2024-27903-cve-2024-27459-cve-2024-24974/",
-      "https://www.mail-archive.com/openvpn-users@lists.sourceforge.net/msg07534.html",
-      "https://community.openvpn.net/openvpn/wiki/CVE-2024-24974",
-      "https://openvpn.net/security-advisory/ovpnx-vulnerability-cve-2024-27903-cve-2024-27459-cve-2024-24974/",
-      "https://www.mail-archive.com/openvpn-users@lists.sourceforge.net/msg07534.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 9.8,
-    "epss_percentile": 95.5,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-7885",
     "published": "2024-08-21T14:15:09.500",
     "last_modified": "2026-11-04T21:17:39.230",
@@ -17203,27 +15786,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-55580",
-    "published": "2024-12-09T03:15:05.400",
-    "last_modified": "2026-11-03T22:17:28.253",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An issue was discovered in Qlik Sense Enterprise for Windows before November 2024 IR. Unprivileged users with network access may be able to execute remote commands that could cause high availability damages, including high integrity and confidentiality risks. This is fixed in November 2024 IR, May 2024 Patch 10, February 2024 Patch 14, November 2023 Patch 16, August 2023 Patch 16, May 2023 Patch 18, and February 2023 Patch 15.",
-    "references": [
-      "https://community.qlik.com/t5/Official-Support-Articles/High-Security-fixes-for-Qlik-Sense-Enterprise-for-Windows-CVEs/tac-p/2496004"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 28.3,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-32906",
     "published": "2025-04-14T14:15:24.433",
     "last_modified": "2026-11-04T22:17:32.180",
@@ -17251,8 +15813,8 @@
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 62.1,
+    "epss": 1.3,
+    "epss_percentile": 69.7,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -17288,6 +15850,30 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 58.0,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2023-32256",
+    "published": "2025-08-01T18:15:27.910",
+    "last_modified": "2026-11-06T21:17:00.240",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the Linux kernel's ksmbd component. A race condition between smb2 close operation and logoff in multichannel connections could result in a use-after-free issue.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2023-32256",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2385885",
+      "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=abcc506a9a71976a8b4c9bf3ee6efd13229c1e19",
+      "https://www.zerodayinitiative.com/advisories/ZDI-23-704/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 49.6,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -17699,7 +16285,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 39.7,
+    "epss_percentile": 39.8,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -17764,7 +16350,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 43.9,
+    "epss_percentile": 44.0,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18079,7 +16665,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 36.4,
+    "epss_percentile": 36.5,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18145,7 +16731,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 17.5,
+    "epss_percentile": 17.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18231,7 +16817,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 22.4,
+    "epss_percentile": 22.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18357,7 +16943,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 22.4,
+    "epss_percentile": 22.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18378,7 +16964,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 22.4,
+    "epss_percentile": 22.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18465,7 +17051,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 37.3,
+    "epss_percentile": 37.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18531,7 +17117,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18553,7 +17139,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 29.3,
+    "epss_percentile": 29.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18574,7 +17160,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 14.1,
+    "epss_percentile": 14.0,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18774,7 +17360,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 50.5,
+    "epss_percentile": 50.6,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18970,7 +17556,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 22.4,
+    "epss_percentile": 22.3,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -18991,7 +17577,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 30.7,
+    "epss_percentile": 30.6,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -19015,6 +17601,72 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 25.9,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-55471",
+    "published": "2025-11-26T18:15:48.820",
+    "last_modified": "2026-11-05T22:10:00.203",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Incorrect access control in the getUserFormData function of youlai-boot v2.21.1 allows attackers to access sensitive information for other users.",
+    "references": [
+      "https://gist.github.com/old6ma/08d83e5aa7d47e7ff18b23337ccd1f1d",
+      "https://gitee.com/youlaiorg/youlai-boot",
+      "https://gitee.com/youlaiorg/youlai-boot/issues/ICFBW8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 30.5,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-65672",
+    "published": "2025-11-26T19:15:47.963",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Insecure Direct Object Reference (IDOR) in classroomio 0.1.13 allows unauthorized share and invite access to course settings.",
+    "references": [
+      "https://github.com/Rivek619/CVE-2025-65672",
+      "https://github.com/classroomio/classroomio"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.2,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-65278",
+    "published": "2025-11-26T20:15:49.803",
+    "last_modified": "2026-11-04T23:10:00.223",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue was discovered in file users.json in GroceryMart commit 21934e6 (2020-10-23) allowing unauthenticated attackers to gain sensitive information including plaintext usernames and passwords.",
+    "references": [
+      "https://gist.github.com/whoisrushi/7e8d15c85221e3f708b7b480e04ab6ca"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 17.5,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -19141,7 +17793,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.8,
-    "epss_percentile": 55.1,
+    "epss_percentile": 55.2,
     "tags": [],
     "intel_score": 47.0,
     "reasons": [
@@ -19168,7 +17820,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 60.6,
+    "epss_percentile": 60.7,
     "tags": [],
     "intel_score": 47.0,
     "reasons": [
@@ -19192,6 +17844,33 @@
     "cisa_kev": false,
     "epss": 0.7,
     "epss_percentile": 51.7,
+    "tags": [],
+    "intel_score": 47.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-12797",
+    "published": "2025-02-11T16:15:38.827",
+    "last_modified": "2026-11-06T22:18:41.713",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Issue summary: Clients using RFC7250 Raw Public Keys (RPKs) to authenticate a\nserver may fail to notice that the server was not authenticated, because\nhandshakes don't abort as expected when the SSL_VERIFY_PEER verification mode\nis set.\n\nImpact summary: TLS and DTLS connections using raw public keys may be\nvulnerable to man-in-middle attacks when server authentication failure is not\ndetected by clients.\n\nRPKs are disabled by default in both TLS clients and TLS servers.  The issue\nonly arises when TLS clients explicitly enable RPK use by the server, and the\nserver, likewise, enables sending of an RPK instead of an X.509 certificate\nchain.  The affected clients are those that then rely on the handshake to\nfail when the server's RPK fails to match one of the expected public keys,\nby setting the verification mode to SSL_VERIFY_PEER.\n\nClients that enable server-side raw public keys can still find out that raw\npublic key verification failed by calling SSL_get_verify_result(), and those\nthat do, and take appropriate action, are not affected.  This issue was\nintroduced in the initial implementation of RPK support in OpenSSL 3.2.\n\nThe FIPS modules in 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this issue.",
+    "references": [
+      "https://github.com/openssl/openssl/commit/738d4f9fdeaad57660dcba50a619fafced3fd5e9",
+      "https://github.com/openssl/openssl/commit/798779d43494549b611233f92652f0da5328fbe7",
+      "https://github.com/openssl/openssl/commit/87ebd203feffcf92ad5889df92f90bb0ee10a699",
+      "https://openssl-library.org/news/secadv/20250211.txt",
+      "http://www.openwall.com/lists/oss-security/2025/02/11/3",
+      "http://www.openwall.com/lists/oss-security/2025/02/11/4",
+      "https://security.netapp.com/advisory/ntap-20250214-0001/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.5,
+    "epss_percentile": 85.0,
     "tags": [],
     "intel_score": 47.0,
     "reasons": [
@@ -19445,28 +18124,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 27.4,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-35248",
-    "published": "2024-06-11T17:16:02.180",
-    "last_modified": "2026-11-03T22:17:19.230",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Microsoft Dynamics 365 Business Central Elevation of Privilege Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-35248",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-35248"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 61.5,
     "tags": [],
     "intel_score": 46.5,
     "reasons": [
@@ -19922,29 +18579,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2022-23498",
-    "published": "2023-02-03T22:15:09.463",
-    "last_modified": "2026-11-03T22:17:09.223",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grafana is an open-source platform for monitoring and observability. When datasource query caching is enabled, Grafana caches all headers, including `grafana_session`. As a result, any user that queries a datasource where the caching is enabled can acquire another user’s session. To mitigate the vulnerability you can disable datasource query caching for all datasources. This issue has been patched in versions 9.2.10 and 9.3.4.\n",
-    "references": [
-      "https://github.com/grafana/grafana/security/advisories/GHSA-2j8f-6whh-frc8",
-      "https://github.com/grafana/grafana/security/advisories/GHSA-2j8f-6whh-frc8",
-      "https://security.netapp.com/advisory/ntap-20230309-0007/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 66.6,
-    "tags": [],
-    "intel_score": 45.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-6606",
     "published": "2023-12-08T17:15:07.733",
     "last_modified": "2026-11-05T12:17:37.273",
@@ -19983,7 +18617,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.5,
-    "epss_percentile": 44.7,
+    "epss_percentile": 44.8,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20053,7 +18687,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.6,
-    "epss_percentile": 47.5,
+    "epss_percentile": 47.6,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20179,7 +18813,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.3,
-    "epss_percentile": 20.8,
+    "epss_percentile": 20.7,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20353,7 +18987,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 13.1,
+    "epss_percentile": 13.0,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20381,7 +19015,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 13.1,
+    "epss_percentile": 13.0,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20553,7 +19187,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 13.1,
+    "epss_percentile": 13.7,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20580,7 +19214,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 7.9,
+    "epss_percentile": 8.3,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20610,7 +19244,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.3,
+    "epss_percentile": 8.2,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20640,7 +19274,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 11.3,
+    "epss_percentile": 11.2,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20693,7 +19327,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 4.8,
+    "epss_percentile": 5.9,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -20750,7 +19384,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 8.4,
+    "epss_percentile": 8.3,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -21091,7 +19725,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 13.1,
+    "epss_percentile": 13.0,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -21189,7 +19823,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 31.4,
+    "epss_percentile": 31.3,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -21214,7 +19848,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.4,
-    "epss_percentile": 39.2,
+    "epss_percentile": 39.3,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
@@ -21473,21 +20107,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-30090",
-    "published": "2024-06-11T17:15:57.240",
-    "last_modified": "2026-11-03T22:17:18.320",
+    "cve_id": "CVE-2024-6655",
+    "published": "2024-07-16T15:15:12.597",
+    "last_modified": "2026-11-06T21:17:03.443",
     "cvss_v3": 7.0,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Microsoft Streaming Service Elevation of Privilege Vulnerability",
+    "summary": "A flaw was found in the GTK library. Under certain conditions, it is possible for a library to be injected into a GTK application from the current working directory.",
     "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30090",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30090"
+      "https://access.redhat.com/errata/RHSA-2024:6963",
+      "https://access.redhat.com/errata/RHSA-2024:9184",
+      "https://access.redhat.com/security/cve/CVE-2024-6655",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2297098",
+      "https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/7361/diffs?commit_id=3bbf0b6176d42836d23c36a6ac410e807ec0a7a7#diff-content-e3fbe6480add9420b69f82374fb26ccac2c015a0",
+      "https://www.openwall.com/lists/oss-security/2024/09/09/1",
+      "http://www.openwall.com/lists/oss-security/2024/09/09/1",
+      "https://access.redhat.com/security/cve/CVE-2024-6655",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2297098",
+      "https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/7361/diffs?commit_id=3bbf0b6176d42836d23c36a6ac410e807ec0a7a7#diff-content-e3fbe6480add9420b69f82374fb26ccac2c015a0"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 2.0,
-    "epss_percentile": 80.6,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
     "tags": [],
     "intel_score": 45.0,
     "reasons": [
@@ -21548,7 +20190,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.9,
-    "epss_percentile": 59.1,
+    "epss_percentile": 59.2,
     "tags": [],
     "intel_score": 45.0,
     "reasons": [
@@ -21573,7 +20215,7 @@
     "source": "NVD",
     "cisa_kev": false,
     "epss": 0.2,
-    "epss_percentile": 9.2,
+    "epss_percentile": 9.1,
     "tags": [],
     "intel_score": 45.0,
     "reasons": [
