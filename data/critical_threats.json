@@ -160,6 +160,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-63408",
+    "published": "2025-11-18T16:15:45.323",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Local Agent DVR versions thru 6.6.1.0 are vulnerable to directory traversal that allows an unauthenticated local attacker to gain access to sensitive information, cause a server-side forgery request (SSRF), or execute OS commands.",
+    "references": [
+      "https://ispysoftware.github.io/Agent_API/",
+      "https://www.ericholub.com/blog/agent-dvr-rce/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 37.2,
+    "tags": [
+      "path_traversal",
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 112.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "ssrf+18",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-60957",
     "published": "2025-10-06T17:16:06.497",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -402,6 +431,87 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-59359",
+    "published": "2025-09-15T12:15:33.633",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The cleanTcs mutation in Chaos Controller Manager is vulnerable to OS command injection. In conjunction with CVE-2025-59358, this allows  unauthenticated in-cluster attackers to perform remote code execution across the cluster.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 3.0,
+    "epss_percentile": 87.6,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-59360",
+    "published": "2025-09-15T12:15:33.790",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The killProcesses mutation in Chaos Controller Manager is vulnerable to OS command injection. In conjunction with CVE-2025-59358, this allows unauthenticated in-cluster attackers to perform remote code execution across the cluster.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.9,
+    "epss_percentile": 87.1,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-59361",
+    "published": "2025-09-15T12:15:33.940",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The cleanIptables mutation in Chaos Controller Manager is vulnerable to OS command injection. In conjunction with CVE-2025-59358, this allows unauthenticated in-cluster attackers to perform remote code execution across the cluster.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 3.4,
+    "epss_percentile": 88.9,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-57631",
     "published": "2025-09-16T20:15:36.527",
     "last_modified": "2026-11-07T17:10:00.240",
@@ -549,47 +659,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 19.6,
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-9050",
-    "published": "2024-10-22T13:15:02.410",
-    "last_modified": "2026-11-04T22:17:23.463",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the libreswan client plugin for NetworkManager (NetkworkManager-libreswan), where it fails to properly sanitize the VPN configuration from the local unprivileged user. In this configuration, composed by a key-value format, the plugin fails to escape special characters, leading the application to interpret values as keys. One of the most critical parameters that could be abused by a malicious user is the `leftupdown`key. This key takes an executable command as a value and is used to specify what executes as a callback in NetworkManager-libreswan to retrieve configuration settings back to NetworkManager. As NetworkManager uses Polkit to allow an unprivileged user to control the system's network configuration, a malicious actor could achieve local privilege escalation and potential code execution as root in the targeted machine by creating a malicious configuration.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:8312",
-      "https://access.redhat.com/errata/RHSA-2024:8338",
-      "https://access.redhat.com/errata/RHSA-2024:8352",
-      "https://access.redhat.com/errata/RHSA-2024:8353",
-      "https://access.redhat.com/errata/RHSA-2024:8354",
-      "https://access.redhat.com/errata/RHSA-2024:8355",
-      "https://access.redhat.com/errata/RHSA-2024:8356",
-      "https://access.redhat.com/errata/RHSA-2024:8357",
-      "https://access.redhat.com/errata/RHSA-2024:8358",
-      "https://access.redhat.com/errata/RHSA-2024:9555",
-      "https://access.redhat.com/errata/RHSA-2024:9556",
-      "https://access.redhat.com/security/cve/CVE-2024-9050",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2313828",
-      "https://gitlab.gnome.org/GNOME/NetworkManager-libreswan/-/commit/dcf8acfb25bd31e4b8cbd20c229da660238b5c1b",
-      "https://www.openwall.com/lists/oss-security/2024/10/25/1",
-      "http://www.openwall.com/lists/oss-security/2024/10/25/1"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.8,
     "tags": [
       "priv_esc",
       "rce"
@@ -869,6 +938,37 @@
       "recently modified (last 48h)",
       "auth_bypass+25",
       "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-60455",
+    "published": "2025-11-18T19:15:49.800",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Unsafe Deserialization vulnerability in Modular Max Serve before 25.6, specifically when the \"--experimental-enable-kvcache-agent\" feature is used allowing attackers to execute arbitrary code.",
+    "references": [
+      "https://github.com/modular/modular/blame/main/max/serve/kvcache_agent/kvcache_agent.py#L220",
+      "https://github.com/modular/modular/commit/10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+      "https://github.com/modular/modular/commit/b20e749fa892dbe772e890a268002f732164d9f5",
+      "https://github.com/modular/modular/commit/ee9c4ab02345dd30bed8b79771b6909ff1b930a1",
+      "https://github.com/modular/modular/issues/4795",
+      "https://www.oligo.security/blog/shadowmq-how-code-reuse-spread-critical-vulnerabilities-across-the-ai-ecosystem"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 26.6,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -1579,71 +1679,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-9900",
-    "published": "2025-09-23T17:15:38.357",
-    "last_modified": "2026-11-04T22:17:41.203",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Libtiff. This vulnerability is a \"write-what-where\" condition, triggered when the library processes a specially crafted TIFF image file.\n\nBy providing an abnormally large image height value in the file's metadata, an attacker can trick the library into writing attacker-controlled color data to an arbitrary memory location. This memory corruption can be exploited to cause a denial of service (application crash) or to achieve arbitrary code execution with the permissions of the user.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:17651",
-      "https://access.redhat.com/errata/RHSA-2025:17675",
-      "https://access.redhat.com/errata/RHSA-2025:17710",
-      "https://access.redhat.com/errata/RHSA-2025:17738",
-      "https://access.redhat.com/errata/RHSA-2025:17739",
-      "https://access.redhat.com/errata/RHSA-2025:17740",
-      "https://access.redhat.com/errata/RHSA-2025:19113",
-      "https://access.redhat.com/errata/RHSA-2025:19156",
-      "https://access.redhat.com/errata/RHSA-2025:19276",
-      "https://access.redhat.com/errata/RHSA-2025:19906",
-      "https://access.redhat.com/errata/RHSA-2025:19947",
-      "https://access.redhat.com/errata/RHSA-2025:20956",
-      "https://access.redhat.com/errata/RHSA-2025:20998",
-      "https://access.redhat.com/errata/RHSA-2025:21060",
-      "https://access.redhat.com/errata/RHSA-2025:21061",
-      "https://access.redhat.com/errata/RHSA-2025:21062",
-      "https://access.redhat.com/errata/RHSA-2025:21407",
-      "https://access.redhat.com/errata/RHSA-2025:21506",
-      "https://access.redhat.com/errata/RHSA-2025:21507",
-      "https://access.redhat.com/errata/RHSA-2025:21508",
-      "https://access.redhat.com/errata/RHSA-2025:21994",
-      "https://access.redhat.com/errata/RHSA-2025:23078",
-      "https://access.redhat.com/errata/RHSA-2025:23079",
-      "https://access.redhat.com/errata/RHSA-2025:23080",
-      "https://access.redhat.com/errata/RHSA-2026:0001",
-      "https://access.redhat.com/errata/RHSA-2026:0076",
-      "https://access.redhat.com/errata/RHSA-2026:0077",
-      "https://access.redhat.com/errata/RHSA-2026:0078",
-      "https://access.redhat.com/errata/RHSA-2026:3461",
-      "https://access.redhat.com/errata/RHSA-2026:3462",
-      "https://access.redhat.com/errata/RHSA-2026:7504",
-      "https://access.redhat.com/security/cve/CVE-2025-9900",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2392784",
-      "https://github.com/SexyShoelessGodofWar/LibTiff-4.7.0-Write-What-Where?tab=readme-ov-file",
-      "https://gitlab.com/libtiff/libtiff/-/issues/704",
-      "https://gitlab.com/libtiff/libtiff/-/merge_requests/732",
-      "https://libtiff.gitlab.io/libtiff/releases/v4.7.1.html",
-      "http://www.openwall.com/lists/oss-security/2025/09/26/3",
-      "https://lists.debian.org/debian-lts-announce/2025/09/msg00031.html",
-      "https://github.com/SexyShoelessGodofWar/LibTiff-4.7.0-Write-What-Where?tab=readme-ov-file"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 63.2,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 87.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-55847",
     "published": "2025-09-26T18:15:36.367",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -1771,86 +1806,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-3094",
-    "published": "2024-03-29T17:15:21.150",
-    "last_modified": "2026-11-04T22:17:21.430",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Malicious code was discovered in the upstream tarballs of xz, starting with version 5.6.0. \r\nThrough a series of complex obfuscations, the liblzma build process extracts a prebuilt object file from a disguised test file existing in the source code, which is then used to modify specific functions in the liblzma code. This results in a modified liblzma library that can be used by any software linked against this library, intercepting and modifying the data interaction with this library.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2024-3094",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272210",
-      "https://www.openwall.com/lists/oss-security/2024/03/29/4",
-      "https://www.redhat.com/en/blog/urgent-security-alert-fedora-41-and-rawhide-users",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/10",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/12",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/4",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/5",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/8",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/12",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/27",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/36",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/5",
-      "http://www.openwall.com/lists/oss-security/2024/04/16/5",
-      "https://access.redhat.com/security/cve/CVE-2024-3094",
-      "https://ariadne.space/2024/04/02/the-xz-utils-backdoor-is-a-symptom-of-a-larger-problem/",
-      "https://arstechnica.com/security/2024/03/backdoor-found-in-widely-used-linux-utility-breaks-encrypted-ssh-connections/",
-      "https://aws.amazon.com/security/security-bulletins/AWS-2024-002/",
-      "https://blog.netbsd.org/tnf/entry/statement_on_backdoor_in_xz",
-      "https://boehs.org/node/everything-i-know-about-the-xz-backdoor",
-      "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1068024",
-      "https://bugs.gentoo.org/928134",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272210",
-      "https://bugzilla.suse.com/show_bug.cgi?id=1222124",
-      "https://discourse.nixos.org/t/cve-2024-3094-malicious-code-in-xz-5-6-0-and-5-6-1-tarballs/42405",
-      "https://gist.github.com/thesamesam/223949d5a074ebc3dce9ee78baad9e27",
-      "https://github.com/advisories/GHSA-rxwq-x6h5-x525",
-      "https://github.com/amlweems/xzbot",
-      "https://github.com/karcherm/xz-malware",
-      "https://gynvael.coldwind.pl/?lang=en&id=782",
-      "https://lists.debian.org/debian-security-announce/2024/msg00057.html",
-      "https://lists.freebsd.org/archives/freebsd-security/2024-March/000248.html",
-      "https://lwn.net/Articles/967180/",
-      "https://news.ycombinator.com/item?id=39865810",
-      "https://news.ycombinator.com/item?id=39877267",
-      "https://news.ycombinator.com/item?id=39895344",
-      "https://openssf.org/blog/2024/03/30/xz-backdoor-cve-2024-3094/",
-      "https://research.swtch.com/xz-script",
-      "https://research.swtch.com/xz-timeline",
-      "https://security-tracker.debian.org/tracker/CVE-2024-3094",
-      "https://security.alpinelinux.org/vuln/CVE-2024-3094",
-      "https://security.archlinux.org/CVE-2024-3094",
-      "https://security.netapp.com/advisory/ntap-20240402-0001/",
-      "https://tukaani.org/xz-backdoor/",
-      "https://twitter.com/LetsDefendIO/status/1774804387417751958",
-      "https://twitter.com/debian/status/1774219194638409898",
-      "https://twitter.com/infosecb/status/1774595540233167206",
-      "https://twitter.com/infosecb/status/1774597228864139400",
-      "https://ubuntu.com/security/CVE-2024-3094",
-      "https://www.binarly.io/blog/persistent-risk-xz-utils-backdoor-still-lurking-in-docker-images",
-      "https://www.cisa.gov/news-events/alerts/2024/03/29/reported-supply-chain-compromise-affecting-xz-utils-data-compression-library-cve-2024-3094",
-      "https://www.darkreading.com/vulnerabilities-threats/are-you-affected-by-the-backdoor-in-xz-utils",
-      "https://www.kali.org/blog/about-the-xz-backdoor/",
-      "https://www.openwall.com/lists/oss-security/2024/03/29/4",
-      "https://www.redhat.com/en/blog/urgent-security-alert-fedora-41-and-rawhide-users",
-      "https://www.tenable.com/blog/frequently-asked-questions-cve-2024-3094-supply-chain-backdoor-in-xz-utils",
-      "https://www.theregister.com/2024/03/29/malicious_backdoor_xz/",
-      "https://www.vicarius.io/vsociety/vulnerabilities/cve-2024-3094",
-      "https://xeiaso.net/notes/2024/xz-vuln/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 90.9,
-    "epss_percentile": 99.8,
-    "tags": [],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "High EPSS exploit prob 90.9% (+25)"
     ]
   },
   {
@@ -2483,45 +2438,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-4404",
-    "published": "2025-06-17T14:15:32.743",
-    "last_modified": "2026-11-04T22:17:37.497",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A privilege escalation from host to domain vulnerability was found in the FreeIPA project. The FreeIPA package fails to validate the uniqueness of the `krbCanonicalName` for the admin account by default, allowing users to create services with the same canonical name as the REALM admin. When a successful attack happens, the user can retrieve a Kerberos ticket in the name of this service, containing the admin@REALM credential. This flaw allows an attacker to perform administrative tasks over the REALM, leading to access to sensitive data and sensitive data exfiltration.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:9184",
-      "https://access.redhat.com/errata/RHSA-2025:9185",
-      "https://access.redhat.com/errata/RHSA-2025:9186",
-      "https://access.redhat.com/errata/RHSA-2025:9187",
-      "https://access.redhat.com/errata/RHSA-2025:9188",
-      "https://access.redhat.com/errata/RHSA-2025:9189",
-      "https://access.redhat.com/errata/RHSA-2025:9190",
-      "https://access.redhat.com/errata/RHSA-2025:9191",
-      "https://access.redhat.com/errata/RHSA-2025:9192",
-      "https://access.redhat.com/errata/RHSA-2025:9193",
-      "https://access.redhat.com/errata/RHSA-2025:9194",
-      "https://access.redhat.com/security/cve/CVE-2025-4404",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2364606",
-      "https://pagure.io/freeipa/c/6b9400c135ed16b10057b350cc9ce42aa0e862d4",
-      "https://pagure.io/freeipa/c/796ed20092d554ee0c9e23295e346ec1e8a0bf6e",
-      "http://www.openwall.com/lists/oss-security/2025/09/30/6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.0,
-    "epss_percentile": 80.8,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-55763",
     "published": "2025-08-29T17:15:35.790",
     "last_modified": "2026-11-07T18:10:00.200",
@@ -2934,68 +2850,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-31083",
-    "published": "2024-04-05T12:15:37.577",
-    "last_modified": "2026-11-04T22:17:20.820",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free vulnerability was found in the ProcRenderAddGlyphs() function of Xorg servers. This issue occurs when AllocateGlyph() is called to store new glyphs sent by the client to the X server, potentially resulting in multiple entries pointing to the same non-refcounted glyphs. Consequently, ProcRenderAddGlyphs() may free a glyph, leading to a use-after-free scenario when the same glyph pointer is subsequently accessed. This flaw allows an authenticated attacker to execute arbitrary code on the system by sending a specially crafted request.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/errata/RHSA-2024:9093",
-      "https://access.redhat.com/errata/RHSA-2024:9122",
-      "https://access.redhat.com/errata/RHSA-2025:12751",
-      "https://access.redhat.com/security/cve/CVE-2024-31083",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272000",
-      "http://www.openwall.com/lists/oss-security/2024/04/03/13",
-      "http://www.openwall.com/lists/oss-security/2024/04/12/10",
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/security/cve/CVE-2024-31083",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272000",
-      "https://lists.debian.org/debian-lts-announce/2024/04/msg00009.html",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6TF7FZXOKHIKPZXYIMSQXKVH7WITKV3V/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/EBLQJIAXEDMEGRGZMSH7CWUJHSVKUWLV/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P73U4DAAWLFZAPD75GLXTGMSTTQWW5AP/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.9,
-    "epss_percentile": 79.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-10494",
     "published": "2024-12-10T16:15:21.930",
     "last_modified": "2026-11-05T22:17:16.630",
@@ -3333,57 +3187,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-11561",
-    "published": "2025-10-09T14:15:54.447",
-    "last_modified": "2026-11-04T22:17:26.980",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the integration of Active Directory and the System Security Services Daemon (SSSD) on Linux systems. In default configurations, the Kerberos local authentication plugin (sssd_krb5_localauth_plugin) is enabled, but a fallback to the an2ln plugin is possible. This fallback allows an attacker with permission to modify certain AD attributes (such as userPrincipalName or samAccountName) to impersonate privileged users, potentially resulting in unauthorized access or privilege escalation on domain-joined Linux hosts.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:19610",
-      "https://access.redhat.com/errata/RHSA-2025:19847",
-      "https://access.redhat.com/errata/RHSA-2025:19848",
-      "https://access.redhat.com/errata/RHSA-2025:19849",
-      "https://access.redhat.com/errata/RHSA-2025:19850",
-      "https://access.redhat.com/errata/RHSA-2025:19851",
-      "https://access.redhat.com/errata/RHSA-2025:19852",
-      "https://access.redhat.com/errata/RHSA-2025:19853",
-      "https://access.redhat.com/errata/RHSA-2025:19854",
-      "https://access.redhat.com/errata/RHSA-2025:19859",
-      "https://access.redhat.com/errata/RHSA-2025:20954",
-      "https://access.redhat.com/errata/RHSA-2025:21020",
-      "https://access.redhat.com/errata/RHSA-2025:21067",
-      "https://access.redhat.com/errata/RHSA-2025:21329",
-      "https://access.redhat.com/errata/RHSA-2025:21795",
-      "https://access.redhat.com/errata/RHSA-2025:22256",
-      "https://access.redhat.com/errata/RHSA-2025:22265",
-      "https://access.redhat.com/errata/RHSA-2025:22277",
-      "https://access.redhat.com/errata/RHSA-2025:22529",
-      "https://access.redhat.com/errata/RHSA-2025:22548",
-      "https://access.redhat.com/errata/RHSA-2025:22724",
-      "https://access.redhat.com/errata/RHSA-2025:23113",
-      "https://access.redhat.com/errata/RHSA-2026:0316",
-      "https://access.redhat.com/errata/RHSA-2026:0677",
-      "https://access.redhat.com/security/cve/CVE-2025-11561",
-      "https://blog.async.sg/kerberos-ldr",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2402727",
-      "https://github.com/SSSD/sssd/issues/8021"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 57.6,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-63307",
     "published": "2025-11-06T16:16:13.687",
     "last_modified": "2026-11-05T14:10:00.273",
@@ -3440,49 +3243,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-0624",
-    "published": "2025-02-19T19:15:15.120",
-    "last_modified": "2026-11-04T22:17:26.027",
-    "cvss_v3": 7.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in grub2. During the network boot process, when trying to search for the configuration file, grub copies data from a user controlled environment variable into an internal buffer using the grub_strcpy() function. During this step, it fails to consider the environment variable length when allocating the internal buffer, resulting in an out-of-bounds write. If correctly exploited, this issue may result in remote code execution through the same network segment grub is searching for the boot information, which can be used to by-pass secure boot protections.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2521",
-      "https://access.redhat.com/errata/RHSA-2025:2653",
-      "https://access.redhat.com/errata/RHSA-2025:2655",
-      "https://access.redhat.com/errata/RHSA-2025:2675",
-      "https://access.redhat.com/errata/RHSA-2025:2784",
-      "https://access.redhat.com/errata/RHSA-2025:2799",
-      "https://access.redhat.com/errata/RHSA-2025:2867",
-      "https://access.redhat.com/errata/RHSA-2025:2869",
-      "https://access.redhat.com/errata/RHSA-2025:3297",
-      "https://access.redhat.com/errata/RHSA-2025:3301",
-      "https://access.redhat.com/errata/RHSA-2025:3367",
-      "https://access.redhat.com/errata/RHSA-2025:3396",
-      "https://access.redhat.com/errata/RHSA-2025:3573",
-      "https://access.redhat.com/errata/RHSA-2025:3577",
-      "https://access.redhat.com/errata/RHSA-2025:3780",
-      "https://access.redhat.com/errata/RHSA-2025:4422",
-      "https://access.redhat.com/errata/RHSA-2025:7702",
-      "https://access.redhat.com/security/cve/CVE-2025-0624",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2346112",
-      "https://security.netapp.com/advisory/ntap-20250516-0006/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.4,
-    "epss_percentile": 72.7,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 78.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -3591,44 +3351,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-8067",
-    "published": "2025-08-28T15:16:03.600",
-    "last_modified": "2026-11-04T22:17:40.463",
-    "cvss_v3": 8.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the Udisks daemon, where it allows unprivileged users to create loop devices using the D-BUS system. This is achieved via the loop device handler, which handles requests sent through the D-BUS interface. As two of the parameters of this handle, it receives the file descriptor list and index specifying the file where the loop device should be backed. The function itself validates the index value to ensure it isn't bigger than the maximum value allowed. However, it fails to validate the lower bound, allowing the index parameter to be a negative value. Under these circumstances, an attacker can cause the UDisks daemon to crash or perform a local privilege escalation by gaining access to files owned by privileged users.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:15017",
-      "https://access.redhat.com/errata/RHSA-2025:15018",
-      "https://access.redhat.com/errata/RHSA-2025:15020",
-      "https://access.redhat.com/errata/RHSA-2025:15956",
-      "https://access.redhat.com/errata/RHSA-2025:16021",
-      "https://access.redhat.com/errata/RHSA-2025:16090",
-      "https://access.redhat.com/errata/RHSA-2025:16106",
-      "https://access.redhat.com/errata/RHSA-2025:16121",
-      "https://access.redhat.com/errata/RHSA-2025:16122",
-      "https://access.redhat.com/errata/RHSA-2025:16125",
-      "https://access.redhat.com/errata/RHSA-2025:16130",
-      "https://access.redhat.com/security/cve/CVE-2025-8067",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2388623",
-      "http://www.openwall.com/lists/oss-security/2025/08/28/1",
-      "https://lists.debian.org/debian-lts-announce/2025/08/msg00023.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.5,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-57632",
     "published": "2025-09-25T20:15:35.237",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -3702,51 +3424,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-9632",
-    "published": "2024-10-30T08:15:04.830",
-    "last_modified": "2026-11-04T22:17:23.750",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the X.org server. Due to improperly tracked allocation size in _XkbSetCompatMap, a local attacker may be able to trigger a buffer overflow condition via a specially crafted payload, leading to denial of service or local privilege escalation in distributions where the X.org server is run with root privileges.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:10090",
-      "https://access.redhat.com/errata/RHSA-2024:8798",
-      "https://access.redhat.com/errata/RHSA-2024:9540",
-      "https://access.redhat.com/errata/RHSA-2024:9579",
-      "https://access.redhat.com/errata/RHSA-2024:9601",
-      "https://access.redhat.com/errata/RHSA-2024:9690",
-      "https://access.redhat.com/errata/RHSA-2024:9816",
-      "https://access.redhat.com/errata/RHSA-2024:9818",
-      "https://access.redhat.com/errata/RHSA-2024:9819",
-      "https://access.redhat.com/errata/RHSA-2024:9820",
-      "https://access.redhat.com/errata/RHSA-2024:9901",
-      "https://access.redhat.com/errata/RHSA-2025:12751",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2024-9632",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2317233",
-      "http://seclists.org/fulldisclosure/2024/Oct/20",
-      "http://www.openwall.com/lists/oss-security/2024/10/29/2",
-      "https://lists.debian.org/debian-lts-announce/2024/10/msg00031.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 60.0,
-    "tags": [
-      "dos",
-      "priv_esc"
-    ],
-    "intel_score": 77.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "dos+3"
     ]
   },
   {
@@ -4193,29 +3870,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-48796",
-    "published": "2025-05-27T14:15:23.583",
-    "last_modified": "2026-11-04T22:17:33.890",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
+    "cve_id": "CVE-2025-63694",
+    "published": "2025-11-18T18:16:13.437",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "A flaw was found in GIMP. The GIMP ani_load_image() function is vulnerable to a stack-based overflow. If a user opens.ANI files, GIMP may be used to store more information than the capacity allows. This flaw allows a malicious ANI file to trigger arbitrary code execution.",
+    "summary": "DzzOffice v2.3.7 and before is vulnerable to SQL Injection in explorer/groupmanage.",
     "references": [
-      "https://access.redhat.com/security/cve/CVE-2025-48796",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2368559",
-      "https://gitlab.gnome.org/GNOME/gimp/-/issues/9257"
+      "https://github.com/Yohane-Mashiro/dzzoffice_sql",
+      "https://github.com/zyx0814/dzzoffice/issues/364",
+      "https://github.com/Yohane-Mashiro/dzzoffice_sql"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.7,
+    "epss": 0.4,
+    "epss_percentile": 31.8,
     "tags": [
-      "rce"
+      "sqli"
     ],
-    "intel_score": 76.5,
+    "intel_score": 77.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30"
+      "sqli+18"
     ]
   },
   {
@@ -4584,95 +4261,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-52336",
-    "published": "2024-11-26T16:15:17.093",
-    "last_modified": "2026-11-04T22:17:22.723",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A script injection vulnerability was identified in the Tuned package. The `instance_create()` D-Bus function can be called by locally logged-in users without authentication. This flaw allows a local non-privileged user to execute a D-Bus call with `script_pre` or `script_post` options that permit arbitrary scripts with their absolute paths to be passed. These user or attacker-controlled executable scripts or programs could then be executed by Tuned with root privileges that could allow attackers to local privilege escalation.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:10384",
-      "https://access.redhat.com/errata/RHSA-2025:0879",
-      "https://access.redhat.com/errata/RHSA-2025:0880",
-      "https://access.redhat.com/security/cve/CVE-2024-52336",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2324540",
-      "https://github.com/redhat-performance/tuned/releases/tag/v2.24.1",
-      "https://security.opensuse.org/2024/11/26/tuned-instance-create.html",
-      "https://www.openwall.com/lists/oss-security/2024/11/28/1",
-      "https://security.opensuse.org/2024/11/26/tuned-instance-create.html",
-      "https://www.openwall.com/lists/oss-security/2024/11/28/2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.0,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 74.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-3931",
-    "published": "2025-05-14T12:15:19.493",
-    "last_modified": "2026-11-04T22:17:33.710",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Yggdrasil, which acts as a system broker, allowing the processes to communicate to other children's \"worker\" processes through the DBus component. Yggdrasil creates a DBus method to dispatch messages to workers. However, it misses authentication and authorization checks, allowing every system user to call it. One available Yggdrasil worker acts as a package manager with capabilities to create and enable new repositories and install or remove packages. \n\nThis flaw allows an attacker with access to the system to leverage the lack of authentication on the dispatch message to force the Yggdrasil worker to install arbitrary RPM packages. This issue results in local privilege escalation, enabling the attacker to access and modify sensitive system data.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:7592",
-      "https://access.redhat.com/security/cve/CVE-2025-3931",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2362345",
-      "https://github.com/RedHatInsights/yggdrasil/pull/336"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 7.7,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 74.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-6018",
-    "published": "2025-07-23T15:15:34.810",
-    "last_modified": "2026-11-04T22:17:39.153",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A Local Privilege Escalation (LPE) vulnerability has been discovered in pam-config within Linux Pluggable Authentication Modules (PAM). This flaw allows an unprivileged local attacker (for example, a user logged in via SSH) to obtain the elevated privileges normally reserved for a physically present, \"allow_active\" user. The highest risk is that the attacker can then perform all allow_active yes Polkit actions, which are typically restricted to console users, potentially gaining unauthorized control over system configurations, services, or other sensitive operations.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2025-6018",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2372693",
-      "https://bugzilla.suse.com/show_bug.cgi?id=1243226",
-      "https://cdn2.qualys.com/2025/06/17/suse15-pam-udisks-lpe.txt",
-      "http://www.openwall.com/lists/oss-security/2025/08/28/4",
-      "https://cdn2.qualys.com/2025/06/17/suse15-pam-udisks-lpe.txt"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 65.9,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 74.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-50505",
     "published": "2025-10-07T14:15:37.120",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -4698,6 +4286,32 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-63695",
+    "published": "2025-11-18T18:16:13.590",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "DzzOffice v2.3.7 and before is vulnerable to Arbitrary File Upload in /dzz/system/ueditor/php/controller.php.",
+    "references": [
+      "https://github.com/Yohane-Mashiro/dzzoffice_upload",
+      "https://github.com/zyx0814/dzzoffice/issues/365",
+      "https://github.com/Yohane-Mashiro/dzzoffice_upload"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 36.5,
+    "tags": [
+      "file_write"
+    ],
+    "intel_score": 74.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "file_write+15"
     ]
   },
   {
@@ -4747,47 +4361,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-1244",
-    "published": "2025-02-12T15:15:18.430",
-    "last_modified": "2026-11-04T22:17:29.037",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A command injection flaw was found in the text editor Emacs. It could allow a remote, unauthenticated attacker to execute arbitrary shell commands on a vulnerable system. Exploitation is possible by tricking users into visiting a specially crafted website or an HTTP URL with a redirect.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:1915",
-      "https://access.redhat.com/errata/RHSA-2025:1917",
-      "https://access.redhat.com/errata/RHSA-2025:1961",
-      "https://access.redhat.com/errata/RHSA-2025:1962",
-      "https://access.redhat.com/errata/RHSA-2025:1963",
-      "https://access.redhat.com/errata/RHSA-2025:1964",
-      "https://access.redhat.com/errata/RHSA-2025:2022",
-      "https://access.redhat.com/errata/RHSA-2025:2130",
-      "https://access.redhat.com/errata/RHSA-2025:2157",
-      "https://access.redhat.com/errata/RHSA-2025:2195",
-      "https://access.redhat.com/errata/RHSA-2025:2754",
-      "https://access.redhat.com/security/cve/CVE-2025-1244",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345150",
-      "https://git.savannah.gnu.org/cgit/emacs.git/commit/?id=820f0793f0b46448928905552726c1f1b999062f",
-      "http://www.openwall.com/lists/oss-security/2025/03/01/2",
-      "https://debbugs.gnu.org/cgi/bugreport.cgi?bug=66390",
-      "https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS?h=emacs-30.1",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00033.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.6,
-    "epss_percentile": 85.6,
-    "tags": [
-      "command_injection"
-    ],
-    "intel_score": 72.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18"
     ]
   },
   {
@@ -4908,35 +4481,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-5791",
-    "published": "2025-06-06T14:15:23.137",
-    "last_modified": "2026-11-04T22:17:38.203",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the user's crate for Rust. This vulnerability allows privilege escalation via incorrect group listing when a user or process has fewer than exactly 1024 groups, leading to the erroneous inclusion of the root group in the access list.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:12359",
-      "https://access.redhat.com/security/cve/CVE-2025-5791",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2370001",
-      "https://crates.io/crates/users",
-      "https://github.com/ogham/rust-users/issues/44",
-      "https://rustsec.org/advisories/RUSTSEC-2025-0040.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 10.6,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 70.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
     ]
   },
   {
@@ -5332,32 +4876,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-10230",
-    "published": "2025-11-07T20:15:35.630",
-    "last_modified": "2026-11-04T22:17:26.340",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A flaw was found in Samba, in the front-end WINS hook handling: NetBIOS names from registration packets are passed to a shell without proper validation or escaping. Unsanitized NetBIOS name data from WINS registration packets are inserted into a shell command and executed by the Samba Active Directory Domain Controller’s wins hook, allowing an unauthenticated network attacker to achieve remote command execution as the Samba process.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2025-10230",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2394377",
-      "https://www.samba.org/samba/history/security.html",
-      "https://www.vicarius.io/vsociety/posts/cve-2025-10230-detect-samba-vulnerability",
-      "https://www.vicarius.io/vsociety/posts/cve-2025-10230-mitigate-samba-vulnerability"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 39.8,
-    "epss_percentile": 98.6,
-    "tags": [],
-    "intel_score": 70.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Moderate EPSS prob 39.8% (+10)"
     ]
   },
   {
@@ -5826,45 +5344,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-5154",
-    "published": "2024-06-12T09:15:19.973",
-    "last_modified": "2026-11-04T22:17:22.940",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in cri-o. A malicious container can create a symbolic link to arbitrary files on the host via directory traversal (“../“). This flaw allows the container to read and write to arbitrary files on the host system.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:10818",
-      "https://access.redhat.com/errata/RHSA-2024:3676",
-      "https://access.redhat.com/errata/RHSA-2024:3700",
-      "https://access.redhat.com/errata/RHSA-2024:4008",
-      "https://access.redhat.com/errata/RHSA-2024:4159",
-      "https://access.redhat.com/errata/RHSA-2024:4486",
-      "https://access.redhat.com/security/cve/CVE-2024-5154",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2280190",
-      "https://github.com/cri-o/cri-o/security/advisories/GHSA-j9hf-98c3-wrm8",
-      "https://access.redhat.com/errata/RHSA-2024:3676",
-      "https://access.redhat.com/errata/RHSA-2024:3700",
-      "https://access.redhat.com/errata/RHSA-2024:4008",
-      "https://access.redhat.com/errata/RHSA-2024:4486",
-      "https://access.redhat.com/security/cve/CVE-2024-5154",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2280190",
-      "https://github.com/cri-o/cri-o/security/advisories/GHSA-j9hf-98c3-wrm8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 69.3,
-    "tags": [
-      "path_traversal"
-    ],
-    "intel_score": 65.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-57147",
     "published": "2025-09-03T15:15:38.563",
     "last_modified": "2026-11-07T18:10:00.200",
@@ -6294,6 +5773,31 @@
     "reasons": [
       "recently modified (last 48h)",
       "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57085",
+    "published": "2025-09-09T18:15:35.867",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Tenda W30E V16.01.0.19 (5037) was discovered to contain a stack overflow in the v17 parameter in the UploadCfg function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/W30E/UploadCfg.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/W30E/UploadCfg.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.8,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 62.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -6775,6 +6279,29 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-11126",
+    "published": "2025-09-29T00:15:31.423",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A security flaw has been discovered in Apeman ID71 218.53.203.117. This vulnerability affects unknown code of the file /system/www/system.ini. The manipulation results in hard-coded credentials. The attack may be performed from remote. The exploit has been released to the public and may be exploited. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://vuldb.com/?ctiid.326209",
+      "https://vuldb.com/?id.326209",
+      "https://vuldb.com/?submit.654168"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 51.3,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-57266",
     "published": "2025-09-29T21:15:38.180",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -7013,61 +6540,47 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-49796",
-    "published": "2025-06-16T16:15:19.370",
-    "last_modified": "2026-11-04T22:17:37.073",
-    "cvss_v3": 9.1,
+    "cve_id": "CVE-2025-54321",
+    "published": "2025-11-18T19:15:49.043",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "A vulnerability was found in libxml2. Processing certain sch:name elements from the input XML file can trigger a memory corruption issue. This flaw allows an attacker to craft a malicious XML input file that can lead libxml to crash, resulting in a denial of service or other possible undefined behavior due to sensitive data being corrupted in memory.",
+    "summary": "In Ascertia SigningHub through 8.6.8, there is a lack of rate limiting on the reset password function, leading to an email bombing vulnerability. An authenticated attacker can exploit this by automating reset password requests.",
     "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10630",
-      "https://access.redhat.com/errata/RHSA-2025:10698",
-      "https://access.redhat.com/errata/RHSA-2025:10699",
-      "https://access.redhat.com/errata/RHSA-2025:11580",
-      "https://access.redhat.com/errata/RHSA-2025:12098",
-      "https://access.redhat.com/errata/RHSA-2025:12099",
-      "https://access.redhat.com/errata/RHSA-2025:12199",
-      "https://access.redhat.com/errata/RHSA-2025:12237",
-      "https://access.redhat.com/errata/RHSA-2025:12239",
-      "https://access.redhat.com/errata/RHSA-2025:12240",
-      "https://access.redhat.com/errata/RHSA-2025:12241",
-      "https://access.redhat.com/errata/RHSA-2025:13267",
-      "https://access.redhat.com/errata/RHSA-2025:13335",
-      "https://access.redhat.com/errata/RHSA-2025:15397",
-      "https://access.redhat.com/errata/RHSA-2025:15827",
-      "https://access.redhat.com/errata/RHSA-2025:15828",
-      "https://access.redhat.com/errata/RHSA-2025:18217",
-      "https://access.redhat.com/errata/RHSA-2025:18218",
-      "https://access.redhat.com/errata/RHSA-2025:18219",
-      "https://access.redhat.com/errata/RHSA-2025:18240",
-      "https://access.redhat.com/errata/RHSA-2025:19020",
-      "https://access.redhat.com/errata/RHSA-2025:19041",
-      "https://access.redhat.com/errata/RHSA-2025:19046",
-      "https://access.redhat.com/errata/RHSA-2025:19894",
-      "https://access.redhat.com/errata/RHSA-2025:21913",
-      "https://access.redhat.com/errata/RHSA-2026:0934",
-      "https://access.redhat.com/errata/RHSA-2026:62549",
-      "https://access.redhat.com/errata/RHSA-2026:67857",
-      "https://access.redhat.com/errata/RHSA-2026:7519",
-      "https://access.redhat.com/security/cve/CVE-2025-49796",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2372385",
-      "https://gitlab.gnome.org/GNOME/libxml2/-/issues/933",
-      "https://lists.debian.org/debian-lts-announce/2025/07/msg00014.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-253495.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-577017.html"
+      "https://github.com/saykino/CVE-2025-54321",
+      "https://www.ascertia.com/company/vulnerability-disclosure-policy/"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 75.4,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 58.5,
+    "epss": 0.5,
+    "epss_percentile": 43.2,
+    "tags": [],
+    "intel_score": 59.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-63225",
+    "published": "2025-11-18T19:15:50.823",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The Eurolab ELTS100_UBX device (firmware version ELTS100v1.UBX) is vulnerable to Broken Access Control due to missing authentication on critical administrative endpoints. Attackers can directly access and modify sensitive system and network configurations, upload firmware, and execute unauthorized actions without any form of authentication. This vulnerability allows remote attackers to fully compromise the device, control its functionality, and disrupt its operation.",
+    "references": [
+      "http://eurolab-srl.com/",
+      "https://github.com/shiky8/my--cve-vulnerability-research/tree/main/CVE-2025-63225_Eurolab_ELTS100_UBX_Broken_Access_Control"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 51.2,
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
     ]
   },
   {
@@ -7284,60 +6797,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-49794",
-    "published": "2025-06-16T16:15:18.997",
-    "last_modified": "2026-11-04T22:17:36.413",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A use-after-free vulnerability was found in libxml2. This issue occurs when parsing XPath elements under certain circumstances when the XML schematron has the <sch:name path=\"...\"/> schema elements. This flaw allows a malicious actor to craft a malicious XML document used as input for libxml, resulting in the program's crash using libxml or other possible undefined behaviors.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10630",
-      "https://access.redhat.com/errata/RHSA-2025:10698",
-      "https://access.redhat.com/errata/RHSA-2025:10699",
-      "https://access.redhat.com/errata/RHSA-2025:11580",
-      "https://access.redhat.com/errata/RHSA-2025:12098",
-      "https://access.redhat.com/errata/RHSA-2025:12099",
-      "https://access.redhat.com/errata/RHSA-2025:12199",
-      "https://access.redhat.com/errata/RHSA-2025:12237",
-      "https://access.redhat.com/errata/RHSA-2025:12239",
-      "https://access.redhat.com/errata/RHSA-2025:12240",
-      "https://access.redhat.com/errata/RHSA-2025:12241",
-      "https://access.redhat.com/errata/RHSA-2025:13335",
-      "https://access.redhat.com/errata/RHSA-2025:15397",
-      "https://access.redhat.com/errata/RHSA-2025:15827",
-      "https://access.redhat.com/errata/RHSA-2025:15828",
-      "https://access.redhat.com/errata/RHSA-2025:18217",
-      "https://access.redhat.com/errata/RHSA-2025:18218",
-      "https://access.redhat.com/errata/RHSA-2025:18219",
-      "https://access.redhat.com/errata/RHSA-2025:18240",
-      "https://access.redhat.com/errata/RHSA-2025:19020",
-      "https://access.redhat.com/errata/RHSA-2025:19041",
-      "https://access.redhat.com/errata/RHSA-2025:19046",
-      "https://access.redhat.com/errata/RHSA-2025:19894",
-      "https://access.redhat.com/errata/RHSA-2025:21913",
-      "https://access.redhat.com/errata/RHSA-2026:0934",
-      "https://access.redhat.com/errata/RHSA-2026:62549",
-      "https://access.redhat.com/errata/RHSA-2026:67857",
-      "https://access.redhat.com/errata/RHSA-2026:7519",
-      "https://access.redhat.com/security/cve/CVE-2025-49794",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2372373",
-      "https://gitlab.gnome.org/GNOME/libxml2/-/issues/931",
-      "https://lists.debian.org/debian-lts-announce/2025/07/msg00014.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-253495.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-577017.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.8,
-    "epss_percentile": 57.9,
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-45583",
     "published": "2025-09-12T21:15:33.640",
     "last_modified": "2026-11-07T18:10:00.200",
@@ -7469,36 +6928,50 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-32911",
-    "published": "2025-04-15T16:16:06.567",
-    "last_modified": "2026-11-04T22:17:32.600",
-    "cvss_v3": 9.0,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2025-56527",
+    "published": "2025-11-18T17:16:04.760",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "A use-after-free type vulnerability was found in libsoup, in the soup_message_headers_get_content_disposition() function. This flaw allows a malicious HTTP client to cause memory corruption in the libsoup server.",
+    "summary": "Plaintext password storage in Kotaemon 0.11.0 in the client's localStorage.",
     "references": [
-      "https://access.redhat.com/errata/RHSA-2025:21657",
-      "https://access.redhat.com/errata/RHSA-2025:4439",
-      "https://access.redhat.com/errata/RHSA-2025:4440",
-      "https://access.redhat.com/errata/RHSA-2025:4508",
-      "https://access.redhat.com/errata/RHSA-2025:4538",
-      "https://access.redhat.com/errata/RHSA-2025:4560",
-      "https://access.redhat.com/errata/RHSA-2025:4568",
-      "https://access.redhat.com/errata/RHSA-2025:4609",
-      "https://access.redhat.com/errata/RHSA-2025:4624",
-      "https://access.redhat.com/errata/RHSA-2025:7436",
-      "https://access.redhat.com/errata/RHSA-2025:8292",
-      "https://access.redhat.com/security/cve/CVE-2025-32911",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2359355",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/433",
-      "https://lists.debian.org/debian-lts-announce/2025/04/msg00036.html"
+      "https://github.com/Cinnamon/kotaemon",
+      "https://github.com/Cinnamon/kotaemon/commit/37cdc28",
+      "https://github.com/HanTul/Kotaemon-CVE-2025-56526-56527-disclosure",
+      "https://harvest-sink-590.notion.site/Stored-XSS-via-Unsanitized-PDF-Content-Rendering-and-Plaintext-Credential-Exposure-in-LocalStorage-236770c3fe1e80f6a1aef381fb1c8f73",
+      "https://skinny-exoplanet-584.notion.site/Stored-XSS-via-Unsanitized-PDF-Content-Rendering-and-Plaintext-Credential-Exposure-in-LocalStorage-22cd1563bd3380458588eb49f361a363?pvs=74"
     ],
     "source": "NVD",
     "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 61.9,
+    "epss": 0.5,
+    "epss_percentile": 39.8,
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 55.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-56643",
+    "published": "2025-11-18T18:16:07.647",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Requarks Wiki.js 2.5.307 does not properly revoke or invalidate active JWT tokens when a user logs out. As a result, previously issued tokens remain valid and can be reused to access the system, even after logout. This behavior affects session integrity and may allow unauthorized access if a token is compromised. The issue is present in the authentication resolver logic and affects both the GraphQL endpoint and the logout mechanism.",
+    "references": [
+      "https://github.com/0xBS0D27/CVE-2025-56643"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 32.4,
     "tags": [],
-    "intel_score": 55.0,
+    "intel_score": 55.5,
     "reasons": [
       "recently modified (last 48h)"
     ]
@@ -7799,6 +7272,28 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-50944",
+    "published": "2025-09-15T14:15:43.550",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue was discovered in the method push.lite.avtech.com.MySSLSocketFactoryNew.checkServerTrusted in AVTECH EagleEyes 2.0.0. The custom X509TrustManager used in checkServerTrusted only checks the certificate's expiration date, skipping proper TLS chain validation.",
+    "references": [
+      "https://github.com/shinyColumn/CVE-2025-50944",
+      "https://shinycolumn.notion.site/eagleeyes-lite"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 18.5,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-52159",
     "published": "2025-09-19T20:15:39.453",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -8052,53 +7547,6 @@
     "intel_score": 53.0,
     "reasons": [
       "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-4467",
-    "published": "2024-07-02T16:15:05.423",
-    "last_modified": "2026-11-04T22:17:22.367",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the QEMU disk image utility (qemu-img) 'info' command. A specially crafted image file containing a `json:{}` value describing block devices in QMP could cause the qemu-img process on the host to consume large amounts of memory or CPU time, leading to denial of service or read/write to an existing external file.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:4276",
-      "https://access.redhat.com/errata/RHSA-2024:4277",
-      "https://access.redhat.com/errata/RHSA-2024:4278",
-      "https://access.redhat.com/errata/RHSA-2024:4372",
-      "https://access.redhat.com/errata/RHSA-2024:4373",
-      "https://access.redhat.com/errata/RHSA-2024:4374",
-      "https://access.redhat.com/errata/RHSA-2024:4420",
-      "https://access.redhat.com/errata/RHSA-2024:4724",
-      "https://access.redhat.com/errata/RHSA-2024:4727",
-      "https://access.redhat.com/security/cve/CVE-2024-4467",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2278875",
-      "http://www.openwall.com/lists/oss-security/2024/07/23/2",
-      "https://access.redhat.com/errata/RHSA-2024:4276",
-      "https://access.redhat.com/errata/RHSA-2024:4277",
-      "https://access.redhat.com/errata/RHSA-2024:4278",
-      "https://access.redhat.com/errata/RHSA-2024:4372",
-      "https://access.redhat.com/errata/RHSA-2024:4373",
-      "https://access.redhat.com/errata/RHSA-2024:4374",
-      "https://access.redhat.com/errata/RHSA-2024:4420",
-      "https://access.redhat.com/errata/RHSA-2024:4724",
-      "https://access.redhat.com/errata/RHSA-2024:4727",
-      "https://access.redhat.com/security/cve/CVE-2024-4467",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2278875",
-      "https://security.netapp.com/advisory/ntap-20240822-0005/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
     ]
   },
   {
@@ -8625,95 +8073,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-5564",
-    "published": "2024-05-31T19:15:08.883",
-    "last_modified": "2026-11-04T22:17:23.190",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was found in libndp. This flaw allows a local malicious user to cause a buffer overflow in NetworkManager, triggered by sending a malformed IPv6 router advertisement packet. This issue occurred as libndp was not correctly validating the route length information.",
-    "references": [
-      "https://access.redhat.com/errata/RHBA-2025:6631",
-      "https://access.redhat.com/errata/RHSA-2024:4618",
-      "https://access.redhat.com/errata/RHSA-2024:4619",
-      "https://access.redhat.com/errata/RHSA-2024:4620",
-      "https://access.redhat.com/errata/RHSA-2024:4622",
-      "https://access.redhat.com/errata/RHSA-2024:4636",
-      "https://access.redhat.com/errata/RHSA-2024:4640",
-      "https://access.redhat.com/errata/RHSA-2024:4641",
-      "https://access.redhat.com/errata/RHSA-2024:4642",
-      "https://access.redhat.com/errata/RHSA-2024:4643",
-      "https://access.redhat.com/security/cve/CVE-2024-5564",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2284122",
-      "https://access.redhat.com/errata/RHSA-2024:4618",
-      "https://access.redhat.com/errata/RHSA-2024:4619",
-      "https://access.redhat.com/errata/RHSA-2024:4620",
-      "https://access.redhat.com/errata/RHSA-2024:4622",
-      "https://access.redhat.com/errata/RHSA-2024:4636",
-      "https://access.redhat.com/errata/RHSA-2024:4640",
-      "https://access.redhat.com/errata/RHSA-2024:4641",
-      "https://access.redhat.com/errata/RHSA-2024:4642",
-      "https://access.redhat.com/errata/RHSA-2024:4643",
-      "https://access.redhat.com/security/cve/CVE-2024-5564",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2284122",
-      "https://lists.debian.org/debian-lts-announce/2024/06/msg00011.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 67.5,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-3183",
-    "published": "2024-06-12T09:15:18.683",
-    "last_modified": "2026-11-04T22:17:21.840",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was found in FreeIPA in a way when a Kerberos TGS-REQ is encrypted using the client’s session key. This key is different for each new session, which protects it from brute force attacks. However, the ticket it contains is encrypted using the target principal key directly. For user principals, this key is a hash of a public per-principal randomly-generated salt and the user’s password.\r\n\r\nIf a principal is compromised it means the attacker would be able to retrieve tickets encrypted to any principal, all of them being encrypted by their own key directly. By taking these tickets and salts offline, the attacker could run brute force attacks to find character strings able to decrypt tickets when combined to a principal salt (i.e. find the principal’s password).",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:3754",
-      "https://access.redhat.com/errata/RHSA-2024:3755",
-      "https://access.redhat.com/errata/RHSA-2024:3756",
-      "https://access.redhat.com/errata/RHSA-2024:3757",
-      "https://access.redhat.com/errata/RHSA-2024:3758",
-      "https://access.redhat.com/errata/RHSA-2024:3759",
-      "https://access.redhat.com/errata/RHSA-2024:3760",
-      "https://access.redhat.com/errata/RHSA-2024:3761",
-      "https://access.redhat.com/errata/RHSA-2024:3775",
-      "https://access.redhat.com/security/cve/CVE-2024-3183",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2270685",
-      "https://www.freeipa.org/release-notes/4-12-1.html",
-      "https://access.redhat.com/errata/RHSA-2024:3754",
-      "https://access.redhat.com/errata/RHSA-2024:3755",
-      "https://access.redhat.com/errata/RHSA-2024:3756",
-      "https://access.redhat.com/errata/RHSA-2024:3757",
-      "https://access.redhat.com/errata/RHSA-2024:3758",
-      "https://access.redhat.com/errata/RHSA-2024:3759",
-      "https://access.redhat.com/errata/RHSA-2024:3760",
-      "https://access.redhat.com/errata/RHSA-2024:3761",
-      "https://access.redhat.com/errata/RHSA-2024:3775",
-      "https://access.redhat.com/security/cve/CVE-2024-3183",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2270685",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/WT3JL7JQDIAFKKEFARWYES7GZNWGQNCI/",
-      "https://www.freeipa.org/release-notes/4-12-1.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.1,
-    "epss_percentile": 81.4,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-6239",
     "published": "2024-06-21T14:15:14.007",
     "last_modified": "2026-11-06T21:17:02.387",
@@ -8902,85 +8261,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-1801",
-    "published": "2025-03-03T15:15:16.500",
-    "last_modified": "2026-11-04T22:17:29.330",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the Ansible aap-gateway. Concurrent requests handled by the gateway grpc service can result in concurrency issues due to race condition requests against the proxy. This issue potentially allows a less privileged user to obtain the JWT of a greater privileged user, enabling the server to be jeopardized. A user session or confidential data might be vulnerable.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:1954",
-      "https://access.redhat.com/security/cve/CVE-2025-1801",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2349081"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.0,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-23368",
-    "published": "2025-03-04T16:15:39.270",
-    "last_modified": "2026-11-04T22:17:29.510",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Wildfly Elytron integration. The component does not implement sufficient measures to prevent multiple failed authentication attempts within a short time frame, making it more susceptible to brute force attacks via CLI.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:18054",
-      "https://access.redhat.com/errata/RHSA-2026:18055",
-      "https://access.redhat.com/errata/RHSA-2026:18059",
-      "https://access.redhat.com/errata/RHSA-2026:33371",
-      "https://access.redhat.com/security/cve/CVE-2025-23368",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2337621",
-      "https://www.gruppotim.it/it/footer/red-team.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 59.5,
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-2240",
-    "published": "2025-03-12T15:15:42.273",
-    "last_modified": "2026-11-04T22:17:31.987",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Smallrye, where smallrye-fault-tolerance is vulnerable to an out-of-memory (OOM) issue. This vulnerability is externally triggered when calling the metrics URI. Every call creates a new object within meterMap and may lead to a denial of service (DoS) issue.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:3376",
-      "https://access.redhat.com/errata/RHSA-2025:3541",
-      "https://access.redhat.com/errata/RHSA-2025:3543",
-      "https://access.redhat.com/security/cve/CVE-2025-2240",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2351452",
-      "https://github.com/advisories/GHSA-gfh6-3pqw-x2j4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.2,
-    "epss_percentile": 69.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-8176",
     "published": "2025-03-14T09:15:14.157",
     "last_modified": "2026-11-05T15:16:59.753",
@@ -9083,109 +8363,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-32908",
-    "published": "2025-04-14T14:15:24.717",
-    "last_modified": "2026-11-04T22:17:32.453",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in libsoup. The HTTP/2 server in libsoup may not fully validate the values of pseudo-headers :scheme, :authority, and :path, which may allow a user to cause a denial of service (DoS).",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:7505",
-      "https://access.redhat.com/security/cve/CVE-2025-32908",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2359343",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/429",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/merge_requests/451"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 49.9,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-3891",
-    "published": "2025-04-29T12:15:32.137",
-    "last_modified": "2026-11-04T22:17:33.443",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the mod_auth_openidc module for Apache httpd. This flaw allows a remote, unauthenticated attacker to trigger a denial of service by sending an empty POST request when the OIDCPreservePost directive is enabled. The server crashes consistently, affecting availability.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10002",
-      "https://access.redhat.com/errata/RHSA-2025:10003",
-      "https://access.redhat.com/errata/RHSA-2025:10004",
-      "https://access.redhat.com/errata/RHSA-2025:10006",
-      "https://access.redhat.com/errata/RHSA-2025:10007",
-      "https://access.redhat.com/errata/RHSA-2025:10008",
-      "https://access.redhat.com/errata/RHSA-2025:10010",
-      "https://access.redhat.com/errata/RHSA-2025:4597",
-      "https://access.redhat.com/errata/RHSA-2025:9396",
-      "https://access.redhat.com/security/cve/CVE-2025-3891",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2361633",
-      "https://github.com/OpenIDC/mod_auth_openidc/commit/6a0b5f66c87184dfe0e4400f6bdd46a82dc0ec2b",
-      "https://github.com/OpenIDC/mod_auth_openidc/security/advisories/GHSA-x7cf-8wgv-5j86",
-      "https://lists.debian.org/debian-lts-announce/2025/05/msg00007.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.6,
-    "epss_percentile": 76.0,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-4948",
-    "published": "2025-05-19T16:15:36.790",
-    "last_modified": "2026-11-04T22:17:37.787",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the soup_multipart_new_from_message() function of the libsoup HTTP library, which is commonly used by GNOME and other applications to handle web communications. The issue occurs when the library processes specially crafted multipart messages. Due to improper validation, an internal calculation can go wrong, leading to an integer underflow. This can cause the program to access invalid memory and crash. As a result, any application or server using libsoup could be forced to exit unexpectedly, creating a denial-of-service (DoS) risk.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:21657",
-      "https://access.redhat.com/errata/RHSA-2025:8126",
-      "https://access.redhat.com/errata/RHSA-2025:8128",
-      "https://access.redhat.com/errata/RHSA-2025:8132",
-      "https://access.redhat.com/errata/RHSA-2025:8139",
-      "https://access.redhat.com/errata/RHSA-2025:8140",
-      "https://access.redhat.com/errata/RHSA-2025:8252",
-      "https://access.redhat.com/errata/RHSA-2025:8480",
-      "https://access.redhat.com/errata/RHSA-2025:8481",
-      "https://access.redhat.com/errata/RHSA-2025:8482",
-      "https://access.redhat.com/errata/RHSA-2025:8663",
-      "https://access.redhat.com/security/cve/CVE-2025-4948",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2367183",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/449",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/work_items/449"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.1,
-    "epss_percentile": 66.4,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-6021",
     "published": "2025-06-12T13:15:25.590",
     "last_modified": "2026-11-05T17:17:19.250",
@@ -9238,36 +8415,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-49795",
-    "published": "2025-06-16T16:15:19.203",
-    "last_modified": "2026-11-04T22:17:36.903",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A NULL pointer dereference vulnerability was found in libxml2 when processing XPath XML expressions. This flaw allows an attacker to craft a malicious XML input to libxml2, leading to a denial of service.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10630",
-      "https://access.redhat.com/errata/RHSA-2025:19020",
-      "https://access.redhat.com/errata/RHSA-2026:7519",
-      "https://access.redhat.com/security/cve/CVE-2025-49795",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2372379",
-      "https://gitlab.gnome.org/GNOME/libxml2/-/issues/932",
-      "https://cert-portal.siemens.com/productcert/html/ssa-253495.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.5,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-5987",
     "published": "2025-07-07T15:15:28.180",
     "last_modified": "2026-11-05T17:17:16.630",
@@ -9302,42 +8449,6 @@
     "intel_score": 50.5,
     "reasons": [
       "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-7424",
-    "published": "2025-07-10T14:15:27.573",
-    "last_modified": "2026-11-04T22:17:39.703",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the libxslt library. The same memory field, psvi, is used for both stylesheet and input data, which can lead to type confusion during XML transformations. This vulnerability allows an attacker to crash the application or corrupt memory. In some cases, it may lead to denial of service or unexpected behavior.",
-    "references": [
-      "https://access.redhat.com/errata/RHBA-2025:12345",
-      "https://access.redhat.com/errata/RHSA-2026:11015",
-      "https://access.redhat.com/security/cve/CVE-2025-7424",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2379228",
-      "https://gitlab.gnome.org/GNOME/libxslt/-/issues/139",
-      "http://seclists.org/fulldisclosure/2025/Aug/0",
-      "http://seclists.org/fulldisclosure/2025/Jul/30",
-      "http://seclists.org/fulldisclosure/2025/Jul/32",
-      "http://seclists.org/fulldisclosure/2025/Jul/33",
-      "http://seclists.org/fulldisclosure/2025/Jul/35",
-      "http://seclists.org/fulldisclosure/2025/Jul/37",
-      "http://www.openwall.com/lists/oss-security/2025/07/11/2",
-      "https://lists.debian.org/debian-lts-announce/2025/09/msg00024.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.6,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
     ]
   },
   {
@@ -9386,54 +8497,6 @@
     "intel_score": 50.5,
     "reasons": [
       "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-9784",
-    "published": "2025-09-02T14:15:36.593",
-    "last_modified": "2026-11-04T22:17:40.723",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Undertow where malformed client requests can trigger server-side stream resets without triggering abuse counters. This issue, referred to as the \"MadeYouReset\" attack, allows malicious clients to induce excessive server workload by repeatedly causing server-side stream aborts. While not a protocol bug, this highlights a common implementation weakness that can be exploited to cause a denial of service (DoS).",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:23143",
-      "https://access.redhat.com/errata/RHSA-2026:0383",
-      "https://access.redhat.com/errata/RHSA-2026:0384",
-      "https://access.redhat.com/errata/RHSA-2026:0386",
-      "https://access.redhat.com/errata/RHSA-2026:33371",
-      "https://access.redhat.com/errata/RHSA-2026:33372",
-      "https://access.redhat.com/errata/RHSA-2026:3889",
-      "https://access.redhat.com/errata/RHSA-2026:3891",
-      "https://access.redhat.com/errata/RHSA-2026:3892",
-      "https://access.redhat.com/errata/RHSA-2026:4915",
-      "https://access.redhat.com/errata/RHSA-2026:4916",
-      "https://access.redhat.com/errata/RHSA-2026:4917",
-      "https://access.redhat.com/errata/RHSA-2026:4924",
-      "https://access.redhat.com/errata/RHSA-2026:76128",
-      "https://access.redhat.com/errata/RHSA-2026:76129",
-      "https://access.redhat.com/errata/RHSA-2026:76130",
-      "https://access.redhat.com/errata/RHSA-2026:76132",
-      "https://access.redhat.com/errata/RHSA-2026:76134",
-      "https://access.redhat.com/security/cve/CVE-2025-9784",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2392306",
-      "https://github.com/undertow-io/undertow/pull/1778",
-      "https://github.com/undertow-io/undertow/releases/tag/2.2.38.Final",
-      "https://issues.redhat.com/browse/UNDERTOW-2598",
-      "https://kb.cert.org/vuls/id/767506",
-      "https://www.kb.cert.org/vuls/id/767506"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.3,
-    "epss_percentile": 83.6,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
     ]
   },
   {
@@ -9712,6 +8775,231 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-57062",
+    "published": "2025-09-09T17:16:08.827",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the delDhcpIndex parameter in the formDelDhcpRule function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formDelDhcpRule.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formDelDhcpRule.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57063",
+    "published": "2025-09-09T17:16:09.013",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the portMappingIndex parameter in the formDelPortMapping function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formDelPortMapping.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formDelPortMapping.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57064",
+    "published": "2025-09-09T17:16:09.213",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the bindDhcpIndex parameter in the modifyDhcpRule function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/modifyDhcpRule.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/modifyDhcpRule.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57069",
+    "published": "2025-09-09T17:16:09.413",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the pPppUser parameter in the getsinglepppuser function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/getsinglepppuser.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/getsinglepppuser.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57070",
+    "published": "2025-09-09T17:16:09.603",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the gstUp parameter in the guestWifiRuleRefresh function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/guestWifiRuleRefresh.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/guestWifiRuleRefresh.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57071",
+    "published": "2025-09-09T17:16:09.797",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the vpnUsers parameter in the formAddVpnUsers function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formAddVpnUsers.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formAddVpnUsers.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57072",
+    "published": "2025-09-09T17:16:09.987",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the staticRouteGateway parameter in the formSetStaticRoute function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formSetStaticRoute.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formSetStaticRoute.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57087",
+    "published": "2025-09-09T17:16:10.180",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda W30E V16.01.0.19 (5037) was discovered to contain a stack overflow in the countryCode parameter in the werlessAdvancedSet function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/W30E/werlessAdvancedSet.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/W30E/werlessAdvancedSet.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-57078",
+    "published": "2025-09-09T18:15:35.723",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Tenda G3 v3.0br_V15.11.0.17 was discovered to contain a stack overflow in the pppoeServerWhiteMacIndex parameter in the formModifyPppAuthWhiteMac function. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted request.",
+    "references": [
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formModifyPppAuthWhiteMac.md",
+      "https://github.com/vulnDetailRecord/VulforDevice/blob/main/Tenda/G3/formModifyPppAuthWhiteMac.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 34.1,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-57086",
     "published": "2025-09-09T18:15:36.020",
     "last_modified": "2026-11-07T18:10:00.200",
@@ -9750,6 +9038,31 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-59358",
+    "published": "2025-09-15T12:15:33.470",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Chaos Controller Manager in Chaos Mesh exposes a GraphQL debugging server without authentication to the entire Kubernetes cluster, which provides an API to kill arbitrary processes in any Kubernetes pod, leading to cluster-wide denial of service.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.8,
+    "epss_percentile": 57.3,
     "tags": [
       "dos"
     ],
@@ -10831,6 +10144,57 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-64076",
+    "published": "2025-11-18T18:16:14.263",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Multiple vulnerabilities exist in cbor2 through version 5.7.0 in the decode_definite_long_string() function of the C extension decoder (source/decoder.c): (1) Integer Underflow Leading to Out-of-Bounds Read (CWE-191, CWE-125): An incorrect variable reference and missing state reset in the chunk processing loop causes buffer_length to not be reset to zero after UTF-8 character consumption. This results in subsequent chunk_length calculations producing negative values (e.g., chunk_length = 65536 - buffer_length), which are passed as signed integers to the read() method, potentially triggering unlimited read operations and resource exhaustion. (2) Memory Leak via Missing Reference Count Release (CWE-401): The main processing loop fails to release Python object references (Py_DECREF) for chunk objects allocated in each iteration. For CBOR strings longer than 65536 bytes, this causes cumulative memory leaks proportional to the payload size, enabling memory exhaustion attacks through repeated processing of large CBOR payloads. Both vulnerabilities can be exploited remotely without authentication by sending specially-crafted CBOR data containing definite-length text strings with multi-byte UTF-8 characters positioned at 65536-byte chunk boundaries. Successful exploitation results in denial of service through process crashes (CBORDecodeEOF exceptions) or memory exhaustion. The vulnerabilities affect all applications using cbor2's C extension to process untrusted CBOR data, including web APIs, IoT data collectors, and message queue processors. Fixed in commit 851473490281f82d82560b2368284ef33cf6e8f9 pushed with released version 5.7.1.",
+    "references": [
+      "https://github.com/agronholm/cbor2/commit/851473490281f82d82560b2368284ef33cf6e8f9",
+      "https://github.com/agronholm/cbor2/issues/264",
+      "https://github.com/agronholm/cbor2/pull/265"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 42.3,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-63955",
+    "published": "2025-11-18T19:15:51.307",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A Cross-Site Request Forgery (CSRF) vulnerability in the manage-students.php component of PHPGurukul Student Record System v3.2 allows an attacker to trick an authenticated administrator into submitting a forged request. This leads to the unauthorized deletion of user accounts, causing a Denial of Service (DoS).",
+    "references": [
+      "https://github.com/Wayne-arul/CVE-Disclosures/tree/main/CVE-2025-63955",
+      "https://phpgurukul.com/student-record-system-php/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 15.8,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-54761",
     "published": "2025-09-19T20:15:39.580",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -11139,53 +10503,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-9675",
-    "published": "2024-10-09T15:15:17.837",
-    "last_modified": "2026-11-04T22:17:24.073",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was found in Buildah. Cache mounts do not properly validate that user-specified paths for the cache are within our cache directory, allowing a `RUN` instruction in a Container file to mount an arbitrary directory from the host (read/write) into the container as long as those files can be accessed by the user running Buildah.",
-    "references": [
-      "https://access.redhat.com/errata/RHBA-2024:10967",
-      "https://access.redhat.com/errata/RHEA-2024:6126",
-      "https://access.redhat.com/errata/RHSA-2024:8563",
-      "https://access.redhat.com/errata/RHSA-2024:8675",
-      "https://access.redhat.com/errata/RHSA-2024:8679",
-      "https://access.redhat.com/errata/RHSA-2024:8686",
-      "https://access.redhat.com/errata/RHSA-2024:8690",
-      "https://access.redhat.com/errata/RHSA-2024:8700",
-      "https://access.redhat.com/errata/RHSA-2024:8703",
-      "https://access.redhat.com/errata/RHSA-2024:8707",
-      "https://access.redhat.com/errata/RHSA-2024:8708",
-      "https://access.redhat.com/errata/RHSA-2024:8709",
-      "https://access.redhat.com/errata/RHSA-2024:8846",
-      "https://access.redhat.com/errata/RHSA-2024:8984",
-      "https://access.redhat.com/errata/RHSA-2024:8994",
-      "https://access.redhat.com/errata/RHSA-2024:9051",
-      "https://access.redhat.com/errata/RHSA-2024:9454",
-      "https://access.redhat.com/errata/RHSA-2024:9459",
-      "https://access.redhat.com/errata/RHSA-2025:2445",
-      "https://access.redhat.com/errata/RHSA-2025:2449",
-      "https://access.redhat.com/errata/RHSA-2025:2454",
-      "https://access.redhat.com/errata/RHSA-2025:2701",
-      "https://access.redhat.com/errata/RHSA-2025:2710",
-      "https://access.redhat.com/errata/RHSA-2025:3301",
-      "https://access.redhat.com/errata/RHSA-2025:3573",
-      "https://access.redhat.com/security/cve/CVE-2024-9675",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2317458"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.6,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-56609",
     "published": "2024-12-27T15:15:20.387",
     "last_modified": "2026-11-05T21:17:36.453",
@@ -11255,313 +10572,6 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 12.2,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26594",
-    "published": "2025-02-25T16:15:38.227",
-    "last_modified": "2026-11-04T22:17:29.703",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free flaw was found in X.Org and Xwayland. The root cursor is referenced in the X server as a global variable. If a client frees the root cursor, the internal reference points to freed memory and causes a use-after-free.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26594",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345248",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.7,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26595",
-    "published": "2025-02-25T16:15:38.390",
-    "last_modified": "2026-11-04T22:17:30.020",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A buffer overflow flaw was found in X.Org and Xwayland. The code in XkbVModMaskText() allocates a fixed-sized buffer on the stack and copies the names of the virtual modifiers to that buffer. The code fails to check the bounds of the buffer and would copy the data regardless of the size.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26595",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345257",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.3,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26596",
-    "published": "2025-02-25T16:15:38.603",
-    "last_modified": "2026-11-04T22:17:30.307",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap overflow flaw was found in X.Org and Xwayland. The computation of the length in XkbSizeKeySyms() differs from what is written in XkbWriteKeySyms(), which may lead to a heap-based buffer overflow.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26596",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345256",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.3,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26597",
-    "published": "2025-02-25T16:15:38.797",
-    "last_modified": "2026-11-04T22:17:30.587",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A buffer overflow flaw was found in X.Org and Xwayland. If XkbChangeTypesOfKey() is called with a 0 group, it will resize the key symbols table to 0 but leave the key actions unchanged. If the same function is later called with a non-zero value of groups, this will cause a buffer overflow because the key actions are of the wrong size.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26597",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345255",
-      "http://www.openwall.com/lists/oss-security/2026/06/02/1",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 38.8,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26598",
-    "published": "2025-02-25T16:15:38.977",
-    "last_modified": "2026-11-04T22:17:30.870",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An out-of-bounds write flaw was found in X.Org and Xwayland. The function GetBarrierDevice() searches for the pointer device based on its device ID and returns the matching value, or supposedly NULL, if no match was found. However, the code will return the last element of the list if no matching device ID is found, which can lead to out-of-bounds memory access.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26598",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345254",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26599",
-    "published": "2025-02-25T16:15:39.163",
-    "last_modified": "2026-11-04T22:17:31.143",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An access to an uninitialized pointer flaw was found in X.Org and Xwayland. The function compCheckRedirect() may fail if it cannot allocate the backing pixmap. In that case, compRedirectWindow() will return a BadAlloc error without validating the window tree marked just before, which leaves the validated data partly initialized and the use of an uninitialized pointer later.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26599",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345253",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 35.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26600",
-    "published": "2025-02-25T16:15:39.350",
-    "last_modified": "2026-11-04T22:17:31.423",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free flaw was found in X.Org and Xwayland. When a device is removed while still frozen, the events queued for that device remain while the device is freed. Replaying the events will cause a use-after-free.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26600",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345252",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html",
-      "https://security.netapp.com/advisory/ntap-20250516-0005/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.7,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-26601",
-    "published": "2025-02-25T16:15:39.537",
-    "last_modified": "2026-11-04T22:17:31.707",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free flaw was found in X.Org and Xwayland. When changing an alarm, the values of the change mask are evaluated one after the other, changing the trigger values as requested, and eventually, SyncInitTrigger() is called. If one of the changes triggers an error, the function will return early, not adding the new sync object, possibly causing a use-after-free when the alarm eventually triggers.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:2500",
-      "https://access.redhat.com/errata/RHSA-2025:2502",
-      "https://access.redhat.com/errata/RHSA-2025:2861",
-      "https://access.redhat.com/errata/RHSA-2025:2862",
-      "https://access.redhat.com/errata/RHSA-2025:2865",
-      "https://access.redhat.com/errata/RHSA-2025:2866",
-      "https://access.redhat.com/errata/RHSA-2025:2873",
-      "https://access.redhat.com/errata/RHSA-2025:2874",
-      "https://access.redhat.com/errata/RHSA-2025:2875",
-      "https://access.redhat.com/errata/RHSA-2025:2879",
-      "https://access.redhat.com/errata/RHSA-2025:2880",
-      "https://access.redhat.com/errata/RHSA-2025:3976",
-      "https://access.redhat.com/errata/RHSA-2025:7163",
-      "https://access.redhat.com/errata/RHSA-2025:7165",
-      "https://access.redhat.com/errata/RHSA-2025:7458",
-      "https://access.redhat.com/security/cve/CVE-2025-26601",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2345251",
-      "https://lists.debian.org/debian-lts-announce/2025/02/msg00036.html",
-      "https://security.netapp.com/advisory/ntap-20250516-0004/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 33.8,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -12262,58 +11272,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 41.0,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-49180",
-    "published": "2025-06-17T15:15:46.183",
-    "last_modified": "2026-11-04T22:17:36.000",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the RandR extension, where the RRChangeProviderProperty function does not properly validate input. This issue leads to an integer overflow when computing the total size to allocate.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10258",
-      "https://access.redhat.com/errata/RHSA-2025:10342",
-      "https://access.redhat.com/errata/RHSA-2025:10343",
-      "https://access.redhat.com/errata/RHSA-2025:10344",
-      "https://access.redhat.com/errata/RHSA-2025:10346",
-      "https://access.redhat.com/errata/RHSA-2025:10347",
-      "https://access.redhat.com/errata/RHSA-2025:10348",
-      "https://access.redhat.com/errata/RHSA-2025:10349",
-      "https://access.redhat.com/errata/RHSA-2025:10350",
-      "https://access.redhat.com/errata/RHSA-2025:10351",
-      "https://access.redhat.com/errata/RHSA-2025:10352",
-      "https://access.redhat.com/errata/RHSA-2025:10355",
-      "https://access.redhat.com/errata/RHSA-2025:10356",
-      "https://access.redhat.com/errata/RHSA-2025:10360",
-      "https://access.redhat.com/errata/RHSA-2025:10370",
-      "https://access.redhat.com/errata/RHSA-2025:10374",
-      "https://access.redhat.com/errata/RHSA-2025:10375",
-      "https://access.redhat.com/errata/RHSA-2025:10376",
-      "https://access.redhat.com/errata/RHSA-2025:10377",
-      "https://access.redhat.com/errata/RHSA-2025:10378",
-      "https://access.redhat.com/errata/RHSA-2025:10381",
-      "https://access.redhat.com/errata/RHSA-2025:10410",
-      "https://access.redhat.com/errata/RHSA-2025:9303",
-      "https://access.redhat.com/errata/RHSA-2025:9304",
-      "https://access.redhat.com/errata/RHSA-2025:9305",
-      "https://access.redhat.com/errata/RHSA-2025:9306",
-      "https://access.redhat.com/errata/RHSA-2025:9392",
-      "https://access.redhat.com/errata/RHSA-2025:9964",
-      "https://access.redhat.com/security/cve/CVE-2025-49180",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2369981",
-      "https://gitlab.freedesktop.org/xorg/xserver/-/commit/3c3a4b767b16174d3213055947ea7f4f88e10ec6",
-      "https://lists.debian.org/debian-lts-announce/2025/06/msg00028.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 26.6,
     "tags": [],
     "intel_score": 49.0,
     "reasons": [
@@ -13333,6 +12291,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-34200",
+    "published": "2025-09-19T19:15:40.737",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Vasion Print (formerly PrinterLogic) Virtual Appliance Host and Application (VA and SaaS deployments)  provision the appliance with the network account credentials in clear-text inside /etc/issue, and the file is world-readable by default. An attacker with local shell access can read /etc/issue to obtain the network account username and password. Using the network account an attacker can change network parameters via the appliance interface, enabling local misconfiguration, network disruption or further escalation depending on deployment.",
+    "references": [
+      "https://help.printerlogic.com/saas/Print/Security/Security-Bulletins.htm",
+      "https://help.printerlogic.com/va/Print/Security/Security-Bulletins.htm",
+      "https://pierrekim.github.io/blog/2025-04-08-vasion-printerlogic-83-vulnerabilities.html#va-clear-text-password",
+      "https://www.vulncheck.com/advisories/vasion-print-printerlogic-network-account-password-stored-in-cleartext"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 28.8,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-39877",
     "published": "2025-09-23T06:15:47.230",
     "last_modified": "2026-11-05T22:17:34.610",
@@ -13741,38 +12723,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2024-1139",
-    "published": "2024-04-25T17:15:47.650",
-    "last_modified": "2026-11-05T02:16:56.410",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A credentials leak vulnerability was found in the cluster monitoring operator in OCP.  This issue may allow a remote attacker who has basic login credentials to check the pod manifest to discover a repository pull secret.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:1887",
-      "https://access.redhat.com/errata/RHSA-2024:1891",
-      "https://access.redhat.com/errata/RHSA-2024:2047",
-      "https://access.redhat.com/errata/RHSA-2024:2782",
-      "https://access.redhat.com/security/cve/CVE-2024-1139",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2262158",
-      "https://access.redhat.com/errata/RHSA-2024:1887",
-      "https://access.redhat.com/errata/RHSA-2024:1891",
-      "https://access.redhat.com/errata/RHSA-2024:2047",
-      "https://access.redhat.com/errata/RHSA-2024:2782",
-      "https://access.redhat.com/security/cve/CVE-2024-1139",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2262158"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 59.7,
-    "tags": [],
-    "intel_score": 48.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-56219",
     "published": "2025-10-20T13:15:44.703",
     "last_modified": "2026-11-05T22:10:00.203",
@@ -14157,77 +13107,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-32906",
-    "published": "2025-04-14T14:15:24.433",
-    "last_modified": "2026-11-04T22:17:32.180",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in libsoup, where the soup_headers_parse_request() function may be vulnerable to an out-of-bound read. This flaw allows a malicious user to use a specially crafted HTTP request to crash the HTTP server.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:21657",
-      "https://access.redhat.com/errata/RHSA-2025:4439",
-      "https://access.redhat.com/errata/RHSA-2025:4440",
-      "https://access.redhat.com/errata/RHSA-2025:4508",
-      "https://access.redhat.com/errata/RHSA-2025:4538",
-      "https://access.redhat.com/errata/RHSA-2025:4560",
-      "https://access.redhat.com/errata/RHSA-2025:4568",
-      "https://access.redhat.com/errata/RHSA-2025:4609",
-      "https://access.redhat.com/errata/RHSA-2025:4624",
-      "https://access.redhat.com/errata/RHSA-2025:7436",
-      "https://access.redhat.com/errata/RHSA-2025:7505",
-      "https://access.redhat.com/errata/RHSA-2025:8292",
-      "https://access.redhat.com/security/cve/CVE-2025-32906",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2359341",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/404",
-      "https://lists.debian.org/debian-lts-announce/2025/04/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.3,
-    "epss_percentile": 70.3,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-32913",
-    "published": "2025-04-14T14:15:24.860",
-    "last_modified": "2026-11-04T22:17:32.883",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in libsoup, where the soup_message_headers_get_content_disposition() function is vulnerable to a NULL pointer dereference. This flaw allows a malicious HTTP peer to crash a libsoup client or server that uses this function.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:21657",
-      "https://access.redhat.com/errata/RHSA-2025:4439",
-      "https://access.redhat.com/errata/RHSA-2025:4440",
-      "https://access.redhat.com/errata/RHSA-2025:4508",
-      "https://access.redhat.com/errata/RHSA-2025:4538",
-      "https://access.redhat.com/errata/RHSA-2025:4560",
-      "https://access.redhat.com/errata/RHSA-2025:4568",
-      "https://access.redhat.com/errata/RHSA-2025:4609",
-      "https://access.redhat.com/errata/RHSA-2025:4624",
-      "https://access.redhat.com/errata/RHSA-2025:7436",
-      "https://access.redhat.com/errata/RHSA-2025:8292",
-      "https://access.redhat.com/security/cve/CVE-2025-32913",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2359357",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/435",
-      "https://lists.debian.org/debian-lts-announce/2025/04/msg00036.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.9,
-    "epss_percentile": 58.6,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-32256",
     "published": "2025-08-01T18:15:27.910",
     "last_modified": "2026-11-06T21:17:00.240",
@@ -14533,42 +13412,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 37.5,
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-11021",
-    "published": "2025-09-26T09:15:31.370",
-    "last_modified": "2026-11-04T22:17:26.697",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the cookie date handling logic of the libsoup HTTP library, widely used by GNOME and other applications for web communication. When processing cookies with specially crafted expiration dates, the library may perform an out-of-bounds memory read. This flaw could result in unintended disclosure of memory contents, potentially exposing sensitive information from the process using libsoup.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:18183",
-      "https://access.redhat.com/errata/RHSA-2025:19713",
-      "https://access.redhat.com/errata/RHSA-2025:19714",
-      "https://access.redhat.com/errata/RHSA-2025:20959",
-      "https://access.redhat.com/errata/RHSA-2025:21032",
-      "https://access.redhat.com/errata/RHSA-2025:21655",
-      "https://access.redhat.com/errata/RHSA-2025:21656",
-      "https://access.redhat.com/errata/RHSA-2025:21657",
-      "https://access.redhat.com/errata/RHSA-2025:21664",
-      "https://access.redhat.com/errata/RHSA-2025:21665",
-      "https://access.redhat.com/errata/RHSA-2025:21666",
-      "https://access.redhat.com/errata/RHSA-2025:21772",
-      "https://access.redhat.com/errata/RHSA-2025:22013",
-      "https://access.redhat.com/security/cve/CVE-2025-11021",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2399627",
-      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/459"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 50.8,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -15803,6 +14646,74 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-63800",
+    "published": "2025-11-18T16:15:46.310",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The password change endpoint in Open Source Point of Sale 3.4.1 allows users to set their account password to an empty string due to missing server-side validation. When an authenticated user omits or leaves the `password` and `repeat_password` parameters empty in the password change request, the backend still returns a successful response and sets the password to an empty string. This effectively disables authentication and may allow unauthorized access to user or administrative accounts.",
+    "references": [
+      "https://github.com/omkaryepre/vulnerability-research/tree/main/CVE-2025-63800",
+      "https://github.com/opensourcepos/opensourcepos",
+      "https://opensourcepos.org/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.6,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-55796",
+    "published": "2025-11-18T17:16:04.270",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The openml/openml.org web application version v2.0.20241110 uses predictable MD5-based tokens for critical user workflows such as signup confirmation, password resets, email confirmation resends, and email change confirmation. These tokens are generated by hashing the current timestamp formatted as \"%d %H:%M:%S\" without incorporating any user-specific data or cryptographic randomness. This predictability allows remote attackers to brute-force valid tokens within a small time window, enabling unauthorized account confirmation, password resets, and email change approvals, potentially leading to account takeover.",
+    "references": [
+      "https://github.com/openml",
+      "https://github.com/openml/openml.org",
+      "https://github.com/openml/openml.org/security/advisories/GHSA-xfjh-gf9p-8qr6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 50.6,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-63829",
+    "published": "2025-11-18T17:16:12.907",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "eProsima Fast-DDS v3.3 and before has an infinite loop vulnerability caused by integer overflow in the Time_t:: fraction() function.",
+    "references": [
+      "https://gist.github.com/lkloliver/b00377bec754d4aa1dc731be210d5889",
+      "https://github.com/eProsima/Fast-DDS/blob/master/src/cpp/fastdds/core/Time_t.cpp#L67"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.5,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2024-7383",
     "published": "2024-08-05T14:15:35.130",
     "last_modified": "2026-11-05T15:16:59.340",
@@ -15934,42 +14845,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-3155",
-    "published": "2025-04-03T14:15:46.413",
-    "last_modified": "2026-11-04T22:17:33.130",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Yelp. The Gnome user help application allows the help document to execute arbitrary scripts. This vulnerability allows malicious users to input help documents, which may exfiltrate user files to an external environment.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:4450",
-      "https://access.redhat.com/errata/RHSA-2025:4451",
-      "https://access.redhat.com/errata/RHSA-2025:4455",
-      "https://access.redhat.com/errata/RHSA-2025:4456",
-      "https://access.redhat.com/errata/RHSA-2025:4457",
-      "https://access.redhat.com/errata/RHSA-2025:4505",
-      "https://access.redhat.com/errata/RHSA-2025:4532",
-      "https://access.redhat.com/errata/RHSA-2025:7430",
-      "https://access.redhat.com/errata/RHSA-2025:7569",
-      "https://access.redhat.com/security/cve/CVE-2025-3155",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2357091",
-      "https://gitlab.gnome.org/GNOME/yelp/-/issues/221",
-      "http://www.openwall.com/lists/oss-security/2025/04/04/1",
-      "https://lists.debian.org/debian-lts-announce/2025/05/msg00036.html",
-      "https://lists.debian.org/debian-lts-announce/2025/05/msg00037.html",
-      "https://gist.github.com/parrot409/e970b155358d45b298d7024edd9b17f2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 13.1,
-    "epss_percentile": 96.4,
-    "tags": [],
-    "intel_score": 47.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-32914",
     "published": "2025-04-14T15:15:25.633",
     "last_modified": "2026-11-05T15:17:15.210",
@@ -16062,328 +14937,6 @@
     "cisa_kev": false,
     "epss": 0.8,
     "epss_percentile": 57.3,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-31080",
-    "published": "2024-04-04T14:15:10.330",
-    "last_modified": "2026-11-04T22:17:19.920",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap-based buffer over-read vulnerability was found in the X.org server's ProcXIGetSelectedEvents() function. This issue occurs when byte-swapped length values are used in replies, potentially leading to memory leakage and segmentation faults, particularly when triggered by a client with a different endianness. This vulnerability could be exploited by an attacker to cause the X server to read heap memory values and then transmit them back to the client until encountering an unmapped page, resulting in a crash. Despite the attacker's inability to control the specific memory copied into the replies, the small length values typically stored in a 32-bit integer can result in significant attempted out-of-bounds reads.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/errata/RHSA-2024:9093",
-      "https://access.redhat.com/errata/RHSA-2024:9122",
-      "https://access.redhat.com/errata/RHSA-2025:12751",
-      "https://access.redhat.com/security/cve/CVE-2024-31080",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2271997",
-      "http://www.openwall.com/lists/oss-security/2024/04/03/13",
-      "http://www.openwall.com/lists/oss-security/2024/04/12/10",
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/security/cve/CVE-2024-31080",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2271997",
-      "https://lists.debian.org/debian-lts-announce/2024/04/msg00009.html",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6TF7FZXOKHIKPZXYIMSQXKVH7WITKV3V/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/EBLQJIAXEDMEGRGZMSH7CWUJHSVKUWLV/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P73U4DAAWLFZAPD75GLXTGMSTTQWW5AP/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.2,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-31081",
-    "published": "2024-04-04T14:15:10.593",
-    "last_modified": "2026-11-04T22:17:20.330",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap-based buffer over-read vulnerability was found in the X.org server's ProcXIPassiveGrabDevice() function. This issue occurs when byte-swapped length values are used in replies, potentially leading to memory leakage and segmentation faults, particularly when triggered by a client with a different endianness. This vulnerability could be exploited by an attacker to cause the X server to read heap memory values and then transmit them back to the client until encountering an unmapped page, resulting in a crash. Despite the attacker's inability to control the specific memory copied into the replies, the small length values typically stored in a 32-bit integer can result in significant attempted out-of-bounds reads.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/errata/RHSA-2024:9093",
-      "https://access.redhat.com/errata/RHSA-2024:9122",
-      "https://access.redhat.com/errata/RHSA-2025:12751",
-      "https://access.redhat.com/security/cve/CVE-2024-31081",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2271998",
-      "http://www.openwall.com/lists/oss-security/2024/04/03/13",
-      "http://www.openwall.com/lists/oss-security/2024/04/12/10",
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/security/cve/CVE-2024-31081",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2271998",
-      "https://lists.debian.org/debian-lts-announce/2024/04/msg00009.html",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6TF7FZXOKHIKPZXYIMSQXKVH7WITKV3V/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/EBLQJIAXEDMEGRGZMSH7CWUJHSVKUWLV/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P73U4DAAWLFZAPD75GLXTGMSTTQWW5AP/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 44.2,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-31082",
-    "published": "2024-04-04T14:15:10.833",
-    "last_modified": "2026-11-04T22:17:20.637",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap-based buffer over-read vulnerability was found in the X.org server's ProcAppleDRICreatePixmap() function. This issue occurs when byte-swapped length values are used in replies, potentially leading to memory leakage and segmentation faults, particularly when triggered by a client with a different endianness. This vulnerability could be exploited by an attacker to cause the X server to read heap memory values and then transmit them back to the client until encountering an unmapped page, resulting in a crash. Despite the attacker's inability to control the specific memory copied into the replies, the small length values typically stored in a 32-bit integer can result in significant attempted out-of-bounds reads.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2024-31082",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2271999",
-      "https://lists.x.org/archives/xorg-announce/2024-April/003497.html",
-      "http://www.openwall.com/lists/oss-security/2024/04/03/13",
-      "http://www.openwall.com/lists/oss-security/2024/04/12/10",
-      "https://access.redhat.com/security/cve/CVE-2024-31082",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2271999",
-      "https://lists.x.org/archives/xorg-announce/2024-April/003497.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.4,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-48797",
-    "published": "2025-05-27T14:15:24.140",
-    "last_modified": "2026-11-04T22:17:34.050",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in GIMP when processing certain TGA image files. If a user opens one of these image files that has been specially crafted by an attacker, GIMP can be tricked into making serious memory errors, potentially leading to crashes and causing a heap buffer overflow.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:9162",
-      "https://access.redhat.com/errata/RHSA-2025:9165",
-      "https://access.redhat.com/errata/RHSA-2025:9308",
-      "https://access.redhat.com/errata/RHSA-2025:9309",
-      "https://access.redhat.com/errata/RHSA-2025:9310",
-      "https://access.redhat.com/errata/RHSA-2025:9314",
-      "https://access.redhat.com/errata/RHSA-2025:9315",
-      "https://access.redhat.com/errata/RHSA-2025:9316",
-      "https://access.redhat.com/errata/RHSA-2025:9501",
-      "https://access.redhat.com/errata/RHSA-2025:9569",
-      "https://access.redhat.com/security/cve/CVE-2025-48797",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2368558",
-      "https://gitlab.gnome.org/GNOME/gimp/-/issues/11822",
-      "https://lists.debian.org/debian-lts-announce/2025/10/msg00022.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.7,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-48798",
-    "published": "2025-05-27T14:15:24.307",
-    "last_modified": "2026-11-04T22:17:34.280",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in GIMP when processing XCF image files. If a user opens one of these image files that has been specially crafted by an attacker, GIMP can be tricked into making serious memory errors, potentially leading to crashes and causing use-after-free issues.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:9162",
-      "https://access.redhat.com/errata/RHSA-2025:9165",
-      "https://access.redhat.com/errata/RHSA-2025:9308",
-      "https://access.redhat.com/errata/RHSA-2025:9309",
-      "https://access.redhat.com/errata/RHSA-2025:9310",
-      "https://access.redhat.com/errata/RHSA-2025:9314",
-      "https://access.redhat.com/errata/RHSA-2025:9315",
-      "https://access.redhat.com/errata/RHSA-2025:9316",
-      "https://access.redhat.com/errata/RHSA-2025:9501",
-      "https://access.redhat.com/errata/RHSA-2025:9569",
-      "https://access.redhat.com/security/cve/CVE-2025-48798",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2368557",
-      "https://gitlab.gnome.org/GNOME/gimp/-/issues/11822",
-      "https://lists.debian.org/debian-lts-announce/2025/10/msg00022.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 16.1,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-49176",
-    "published": "2025-06-17T15:15:45.470",
-    "last_modified": "2026-11-04T22:17:34.960",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the Big Requests extension. The request length is multiplied by 4 before checking against the maximum allowed size, potentially causing an integer overflow and bypassing the size check.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10258",
-      "https://access.redhat.com/errata/RHSA-2025:10342",
-      "https://access.redhat.com/errata/RHSA-2025:10343",
-      "https://access.redhat.com/errata/RHSA-2025:10344",
-      "https://access.redhat.com/errata/RHSA-2025:10346",
-      "https://access.redhat.com/errata/RHSA-2025:10347",
-      "https://access.redhat.com/errata/RHSA-2025:10348",
-      "https://access.redhat.com/errata/RHSA-2025:10349",
-      "https://access.redhat.com/errata/RHSA-2025:10350",
-      "https://access.redhat.com/errata/RHSA-2025:10351",
-      "https://access.redhat.com/errata/RHSA-2025:10352",
-      "https://access.redhat.com/errata/RHSA-2025:10355",
-      "https://access.redhat.com/errata/RHSA-2025:10356",
-      "https://access.redhat.com/errata/RHSA-2025:10360",
-      "https://access.redhat.com/errata/RHSA-2025:10370",
-      "https://access.redhat.com/errata/RHSA-2025:10374",
-      "https://access.redhat.com/errata/RHSA-2025:10375",
-      "https://access.redhat.com/errata/RHSA-2025:10376",
-      "https://access.redhat.com/errata/RHSA-2025:10377",
-      "https://access.redhat.com/errata/RHSA-2025:10378",
-      "https://access.redhat.com/errata/RHSA-2025:10381",
-      "https://access.redhat.com/errata/RHSA-2025:10410",
-      "https://access.redhat.com/errata/RHSA-2025:9303",
-      "https://access.redhat.com/errata/RHSA-2025:9304",
-      "https://access.redhat.com/errata/RHSA-2025:9305",
-      "https://access.redhat.com/errata/RHSA-2025:9306",
-      "https://access.redhat.com/errata/RHSA-2025:9392",
-      "https://access.redhat.com/errata/RHSA-2025:9964",
-      "https://access.redhat.com/security/cve/CVE-2025-49176",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2369954",
-      "https://gitlab.freedesktop.org/xorg/xserver/-/commit/03731b326a80b582e48d939fe62cb1e2b10400d9",
-      "https://gitlab.freedesktop.org/xorg/xserver/-/commit/4fc4d76b2c7aaed61ed2653f997783a3714c4fe1",
-      "https://www.x.org/wiki/Development/Security/",
-      "http://www.openwall.com/lists/oss-security/2025/06/18/2",
-      "https://lists.debian.org/debian-lts-announce/2025/06/msg00028.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 30.6,
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-49179",
-    "published": "2025-06-17T15:15:46.000",
-    "last_modified": "2026-11-04T22:17:35.593",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the X Record extension. The RecordSanityCheckRegisterClients function does not check for an integer overflow when computing request length, which allows a client to bypass length checks.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:10258",
-      "https://access.redhat.com/errata/RHSA-2025:10342",
-      "https://access.redhat.com/errata/RHSA-2025:10343",
-      "https://access.redhat.com/errata/RHSA-2025:10344",
-      "https://access.redhat.com/errata/RHSA-2025:10346",
-      "https://access.redhat.com/errata/RHSA-2025:10347",
-      "https://access.redhat.com/errata/RHSA-2025:10348",
-      "https://access.redhat.com/errata/RHSA-2025:10349",
-      "https://access.redhat.com/errata/RHSA-2025:10350",
-      "https://access.redhat.com/errata/RHSA-2025:10351",
-      "https://access.redhat.com/errata/RHSA-2025:10352",
-      "https://access.redhat.com/errata/RHSA-2025:10355",
-      "https://access.redhat.com/errata/RHSA-2025:10356",
-      "https://access.redhat.com/errata/RHSA-2025:10360",
-      "https://access.redhat.com/errata/RHSA-2025:10370",
-      "https://access.redhat.com/errata/RHSA-2025:10374",
-      "https://access.redhat.com/errata/RHSA-2025:10375",
-      "https://access.redhat.com/errata/RHSA-2025:10376",
-      "https://access.redhat.com/errata/RHSA-2025:10377",
-      "https://access.redhat.com/errata/RHSA-2025:10378",
-      "https://access.redhat.com/errata/RHSA-2025:10381",
-      "https://access.redhat.com/errata/RHSA-2025:10410",
-      "https://access.redhat.com/errata/RHSA-2025:9303",
-      "https://access.redhat.com/errata/RHSA-2025:9304",
-      "https://access.redhat.com/errata/RHSA-2025:9305",
-      "https://access.redhat.com/errata/RHSA-2025:9306",
-      "https://access.redhat.com/errata/RHSA-2025:9392",
-      "https://access.redhat.com/errata/RHSA-2025:9964",
-      "https://access.redhat.com/security/cve/CVE-2025-49179",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2369978",
-      "https://gitlab.freedesktop.org/xorg/xserver/-/commit/2bde9ca49a8fd9a1e6697d5e7ef837870d66f5d4",
-      "https://www.x.org/wiki/Development/Security/",
-      "https://lists.debian.org/debian-lts-announce/2025/06/msg00028.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 27.6,
     "tags": [],
     "intel_score": 46.5,
     "reasons": [

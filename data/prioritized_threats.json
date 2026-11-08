@@ -160,6 +160,35 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-63408",
+    "published": "2025-11-18T16:15:45.323",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Local Agent DVR versions thru 6.6.1.0 are vulnerable to directory traversal that allows an unauthenticated local attacker to gain access to sensitive information, cause a server-side forgery request (SSRF), or execute OS commands.",
+    "references": [
+      "https://ispysoftware.github.io/Agent_API/",
+      "https://www.ericholub.com/blog/agent-dvr-rce/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 37.2,
+    "tags": [
+      "path_traversal",
+      "rce",
+      "ssrf"
+    ],
+    "intel_score": 112.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "ssrf+18",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-60957",
     "published": "2025-10-06T17:16:06.497",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -402,6 +431,87 @@
     ]
   },
   {
+    "cve_id": "CVE-2025-59359",
+    "published": "2025-09-15T12:15:33.633",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The cleanTcs mutation in Chaos Controller Manager is vulnerable to OS command injection. In conjunction with CVE-2025-59358, this allows  unauthenticated in-cluster attackers to perform remote code execution across the cluster.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 3.0,
+    "epss_percentile": 87.6,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-59360",
+    "published": "2025-09-15T12:15:33.790",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The killProcesses mutation in Chaos Controller Manager is vulnerable to OS command injection. In conjunction with CVE-2025-59358, this allows unauthenticated in-cluster attackers to perform remote code execution across the cluster.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.9,
+    "epss_percentile": 87.1,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-59361",
+    "published": "2025-09-15T12:15:33.940",
+    "last_modified": "2026-11-08T00:10:00.250",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The cleanIptables mutation in Chaos Controller Manager is vulnerable to OS command injection. In conjunction with CVE-2025-59358, this allows unauthenticated in-cluster attackers to perform remote code execution across the cluster.",
+    "references": [
+      "https://github.com/chaos-mesh/chaos-mesh/pull/4702",
+      "https://jfrog.com/blog/chaotic-deputy-critical-vulnerabilities-in-chaos-mesh-lead-to-kubernetes-cluster-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 3.4,
+    "epss_percentile": 88.9,
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 107.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-57631",
     "published": "2025-09-16T20:15:36.527",
     "last_modified": "2026-11-07T17:10:00.240",
@@ -549,47 +659,6 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 19.6,
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-9050",
-    "published": "2024-10-22T13:15:02.410",
-    "last_modified": "2026-11-04T22:17:23.463",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the libreswan client plugin for NetworkManager (NetkworkManager-libreswan), where it fails to properly sanitize the VPN configuration from the local unprivileged user. In this configuration, composed by a key-value format, the plugin fails to escape special characters, leading the application to interpret values as keys. One of the most critical parameters that could be abused by a malicious user is the `leftupdown`key. This key takes an executable command as a value and is used to specify what executes as a callback in NetworkManager-libreswan to retrieve configuration settings back to NetworkManager. As NetworkManager uses Polkit to allow an unprivileged user to control the system's network configuration, a malicious actor could achieve local privilege escalation and potential code execution as root in the targeted machine by creating a malicious configuration.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:8312",
-      "https://access.redhat.com/errata/RHSA-2024:8338",
-      "https://access.redhat.com/errata/RHSA-2024:8352",
-      "https://access.redhat.com/errata/RHSA-2024:8353",
-      "https://access.redhat.com/errata/RHSA-2024:8354",
-      "https://access.redhat.com/errata/RHSA-2024:8355",
-      "https://access.redhat.com/errata/RHSA-2024:8356",
-      "https://access.redhat.com/errata/RHSA-2024:8357",
-      "https://access.redhat.com/errata/RHSA-2024:8358",
-      "https://access.redhat.com/errata/RHSA-2024:9555",
-      "https://access.redhat.com/errata/RHSA-2024:9556",
-      "https://access.redhat.com/security/cve/CVE-2024-9050",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2313828",
-      "https://gitlab.gnome.org/GNOME/NetworkManager-libreswan/-/commit/dcf8acfb25bd31e4b8cbd20c229da660238b5c1b",
-      "https://www.openwall.com/lists/oss-security/2024/10/25/1",
-      "http://www.openwall.com/lists/oss-security/2024/10/25/1"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.5,
-    "epss_percentile": 39.8,
     "tags": [
       "priv_esc",
       "rce"
@@ -869,6 +938,37 @@
       "recently modified (last 48h)",
       "auth_bypass+25",
       "sqli+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2025-60455",
+    "published": "2025-11-18T19:15:49.800",
+    "last_modified": "2026-11-05T14:10:00.273",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Unsafe Deserialization vulnerability in Modular Max Serve before 25.6, specifically when the \"--experimental-enable-kvcache-agent\" feature is used allowing attackers to execute arbitrary code.",
+    "references": [
+      "https://github.com/modular/modular/blame/main/max/serve/kvcache_agent/kvcache_agent.py#L220",
+      "https://github.com/modular/modular/commit/10620059fb5c47fb0c30e5d21a8ff3b8d622fba4",
+      "https://github.com/modular/modular/commit/b20e749fa892dbe772e890a268002f732164d9f5",
+      "https://github.com/modular/modular/commit/ee9c4ab02345dd30bed8b79771b6909ff1b930a1",
+      "https://github.com/modular/modular/issues/4795",
+      "https://www.oligo.security/blog/shadowmq-how-code-reuse-spread-critical-vulnerabilities-across-the-ai-ecosystem"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 26.6,
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
     ]
   },
   {
@@ -1579,71 +1679,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-9900",
-    "published": "2025-09-23T17:15:38.357",
-    "last_modified": "2026-11-04T22:17:41.203",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Libtiff. This vulnerability is a \"write-what-where\" condition, triggered when the library processes a specially crafted TIFF image file.\n\nBy providing an abnormally large image height value in the file's metadata, an attacker can trick the library into writing attacker-controlled color data to an arbitrary memory location. This memory corruption can be exploited to cause a denial of service (application crash) or to achieve arbitrary code execution with the permissions of the user.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:17651",
-      "https://access.redhat.com/errata/RHSA-2025:17675",
-      "https://access.redhat.com/errata/RHSA-2025:17710",
-      "https://access.redhat.com/errata/RHSA-2025:17738",
-      "https://access.redhat.com/errata/RHSA-2025:17739",
-      "https://access.redhat.com/errata/RHSA-2025:17740",
-      "https://access.redhat.com/errata/RHSA-2025:19113",
-      "https://access.redhat.com/errata/RHSA-2025:19156",
-      "https://access.redhat.com/errata/RHSA-2025:19276",
-      "https://access.redhat.com/errata/RHSA-2025:19906",
-      "https://access.redhat.com/errata/RHSA-2025:19947",
-      "https://access.redhat.com/errata/RHSA-2025:20956",
-      "https://access.redhat.com/errata/RHSA-2025:20998",
-      "https://access.redhat.com/errata/RHSA-2025:21060",
-      "https://access.redhat.com/errata/RHSA-2025:21061",
-      "https://access.redhat.com/errata/RHSA-2025:21062",
-      "https://access.redhat.com/errata/RHSA-2025:21407",
-      "https://access.redhat.com/errata/RHSA-2025:21506",
-      "https://access.redhat.com/errata/RHSA-2025:21507",
-      "https://access.redhat.com/errata/RHSA-2025:21508",
-      "https://access.redhat.com/errata/RHSA-2025:21994",
-      "https://access.redhat.com/errata/RHSA-2025:23078",
-      "https://access.redhat.com/errata/RHSA-2025:23079",
-      "https://access.redhat.com/errata/RHSA-2025:23080",
-      "https://access.redhat.com/errata/RHSA-2026:0001",
-      "https://access.redhat.com/errata/RHSA-2026:0076",
-      "https://access.redhat.com/errata/RHSA-2026:0077",
-      "https://access.redhat.com/errata/RHSA-2026:0078",
-      "https://access.redhat.com/errata/RHSA-2026:3461",
-      "https://access.redhat.com/errata/RHSA-2026:3462",
-      "https://access.redhat.com/errata/RHSA-2026:7504",
-      "https://access.redhat.com/security/cve/CVE-2025-9900",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2392784",
-      "https://github.com/SexyShoelessGodofWar/LibTiff-4.7.0-Write-What-Where?tab=readme-ov-file",
-      "https://gitlab.com/libtiff/libtiff/-/issues/704",
-      "https://gitlab.com/libtiff/libtiff/-/merge_requests/732",
-      "https://libtiff.gitlab.io/libtiff/releases/v4.7.1.html",
-      "http://www.openwall.com/lists/oss-security/2025/09/26/3",
-      "https://lists.debian.org/debian-lts-announce/2025/09/msg00031.html",
-      "https://github.com/SexyShoelessGodofWar/LibTiff-4.7.0-Write-What-Where?tab=readme-ov-file"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.0,
-    "epss_percentile": 63.2,
-    "tags": [
-      "dos",
-      "rce"
-    ],
-    "intel_score": 87.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-55847",
     "published": "2025-09-26T18:15:36.367",
     "last_modified": "2026-11-05T23:10:00.150",
@@ -1771,86 +1806,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-3094",
-    "published": "2024-03-29T17:15:21.150",
-    "last_modified": "2026-11-04T22:17:21.430",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Malicious code was discovered in the upstream tarballs of xz, starting with version 5.6.0. \r\nThrough a series of complex obfuscations, the liblzma build process extracts a prebuilt object file from a disguised test file existing in the source code, which is then used to modify specific functions in the liblzma code. This results in a modified liblzma library that can be used by any software linked against this library, intercepting and modifying the data interaction with this library.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2024-3094",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272210",
-      "https://www.openwall.com/lists/oss-security/2024/03/29/4",
-      "https://www.redhat.com/en/blog/urgent-security-alert-fedora-41-and-rawhide-users",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/10",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/12",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/4",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/5",
-      "http://www.openwall.com/lists/oss-security/2024/03/29/8",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/12",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/27",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/36",
-      "http://www.openwall.com/lists/oss-security/2024/03/30/5",
-      "http://www.openwall.com/lists/oss-security/2024/04/16/5",
-      "https://access.redhat.com/security/cve/CVE-2024-3094",
-      "https://ariadne.space/2024/04/02/the-xz-utils-backdoor-is-a-symptom-of-a-larger-problem/",
-      "https://arstechnica.com/security/2024/03/backdoor-found-in-widely-used-linux-utility-breaks-encrypted-ssh-connections/",
-      "https://aws.amazon.com/security/security-bulletins/AWS-2024-002/",
-      "https://blog.netbsd.org/tnf/entry/statement_on_backdoor_in_xz",
-      "https://boehs.org/node/everything-i-know-about-the-xz-backdoor",
-      "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1068024",
-      "https://bugs.gentoo.org/928134",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272210",
-      "https://bugzilla.suse.com/show_bug.cgi?id=1222124",
-      "https://discourse.nixos.org/t/cve-2024-3094-malicious-code-in-xz-5-6-0-and-5-6-1-tarballs/42405",
-      "https://gist.github.com/thesamesam/223949d5a074ebc3dce9ee78baad9e27",
-      "https://github.com/advisories/GHSA-rxwq-x6h5-x525",
-      "https://github.com/amlweems/xzbot",
-      "https://github.com/karcherm/xz-malware",
-      "https://gynvael.coldwind.pl/?lang=en&id=782",
-      "https://lists.debian.org/debian-security-announce/2024/msg00057.html",
-      "https://lists.freebsd.org/archives/freebsd-security/2024-March/000248.html",
-      "https://lwn.net/Articles/967180/",
-      "https://news.ycombinator.com/item?id=39865810",
-      "https://news.ycombinator.com/item?id=39877267",
-      "https://news.ycombinator.com/item?id=39895344",
-      "https://openssf.org/blog/2024/03/30/xz-backdoor-cve-2024-3094/",
-      "https://research.swtch.com/xz-script",
-      "https://research.swtch.com/xz-timeline",
-      "https://security-tracker.debian.org/tracker/CVE-2024-3094",
-      "https://security.alpinelinux.org/vuln/CVE-2024-3094",
-      "https://security.archlinux.org/CVE-2024-3094",
-      "https://security.netapp.com/advisory/ntap-20240402-0001/",
-      "https://tukaani.org/xz-backdoor/",
-      "https://twitter.com/LetsDefendIO/status/1774804387417751958",
-      "https://twitter.com/debian/status/1774219194638409898",
-      "https://twitter.com/infosecb/status/1774595540233167206",
-      "https://twitter.com/infosecb/status/1774597228864139400",
-      "https://ubuntu.com/security/CVE-2024-3094",
-      "https://www.binarly.io/blog/persistent-risk-xz-utils-backdoor-still-lurking-in-docker-images",
-      "https://www.cisa.gov/news-events/alerts/2024/03/29/reported-supply-chain-compromise-affecting-xz-utils-data-compression-library-cve-2024-3094",
-      "https://www.darkreading.com/vulnerabilities-threats/are-you-affected-by-the-backdoor-in-xz-utils",
-      "https://www.kali.org/blog/about-the-xz-backdoor/",
-      "https://www.openwall.com/lists/oss-security/2024/03/29/4",
-      "https://www.redhat.com/en/blog/urgent-security-alert-fedora-41-and-rawhide-users",
-      "https://www.tenable.com/blog/frequently-asked-questions-cve-2024-3094-supply-chain-backdoor-in-xz-utils",
-      "https://www.theregister.com/2024/03/29/malicious_backdoor_xz/",
-      "https://www.vicarius.io/vsociety/vulnerabilities/cve-2024-3094",
-      "https://xeiaso.net/notes/2024/xz-vuln/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 90.9,
-    "epss_percentile": 99.8,
-    "tags": [],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "High EPSS exploit prob 90.9% (+25)"
     ]
   },
   {
@@ -2483,45 +2438,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-4404",
-    "published": "2025-06-17T14:15:32.743",
-    "last_modified": "2026-11-04T22:17:37.497",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A privilege escalation from host to domain vulnerability was found in the FreeIPA project. The FreeIPA package fails to validate the uniqueness of the `krbCanonicalName` for the admin account by default, allowing users to create services with the same canonical name as the REALM admin. When a successful attack happens, the user can retrieve a Kerberos ticket in the name of this service, containing the admin@REALM credential. This flaw allows an attacker to perform administrative tasks over the REALM, leading to access to sensitive data and sensitive data exfiltration.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:9184",
-      "https://access.redhat.com/errata/RHSA-2025:9185",
-      "https://access.redhat.com/errata/RHSA-2025:9186",
-      "https://access.redhat.com/errata/RHSA-2025:9187",
-      "https://access.redhat.com/errata/RHSA-2025:9188",
-      "https://access.redhat.com/errata/RHSA-2025:9189",
-      "https://access.redhat.com/errata/RHSA-2025:9190",
-      "https://access.redhat.com/errata/RHSA-2025:9191",
-      "https://access.redhat.com/errata/RHSA-2025:9192",
-      "https://access.redhat.com/errata/RHSA-2025:9193",
-      "https://access.redhat.com/errata/RHSA-2025:9194",
-      "https://access.redhat.com/security/cve/CVE-2025-4404",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2364606",
-      "https://pagure.io/freeipa/c/6b9400c135ed16b10057b350cc9ce42aa0e862d4",
-      "https://pagure.io/freeipa/c/796ed20092d554ee0c9e23295e346ec1e8a0bf6e",
-      "http://www.openwall.com/lists/oss-security/2025/09/30/6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 2.0,
-    "epss_percentile": 80.8,
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 80.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2025-55763",
     "published": "2025-08-29T17:15:35.790",
     "last_modified": "2026-11-07T18:10:00.200",
@@ -2924,68 +2840,6 @@
     "cisa_kev": false,
     "epss": 0.5,
     "epss_percentile": 41.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-31083",
-    "published": "2024-04-05T12:15:37.577",
-    "last_modified": "2026-11-04T22:17:20.820",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A use-after-free vulnerability was found in the ProcRenderAddGlyphs() function of Xorg servers. This issue occurs when AllocateGlyph() is called to store new glyphs sent by the client to the X server, potentially resulting in multiple entries pointing to the same non-refcounted glyphs. Consequently, ProcRenderAddGlyphs() may free a glyph, leading to a use-after-free scenario when the same glyph pointer is subsequently accessed. This flaw allows an authenticated attacker to execute arbitrary code on the system by sending a specially crafted request.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/errata/RHSA-2024:9093",
-      "https://access.redhat.com/errata/RHSA-2024:9122",
-      "https://access.redhat.com/errata/RHSA-2025:12751",
-      "https://access.redhat.com/security/cve/CVE-2024-31083",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272000",
-      "http://www.openwall.com/lists/oss-security/2024/04/03/13",
-      "http://www.openwall.com/lists/oss-security/2024/04/12/10",
-      "https://access.redhat.com/errata/RHSA-2024:1785",
-      "https://access.redhat.com/errata/RHSA-2024:2036",
-      "https://access.redhat.com/errata/RHSA-2024:2037",
-      "https://access.redhat.com/errata/RHSA-2024:2038",
-      "https://access.redhat.com/errata/RHSA-2024:2039",
-      "https://access.redhat.com/errata/RHSA-2024:2040",
-      "https://access.redhat.com/errata/RHSA-2024:2041",
-      "https://access.redhat.com/errata/RHSA-2024:2042",
-      "https://access.redhat.com/errata/RHSA-2024:2080",
-      "https://access.redhat.com/errata/RHSA-2024:2616",
-      "https://access.redhat.com/errata/RHSA-2024:3258",
-      "https://access.redhat.com/errata/RHSA-2024:3261",
-      "https://access.redhat.com/errata/RHSA-2024:3343",
-      "https://access.redhat.com/security/cve/CVE-2024-31083",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2272000",
-      "https://lists.debian.org/debian-lts-announce/2024/04/msg00009.html",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/6TF7FZXOKHIKPZXYIMSQXKVH7WITKV3V/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/EBLQJIAXEDMEGRGZMSH7CWUJHSVKUWLV/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/P73U4DAAWLFZAPD75GLXTGMSTTQWW5AP/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.9,
-    "epss_percentile": 79.3,
     "tags": [
       "rce"
     ],
