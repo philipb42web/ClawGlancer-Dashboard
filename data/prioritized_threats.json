@@ -351,6 +351,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-92982",
+    "published": "2026-10-15T16:18:23.657",
+    "last_modified": "2026-11-11T13:17:34.297",
+    "cvss_v3": 8.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Ansible Operator Plugins. A low-privileged Kubernetes user can exploit a Jinja2 template injection vulnerability by crafting malicious custom resource (CR) specification values. These values are processed by Ansible without proper sanitization, allowing embedded Jinja2 expressions to be executed within the operator pod. This can lead to arbitrary code execution and privilege escalation, granting the attacker control over the operator's service account with cluster-wide permissions.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68695",
+      "https://access.redhat.com/errata/RHSA-2026:87120",
+      "https://access.redhat.com/errata/RHSA-2026:87124",
+      "https://access.redhat.com/security/cve/CVE-2026-92982",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2522227"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.2,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 107.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2023-38034",
     "published": "2023-08-10T19:15:09.803",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -459,6 +489,37 @@
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-86476",
+    "published": "2026-10-14T10:17:56.850",
+    "last_modified": "2026-11-11T12:19:56.733",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in gst-plugins-base. A heap buffer overflow can be triggered when processing video buffers whose attached GstVideoMeta metadata declares plane strides and offsets that exceed the actual backing memory allocation. The metadata is not range-checked during deserialization, and the video frame mapping code does not verify that the declared plane geometry fits within the buffer before allowing consumers to read or write video data. A local attacker who controls the sending side of a GStreamer inter-process IPC pipeline can deliver a crafted buffer carrying fabricated strides, causing the receiving process to read or write beyond heap boundaries. Successful exploitation can cause a denial of service or potentially allow code execution within the affected process.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:98600",
+      "https://access.redhat.com/security/cve/CVE-2026-86476",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2529510",
+      "https://redhat.atlassian.net/browse/PSIRTSUPT-23320"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.5,
+    "tags": [
+      "deserialization",
+      "dos",
+      "rce"
+    ],
+    "intel_score": 105.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20",
+      "dos+3"
     ]
   },
   {
@@ -1190,30 +1251,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58936",
-    "published": "2026-11-02T20:17:50.837",
-    "last_modified": "2026-11-09T14:37:54.733",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In png_set_tRNS of pngset.c, there is a possible memory corruption due to a use-after-free. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2022-31474",
     "published": "2023-03-13T14:15:12.507",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -1244,7 +1281,7 @@
   {
     "cve_id": "CVE-2026-20320",
     "published": "2026-08-19T17:18:40.433",
-    "last_modified": "2026-11-10T21:31:51.953",
+    "last_modified": "2026-11-11T05:19:43.487",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -1931,6 +1968,76 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-96889",
+    "published": "2026-09-23T20:17:27.587",
+    "last_modified": "2026-11-11T13:17:36.047",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in librsvg. When processing an SVG document containing nested XML inclusions (Xincludes) with duplicate entity declarations, a use-after-free error can occur. This vulnerability arises because the library incorrectly frees an XML entity that is still in use by the parser. An attacker could potentially exploit this to cause a denial of service or execute arbitrary code.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:86331",
+      "https://access.redhat.com/errata/RHSA-2026:86841",
+      "https://access.redhat.com/errata/RHSA-2026:86842",
+      "https://access.redhat.com/errata/RHSA-2026:86921",
+      "https://access.redhat.com/errata/RHSA-2026:92212",
+      "https://access.redhat.com/errata/RHSA-2026:92213",
+      "https://access.redhat.com/errata/RHSA-2026:92214",
+      "https://access.redhat.com/errata/RHSA-2026:92218",
+      "https://access.redhat.com/errata/RHSA-2026:92336",
+      "https://access.redhat.com/errata/RHSA-2026:92353",
+      "https://access.redhat.com/errata/RHSA-2026:92382",
+      "https://access.redhat.com/errata/RHSA-2026:92573",
+      "https://access.redhat.com/errata/RHSA-2026:92579",
+      "https://access.redhat.com/errata/RHSA-2026:94452",
+      "https://access.redhat.com/errata/RHSA-2026:94453",
+      "https://access.redhat.com/errata/RHSA-2026:94454",
+      "https://access.redhat.com/errata/RHSA-2026:94455",
+      "https://access.redhat.com/errata/RHSA-2026:94457",
+      "https://access.redhat.com/errata/RHSA-2026:94458",
+      "https://access.redhat.com/errata/RHSA-2026:94459",
+      "https://access.redhat.com/errata/RHSA-2026:94460",
+      "https://access.redhat.com/errata/RHSA-2026:94461",
+      "https://access.redhat.com/errata/RHSA-2026:94462",
+      "https://access.redhat.com/errata/RHSA-2026:94463",
+      "https://access.redhat.com/errata/RHSA-2026:94464",
+      "https://access.redhat.com/errata/RHSA-2026:94465",
+      "https://access.redhat.com/errata/RHSA-2026:94466",
+      "https://access.redhat.com/errata/RHSA-2026:94467",
+      "https://access.redhat.com/errata/RHSA-2026:94468",
+      "https://access.redhat.com/errata/RHSA-2026:94469",
+      "https://access.redhat.com/errata/RHSA-2026:94470",
+      "https://access.redhat.com/errata/RHSA-2026:94471",
+      "https://access.redhat.com/errata/RHSA-2026:94472",
+      "https://access.redhat.com/errata/RHSA-2026:94473",
+      "https://access.redhat.com/errata/RHSA-2026:94474",
+      "https://access.redhat.com/errata/RHSA-2026:94476",
+      "https://access.redhat.com/errata/RHSA-2026:98482",
+      "https://access.redhat.com/errata/RHSA-2026:98584",
+      "https://access.redhat.com/errata/RHSA-2026:98591",
+      "https://access.redhat.com/security/cve/CVE-2026-96889",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
+      "https://crates.io/crates/librsvg",
+      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241",
+      "https://rustsec.org/advisories/RUSTSEC-2026-0305.html",
+      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2024-42002",
     "published": "2026-09-28T22:17:28.617",
     "last_modified": "2026-11-09T10:10:00.217",
@@ -2364,13 +2471,14 @@
   {
     "cve_id": "CVE-2026-79655",
     "published": "2026-08-25T14:16:58.010",
-    "last_modified": "2026-11-10T23:18:28.350",
+    "last_modified": "2026-11-11T09:17:15.767",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in sos clean, a utility within the sos package. This vulnerability allows a local attacker to perform arbitrary file creation or overwrite. By crafting a malicious tar archive, an attacker can exploit a path traversal issue during tar extraction, where symlink and hardlink targets are not properly validated. This enables the attacker to write files to arbitrary locations on the system with the privileges of the sos clean process, which often runs as root.",
     "references": [
       "https://access.redhat.com/errata/RHSA-2026:97867",
+      "https://access.redhat.com/errata/RHSA-2026:98076",
       "https://access.redhat.com/security/cve/CVE-2026-79655",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2523363",
       "https://github.com/sosreport/sos/issues/4460",
@@ -2393,6 +2501,229 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-79992",
+    "published": "2026-08-25T18:18:06.973",
+    "last_modified": "2026-11-11T13:17:27.793",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Emacs TRAMP. A local attacker could exploit this vulnerability by processing maliciously crafted filenames. This occurs because TRAMP concatenates login arguments without proper sanitization, which are then passed to a local shell. Successful exploitation could lead to arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:80506",
+      "https://access.redhat.com/errata/RHSA-2026:80507",
+      "https://access.redhat.com/errata/RHSA-2026:84591",
+      "https://access.redhat.com/errata/RHSA-2026:98574",
+      "https://access.redhat.com/security/cve/CVE-2026-79992",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2523665",
+      "http://www.openwall.com/lists/oss-security/2026/08/26/15",
+      "http://www.openwall.com/lists/oss-security/2026/10/11/1",
+      "http://www.openwall.com/lists/oss-security/2026/10/14/4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90948",
+    "published": "2026-09-14T14:17:20.693",
+    "last_modified": "2026-11-11T13:17:33.087",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's ICO file loader. When processing an ICO file containing an embedded PNG image, an integer overflow can occur during the calculation of the required buffer size. This leads to an undersized buffer being allocated, causing a heap-based buffer overflow when the decoded pixel data is written. A remote attacker could exploit this by crafting a malicious ICO file, which, when opened, could lead to arbitrary code execution or a crash.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-90948",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2533008",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16742"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90947",
+    "published": "2026-09-14T16:17:41.860",
+    "last_modified": "2026-11-11T13:17:32.870",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. When processing a specially crafted lighting preset file, the Lighting Effects filter does not properly validate the number of light sources. This can lead to an out-of-bounds write, corrupting memory. An attacker could exploit this by convincing a user to open a malicious preset file, potentially causing a crash or enabling arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-90947",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2533005",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16682"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-92248",
+    "published": "2026-09-15T22:17:04.190",
+    "last_modified": "2026-11-11T13:17:34.127",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the file-psd plugin in GIMP. When generating a thumbnail preview for a specially crafted PSD (Photoshop Document) image file, an integer overflow occurs during the multiplication of values from an embedded JPEG header. This leads to an undersized heap allocation, resulting in a heap-based buffer overflow when the image data is decoded. This buffer overflow corrupts adjacent heap objects, allowing for a controlled memory write that can result in an application crash or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-92248",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2534282",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16775"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-86320",
+    "published": "2026-09-17T08:17:02.200",
+    "last_modified": "2026-11-11T13:17:28.560",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in flatpak-builder where Git hooks are not disabled when applying patch sources with use-git-am: true. An attacker who can provide a malicious source containing a Git post-applypatch hook can cause the hook to execute on the host during the build process, resulting in arbitrary code execution with the privileges of the user running flatpak-builder.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:80495",
+      "https://access.redhat.com/errata/RHSA-2026:80496",
+      "https://access.redhat.com/errata/RHSA-2026:80973",
+      "https://access.redhat.com/errata/RHSA-2026:84832",
+      "https://access.redhat.com/errata/RHSA-2026:84833",
+      "https://access.redhat.com/errata/RHSA-2026:84834",
+      "https://access.redhat.com/errata/RHSA-2026:84842",
+      "https://access.redhat.com/errata/RHSA-2026:86714",
+      "https://access.redhat.com/errata/RHSA-2026:90896",
+      "https://access.redhat.com/errata/RHSA-2026:92220",
+      "https://access.redhat.com/errata/RHSA-2026:98536",
+      "https://access.redhat.com/security/cve/CVE-2026-86320",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
+      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
+      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-96442",
+    "published": "2026-09-23T11:17:18.550",
+    "last_modified": "2026-11-11T13:17:35.873",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A code execution flaw was found in Emacs, affecting versions prior to 31.2. The Flymake mode using language backends other than Lisp would execute arbitrary code from the edited file while performing syntax checking. Viewing or editing untrusted files using Emacs could lead to arbitrary code execution with the privileges of the user running Emacs.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:84591",
+      "https://access.redhat.com/errata/RHSA-2026:85245",
+      "https://access.redhat.com/errata/RHSA-2026:90800",
+      "https://access.redhat.com/errata/RHSA-2026:98574",
+      "https://access.redhat.com/security/cve/CVE-2026-96442",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537347",
+      "https://github.com/emacs-mirror/emacs/commit/135e6f63f08fee3d374fa1a5187bce941a2d3e3c",
+      "https://github.com/emacs-mirror/emacs/commit/abc802ee2eb0b1663349ddf22a461f8e54a383fb",
+      "https://www.openwall.com/lists/oss-security/2026/09/14/1"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-97185",
+    "published": "2026-09-24T09:17:08.937",
+    "last_modified": "2026-11-11T13:17:36.770",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. When processing a specially crafted GIMPressionist preset file, the plug-in does not properly validate vector indices before writing into fixed-size arrays. This can lead to an out-of-bounds write, corrupting memory. An attacker could exploit this by convincing a user to load a malicious preset file, potentially causing a crash or enabling arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-97185",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2539980",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16788"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-102925",
     "published": "2026-09-29T21:17:18.570",
     "last_modified": "2026-11-09T19:41:02.377",
@@ -2410,6 +2741,33 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 5.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-106062",
+    "published": "2026-10-06T21:17:04.903",
+    "last_modified": "2026-11-11T13:17:13.270",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A heap-based buffer overflow was found in GIMP’s DirectDraw Surface (DDS) loader. When loading a crafted DDS image, buffer sizes derived from width, height, and pitch can be computed using 32-bit arithmetic that overflows. The allocated buffer is too small for the amount of pixel data written through GEGL, following integer overflow in size calculations. This may allow heap corruption and, in the worst case, arbitrary code execution in the context of the GIMP process.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:93975",
+      "https://access.redhat.com/errata/RHSA-2026:98495",
+      "https://access.redhat.com/security/cve/CVE-2026-106062",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2546654"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 4.7,
     "tags": [
       "rce"
     ],
@@ -2489,265 +2847,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-103854",
-    "published": "2026-10-13T20:17:12.023",
-    "last_modified": "2026-11-10T15:01:35.057",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Dimension is affected by a Stack-based Buffer Overflow vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/dimension/apsb26-171.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 8.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100127",
-    "published": "2026-10-13T21:17:14.753",
-    "last_modified": "2026-11-10T14:56:06.973",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Bridge is affected by an out-of-bounds write vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/bridge/apsb26-167.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100128",
-    "published": "2026-10-13T21:17:14.870",
-    "last_modified": "2026-11-09T22:31:44.257",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Bridge is affected by an out-of-bounds write vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/bridge/apsb26-167.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100129",
-    "published": "2026-10-13T21:17:14.983",
-    "last_modified": "2026-11-09T22:29:20.670",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Bridge is affected by an out-of-bounds write vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
-    "references": [
-      "https://www.adobe.com/trust/security/products/bridge/apsb26-167.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 3.5,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86958",
-    "published": "2026-10-26T21:20:33.703",
-    "last_modified": "2026-11-10T16:49:02.697",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The issue was addressed with improved memory handling. This issue is fixed in macOS Golden Gate 27, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2. An attacker with memory write capability may be able to bypass pointer authentication codes and run arbitrary code.",
-    "references": [
-      "https://support.apple.com/en-us/149035",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 14.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-57695",
-    "published": "2025-11-11T15:15:34.807",
-    "last_modified": "2026-11-08T20:10:00.187",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An issue in Agnitum Outpost Security Suite 7.5.3 (3942.608.1810) and 7.6 (3984.693.1842) allows a local attacker to execute arbitrary code via the lock function. The manufacturer fixed the vulnerability in version 8.0 (4164.652.1856) from December 17, 2012.",
-    "references": [
-      "https://habr.com/en/articles/161393/",
-      "https://www.youtube.com/watch?v=fvgD884wCX8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 13.1,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 78.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-38184",
-    "published": "2023-08-08T18:15:22.967",
-    "last_modified": "2026-11-10T13:10:00.363",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Windows Lightweight Directory Access Protocol (LDAP) Remote Code Execution Vulnerability",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-38184",
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-38184"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 1.5,
-    "epss_percentile": 73.8,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-36354",
-    "published": "2025-09-06T18:15:40.297",
-    "last_modified": "2026-11-09T10:10:00.217",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper input validation for DIMM serial presence detect (SPD) metadata could allow an attacker with physical access, ring0 access on a system with a non-compliant DIMM, or control over the Root of Trust for BIOS update, to bypass SMM isolation potentially resulting in arbitrary code execution at the SMM level.",
-    "references": [
-      "https://www.amd.com/en/resources/product-security/bulletin/AMD-SB-3014.html",
-      "https://www.amd.com/en/resources/product-security/bulletin/AMD-SB-4012.html",
-      "https://www.amd.com/en/resources/product-security/bulletin/AMD-SB-5007.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.2,
-    "epss_percentile": 6.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-96280",
-    "published": "2026-09-27T21:17:04.200",
-    "last_modified": "2026-11-11T02:17:23.610",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The OCI delta stream parser read sizes as guint64 but passed them to GLib I/O and allocation functions expecting gsize (32 bits on 32-bit systems), causing undersized allocations while subsequent operations use the original 64-bit size, leading to heap buffer overflows. An attacker controlling an OCI registry can craft a delta stream that triggers this during flatpak install/update, potentially achieving code execution on 32-bit systems.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:80497",
-      "https://access.redhat.com/errata/RHSA-2026:80498",
-      "https://access.redhat.com/errata/RHSA-2026:80687",
-      "https://access.redhat.com/errata/RHSA-2026:89733",
-      "https://access.redhat.com/errata/RHSA-2026:90364",
-      "https://access.redhat.com/errata/RHSA-2026:92221",
-      "https://access.redhat.com/errata/RHSA-2026:92369",
-      "https://access.redhat.com/errata/RHSA-2026:95493",
-      "https://access.redhat.com/errata/RHSA-2026:98112",
-      "https://access.redhat.com/security/cve/CVE-2026-96280",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2539419",
-      "https://github.com/flatpak/flatpak/security/advisories/GHSA-jr92-2v97-wgvc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.6,
-    "epss_percentile": 48.3,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 77.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-4557",
-    "published": "2023-02-12T04:15:19.160",
-    "last_modified": "2026-11-10T12:10:00.177",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability in Group Arge Energy and Control Systems Smartpower Web allows SQL Injection.\n\nThis issue affects Smartpower Web: before 23.01.01.",
-    "references": [
-      "https://siberguvenlik.gov.tr/guvenlik-bildirimleri/detay/tr-23-0066",
-      "https://www.usom.gov.tr/bildirim/tr-23-0066",
-      "https://www.usom.gov.tr/bildirim/tr-23-0066"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.7,
-    "epss_percentile": 51.8,
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 77.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
     ]
   }
 ]

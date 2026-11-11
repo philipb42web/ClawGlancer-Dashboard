@@ -351,6 +351,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-92982",
+    "published": "2026-10-15T16:18:23.657",
+    "last_modified": "2026-11-11T13:17:34.297",
+    "cvss_v3": 8.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Ansible Operator Plugins. A low-privileged Kubernetes user can exploit a Jinja2 template injection vulnerability by crafting malicious custom resource (CR) specification values. These values are processed by Ansible without proper sanitization, allowing embedded Jinja2 expressions to be executed within the operator pod. This can lead to arbitrary code execution and privilege escalation, granting the attacker control over the operator's service account with cluster-wide permissions.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68695",
+      "https://access.redhat.com/errata/RHSA-2026:87120",
+      "https://access.redhat.com/errata/RHSA-2026:87124",
+      "https://access.redhat.com/security/cve/CVE-2026-92982",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2522227"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.2,
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 107.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2023-38034",
     "published": "2023-08-10T19:15:09.803",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -459,6 +489,37 @@
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-86476",
+    "published": "2026-10-14T10:17:56.850",
+    "last_modified": "2026-11-11T12:19:56.733",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in gst-plugins-base. A heap buffer overflow can be triggered when processing video buffers whose attached GstVideoMeta metadata declares plane strides and offsets that exceed the actual backing memory allocation. The metadata is not range-checked during deserialization, and the video frame mapping code does not verify that the declared plane geometry fits within the buffer before allowing consumers to read or write video data. A local attacker who controls the sending side of a GStreamer inter-process IPC pipeline can deliver a crafted buffer carrying fabricated strides, causing the receiving process to read or write beyond heap boundaries. Successful exploitation can cause a denial of service or potentially allow code execution within the affected process.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:98600",
+      "https://access.redhat.com/security/cve/CVE-2026-86476",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2529510",
+      "https://redhat.atlassian.net/browse/PSIRTSUPT-23320"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.5,
+    "tags": [
+      "deserialization",
+      "dos",
+      "rce"
+    ],
+    "intel_score": 105.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20",
+      "dos+3"
     ]
   },
   {
@@ -1190,30 +1251,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58936",
-    "published": "2026-11-02T20:17:50.837",
-    "last_modified": "2026-11-09T14:37:54.733",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In png_set_tRNS of pngset.c, there is a possible memory corruption due to a use-after-free. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 23.6,
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2022-31474",
     "published": "2023-03-13T14:15:12.507",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -1244,7 +1281,7 @@
   {
     "cve_id": "CVE-2026-20320",
     "published": "2026-08-19T17:18:40.433",
-    "last_modified": "2026-11-10T21:31:51.953",
+    "last_modified": "2026-11-11T05:19:43.487",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -1931,6 +1968,76 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-96889",
+    "published": "2026-09-23T20:17:27.587",
+    "last_modified": "2026-11-11T13:17:36.047",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in librsvg. When processing an SVG document containing nested XML inclusions (Xincludes) with duplicate entity declarations, a use-after-free error can occur. This vulnerability arises because the library incorrectly frees an XML entity that is still in use by the parser. An attacker could potentially exploit this to cause a denial of service or execute arbitrary code.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:86331",
+      "https://access.redhat.com/errata/RHSA-2026:86841",
+      "https://access.redhat.com/errata/RHSA-2026:86842",
+      "https://access.redhat.com/errata/RHSA-2026:86921",
+      "https://access.redhat.com/errata/RHSA-2026:92212",
+      "https://access.redhat.com/errata/RHSA-2026:92213",
+      "https://access.redhat.com/errata/RHSA-2026:92214",
+      "https://access.redhat.com/errata/RHSA-2026:92218",
+      "https://access.redhat.com/errata/RHSA-2026:92336",
+      "https://access.redhat.com/errata/RHSA-2026:92353",
+      "https://access.redhat.com/errata/RHSA-2026:92382",
+      "https://access.redhat.com/errata/RHSA-2026:92573",
+      "https://access.redhat.com/errata/RHSA-2026:92579",
+      "https://access.redhat.com/errata/RHSA-2026:94452",
+      "https://access.redhat.com/errata/RHSA-2026:94453",
+      "https://access.redhat.com/errata/RHSA-2026:94454",
+      "https://access.redhat.com/errata/RHSA-2026:94455",
+      "https://access.redhat.com/errata/RHSA-2026:94457",
+      "https://access.redhat.com/errata/RHSA-2026:94458",
+      "https://access.redhat.com/errata/RHSA-2026:94459",
+      "https://access.redhat.com/errata/RHSA-2026:94460",
+      "https://access.redhat.com/errata/RHSA-2026:94461",
+      "https://access.redhat.com/errata/RHSA-2026:94462",
+      "https://access.redhat.com/errata/RHSA-2026:94463",
+      "https://access.redhat.com/errata/RHSA-2026:94464",
+      "https://access.redhat.com/errata/RHSA-2026:94465",
+      "https://access.redhat.com/errata/RHSA-2026:94466",
+      "https://access.redhat.com/errata/RHSA-2026:94467",
+      "https://access.redhat.com/errata/RHSA-2026:94468",
+      "https://access.redhat.com/errata/RHSA-2026:94469",
+      "https://access.redhat.com/errata/RHSA-2026:94470",
+      "https://access.redhat.com/errata/RHSA-2026:94471",
+      "https://access.redhat.com/errata/RHSA-2026:94472",
+      "https://access.redhat.com/errata/RHSA-2026:94473",
+      "https://access.redhat.com/errata/RHSA-2026:94474",
+      "https://access.redhat.com/errata/RHSA-2026:94476",
+      "https://access.redhat.com/errata/RHSA-2026:98482",
+      "https://access.redhat.com/errata/RHSA-2026:98584",
+      "https://access.redhat.com/errata/RHSA-2026:98591",
+      "https://access.redhat.com/security/cve/CVE-2026-96889",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2539279",
+      "https://crates.io/crates/librsvg",
+      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241",
+      "https://rustsec.org/advisories/RUSTSEC-2026-0305.html",
+      "https://gitlab.gnome.org/GNOME/librsvg/-/work_items/1241"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
+    "tags": [
+      "dos",
+      "rce"
+    ],
+    "intel_score": 82.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2024-42002",
     "published": "2026-09-28T22:17:28.617",
     "last_modified": "2026-11-09T10:10:00.217",
@@ -2364,13 +2471,14 @@
   {
     "cve_id": "CVE-2026-79655",
     "published": "2026-08-25T14:16:58.010",
-    "last_modified": "2026-11-10T23:18:28.350",
+    "last_modified": "2026-11-11T09:17:15.767",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in sos clean, a utility within the sos package. This vulnerability allows a local attacker to perform arbitrary file creation or overwrite. By crafting a malicious tar archive, an attacker can exploit a path traversal issue during tar extraction, where symlink and hardlink targets are not properly validated. This enables the attacker to write files to arbitrary locations on the system with the privileges of the sos clean process, which often runs as root.",
     "references": [
       "https://access.redhat.com/errata/RHSA-2026:97867",
+      "https://access.redhat.com/errata/RHSA-2026:98076",
       "https://access.redhat.com/security/cve/CVE-2026-79655",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2523363",
       "https://github.com/sosreport/sos/issues/4460",
@@ -2393,6 +2501,229 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-79992",
+    "published": "2026-08-25T18:18:06.973",
+    "last_modified": "2026-11-11T13:17:27.793",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Emacs TRAMP. A local attacker could exploit this vulnerability by processing maliciously crafted filenames. This occurs because TRAMP concatenates login arguments without proper sanitization, which are then passed to a local shell. Successful exploitation could lead to arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:80506",
+      "https://access.redhat.com/errata/RHSA-2026:80507",
+      "https://access.redhat.com/errata/RHSA-2026:84591",
+      "https://access.redhat.com/errata/RHSA-2026:98574",
+      "https://access.redhat.com/security/cve/CVE-2026-79992",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2523665",
+      "http://www.openwall.com/lists/oss-security/2026/08/26/15",
+      "http://www.openwall.com/lists/oss-security/2026/10/11/1",
+      "http://www.openwall.com/lists/oss-security/2026/10/14/4"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 12.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90948",
+    "published": "2026-09-14T14:17:20.693",
+    "last_modified": "2026-11-11T13:17:33.087",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP's ICO file loader. When processing an ICO file containing an embedded PNG image, an integer overflow can occur during the calculation of the required buffer size. This leads to an undersized buffer being allocated, causing a heap-based buffer overflow when the decoded pixel data is written. A remote attacker could exploit this by crafting a malicious ICO file, which, when opened, could lead to arbitrary code execution or a crash.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-90948",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2533008",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16742"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.6,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-90947",
+    "published": "2026-09-14T16:17:41.860",
+    "last_modified": "2026-11-11T13:17:32.870",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. When processing a specially crafted lighting preset file, the Lighting Effects filter does not properly validate the number of light sources. This can lead to an out-of-bounds write, corrupting memory. An attacker could exploit this by convincing a user to open a malicious preset file, potentially causing a crash or enabling arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-90947",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2533005",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16682"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-92248",
+    "published": "2026-09-15T22:17:04.190",
+    "last_modified": "2026-11-11T13:17:34.127",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the file-psd plugin in GIMP. When generating a thumbnail preview for a specially crafted PSD (Photoshop Document) image file, an integer overflow occurs during the multiplication of values from an embedded JPEG header. This leads to an undersized heap allocation, resulting in a heap-based buffer overflow when the image data is decoded. This buffer overflow corrupts adjacent heap objects, allowing for a controlled memory write that can result in an application crash or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-92248",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2534282",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16775"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.4,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-86320",
+    "published": "2026-09-17T08:17:02.200",
+    "last_modified": "2026-11-11T13:17:28.560",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in flatpak-builder where Git hooks are not disabled when applying patch sources with use-git-am: true. An attacker who can provide a malicious source containing a Git post-applypatch hook can cause the hook to execute on the host during the build process, resulting in arbitrary code execution with the privileges of the user running flatpak-builder.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:80495",
+      "https://access.redhat.com/errata/RHSA-2026:80496",
+      "https://access.redhat.com/errata/RHSA-2026:80973",
+      "https://access.redhat.com/errata/RHSA-2026:84832",
+      "https://access.redhat.com/errata/RHSA-2026:84833",
+      "https://access.redhat.com/errata/RHSA-2026:84834",
+      "https://access.redhat.com/errata/RHSA-2026:84842",
+      "https://access.redhat.com/errata/RHSA-2026:86714",
+      "https://access.redhat.com/errata/RHSA-2026:90896",
+      "https://access.redhat.com/errata/RHSA-2026:92220",
+      "https://access.redhat.com/errata/RHSA-2026:98536",
+      "https://access.redhat.com/security/cve/CVE-2026-86320",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
+      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2471023",
+      "https://github.com/flatpak/flatpak-builder/security/advisories/GHSA-j5p8-jgjc-f3xv"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 22.8,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-96442",
+    "published": "2026-09-23T11:17:18.550",
+    "last_modified": "2026-11-11T13:17:35.873",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A code execution flaw was found in Emacs, affecting versions prior to 31.2. The Flymake mode using language backends other than Lisp would execute arbitrary code from the edited file while performing syntax checking. Viewing or editing untrusted files using Emacs could lead to arbitrary code execution with the privileges of the user running Emacs.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:84591",
+      "https://access.redhat.com/errata/RHSA-2026:85245",
+      "https://access.redhat.com/errata/RHSA-2026:90800",
+      "https://access.redhat.com/errata/RHSA-2026:98574",
+      "https://access.redhat.com/security/cve/CVE-2026-96442",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537347",
+      "https://github.com/emacs-mirror/emacs/commit/135e6f63f08fee3d374fa1a5187bce941a2d3e3c",
+      "https://github.com/emacs-mirror/emacs/commit/abc802ee2eb0b1663349ddf22a461f8e54a383fb",
+      "https://www.openwall.com/lists/oss-security/2026/09/14/1"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 10.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-97185",
+    "published": "2026-09-24T09:17:08.937",
+    "last_modified": "2026-11-11T13:17:36.770",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. When processing a specially crafted GIMPressionist preset file, the plug-in does not properly validate vector indices before writing into fixed-size arrays. This can lead to an out-of-bounds write, corrupting memory. An attacker could exploit this by convincing a user to load a malicious preset file, potentially causing a crash or enabling arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:75575",
+      "https://access.redhat.com/errata/RHSA-2026:84744",
+      "https://access.redhat.com/errata/RHSA-2026:93589",
+      "https://access.redhat.com/errata/RHSA-2026:98462",
+      "https://access.redhat.com/security/cve/CVE-2026-97185",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2539980",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16788"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.1,
+    "epss_percentile": 2.9,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-102925",
     "published": "2026-09-29T21:17:18.570",
     "last_modified": "2026-11-09T19:41:02.377",
@@ -2410,6 +2741,33 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 5.7,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-106062",
+    "published": "2026-10-06T21:17:04.903",
+    "last_modified": "2026-11-11T13:17:13.270",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A heap-based buffer overflow was found in GIMP’s DirectDraw Surface (DDS) loader. When loading a crafted DDS image, buffer sizes derived from width, height, and pitch can be computed using 32-bit arithmetic that overflows. The allocated buffer is too small for the amount of pixel data written through GEGL, following integer overflow in size calculations. This may allow heap corruption and, in the worst case, arbitrary code execution in the context of the GIMP process.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:93975",
+      "https://access.redhat.com/errata/RHSA-2026:98495",
+      "https://access.redhat.com/security/cve/CVE-2026-106062",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2546654"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 4.7,
     "tags": [
       "rce"
     ],
@@ -2588,6 +2946,88 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-112257",
+    "published": "2026-10-19T22:17:05.420",
+    "last_modified": "2026-11-11T13:17:14.030",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. The PSD thumbnail resource loader performs a BGR-to-RGB channel swap with a fixed 3-byte stride and does not verify that the JPEG thumbnail is RGB. A crafted grayscale PSD thumbnail can cause a heap out-of-bounds read and write in the plug-in process, leading to a crash and potentially arbitrary code execution when the victim browses or opens the file.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:93975",
+      "https://access.redhat.com/errata/RHSA-2026:95482",
+      "https://access.redhat.com/errata/RHSA-2026:98495",
+      "https://access.redhat.com/security/cve/CVE-2026-112257",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2555574"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 7.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-112258",
+    "published": "2026-10-19T22:17:05.543",
+    "last_modified": "2026-11-11T13:17:14.200",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. The XCF loader can leave a dangling pointer in the linked-channels list when a linked channel is later destroyed via a selection property. Opening a crafted XCF file can cause a use-after-free in the main GIMP process, leading to a crash and potentially arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:93975",
+      "https://access.redhat.com/errata/RHSA-2026:98495",
+      "https://access.redhat.com/security/cve/CVE-2026-112258",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2555588"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-112261",
+    "published": "2026-10-19T22:17:05.767",
+    "last_modified": "2026-11-11T13:17:14.507",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. Opening a crafted XCF that selects a path and then fails to load that path can cause a use-after-free in the main process, leading to a crash and potentially arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:93975",
+      "https://access.redhat.com/errata/RHSA-2026:98495",
+      "https://access.redhat.com/security/cve/CVE-2026-112261",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2555748"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 6.5,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-86958",
     "published": "2026-10-26T21:20:33.703",
     "last_modified": "2026-11-10T16:49:02.697",
@@ -2604,6 +3044,33 @@
     "cisa_kev": false,
     "epss": 0.2,
     "epss_percentile": 14.1,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-119528",
+    "published": "2026-10-30T14:16:45.143",
+    "last_modified": "2026-11-11T13:17:16.890",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. The PSD plug-in’s image resource header loader uses an incorrect destination size when copying a converted resource name into a fixed stack buffer. Opening a crafted PSD file can cause a stack-based buffer overflow, leading to a crash and potentially arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:98532",
+      "https://access.redhat.com/security/cve/CVE-2026-119528",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2563900",
+      "https://gitlab.gnome.org/GNOME/gimp/-/work_items/16799"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 8.3,
     "tags": [
       "rce"
     ],
@@ -2633,6 +3100,36 @@
       "rce"
     ],
     "intel_score": 78.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85197",
+    "published": "2026-09-04T08:17:16.677",
+    "last_modified": "2026-11-11T13:17:28.210",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. A malicious HTTP/2 server or a Man-in-the-Middle (MITM) attacker can exploit a heap use-after-free vulnerability in the HTTP/2 client implementation. This occurs when a GNOME application uploads a file using HTTP/2, and the server sends a GOAWAY frame while the file body is being read asynchronously. This can lead to memory corruption, potentially resulting in information disclosure or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68235",
+      "https://access.redhat.com/errata/RHSA-2026:82728",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-85197",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2528425",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/work_items/552",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/work_items/552"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 27.2,
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 78.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
@@ -2692,7 +3189,7 @@
   {
     "cve_id": "CVE-2026-96280",
     "published": "2026-09-27T21:17:04.200",
-    "last_modified": "2026-11-11T02:17:23.610",
+    "last_modified": "2026-11-11T13:17:35.663",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -2707,6 +3204,8 @@
       "https://access.redhat.com/errata/RHSA-2026:92369",
       "https://access.redhat.com/errata/RHSA-2026:95493",
       "https://access.redhat.com/errata/RHSA-2026:98112",
+      "https://access.redhat.com/errata/RHSA-2026:98127",
+      "https://access.redhat.com/errata/RHSA-2026:98490",
       "https://access.redhat.com/security/cve/CVE-2026-96280",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2539419",
       "https://github.com/flatpak/flatpak/security/advisories/GHSA-jr92-2v97-wgvc"
@@ -2910,7 +3409,7 @@
   {
     "cve_id": "CVE-2026-92092",
     "published": "2026-10-29T20:17:36.440",
-    "last_modified": "2026-11-09T23:17:26.700",
+    "last_modified": "2026-11-11T05:19:55.283",
     "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
@@ -2919,6 +3418,7 @@
       "https://access.redhat.com/errata/RHSA-2026:95103",
       "https://access.redhat.com/errata/RHSA-2026:95228",
       "https://access.redhat.com/errata/RHSA-2026:95507",
+      "https://access.redhat.com/errata/RHSA-2026:96281",
       "https://access.redhat.com/security/cve/CVE-2026-92092",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2515862"
     ],
@@ -3986,6 +4486,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-18912",
+    "published": "2026-09-18T06:16:33.250",
+    "last_modified": "2026-11-11T08:17:18.580",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Zoho Corporation ManageEngine DataSecurity Plus versions below 6310 are vulnerable to an authenticated SQL injection vulnerability in reports module where an authenticated technician could execute arbitrary SQL queries.",
+    "references": [
+      "https://www.manageengine.com/data-security/cve-2026-18912.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 2.8,
+    "epss_percentile": 86.4,
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 68.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2022-46850",
     "published": "2023-06-19T13:15:09.493",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -4300,6 +4824,38 @@
     "cisa_kev": false,
     "epss": 1.2,
     "epss_percentile": 69.3,
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 64.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85013",
+    "published": "2026-09-15T16:17:34.543",
+    "last_modified": "2026-11-11T12:19:55.323",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in environment-modules. A local attacker can exploit this vulnerability by placing a maliciously named modulefile in a location visible to the victim's `MODULEPATH`. When the victim uses Bash completion for `module` or `ml` commands, the malicious module name, containing shell metacharacters, is evaluated as a command. This can lead to arbitrary command execution in the completing user's shell, impacting their confidentiality, integrity, and availability.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:64766",
+      "https://access.redhat.com/errata/RHSA-2026:80664",
+      "https://access.redhat.com/errata/RHSA-2026:82919",
+      "https://access.redhat.com/errata/RHSA-2026:84594",
+      "https://access.redhat.com/errata/RHSA-2026:98565",
+      "https://access.redhat.com/security/cve/CVE-2026-85013",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2465635",
+      "https://github.com/envmodules/modules/security/advisories/GHSA-8hrw-p88g-qhmg",
+      "https://github.com/envmodules/modules/security/advisories/GHSA-8hrw-p88g-qhmg"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 13.9,
     "tags": [
       "command_injection"
     ],
@@ -4775,6 +5331,74 @@
     "reasons": [
       "recently modified (last 48h)",
       "Moderate EPSS prob 38.0% (+10)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-97023",
+    "published": "2026-09-28T19:16:50.710",
+    "last_modified": "2026-11-11T13:17:36.410",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal vulnerability in Flatpak's handling of the export/bin directory during app deployment allows a malicious Flatpak app to cause deletion of attacker-chosen files outside the deployment directory when the app is installed or upgraded. In system-wide installations, the deletion is performed as root.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:89849",
+      "https://access.redhat.com/errata/RHSA-2026:89850",
+      "https://access.redhat.com/errata/RHSA-2026:89859",
+      "https://access.redhat.com/errata/RHSA-2026:95061",
+      "https://access.redhat.com/errata/RHSA-2026:95062",
+      "https://access.redhat.com/errata/RHSA-2026:95063",
+      "https://access.redhat.com/errata/RHSA-2026:95064",
+      "https://access.redhat.com/errata/RHSA-2026:98490",
+      "https://access.redhat.com/security/cve/CVE-2026-97023",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2542606",
+      "https://github.com/flatpak/flatpak/security/advisories/GHSA-5p67-xh8x-rq54"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.2,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 60.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-97024",
+    "published": "2026-09-29T04:18:02.397",
+    "last_modified": "2026-11-11T13:17:36.583",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A path traversal vulnerability in Flatpak's handling of the files/etc directory during app deployment allows a malicious Flatpak app to cause certain host system files (such as passwd, group, machine-id, or resolv.conf) to be emptied or replaced with a symlink when the app is installed or upgraded. In system-wide installations, the write is performed as root.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:89849",
+      "https://access.redhat.com/errata/RHSA-2026:89850",
+      "https://access.redhat.com/errata/RHSA-2026:89859",
+      "https://access.redhat.com/errata/RHSA-2026:95061",
+      "https://access.redhat.com/errata/RHSA-2026:95062",
+      "https://access.redhat.com/errata/RHSA-2026:95063",
+      "https://access.redhat.com/errata/RHSA-2026:95064",
+      "https://access.redhat.com/errata/RHSA-2026:98490",
+      "https://access.redhat.com/security/cve/CVE-2026-97024",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2542625",
+      "https://github.com/flatpak/flatpak/security/advisories/GHSA-8xgq-v545-vgvf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 60.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
     ]
   },
   {
@@ -6293,27 +6917,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58968",
-    "published": "2026-11-02T20:17:53.030",
-    "last_modified": "2026-11-10T16:19:17.983",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In oapvd_vlc_metadata of oapv_vlc.c, there is a possible memory corruption due to a double free. This could lead to remote escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 21.2,
-    "tags": [],
-    "intel_score": 59.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-92922",
     "published": "2026-10-13T19:21:43.953",
     "last_modified": "2026-11-10T15:02:34.957",
@@ -7010,6 +7613,76 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-74860",
+    "published": "2026-09-08T12:16:58.083",
+    "last_modified": "2026-11-11T12:19:53.817",
+    "cvss_v3": 8.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libxml2 with Python bindings enabled. A remote attacker could exploit this vulnerability by providing a specially crafted XML document containing a Document Type Definition (DTD) with enumerated attribute values. This triggers a double-free error in the SAX attributeDecl callback handler, where a string is freed twice. This flaw can lead to a denial of service (DoS) due to a reproducible crash in Python applications using the libxml2 SAX bindings.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:64463",
+      "https://access.redhat.com/errata/RHSA-2026:71585",
+      "https://access.redhat.com/errata/RHSA-2026:71586",
+      "https://access.redhat.com/errata/RHSA-2026:71641",
+      "https://access.redhat.com/errata/RHSA-2026:72470",
+      "https://access.redhat.com/errata/RHSA-2026:72475",
+      "https://access.redhat.com/errata/RHSA-2026:72476",
+      "https://access.redhat.com/errata/RHSA-2026:79357",
+      "https://access.redhat.com/errata/RHSA-2026:82939",
+      "https://access.redhat.com/errata/RHSA-2026:89750",
+      "https://access.redhat.com/errata/RHSA-2026:89759",
+      "https://access.redhat.com/errata/RHSA-2026:90309",
+      "https://access.redhat.com/errata/RHSA-2026:91202",
+      "https://access.redhat.com/errata/RHSA-2026:91204",
+      "https://access.redhat.com/errata/RHSA-2026:91206",
+      "https://access.redhat.com/errata/RHSA-2026:91207",
+      "https://access.redhat.com/errata/RHSA-2026:91217",
+      "https://access.redhat.com/errata/RHSA-2026:91218",
+      "https://access.redhat.com/errata/RHSA-2026:91219",
+      "https://access.redhat.com/errata/RHSA-2026:91224",
+      "https://access.redhat.com/errata/RHSA-2026:91232",
+      "https://access.redhat.com/errata/RHSA-2026:91233",
+      "https://access.redhat.com/errata/RHSA-2026:91234",
+      "https://access.redhat.com/errata/RHSA-2026:91235",
+      "https://access.redhat.com/errata/RHSA-2026:91236",
+      "https://access.redhat.com/errata/RHSA-2026:91237",
+      "https://access.redhat.com/errata/RHSA-2026:91238",
+      "https://access.redhat.com/errata/RHSA-2026:91241",
+      "https://access.redhat.com/errata/RHSA-2026:91242",
+      "https://access.redhat.com/errata/RHSA-2026:91243",
+      "https://access.redhat.com/errata/RHSA-2026:91244",
+      "https://access.redhat.com/errata/RHSA-2026:91245",
+      "https://access.redhat.com/errata/RHSA-2026:91246",
+      "https://access.redhat.com/errata/RHSA-2026:91248",
+      "https://access.redhat.com/errata/RHSA-2026:91249",
+      "https://access.redhat.com/errata/RHSA-2026:92352",
+      "https://access.redhat.com/errata/RHSA-2026:92589",
+      "https://access.redhat.com/errata/RHSA-2026:93463",
+      "https://access.redhat.com/errata/RHSA-2026:93473",
+      "https://access.redhat.com/errata/RHSA-2026:93791",
+      "https://access.redhat.com/errata/RHSA-2026:94459",
+      "https://access.redhat.com/errata/RHSA-2026:94468",
+      "https://access.redhat.com/errata/RHSA-2026:94474",
+      "https://access.redhat.com/errata/RHSA-2026:94476",
+      "https://access.redhat.com/errata/RHSA-2026:98572",
+      "https://access.redhat.com/security/cve/CVE-2026-74860",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2529697"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 51.8,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 55.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-101307",
     "published": "2026-10-15T07:17:57.890",
     "last_modified": "2026-11-09T15:17:04.623",
@@ -7066,6 +7739,28 @@
     "cisa_kev": false,
     "epss": 0.3,
     "epss_percentile": 24.8,
+    "tags": [],
+    "intel_score": 55.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-111115",
+    "published": "2026-10-28T17:17:38.567",
+    "last_modified": "2026-11-11T12:18:33.100",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Apache Kafka's code-generated readers for flexible protocol versions read a tagged-field count declared by the sender and retain a RawTaggedField object for each unknown field. That count was bounded only by the outer request frame size (socket.request.max.bytes); it was not checked against the remaining buffer bytes or capped. Because each entry can be encoded in as little as two bytes (unknown tag 0, size 0), a modest request can declare tens of millions of tagged fields and force one object allocation per declared field. Flexible request headers (header version 2, used by flexible APIs such as ApiVersions v3) are parsed this way, so the amplification applies to the request header itself.\n\n\nImpact:\nThe flexible request header is parsed on the network thread before authorization, request dispatch, and request-time quota accounting. A client can send a request of a few tens of megabytes whose header declares about 20 million tagged fields, forcing roughly that many RawTaggedField allocations and exhausting broker heap or inducing process-wide GC stalls, denying broker service. Because the header is parsed for pre-authentication APIs such as ApiVersions (v3), the allocation can occur before authentication; no Kafka resource ACL or quota is required.\n\nMitigation:\nUpgrade to Apache Kafka 4.2.2, 4.3.2, or 4.4.0. Until then, lowering socket.request.max.bytes and restricting network access to broker listeners reduces, but does not remove, exposure.\n\nResolution:\nFrom Apache Kafka 4.2.2, 4.3.2, and 4.4.0: generated readers bounds-check the tagged-field count for flexible-versioned messages, rejecting a negative count, a count exceeding the remaining buffer bytes, or a count exceeding a fixed maximum (10,000), before any per-field allocation.",
+    "references": [
+      "https://kafka.apache.org/cve-list",
+      "http://www.openwall.com/lists/oss-security/2026/10/28/12"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 47.1,
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -8025,6 +8720,45 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-87766",
+    "published": "2026-09-09T09:17:12.540",
+    "last_modified": "2026-11-11T13:17:31.883",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in bubblewrap. During sandbox setup, creating files or directories under the new root can follow a parent symlink onto the host via /oldroot, writing attacker-chosen paths outside the sandbox as the launching user. This happens before the sandboxed process starts. This issue is GHSA-pxhw-h44j-8pfx. It is fixed in bubblewrap 0.12.0.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:85306",
+      "https://access.redhat.com/errata/RHSA-2026:85308",
+      "https://access.redhat.com/errata/RHSA-2026:85309",
+      "https://access.redhat.com/errata/RHSA-2026:85312",
+      "https://access.redhat.com/errata/RHSA-2026:85313",
+      "https://access.redhat.com/errata/RHSA-2026:85317",
+      "https://access.redhat.com/errata/RHSA-2026:85319",
+      "https://access.redhat.com/errata/RHSA-2026:85322",
+      "https://access.redhat.com/errata/RHSA-2026:85324",
+      "https://access.redhat.com/errata/RHSA-2026:85325",
+      "https://access.redhat.com/errata/RHSA-2026:98521",
+      "https://access.redhat.com/security/cve/CVE-2026-87766",
+      "https://bugs.debian.org/1145655",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2530542",
+      "https://github.com/containers/bubblewrap/releases/tag/v0.12.0",
+      "https://github.com/containers/bubblewrap/security/advisories/GHSA-pxhw-h44j-8pfx",
+      "https://www.openwall.com/lists/oss-security/2026/08/27/7",
+      "http://www.openwall.com/lists/oss-security/2026/09/09/3",
+      "http://www.openwall.com/lists/oss-security/2026/09/22/23"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 11.5,
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2023-28148",
     "published": "2026-09-14T05:16:56.837",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -8073,7 +8807,7 @@
   {
     "cve_id": "CVE-2026-96275",
     "published": "2026-09-23T15:17:32.180",
-    "last_modified": "2026-11-11T02:17:23.393",
+    "last_modified": "2026-11-11T13:17:35.443",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -8088,6 +8822,8 @@
       "https://access.redhat.com/errata/RHSA-2026:92369",
       "https://access.redhat.com/errata/RHSA-2026:95493",
       "https://access.redhat.com/errata/RHSA-2026:98112",
+      "https://access.redhat.com/errata/RHSA-2026:98127",
+      "https://access.redhat.com/errata/RHSA-2026:98490",
       "https://access.redhat.com/security/cve/CVE-2026-96275",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2539416",
       "https://github.com/flatpak/flatpak/security/advisories/GHSA-fqx6-vh4p-42cg"
@@ -8210,7 +8946,7 @@
   {
     "cve_id": "CVE-2026-86567",
     "published": "2026-10-14T18:19:18.390",
-    "last_modified": "2026-11-10T22:21:12.630",
+    "last_modified": "2026-11-11T13:17:30.370",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -8219,6 +8955,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94629",
       "https://access.redhat.com/errata/RHSA-2026:94630",
       "https://access.redhat.com/errata/RHSA-2026:96083",
+      "https://access.redhat.com/errata/RHSA-2026:98505",
       "https://access.redhat.com/security/cve/CVE-2026-86567",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529685"
     ],
@@ -8235,7 +8972,7 @@
   {
     "cve_id": "CVE-2026-86848",
     "published": "2026-10-14T18:19:19.223",
-    "last_modified": "2026-11-09T10:17:14.730",
+    "last_modified": "2026-11-11T13:17:31.223",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -8244,6 +8981,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94629",
       "https://access.redhat.com/errata/RHSA-2026:94630",
       "https://access.redhat.com/errata/RHSA-2026:96083",
+      "https://access.redhat.com/errata/RHSA-2026:98505",
       "https://access.redhat.com/security/cve/CVE-2026-86848",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529853"
     ],
@@ -8892,9 +9630,179 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-102556",
+    "published": "2026-09-29T17:17:06.460",
+    "last_modified": "2026-11-11T13:17:11.597",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When handling an incoming WebSocket Pong frame, SoupWebsocketConnection emitted the ::pong signal with a GByteArray pointer even though the signal is declared to pass a GBytes. Applications connecting a handler that follows the documented GBytes API can trigger heap corruption or a crash upon receiving a crafted Pong.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93446",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93465",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/errata/RHSA-2026:93583",
+      "https://access.redhat.com/errata/RHSA-2026:93716",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-102556",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543229"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102557",
+    "published": "2026-09-29T17:17:06.600",
+    "last_modified": "2026-11-11T13:17:11.843",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When reassembling fragmented WebSocket messages into a GByteArray, libsoup did not adequately cap total message size against the limits of the underlying buffer type. A remote peer could send fragments that caused size truncation while the implementation still used the full length, leading to heap corruption or a crash.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93446",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93465",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/errata/RHSA-2026:93583",
+      "https://access.redhat.com/errata/RHSA-2026:93716",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-102557",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543231"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102558",
+    "published": "2026-09-29T18:17:08.340",
+    "last_modified": "2026-11-11T13:17:12.070",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When max-incoming-payload-size is unlimited (0), SoupWebsocketConnection could grow its incoming GByteArray based on an attacker-controlled frame length until the length wrapped, causing a heap buffer overflow while reading frame data.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93446",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93465",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/errata/RHSA-2026:93583",
+      "https://access.redhat.com/errata/RHSA-2026:93716",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-102558",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543274"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 48.8,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102559",
+    "published": "2026-09-29T18:17:08.503",
+    "last_modified": "2026-11-11T13:17:12.297",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When constructing a masked WebSocket client frame for a very large outgoing payload, size values passed to GByteArray allocation APIs could be truncated while the masking routine still used the full length, causing a heap buffer overflow.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:84586",
+      "https://access.redhat.com/errata/RHSA-2026:92347",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93446",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93465",
+      "https://access.redhat.com/errata/RHSA-2026:93466",
+      "https://access.redhat.com/errata/RHSA-2026:93583",
+      "https://access.redhat.com/errata/RHSA-2026:93716",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-102559",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543285"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.6,
+    "epss_percentile": 50.3,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102560",
+    "published": "2026-09-29T18:17:08.750",
+    "last_modified": "2026-11-11T13:17:12.573",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. When the permessage-deflate WebSocket extension compresses a very large outgoing message, truncated size calculations used for GByteArray growth could wrap, causing zlib to write past the allocated buffer and resulting in a heap buffer overflow.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83384",
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:93445",
+      "https://access.redhat.com/errata/RHSA-2026:93446",
+      "https://access.redhat.com/errata/RHSA-2026:93447",
+      "https://access.redhat.com/errata/RHSA-2026:93583",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-102560",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543296"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 44.6,
+    "tags": [],
+    "intel_score": 53.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-100236",
     "published": "2026-10-14T17:17:44.833",
-    "last_modified": "2026-11-09T10:16:59.957",
+    "last_modified": "2026-11-11T13:17:09.670",
     "cvss_v3": 8.6,
     "severity": "HIGH",
     "affected": [],
@@ -8903,6 +9811,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94629",
       "https://access.redhat.com/errata/RHSA-2026:94630",
       "https://access.redhat.com/errata/RHSA-2026:96083",
+      "https://access.redhat.com/errata/RHSA-2026:98505",
       "https://access.redhat.com/security/cve/CVE-2026-100236",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2541488"
     ],
@@ -9889,554 +10798,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58879",
-    "published": "2026-11-02T20:17:49.950",
-    "last_modified": "2026-11-10T17:58:48.083",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In descramble of multiple files, there is a possible out-of-bounds write due to improper casting. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58884",
-    "published": "2026-11-02T20:17:50.280",
-    "last_modified": "2026-11-10T17:58:37.320",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In startTetheredHotspotRequest of WifiServiceImpl.java, there is a possible permission bypass due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.9,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58885",
-    "published": "2026-11-02T20:17:50.387",
-    "last_modified": "2026-11-10T17:58:13.610",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible permission bypass due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.9,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58934",
-    "published": "2026-11-02T20:17:50.720",
-    "last_modified": "2026-11-09T14:38:32.390",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In prepareWindowToDisplayDuringRelayout of WindowState.java, there is a possible permission bypass due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.0,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58942",
-    "published": "2026-11-02T20:17:51.170",
-    "last_modified": "2026-11-09T14:31:48.240",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In do_fault_around of memory.c, there is a possible use after free due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://android.googlesource.com/kernel/common/+/019d909caeb85547b9aed2beea73101ea73b958f",
-      "https://android.googlesource.com/kernel/common/+/27d9c79c71ceaaee3c31337658a699364ec7d833",
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.3,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58943",
-    "published": "2026-11-02T20:17:51.290",
-    "last_modified": "2026-11-10T17:58:01.140",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In run of AddAccountSettings.java, there is a possible background activity launch due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.6,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58944",
-    "published": "2026-11-02T20:17:51.393",
-    "last_modified": "2026-11-10T17:37:53.540",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In moveTaskToFrontLocked of ActivityTaskManagerService.java, there is a possible background application launch (bal) issue due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.6,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58946",
-    "published": "2026-11-02T20:17:51.610",
-    "last_modified": "2026-11-10T17:38:07.040",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In navigateUpTo of ActivityClientController.java, there is a possible permission bypass due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.3,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58956",
-    "published": "2026-11-02T20:17:52.167",
-    "last_modified": "2026-11-10T17:39:02.260",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In modpowF4 of avb_rsa.c, there is a possible signature verification bypass due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.3,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58957",
-    "published": "2026-11-02T20:17:52.280",
-    "last_modified": "2026-11-10T17:39:13.650",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In resolveToHeavyWeightSwitcherIfNeeded of ActivityStarter.java, there is a possible background activity launch due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.6,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58961",
-    "published": "2026-11-02T20:17:52.387",
-    "last_modified": "2026-11-10T17:39:26.790",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In moveTaskToFrontLocked of ActivityTaskManagerService.java, there is a possible background activity launch due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.2,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58962",
-    "published": "2026-11-02T20:17:52.490",
-    "last_modified": "2026-11-10T17:39:33.907",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In moveTaskToFrontLocked of ActivityTaskManagerService.java, there is a possible permission bypass due to a missing permission check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58964",
-    "published": "2026-11-02T20:17:52.700",
-    "last_modified": "2026-11-10T17:39:44.010",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In checkDestination of SmsUsageMonitor.java, there is a possible permission bypass due to improper input validation. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.2,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58965",
-    "published": "2026-11-02T20:17:52.807",
-    "last_modified": "2026-11-10T16:16:06.320",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In handleAudioEffectBroadcast of MusicFxHelper.java, there is a possible permission bypass due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.9,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58966",
-    "published": "2026-11-02T20:17:52.913",
-    "last_modified": "2026-11-10T16:18:29.960",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple functions of hppsfilter.c, there is a possible out-of-bounds write due to a stack buffer overflow. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58970",
-    "published": "2026-11-02T20:17:53.263",
-    "last_modified": "2026-11-09T23:20:43.487",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In deliverResult of AppTimeTracker.java, there is a possible background activity launch due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.6,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58974",
-    "published": "2026-11-02T20:17:53.490",
-    "last_modified": "2026-11-09T23:19:17.393",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible permission bypass due to a missing permission check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58975",
-    "published": "2026-11-02T20:17:53.600",
-    "last_modified": "2026-11-09T23:17:30.140",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible out-of-bounds write due to a missing bounds check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58979",
-    "published": "2026-11-02T20:17:53.930",
-    "last_modified": "2026-11-09T23:01:38.457",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In canPresent of PresentationController.java, there is a possible permission bypass due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.2,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58984",
-    "published": "2026-11-02T20:17:54.047",
-    "last_modified": "2026-11-10T16:28:59.970",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible memory corruption due to a use-after-free. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 1.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58986",
-    "published": "2026-11-02T20:17:54.270",
-    "last_modified": "2026-11-10T16:26:54.327",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In notifyPictureProfileHandleSelection of MediaQualityService.java, there is a possible permission bypass due to a missing permission check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58989",
-    "published": "2026-11-02T20:17:54.500",
-    "last_modified": "2026-11-10T16:24:32.110",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In setOemUnlockAllowedByUser of OemLockService.java, there is a possible way to bypass FRP due to a missing permission check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58994",
-    "published": "2026-11-02T20:17:54.717",
-    "last_modified": "2026-11-10T20:00:59.420",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple functions of NfcService.java, there is a possible permission bypass due to a missing permission check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58995",
-    "published": "2026-11-02T20:17:54.830",
-    "last_modified": "2026-11-10T17:57:36.463",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In getEntryFileName of ZipFileRO.cpp, there is a possible memory safety issue due to a heap buffer overflow. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.1,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-59000",
-    "published": "2026-11-02T20:17:55.057",
-    "last_modified": "2026-11-10T17:57:50.887",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible permission bypass due to a confused deputy. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.9,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58873",
-    "published": "2026-11-02T21:17:35.373",
-    "last_modified": "2026-11-10T17:48:01.737",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In addDragDropListener of WindowManagerService.java, there is a possible permission bypass due to a missing permission check. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/xr/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.9,
-    "tags": [],
-    "intel_score": 52.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2023-36741",
     "published": "2023-08-26T01:15:08.460",
     "last_modified": "2026-11-10T12:10:00.177",
@@ -10705,7 +11066,7 @@
   {
     "cve_id": "CVE-2026-42013",
     "published": "2026-05-26T22:16:42.050",
-    "last_modified": "2026-11-09T18:17:28.387",
+    "last_modified": "2026-11-11T13:17:26.887",
     "cvss_v3": 8.2,
     "severity": "HIGH",
     "affected": [],
@@ -10744,6 +11105,8 @@
       "https://access.redhat.com/errata/RHSA-2026:89232",
       "https://access.redhat.com/errata/RHSA-2026:89333",
       "https://access.redhat.com/errata/RHSA-2026:95508",
+      "https://access.redhat.com/errata/RHSA-2026:95745",
+      "https://access.redhat.com/errata/RHSA-2026:95755",
       "https://access.redhat.com/security/cve/CVE-2026-42013",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2467448",
       "https://www.gnutls.org/security-new.html#GNUTLS-SA-2026-04-29-8"
@@ -10901,6 +11264,31 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-102555",
+    "published": "2026-09-29T18:17:07.977",
+    "last_modified": "2026-11-11T13:17:11.413",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. The soup_uri_decode_data_uri() function incorrectly treated base64 data-URI payloads as NUL-terminated strings when calling g_base64_decode_inplace(). If the percent-decoded payload contained embedded NUL bytes, the decoded length could remain uninitialized and be used as the size of the returned GBytes. This can lead to an out-of-bounds read or application crash when processing a crafted data URI.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:83618",
+      "https://access.redhat.com/errata/RHSA-2026:93583",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-102555",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2543224"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.7,
+    "tags": [],
+    "intel_score": 51.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-77214",
     "published": "2026-10-07T15:17:53.327",
     "last_modified": "2026-11-10T13:19:39.863",
@@ -10927,7 +11315,7 @@
   {
     "cve_id": "CVE-2026-86565",
     "published": "2026-10-14T17:20:05.770",
-    "last_modified": "2026-11-09T10:17:12.940",
+    "last_modified": "2026-11-11T13:17:29.547",
     "cvss_v3": 8.2,
     "severity": "HIGH",
     "affected": [],
@@ -10936,6 +11324,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94629",
       "https://access.redhat.com/errata/RHSA-2026:94630",
       "https://access.redhat.com/errata/RHSA-2026:96083",
+      "https://access.redhat.com/errata/RHSA-2026:98505",
       "https://access.redhat.com/security/cve/CVE-2026-86565",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529683"
     ],
@@ -11928,6 +12317,83 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-15709",
+    "published": "2026-07-14T20:16:57.027",
+    "last_modified": "2026-11-11T13:17:24.720",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup's WebSocket implementation when using the permessage-deflate extension. The extension's decompression loop (inflate()) processes data in chunks without enforcing an upper boundary limit on the output buffer size. While libsoup limits the incoming compressed frame size via max_incoming_payload_size, it fails to track or limit memory allocation during decompression. A separate check for decompressed size (max_total_message_size) exists but executes only after inflation is complete, and it is entirely disabled by default for client connections. A remote, unauthenticated attacker can exploit this by sending a small, highly compressed payload (a decompression bomb), causing unbounded memory allocation that triggers an Out-of-Memory (OOM) crash and a Denial of Service (DoS).",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68234",
+      "https://access.redhat.com/errata/RHSA-2026:68235",
+      "https://access.redhat.com/errata/RHSA-2026:68612",
+      "https://access.redhat.com/errata/RHSA-2026:69108",
+      "https://access.redhat.com/errata/RHSA-2026:69297",
+      "https://access.redhat.com/errata/RHSA-2026:69863",
+      "https://access.redhat.com/errata/RHSA-2026:70598",
+      "https://access.redhat.com/errata/RHSA-2026:70599",
+      "https://access.redhat.com/errata/RHSA-2026:71389",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-15709",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2499922",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/511",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/511"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.5,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-15711",
+    "published": "2026-07-14T20:16:57.177",
+    "last_modified": "2026-11-11T13:17:25.160",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was found in libsoup's WebSocket frame parsing implementation. The library fails to validate length rules specified in RFC 6455 §5.5, which mandates that all WebSocket control frames (e.g., PING, PONG, CLOSE) contain a payload of 125 bytes or less. A remote, unauthenticated attacker can exploit this by sending a non-compliant, oversized control frame. Because the parser handles this protocol violation improperly instead of throwing an immediate connection termination error, it triggers a internal processing crash, resulting in a remote denial of service (DoS) for applications utilizing libsoup WebSockets.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68234",
+      "https://access.redhat.com/errata/RHSA-2026:68235",
+      "https://access.redhat.com/errata/RHSA-2026:68266",
+      "https://access.redhat.com/errata/RHSA-2026:68612",
+      "https://access.redhat.com/errata/RHSA-2026:69108",
+      "https://access.redhat.com/errata/RHSA-2026:69297",
+      "https://access.redhat.com/errata/RHSA-2026:69863",
+      "https://access.redhat.com/errata/RHSA-2026:70598",
+      "https://access.redhat.com/errata/RHSA-2026:70599",
+      "https://access.redhat.com/errata/RHSA-2026:71389",
+      "https://access.redhat.com/errata/RHSA-2026:98453",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-15711",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2499924",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/515",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/issues/515"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.7,
+    "epss_percentile": 55.1,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-64235",
     "published": "2026-07-24T16:16:52.737",
     "last_modified": "2026-11-08T16:10:00.183",
@@ -12076,7 +12542,7 @@
   {
     "cve_id": "CVE-2026-76235",
     "published": "2026-08-19T13:18:11.637",
-    "last_modified": "2026-11-09T20:10:00.200",
+    "last_modified": "2026-11-11T13:17:27.360",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -12085,6 +12551,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94485",
       "https://access.redhat.com/errata/RHSA-2026:94533",
       "https://access.redhat.com/errata/RHSA-2026:96250",
+      "https://access.redhat.com/errata/RHSA-2026:98463",
       "https://access.redhat.com/security/cve/CVE-2026-76235",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2519497"
     ],
@@ -12104,7 +12571,7 @@
   {
     "cve_id": "CVE-2026-78002",
     "published": "2026-08-27T17:20:29.367",
-    "last_modified": "2026-11-09T03:16:38.763",
+    "last_modified": "2026-11-11T13:17:27.540",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -12122,6 +12589,8 @@
       "https://access.redhat.com/errata/RHSA-2026:91582",
       "https://access.redhat.com/errata/RHSA-2026:95573",
       "https://access.redhat.com/errata/RHSA-2026:96085",
+      "https://access.redhat.com/errata/RHSA-2026:98456",
+      "https://access.redhat.com/errata/RHSA-2026:98558",
       "https://access.redhat.com/security/cve/CVE-2026-78002",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2521135",
       "https://github.com/rsyslog/rsyslog/security/advisories/GHSA-g72f-gc6v-f2w3",
@@ -12131,6 +12600,37 @@
     "cisa_kev": false,
     "epss": 1.1,
     "epss_percentile": 64.9,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-85234",
+    "published": "2026-09-15T18:19:34.927",
+    "last_modified": "2026-11-11T13:17:28.387",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in tftp-hpa. When the `in.tftpd` remap engine processes an inverse remap rule that also aborts with a non-empty custom error message, it can pass invalid match offsets to the `genmatchstring()` function. This leads to out-of-bounds read/write operations. A remote, unauthenticated attacker can exploit this vulnerability by sending a specially crafted request, causing the daemon to crash and resulting in a denial of service.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:78952",
+      "https://access.redhat.com/errata/RHSA-2026:80663",
+      "https://access.redhat.com/errata/RHSA-2026:82280",
+      "https://access.redhat.com/errata/RHSA-2026:98457",
+      "https://access.redhat.com/errata/RHSA-2026:98563",
+      "https://access.redhat.com/security/cve/CVE-2026-85234",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2460997",
+      "https://git.kernel.org/pub/scm/network/tftp/tftp-hpa.git/commit/?id=4b493532f5ce052a1c124acd0661233ec7918327"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.5,
+    "epss_percentile": 41.0,
     "tags": [
       "dos"
     ],
@@ -12206,7 +12706,7 @@
   {
     "cve_id": "CVE-2026-89059",
     "published": "2026-09-18T08:17:01.783",
-    "last_modified": "2026-11-09T02:17:00.210",
+    "last_modified": "2026-11-11T13:17:32.590",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -12223,6 +12723,8 @@
       "https://access.redhat.com/errata/RHSA-2026:95505",
       "https://access.redhat.com/errata/RHSA-2026:95887",
       "https://access.redhat.com/errata/RHSA-2026:96077",
+      "https://access.redhat.com/errata/RHSA-2026:98494",
+      "https://access.redhat.com/errata/RHSA-2026:98606",
       "https://access.redhat.com/security/cve/CVE-2026-89059",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2519756",
       "https://github.com/resteasy/resteasy/commit/7c7e6b37c8b2451a37aed9cdc6978b447456bacb",
@@ -12246,7 +12748,7 @@
   {
     "cve_id": "CVE-2026-91149",
     "published": "2026-09-18T17:17:05.563",
-    "last_modified": "2026-11-09T16:17:35.180",
+    "last_modified": "2026-11-11T13:17:33.620",
     "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
@@ -12254,6 +12756,7 @@
     "references": [
       "https://access.redhat.com/errata/RHSA-2026:94533",
       "https://access.redhat.com/errata/RHSA-2026:96250",
+      "https://access.redhat.com/errata/RHSA-2026:98463",
       "https://access.redhat.com/security/cve/CVE-2026-91149",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2479422"
     ],
@@ -12296,6 +12799,32 @@
     "intel_score": 50.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-109832",
+    "published": "2026-10-13T12:17:14.033",
+    "last_modified": "2026-11-11T13:17:13.583",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in gnome-remote-desktop as shipped in Red Hat Enterprise Linux. In the VNC TLS I/O handlers, retryable GnuTLS results (GNUTLS_E_AGAIN and GNUTLS_E_INTERRUPTED) are handled with an unbounded busy loop instead of yielding to the event loop. A remote attacker who can reach an enabled VNC TLS listener can cause the event-loop thread to spin at high CPU with no forward progress, resulting in denial of service.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:98510",
+      "https://access.redhat.com/security/cve/CVE-2026-109832",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2550352"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 35.6,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -12752,126 +13281,6 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 29.5,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58882",
-    "published": "2026-11-02T20:17:50.057",
-    "last_modified": "2026-11-09T18:02:59.847",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In decodeWapPdu of WapPushOverSms.java, there is a possible out of bounds read due to an integer overflow. This could lead to a remote denial of service with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.4,
-    "epss_percentile": 29.0,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58883",
-    "published": "2026-11-02T20:17:50.163",
-    "last_modified": "2026-11-10T17:20:50.417",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible denial of service due to a logic error in the code. This could lead to remote denial of service with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.1,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58938",
-    "published": "2026-11-02T20:17:51.060",
-    "last_modified": "2026-11-09T14:34:09.850",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In parseChunk of MPEG4Extractor.cpp, there is a possible denial of service due to improper input validation. This could lead to remote denial of service with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.1,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58949",
-    "published": "2026-11-02T20:17:51.720",
-    "last_modified": "2026-11-10T17:38:21.967",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In parseMetaData of StagefrightMetadataRetriever.cpp, there is a possible denial of service due to a stack buffer overflow. This could lead to remote denial of service with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 20.2,
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-58963",
-    "published": "2026-11-02T20:17:52.590",
-    "last_modified": "2026-11-10T17:34:20.533",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible denial of service due to improper input validation. This could lead to remote denial of service with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.3,
-    "epss_percentile": 19.1,
     "tags": [
       "dos"
     ],
@@ -17159,6 +17568,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-43961",
+    "published": "2026-08-19T14:17:31.793",
+    "last_modified": "2026-11-11T06:17:20.930",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in Vim's netrw plugin. A crafted filename containing quote characters and expression fragments can break out of the quoted context during mark/unmark operations, allowing arbitrary Vimscript execution. This can be leveraged to run shell commands with the privileges of the user running Vim.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:57614",
+      "https://access.redhat.com/errata/RHSA-2026:98119",
+      "https://access.redhat.com/security/cve/CVE-2026-43961",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2460434",
+      "https://github.com/vim/vim/security/advisories/GHSA-66hr-7p6x-x5j3",
+      "http://www.openwall.com/lists/oss-security/2026/05/14/7"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.1,
+    "tags": [],
+    "intel_score": 49.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-69576",
     "published": "2026-09-08T18:19:27.073",
     "last_modified": "2026-11-10T22:20:05.117",
@@ -17182,13 +17617,14 @@
   {
     "cve_id": "CVE-2026-84042",
     "published": "2026-09-10T09:17:03.260",
-    "last_modified": "2026-11-10T16:17:24.517",
+    "last_modified": "2026-11-11T13:17:28.043",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
     "summary": "A flaw was found in crun. When crun is built with libkrun and a container is started rootful with passt networking (krun.use_passt), crun can execute attacker-controlled payload from the container image with host root privileges. The issue is a regression in crun 1.29. It affects crun >= 1.29",
     "references": [
       "https://access.redhat.com/errata/RHSA-2026:97561",
+      "https://access.redhat.com/errata/RHSA-2026:98561",
       "https://access.redhat.com/security/cve/CVE-2026-84042",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2531222",
       "https://github.com/containers/crun/"
@@ -17272,7 +17708,7 @@
   {
     "cve_id": "CVE-2026-86562",
     "published": "2026-10-14T17:20:05.420",
-    "last_modified": "2026-11-10T22:21:12.220",
+    "last_modified": "2026-11-11T13:17:29.000",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -17281,6 +17717,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94629",
       "https://access.redhat.com/errata/RHSA-2026:94630",
       "https://access.redhat.com/errata/RHSA-2026:96083",
+      "https://access.redhat.com/errata/RHSA-2026:98505",
       "https://access.redhat.com/security/cve/CVE-2026-86562",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529667",
       "https://git.dpdk.org/dpdk/commit/?id=6ec17781346e0fe4b566b6bf8f79be71f87c10e4"
@@ -17298,7 +17735,7 @@
   {
     "cve_id": "CVE-2026-86563",
     "published": "2026-10-14T17:20:05.600",
-    "last_modified": "2026-11-10T22:21:12.433",
+    "last_modified": "2026-11-11T13:17:29.240",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
@@ -17307,6 +17744,7 @@
       "https://access.redhat.com/errata/RHSA-2026:94629",
       "https://access.redhat.com/errata/RHSA-2026:94630",
       "https://access.redhat.com/errata/RHSA-2026:96083",
+      "https://access.redhat.com/errata/RHSA-2026:98505",
       "https://access.redhat.com/security/cve/CVE-2026-86563",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2529668"
     ],
@@ -17681,48 +18119,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-58886",
-    "published": "2026-11-02T20:17:50.493",
-    "last_modified": "2026-11-09T14:41:09.153",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In updateInputWindows of InputMonitor.java, there is a possible tapjacking issue due to a logic error in the code. This could lead to local escalation of privilege with no additional execution privileges needed. User interaction is needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 0.9,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-49906",
-    "published": "2026-11-02T21:17:31.703",
-    "last_modified": "2026-11-10T17:49:04.997",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "An unprivileged application can bypass the `android.car.permission.CAR_DISPLAY_IN_CLUSTER` permission by registering an activity with the `android.car.cluster.NAVIGATION` category and requesting navigation app focus. The privileged `ClusterHomeSample` application, acting as a confused deputy, resolves and launches this arbitrary third-party activity on the safety-critical instrument cluster display without enforcing the necessary permission check, allowing for persistent display of potentially misleading or distracting content.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/aaos/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "epss": 0.1,
-    "epss_percentile": 2.5,
-    "tags": [],
-    "intel_score": 49.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-0017",
     "published": "2026-03-02T19:16:30.133",
     "last_modified": "2026-11-09T18:16:59.800",
@@ -17884,6 +18280,32 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-95619",
+    "published": "2026-09-22T13:17:13.300",
+    "last_modified": "2026-11-11T13:17:35.157",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libstdc++. An integer overflow can occur when processing large inputs to the aligned operator new in the C++ library. This vulnerability could lead to an undersized memory allocation, potentially causing memory corruption or application instability.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:58503",
+      "https://access.redhat.com/errata/RHSA-2026:67275",
+      "https://access.redhat.com/errata/RHSA-2026:89830",
+      "https://access.redhat.com/errata/RHSA-2026:98475",
+      "https://access.redhat.com/security/cve/CVE-2026-95619",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2537811"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.4,
+    "epss_percentile": 38.9,
+    "tags": [],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-102231",
     "published": "2026-10-13T19:17:48.690",
     "last_modified": "2026-11-10T21:17:32.803",
@@ -17902,6 +18324,33 @@
     "intel_score": 48.5,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-112260",
+    "published": "2026-10-19T20:17:52.970",
+    "last_modified": "2026-11-11T13:17:14.353",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GIMP. Opening a crafted XCF with a malformed text-layer parasite can cause a heap out-of-bounds read, disclosing adjacent heap data into layer text and causing denial of service.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:93975",
+      "https://access.redhat.com/errata/RHSA-2026:98495",
+      "https://access.redhat.com/security/cve/CVE-2026-112260",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2555730"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 5.8,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 48.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -18019,7 +18468,7 @@
   {
     "cve_id": "CVE-2026-16313",
     "published": "2026-07-28T17:16:37.807",
-    "last_modified": "2026-11-09T17:17:28.650",
+    "last_modified": "2026-11-11T13:17:26.090",
     "cvss_v3": 7.6,
     "severity": "HIGH",
     "affected": [],
@@ -18045,6 +18494,8 @@
       "https://access.redhat.com/errata/RHSA-2026:69124",
       "https://access.redhat.com/errata/RHSA-2026:70586",
       "https://access.redhat.com/errata/RHSA-2026:95508",
+      "https://access.redhat.com/errata/RHSA-2026:95745",
+      "https://access.redhat.com/errata/RHSA-2026:95755",
       "https://access.redhat.com/security/cve/CVE-2026-16313",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2502845",
       "https://github.com/doug-gilbert/sg3_utils/pull/83"
@@ -18057,6 +18508,43 @@
     "intel_score": 48.0,
     "reasons": [
       "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-102010",
+    "published": "2026-09-28T19:16:48.830",
+    "last_modified": "2026-11-11T13:17:11.097",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in GCC. When an application calls the erase_if function on a binary heap priority queue in libstdc++, the library reallocates storage but fails to update its internal entry pointer. An attacker capable of triggering this operation can exploit this use-after-free condition, leading to a Denial of Service (DoS) via an application crash or potential memory corruption.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:73642",
+      "https://access.redhat.com/errata/RHSA-2026:74569",
+      "https://access.redhat.com/errata/RHSA-2026:89830",
+      "https://access.redhat.com/errata/RHSA-2026:89891",
+      "https://access.redhat.com/errata/RHSA-2026:90915",
+      "https://access.redhat.com/errata/RHSA-2026:95581",
+      "https://access.redhat.com/errata/RHSA-2026:98474",
+      "https://access.redhat.com/errata/RHSA-2026:98475",
+      "https://access.redhat.com/errata/RHSA-2026:98483",
+      "https://access.redhat.com/errata/RHSA-2026:98576",
+      "https://access.redhat.com/errata/RHSA-2026:98577",
+      "https://access.redhat.com/errata/RHSA-2026:98580",
+      "https://access.redhat.com/security/cve/CVE-2026-102010",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2478395"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 28.7,
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 48.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
     ]
   },
   {
@@ -20366,6 +20854,30 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-87853",
+    "published": "2026-09-09T17:17:52.827",
+    "last_modified": "2026-11-11T13:17:32.137",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in SSSD's IdP authentication provider. The eval_access_token_buf() function compares the OIDC subject identifier using strncmp() with the authenticated user's identifier length, performing a prefix comparison instead of an exact match. An attacker whose IdP identifier is a strict prefix of a target user's identifier can authenticate as the target user.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:77534",
+      "https://access.redhat.com/errata/RHSA-2026:98559",
+      "https://access.redhat.com/security/cve/CVE-2026-87853",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2530888"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 26.1,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-83110",
     "published": "2026-09-15T20:18:21.223",
     "last_modified": "2026-11-10T20:46:08.153",
@@ -20407,6 +20919,31 @@
     "cisa_kev": false,
     "epss": 0.4,
     "epss_percentile": 34.9,
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-96541",
+    "published": "2026-09-23T19:19:54.080",
+    "last_modified": "2026-11-11T12:20:22.117",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A denial-of-service flaw was found in gnome-remote-desktop. An unauthenticated remote attacker can open RDP connections without completing the handshake and retain the connection-throttling slots indefinitely because no pre-authentication handshake deadline is enforced. By exhausting the global connection limit, an attacker can prevent new RDP clients from connecting until a holding socket is closed.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:98622",
+      "https://access.redhat.com/security/cve/CVE-2026-96541",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2539385",
+      "https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/issues/356",
+      "https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/issues/356"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.9,
+    "epss_percentile": 59.4,
     "tags": [],
     "intel_score": 47.5,
     "reasons": [
@@ -20700,7 +21237,7 @@
   {
     "cve_id": "CVE-2026-42011",
     "published": "2026-05-07T15:16:09.760",
-    "last_modified": "2026-11-09T18:17:27.887",
+    "last_modified": "2026-11-11T13:17:26.417",
     "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
@@ -20739,6 +21276,8 @@
       "https://access.redhat.com/errata/RHSA-2026:89232",
       "https://access.redhat.com/errata/RHSA-2026:89333",
       "https://access.redhat.com/errata/RHSA-2026:95508",
+      "https://access.redhat.com/errata/RHSA-2026:95745",
+      "https://access.redhat.com/errata/RHSA-2026:95755",
       "https://access.redhat.com/security/cve/CVE-2026-42011",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2467437",
       "https://www.gnutls.org/security-new.html#GNUTLS-SA-2026-04-29-6"
@@ -20777,7 +21316,7 @@
   {
     "cve_id": "CVE-2026-42784",
     "published": "2026-09-16T17:17:18.380",
-    "last_modified": "2026-11-10T14:17:31.413",
+    "last_modified": "2026-11-11T06:17:20.640",
     "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
@@ -20792,6 +21331,7 @@
       "https://access.redhat.com/errata/RHSA-2026:76737",
       "https://access.redhat.com/errata/RHSA-2026:79357",
       "https://access.redhat.com/errata/RHSA-2026:94791",
+      "https://access.redhat.com/errata/RHSA-2026:98248",
       "https://access.redhat.com/security/cve/CVE-2026-42784",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2464122"
     ],
@@ -20808,7 +21348,7 @@
   {
     "cve_id": "CVE-2026-89058",
     "published": "2026-09-18T08:17:01.653",
-    "last_modified": "2026-11-09T02:16:59.900",
+    "last_modified": "2026-11-11T13:17:32.317",
     "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
@@ -20825,6 +21365,8 @@
       "https://access.redhat.com/errata/RHSA-2026:95505",
       "https://access.redhat.com/errata/RHSA-2026:95887",
       "https://access.redhat.com/errata/RHSA-2026:96077",
+      "https://access.redhat.com/errata/RHSA-2026:98494",
+      "https://access.redhat.com/errata/RHSA-2026:98606",
       "https://access.redhat.com/security/cve/CVE-2026-89058",
       "https://bugzilla.redhat.com/show_bug.cgi?id=2519775",
       "https://github.com/resteasy/resteasy/commit/efeb2b7",
@@ -21961,6 +22503,106 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-16118",
+    "published": "2026-07-17T20:17:16.167",
+    "last_modified": "2026-11-11T13:17:25.407",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in xdgmime. A heap-based buffer overflow can be triggered in _xdg_mime_magic_parse_magic_line() in the xdgmimemagic.c file on little-endian systems when an attacker-controlled MIME magic file in a user-writable XDG data location (e.g., in the $XDG_DATA_HOME/mime/magic path) is parsed by an application performing MIME type detection (e.g., via g_content_type_guess()). When performing byte-swap, incorrect pointer arithmetic on the write side causes an out-of-bounds write of 2 bytes, resulting in an application crash or memory corruption.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:64799",
+      "https://access.redhat.com/errata/RHSA-2026:64800",
+      "https://access.redhat.com/errata/RHSA-2026:66451",
+      "https://access.redhat.com/errata/RHSA-2026:67956",
+      "https://access.redhat.com/errata/RHSA-2026:70636",
+      "https://access.redhat.com/errata/RHSA-2026:71403",
+      "https://access.redhat.com/errata/RHSA-2026:71404",
+      "https://access.redhat.com/errata/RHSA-2026:71405",
+      "https://access.redhat.com/errata/RHSA-2026:72394",
+      "https://access.redhat.com/errata/RHSA-2026:72395",
+      "https://access.redhat.com/errata/RHSA-2026:72399",
+      "https://access.redhat.com/errata/RHSA-2026:72470",
+      "https://access.redhat.com/errata/RHSA-2026:72475",
+      "https://access.redhat.com/errata/RHSA-2026:72476",
+      "https://access.redhat.com/errata/RHSA-2026:72502",
+      "https://access.redhat.com/errata/RHSA-2026:73859",
+      "https://access.redhat.com/errata/RHSA-2026:73909",
+      "https://access.redhat.com/errata/RHSA-2026:73929",
+      "https://access.redhat.com/errata/RHSA-2026:73930",
+      "https://access.redhat.com/errata/RHSA-2026:73959",
+      "https://access.redhat.com/errata/RHSA-2026:73960",
+      "https://access.redhat.com/errata/RHSA-2026:73961",
+      "https://access.redhat.com/errata/RHSA-2026:73962",
+      "https://access.redhat.com/errata/RHSA-2026:74359",
+      "https://access.redhat.com/errata/RHSA-2026:74360",
+      "https://access.redhat.com/errata/RHSA-2026:74361",
+      "https://access.redhat.com/errata/RHSA-2026:74362",
+      "https://access.redhat.com/errata/RHSA-2026:74363",
+      "https://access.redhat.com/errata/RHSA-2026:74364",
+      "https://access.redhat.com/errata/RHSA-2026:74365",
+      "https://access.redhat.com/errata/RHSA-2026:74450",
+      "https://access.redhat.com/errata/RHSA-2026:74458",
+      "https://access.redhat.com/errata/RHSA-2026:74459",
+      "https://access.redhat.com/errata/RHSA-2026:74460",
+      "https://access.redhat.com/errata/RHSA-2026:74461",
+      "https://access.redhat.com/errata/RHSA-2026:74462",
+      "https://access.redhat.com/errata/RHSA-2026:74463",
+      "https://access.redhat.com/errata/RHSA-2026:74674",
+      "https://access.redhat.com/errata/RHSA-2026:74677",
+      "https://access.redhat.com/errata/RHSA-2026:74678",
+      "https://access.redhat.com/errata/RHSA-2026:74679",
+      "https://access.redhat.com/errata/RHSA-2026:74681",
+      "https://access.redhat.com/errata/RHSA-2026:74683",
+      "https://access.redhat.com/errata/RHSA-2026:74685",
+      "https://access.redhat.com/errata/RHSA-2026:74687",
+      "https://access.redhat.com/errata/RHSA-2026:74688",
+      "https://access.redhat.com/errata/RHSA-2026:74771",
+      "https://access.redhat.com/errata/RHSA-2026:75652",
+      "https://access.redhat.com/errata/RHSA-2026:75654",
+      "https://access.redhat.com/errata/RHSA-2026:75655",
+      "https://access.redhat.com/errata/RHSA-2026:75657",
+      "https://access.redhat.com/errata/RHSA-2026:75658",
+      "https://access.redhat.com/errata/RHSA-2026:75659",
+      "https://access.redhat.com/errata/RHSA-2026:75660",
+      "https://access.redhat.com/errata/RHSA-2026:76042",
+      "https://access.redhat.com/errata/RHSA-2026:79357",
+      "https://access.redhat.com/errata/RHSA-2026:80756",
+      "https://access.redhat.com/errata/RHSA-2026:81127",
+      "https://access.redhat.com/errata/RHSA-2026:82059",
+      "https://access.redhat.com/errata/RHSA-2026:82061",
+      "https://access.redhat.com/errata/RHSA-2026:82066",
+      "https://access.redhat.com/errata/RHSA-2026:82304",
+      "https://access.redhat.com/errata/RHSA-2026:82322",
+      "https://access.redhat.com/errata/RHSA-2026:82336",
+      "https://access.redhat.com/errata/RHSA-2026:82347",
+      "https://access.redhat.com/errata/RHSA-2026:82354",
+      "https://access.redhat.com/errata/RHSA-2026:82368",
+      "https://access.redhat.com/errata/RHSA-2026:82371",
+      "https://access.redhat.com/errata/RHSA-2026:82372",
+      "https://access.redhat.com/errata/RHSA-2026:82415",
+      "https://access.redhat.com/errata/RHSA-2026:82857",
+      "https://access.redhat.com/errata/RHSA-2026:82888",
+      "https://access.redhat.com/errata/RHSA-2026:92449",
+      "https://access.redhat.com/errata/RHSA-2026:92452",
+      "https://access.redhat.com/errata/RHSA-2026:98452",
+      "https://access.redhat.com/errata/RHSA-2026:98557",
+      "https://access.redhat.com/security/cve/CVE-2026-16118",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2501732",
+      "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41",
+      "https://gitlab.freedesktop.org/xdg/xdgmime/-/work_items/41"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.3,
+    "epss_percentile": 20.3,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-64243",
     "published": "2026-07-24T16:16:53.680",
     "last_modified": "2026-11-08T16:10:00.183",
@@ -22122,6 +22764,32 @@
     "cisa_kev": false,
     "epss": 0.1,
     "epss_percentile": 2.8,
+    "tags": [],
+    "intel_score": 45.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-19685",
+    "published": "2026-08-24T17:17:21.907",
+    "last_modified": "2026-11-11T12:19:51.160",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "NetworkManager did not apply the private_user restriction to the 802-1x.ca-path and phase2-ca-path directory-valued connection properties. This incomplete fix for CVE-2025-9615 allows an unprivileged local user to point a private WPA-Enterprise (802.1X) connection profile's CA path at an attacker-controlled directory, bypassing server certificate validation and enabling credential theft via a rogue access point.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:98586",
+      "https://access.redhat.com/security/cve/CVE-2026-19685",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2515042",
+      "https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/commit/a8e87381a3e70060abd721d9a347f42b2ba68e6e",
+      "https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/commit/e85cc46d0b36cdba50fe8411cc93d55a49ebfccf",
+      "https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/merge_requests/2513"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "epss": 0.2,
+    "epss_percentile": 14.9,
     "tags": [],
     "intel_score": 45.5,
     "reasons": [
