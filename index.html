@@ -9,8 +9,8 @@
         form-action 'none';
         frame-ancestors 'none';
         object-src 'none';
-        img-src 'self' data:;
-        connect-src 'self';
+        img-src 'self' data: https:;
+        connect-src 'self' data:;
         script-src 'self' 'unsafe-inline';
         style-src 'self' 'unsafe-inline';
         upgrade-insecure-requests;
@@ -19,7 +19,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-  <title>Claw 🦞 Glancer</title>
+  <title>Claw 🦞 Glancer | Asymmetric Threat Intelligence</title>
   <style>
     :root{
       --bg:#050807;
@@ -49,7 +49,6 @@ body{
   position: relative;
 }
 
-
 body::before{
   content:"";
   position: fixed;
@@ -66,9 +65,9 @@ body::before{
 }
 
 .wrap{
-  max-width: 1200px;
+  max-width: 1260px;
   margin: 0 auto;
-  padding: 26px 18px 40px;
+  padding: 24px 18px 40px;
   position: relative;
   z-index: 1; 
 }
@@ -79,24 +78,24 @@ header{
   align-items:center;
   justify-content:center;
   gap:6px;
-  margin-bottom:16px;
+  margin-bottom:18px;
   text-align:center;
 }
 
 .title{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:4px;
   align-items:center;
 }
 
 h1{
   margin:0;
-  font-size:20px;
-  letter-spacing:.5px;
+  font-size:22px;
+  letter-spacing:.6px;
   font-family:var(--mono);
   color:var(--neon);
-  text-shadow:0 0 18px rgba(0,255,140,.12);
+  text-shadow:0 0 18px rgba(0,255,140,.18);
   text-align:center;
 }
 
@@ -108,18 +107,18 @@ h1{
 }
 
 .panel{
-  background: rgba(7,17,12,.78);
+  background: rgba(7,17,12,.82);
   border: 1px solid rgba(0,255,140,.18);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .controls{
-  padding: 14px;
+  padding: 14px 16px;
   display: grid;
-  grid-template-columns: 1.3fr .7fr 1fr max-content; 
+  grid-template-columns: 1.4fr 1fr .8fr max-content; 
   gap: 10px;
   align-items: center;
 }
@@ -139,33 +138,25 @@ button#refresh{
 input, select, button{
   width:100%;
   padding:10px 12px;
-  border-radius:14px;
+  border-radius:12px;
   border:1px solid rgba(0,255,140,.18);
-  background: rgba(0,0,0,.25);
+  background: rgba(0,0,0,.35);
   color: var(--txt);
   font-family: var(--mono);
+  font-size: 12px;
   outline:none;
-
-  
-#tag {
-  width: auto;          
-  justify-self: start;  
-  min-width: 260px;     
-  max-width: 320px;     
-}
+  box-sizing: border-box;
 }
 
-  #q{
-    max-width: 420px;   
-    justify-self: start;
-  }
-
+#q {
+  width: 100%;
+}
 
 select{
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 38px;                 
+  padding-right: 34px;                 
   background-image:
     linear-gradient(45deg, transparent 50%, rgba(0,255,140,.75) 50%),
     linear-gradient(135deg, rgba(0,255,140,.75) 50%, transparent 50%),
@@ -173,17 +164,17 @@ select{
   background-position:
     calc(100% - 18px) 50%,
     calc(100% - 12px) 50%,
-    calc(100% - 34px) 50%;
+    calc(100% - 30px) 50%;
   background-size:
-    6px 6px,
-    6px 6px,
-    1px 18px;
+    5px 5px,
+    5px 5px,
+    1px 16px;
   background-repeat: no-repeat;
 }
 
 select:focus, input:focus{
-  border-color: rgba(0,255,140,.42);
-  box-shadow: 0 0 0 3px rgba(0,255,140,.10);
+  border-color: rgba(0,255,140,.45);
+  box-shadow: 0 0 0 3px rgba(0,255,140,.12);
 }
 
 option{
@@ -191,14 +182,7 @@ option{
   color: rgba(180,255,220,.92);
 }
 
-
-input{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-input::placeholder{ color: rgba(180,255,220,.45); }
+input::placeholder{ color: rgba(180,255,220,.40); }
 
 button{
   cursor:pointer;
@@ -206,12 +190,95 @@ button{
   width: auto; 
   border: 1px solid rgba(0,255,140,.30);
   background: rgba(0,255,140,.08);
+  transition: all .15s ease;
 }
 
-button:hover{ background: rgba(0,255,140,.14); }
+button:hover{ 
+  background: rgba(0,255,140,.16); 
+  border-color: var(--neon);
+}
+
+/* Tactical Filter Chips Bar */
+.filter-chips {
+  padding: 0 16px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,255,140,.18);
+  background: rgba(0,0,0,.30);
+  color: var(--txt);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s ease;
+}
+
+.chip:hover {
+  border-color: var(--neon);
+  background: rgba(0,255,140,.10);
+  transform: translateY(-1px);
+}
+
+.chip.active {
+  background: var(--neon);
+  color: #040806;
+  font-weight: 700;
+  border-color: var(--neon);
+  box-shadow: 0 0 12px rgba(0,255,140,.40);
+}
+
+.chip-war {
+  border-color: rgba(255, 51, 85, 0.45);
+  color: #ff5577;
+}
+.chip-war:hover {
+  background: rgba(255, 51, 85, 0.15);
+  border-color: #ff3355;
+}
+.chip-war.active {
+  background: #ff3355;
+  color: #fff;
+  border-color: #ff3355;
+  box-shadow: 0 0 16px rgba(255, 51, 85, 0.60);
+}
+
+.chip-kev {
+  border-color: rgba(255, 77, 109, 0.45);
+  color: #ff4d6d;
+}
+.chip-preauth {
+  border-color: rgba(255, 184, 56, 0.45);
+  color: #ffb838;
+}
+.chip-weaponized {
+  border-color: rgba(190, 95, 255, 0.45);
+  color: #d070ff;
+}
+.chip-ai {
+  border-color: rgba(0, 229, 255, 0.45);
+  color: #00e5ff;
+}
+.chip-edge {
+  border-color: rgba(0, 255, 170, 0.45);
+  color: #00ffaa;
+}
+.chip-prenvd {
+  border-color: rgba(0, 255, 140, 0.45);
+  color: #00ff8c;
+}
 
 .meta{
-  padding: 0 14px 14px;
+  padding: 0 16px 14px;
   display:flex;
   gap:12px;
   flex-wrap:wrap;
@@ -220,16 +287,17 @@ button:hover{ background: rgba(0,255,140,.14); }
   color: var(--muted);
   font-family: var(--mono);
   font-size:12px;
+  border-bottom: 1px solid rgba(0,255,140,.10);
 }
 
 .pill{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  padding:6px 10px;
+  padding:5px 10px;
   border-radius:999px;
   border:1px solid rgba(0,255,140,.18);
-  background: rgba(0,0,0,.18);
+  background: rgba(0,0,0,.22);
 }
 
 .dot{
@@ -237,7 +305,7 @@ button:hover{ background: rgba(0,255,140,.14); }
   height:8px;
   border-radius:50%;
   background: var(--neon);
-  box-shadow: 0 0 12px rgba(0,255,140,.30);
+  box-shadow: 0 0 12px rgba(0,255,140,.35);
 }
 
 table{
@@ -251,44 +319,254 @@ table{
 thead th{
   text-align:left;
   padding:12px 14px;
-  color: rgba(200,255,230,.85);
+  color: rgba(200,255,230,.88);
   border-bottom:1px solid rgba(0,255,140,.16);
-  background: rgba(0,0,0,.16);
+  background: rgba(0,0,0,.28);
   position:sticky;
-  top:0;
-  backdrop-filter: blur(8px);
+  top:38px;
+  backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 tbody td{
   padding:12px 14px;
-  border-bottom:1px solid rgba(0,255,140,.10);
+  border-bottom:1px solid rgba(0,255,140,.09);
   vertical-align:top;
 }
 
-tbody tr:hover{ background: rgba(0,255,140,.06); }
+tbody tr:hover{ background: rgba(0,255,140,.05); }
 
-.score{ font-weight:700; color: var(--neon); }
+/* Score & Popover Breakdown */
+.score-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.score {
+  font-weight:700;
+  color: var(--neon);
+  border-bottom: 1px dashed rgba(0,255,140,.35);
+  display: inline-block;
+}
+
+.score-popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  min-width: 250px;
+  background: rgba(5, 12, 9, 0.96);
+  border: 1px solid rgba(0, 255, 140, 0.35);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.75);
+  padding: 10px 12px;
+  display: none;
+  z-index: 1000;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.4;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+
+.score-wrap:hover .score-popover {
+  display: block;
+}
+
+.popover-title {
+  font-weight: 700;
+  color: var(--neon);
+  border-bottom: 1px solid rgba(0, 255, 140, 0.2);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.popover-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--txt);
+  padding: 1px 0;
+}
+
+.popover-row span:last-child {
+  color: var(--neon);
+  font-weight: 600;
+}
 
 .sev{ font-weight:700; }
 .sev.CRITICAL{ color: var(--warn); }
 .sev.HIGH{ color: var(--amber); }
 
-.tags{ display:flex; flex-wrap:wrap; gap:6px; }
+.tags{ display:flex; flex-wrap:wrap; gap:5px; }
 
 .tag{
-  padding:3px 8px;
+  padding:2px 7px;
   border-radius:999px;
   border:1px solid rgba(0,255,140,.16);
-  background: rgba(0,0,0,.18);
+  background: rgba(0,0,0,.22);
   color: rgba(180,255,220,.88);
-  font-size:11px;
+  font-size:10px;
   white-space:nowrap;
+}
+
+/* Specific Badges */
+.cve-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.cve-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.badge-tag {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+.badge-kev {
+  background: rgba(255, 45, 85, 0.22);
+  border: 1px solid rgba(255, 45, 85, 0.7);
+  color: #ff3b65;
+  text-shadow: 0 0 8px rgba(255, 45, 85, 0.4);
+}
+
+.badge-ransomware {
+  background: rgba(255, 20, 60, 0.30);
+  border: 1px solid #ff143c;
+  color: #ff2a55;
+  box-shadow: 0 0 10px rgba(255, 20, 60, 0.5);
+  animation: pulse-red 1.6s infinite ease-in-out;
+}
+
+.badge-preauth {
+  background: rgba(255, 170, 0, 0.18);
+  border: 1px solid rgba(255, 170, 0, 0.65);
+  color: #ffb838;
+}
+
+.badge-weaponized {
+  background: rgba(180, 70, 255, 0.20);
+  border: 1px solid rgba(180, 70, 255, 0.65);
+  color: #d070ff;
+}
+
+.badge-ai {
+  background: rgba(0, 220, 255, 0.18);
+  border: 1px solid rgba(0, 220, 255, 0.65);
+  color: #00e5ff;
+}
+
+.badge-prenvd {
+  background: rgba(0, 255, 140, 0.20);
+  border: 1px solid rgba(0, 255, 140, 0.65);
+  color: #00ff8c;
+}
+
+.tag-kev {
+  border-color: rgba(255, 45, 85, 0.4) !important;
+  color: #ff4d6d !important;
+  background: rgba(255, 45, 85, 0.12) !important;
+}
+
+.tag-ai {
+  border-color: rgba(0, 220, 255, 0.35) !important;
+  color: #00e5ff !important;
+  background: rgba(0, 220, 255, 0.10) !important;
+}
+
+.tag-edge {
+  border-color: rgba(0, 255, 170, 0.35) !important;
+  color: #00ffaa !important;
+  background: rgba(0, 255, 170, 0.10) !important;
+}
+
+.tag-weaponized {
+  border-color: rgba(180, 70, 255, 0.35) !important;
+  color: #d070ff !important;
+  background: rgba(180, 70, 255, 0.10) !important;
+}
+
+.epss-pill {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--mono);
+}
+.epss-high {
+  background: rgba(255, 60, 60, 0.15);
+  border: 1px solid rgba(255, 60, 60, 0.5);
+  color: #ff6060;
+  box-shadow: 0 0 8px rgba(255, 60, 60, 0.2);
+}
+.epss-med {
+  background: rgba(255, 180, 50, 0.15);
+  border: 1px solid rgba(255, 180, 50, 0.5);
+  color: #ffb838;
+}
+.epss-low {
+  background: rgba(0, 255, 140, 0.08);
+  border: 1px solid rgba(0, 255, 140, 0.25);
+  color: rgba(180, 255, 220, 0.7);
+}
+.muted-dash {
+  color: rgba(180, 255, 220, 0.35);
 }
 
 .summary{
   color: rgba(200,255,230,.88);
-  line-height:1.35;
-  max-width:72ch;
+  line-height:1.4;
+  max-width:76ch;
+}
+
+.summary-text {
+  margin-bottom: 6px;
+}
+
+/* Analyst Action Bar */
+.actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,255,140,.20);
+  background: rgba(0,0,0,.35);
+  color: var(--txt);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.action-btn:hover {
+  background: rgba(0,255,140,.12);
+  border-color: var(--neon);
+  color: var(--neon);
+  text-decoration: none;
 }
 
 a{ color: rgba(0,255,140,.92); text-decoration:none; }
@@ -303,6 +581,30 @@ a:hover{ text-decoration:underline; }
   font-family: var(--mono);
   color: rgba(255,210,210,.92);
   white-space: pre-wrap;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(5, 14, 9, 0.96);
+  border: 1px solid var(--neon);
+  box-shadow: 0 0 20px rgba(0, 255, 140, 0.35);
+  color: var(--txt);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Rolling Cyber Intel Ticker */
@@ -427,60 +729,11 @@ a:hover{ text-decoration:underline; }
   filter: drop-shadow(0 0 9px rgba(0, 255, 140, 0.70));
 }
 
-.badge-kev {
-  display: inline-block;
-  background: rgba(255, 45, 85, 0.22);
-  border: 1px solid rgba(255, 45, 85, 0.7);
-  color: #ff3b65;
-  font-weight: 700;
-  font-size: 10px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  margin-left: 6px;
-  text-shadow: 0 0 8px rgba(255, 45, 85, 0.4);
-  letter-spacing: 0.5px;
-  vertical-align: middle;
-}
-
-.tag-kev {
-  border-color: rgba(255, 45, 85, 0.4) !important;
-  color: #ff4d6d !important;
-  background: rgba(255, 45, 85, 0.12) !important;
-}
-
-.epss-pill {
-  display: inline-block;
-  padding: 2px 7px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--mono);
-}
-.epss-high {
-  background: rgba(255, 60, 60, 0.15);
-  border: 1px solid rgba(255, 60, 60, 0.5);
-  color: #ff6060;
-  box-shadow: 0 0 8px rgba(255, 60, 60, 0.2);
-}
-.epss-med {
-  background: rgba(255, 180, 50, 0.15);
-  border: 1px solid rgba(255, 180, 50, 0.5);
-  color: #ffb838;
-}
-.epss-low {
-  background: rgba(0, 255, 140, 0.08);
-  border: 1px solid rgba(0, 255, 140, 0.25);
-  color: rgba(180, 255, 220, 0.7);
-}
-.muted-dash {
-  color: rgba(180, 255, 220, 0.35);
-}
-
-@media (max-width: 520px){
+@media (max-width: 640px){
   .wrap{ padding: 18px 12px 28px; }
   .controls{ grid-template-columns: 1fr; }
   button#refresh{ width: auto; } 
-  thead th, tbody td{ padding: 10px 10px; }
+  thead th, tbody td{ padding: 10px 8px; }
   table{ font-size: 11px; }
   .ticker-badge { padding: 0 8px; font-size: 10px; }
 }
@@ -504,13 +757,13 @@ a:hover{ text-decoration:underline; }
     <header>
       <div class="title">
         <h1>Claw 🦞 Glancer</h1>
-        
+        <div class="sub">Asymmetric Pre-Disclosure & Threat Telemetry Vanguard</div>
       </div>
     </header>
 
     <section class="panel">
       <div class="controls">
-        
+        <input type="text" id="q" placeholder="Filter CVE, vendor, keyword, reason…" autocomplete="off" />
         <select id="tag">
           <option value="">Tag: any</option>
         </select>
@@ -521,14 +774,27 @@ a:hover{ text-decoration:underline; }
           <option value="100">Min score: 100</option>
           <option value="120">Min score: 120</option>
           <option value="140">Min score: 140</option>
+          <option value="160">Min score: 160</option>
         </select>
         <button id="refresh">Refresh</button>
+      </div>
+
+      <!-- Tactical Quick-Filter Chips -->
+      <div class="filter-chips" id="filterChips">
+        <button class="chip active" data-filter="all">⚡ ALL</button>
+        <button class="chip chip-war" data-filter="war_room" title="Pre-Auth RCE, Active KEV, or Weaponized Threats">🚨 WAR ROOM</button>
+        <button class="chip chip-kev" data-filter="kev" title="CISA Known Exploited Vulnerabilities">🔥 CISA KEV</button>
+        <button class="chip chip-preauth" data-filter="pre_auth" title="Unauthenticated Remote Execution">🔓 PRE-AUTH</button>
+        <button class="chip chip-weaponized" data-filter="weaponized" title="Verified Public Weaponized Exploit or PoC">💥 WEAPONIZED</button>
+        <button class="chip chip-ai" data-filter="ai" title="AI, LLM, or MLOps Infrastructure">🤖 AI INFRA</button>
+        <button class="chip chip-edge" data-filter="edge" title="Edge Appliances, Firewalls, Gateways, VPNs">🌐 EDGE / VPN</button>
+        <button class="chip chip-prenvd" data-filter="pre_nvd" title="Disclosed via Openwall oss-security before NVD index">📡 PRE-NVD</button>
       </div>
 
       <div class="meta">
         <div class="pill"><span class="dot"></span><span id="status">Idle</span></div>
         <div class="pill">Last load: <span id="lastLoad">never</span></div>
-        <div class="pill">Showing: <span id="count">0</span></div>
+        <div class="pill">Showing: <span id="count">0</span> threats</div>
       </div>
 
       <div id="err" class="err" style="display:none"></div>
@@ -538,11 +804,11 @@ a:hover{ text-decoration:underline; }
           <thead>
             <tr>
               <th style="width:75px">Score</th>
-              <th style="width:160px">CVE</th>
+              <th style="width:175px">Threat / CVE</th>
               <th style="width:90px">Severity</th>
               <th style="width:95px">EPSS Prob</th>
-              <th style="width:200px">Tags</th>
-              <th>Summary</th>
+              <th style="width:200px">Killchain Tags</th>
+              <th>Analyst Intel & Exploitation Context</th>
             </tr>
           </thead>
           <tbody id="rows"></tbody>
@@ -551,6 +817,8 @@ a:hover{ text-decoration:underline; }
     </section>
   </div>
 
+  <div id="toast" class="toast">Threat Brief copied to clipboard!</div>
+
 <script>
 const DATA_FILES = ["data/prioritized_threats.json", "prioritized_threats.json"]; 
 const TICKER_FILES = ["data/ticker_feed.json", "ticker_feed.json"];
@@ -558,7 +826,7 @@ let all = [];
 
 let lastManualRefresh = 0;
 const REFRESH_COOLDOWN_MS = 10_000;
-
+let currentChipFilter = "all";
 
 const el = (id)=>document.getElementById(id);
 const rowsEl = el("rows");
@@ -566,9 +834,10 @@ const errEl = el("err");
 const statusEl = el("status");
 const lastLoadEl = el("lastLoad");
 const countEl = el("count");
-
+const qEl = el("q");
 const tagEl = el("tag");
 const minScoreEl = el("minScore");
+const toastEl = el("toast");
 
 function setStatus(s){ statusEl.textContent = s; }
 function showErr(msg){
@@ -576,6 +845,12 @@ function showErr(msg){
   errEl.textContent = msg;
 }
 function clearErr(){ errEl.style.display = "none"; errEl.textContent = ""; }
+
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  setTimeout(() => toastEl.classList.remove("show"), 2600);
+}
 
 function uniqTags(items){
   const s = new Set();
@@ -593,33 +868,81 @@ function renderTagOptions(){
   if (tags.includes(current)) tagEl.value = current;
 }
 
-function match(x, q, tag, minScore){
+function match(x, q, tag, minScore, chip){
   const score = Number(x.intel_score ?? 0);
   if (score < minScore) return false;
+
+  const tags = x.tags || [];
+
+  if (chip === 'war_room') {
+    const isCritical = x.cisa_kev || x.ransomware_campaign || x.pre_auth || x.weaponized || (x.epss && x.epss >= 15);
+    if (!isCritical) return false;
+  } else if (chip === 'kev') {
+    if (!x.cisa_kev && !tags.includes('cisa_kev')) return false;
+  } else if (chip === 'pre_auth') {
+    if (!x.pre_auth && !tags.includes('pre_auth')) return false;
+  } else if (chip === 'weaponized') {
+    if (!x.weaponized && !tags.includes('weaponized') && !tags.includes('poc')) return false;
+  } else if (chip === 'ai') {
+    if (!tags.includes('ai_infrastructure')) return false;
+  } else if (chip === 'edge') {
+    if (!tags.includes('edge_perimeter')) return false;
+  } else if (chip === 'pre_nvd') {
+    if (!tags.includes('pre_nvd') && !tags.includes('oss_security') && !(x.cve_id || '').startsWith('PRE-NVD')) return false;
+  }
+
   if (tag){
-    const tags = x.tags || [];
     if (!tags.includes(tag)) return false;
   }
+
   if (!q) return true;
   const hay = [
     x.cve_id || "",
     x.summary || "",
-    (x.tags || []).join(" "),
+    tags.join(" "),
     (x.reasons || []).join(" ")
   ].join(" ").toLowerCase();
   return hay.includes(q.toLowerCase());
 }
 
 function esc(s){
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  return String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function copyBrief(cveId){
+  const item = all.find(x => x.cve_id === cveId);
+  if (!item) return;
+
+  const score = item.intel_score ?? 0;
+  const sev = item.severity || 'UNKNOWN';
+  const epss = item.epss != null ? `${item.epss}%` : 'N/A';
+  const isKev = item.cisa_kev ? 'YES (Active Exploitation)' : 'No';
+  const isPreAuth = item.pre_auth ? 'YES' : 'No';
+  const isWeaponized = item.weaponized ? 'YES' : 'No';
+  const summary = item.summary || 'No summary available.';
+  const link = (item.cve_id || '').startsWith('CVE-') 
+    ? `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(item.cve_id)}`
+    : (item.references && item.references[0] ? item.references[0] : 'https://www.openwall.com/lists/oss-security/');
+
+  const md = `🚨 **[THREAT BRIEF] ${item.cve_id}** (Intel Score: ${score} | ${sev})\n` +
+    `• **Attack Vector:** Pre-Auth: ${isPreAuth} | Weaponized Exploit: ${isWeaponized}\n` +
+    `• **Telemetry:** CISA KEV: ${isKev} | EPSS Prob: ${epss}\n` +
+    `• **Summary:** ${summary}\n` +
+    `• **Advisory:** ${link}`;
+
+  navigator.clipboard.writeText(md).then(() => {
+    showToast(`Copied ${item.cve_id} Brief to clipboard`);
+  }).catch(() => {
+    showToast(`Copied Brief to clipboard`);
+  });
 }
 
 function render(){
-  const q = "";
+  const q = qEl ? qEl.value.trim() : "";
   const tag = tagEl.value;
   const minScore = Number(minScoreEl.value || 0);
 
-  const filtered = all.filter(x => match(x, q, tag, minScore));
+  const filtered = all.filter(x => match(x, q, tag, minScore, currentChipFilter));
   countEl.textContent = filtered.length;
 
   rowsEl.innerHTML = filtered.map(x => {
@@ -629,6 +952,11 @@ function render(){
     const summary = x.summary || "";
     const cve = x.cve_id || "";
     const isKev = Boolean(x.cisa_kev || tags.includes("cisa_kev"));
+    const isRansomware = Boolean(x.ransomware_campaign || tags.includes("ransomware"));
+    const isPreAuth = Boolean(x.pre_auth || tags.includes("pre_auth"));
+    const isWeaponized = Boolean(x.weaponized || tags.includes("weaponized") || tags.includes("poc"));
+    const isAi = Boolean(tags.includes("ai_infrastructure"));
+    const isPreNvd = Boolean(cve.startsWith("PRE-NVD") || tags.includes("pre_nvd") || tags.includes("oss_security"));
     const epss = x.epss != null ? Number(x.epss) : null;
 
     let epssHtml = `<span class="muted-dash">—</span>`;
@@ -638,19 +966,77 @@ function render(){
       epssHtml = `<span class="epss-pill ${epssClass}" title="EPSS Exploit Probability: ${epss}%${percText}">${epss}%</span>`;
     }
 
-    const kevBadge = isKev ? `<span class="badge-kev" title="Confirmed actively exploited in the wild (CISA KEV)">KEV</span>` : "";
+    let badges = [];
+    if (isPreNvd) badges.push(`<span class="badge-tag badge-prenvd" title="Pre-NVD Vanguard: Upstream oss-security disclosure">PRE-NVD</span>`);
+    if (isKev) badges.push(`<span class="badge-tag badge-kev" title="Confirmed actively exploited in the wild (CISA KEV)">KEV</span>`);
+    if (isRansomware) badges.push(`<span class="badge-tag badge-ransomware" title="Known Ransomware Campaign Use">RANSOMWARE</span>`);
+    if (isPreAuth) badges.push(`<span class="badge-tag badge-preauth" title="Pre-Auth Remote Execution Vector">PRE-AUTH</span>`);
+    if (isWeaponized) badges.push(`<span class="badge-tag badge-weaponized" title="Verified Public Weaponized Exploit / PoC">WEAPONIZED</span>`);
+    if (isAi) badges.push(`<span class="badge-tag badge-ai" title="AI / LLM Infrastructure Vulnerability">AI-STACK</span>`);
+
+    const cveLink = cve.startsWith("CVE-")
+      ? `https://nvd.nist.gov/vuln/detail/${encodeURIComponent(cve)}`
+      : (x.references && x.references[0] ? x.references[0] : "https://www.openwall.com/lists/oss-security/");
+
+    // Popover components
+    const bdown = x.score_breakdown || {};
+    const basePts = bdown.base_cvss ?? (x.cvss_v3 ? (x.cvss_v3 * 5).toFixed(1) : 25);
+    const freshnessPts = bdown.freshness ? `<div class="popover-row"><span>Freshness (48h)</span><span>+10</span></div>` : '';
+    const componentRows = (bdown.components || []).map(c => `
+      <div class="popover-row"><span>${esc(c.signal)}</span><span>+${esc(c.points)}</span></div>
+    `).join("");
 
     return `
       <tr>
-        <td class="score">${esc(score)}</td>
+        <td class="score-cell">
+          <div class="score-wrap">
+            <span class="score">${esc(score)}</span>
+            <div class="score-popover">
+              <div class="popover-title">
+                <span>Score Breakdown</span>
+                <span>${esc(score)} pts</span>
+              </div>
+              <div class="popover-row"><span>Base CVSS</span><span>${esc(basePts)}</span></div>
+              ${freshnessPts}
+              ${componentRows}
+            </div>
+          </div>
+        </td>
         <td>
-          <a href="https://nvd.nist.gov/vuln/detail/${encodeURIComponent(cve)}" target="_blank" rel="noreferrer">${esc(cve)}</a>
-          ${kevBadge}
+          <div class="cve-col">
+            <div class="cve-line">
+              <a href="${esc(cveLink)}" target="_blank" rel="noreferrer">${esc(cve)}</a>
+            </div>
+            <div class="cve-line">${badges.join("")}</div>
+          </div>
         </td>
         <td class="sev ${esc(sev)}">${esc(sev)}</td>
         <td>${epssHtml}</td>
-        <td><div class="tags">${tags.map(t => `<span class="tag ${t === 'cisa_kev' ? 'tag-kev' : ''}">${esc(t)}</span>`).join("")}</div></td>
-        <td class="summary">${esc(summary)}</td>
+        <td>
+          <div class="tags">
+            ${tags.map(t => {
+              let cls = "";
+              if (t === 'cisa_kev' || t === 'ransomware') cls = 'tag-kev';
+              else if (t === 'ai_infrastructure') cls = 'tag-ai';
+              else if (t === 'edge_perimeter') cls = 'tag-edge';
+              else if (t === 'weaponized' || t === 'poc') cls = 'tag-weaponized';
+              return `<span class="tag ${cls}">${esc(t)}</span>`;
+            }).join("")}
+          </div>
+        </td>
+        <td class="summary">
+          <div class="summary-text">${esc(summary)}</div>
+          <div class="actions-bar">
+            <a href="https://www.shodan.io/search?query=vuln%3A${encodeURIComponent(cve)}" target="_blank" rel="noopener noreferrer" class="action-btn" title="Search Global Internet Exposure on Shodan">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Shodan</span>
+            </a>
+            <button class="action-btn" onclick="copyBrief('${esc(cve)}')" title="Copy Markdown Incident Brief for Slack/Jira">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>Brief</span>
+            </button>
+          </div>
+        </td>
       </tr>
     `;
   }).join("");
@@ -707,6 +1093,23 @@ async function loadTicker(){
   }
 }
 
+// Event Listeners
+el("filterChips").addEventListener("click", (e) => {
+  const btn = e.target.closest(".chip");
+  if (!btn) return;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  btn.classList.add("active");
+  currentChipFilter = btn.dataset.filter;
+  render();
+});
+
+if (qEl) {
+  qEl.addEventListener("input", render);
+}
+
+tagEl.addEventListener("change", render);
+minScoreEl.addEventListener("change", render);
+
 el("refresh").addEventListener("click", () => {
   const now = Date.now();
   if (now - lastManualRefresh < REFRESH_COOLDOWN_MS){
@@ -718,14 +1121,12 @@ el("refresh").addEventListener("click", () => {
   loadTicker();
 });
 
-
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     load();
     loadTicker();
   }
 });
-
 
 load();
 loadTicker();

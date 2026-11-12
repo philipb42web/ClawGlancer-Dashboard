@@ -248,7 +248,7 @@
         <div class="hero">
           <h2 class="page">Scoring Engine</h2>
           <p class="sub">
-            Signals-based threat model ranking real-world exploitability over raw CVSS noise.
+            Signals-based threat model ranking real-world exploitability, pre-auth attack vectors, and pre-disclosure telemetry over raw CVSS noise.
           </p>
         </div>
 
@@ -257,16 +257,35 @@
             <h3 class="block-title">Score Components</h3>
             <p><strong>Base CVSS:</strong> <code>CVSS_v3 × 5.0</code> (0 - 50 pts)</p>
             <p><strong>Freshness Boost:</strong> <code>+10 pts</code> for CVEs modified in last 48h.</p>
+            <p><strong>EPSS Exploit Prob:</strong> <code>+25 pts</code> (&ge;50%) / <code>+10 pts</code> (&ge;15%).</p>
           </div>
 
           <div class="block">
             <h3 class="block-title">Killchain Tag Weights</h3>
             <div class="tag-grid">
+              <div class="tag-item"><span class="tag-name">cisa_kev</span></div>
+              <div class="tag-weight">+40</div>
+
               <div class="tag-item"><span class="tag-name">in_the_wild</span></div>
+              <div class="tag-weight">+35</div>
+
+              <div class="tag-item"><span class="tag-name">ransomware</span></div>
+              <div class="tag-weight">+35</div>
+
+              <div class="tag-item"><span class="tag-name">edge_perimeter</span></div>
+              <div class="tag-weight">+35</div>
+
+              <div class="tag-item"><span class="tag-name">ai_infrastructure</span></div>
               <div class="tag-weight">+35</div>
 
               <div class="tag-item"><span class="tag-name">rce</span></div>
               <div class="tag-weight">+30</div>
+
+              <div class="tag-item"><span class="tag-name">pre_auth</span></div>
+              <div class="tag-weight">+25</div>
+
+              <div class="tag-item"><span class="tag-name">weaponized</span></div>
+              <div class="tag-weight">+25</div>
 
               <div class="tag-item"><span class="tag-name">auth_bypass</span></div>
               <div class="tag-weight">+25</div>
@@ -276,6 +295,9 @@
 
               <div class="tag-item"><span class="tag-name">wormable</span></div>
               <div class="tag-weight">+25</div>
+
+              <div class="tag-item"><span class="tag-name">oss_security</span></div>
+              <div class="tag-weight">+20</div>
 
               <div class="tag-item"><span class="tag-name">deserialization</span></div>
               <div class="tag-weight">+20</div>
@@ -310,6 +332,10 @@
               <span>critical_threats.json</span>
               <span>↗</span>
             </a>
+            <a class="feed-link" href="/data/ticker_feed.json" target="_blank">
+              <span>ticker_feed.json</span>
+              <span>↗</span>
+            </a>
             <a class="feed-link" href="/data/delta.json" target="_blank">
               <span>delta.json</span>
               <span>↗</span>
@@ -323,46 +349,39 @@
         <div class="hero">
           <h1 class="page">About Claw Glancer</h1>
           <p class="sub">
-            A high-signal, lightweight vulnerability intelligence dashboard designed for security teams and engineers.
+            An asymmetric, pre-disclosure threat intelligence platform designed to bypass the information degradation curve.
           </p>
         </div>
 
         <div class="content">
           <div class="block">
-            <h2 class="block-title">What It Does</h2>
+            <h2 class="block-title">The Asymmetric Advantage</h2>
             <p>
-              Claw Glancer pulls newly published and modified vulnerability records from NIST's National Vulnerability Database (NVD).
-              Instead of burying security analysts in hundreds of low-impact alerts, it normalizes the data into a strict schema, extracts kill-chain indicators, and computes a composite <strong>Intel Score</strong>.
+              By the time vulnerability reporting reaches mainstream commercial news and polished blogs, its strategic defensive value has degraded significantly. Adversaries automate reconnaissance against edge infrastructure within minutes of public exploit release.
+            </p>
+            <p>
+              Claw Glancer operates on an <strong>upstream intelligence paradigm</strong>: intercepting raw maintainer advisories (Openwall oss-security), tracking confirmed weaponized exploits (Nuclei, Metasploit, PacketStorm), and extracting pre-auth remote attack vectors directly from telemetry.
             </p>
           </div>
 
           <div class="block">
-            <h2 class="block-title">How It Works</h2>
+            <h2 class="block-title">Core Intelligence Pipelines</h2>
             <ul>
-              <li><strong>Scraper & Normalizer:</strong> Ingests NVD CVE 2.0 API data scoped to the recent 72-hour window.</li>
-              <li><strong>Pattern Matching:</strong> Scans summaries and reference advisories for critical exploit patterns (RCE, bypass, active exploitation, PoCs).</li>
-              <li><strong>Signal Extraction:</strong> Deduplicates records, discards low-severity noise (CVSS &lt; 7.0), and produces atomic JSON artifacts.</li>
-              <li><strong>Zero-Server Architecture:</strong> The dashboard runs as a pure static web application hosted on GitHub Pages with automated cron workflows.</li>
+              <li><strong>Pre-Disclosure Vanguard:</strong> Ingests the Openwall <code>oss-security</code> plain-text feed to capture embargo expirations and zero-days days before NVD indexes them.</li>
+              <li><strong>Weaponization & Exploitation Reality:</strong> Correlates against CISA KEV (with active Ransomware Campaign tracking), EPSS exploit probability percentiles, and public exploit repositories.</li>
+              <li><strong>Adversarial AI & MLOps Coverage:</strong> Specialized kill-chain tracking for prompt injection, context window manipulation, unsafe deserialization (e.g. <code>torch.load</code>), and agent execution bypasses.</li>
+              <li><strong>Actionable Analyst Arsenal:</strong> Instant Shodan attack surface pivots and one-click Markdown incident briefs for incident response teams.</li>
+              <li><strong>Zero-Server Architecture:</strong> Runs as a high-performance static client powered by automated pipeline workflows.</li>
             </ul>
           </div>
 
           <div class="block">
             <h2 class="block-title">Design Philosophy</h2>
-            <p>
-              Many vulnerability trackers are cluttered with bloated dashboards and opaque metrics. Claw Glancer prioritizes:
-            </p>
             <ul>
-              <li><strong>Speed:</strong> Instant client-side filtering by score, tags, vendor, and keywords.</li>
-              <li><strong>Explainability:</strong> Every score is transparently backed by explicit reasons (e.g. <code>rce+30</code>, <code>in_the_wild+35</code>).</li>
-              <li><strong>Minimal Attack Surface:</strong> Static client delivery without complex backend servers or database maintenance.</li>
+              <li><strong>Speed:</strong> Instant client-side filtering by tactical presets (War Room, Pre-Auth, AI Infra, Ransomware).</li>
+              <li><strong>Explainability:</strong> Hover over any threat score to see its exact mathematical breakdown.</li>
+              <li><strong>Hostile Brevity:</strong> Technical, unambiguous indicators replacing corporate PR summaries.</li>
             </ul>
-          </div>
-
-          <div class="block">
-            <h2 class="block-title">Roadmap</h2>
-            <p>
-              Future planned upgrades include CISA KEV cross-referencing, EPSS (Exploit Prediction Scoring System) integration, and RSS / JSON feeds for direct SIEM ingestion.
-            </p>
           </div>
         </div>
       </main>
