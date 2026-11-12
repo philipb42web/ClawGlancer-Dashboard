@@ -237,21 +237,6 @@ button:hover{
   box-shadow: 0 0 12px rgba(0,255,140,.40);
 }
 
-.chip-war {
-  border-color: rgba(255, 51, 85, 0.45);
-  color: #ff5577;
-}
-.chip-war:hover {
-  background: rgba(255, 51, 85, 0.15);
-  border-color: #ff3355;
-}
-.chip-war.active {
-  background: #ff3355;
-  color: #fff;
-  border-color: #ff3355;
-  box-shadow: 0 0 16px rgba(255, 51, 85, 0.60);
-}
-
 .chip-kev {
   border-color: rgba(255, 77, 109, 0.45);
   color: #ff4d6d;
@@ -321,11 +306,22 @@ thead th{
   padding:12px 14px;
   color: rgba(200,255,230,.88);
   border-bottom:1px solid rgba(0,255,140,.16);
-  background: rgba(0,0,0,.28);
+  background: #07130e;
   position:sticky;
-  top:38px;
+  top:0;
   backdrop-filter: blur(10px);
   z-index: 10;
+}
+
+footer {
+  margin-top: 32px;
+  padding: 20px 0 12px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid rgba(0, 255, 140, 0.10);
+  letter-spacing: 0.5px;
 }
 
 tbody td{
@@ -757,7 +753,6 @@ a:hover{ text-decoration:underline; }
     <header>
       <div class="title">
         <h1>Claw 🦞 Glancer</h1>
-        <div class="sub">Asymmetric Pre-Disclosure & Threat Telemetry Vanguard</div>
       </div>
     </header>
 
@@ -782,7 +777,6 @@ a:hover{ text-decoration:underline; }
       <!-- Tactical Quick-Filter Chips -->
       <div class="filter-chips" id="filterChips">
         <button class="chip active" data-filter="all">⚡ ALL</button>
-        <button class="chip chip-war" data-filter="war_room" title="Pre-Auth RCE, Active KEV, or Weaponized Threats">🚨 WAR ROOM</button>
         <button class="chip chip-kev" data-filter="kev" title="CISA Known Exploited Vulnerabilities">🔥 CISA KEV</button>
         <button class="chip chip-preauth" data-filter="pre_auth" title="Unauthenticated Remote Execution">🔓 PRE-AUTH</button>
         <button class="chip chip-weaponized" data-filter="weaponized" title="Verified Public Weaponized Exploit or PoC">💥 WEAPONIZED</button>
@@ -815,6 +809,12 @@ a:hover{ text-decoration:underline; }
         </table>
       </div>
     </section>
+
+    <footer>
+      <div class="footer-content">
+        &copy; 2026 clawglancer | All rights reserved.
+      </div>
+    </footer>
   </div>
 
   <div id="toast" class="toast">Threat Brief copied to clipboard!</div>
@@ -874,10 +874,7 @@ function match(x, q, tag, minScore, chip){
 
   const tags = x.tags || [];
 
-  if (chip === 'war_room') {
-    const isCritical = x.cisa_kev || x.ransomware_campaign || x.pre_auth || x.weaponized || (x.epss && x.epss >= 15);
-    if (!isCritical) return false;
-  } else if (chip === 'kev') {
+  if (chip === 'kev') {
     if (!x.cisa_kev && !tags.includes('cisa_kev')) return false;
   } else if (chip === 'pre_auth') {
     if (!x.pre_auth && !tags.includes('pre_auth')) return false;
