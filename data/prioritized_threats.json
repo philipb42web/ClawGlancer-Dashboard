@@ -2508,6 +2508,71 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-84268",
+    "published": "2026-09-01T16:17:37.563",
+    "last_modified": "2026-11-11T19:17:45.577",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in the SFTP backend in gvfs. When mounting a share and reading a file, a malicious SFTP server can cause read_reply() to process a length that exceeds the size requested by the client. The function does not verify the server-provided length against the allocated buffer size, causing the operation to write past the intended boundaries. This issue allows a malicious server to corrupt adjacent heap memory in the gvfsd-sftp process, resulting in a denial of service as the process aborts upon detecting the heap corruption or potentially allowing arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:73997",
+      "https://access.redhat.com/errata/RHSA-2026:73998",
+      "https://access.redhat.com/errata/RHSA-2026:74370",
+      "https://access.redhat.com/errata/RHSA-2026:85939",
+      "https://access.redhat.com/errata/RHSA-2026:85940",
+      "https://access.redhat.com/errata/RHSA-2026:85941",
+      "https://access.redhat.com/errata/RHSA-2026:85942",
+      "https://access.redhat.com/errata/RHSA-2026:85943",
+      "https://access.redhat.com/errata/RHSA-2026:85944",
+      "https://access.redhat.com/errata/RHSA-2026:85945",
+      "https://access.redhat.com/errata/RHSA-2026:86606",
+      "https://access.redhat.com/errata/RHSA-2026:98513",
+      "https://access.redhat.com/errata/RHSA-2026:98623",
+      "https://access.redhat.com/security/cve/CVE-2026-84268",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2526485",
+      "https://gitlab.gnome.org/GNOME/gvfs/-/issues/862"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 50.4,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: dos",
+          "points": 3
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "dos",
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 112.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "dos+3",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-43233",
     "published": "2026-05-06T12:16:43.417",
     "last_modified": "2026-11-11T20:10:00.273",
@@ -3786,6 +3851,56 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-85197",
+    "published": "2026-09-04T08:17:16.677",
+    "last_modified": "2026-11-11T13:17:28.210",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libsoup. A malicious HTTP/2 server or a Man-in-the-Middle (MITM) attacker can exploit a heap use-after-free vulnerability in the HTTP/2 client implementation. This occurs when a GNOME application uploads a file using HTTP/2, and the server sends a GOAWAY frame while the file body is being read asynchronously. This can lead to memory corruption, potentially resulting in information disclosure or arbitrary code execution.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:68235",
+      "https://access.redhat.com/errata/RHSA-2026:82728",
+      "https://access.redhat.com/errata/RHSA-2026:98560",
+      "https://access.redhat.com/security/cve/CVE-2026-85197",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2528425",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/work_items/552",
+      "https://gitlab.gnome.org/GNOME/libsoup/-/work_items/552"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 28.2,
+    "score_breakdown": {
+      "base_cvss": 38.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 103.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-30530",
     "published": "2026-03-27T16:16:23.567",
     "last_modified": "2026-11-11T23:10:00.263",
@@ -4920,97 +5035,6 @@
       "recently modified (last 48h)",
       "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2017-6320",
-    "published": "2017-07-18T14:29:00.293",
-    "last_modified": "2026-11-12T14:57:33.517",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A remote command injection vulnerability exists in the Barracuda Load Balancer product line (confirmed on v5.4.0.004 (2015-11-26) and v6.0.1.006 (2016-08-19); fixed in 6.1.0.003 (2017-01-17)) in which an authenticated user can execute arbitrary shell commands and gain root privileges. The vulnerability stems from unsanitized data being processed in a system call when the delete_assessment command is issued.",
-    "references": [
-      "https://campus.barracuda.com/product/loadbalanceradc/article/ADC/ReleaseNotes610003/",
-      "https://www.exploit-db.com/exploits/42333/",
-      "https://campus.barracuda.com/product/loadbalanceradc/article/ADC/ReleaseNotes610003/",
-      "https://www.exploit-db.com/exploits/42333/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 11.1,
-    "epss_percentile": 96.0,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "weaponized"
-    ],
-    "intel_score": 97.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-30529",
-    "published": "2026-03-27T16:16:23.447",
-    "last_modified": "2026-11-11T19:10:00.360",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A SQL Injection vulnerability exists in SourceCodester Online Food Ordering System v1.0 in the Actions.php file (specifically the save_user action). The application fails to properly sanitize user input supplied to the \"username\" parameter. This allows an authenticated attacker to inject malicious SQL commands.",
-    "references": [
-      "https://github.com/meifukun/Web-Security-PoCs/blob/main/Online-Food-Ordering-System/SQLi-Actions-saveUser-username.md"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 41.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 97.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   }
 ]
