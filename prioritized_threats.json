@@ -314,67 +314,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-41460",
-    "published": "2026-04-23T15:37:24.540",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SocialEngine versions 7.8.0 and prior contain a SQL injection vulnerability in the /activity/index/get-memberall endpoint where user-supplied input passed via the text parameter is not sanitized before being incorporated into a SQL query. An unauthenticated remote attacker can exploit this vulnerability to read arbitrary data from the database, reset administrator account passwords, and gain unauthorized access to the Packages Manager in the Admin Panel, potentially enabling remote code execution.",
-    "references": [
-      "https://karmainsecurity.com/KIS-2026-08",
-      "https://socialengine.com",
-      "https://www.vulncheck.com/advisories/socialengine-sql-injection-via-activity-index-get-memberall",
-      "http://seclists.org/fulldisclosure/2026/Apr/12",
-      "https://karmainsecurity.com/KIS-2026-08",
-      "https://karmainsecurity.com/pocs/CVE-2026-41460.php"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 1.0,
-    "epss_percentile": 62.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce",
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 157.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-63146",
     "published": "2026-10-13T20:17:30.210",
     "last_modified": "2026-11-13T18:17:43.623",
@@ -429,63 +368,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "sqli+18",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41342",
-    "published": "2026-04-23T22:16:40.640",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.28 contains an authentication bypass vulnerability in the remote onboarding component that persists unauthenticated discovery endpoints without explicit trust confirmation. Attackers can spoof discovery endpoints to redirect onboarding toward malicious gateways and capture gateway credentials or traffic.",
-    "references": [
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-3cw3-5vxw-g2h3",
-      "https://www.vulncheck.com/advisories/openclaw-unauthenticated-discovery-endpoint-credential-exfiltration-via-remote-onboarding"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.1,
-    "epss_percentile": 2.4,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:A/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "edge_perimeter",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 156.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
@@ -662,208 +544,39 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-31431",
-    "published": "2026-04-22T09:16:21.270",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: algif_aead - Revert to operating out-of-place\n\nThis mostly reverts commit 72548b093ee3 except for the copying of\nthe associated data.\n\nThere is no benefit in operating in-place in algif_aead since the\nsource and destination come from different mappings.  Get rid of\nall the complexity added for in-place operation and just copy the\nAD directly.",
-    "references": [
-      "https://git.kernel.org/stable/c/19d43105a97be0810edbda875f2cd03f30dc130c",
-      "https://git.kernel.org/stable/c/3115af9644c342b356f3f07a4dd1c8905cd9a6fc",
-      "https://git.kernel.org/stable/c/893d22e0135fa394db81df88697fba6032747667",
-      "https://git.kernel.org/stable/c/8b88d99341f139e23bdeb1027a2a3ae10d341d82",
-      "https://git.kernel.org/stable/c/961cfa271a918ad4ae452420e7c303149002875b",
-      "https://git.kernel.org/stable/c/a664bf3d603dc3bdcf9ae47cc21e0daec706d7a5",
-      "https://git.kernel.org/stable/c/ce42ee423e58dffa5ec03524054c9d8bfd4f6237",
-      "https://git.kernel.org/stable/c/fafe0fa2995a0f7073c1c358d7d3145bcc9aedd8",
-      "http://www.openwall.com/lists/oss-security/2026/04/29/23",
-      "http://www.openwall.com/lists/oss-security/2026/04/29/25",
-      "http://www.openwall.com/lists/oss-security/2026/04/29/26",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/10",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/11",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/12",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/14",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/15",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/16",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/17",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/18",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/2",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/20",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/5",
-      "http://www.openwall.com/lists/oss-security/2026/04/30/6",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/10",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/12",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/15",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/16",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/17",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/18",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/2",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/22",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/23",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/24",
-      "http://www.openwall.com/lists/oss-security/2026/05/01/3",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/14",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/15",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/16",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/17",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/18",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/19",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/20",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/21",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/23",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/24",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/25",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/4",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/5",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/6",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/7",
-      "http://www.openwall.com/lists/oss-security/2026/05/02/8",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/10",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/12",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/13",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/3",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/4",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/5",
-      "http://www.openwall.com/lists/oss-security/2026/05/03/6",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/1",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/10",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/11",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/12",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/13",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/14",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/2",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/24",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/27",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/28",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/29",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/31",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/8",
-      "http://www.openwall.com/lists/oss-security/2026/05/04/9",
-      "http://www.openwall.com/lists/oss-security/2026/05/06/5",
-      "http://www.openwall.com/lists/oss-security/2026/05/07/12",
-      "http://www.openwall.com/lists/oss-security/2026/05/07/2",
-      "http://www.openwall.com/lists/oss-security/2026/05/08/13",
-      "http://www.openwall.com/lists/oss-security/2026/05/18/3",
-      "https://copy.fail",
-      "https://websec.net/blog/cve-2026-31431-linux-algifaead-page-cache-write-to-root-69f38a4ccddd2db1f520f170",
-      "https://www.kb.cert.org/vuls/id/260001",
-      "https://access.redhat.com/errata/RHSA-2026:13565",
-      "https://access.redhat.com/errata/RHSA-2026:13566",
-      "https://access.redhat.com/errata/RHSA-2026:13577",
-      "https://access.redhat.com/errata/RHSA-2026:13578",
-      "https://access.redhat.com/errata/RHSA-2026:13681",
-      "https://access.redhat.com/errata/RHSA-2026:13690",
-      "https://access.redhat.com/errata/RHSA-2026:13727",
-      "https://access.redhat.com/errata/RHSA-2026:13729",
-      "https://access.redhat.com/errata/RHSA-2026:13734",
-      "https://access.redhat.com/errata/RHSA-2026:13811",
-      "https://access.redhat.com/errata/RHSA-2026:13862",
-      "https://access.redhat.com/errata/RHSA-2026:13885",
-      "https://access.redhat.com/errata/RHSA-2026:13887",
-      "https://access.redhat.com/errata/RHSA-2026:13932",
-      "https://access.redhat.com/errata/RHSA-2026:13936",
-      "https://access.redhat.com/errata/RHSA-2026:14097",
-      "https://access.redhat.com/errata/RHSA-2026:14112",
-      "https://access.redhat.com/errata/RHSA-2026:14137",
-      "https://access.redhat.com/errata/RHSA-2026:14165",
-      "https://access.redhat.com/errata/RHSA-2026:14230",
-      "https://access.redhat.com/errata/RHSA-2026:14301",
-      "https://access.redhat.com/errata/RHSA-2026:14339",
-      "https://access.redhat.com/errata/RHSA-2026:14773",
-      "https://access.redhat.com/errata/RHSA-2026:14926",
-      "https://access.redhat.com/errata/RHSA-2026:15087",
-      "https://access.redhat.com/errata/RHSA-2026:15976",
-      "https://access.redhat.com/errata/RHSA-2026:15978",
-      "https://access.redhat.com/errata/RHSA-2026:16018",
-      "https://access.redhat.com/errata/RHSA-2026:16063",
-      "https://access.redhat.com/errata/RHSA-2026:16111",
-      "https://access.redhat.com/errata/RHSA-2026:16208",
-      "https://access.redhat.com/errata/RHSA-2026:16209",
-      "https://access.redhat.com/errata/RHSA-2026:16210",
-      "https://access.redhat.com/errata/RHSA-2026:19074",
-      "https://access.redhat.com/errata/RHSA-2026:19225",
-      "https://access.redhat.com/errata/RHSA-2026:33486",
-      "https://access.redhat.com/security/cve/CVE-2026-31431",
-      "https://access.redhat.com/security/cve/cve-2026-31431#cve-details-mitigation",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2460538",
-      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-082556.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-265688.html",
-      "https://cert-portal.siemens.com/productcert/html/ssa-328642.html",
-      "https://github.com/theori-io/copy-fail-CVE-2026-31431",
-      "https://lore.kernel.org/linux-cve-announce/2026042214-CVE-2026-31431-3d65@gregkh/",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-31431.json",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-31431",
-      "https://xint.io/blog/copy-fail-linux-distributions#the-fix-6"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 98.1,
-    "epss_percentile": 99.9,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        },
-        {
-          "signal": "CISA KEV Active Exploit",
-          "points": 40
-        },
-        {
-          "signal": "High EPSS (98.1%)",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "cisa_kev",
-      "in_the_wild",
-      "weaponized"
-    ],
-    "intel_score": 139.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)",
-      "CISA KEV active exploitation (+40)",
-      "High EPSS exploit prob 98.1% (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-42796",
-    "published": "2026-05-04T18:16:32.520",
+    "cve_id": "CVE-2026-41460",
+    "published": "2026-04-23T15:37:24.540",
     "last_modified": "2026-11-11T23:10:00.263",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Arelle before 2.39.10 contains an unauthenticated remote code execution vulnerability in the /rest/configure REST endpoint that accepts a plugins query parameter and forwards it to the plugin manager without authentication or authorization. Attackers can supply a URL to a malicious Python file through the plugins parameter, causing the Arelle webserver to download and execute the attacker-controlled code within the Arelle process with its privileges.",
+    "summary": "SocialEngine versions 7.8.0 and prior contain a SQL injection vulnerability in the /activity/index/get-memberall endpoint where user-supplied input passed via the text parameter is not sanitized before being incorporated into a SQL query. An unauthenticated remote attacker can exploit this vulnerability to read arbitrary data from the database, reset administrator account passwords, and gain unauthorized access to the Packages Manager in the Admin Panel, potentially enabling remote code execution.",
     "references": [
-      "https://github.com/Arelle/Arelle/pull/2320",
-      "https://github.com/Arelle/Arelle/releases/tag/2.39.10",
-      "https://www.vulncheck.com/advisories/arelle-unauthenticated-rce-via-rest-configure"
+      "https://karmainsecurity.com/KIS-2026-08",
+      "https://socialengine.com",
+      "https://www.vulncheck.com/advisories/socialengine-sql-injection-via-activity-index-get-memberall",
+      "http://seclists.org/fulldisclosure/2026/Apr/12",
+      "https://karmainsecurity.com/KIS-2026-08",
+      "https://karmainsecurity.com/pocs/CVE-2026-41460.php"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 2.7,
-    "epss_percentile": 86.4,
+    "epss": 1.0,
+    "epss_percentile": 62.5,
     "score_breakdown": {
       "base_cvss": 49.0,
-      "freshness": 10,
+      "freshness": 0,
       "components": [
         {
           "signal": "Tag: rce",
           "points": 30
+        },
+        {
+          "signal": "Tag: sqli",
+          "points": 18
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -879,12 +592,69 @@
     "tags": [
       "pre_auth",
       "rce",
+      "sqli",
       "weaponized"
     ],
-    "intel_score": 139.0,
+    "intel_score": 147.0,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30",
+      "sqli+18",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-41342",
+    "published": "2026-04-23T22:16:40.640",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenClaw before 2026.3.28 contains an authentication bypass vulnerability in the remote onboarding component that persists unauthenticated discovery endpoints without explicit trust confirmation. Attackers can spoof discovery endpoints to redirect onboarding toward malicious gateways and capture gateway credentials or traffic.",
+    "references": [
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-3cw3-5vxw-g2h3",
+      "https://www.vulncheck.com/advisories/openclaw-unauthenticated-discovery-endpoint-credential-exfiltration-via-remote-onboarding"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.1,
+    "epss_percentile": 2.4,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:A/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "edge_perimeter",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 146.5,
+    "reasons": [
+      "edge_perimeter+35",
+      "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
@@ -987,214 +757,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41355",
-    "published": "2026-04-23T22:16:42.840",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.28 contains an arbitrary code execution vulnerability in mirror mode that converts untrusted sandbox files into workspace hooks. Attackers with mirror mode access can execute arbitrary code on the host during gateway startup by exploiting enabled workspace hooks.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/c02ee8a3a4cb390b23afdf21317aa8b2096854d1",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-42mx-vp8m-j7qh",
-      "https://www.vulncheck.com/advisories/openshell-arbitrary-code-execution-via-mirror-mode-sandbox-file-conversion"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.1,
-    "epss_percentile": 2.1,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "edge_perimeter",
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 136.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43585",
-    "published": "2026-05-06T20:16:34.473",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.4.15 captures resolved bearer-auth configuration at startup, allowing revoked tokens to remain valid after SecretRef rotation. Gateway HTTP and WebSocket handlers fail to re-resolve authentication per-request, enabling attackers to use rotated-out bearer tokens for unauthorized gateway access.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/acd4e0a32f12e1ad85f3130f63b42443ce90f094",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-xmxx-7p24-h892",
-      "https://www.vulncheck.com/advisories/openclaw-bearer-token-validation-bypass-via-stale-secretref-resolution"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 46.0,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "edge_perimeter",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 135.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43575",
-    "published": "2026-05-06T20:16:33.100",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenClaw versions 2026.2.21 before 2026.4.10 contain an authentication bypass vulnerability in the sandbox noVNC helper route that exposes interactive browser session credentials. Attackers can access the noVNC helper route without bridge authentication to gain unauthorized access to the interactive browser session.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/8dfbf3268bd224b7377d1ecca77a445100746085",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-92jp-89mq-4374",
-      "https://www.vulncheck.com/advisories/openclaw-authentication-bypass-in-sandbox-novnc-helper-route"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 34.9,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 134.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-44109",
-    "published": "2026-05-06T20:16:34.620",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenClaw before 2026.4.15 contains an authentication bypass vulnerability in Feishu webhook and card-action validation that allows unauthenticated requests to reach command dispatch. Missing encryptKey configuration and blank callback tokens fail open instead of rejecting requests, enabling attackers to bypass signature verification and replay protection to execute arbitrary commands.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/c8003f1b33ed2924be5f62131bd28742c5a41aae",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-xh72-v6v9-mwhc",
-      "https://www.vulncheck.com/advisories/openclaw-authentication-bypass-in-feishu-webhook-and-card-action-validation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 54.4,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 134.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
@@ -1790,57 +1352,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-41299",
-    "published": "2026-04-21T00:16:30.517",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.28 contains an authorization bypass vulnerability in the chat.send gateway method where ACP-only provenance fields are gated by self-declared client metadata from WebSocket handshake rather than verified authorization state. Authenticated operator clients can spoof ACP identity labels and inject reserved provenance fields intended only for the ACP bridge by manipulating client metadata during connection.",
-    "references": [
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-6xg4-82hv-cp6f",
-      "https://www.vulncheck.com/advisories/openclaw-client-identity-spoofing-in-chat-send-gateway-provenance-guard"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 10.3,
-    "score_breakdown": {
-      "base_cvss": 35.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "edge_perimeter",
-      "weaponized"
-    ],
-    "intel_score": 130.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124450",
     "published": "2026-11-08T14:18:12.260",
     "last_modified": "2026-11-12T20:18:28.110",
@@ -1893,84 +1404,207 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-33076",
-    "published": "2026-04-24T03:16:10.227",
+    "cve_id": "CVE-2026-31431",
+    "published": "2026-04-22T09:16:21.270",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "Roxy-WI is a web interface for managing Haproxy, Nginx, Apache and Keepalived servers. Prior to version 8.2.6.4, the haproxy_section_save interface presents a vulnerability that could lead to remote code execution due to path traversal and writing into scheduled tasks. Version 8.2.6.4 fixes the issue.",
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\ncrypto: algif_aead - Revert to operating out-of-place\n\nThis mostly reverts commit 72548b093ee3 except for the copying of\nthe associated data.\n\nThere is no benefit in operating in-place in algif_aead since the\nsource and destination come from different mappings.  Get rid of\nall the complexity added for in-place operation and just copy the\nAD directly.",
     "references": [
-      "https://github.com/roxy-wi/roxy-wi/commit/aecc7971959092fa93e93531f1ffcde33524b031",
-      "https://github.com/roxy-wi/roxy-wi/security/advisories/GHSA-mmgm-p9x9-h33j",
-      "https://github.com/roxy-wi/roxy-wi/security/advisories/GHSA-mmgm-p9x9-h33j"
+      "https://git.kernel.org/stable/c/19d43105a97be0810edbda875f2cd03f30dc130c",
+      "https://git.kernel.org/stable/c/3115af9644c342b356f3f07a4dd1c8905cd9a6fc",
+      "https://git.kernel.org/stable/c/893d22e0135fa394db81df88697fba6032747667",
+      "https://git.kernel.org/stable/c/8b88d99341f139e23bdeb1027a2a3ae10d341d82",
+      "https://git.kernel.org/stable/c/961cfa271a918ad4ae452420e7c303149002875b",
+      "https://git.kernel.org/stable/c/a664bf3d603dc3bdcf9ae47cc21e0daec706d7a5",
+      "https://git.kernel.org/stable/c/ce42ee423e58dffa5ec03524054c9d8bfd4f6237",
+      "https://git.kernel.org/stable/c/fafe0fa2995a0f7073c1c358d7d3145bcc9aedd8",
+      "http://www.openwall.com/lists/oss-security/2026/04/29/23",
+      "http://www.openwall.com/lists/oss-security/2026/04/29/25",
+      "http://www.openwall.com/lists/oss-security/2026/04/29/26",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/10",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/11",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/12",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/14",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/15",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/16",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/17",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/18",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/2",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/20",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/5",
+      "http://www.openwall.com/lists/oss-security/2026/04/30/6",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/10",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/12",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/15",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/16",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/17",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/18",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/2",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/22",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/23",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/24",
+      "http://www.openwall.com/lists/oss-security/2026/05/01/3",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/14",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/15",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/16",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/17",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/18",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/19",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/20",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/21",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/23",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/24",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/25",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/4",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/5",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/6",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/7",
+      "http://www.openwall.com/lists/oss-security/2026/05/02/8",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/10",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/12",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/13",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/3",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/4",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/5",
+      "http://www.openwall.com/lists/oss-security/2026/05/03/6",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/1",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/10",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/11",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/12",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/13",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/14",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/2",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/24",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/27",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/28",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/29",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/31",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/8",
+      "http://www.openwall.com/lists/oss-security/2026/05/04/9",
+      "http://www.openwall.com/lists/oss-security/2026/05/06/5",
+      "http://www.openwall.com/lists/oss-security/2026/05/07/12",
+      "http://www.openwall.com/lists/oss-security/2026/05/07/2",
+      "http://www.openwall.com/lists/oss-security/2026/05/08/13",
+      "http://www.openwall.com/lists/oss-security/2026/05/18/3",
+      "https://copy.fail",
+      "https://websec.net/blog/cve-2026-31431-linux-algifaead-page-cache-write-to-root-69f38a4ccddd2db1f520f170",
+      "https://www.kb.cert.org/vuls/id/260001",
+      "https://access.redhat.com/errata/RHSA-2026:13565",
+      "https://access.redhat.com/errata/RHSA-2026:13566",
+      "https://access.redhat.com/errata/RHSA-2026:13577",
+      "https://access.redhat.com/errata/RHSA-2026:13578",
+      "https://access.redhat.com/errata/RHSA-2026:13681",
+      "https://access.redhat.com/errata/RHSA-2026:13690",
+      "https://access.redhat.com/errata/RHSA-2026:13727",
+      "https://access.redhat.com/errata/RHSA-2026:13729",
+      "https://access.redhat.com/errata/RHSA-2026:13734",
+      "https://access.redhat.com/errata/RHSA-2026:13811",
+      "https://access.redhat.com/errata/RHSA-2026:13862",
+      "https://access.redhat.com/errata/RHSA-2026:13885",
+      "https://access.redhat.com/errata/RHSA-2026:13887",
+      "https://access.redhat.com/errata/RHSA-2026:13932",
+      "https://access.redhat.com/errata/RHSA-2026:13936",
+      "https://access.redhat.com/errata/RHSA-2026:14097",
+      "https://access.redhat.com/errata/RHSA-2026:14112",
+      "https://access.redhat.com/errata/RHSA-2026:14137",
+      "https://access.redhat.com/errata/RHSA-2026:14165",
+      "https://access.redhat.com/errata/RHSA-2026:14230",
+      "https://access.redhat.com/errata/RHSA-2026:14301",
+      "https://access.redhat.com/errata/RHSA-2026:14339",
+      "https://access.redhat.com/errata/RHSA-2026:14773",
+      "https://access.redhat.com/errata/RHSA-2026:14926",
+      "https://access.redhat.com/errata/RHSA-2026:15087",
+      "https://access.redhat.com/errata/RHSA-2026:15976",
+      "https://access.redhat.com/errata/RHSA-2026:15978",
+      "https://access.redhat.com/errata/RHSA-2026:16018",
+      "https://access.redhat.com/errata/RHSA-2026:16063",
+      "https://access.redhat.com/errata/RHSA-2026:16111",
+      "https://access.redhat.com/errata/RHSA-2026:16208",
+      "https://access.redhat.com/errata/RHSA-2026:16209",
+      "https://access.redhat.com/errata/RHSA-2026:16210",
+      "https://access.redhat.com/errata/RHSA-2026:19074",
+      "https://access.redhat.com/errata/RHSA-2026:19225",
+      "https://access.redhat.com/errata/RHSA-2026:33486",
+      "https://access.redhat.com/security/cve/CVE-2026-31431",
+      "https://access.redhat.com/security/cve/cve-2026-31431#cve-details-mitigation",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2460538",
+      "https://cert-portal.siemens.com/productcert/html/ssa-019113.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-082556.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-265688.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-328642.html",
+      "https://github.com/theori-io/copy-fail-CVE-2026-31431",
+      "https://lore.kernel.org/linux-cve-announce/2026042214-CVE-2026-31431-3d65@gregkh/",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-31431.json",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-31431",
+      "https://xint.io/blog/copy-fail-linux-distributions#the-fix-6"
     ],
     "source": "NVD",
-    "cisa_kev": false,
+    "cisa_kev": true,
     "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 57.8,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 98.1,
+    "epss_percentile": 99.9,
     "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
+      "base_cvss": 39.0,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
         },
         {
-          "signal": "Tag: path_traversal",
-          "points": 15
+          "signal": "CISA KEV Active Exploit",
+          "points": 40
         },
         {
-          "signal": "Pre-Auth Remote Execution",
+          "signal": "High EPSS (98.1%)",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "path_traversal",
-      "pre_auth",
-      "rce"
+      "cisa_kev",
+      "in_the_wild",
+      "weaponized"
     ],
     "intel_score": 129.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15",
-      "Pre-Auth Remote Execution (+25)"
+      "Weaponized Exploit / Public PoC verified (+25)",
+      "CISA KEV active exploitation (+40)",
+      "High EPSS exploit prob 98.1% (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-43569",
-    "published": "2026-05-05T12:16:20.493",
+    "cve_id": "CVE-2026-42796",
+    "published": "2026-05-04T18:16:32.520",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "OpenClaw before 2026.4.9 contains an authentication bypass vulnerability allowing untrusted workspace plugins to be auto-enabled during non-interactive onboarding when provider auth choices are shadowed. Attackers can exploit this by crafting malicious workspace plugins that are automatically selected and enabled during authentication setup without explicit user consent.",
+    "summary": "Arelle before 2.39.10 contains an unauthenticated remote code execution vulnerability in the /rest/configure REST endpoint that accepts a plugins query parameter and forwards it to the plugin manager without authentication or authorization. Attackers can supply a URL to a malicious Python file through the plugins parameter, causing the Arelle webserver to download and execute the attacker-controlled code within the Arelle process with its privileges.",
     "references": [
-      "https://github.com/openclaw/openclaw/commit/2d97eae53e212ae26f3aebcd6a50ffc6877f770d",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-939r-rj45-g2rj",
-      "https://www.vulncheck.com/advisories/openclaw-untrusted-provider-plugin-auto-enablement-via-workspace-provider-auth"
+      "https://github.com/Arelle/Arelle/pull/2320",
+      "https://github.com/Arelle/Arelle/releases/tag/2.39.10",
+      "https://www.vulncheck.com/advisories/arelle-unauthenticated-rce-via-rest-configure"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 32.1,
+    "epss": 2.7,
+    "epss_percentile": 86.4,
     "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
+      "base_cvss": 49.0,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: auth_bypass",
-          "points": 25
+          "signal": "Tag: rce",
+          "points": 30
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -1982,16 +1616,15 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "auth_bypass",
       "pre_auth",
+      "rce",
       "weaponized"
     ],
     "intel_score": 129.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
+      "rce+30",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
@@ -2160,6 +1793,57 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-41355",
+    "published": "2026-04-23T22:16:42.840",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenClaw before 2026.3.28 contains an arbitrary code execution vulnerability in mirror mode that converts untrusted sandbox files into workspace hooks. Attackers with mirror mode access can execute arbitrary code on the host during gateway startup by exploiting enabled workspace hooks.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/c02ee8a3a4cb390b23afdf21317aa8b2096854d1",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-42mx-vp8m-j7qh",
+      "https://www.vulncheck.com/advisories/openshell-arbitrary-code-execution-via-mirror-mode-sandbox-file-conversion"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.1,
+    "epss_percentile": 2.1,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 126.5,
+    "reasons": [
+      "edge_perimeter+35",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-53995",
     "published": "2026-10-19T22:17:11.013",
     "last_modified": "2026-11-13T18:17:43.240",
@@ -2214,6 +1898,57 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-43585",
+    "published": "2026-05-06T20:16:34.473",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenClaw before 2026.4.15 captures resolved bearer-auth configuration at startup, allowing revoked tokens to remain valid after SecretRef rotation. Gateway HTTP and WebSocket handlers fail to re-resolve authentication per-request, enabling attackers to use rotated-out bearer tokens for unauthorized gateway access.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/acd4e0a32f12e1ad85f3130f63b42443ce90f094",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-xmxx-7p24-h892",
+      "https://www.vulncheck.com/advisories/openclaw-bearer-token-validation-bypass-via-stale-secretref-resolution"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 46.0,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 125.5,
+    "reasons": [
+      "edge_perimeter+35",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-122120",
     "published": "2026-11-04T19:17:39.560",
     "last_modified": "2026-11-12T19:11:21.503",
@@ -2261,59 +1996,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "file_write+15",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-6987",
-    "published": "2026-04-25T17:16:33.870",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was detected in PicoClaw up to 0.2.4. Impacted is an unknown function of the file /api/gateway/restart of the component Web Launcher Management Plane. Performing a manipulation results in command injection. It is possible to initiate the attack remotely. The project was informed of the problem early through an issue report but has not responded yet.",
-    "references": [
-      "https://github.com/sipeed/picoclaw/issues/2307",
-      "https://vuldb.com/submit/796336",
-      "https://vuldb.com/vuln/359530",
-      "https://vuldb.com/vuln/359530/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 3.4,
-    "epss_percentile": 89.2,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [
-      "command_injection",
-      "edge_perimeter",
-      "pre_auth"
-    ],
-    "intel_score": 124.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "command_injection+18",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -2370,6 +2052,108 @@
       "edge_perimeter+35",
       "ssrf+18",
       "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43575",
+    "published": "2026-05-06T20:16:33.100",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "OpenClaw versions 2026.2.21 before 2026.4.10 contain an authentication bypass vulnerability in the sandbox noVNC helper route that exposes interactive browser session credentials. Attackers can access the noVNC helper route without bridge authentication to gain unauthorized access to the interactive browser session.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/8dfbf3268bd224b7377d1ecca77a445100746085",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-92jp-89mq-4374",
+      "https://www.vulncheck.com/advisories/openclaw-authentication-bypass-in-sandbox-novnc-helper-route"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 34.9,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 124.0,
+    "reasons": [
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-44109",
+    "published": "2026-05-06T20:16:34.620",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "OpenClaw before 2026.4.15 contains an authentication bypass vulnerability in Feishu webhook and card-action validation that allows unauthenticated requests to reach command dispatch. Missing encryptKey configuration and blank callback tokens fail open instead of rejecting requests, enabling attackers to bypass signature verification and replay protection to execute arbitrary commands.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/c8003f1b33ed2924be5f62131bd28742c5a41aae",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-xh72-v6v9-mwhc",
+      "https://www.vulncheck.com/advisories/openclaw-authentication-bypass-in-feishu-webhook-and-card-action-validation"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.7,
+    "epss_percentile": 54.4,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 124.0,
+    "reasons": [
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -2584,83 +2368,86 @@
     ]
   },
   {
-    "cve_id": "CVE-2025-60679",
-    "published": "2025-11-13T20:15:51.420",
+    "cve_id": "CVE-2026-41299",
+    "published": "2026-04-21T00:16:30.517",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.8,
+    "cvss_v3": 7.1,
     "severity": "HIGH",
     "affected": [],
-    "summary": "A stack buffer overflow vulnerability exists in the D-Link DIR-816A2 router firmware DIR-816A2_FWv1.10CNB05_R1B011D88210.img in the upload.cgi module, which handles firmware version information. The vulnerability occurs because /proc/version is read into a 512-byte buffer and then concatenated using sprintf() into another 512-byte buffer containing a 29-byte constant. Input exceeding 481 bytes triggers a stack buffer overflow, allowing an attacker who can control /proc/version content to potentially execute arbitrary code on the device.",
+    "summary": "OpenClaw before 2026.3.28 contains an authorization bypass vulnerability in the chat.send gateway method where ACP-only provenance fields are gated by self-declared client metadata from WebSocket handshake rather than verified authorization state. Authenticated operator clients can spoof ACP identity labels and inject reserved provenance fields intended only for the ACP bridge by manipulating client metadata during connection.",
     "references": [
-      "https://github.com/yifan20020708/SGTaint-0-day/blob/main/DLink/DLink-DIR-816/CVE-2025-60679.md",
-      "https://www.dlink.com/en",
-      "https://www.dlink.com/en/security-bulletin/"
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-6xg4-82hv-cp6f",
+      "https://www.vulncheck.com/advisories/openclaw-client-identity-spoofing-in-chat-send-gateway-provenance-guard"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 54.2,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 10.3,
     "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
+      "base_cvss": 35.5,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: edge_perimeter",
+          "points": 35
         },
         {
-          "signal": "Tag: in_the_wild",
-          "points": 35
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N",
     "tags": [
-      "in_the_wild",
-      "rce"
+      "auth_bypass",
+      "edge_perimeter",
+      "weaponized"
     ],
-    "intel_score": 119.0,
+    "intel_score": 120.5,
     "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "in_the_wild+35"
+      "edge_perimeter+35",
+      "auth_bypass+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-31657",
-    "published": "2026-04-24T15:16:45.227",
+    "cve_id": "CVE-2026-33076",
+    "published": "2026-04-24T03:16:10.227",
     "last_modified": "2026-11-11T23:10:00.263",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nbatman-adv: hold claim backbone gateways by reference\n\nbatadv_bla_add_claim() can replace claim->backbone_gw and drop the old\ngateway's last reference while readers still follow the pointer.\n\nThe netlink claim dump path dereferences claim->backbone_gw->orig and\ntakes claim->backbone_gw->crc_lock without pinning the underlying\nbackbone gateway. batadv_bla_check_claim() still has the same naked\npointer access pattern.\n\nReuse batadv_bla_claim_get_backbone_gw() in both readers so they operate\non a stable gateway reference until the read-side work is complete.\nThis keeps the dump and claim-check paths aligned with the lifetime\nrules introduced for the other BLA claim readers.",
+    "summary": "Roxy-WI is a web interface for managing Haproxy, Nginx, Apache and Keepalived servers. Prior to version 8.2.6.4, the haproxy_section_save interface presents a vulnerability that could lead to remote code execution due to path traversal and writing into scheduled tasks. Version 8.2.6.4 fixes the issue.",
     "references": [
-      "https://git.kernel.org/stable/c/1f2dc36c297d27733f1b380ea644cf15a361bd7b",
-      "https://git.kernel.org/stable/c/2f55b58b5a0bbed192d60c444a45a49cdf1b545f",
-      "https://git.kernel.org/stable/c/4dee4c0688443aaf5bbec74aa203c851d1d53c35",
-      "https://git.kernel.org/stable/c/5202f071b367ffbc8e279fc7a00db14f5e587f52",
-      "https://git.kernel.org/stable/c/69d1ce9c72eca91203ffdb8d08bacd511100aec6",
-      "https://git.kernel.org/stable/c/7962b522222628596ca9ecc8722efc95367aadbd",
-      "https://git.kernel.org/stable/c/82d8701b2c930d0e96b0dbc9115a218d791cb0d2",
-      "https://git.kernel.org/stable/c/f4858832ddef2f39f21e30b7226bbcd3c4b2bc96"
+      "https://github.com/roxy-wi/roxy-wi/commit/aecc7971959092fa93e93531f1ffcde33524b031",
+      "https://github.com/roxy-wi/roxy-wi/security/advisories/GHSA-mmgm-p9x9-h33j",
+      "https://github.com/roxy-wi/roxy-wi/security/advisories/GHSA-mmgm-p9x9-h33j"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 34.7,
+    "epss": 0.8,
+    "epss_percentile": 57.8,
     "score_breakdown": {
       "base_cvss": 49.0,
-      "freshness": 10,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -2670,42 +2457,100 @@
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "edge_perimeter",
-      "pre_auth"
+      "path_traversal",
+      "pre_auth",
+      "rce"
     ],
     "intel_score": 119.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
+      "rce+30",
+      "path_traversal+15",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-41196",
-    "published": "2026-04-23T02:16:17.900",
+    "cve_id": "CVE-2026-43569",
+    "published": "2026-05-05T12:16:20.493",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "Luanti (formerly Minetest) is an open source voxel game-creation platform. Starting in version 5.0.0 and prior to version 5.15.2, a malicious mod can trivially escape the sandboxed Lua environment to execute arbitrary code and gain full filesystem access on the user's device. This applies to the server-side mod, async and mapgen as well as the client-side (CSM) environments. This vulnerability is only exploitable when using LuaJIT. Version 5.15.2 contains a patch. On release versions, one can also patch this issue without recompiling by editing `builtin/init.lua` and adding the line `getfenv = nil` at the end. Note that this will break mods relying on this function (which is not inherently unsafe).",
+    "summary": "OpenClaw before 2026.4.9 contains an authentication bypass vulnerability allowing untrusted workspace plugins to be auto-enabled during non-interactive onboarding when provider auth choices are shadowed. Attackers can exploit this by crafting malicious workspace plugins that are automatically selected and enabled during authentication setup without explicit user consent.",
     "references": [
-      "https://github.com/luanti-org/luanti/commit/8a929dfb97aa08337f49ba1bb96a56d6557dc896",
-      "https://github.com/luanti-org/luanti/security/advisories/GHSA-g596-mf82-w8c3"
+      "https://github.com/openclaw/openclaw/commit/2d97eae53e212ae26f3aebcd6a50ffc6877f770d",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-939r-rj45-g2rj",
+      "https://www.vulncheck.com/advisories/openclaw-untrusted-provider-plugin-auto-enablement-via-workspace-provider-auth"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 32.1,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 119.0,
+    "reasons": [
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-6987",
+    "published": "2026-04-25T17:16:33.870",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was detected in PicoClaw up to 0.2.4. Impacted is an unknown function of the file /api/gateway/restart of the component Web Launcher Management Plane. Performing a manipulation results in command injection. It is possible to initiate the attack remotely. The project was informed of the problem early through an issue report but has not responded yet.",
+    "references": [
+      "https://github.com/sipeed/picoclaw/issues/2307",
+      "https://vuldb.com/submit/796336",
+      "https://vuldb.com/vuln/359530",
+      "https://vuldb.com/vuln/359530/cti"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 31.9,
+    "epss": 3.4,
+    "epss_percentile": 89.2,
     "score_breakdown": {
-      "base_cvss": 50.0,
-      "freshness": 10,
+      "base_cvss": 36.5,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -2713,15 +2558,16 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
     "tags": [
-      "pre_auth",
-      "rce"
+      "command_injection",
+      "edge_perimeter",
+      "pre_auth"
     ],
-    "intel_score": 115.0,
+    "intel_score": 114.5,
     "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
+      "edge_perimeter+35",
+      "command_injection+18",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -2744,148 +2590,6 @@
     "weaponized": false,
     "epss": 1.1,
     "epss_percentile": 64.9,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41349",
-    "published": "2026-04-23T22:16:41.827",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.28 contains an agentic consent bypass vulnerability allowing LLM agents to silently disable execution approval via config.patch parameter. Remote attackers can exploit this to bypass security controls and execute unauthorized operations without user consent.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/76411b2afc4ae721e36c12e0ea24fd23e2fed61e",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-v3qc-wrwx-j3pw",
-      "https://www.vulncheck.com/advisories/openclaw-agentic-consent-bypass-via-config-patch"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 41.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: ai_infrastructure",
-          "points": 35
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "ai_infrastructure",
-      "weaponized"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "ai_infrastructure+35",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-6951",
-    "published": "2026-04-25T06:16:16.453",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Versions of the package simple-git before 3.36.0 are vulnerable to Remote Code Execution (RCE) due to an incomplete fix for [CVE-2022-25912](https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-3112221) that blocks the -c option but not the equivalent --config form. If untrusted input can reach the options argument passed to simple-git, an attacker may still achieve remote code execution by enabling protocol.ext.allow=always and using an ext:: clone source.",
-    "references": [
-      "https://gist.github.com/KKC73/02d1d97f3410756095b501fda0ac8ca6",
-      "https://github.com/steveukx/git-js/commit/89a2294febed5dfe737c4c735d936bb6018746a8",
-      "https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-16300211",
-      "https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-15456078",
-      "https://access.redhat.com/security/cve/CVE-2026-6951",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2461750",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-6951.json",
-      "https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-15456078"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.9,
-    "epss_percentile": 59.6,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-37709",
-    "published": "2026-05-07T18:16:19.013",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Insecure Permissions vulnerability in grokability snipe-it v.8.4.0 and before and fixed after 2026-03-10 commit 676a9958 allows a remote attacker to execute arbitrary code via the app/Http/Controllers/Api/UploadedFilesController.php component",
-    "references": [
-      "https://github.com/grokability/snipe-it/commit/676a9958895a77de340565e7a0b17ae744664904",
-      "https://github.com/grokability/snipe-it/security/advisories/GHSA-xg82-2hrv-hf64"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 49.0,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -3185,142 +2889,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-43941",
-    "published": "2026-05-08T04:16:23.260",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "electerm is an open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client. In versions 3.8.15 and prior, Electerm's terminal hyperlink handler passes any URL clicked in the terminal directly to shell.openExternal without any protocol validation. An attacker who controls terminal output (e.g., via a malicious SSH server, compromised remote host, or malicious plugin rendering terminal content) can thus achieve arbitrary code execution or local file access on the victim's machine, requiring only that the victim clicks a displayed link. At time of publication, there are no publicly available patches.",
-    "references": [
-      "https://github.com/electerm/electerm/security/advisories/GHSA-fwf6-j56g-m97c"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 34.1,
-    "score_breakdown": {
-      "base_cvss": 48.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 113.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43944",
-    "published": "2026-05-08T04:16:24.033",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "electerm is an open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client. From versions 3.0.6 to before 3.8.15, electerm is vulnerable to arbitrary local code execution via deep links, CLI --opts, or crafted shortcuts. Exploit requires clicking a crafted electerm://... link or opening a crafted shortcut/command that launches electerm with attacker-controlled opts. This issue has been patched in version 3.8.15.",
-    "references": [
-      "https://github.com/electerm/electerm/commit/0599e67069b00e376a2e962649aaad6096e63507",
-      "https://github.com/electerm/electerm/commit/8a6a17951e96d715f5a231532bbd8303fe208700",
-      "https://github.com/electerm/electerm/commit/a79e06f4a1f0ac6376c3d2411ef4690fa0377742",
-      "https://github.com/electerm/electerm/releases/tag/v3.8.15",
-      "https://github.com/electerm/electerm/security/advisories/GHSA-mpm8-cx2p-626q"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 30.6,
-    "score_breakdown": {
-      "base_cvss": 48.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 113.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-4997",
-    "published": "2026-09-23T06:16:59.060",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The jet-form-builder-stripe-gateway WordPress plugin before 1.1.0 does not sanitise and escape a payment token before using it in a SQL statement, allowing unauthenticated users to extract arbitrary data from the database, including password hashes.",
-    "references": [
-      "https://wpscan.com/vulnerability/368c38af-66c3-4500-ad50-87ada3abecd1/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 19.0,
-    "score_breakdown": {
-      "base_cvss": 43.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
-    "tags": [
-      "edge_perimeter",
-      "pre_auth"
-    ],
-    "intel_score": 113.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-104269",
     "published": "2026-11-05T16:17:29.377",
     "last_modified": "2026-11-12T22:18:35.610",
@@ -3511,52 +3079,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-41329",
-    "published": "2026-04-21T00:16:31.390",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.31 contains a sandbox bypass vulnerability allowing attackers to escalate privileges via heartbeat context inheritance and senderIsOwner parameter manipulation. Attackers can exploit improper context validation to bypass sandbox restrictions and achieve unauthorized privilege escalation.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/a30214a624946fc5c85c9558a27c1580172374fd",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-g5cg-8x5w-7jpm",
-      "https://www.vulncheck.com/advisories/openclaw-sandbox-bypass-via-heartbeat-context-inheritance-and-senderisowner-escalation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 22.8,
-    "score_breakdown": {
-      "base_cvss": 49.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 109.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124440",
     "published": "2026-11-08T14:18:10.633",
     "last_modified": "2026-11-12T21:30:23.870",
@@ -3602,49 +3124,98 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-41352",
-    "published": "2026-04-23T22:16:42.327",
+    "cve_id": "CVE-2025-60679",
+    "published": "2025-11-13T20:15:51.420",
     "last_modified": "2026-11-11T23:10:00.263",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "OpenClaw before 2026.3.31 contains a remote code execution vulnerability where a device-paired node can bypass the node scope gate authentication mechanism. Attackers with device pairing credentials can execute arbitrary node commands on the host system without proper node pairing validation.",
+    "summary": "A stack buffer overflow vulnerability exists in the D-Link DIR-816A2 router firmware DIR-816A2_FWv1.10CNB05_R1B011D88210.img in the upload.cgi module, which handles firmware version information. The vulnerability occurs because /proc/version is read into a 512-byte buffer and then concatenated using sprintf() into another 512-byte buffer containing a 29-byte constant. Input exceeding 481 bytes triggers a stack buffer overflow, allowing an attacker who can control /proc/version content to potentially execute arbitrary code on the device.",
     "references": [
-      "https://github.com/openclaw/openclaw/commit/3886b65ef21d02808c1a106fa1f9f69e22f71c32",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-xj9w-5r6q-x6v4",
-      "https://www.vulncheck.com/advisories/openclaw-remote-code-execution-via-node-scope-gate-bypass"
+      "https://github.com/yifan20020708/SGTaint-0-day/blob/main/DLink/DLink-DIR-816/CVE-2025-60679.md",
+      "https://www.dlink.com/en",
+      "https://www.dlink.com/en/security-bulletin/"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 46.2,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 54.2,
     "score_breakdown": {
       "base_cvss": 44.0,
-      "freshness": 10,
+      "freshness": 0,
       "components": [
         {
           "signal": "Tag: rce",
           "points": 30
         },
         {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
+          "signal": "Tag: in_the_wild",
+          "points": 35
         }
       ]
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "rce",
-      "weaponized"
+      "in_the_wild",
+      "rce"
     ],
     "intel_score": 109.0,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "in_the_wild+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-31657",
+    "published": "2026-04-24T15:16:45.227",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nbatman-adv: hold claim backbone gateways by reference\n\nbatadv_bla_add_claim() can replace claim->backbone_gw and drop the old\ngateway's last reference while readers still follow the pointer.\n\nThe netlink claim dump path dereferences claim->backbone_gw->orig and\ntakes claim->backbone_gw->crc_lock without pinning the underlying\nbackbone gateway. batadv_bla_check_claim() still has the same naked\npointer access pattern.\n\nReuse batadv_bla_claim_get_backbone_gw() in both readers so they operate\non a stable gateway reference until the read-side work is complete.\nThis keeps the dump and claim-check paths aligned with the lifetime\nrules introduced for the other BLA claim readers.",
+    "references": [
+      "https://git.kernel.org/stable/c/1f2dc36c297d27733f1b380ea644cf15a361bd7b",
+      "https://git.kernel.org/stable/c/2f55b58b5a0bbed192d60c444a45a49cdf1b545f",
+      "https://git.kernel.org/stable/c/4dee4c0688443aaf5bbec74aa203c851d1d53c35",
+      "https://git.kernel.org/stable/c/5202f071b367ffbc8e279fc7a00db14f5e587f52",
+      "https://git.kernel.org/stable/c/69d1ce9c72eca91203ffdb8d08bacd511100aec6",
+      "https://git.kernel.org/stable/c/7962b522222628596ca9ecc8722efc95367aadbd",
+      "https://git.kernel.org/stable/c/82d8701b2c930d0e96b0dbc9115a218d791cb0d2",
+      "https://git.kernel.org/stable/c/f4858832ddef2f39f21e30b7226bbcd3c4b2bc96"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 34.7,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter",
+      "pre_auth"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "edge_perimeter+35",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -3921,58 +3492,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-43533",
-    "published": "2026-05-05T12:16:19.610",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.4.10 contains an arbitrary file read vulnerability in QQBot media tags that allows attackers to reference host-local paths outside the intended media storage boundary. Attackers can craft malicious reply text containing media tags to disclose arbitrary local files through outbound media handling.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/604777e4414cc3b2ff8861f18f4fb04374c702c6",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-66r7-m7xm-v49h",
-      "https://www.vulncheck.com/advisories/openclaw-arbitrary-local-file-read-via-qqbot-media-tags"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 31.4,
-    "score_breakdown": {
-      "base_cvss": 43.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        },
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
-    "tags": [
-      "file_write",
-      "path_traversal",
-      "weaponized"
-    ],
-    "intel_score": 108.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15",
-      "file_write+15",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-92982",
     "published": "2026-10-15T16:18:23.657",
     "last_modified": "2026-11-13T21:17:48.473",
@@ -4018,195 +3537,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43531",
-    "published": "2026-05-05T12:16:19.337",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.4.9 contains an environment variable injection vulnerability allowing malicious workspace .env files to set runtime-control variables. Attackers can inject variables affecting update sources, gateway URLs, ClawHub resolution, and browser executable paths to compromise application behavior.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/dbfcef319618158fa40b31cdac386ea34c392c0c",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-7wv4-cc7p-jhxc",
-      "https://www.vulncheck.com/advisories/openclaw-environment-variable-injection-via-workspace-env-file"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 10.3,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "edge_perimeter",
-      "weaponized"
-    ],
-    "intel_score": 106.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-38751",
-    "published": "2026-05-04T19:16:03.613",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenSTAManager version 2.10 and earlier contains an arbitrary file upload vulnerability in the module update functionality (modules/aggiornamenti/upload_modules.php)",
-    "references": [
-      "https://github.com/devcode-it/openstamanager",
-      "https://github.com/fuutianyii/poc"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 40.7,
-    "score_breakdown": {
-      "base_cvss": 36.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        },
-        {
-          "signal": "Tag: poc",
-          "points": 20
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "file_write",
-      "poc",
-      "weaponized"
-    ],
-    "intel_score": 106.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "file_write+15",
-      "poc+20",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43566",
-    "published": "2026-05-05T12:16:20.040",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenClaw versions 2026.4.7 before 2026.4.14 contain a privilege escalation vulnerability where heartbeat owner downgrade logic skips webhook wake events carrying untrusted content. Attackers can exploit this by sending untrusted webhook wake events to preserve owner-like execution context when the run should have been downgraded.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/31281bc92f55796817a92bc43f722cba1e77ab42",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-g2hm-779g-vm32",
-      "https://www.vulncheck.com/advisories/openclaw-privilege-escalation-via-untrusted-webhook-wake-events"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 36.6,
-    "score_breakdown": {
-      "base_cvss": 45.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 105.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-43578",
-    "published": "2026-05-06T20:16:33.510",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenClaw versions 2026.3.31 before 2026.4.10 contain a privilege escalation vulnerability where heartbeat owner downgrade detection misses local background async exec completion events. Attackers can exploit this by providing untrusted completion content to leave a run in a more privileged context than intended.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/19a2e9ddb5a8a494abcba812bb11f51075026a27",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-g375-h3v6-4873",
-      "https://www.vulncheck.com/advisories/openclaw-privilege-escalation-via-missed-async-exec-completion-events-in-heartbeat-owner-downgrade"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 21.7,
-    "score_breakdown": {
-      "base_cvss": 45.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 105.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -4348,261 +3678,76 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-41228",
-    "published": "2026-04-23T04:16:19.193",
+    "cve_id": "CVE-2026-41196",
+    "published": "2026-04-23T02:16:17.900",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.9,
+    "cvss_v3": 10.0,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Froxlor is open source server administration software. Prior to version 2.3.6, the Froxlor API endpoint `Customers.update` (and `Admins.update`) does not validate the `def_language` parameter against the list of available language files. An authenticated customer can set `def_language` to a path traversal payload (e.g., `../../../../../var/customers/webs/customer1/evil`), which is stored in the database. On subsequent requests, `Language::loadLanguage()` constructs a file path using this value and executes it via `require`, achieving arbitrary PHP code execution as the web server user. Version 2.3.6 fixes the issue.",
+    "summary": "Luanti (formerly Minetest) is an open source voxel game-creation platform. Starting in version 5.0.0 and prior to version 5.15.2, a malicious mod can trivially escape the sandboxed Lua environment to execute arbitrary code and gain full filesystem access on the user's device. This applies to the server-side mod, async and mapgen as well as the client-side (CSM) environments. This vulnerability is only exploitable when using LuaJIT. Version 5.15.2 contains a patch. On release versions, one can also patch this issue without recompiling by editing `builtin/init.lua` and adding the line `getfenv = nil` at the end. Note that this will break mods relying on this function (which is not inherently unsafe).",
     "references": [
-      "https://github.com/froxlor/froxlor/commit/bc5e6dbaa90e6f3573129da640595e8c770e1d0c",
-      "https://github.com/froxlor/froxlor/releases/tag/2.3.6",
-      "https://github.com/froxlor/froxlor/security/advisories/GHSA-w59f-67xm-rxx7",
-      "https://github.com/froxlor/froxlor/security/advisories/GHSA-w59f-67xm-rxx7"
+      "https://github.com/luanti-org/luanti/commit/8a929dfb97aa08337f49ba1bb96a56d6557dc896",
+      "https://github.com/luanti-org/luanti/security/advisories/GHSA-g596-mf82-w8c3"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": false,
+    "pre_auth": true,
     "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 45.1,
-    "score_breakdown": {
-      "base_cvss": 49.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "path_traversal",
-      "rce"
-    ],
-    "intel_score": 104.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "path_traversal+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-5055",
-    "published": "2026-04-11T01:16:18.017",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NoMachine Uncontrolled Search Path Element Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of NoMachine.  An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the NoMachine Device Server. The product loads a library from an unsecured location. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of SYSTEM. Was ZDI-CAN-28494.",
-    "references": [
-      "https://www.zerodayinitiative.com/advisories/ZDI-26-249/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.2,
-    "epss_percentile": 10.5,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41295",
-    "published": "2026-04-21T00:16:29.803",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.4.2 contains an improper trust boundary vulnerability allowing untrusted workspace channel shadows to execute during built-in channel setup and login. Attackers can clone a workspace with a malicious plugin claiming a bundled channel id to achieve unintended in-process code execution before the plugin is explicitly trusted.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/53c29df2a9eb242a70d0ff29f3d1e67c8d6801f0",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-2qrv-rc5x-2g2h",
-      "https://www.vulncheck.com/advisories/openclaw-untrusted-workspace-channel-shadow-code-execution-during-built-in-channel-setup"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.1,
-    "epss_percentile": 2.8,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41303",
-    "published": "2026-04-21T00:16:31.223",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.28 contains an authorization bypass vulnerability in Discord text approval commands that allows non-approvers to resolve pending exec approvals. Attackers can send Discord text commands to bypass the channels.discord.execApprovals.approvers allowlist and approve pending host execution requests.",
-    "references": [
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-98hh-7ghg-x6rq",
-      "https://www.vulncheck.com/advisories/openclaw-authorization-bypass-in-discord-text-approval-commands"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 35.6,
+    "epss_percentile": 31.9,
     "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-41336",
-    "published": "2026-04-23T22:16:39.603",
-    "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenClaw before 2026.3.31 allows workspace .env files to override the OPENCLAW_BUNDLED_HOOKS_DIR environment variable, enabling loading of attacker-controlled hook code. Attackers can replace trusted default-on bundled hooks from untrusted workspaces to execute arbitrary code.",
-    "references": [
-      "https://github.com/openclaw/openclaw/commit/330a9f98cb29c79b1c16a2117e03d6276a0d6289",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-3qpv-xf3v-mm45",
-      "https://www.vulncheck.com/advisories/openclaw-arbitrary-hook-code-execution-via-openclaw-bundled-hooks-dir-environment-variable-override"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.1,
-    "epss_percentile": 2.9,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
+      "base_cvss": 50.0,
+      "freshness": 0,
       "components": [
         {
           "signal": "Tag: rce",
           "points": 30
         },
         {
-          "signal": "Verified Weaponized Exploit",
+          "signal": "Pre-Auth Remote Execution",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
     "tags": [
-      "rce",
-      "weaponized"
+      "pre_auth",
+      "rce"
     ],
-    "intel_score": 104.0,
+    "intel_score": 105.0,
     "reasons": [
-      "recently modified (last 48h)",
       "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-44110",
-    "published": "2026-05-06T20:16:34.760",
+    "cve_id": "CVE-2026-41349",
+    "published": "2026-04-23T22:16:41.827",
     "last_modified": "2026-11-11T23:10:00.263",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "OpenClaw before 2026.4.15 contains an authorization bypass vulnerability in Matrix room control-command authorization that trusts DM pairing-store entries. Attackers with DM-paired sender IDs can execute room control commands without being in configured allowlists by posting in bot rooms, potentially enabling privileged OpenClaw behavior.",
+    "summary": "OpenClaw before 2026.3.28 contains an agentic consent bypass vulnerability allowing LLM agents to silently disable execution approval via config.patch parameter. Remote attackers can exploit this to bypass security controls and execute unauthorized operations without user consent.",
     "references": [
-      "https://github.com/openclaw/openclaw/commit/2bfd808a83116bd888e3e2633a61473fa2ed81b6",
-      "https://github.com/openclaw/openclaw/commit/f8705f512b09043df02b5da372c33374734bd921",
-      "https://github.com/openclaw/openclaw/security/advisories/GHSA-2gvc-4f3c-2855",
-      "https://www.vulncheck.com/advisories/openclaw-authorization-bypass-in-matrix-room-control-commands-via-dm-pairing-store"
+      "https://github.com/openclaw/openclaw/commit/76411b2afc4ae721e36c12e0ea24fd23e2fed61e",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-v3qc-wrwx-j3pw",
+      "https://www.vulncheck.com/advisories/openclaw-agentic-consent-bypass-via-config-patch"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 21.7,
+    "epss": 0.5,
+    "epss_percentile": 41.5,
     "score_breakdown": {
       "base_cvss": 44.0,
-      "freshness": 10,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: auth_bypass",
-          "points": 25
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
         },
         {
           "signal": "Verified Weaponized Exploit",
@@ -4612,14 +3757,107 @@
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "auth_bypass",
+      "ai_infrastructure",
       "weaponized"
     ],
     "intel_score": 104.0,
     "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
+      "ai_infrastructure+35",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-6951",
+    "published": "2026-04-25T06:16:16.453",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Versions of the package simple-git before 3.36.0 are vulnerable to Remote Code Execution (RCE) due to an incomplete fix for [CVE-2022-25912](https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-3112221) that blocks the -c option but not the equivalent --config form. If untrusted input can reach the options argument passed to simple-git, an attacker may still achieve remote code execution by enabling protocol.ext.allow=always and using an ext:: clone source.",
+    "references": [
+      "https://gist.github.com/KKC73/02d1d97f3410756095b501fda0ac8ca6",
+      "https://github.com/steveukx/git-js/commit/89a2294febed5dfe737c4c735d936bb6018746a8",
+      "https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-16300211",
+      "https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-15456078",
+      "https://access.redhat.com/security/cve/CVE-2026-6951",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2461750",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-6951.json",
+      "https://security.snyk.io/vuln/SNYK-JS-SIMPLEGIT-15456078"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.9,
+    "epss_percentile": 59.6,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-37709",
+    "published": "2026-05-07T18:16:19.013",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Insecure Permissions vulnerability in grokability snipe-it v.8.4.0 and before and fixed after 2026-03-10 commit 676a9958 allows a remote attacker to execute arbitrary code via the app/Http/Controllers/Api/UploadedFilesController.php component",
+    "references": [
+      "https://github.com/grokability/snipe-it/commit/676a9958895a77de340565e7a0b17ae744664904",
+      "https://github.com/grokability/snipe-it/security/advisories/GHSA-xg82-2hrv-hf64"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 49.0,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -5001,6 +4239,139 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-43941",
+    "published": "2026-05-08T04:16:23.260",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "electerm is an open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client. In versions 3.8.15 and prior, Electerm's terminal hyperlink handler passes any URL clicked in the terminal directly to shell.openExternal without any protocol validation. An attacker who controls terminal output (e.g., via a malicious SSH server, compromised remote host, or malicious plugin rendering terminal content) can thus achieve arbitrary code execution or local file access on the victim's machine, requiring only that the victim clicks a displayed link. At time of publication, there are no publicly available patches.",
+    "references": [
+      "https://github.com/electerm/electerm/security/advisories/GHSA-fwf6-j56g-m97c"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 34.1,
+    "score_breakdown": {
+      "base_cvss": 48.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 103.0,
+    "reasons": [
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43944",
+    "published": "2026-05-08T04:16:24.033",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "electerm is an open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client. From versions 3.0.6 to before 3.8.15, electerm is vulnerable to arbitrary local code execution via deep links, CLI --opts, or crafted shortcuts. Exploit requires clicking a crafted electerm://... link or opening a crafted shortcut/command that launches electerm with attacker-controlled opts. This issue has been patched in version 3.8.15.",
+    "references": [
+      "https://github.com/electerm/electerm/commit/0599e67069b00e376a2e962649aaad6096e63507",
+      "https://github.com/electerm/electerm/commit/8a6a17951e96d715f5a231532bbd8303fe208700",
+      "https://github.com/electerm/electerm/commit/a79e06f4a1f0ac6376c3d2411ef4690fa0377742",
+      "https://github.com/electerm/electerm/releases/tag/v3.8.15",
+      "https://github.com/electerm/electerm/security/advisories/GHSA-mpm8-cx2p-626q"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 30.6,
+    "score_breakdown": {
+      "base_cvss": 48.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 103.0,
+    "reasons": [
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2022-4997",
+    "published": "2026-09-23T06:16:59.060",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The jet-form-builder-stripe-gateway WordPress plugin before 1.1.0 does not sanitise and escape a payment token before using it in a SQL statement, allowing unauthenticated users to extract arbitrary data from the database, including password hashes.",
+    "references": [
+      "https://wpscan.com/vulnerability/368c38af-66c3-4500-ad50-87ada3abecd1/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 19.0,
+    "score_breakdown": {
+      "base_cvss": 43.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+    "tags": [
+      "edge_perimeter",
+      "pre_auth"
+    ],
+    "intel_score": 103.0,
+    "reasons": [
+      "edge_perimeter+35",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2022-30267",
     "published": "2026-11-03T23:17:21.860",
     "last_modified": "2026-11-12T22:09:39.233",
@@ -5046,29 +4417,494 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-30530",
-    "published": "2026-03-27T16:16:23.567",
+    "cve_id": "CVE-2026-123033",
+    "published": "2026-11-05T07:17:26.207",
+    "last_modified": "2026-11-12T22:09:39.233",
+    "cvss_v3": 8.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Authentication bypass in the HA heartbeat origin check in middlewared in TrueNAS SCALE before 25.10.8 (and in release trains before their respective fixes) allows an attacker on the same network segment to achieve unauthenticated full-administrator API access and execute commands as root. middlewared registers the HA peer-authentication hook (ha_permission) unconditionally, with no failover-licence or heartbeat-interface check. An unauthenticated connection whose TCP peer address is a hardcoded HA heartbeat address (169.254.10.1 or 169.254.10.2) and whose peer port is <= 1024 is granted a node credential that is authorized for every API method and treated as full administrator. Both conditions are properties of the attacker's own socket, and thus an attacker on the same layer-2 segment satisfies them without forging anything. The hook is present on non-HA, unlicensed, single-node Community Edition installations. The fix additionally requires that the connection terminate on the HA heartbeat listener (a local address/port the attacker cannot control).",
+    "references": [
+      "https://security.truenas.com/scale/impact-statements/ha-node-auth-bypass/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 38.9,
+    "score_breakdown": {
+      "base_cvss": 41.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth"
+    ],
+    "intel_score": 101.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-123998",
+    "published": "2026-11-06T19:17:45.427",
+    "last_modified": "2026-11-12T21:30:23.870",
+    "cvss_v3": 8.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Hisense VIDAA Smart TV firmware V0000.01.00a.P0220 contains an authentication bypass vulnerability in its remote-control MQTT broker on TCP port 36669, which accepts publicly documented default credentials and an ineffective 4-digit pairing PIN with no rate limiting or lockout, allowing a brute force of the entire code space in about five seconds, while some actions require no pairing at all. A LAN-adjacent attacker can exploit this to inject key events, change volume, switch input sources, enumerate inputs, launch arbitrary installed applications, and monitor pairing activity, posing a significant risk in hotel deployments where untrusted LAN access is common.",
+    "references": [
+      "https://github.com/yehia-mamdouh/Hisense-Smart-TV-Security-Research",
+      "https://www.vulncheck.com/advisories/hisense-vidaa-smart-tv-mqtt-broker-authentication-bypass"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 14.0,
+    "score_breakdown": {
+      "base_cvss": 41.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "weaponized"
+    ],
+    "intel_score": 101.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-124488",
+    "published": "2026-11-08T14:18:18.370",
+    "last_modified": "2026-11-13T04:17:41.807",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenEMR before 8.3.0 contains an authorization bypass vulnerability that allows authenticated clinicians lacking high-sensitivity permission to read and modify encounter-bound forms via load_form.php. Attackers can request the Clinical Notes or Care Plan direct loader to obtain restricted content and a CSRF token, then submit save.php to tamper with clinical records.",
+    "references": [
+      "https://github.com/openemr/openemr/security/advisories/GHSA-v58f-jcq4-pc4w",
+      "https://www.vulncheck.com/advisories/openemr-before-8.3.0-authorization-bypass-via-load-form-php-high-sensitivity-encounters",
+      "https://github.com/openemr/openemr/security/advisories/GHSA-v58f-jcq4-pc4w"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 12.8,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "weaponized"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-70640",
+    "published": "2026-08-06T22:18:28.927",
+    "last_modified": "2026-11-13T22:17:25.807",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "llama.cpp builds b1886 through b7445 contain a race condition use-after-free vulnerability in the LLaMA-Android JNI wrapper where bench_1model() and free_1context() lack synchronization, allowing Thread A to operate on freed memory while Thread B concurrently frees the llama_context. Attackers can exploit this by performing heap spray with attacker-controlled data containing a fake vtable to hijack the vtable pointer at offset +0x30, causing llama_batch_allocr::clear() to dereference arbitrary memory and achieve remote code execution.",
+    "references": [
+      "https://github.com/Vladimir-tokarev-cyera/llama-cpp-security-patches",
+      "https://github.com/ggml-org/llama.cpp/commit/5c0d18881e0e9794c96b2602736b758bac9d9388",
+      "https://github.com/ggml-org/llama.cpp/releases/tag/b7446",
+      "https://www.vulncheck.com/advisories/llama-cpp-b1886-b7445-race-condition-use-after-free-via-llama-android-cpp",
+      "https://www.cyera.com/research/breaking-local-ai-runtimes-10-vulnerabilities-in-the-engine-behind-your-open-source-models",
+      "https://www.youtube.com/watch?v=_FKX5hDwgVE&t=1079s"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 15.2,
+    "score_breakdown": {
+      "base_cvss": 35.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 100.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125213",
+    "published": "2026-11-09T19:16:58.250",
+    "last_modified": "2026-11-14T02:16:49.687",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "FFmpeg through 9.0.2 contains a heap buffer overflow vulnerability in the PSD decoder in libavcodec/psd.c that allows attackers to corrupt heap memory on 32-bit builds by supplying a crafted PSD image. Attackers can choose dimensions and channel counts whose product exceeds 4 GB, truncating the av_malloc allocation size so decode_rle() writes attacker-controlled data past the buffer, causing crashes or possible code execution.",
+    "references": [
+      "https://code.ffmpeg.org/FFmpeg/FFmpeg/pulls/25702",
+      "https://github.com/FFmpeg/FFmpeg",
+      "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavcodec/psd.c#L450",
+      "https://github.com/FFmpeg/FFmpeg/commit/aa4b80b54ee8645b5a77fe835ab2bbae1c9c465c",
+      "https://www.vulncheck.com/advisories/ffmpeg-through-9.0.2-heap-buffer-overflow-via-psd-decoder-rle-path"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 4.3,
+    "score_breakdown": {
+      "base_cvss": 35.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 100.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-41329",
+    "published": "2026-04-21T00:16:31.390",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 9.8,
+    "cvss_v3": 9.9,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "A SQL Injection vulnerability exists in SourceCodester Online Food Ordering System v1.0 in the Actions.php file (specifically the save_customer action). The application fails to properly sanitize user input supplied to the \"username\" parameter. This allows an attacker to inject malicious SQL commands.",
+    "summary": "OpenClaw before 2026.3.31 contains a sandbox bypass vulnerability allowing attackers to escalate privileges via heartbeat context inheritance and senderIsOwner parameter manipulation. Attackers can exploit improper context validation to bypass sandbox restrictions and achieve unauthorized privilege escalation.",
     "references": [
-      "https://github.com/meifukun/Web-Security-PoCs/blob/main/Online-Food-Ordering-System/SQLi-Actions-saveCustomer-username.md"
+      "https://github.com/openclaw/openclaw/commit/a30214a624946fc5c85c9558a27c1580172374fd",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-g5cg-8x5w-7jpm",
+      "https://www.vulncheck.com/advisories/openclaw-sandbox-bypass-via-heartbeat-context-inheritance-and-senderisowner-escalation"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 22.8,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "priv_esc",
+      "weaponized"
+    ],
+    "intel_score": 99.5,
+    "reasons": [
+      "priv_esc+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-41352",
+    "published": "2026-04-23T22:16:42.327",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenClaw before 2026.3.31 contains a remote code execution vulnerability where a device-paired node can bypass the node scope gate authentication mechanism. Attackers with device pairing credentials can execute arbitrary node commands on the host system without proper node pairing validation.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/3886b65ef21d02808c1a106fa1f9f69e22f71c32",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-xj9w-5r6q-x6v4",
+      "https://www.vulncheck.com/advisories/openclaw-remote-code-execution-via-node-scope-gate-bypass"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 46.2,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 99.0,
+    "reasons": [
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43533",
+    "published": "2026-05-05T12:16:19.610",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 8.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenClaw before 2026.4.10 contains an arbitrary file read vulnerability in QQBot media tags that allows attackers to reference host-local paths outside the intended media storage boundary. Attackers can craft malicious reply text containing media tags to disclose arbitrary local files through outbound media handling.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/604777e4414cc3b2ff8861f18f4fb04374c702c6",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-66r7-m7xm-v49h",
+      "https://www.vulncheck.com/advisories/openclaw-arbitrary-local-file-read-via-qqbot-media-tags"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 43.8,
+    "epss": 0.4,
+    "epss_percentile": 31.4,
     "score_breakdown": {
-      "base_cvss": 49.0,
+      "base_cvss": 43.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Tag: file_write",
+          "points": 15
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+    "tags": [
+      "file_write",
+      "path_traversal",
+      "weaponized"
+    ],
+    "intel_score": 98.0,
+    "reasons": [
+      "path_traversal+15",
+      "file_write+15",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-10859",
+    "published": "2026-11-04T21:17:48.103",
+    "last_modified": "2026-11-12T21:31:32.600",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "IBM MQ 9.2.0.0 through 9.2.0.44 LTS, 9.3.0.0 through 9.3.0.42 LTS, 9.4.0.0 through 9.4.0.26 LTS, 9.4.0.0 through 9.4.5.1 CD, and 10.0.0.0 through 10.0.0.5 LTS and CD could allow an authenticated attacker to execute arbitrary code on consumer applications due to insecure deserialization of ObjectMessage payloads.",
+    "references": [
+      "https://www.ibm.com/support/pages/node/7294664"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 31.9,
+    "score_breakdown": {
+      "base_cvss": 37.5,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: sqli",
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 97.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-124429",
+    "published": "2026-11-08T14:18:08.833",
+    "last_modified": "2026-11-13T04:17:39.467",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Craft CMS from 5.0.0 before 5.11.2 contains a privilege escalation vulnerability that allows unauthenticated public registrants to reclaim deactivated non-admin accounts while retaining their direct permissions. Attackers can register using a deactivated account, set a new password, and inherit permissions stored in userpermissions_users, enabling privileged account takeover when email verification is disabled.",
+    "references": [
+      "https://github.com/craftcms/cms/security/advisories/GHSA-v25r-wr32-jfg7",
+      "https://www.vulncheck.com/advisories/craft-cms-5.0.0-before-5.11.2-privilege-escalation-via-public-registration"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 22.8,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "priv_esc",
+      "weaponized"
+    ],
+    "intel_score": 97.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2017-6320",
+    "published": "2017-07-18T14:29:00.293",
+    "last_modified": "2026-11-12T14:57:33.517",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A remote command injection vulnerability exists in the Barracuda Load Balancer product line (confirmed on v5.4.0.004 (2015-11-26) and v6.0.1.006 (2016-08-19); fixed in 6.1.0.003 (2017-01-17)) in which an authenticated user can execute arbitrary shell commands and gain root privileges. The vulnerability stems from unsanitized data being processed in a system call when the delete_assessment command is issued.",
+    "references": [
+      "https://campus.barracuda.com/product/loadbalanceradc/article/ADC/ReleaseNotes610003/",
+      "https://www.exploit-db.com/exploits/42333/",
+      "https://campus.barracuda.com/product/loadbalanceradc/article/ADC/ReleaseNotes610003/",
+      "https://www.exploit-db.com/exploits/42333/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 11.1,
+    "epss_percentile": 96.0,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: command_injection",
           "points": 18
         },
         {
@@ -5077,60 +4913,201 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "sqli",
+      "command_injection",
       "weaponized"
     ],
-    "intel_score": 102.0,
+    "intel_score": 97.0,
     "reasons": [
       "recently modified (last 48h)",
-      "sqli+18",
+      "command_injection+18",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-29090",
-    "published": "2026-05-06T18:16:02.953",
+    "cve_id": "CVE-2026-43531",
+    "published": "2026-05-05T12:16:19.337",
     "last_modified": "2026-11-11T23:10:00.263",
-    "cvss_v3": 8.8,
+    "cvss_v3": 7.3,
     "severity": "HIGH",
     "affected": [],
-    "summary": "### Summary\n\nA SQL injection vulnerability exists in Rucio versions 1.30.0 and later before 35.8.5, 38.5.5, 39.4.2, and 40.1.1, in `FilterEngine.create_postgres_query()`. This allows any authenticated Rucio user to execute arbitrary SQL against the PostgreSQL metadata database through the DID search endpoint (`GET /dids/<scope>/dids/search`). When the `postgres_meta` metadata plugin is configured, attacker-controlled filter keys and values are interpolated directly into raw SQL strings via Python `.format()`, then passed to `psycopg3`'s `sql.SQL()` which treats the string as trusted SQL syntax. \n\nDepending on the database privileges assigned to the service account, exploitation can expose sensitive tables, modify or delete metadata, access server-side files, or achieve code execution through PostgreSQL features such as COPY ... FROM PROGRAM. This issue affects deployments that explicitly use the postgres_meta metadata plugin. This vulnerability has been fixed in versions 35.8.5, 38.5.5, 39.4.2, and 40.1.1.",
+    "summary": "OpenClaw before 2026.4.9 contains an environment variable injection vulnerability allowing malicious workspace .env files to set runtime-control variables. Attackers can inject variables affecting update sources, gateway URLs, ClawHub resolution, and browser executable paths to compromise application behavior.",
     "references": [
-      "https://github.com/rucio/rucio/security/advisories/GHSA-6j7p-qjhg-9947"
+      "https://github.com/openclaw/openclaw/commit/dbfcef319618158fa40b31cdac386ea34c392c0c",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-7wv4-cc7p-jhxc",
+      "https://www.vulncheck.com/advisories/openclaw-environment-variable-injection-via-workspace-env-file"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 23.2,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 10.3,
     "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
+      "base_cvss": 36.5,
+      "freshness": 0,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: edge_perimeter",
+          "points": 35
         },
         {
-          "signal": "Tag: sqli",
-          "points": 18
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
-      "rce",
-      "sqli"
+      "edge_perimeter",
+      "weaponized"
     ],
-    "intel_score": 102.0,
+    "intel_score": 96.5,
     "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
+      "edge_perimeter+35",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-38751",
+    "published": "2026-05-04T19:16:03.613",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenSTAManager version 2.10 and earlier contains an arbitrary file upload vulnerability in the module update functionality (modules/aggiornamenti/upload_modules.php)",
+    "references": [
+      "https://github.com/devcode-it/openstamanager",
+      "https://github.com/fuutianyii/poc"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
+    "score_breakdown": {
+      "base_cvss": 36.0,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: file_write",
+          "points": 15
+        },
+        {
+          "signal": "Tag: poc",
+          "points": 20
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "file_write",
+      "poc",
+      "weaponized"
+    ],
+    "intel_score": 96.0,
+    "reasons": [
+      "file_write+15",
+      "poc+20",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43566",
+    "published": "2026-05-05T12:16:20.040",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "OpenClaw versions 2026.4.7 before 2026.4.14 contain a privilege escalation vulnerability where heartbeat owner downgrade logic skips webhook wake events carrying untrusted content. Attackers can exploit this by sending untrusted webhook wake events to preserve owner-like execution context when the run should have been downgraded.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/31281bc92f55796817a92bc43f722cba1e77ab42",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-g2hm-779g-vm32",
+      "https://www.vulncheck.com/advisories/openclaw-privilege-escalation-via-untrusted-webhook-wake-events"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 36.6,
+    "score_breakdown": {
+      "base_cvss": 45.5,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [
+      "priv_esc",
+      "weaponized"
+    ],
+    "intel_score": 95.5,
+    "reasons": [
+      "priv_esc+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-43578",
+    "published": "2026-05-06T20:16:33.510",
+    "last_modified": "2026-11-11T23:10:00.263",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "OpenClaw versions 2026.3.31 before 2026.4.10 contain a privilege escalation vulnerability where heartbeat owner downgrade detection misses local background async exec completion events. Attackers can exploit this by providing untrusted completion content to leave a run in a more privileged context than intended.",
+    "references": [
+      "https://github.com/openclaw/openclaw/commit/19a2e9ddb5a8a494abcba812bb11f51075026a27",
+      "https://github.com/openclaw/openclaw/security/advisories/GHSA-g375-h3v6-4873",
+      "https://www.vulncheck.com/advisories/openclaw-privilege-escalation-via-missed-async-exec-completion-events-in-heartbeat-owner-downgrade"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 21.7,
+    "score_breakdown": {
+      "base_cvss": 45.5,
+      "freshness": 0,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [
+      "priv_esc",
+      "weaponized"
+    ],
+    "intel_score": 95.5,
+    "reasons": [
+      "priv_esc+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   }
 ]
