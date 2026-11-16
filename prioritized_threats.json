@@ -1485,6 +1485,61 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129483",
+    "published": "2026-11-15T14:17:27.530",
+    "last_modified": "2026-11-15T14:17:27.530",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Cyrus SASL through 2.1.28 contains an authentication bypass vulnerability in the SRP server mechanism because srp_server_mech_step2 does not reject client public values A that are multiples of N. Unauthenticated network clients can send A equal to N to force a zero shared secret, authenticating as any existing user without the password and learning session keys.",
+    "references": [
+      "https://gist.github.com/afldl/18d15d3f5a1df99411e35000c7de80db",
+      "https://github.com/cyrusimap/cyrus-sasl/blob/cyrus-sasl-2.1.28/plugins/srp.c#L2046-L2050",
+      "https://github.com/cyrusimap/cyrus-sasl/commit/fb3724f43dc50247ff2bf02135457d6d77031654",
+      "https://github.com/cyrusimap/cyrus-sasl/issues/896",
+      "https://seclists.org/oss-sec/2026/q4/122",
+      "https://www.vulncheck.com/advisories/cyrus-sasl-through-2.1.28-srp-authentication-bypass-via-plugins-srp-c"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 45.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 130.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-126167",
     "published": "2026-11-11T22:17:14.940",
     "last_modified": "2026-11-14T05:18:36.987",
@@ -1690,6 +1745,58 @@
       "rce+30",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82663",
+    "published": "2026-11-15T10:16:54.410",
+    "last_modified": "2026-11-15T10:16:54.530",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Give - Peer-to-Peer plugin for WordPress is vulnerable to authorization bypass in all versions up to, and including, 2.9.5. This is due to the plugin not properly verifying that a user is authorized to perform an action. This makes it possible for unauthenticated attackers who know or discover an existing campaign and team ID to modify the team's name, story, goal, access and notification settings, set its profile image URL, and upload WordPress-allowed media files as parentless attachments. This vulnerability can be combined with CVE-2026-82568 to achieve unauthenticated remote code execution.",
+    "references": [
+      "https://docs.nexcess.com/software/changelogs/give/give-peer-to-peer/",
+      "https://givewp.com/addons/peer-to-peer/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/f424258a-367d-43cb-b66b-1f898391a0ea?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 58.0,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 127.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -2056,61 +2163,6 @@
       "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124558",
-    "published": "2026-11-09T03:16:37.853",
-    "last_modified": "2026-11-13T04:17:42.537",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been found in DataLinkDC Dinky up to 1.2.5. The impacted element is the function SqlGateway.onOpen of the file SqlGateway.java of the component sql-gateway Endpoint. Such manipulation of the argument connectAddress leads to server-side request forgery. It is possible to launch the attack remotely. The exploit has been disclosed to the public and may be used. The researcher claims to have submitted a GHSA on the repository of the project.",
-    "references": [
-      "https://github.com/DataLinkDC/dinky/",
-      "https://github.com/DataLinkDC/dinky/security/advisories/GHSA-x4hx-f425-mrx6",
-      "https://vuldb.com/cve/CVE-2026-124558",
-      "https://vuldb.com/submit/1035494",
-      "https://vuldb.com/vuln/432891",
-      "https://vuldb.com/vuln/432891/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 22.3,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: ssrf",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [
-      "edge_perimeter",
-      "pre_auth",
-      "ssrf"
-    ],
-    "intel_score": 124.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "ssrf+18",
-      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -2783,60 +2835,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-126777",
-    "published": "2026-11-11T19:17:38.497",
-    "last_modified": "2026-11-13T02:18:52.567",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Traccar 3.15 before 6.17.0 contains an authentication bypass vulnerability in LdapProvider.login() that fails to reject empty passwords, causing LDAP binds to be performed as unauthenticated binds when LDAP authentication is enabled. Unauthenticated attackers who know a valid username can log in via POST /api/session or HTTP Basic authentication with an empty password against directories that permit unauthenticated binds, obtaining sessions for any account including administrators.",
-    "references": [
-      "https://github.com/traccar/traccar/blob/v3.15/src/org/traccar/database/LdapProvider.java#L163-L169",
-      "https://github.com/traccar/traccar/blob/v6.16.0/src/main/java/org/traccar/database/LdapProvider.java#L171-L176",
-      "https://github.com/traccar/traccar/commit/552c31f2097dbed9edef7cfe174c50b16febdc21",
-      "https://github.com/traccar/traccar/releases/tag/v6.17.0",
-      "https://www.vulncheck.com/advisories/traccar-3.15-before-6.17.0-authentication-bypass-via-empty-ldap-password"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 40.8,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 122.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124013",
     "published": "2026-11-12T20:18:25.237",
     "last_modified": "2026-11-13T20:18:16.630",
@@ -3049,57 +3047,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-111190",
-    "published": "2026-11-11T08:17:16.887",
-    "last_modified": "2026-11-13T00:20:07.757",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The ARForms plugin for WordPress is vulnerable to arbitrary file upload in all versions up to, and including, 7.2.4 via its form file-upload handler. The name of the stored file is taken from an attacker-controlled request header and is not adequately restricted to safe file types, and the plugin's file-type and content-safety checks can be evaded, allowing files that contain executable PHP code to be written to a publicly accessible directory. This makes it possible for unauthenticated attackers to upload malicious files to the affected site's server, which may make remote code execution possible. Exploitation requires a published form containing a File field to be publicly accessible on the site.",
-    "references": [
-      "https://www.arformsplugin.com/documentation/changelog/",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/58e67f1f-1139-406a-80fb-95aeccac9436?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 46.8,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "file_write",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 120.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-126428",
     "published": "2026-11-13T10:17:49.193",
     "last_modified": "2026-11-13T20:18:36.087",
@@ -3149,6 +3096,58 @@
       "rce+30",
       "sqli+18",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82568",
+    "published": "2026-11-15T10:16:54.217",
+    "last_modified": "2026-11-15T10:16:54.373",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Give - Peer-to-Peer plugin for WordPress is vulnerable to time-based SQL Injection via the 'sort' parameter in all versions up to, and including, 2.9.3 due to insufficient escaping on the user supplied parameter and lack of sufficient preparation on the existing SQL query. This makes it possible for unauthenticated attackers to append additional SQL queries into already existing queries that can be used to extract sensitive information from the database. Successful exploitation requires the existence of at least one Peer-to-Peer campaign. This vulnerability can be combined with CVE-2026-82663 to achieve unauthenticated remote code execution.",
+    "references": [
+      "https://docs.nexcess.com/software/changelogs/give/give-peer-to-peer/",
+      "https://givewp.com/addons/peer-to-peer/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/8b68d24c-a963-4316-a8f3-8dc6a494e016?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 57.4,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: sqli",
+          "points": 18
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "pre_auth",
+      "rce",
+      "sqli"
+    ],
+    "intel_score": 120.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "sqli+18",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {

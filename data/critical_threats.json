@@ -1485,6 +1485,61 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129483",
+    "published": "2026-11-15T14:17:27.530",
+    "last_modified": "2026-11-15T14:17:27.530",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Cyrus SASL through 2.1.28 contains an authentication bypass vulnerability in the SRP server mechanism because srp_server_mech_step2 does not reject client public values A that are multiples of N. Unauthenticated network clients can send A equal to N to force a zero shared secret, authenticating as any existing user without the password and learning session keys.",
+    "references": [
+      "https://gist.github.com/afldl/18d15d3f5a1df99411e35000c7de80db",
+      "https://github.com/cyrusimap/cyrus-sasl/blob/cyrus-sasl-2.1.28/plugins/srp.c#L2046-L2050",
+      "https://github.com/cyrusimap/cyrus-sasl/commit/fb3724f43dc50247ff2bf02135457d6d77031654",
+      "https://github.com/cyrusimap/cyrus-sasl/issues/896",
+      "https://seclists.org/oss-sec/2026/q4/122",
+      "https://www.vulncheck.com/advisories/cyrus-sasl-through-2.1.28-srp-authentication-bypass-via-plugins-srp-c"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 45.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 130.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-126167",
     "published": "2026-11-11T22:17:14.940",
     "last_modified": "2026-11-14T05:18:36.987",
@@ -1690,6 +1745,58 @@
       "rce+30",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82663",
+    "published": "2026-11-15T10:16:54.410",
+    "last_modified": "2026-11-15T10:16:54.530",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Give - Peer-to-Peer plugin for WordPress is vulnerable to authorization bypass in all versions up to, and including, 2.9.5. This is due to the plugin not properly verifying that a user is authorized to perform an action. This makes it possible for unauthenticated attackers who know or discover an existing campaign and team ID to modify the team's name, story, goal, access and notification settings, set its profile image URL, and upload WordPress-allowed media files as parentless attachments. This vulnerability can be combined with CVE-2026-82568 to achieve unauthenticated remote code execution.",
+    "references": [
+      "https://docs.nexcess.com/software/changelogs/give/give-peer-to-peer/",
+      "https://givewp.com/addons/peer-to-peer/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/f424258a-367d-43cb-b66b-1f898391a0ea?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 58.0,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 127.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -2056,61 +2163,6 @@
       "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124558",
-    "published": "2026-11-09T03:16:37.853",
-    "last_modified": "2026-11-13T04:17:42.537",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been found in DataLinkDC Dinky up to 1.2.5. The impacted element is the function SqlGateway.onOpen of the file SqlGateway.java of the component sql-gateway Endpoint. Such manipulation of the argument connectAddress leads to server-side request forgery. It is possible to launch the attack remotely. The exploit has been disclosed to the public and may be used. The researcher claims to have submitted a GHSA on the repository of the project.",
-    "references": [
-      "https://github.com/DataLinkDC/dinky/",
-      "https://github.com/DataLinkDC/dinky/security/advisories/GHSA-x4hx-f425-mrx6",
-      "https://vuldb.com/cve/CVE-2026-124558",
-      "https://vuldb.com/submit/1035494",
-      "https://vuldb.com/vuln/432891",
-      "https://vuldb.com/vuln/432891/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 22.3,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: ssrf",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [
-      "edge_perimeter",
-      "pre_auth",
-      "ssrf"
-    ],
-    "intel_score": 124.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "ssrf+18",
-      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -2783,60 +2835,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-126777",
-    "published": "2026-11-11T19:17:38.497",
-    "last_modified": "2026-11-13T02:18:52.567",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Traccar 3.15 before 6.17.0 contains an authentication bypass vulnerability in LdapProvider.login() that fails to reject empty passwords, causing LDAP binds to be performed as unauthenticated binds when LDAP authentication is enabled. Unauthenticated attackers who know a valid username can log in via POST /api/session or HTTP Basic authentication with an empty password against directories that permit unauthenticated binds, obtaining sessions for any account including administrators.",
-    "references": [
-      "https://github.com/traccar/traccar/blob/v3.15/src/org/traccar/database/LdapProvider.java#L163-L169",
-      "https://github.com/traccar/traccar/blob/v6.16.0/src/main/java/org/traccar/database/LdapProvider.java#L171-L176",
-      "https://github.com/traccar/traccar/commit/552c31f2097dbed9edef7cfe174c50b16febdc21",
-      "https://github.com/traccar/traccar/releases/tag/v6.17.0",
-      "https://www.vulncheck.com/advisories/traccar-3.15-before-6.17.0-authentication-bypass-via-empty-ldap-password"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 40.8,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 122.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124013",
     "published": "2026-11-12T20:18:25.237",
     "last_modified": "2026-11-13T20:18:16.630",
@@ -3049,57 +3047,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-111190",
-    "published": "2026-11-11T08:17:16.887",
-    "last_modified": "2026-11-13T00:20:07.757",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The ARForms plugin for WordPress is vulnerable to arbitrary file upload in all versions up to, and including, 7.2.4 via its form file-upload handler. The name of the stored file is taken from an attacker-controlled request header and is not adequately restricted to safe file types, and the plugin's file-type and content-safety checks can be evaded, allowing files that contain executable PHP code to be written to a publicly accessible directory. This makes it possible for unauthenticated attackers to upload malicious files to the affected site's server, which may make remote code execution possible. Exploitation requires a published form containing a File field to be publicly accessible on the site.",
-    "references": [
-      "https://www.arformsplugin.com/documentation/changelog/",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/58e67f1f-1139-406a-80fb-95aeccac9436?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 46.8,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "file_write",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 120.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-126428",
     "published": "2026-11-13T10:17:49.193",
     "last_modified": "2026-11-13T20:18:36.087",
@@ -3149,6 +3096,58 @@
       "rce+30",
       "sqli+18",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82568",
+    "published": "2026-11-15T10:16:54.217",
+    "last_modified": "2026-11-15T10:16:54.373",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Give - Peer-to-Peer plugin for WordPress is vulnerable to time-based SQL Injection via the 'sort' parameter in all versions up to, and including, 2.9.3 due to insufficient escaping on the user supplied parameter and lack of sufficient preparation on the existing SQL query. This makes it possible for unauthenticated attackers to append additional SQL queries into already existing queries that can be used to extract sensitive information from the database. Successful exploitation requires the existence of at least one Peer-to-Peer campaign. This vulnerability can be combined with CVE-2026-82663 to achieve unauthenticated remote code execution.",
+    "references": [
+      "https://docs.nexcess.com/software/changelogs/give/give-peer-to-peer/",
+      "https://givewp.com/addons/peer-to-peer/",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/8b68d24c-a963-4316-a8f3-8dc6a494e016?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 57.4,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: sqli",
+          "points": 18
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "pre_auth",
+      "rce",
+      "sqli"
+    ],
+    "intel_score": 120.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "sqli+18",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -5613,52 +5612,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124467",
-    "published": "2026-11-08T14:18:14.823",
-    "last_modified": "2026-11-13T04:17:40.870",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenEMR before 8.4.0 contains a local file inclusion in the ESign router (library/ESign/Router.php), which passes the unsanitized module parameter into a require_once of '<module>/Controller.php', and the fax module's faxProcessUploads writes attacker-named files to a predictable temp path without extension checks. Authenticated attackers can upload a PHP file named Controller.php, then request interface/esign/index.php with a traversing module parameter to include it and execute arbitrary code.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-p4v7-crwp-qq7q",
-      "https://www.vulncheck.com/advisories/openemr-before-8.4.0-remote-code-execution-via-esign-lfi-and-fax-upload",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-p4v7-crwp-qq7q"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 40.6,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-121287",
     "published": "2026-11-10T20:18:53.950",
     "last_modified": "2026-11-13T14:17:49.077",
@@ -5745,53 +5698,6 @@
       "recently modified (last 48h)",
       "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-67547",
-    "published": "2026-11-11T22:17:29.710",
-    "last_modified": "2026-11-13T02:18:58.510",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "taOS is a self-hosted AI agent OS. Prior to version 1.0.0-beta.23, the POST /api/skill-exec/{skill_id}/call endpoint in taOS executes built-in skills — including the code_exec skill which runs arbitrary Python via subprocess.run([\"python3\", \"-c\", code]) — without performing any admin role check, skill ownership check, or agent assignment verification. Any authenticated non-admin user can supply attacker-controlled Python code in the request body and have it executed as the taOS backend process user on the host, achieving full remote code execution with no privilege escalation required beyond a valid (non-admin) session. This issue has been patched in version 1.0.0-beta.23.",
-    "references": [
-      "https://github.com/jaylfc/taOS/commit/8998d85190424d5e843880b4ca256e79b653a304",
-      "https://github.com/jaylfc/taOS/releases/tag/v1.0.0-beta.23",
-      "https://github.com/jaylfc/taOS/security/advisories/GHSA-h24f-gp4c-8qjm",
-      "https://github.com/jaylfc/taOS/security/advisories/GHSA-h24f-gp4c-8qjm"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 56.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
     ]
   },
   {
@@ -8604,98 +8510,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124441",
-    "published": "2026-11-08T14:18:10.800",
-    "last_modified": "2026-11-13T04:17:39.930",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Kyverno before 1.19.2 contains an authorization bypass vulnerability that allows namespaced tenants to generate any resource kind in any namespace by templating the generate rule's kind and namespace with variables. Attackers can create a Policy and trigger ConfigMap in their own namespace, causing the privileged background-controller to write NetworkPolicies or RoleBindings into victim or kube-system namespaces.",
-    "references": [
-      "https://github.com/kyverno/kyverno/security/advisories/GHSA-vjfx-fp68-rh4v",
-      "https://www.vulncheck.com/advisories/kyverno-before-1.19.2-authorization-bypass-via-variable-generate-target-kind",
-      "https://github.com/kyverno/kyverno/security/advisories/GHSA-vjfx-fp68-rh4v"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 35.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124480",
-    "published": "2026-11-08T14:18:17.147",
-    "last_modified": "2026-11-13T04:17:41.493",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenEMR before 8.4.0 contains an authorization bypass vulnerability that allows low-privileged authenticated users to read cross-patient FHIR QuestionnaireResponse data by sending the APICSRFTOKEN header. Attackers can reuse the session-exposed api_csrf_token_js value to skip FHIR scope checks and call GET /fhir/QuestionnaireResponse, exfiltrating site-wide questionnaire answer PHI.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-5xf2-3h9x-f4m6",
-      "https://www.vulncheck.com/advisories/openemr-before-8.4.0-authorization-bypass-via-fhir-questionnaireresponse-apicsrftoken",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-5xf2-3h9x-f4m6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 18.0,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124560",
     "published": "2026-11-09T03:16:38.117",
     "last_modified": "2026-11-15T14:17:21.840",
@@ -9409,55 +9223,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-127283",
-    "published": "2026-11-13T02:18:55.487",
-    "last_modified": "2026-11-13T02:18:55.633",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was identified in SourceCodester Food Ordering System 1.0. Affected by this issue is some unknown functionality of the file admin/update_food.php of the component Admin Image Handler. Such manipulation of the argument cmd leads to unrestricted upload. The attack may be performed from remote. The exploit is publicly available and might be used.",
-    "references": [
-      "https://github.com/yuechuya/sourcecodester-vuln-reports/blob/main/reports/Food-Ordering-System/VULN-F1-Unauth-File-Upload-RCE.md",
-      "https://vuldb.com/cve/CVE-2026-127283",
-      "https://vuldb.com/submit/1041048",
-      "https://vuldb.com/vuln/436449",
-      "https://vuldb.com/vuln/436449/cti",
-      "https://www.sourcecodester.com/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 21.6,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 101.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-129100",
     "published": "2026-11-13T16:18:59.603",
     "last_modified": "2026-11-13T16:18:59.603",
@@ -9500,52 +9265,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124488",
-    "published": "2026-11-08T14:18:18.370",
-    "last_modified": "2026-11-13T04:17:41.807",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenEMR before 8.3.0 contains an authorization bypass vulnerability that allows authenticated clinicians lacking high-sensitivity permission to read and modify encounter-bound forms via load_form.php. Attackers can request the Clinical Notes or Care Plan direct loader to obtain restricted content and a CSRF token, then submit save.php to tamper with clinical records.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-v58f-jcq4-pc4w",
-      "https://www.vulncheck.com/advisories/openemr-before-8.3.0-authorization-bypass-via-load-form-php-high-sensitivity-encounters",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-v58f-jcq4-pc4w"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 12.8,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 100.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
@@ -10231,51 +9950,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124429",
-    "published": "2026-11-08T14:18:08.833",
-    "last_modified": "2026-11-13T04:17:39.467",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Craft CMS from 5.0.0 before 5.11.2 contains a privilege escalation vulnerability that allows unauthenticated public registrants to reclaim deactivated non-admin accounts while retaining their direct permissions. Attackers can register using a deactivated account, set a new password, and inherit permissions stored in userpermissions_users, enabling privileged account takeover when email verification is disabled.",
-    "references": [
-      "https://github.com/craftcms/cms/security/advisories/GHSA-v25r-wr32-jfg7",
-      "https://www.vulncheck.com/advisories/craft-cms-5.0.0-before-5.11.2-privilege-escalation-via-public-registration"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 22.7,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 97.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-129116",
     "published": "2026-11-13T17:17:28.287",
     "last_modified": "2026-11-13T22:14:15.437",
@@ -10460,6 +10134,52 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129540",
+    "published": "2026-11-16T02:17:12.100",
+    "last_modified": "2026-11-16T02:17:12.100",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "VoAPI 1.0.0 through 1.2.0 contains a sql injection vulnerability that allows authenticated users to inject SQL by supplying crafted column names as search[...] filter keys on list endpoints such as GET /api/log. Attackers can read the HS256 JWT signing secret from the option table and forge a manager role token to take over the /api/m/* management API.",
+    "references": [
+      "https://github.com/VoAPI/VoAPI/issues/78",
+      "https://vul.yulun.ac.cn/20261115/voapi/",
+      "https://www.vulncheck.com/advisories/voapi-1.0.0-through-1.2.0-sql-injection-via-search-filter-key"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: sqli",
+          "points": 18
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "sqli",
+      "weaponized"
+    ],
+    "intel_score": 97.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-106140",
     "published": "2026-11-12T10:17:26.987",
     "last_modified": "2026-11-14T05:18:16.173",
@@ -10501,6 +10221,54 @@
       "recently modified (last 48h)",
       "rce+30",
       "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129360",
+    "published": "2026-11-15T04:16:45.090",
+    "last_modified": "2026-11-15T04:16:45.263",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A weakness has been identified in Linux Foundation Magma up to 1.9.0. The impacted element is an unknown function of the file orc8r/cloud/go/services/obsidian/access/operator.go of the component Obsidian REST. Executing a manipulation of the argument X-Magma-Client-Cert-Serial can lead to authentication bypass by spoofing. The attack can be launched remotely. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://vuldb.com/cve/CVE-2026-129360",
+      "https://vuldb.com/submit/1044006",
+      "https://vuldb.com/vuln/437423",
+      "https://vuldb.com/vuln/437423/cti",
+      "https://www.linuxfoundation.org/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 35.9,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+    "tags": [
+      "auth_bypass",
+      "pre_auth"
+    ],
+    "intel_score": 96.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -11196,6 +10964,55 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129464",
+    "published": "2026-11-15T02:17:21.597",
+    "last_modified": "2026-11-15T02:17:21.723",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Zr.Admin.NET commit 0ee1ab8 through commit eb9228a contains a path traversal vulnerability that allows any logged-in user to read arbitrary server files via the path parameter of /common/DownloadFile. Attackers can supply absolute paths or ../ sequences to read appsettings files and use the JwtSettings SecretKey to forge administrator tokens.",
+    "references": [
+      "https://github.com/izhaorui/Zr.Admin.NET/blob/eb9228a23014f6000c06cab2f10ae0d44ecbbd3a/Infrastructure/Controllers/BaseController.cs#L110-L119",
+      "https://github.com/izhaorui/Zr.Admin.NET/blob/eb9228a23014f6000c06cab2f10ae0d44ecbbd3a/ZR.Admin.WebApi/Controllers/CommonController.cs#L220-L241",
+      "https://github.com/izhaorui/Zr.Admin.NET/commit/0ee1ab8af5e3861766746d25acba1184111befcb",
+      "https://github.com/izhaorui/Zr.Admin.NET/issues/27",
+      "https://vul.yulun.ac.cn/20261114/zr-admin-net/",
+      "https://www.vulncheck.com/advisories/zr-admin-net-commit-0ee1ab8-through-eb9228a-path-traversal-via-downloadfile"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 37.2,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal",
+      "weaponized"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-63152",
     "published": "2026-10-13T20:17:30.750",
     "last_modified": "2026-11-13T18:17:44.383",
@@ -11516,57 +11333,6 @@
       "recently modified (last 48h)",
       "poc+20",
       "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-108472",
-    "published": "2026-11-11T19:17:29.070",
-    "last_modified": "2026-11-13T00:20:07.247",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in the xfs_admin utility in xfsprogs. The tool does not properly validate user-supplied parameters, allowing operating system command injection. A local attacker can exploit this issue by providing crafted input arguments, which may result in arbitrary command execution and local privilege escalation depending on how xfs_admin is executed.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:99659",
-      "https://access.redhat.com/errata/RHSA-2026:99660",
-      "https://access.redhat.com/errata/RHSA-2026:99661",
-      "https://access.redhat.com/errata/RHSA-2026:99662",
-      "https://access.redhat.com/errata/RHSA-2026:99817",
-      "https://access.redhat.com/security/cve/CVE-2026-108472",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2548925",
-      "http://www.openwall.com/lists/oss-security/2026/11/11/27"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.9,
-    "epss_percentile": 60.9,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "priv_esc"
-    ],
-    "intel_score": 92.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "command_injection+18"
     ]
   },
   {
@@ -13252,45 +13018,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-123551",
-    "published": "2026-11-08T02:16:46.603",
-    "last_modified": "2026-11-13T03:17:29.467",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenAM from 14.0.0 before 16.1.4 contains an information disclosure vulnerability that allows unauthenticated attackers to read live session tokens from the notification WebSocket. Attackers can bypass the agent-only check through an unvalidated internal forward on legacy Liberty ID-FF endpoints, collecting iPlanetDirectoryPro tokens to hijack user and administrator sessions.",
-    "references": [
-      "https://github.com/OpenIdentityPlatform/OpenAM/security/advisories/GHSA-5c3q-hp86-xjr8",
-      "https://www.vulncheck.com/advisories/openam-14.0.0-before-16.1.4-session-token-disclosure-via-notification-websocket"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 37.5,
-    "score_breakdown": {
-      "base_cvss": 50.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 85.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-127080",
     "published": "2026-11-13T10:18:04.260",
     "last_modified": "2026-11-13T23:17:17.230",
@@ -13325,46 +13052,6 @@
       "weaponized"
     ],
     "intel_score": 84.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124445",
-    "published": "2026-11-08T14:18:11.487",
-    "last_modified": "2026-11-13T04:17:40.077",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenEMR from 7.0.1 before 8.4.0 contains a flaw in src/Common/Auth/OneTimeAuth.php that ignores the enforce_onetime_use and max_access_count flags, never revokes consumed service_auth tokens, and checks login_pin without rate limiting or strict comparison. Attackers holding a captured token can replay it or brute-force the PIN to open patient-portal sessions exposing PHI.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-xg3m-9pfq-c8r6",
-      "https://www.vulncheck.com/advisories/openemr-7.0.1-before-8.4.0-onetimeauth-token-replay-and-pin-brute-force",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-xg3m-9pfq-c8r6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 29.2,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 84.0,
     "reasons": [
       "recently modified (last 48h)",
       "Weaponized Exploit / Public PoC verified (+25)"
@@ -13488,51 +13175,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-126812",
-    "published": "2026-11-11T21:16:45.690",
-    "last_modified": "2026-11-13T02:18:52.967",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "blueprintUE Self-Hosted Edition before 4.3.7 contains an insecure default configuration in its Docker Compose examples that sets MYSQL_ALLOW_EMPTY_PASSWORD=yes in database.env and publishes MariaDB on port 3306. Unauthenticated attackers reaching the Docker host on port 3306 can log in as root without a password to read, modify, or delete user accounts, blueprints, and all databases.",
-    "references": [
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/blob/v4.3.6/docker-examples/database.env",
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/blob/v4.3.6/docker-examples/docker-compose-smtp.yml#L14-L24",
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/commit/e6a6e1d4c2f22efbbabf9fb31ec479544405b469",
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/pull/270",
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/releases/tag/v4.3.7",
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/security/advisories/GHSA-9f6r-vjc7-jq67",
-      "https://www.vulncheck.com/advisories/blueprintue-self-hosted-edition-before-4.3.7-empty-mariadb-root-password-via-docker-compose",
-      "https://github.com/blueprintue/blueprintue-self-hosted-edition/security/advisories/GHSA-9f6r-vjc7-jq67"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 49.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-126223",
     "published": "2026-11-11T22:17:20.243",
     "last_modified": "2026-11-13T05:18:22.217",
@@ -13618,47 +13260,6 @@
       "recently modified (last 48h)",
       "edge_perimeter+35",
       "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-67544",
-    "published": "2026-11-11T22:17:29.180",
-    "last_modified": "2026-11-13T02:18:58.390",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Heym builds and runs agentic systems and business-process automations on self-hosted infrastructure. Prior to version 0.0.71, Heym's workflow engine accepts an arbitrary Python code string in the playwrightCode field of a Playwright node. This string is written to a temporary .py file and executed directly by the backend process via subprocess.Popen([sys.executable, script_path]) with no sandboxing, AST validation, or role gate. Any authenticated user — including a freshly registered account — can achieve full remote code execution (RCE) on the backend host, running as the service process user (observed as root in the default Docker deployment). This issue has been patched in version 0.0.71.",
-    "references": [
-      "https://github.com/heymrun/heym/commit/d2fd46c07754c4ed3e80b521aa54cc276039849b",
-      "https://github.com/heymrun/heym/releases/tag/0.0.71",
-      "https://github.com/heymrun/heym/security/advisories/GHSA-mp23-7m6r-jfw4",
-      "https://github.com/heymrun/heym/security/advisories/GHSA-mp23-7m6r-jfw4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 1.0,
-    "epss_percentile": 62.4,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 84.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
     ]
   },
   {
@@ -14807,6 +14408,44 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-125769",
+    "published": "2026-11-15T14:17:24.813",
+    "last_modified": "2026-11-15T14:17:24.937",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Incorrect Privilege Assignment vulnerability in Nasir Ahmed Advanced Form Integration advanced-form-integration allows Privilege Escalation.This issue affects Advanced Form Integration: from n/a through 2.11.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/advanced-form-integration/vulnerability/wordpress-advanced-form-integration-plugin-2-11-3-privilege-escalation-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-126286",
     "published": "2026-11-13T10:17:32.287",
     "last_modified": "2026-11-13T23:17:16.023",
@@ -15092,52 +14731,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "edge_perimeter+35"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124492",
-    "published": "2026-11-08T14:18:18.980",
-    "last_modified": "2026-11-13T04:17:41.973",
-    "cvss_v3": 7.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SunEditor before 3.4.0 contains a stored cross-site scripting vulnerability in ModalAnchorEditor's #createBookmarkList, which inserts entity-decoded h1-h6 header textContent into the bookmark list via innerHTML without escaping. Attackers can store HTML-encoded payloads in editor headers that execute JavaScript when a victim opens the link modal and types # in the URL input.",
-    "references": [
-      "https://github.com/JiHong88/suneditor/security/advisories/GHSA-5pp5-5qrp-vq56",
-      "https://www.vulncheck.com/advisories/suneditor-before-3.4.0-stored-xss-via-link-modal-bookmark-list",
-      "https://github.com/JiHong88/suneditor/security/advisories/GHSA-5pp5-5qrp-vq56"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 11.5,
-    "score_breakdown": {
-      "base_cvss": 38.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: xss",
-          "points": 8
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:L/A:N",
-    "tags": [
-      "weaponized",
-      "xss"
-    ],
-    "intel_score": 81.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "xss+8",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -16102,85 +15695,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-123595",
-    "published": "2026-11-08T02:16:53.863",
-    "last_modified": "2026-11-13T04:17:38.070",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Hickory DNS hickory-proto 0.25 through 0.26.0-alpha.1 and hickory-net 0.26.0-beta.1 before 0.26.2 contain a DNSSEC validation flaw in the validating recursor's NSEC3 handler, which matches the closest encloser by hash alone without checking the type bitmap and so accepts parent-side ancestor-delegation NSEC3 records as proof of nonexistence. An attacker who delivers one response built from genuinely signed parent NSEC3 records can cause NXDOMAIN or NODATA to be cached with AD=1, denying resolution of existing names at and below the zone cut.",
-    "references": [
-      "https://github.com/hickory-dns/hickory-dns/security/advisories/GHSA-624w-vvww-xvpw",
-      "https://www.vulncheck.com/advisories/hickory-dns-through-0.26.0-alpha.1-dnssec-validation-bypass-via-ancestor-delegation-nsec3"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 8.1,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124484",
-    "published": "2026-11-08T14:18:17.773",
-    "last_modified": "2026-11-13T04:17:41.650",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenEMR before 8.4.0 contains a missing authorization vulnerability in portal onsite-document APIs that allows any authenticated core user to access cross-patient documents. Attackers can omit the patientId parameter and supply arbitrary record IDs to list, read, and overwrite other patients' portal documents, signatures, and template data.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-4r76-rq83-hgpg",
-      "https://www.vulncheck.com/advisories/openemr-before-8.4.0-missing-authorization-in-portal-onsite-document-apis",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-4r76-rq83-hgpg"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 16.0,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -17170,45 +16684,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-16135",
-    "published": "2026-11-12T12:18:24.087",
-    "last_modified": "2026-11-13T02:18:56.770",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The VibeBP plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 1.9.9.8.1. This is due to the plugin allowing arbitrary user meta updates through the set_email_notification_settings() function. This makes it possible for authenticated attackers, with Subscriber-level access and above, to grant themselves administrator privileges by updating their own 'wp_capabilities' user meta value.",
-    "references": [
-      "https://themeforest.net/item/wplms-learning-management-system/6780226",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/d726543c-9ce2-4359-978d-c72a451296a2?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 39.0,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "priv_esc"
-    ],
-    "intel_score": 79.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-119077",
     "published": "2026-11-13T10:17:26.483",
     "last_modified": "2026-11-13T23:17:13.633",
@@ -17890,6 +17365,88 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129465",
+    "published": "2026-11-15T02:17:21.770",
+    "last_modified": "2026-11-15T02:17:21.897",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Zr.Admin.NET commit af07ffc through commit eb9228a contains an insecure direct object reference vulnerability in SysProfileController.UpdateProfile that allows any authenticated user to modify other accounts via UserId. Attackers can set the administrator's phone number to one they control, request an SMS code via /checkMobile, and log in through /PhoneLogin to take over the administrator account.",
+    "references": [
+      "https://github.com/izhaorui/Zr.Admin.NET/blob/eb9228a23014f6000c06cab2f10ae0d44ecbbd3a/ZR.Admin.WebApi/Controllers/System/SysLoginController.cs#L516-L559",
+      "https://github.com/izhaorui/Zr.Admin.NET/blob/eb9228a23014f6000c06cab2f10ae0d44ecbbd3a/ZR.Admin.WebApi/Controllers/System/SysProfileController.cs#L62-L75",
+      "https://github.com/izhaorui/Zr.Admin.NET/blob/eb9228a23014f6000c06cab2f10ae0d44ecbbd3a/ZR.ServiceCore/Services/SysUserService.cs#L220-L236",
+      "https://github.com/izhaorui/Zr.Admin.NET/commit/af07ffc5d18e7876d3780d1ff5ee776b80950399",
+      "https://github.com/izhaorui/Zr.Admin.NET/issues/27",
+      "https://vul.yulun.ac.cn/20261114/zr-admin-net/",
+      "https://www.vulncheck.com/advisories/zr-admin-net-commit-af07ffc-through-eb9228a-idor-via-system-user-profile"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 24.8,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "weaponized"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-122662",
+    "published": "2026-11-15T14:17:20.507",
+    "last_modified": "2026-11-15T14:17:21.347",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in Barn2 Plugins Document Library Pro document-library-pro allows Object Injection.This issue affects Document Library Pro: from n/a before 4.2.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/document-library-pro/vulnerability/wordpress-document-library-pro-plugin-4-2-2-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 79.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-113551",
     "published": "2026-11-10T21:18:48.963",
     "last_modified": "2026-11-13T18:34:11.490",
@@ -18078,6 +17635,49 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129449",
+    "published": "2026-11-15T11:17:10.620",
+    "last_modified": "2026-11-15T11:17:11.580",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A security vulnerability has been detected in DrayTek Vigor2960 up to 1.5.1.6. Affected by this vulnerability is the function sub_14914 of the file /cgi-bin/mainfunction.cgi. The manipulation of the argument swmconfigupload leads to command injection. It is possible to initiate the attack remotely. The exploit has been disclosed publicly and may be used. Upgrading to version 1.5.1.7 addresses this issue. It is advisable to upgrade the affected component. The vendor recommends: \"1.5.1.6 isn't the latest version of 2960, the latest version fixes many security issues. And we have another one in our release plan which should solve the issues reported.\"",
+    "references": [
+      "https://fw.draytek.com.tw/Vigor2960/Firmware/v1.5.1.7/Vigor2960_v1.5.1.7.zip",
+      "https://github.com/yikesoftware/DrayTek_Vigor2960_Security_Analysis/blob/main/cases/DRV2960-0015-authenticated-swmconfigupload-fieldname-command-injection",
+      "https://vuldb.com/cve/CVE-2026-129449",
+      "https://vuldb.com/submit/1044957",
+      "https://vuldb.com/vuln/437460",
+      "https://vuldb.com/vuln/437460/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 77.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
     ]
   },
   {
@@ -18528,182 +18128,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-123555",
-    "published": "2026-11-08T02:16:47.313",
-    "last_modified": "2026-11-13T03:17:29.643",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Zebra from 2.3.0 before 7.0.0 contains a denial of service vulnerability that allows unauthenticated peers to evade misbehavior scoring by sending transactions or blocks with invalid transparent scripts. Attackers can flood mempool with script-failing transactions or serve forged v5 block bodies with altered scriptSig bytes to exhaust CPU and repeatedly stall block sync.",
-    "references": [
-      "https://github.com/ZcashFoundation/zebra/commit/e8db87eb69254e0d4eedd058eadd48bdfa09065a",
-      "https://github.com/ZcashFoundation/zebra/security/advisories/GHSA-jq45-ghw5-v37x",
-      "https://www.vulncheck.com/advisories/zebra-2.3.0-before-7.0.0-denial-of-service-via-unscored-script-verification-failures"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 37.9,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos",
-      "weaponized"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-123563",
-    "published": "2026-11-08T02:16:48.720",
-    "last_modified": "2026-11-13T04:17:36.900",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Devalue before 5.9.3 contains a validation bypass vulnerability that allows custom ArrayBuffer revivers to skip typed-array allocation checks in the parse function. Attackers can supply very small crafted input processed by a malformed ArrayBuffer reviver to allocate massive ArrayBuffers, causing memory exhaustion and denial of service.",
-    "references": [
-      "https://github.com/sveltejs/devalue/security/advisories/GHSA-r9w8-h9r3-54w4",
-      "https://www.vulncheck.com/advisories/devalue-before-5.9.3-typed-array-allocation-validation-bypass-via-parse"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 32.0,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos",
-      "weaponized"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-123571",
-    "published": "2026-11-08T02:16:49.990",
-    "last_modified": "2026-11-13T04:17:37.187",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Hickory DNS from 0.26.0 before 0.26.2 contains an integer underflow vulnerability in TSIG RDATA decoding that allows remote attackers to trigger a panic via malformed records. Attackers can send a crafted TSIG record in DNS wire format to cause unchecked subtraction underflow, crashing builds with overflow checks enabled and causing denial of service.",
-    "references": [
-      "https://github.com/hickory-dns/hickory-dns/security/advisories/GHSA-x962-5xwx-fr8x",
-      "https://www.vulncheck.com/advisories/hickory-dns-from-0.26.0-before-0.26.2-panic-via-tsig-rdata-decoding"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 35.8,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos",
-      "weaponized"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124471",
-    "published": "2026-11-08T14:18:15.447",
-    "last_modified": "2026-11-13T04:17:41.030",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenEMR before 8.3.0 contains a missing authorization vulnerability in interface/billing/sl_eob_invoice.php that allows any authenticated user to read and modify billing data for any encounter. Attackers can iterate the id parameter to read patient names and billing notes, and post payments, adjustments, deletions, or billing notes against any patient's account.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-55gc-5wj7-xxp7",
-      "https://www.vulncheck.com/advisories/openemr-before-8.3.0-missing-authorization-and-idor-via-sl-eob-invoice-php",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-55gc-5wj7-xxp7"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 17.5,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-125358",
     "published": "2026-11-10T00:17:07.180",
     "last_modified": "2026-11-13T14:17:52.833",
@@ -18868,52 +18292,6 @@
     "intel_score": 75.5,
     "reasons": [
       "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-127056",
-    "published": "2026-11-12T13:17:16.177",
-    "last_modified": "2026-11-13T02:18:53.540",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "PapaParse before 5.7.1 contains an inefficient algorithmic complexity vulnerability that allows remote unauthenticated attackers to cause denial of service by submitting delimiter-free quoted CSV input to Papa.parse(). Attackers can supply a single-column quoted CSV with no delimiters, triggering repeated full-buffer indexOf scans per row that grow quadratically with input size, exhausting CPU and blocking the Node.js event loop or freezing a browser tab.",
-    "references": [
-      "https://github.com/mholt/PapaParse/commit/a50fe19aae08b966de444119333fe4a8b7aa6b2f",
-      "https://www.npmjs.com/package/papaparse",
-      "https://www.vulncheck.com/advisories/papaparse-before-quadratic-time-parsing-dos-via-indexof-scan"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 52.9,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos",
-      "weaponized"
-    ],
-    "intel_score": 75.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
@@ -20324,6 +19702,92 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129450",
+    "published": "2026-11-15T12:17:20.913",
+    "last_modified": "2026-11-15T12:17:21.790",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was detected in DrayTek Vigor2960 1.5.1.6. Affected by this issue is the function sub_1E084 of the file /cgi-bin/mainfunction.cgi?action=doWebBackup. The manipulation of the argument option results in path traversal. It is possible to launch the attack remotely. The exploit is now public and may be used. Upgrading to version 1.5.1.7 can resolve this issue. You should upgrade the affected component. The vendor recommends: \"1.5.1.6 isn't the latest version of 2960, the latest version fixes many security issues. And we have another one in our release plan which should solve the issues reported.\"",
+    "references": [
+      "https://fw.draytek.com.tw/Vigor2960/Firmware/v1.5.1.7/Vigor2960_v1.5.1.7.zip",
+      "https://github.com/yikesoftware/DrayTek_Vigor2960_Security_Analysis/tree/main/cases/DRV2960-0016-authenticated-dowebbackup-path-traversal-clobber",
+      "https://vuldb.com/cve/CVE-2026-129450",
+      "https://vuldb.com/submit/1044958",
+      "https://vuldb.com/vuln/437461",
+      "https://vuldb.com/vuln/437461/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 74.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129451",
+    "published": "2026-11-15T13:16:58.600",
+    "last_modified": "2026-11-15T13:16:59.647",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A flaw has been found in DrayTek Vigor2960 up to 1.5.1.6. This affects the function app_guest_export of the file /cgi-bin/mainfunction.cgi. This manipulation of the argument filename causes path traversal. The attack can be initiated remotely. The exploit has been published and may be used. Upgrading to version 1.5.1.7 is able to mitigate this issue. The affected component should be upgraded. The vendor recommends: \"1.5.1.6 isn't the latest version of 2960, the latest version fixes many security issues. And we have another one in our release plan which should solve the issues reported.\"",
+    "references": [
+      "https://fw.draytek.com.tw/Vigor2960/Firmware/v1.5.1.7/Vigor2960_v1.5.1.7.zip",
+      "https://github.com/yikesoftware/DrayTek_Vigor2960_Security_Analysis/tree/main/cases/DRV2960-0017-authenticated-app-guest-export-path-traversal-write-delete",
+      "https://vuldb.com/cve/CVE-2026-129451",
+      "https://vuldb.com/submit/1044961",
+      "https://vuldb.com/vuln/437462",
+      "https://vuldb.com/vuln/437462/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 74.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-73186",
     "published": "2026-10-30T19:19:10.123",
     "last_modified": "2026-11-15T19:17:17.937",
@@ -20689,6 +20153,44 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-125449",
+    "published": "2026-11-15T14:17:24.497",
+    "last_modified": "2026-11-15T14:17:24.607",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data vulnerability in Mamunur Rashid Testimonial Slider testimonial-slider-and-showcase allows Object Injection.This issue affects Testimonial Slider: from n/a through 3.0.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/testimonial-slider-and-showcase/vulnerability/wordpress-testimonial-slider-plugin-3-0-2-php-object-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "deserialization"
+    ],
+    "intel_score": 74.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "deserialization+20"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-126264",
     "published": "2026-11-13T10:17:28.827",
     "last_modified": "2026-11-13T10:17:28.960",
@@ -20928,6 +20430,49 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129452",
+    "published": "2026-11-15T13:16:59.703",
+    "last_modified": "2026-11-15T13:16:59.867",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability has been found in DrayTek Vigor2960 1.5.1.6. This vulnerability affects the function set_table of the file /cgi-bin/mainfunction.cgi. Such manipulation of the argument jsondata leads to command injection. The attack can be launched remotely. The exploit has been disclosed to the public and may be used. Upgrading to version 1.5.1.7 is able to resolve this issue. It is suggested to upgrade the affected component. The vendor recommends: \"1.5.1.6 isn't the latest version of 2960, the latest version fixes many security issues. And we have another one in our release plan which should solve the issues reported.\"",
+    "references": [
+      "https://fw.draytek.com.tw/Vigor2960/Firmware/v1.5.1.7/Vigor2960_v1.5.1.7.zip",
+      "https://github.com/yikesoftware/DrayTek_Vigor2960_Security_Analysis/tree/main/cases/DRV2960-0019-authenticated-set-table-config-field-command-injection",
+      "https://vuldb.com/cve/CVE-2026-129452",
+      "https://vuldb.com/submit/1044962",
+      "https://vuldb.com/vuln/437463",
+      "https://vuldb.com/vuln/437463/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 45.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "command_injection"
+    ],
+    "intel_score": 73.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-126479",
     "published": "2026-11-13T10:17:57.563",
     "last_modified": "2026-11-13T10:17:57.677",
@@ -21089,203 +20634,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-123559",
-    "published": "2026-11-08T02:16:48.047",
-    "last_modified": "2026-11-13T03:17:29.780",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Zebra before 7.0.0 contains an inefficient algorithmic complexity vulnerability that allows unauthenticated peers to exhaust verification threads by submitting transactions with many transparent inputs. Attackers can relay invalid transactions with tens of thousands of inputs, forcing quadratic ZIP-244 or ZIP-243 digest recomputation that stalls Rayon-backed block verification for minutes.",
-    "references": [
-      "https://github.com/ZcashFoundation/zebra/security/advisories/GHSA-j4cw-58mj-7w6v",
-      "https://www.vulncheck.com/advisories/zebra-before-7.0.0-denial-of-service-via-quadratic-sighash-computation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 28.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-123575",
-    "published": "2026-11-08T02:16:50.600",
-    "last_modified": "2026-11-13T04:17:37.327",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Hickory DNS before 0.26.2 contains a resource exhaustion vulnerability in its DNS-over-HTTPS HTTP/2 server that lacks sufficient timeouts or limits for incomplete request bodies. Remote attackers can open DoH connections, send incomplete request bodies, and hold connections open to exhaust server memory.",
-    "references": [
-      "https://github.com/hickory-dns/hickory-dns/security/advisories/GHSA-g5xf-qv55-wv37",
-      "https://www.vulncheck.com/advisories/hickory-dns-before-0.26.2-doh-memory-exhaustion-via-incomplete-request-bodies"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 35.8,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-123607",
-    "published": "2026-11-08T02:16:55.747",
-    "last_modified": "2026-11-13T04:17:38.567",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Hickory DNS hickory-proto 0.25.0-alpha.3 through 0.25.2 and hickory-net before 0.26.1 contain an unbounded loop vulnerability in DnssecDnsHandle NSEC3 closest-encloser proof validation when the SOA owner is not an ancestor of the QNAME. Upstream attackers can return NoData or NXDomain responses with a cross-zone SOA record to panic debug builds or exhaust memory in release builds.",
-    "references": [
-      "https://github.com/hickory-dns/hickory-dns/security/advisories/GHSA-3v94-mw7p-v465",
-      "https://www.vulncheck.com/advisories/hickory-dns-nsec3-closest-encloser-proof-unbounded-loop-denial-of-service"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 28.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-123615",
-    "published": "2026-11-08T02:16:57.147",
-    "last_modified": "2026-11-13T04:17:38.870",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "imgproxy 3.3.0 before 4.0.17 contains an out-of-bounds heap read and write in the ICO loader's BMP header reconstruction (vips_foreign_load_ico_header in vips/icoload.c) when an ICO entry declares a tiny data size, causing unvalidated header fields to be read and written past the allocated buffer. Unauthenticated remote attackers can supply a crafted ICO image to corrupt adjacent heap chunk metadata, triggering a glibc abort that crashes the worker.",
-    "references": [
-      "https://github.com/imgproxy/imgproxy/security/advisories/GHSA-494m-4556-wf5p",
-      "https://www.vulncheck.com/advisories/imgproxy-before-4.0.17-out-of-bounds-write-in-ico-loader",
-      "https://github.com/imgproxy/imgproxy/security/advisories/GHSA-494m-4556-wf5p"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 45.5,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124437",
-    "published": "2026-11-08T14:18:10.163",
-    "last_modified": "2026-11-13T04:17:39.747",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Scriban before 7.5.3 contains a resource exhaustion vulnerability that allows untrusted template authors to exhaust memory and CPU because builtins like math.format, regex.replace and string.escape skip the LimitToString allocation guard. Attackers can submit small templates using huge format precision specifiers, shared-structure array comparison, BigInteger multiplication or exponential function recursion that ignore LoopLimit and CancellationToken, crashing or stalling multi-tenant hosts.",
-    "references": [
-      "https://github.com/scriban/scriban/security/advisories/GHSA-95w2-9mjq-6c74",
-      "https://www.vulncheck.com/advisories/scriban-before-7.5.3-denial-of-service-via-unguarded-builtins-and-recursion",
-      "https://github.com/scriban/scriban/security/advisories/GHSA-95w2-9mjq-6c74"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 36.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-126543",
     "published": "2026-11-11T01:17:15.727",
     "last_modified": "2026-11-13T17:17:25.913",
@@ -21360,47 +20708,6 @@
       ]
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 72.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-126781",
-    "published": "2026-11-11T19:17:39.177",
-    "last_modified": "2026-11-13T02:18:52.700",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Webmin through 2.670 contains a users file injection vulnerability in acl/cert_issue.cgi that allows authenticated Webmin users to inject lines by supplying unvalidated certificate DN fields containing newlines. Attackers can end a DN field with a backslash and newline to add a second root entry with a known password hash, gaining Webmin root access after miniserv restarts.",
-    "references": [
-      "https://github.com/webmin/webmin/blob/2.670/acl/cert_issue.cgi#L22-L52",
-      "https://github.com/webmin/webmin/commit/0c449e341746d8c445c8c7db223eac1f41755943",
-      "https://github.com/webmin/webmin/commit/8fb194e5fbc30a6664545d48940d03759ace9bf2",
-      "https://www.vulncheck.com/advisories/webmin-through-2.670-users-file-injection-via-acl-cert-issue-cgi"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 21.8,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
       "weaponized"
     ],
@@ -22092,6 +21399,89 @@
     "weaponized": true,
     "epss": 0.4,
     "epss_percentile": 33.7,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "weaponized"
+    ],
+    "intel_score": 72.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129493",
+    "published": "2026-11-16T01:17:19.897",
+    "last_modified": "2026-11-16T01:17:19.897",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Bolo (bolo-solo) 1.7 through 2.6.4 contains an information disclosure vulnerability that allows unauthenticated attackers to read article view passwords via the public GET /articles endpoint. Attackers can retrieve the plaintext articleViewPwd field returned by ArticleProcessor.getArticlesByPage and submit it to read password-protected article content.",
+    "references": [
+      "https://github.com/bolo-blog/bolo-solo/blob/e0ab6b1f57a4ba66b4a42a7b6ceafb87c33290cc/src/main/java/org/b3log/solo/processor/ArticleProcessor.java#L442-L478",
+      "https://github.com/bolo-blog/bolo-solo/issues/331",
+      "https://vul.yulun.ac.cn/20261115/bolo-solo/",
+      "https://www.vulncheck.com/advisories/bolo-bolo-solo-1.7-through-2.6.4-article-password-disclosure-via-articles"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "weaponized"
+    ],
+    "intel_score": 72.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129494",
+    "published": "2026-11-16T01:17:20.053",
+    "last_modified": "2026-11-16T01:17:20.053",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "CloudPaste 1.1.0 through 1.9.1 contains an information disclosure vulnerability that allows unauthenticated attackers to obtain WebDAV storage credentials through the unauthenticated /api/proxy/link endpoint. Attackers who know a public share slug can retrieve the Basic Authorization header containing the WebDAV username and password, then read, modify, or delete files on the WebDAV server.",
+    "references": [
+      "https://github.com/ling-drag0n/CloudPaste/blob/282ea1c7fbbcd4fab40527664bf7479fd5bb922d/backend/src/routes/proxyLinkRoutes.js#L139-L167",
+      "https://github.com/ling-drag0n/CloudPaste/blob/282ea1c7fbbcd4fab40527664bf7479fd5bb922d/backend/src/storage/drivers/webdav/WebDavStorageDriver.js#L800-L819",
+      "https://github.com/ling-drag0n/CloudPaste/issues/223",
+      "https://vul.yulun.ac.cn/20261115/cloudpaste/",
+      "https://www.vulncheck.com/advisories/cloudpaste-1.1.0-through-1.9.1-webdav-credential-disclosure-via-api-proxy-link"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -22950,6 +22340,44 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-125771",
+    "published": "2026-11-15T15:16:46.890",
+    "last_modified": "2026-11-15T15:16:46.997",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Incorrect Privilege Assignment vulnerability in AtlasAiDev MCP Server for WordPress ai-workflow-automation-ai-agent-hub allows Privilege Escalation.This issue affects MCP Server for WordPress: from n/a through 2.0.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/ai-workflow-automation-ai-agent-hub/vulnerability/wordpress-mcp-server-for-wordpress-plugin-2-0-3-privilege-escalation-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 36.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 71.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-17407",
     "published": "2026-11-07T05:18:57.670",
     "last_modified": "2026-11-13T15:17:47.797",
@@ -22986,46 +22414,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124453",
-    "published": "2026-11-08T14:18:12.790",
-    "last_modified": "2026-11-13T04:17:40.397",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenEMR before 8.3.0 contains an insecure direct object reference vulnerability in portal/lib/persist.php that allows authenticated portal patients to write settings for other patients. Attackers can modify the setting_patient parameter in a JSON POST request to another patient's PID, altering that patient's portal settings such as the portal theme.",
-    "references": [
-      "https://github.com/openemr/openemr/security/advisories/GHSA-rrw3-g25h-x68h",
-      "https://www.vulncheck.com/advisories/openemr-before-8.3.0-idor-in-portal-patient-settings-via-persist-php",
-      "https://github.com/openemr/openemr/security/advisories/GHSA-rrw3-g25h-x68h"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 10.5,
-    "score_breakdown": {
-      "base_cvss": 35.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N",
-    "tags": [
-      "weaponized"
-    ],
-    "intel_score": 70.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -23553,6 +22941,44 @@
     "reasons": [
       "recently modified (last 48h)",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125832",
+    "published": "2026-11-15T14:17:26.137",
+    "last_modified": "2026-11-15T14:17:26.250",
+    "cvss_v3": 8.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') vulnerability in Passionate Programmer Peter WP Data Access wp-data-access allows SQL Injection.This issue affects WP Data Access: from n/a through 5.5.92.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wp-data-access/vulnerability/wordpress-wp-data-access-plugin-5-5-92-sql-injection-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 42.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: sqli",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:L",
+    "tags": [
+      "sqli"
+    ],
+    "intel_score": 70.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18"
     ]
   },
   {
@@ -24350,90 +23776,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124331",
-    "published": "2026-11-08T14:18:07.720",
-    "last_modified": "2026-11-13T04:17:39.170",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was identified in Jinher OA C6. This impacts an unknown function of the file /C6/JHSoft.Web.Project/OfficeReadOnly/ProjectAfficheManage.aspx. Such manipulation of the argument ProjID leads to sql injection. It is possible to launch the attack remotely. The exploit is publicly available and might be used. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://github.com/wangpenglei11/Submit/issues/2",
-      "https://vuldb.com/cve/CVE-2026-124331",
-      "https://vuldb.com/submit/1028013",
-      "https://vuldb.com/vuln/432651",
-      "https://vuldb.com/vuln/432651/cti",
-      "https://github.com/wangpenglei11/Submit/issues/2"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 17.1,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124554",
-    "published": "2026-11-09T02:16:59.480",
-    "last_modified": "2026-11-13T04:17:42.400",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A security flaw has been discovered in JeecgBoot 3.9.5. This affects an unknown part of the file /jeecg-boot/drag/onlDragDatasetHead/getAllChartData of the component JimuBI. Performing a manipulation of the argument params results in sql injection. Remote exploitation of the attack is possible. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://vuldb.com/cve/CVE-2026-124554",
-      "https://vuldb.com/submit/1035487",
-      "https://vuldb.com/vuln/432886",
-      "https://vuldb.com/vuln/432886/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 17.1,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [
-      "sqli"
-    ],
-    "intel_score": 64.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-126997",
     "published": "2026-11-12T15:17:49.220",
     "last_modified": "2026-11-13T19:19:27.437",
@@ -24829,6 +24171,44 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-125780",
+    "published": "2026-11-15T14:17:25.130",
+    "last_modified": "2026-11-15T14:17:25.247",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability in Acowebs Woocommerce Custom Product Addons Pro woo-custom-product-addons-pro allows Path Traversal.This issue affects Woocommerce Custom Product Addons Pro: from n/a through 5.9.0.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/woo-custom-product-addons-pro/vulnerability/wordpress-woocommerce-custom-product-addons-pro-plugin-5-9-0-arbitrary-file-deletion-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "tags": [
+      "path_traversal"
+    ],
+    "intel_score": 62.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-16709",
     "published": "2026-11-07T05:18:19.730",
     "last_modified": "2026-11-13T15:17:46.107",
@@ -24925,41 +24305,6 @@
     "weaponized": false,
     "epss": 0.8,
     "epss_percentile": 55.7,
-    "score_breakdown": {
-      "base_cvss": 50.0,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [],
-    "intel_score": 60.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-127277",
-    "published": "2026-11-13T02:18:54.520",
-    "last_modified": "2026-11-13T02:18:54.667",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A security flaw has been discovered in Linksys EA8100 1.0.3.216940. The affected element is an unknown function of the file etc/init.d/service_smbd.sh of the component SMB Service. Performing a manipulation of the argument ANON_ACCESS results in improper initialization. The attack can be initiated remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://github.com/geo-chen/oss/blob/main/Linksys.md#finding-5-smb-anonymous-access-mapped-to-the-admin-account-when-anonymous-access-is-enabled",
-      "https://vuldb.com/cve/CVE-2026-127277",
-      "https://vuldb.com/submit/1040999",
-      "https://vuldb.com/vuln/436432",
-      "https://vuldb.com/vuln/436432/cti",
-      "https://www.linksys.com/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 47.2,
     "score_breakdown": {
       "base_cvss": 50.0,
       "freshness": 10,
@@ -25094,6 +24439,41 @@
     "weaponized": false,
     "epss": 0.9,
     "epss_percentile": 59.3,
+    "score_breakdown": {
+      "base_cvss": 50.0,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 60.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129444",
+    "published": "2026-11-15T09:16:44.570",
+    "last_modified": "2026-11-15T09:16:44.743",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was identified in D-Link DSL-6740C 20131126. This affects an unknown function of the file /etc/templates/ftpd/ftpd_conf.php of the component FTP Daemon. Such manipulation leads to hard-coded credentials. The attack can be executed remotely. The exploit is publicly available and might be used.",
+    "references": [
+      "https://github.com/XueDugu/dlink-dsl6740c-ftp-default-evidence",
+      "https://vuldb.com/cve/CVE-2026-129444",
+      "https://vuldb.com/submit/1044943",
+      "https://vuldb.com/vuln/437457",
+      "https://vuldb.com/vuln/437457/cti",
+      "https://www.dlink.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 49.6,
     "score_breakdown": {
       "base_cvss": 50.0,
       "freshness": 10,
@@ -25295,6 +24675,41 @@
     "weaponized": false,
     "epss": 0.8,
     "epss_percentile": 55.6,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 59.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129453",
+    "published": "2026-11-15T14:17:26.583",
+    "last_modified": "2026-11-15T14:17:26.730",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was found in DrayTek Vigor2960 1.5.1.6. This issue affects the function check_file_exist of the file /cgi-bin/mainfunction.cgi of the component File Existence Check. Performing a manipulation of the argument upload_name results in heap-based buffer overflow. The attack may be initiated remotely. The exploit has been made public and could be used. Upgrading to version 1.5.1.7 is capable of addressing this issue. Upgrading the affected component is recommended. The vendor recommends: \"1.5.1.6 isn't the latest version of 2960, the latest version fixes many security issues. And we have another one in our release plan which should solve the issues reported.\"",
+    "references": [
+      "https://fw.draytek.com.tw/Vigor2960/Firmware/v1.5.1.7/Vigor2960_v1.5.1.7.zip",
+      "https://github.com/yikesoftware/DrayTek_Vigor2960_Security_Analysis/tree/main/cases/DRV2960-0020-authenticated-check-file-exist-direct-cgi-core",
+      "https://vuldb.com/cve/CVE-2026-129453",
+      "https://vuldb.com/submit/1044963",
+      "https://vuldb.com/vuln/437464",
+      "https://vuldb.com/vuln/437464/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
     "score_breakdown": {
       "base_cvss": 49.5,
       "freshness": 10,
@@ -25794,6 +25209,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-125795",
+    "published": "2026-11-15T15:16:47.163",
+    "last_modified": "2026-11-15T15:16:47.283",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper Control of Filename for Include/Require Statement in PHP Program ('PHP Remote File Inclusion') vulnerability in Estatik Estatik estatik allows PHP Local File Inclusion.This issue affects Estatik: from n/a through 4.3.6.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/estatik/vulnerability/wordpress-estatik-plugin-4-3-6-local-file-inclusion-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 59.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-121367",
     "published": "2026-11-10T20:18:55.933",
     "last_modified": "2026-11-13T18:17:30.437",
@@ -25854,38 +25299,6 @@
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:N",
     "tags": [],
     "intel_score": 58.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-68548",
-    "published": "2026-11-12T20:18:51.307",
-    "last_modified": "2026-11-13T02:18:58.730",
-    "cvss_v3": 9.4,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Algernon is a small self-contained pure-Go web server. Prior to version 1.17.10, Algernon's URL-prefix authorization gate matches its protected prefixes (/admin, /repo, /data) with case-sensitive strings.HasPrefix, while the exact same raw req.URL.Path is later resolved against the filesystem. On case-insensitive filesystems (Windows NTFS — always; macOS APFS/HFS+ — default), a request for /Admin/secret.lua evades every protected-prefix check, falls through to the public-prefix accept branch, and then resolves on disk to admin/secret.lua. The result is an unauthenticated bypass of the /admin, /repo, and /data authorization boundary, enabling read (and, for Lua files, execution) of protected content. The permission system is active in the default configuration. This issue has been patched in version 1.17.10.",
-    "references": [
-      "https://github.com/xyproto/algernon/releases/tag/v1.17.10",
-      "https://github.com/xyproto/algernon/security/advisories/GHSA-vm84-8c4p-64hx",
-      "https://github.com/xyproto/algernon/security/advisories/GHSA-vm84-8c4p-64hx"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 55.7,
-    "score_breakdown": {
-      "base_cvss": 47.0,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:L",
-    "tags": [],
-    "intel_score": 57.0,
     "reasons": [
       "recently modified (last 48h)"
     ]
@@ -26037,77 +25450,6 @@
       "components": []
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H",
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-18963",
-    "published": "2026-08-18T17:16:57.083",
-    "last_modified": "2026-11-13T00:20:15.030",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A flaw was found in the reset-credentials flow of the keycloak-services component, which is the core engine for identity and access management in Red Hat Build of Keycloak. The issue allows an unauthenticated attacker to force the password reset process for any user without needing to click the required email verification link. This can result in the attacker gaining full control over target user accounts by directly setting new credentials.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:56519",
-      "https://access.redhat.com/errata/RHSA-2026:56520",
-      "https://access.redhat.com/errata/RHSA-2026:56523",
-      "https://access.redhat.com/errata/RHSA-2026:56524",
-      "https://access.redhat.com/errata/RHSA-2026:99763",
-      "https://access.redhat.com/errata/RHSA-2026:99764",
-      "https://access.redhat.com/errata/RHSA-2026:99765",
-      "https://access.redhat.com/errata/RHSA-2026:99766",
-      "https://access.redhat.com/errata/RHSA-2026:99767",
-      "https://access.redhat.com/security/cve/CVE-2026-18963",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2511595",
-      "https://cert-portal.siemens.com/productcert/html/ssa-503852.html"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 8.1,
-    "epss_percentile": 94.9,
-    "score_breakdown": {
-      "base_cvss": 45.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [],
-    "intel_score": 55.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-118740",
-    "published": "2026-11-10T19:19:50.740",
-    "last_modified": "2026-11-13T00:20:09.643",
-    "cvss_v3": 9.1,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Missing authorization in Aspire allows an unauthorized attacker to bypass a security feature over a network.",
-    "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118740"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.9,
-    "epss_percentile": 60.9,
-    "score_breakdown": {
-      "base_cvss": 45.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
     "tags": [],
     "intel_score": 55.5,
     "reasons": [
@@ -27381,69 +26723,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-126785",
-    "published": "2026-11-12T01:17:11.603",
-    "last_modified": "2026-11-13T02:18:52.827",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability has been found in rmalright TR-VISION HOME 2.0.5. Impacted is the function sub_11504 in the library WFanManager.sys of the component IOCTL Handler. Such manipulation leads to incorrect default permissions. The attack must be carried out locally. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://vuldb.com/cve/CVE-2026-126785",
-      "https://vuldb.com/submit/1040412",
-      "https://vuldb.com/vuln/435969",
-      "https://vuldb.com/vuln/435969/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.1,
-    "epss_percentile": 1.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-125836",
-    "published": "2026-11-12T08:16:41.267",
-    "last_modified": "2026-11-13T02:18:51.273",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Cross-Site Request Forgery (CSRF) vulnerability in Nicu Micle Simple JWT Login simple-jwt-login allows Cross Site Request Forgery.This issue affects Simple JWT Login: from n/a through 3.6.8.",
-    "references": [
-      "https://patchstack.com/database/wordpress/plugin/simple-jwt-login/vulnerability/wordpress-simple-jwt-login-plugin-3-6-8-cross-site-request-forgery-csrf-vulnerability?_s_id=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.1,
-    "epss_percentile": 3.7,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [],
-    "intel_score": 54.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-116316",
     "published": "2026-11-12T15:17:39.837",
     "last_modified": "2026-11-13T05:18:04.710",
@@ -27762,6 +27041,36 @@
     "reasons": [
       "recently modified (last 48h)",
       "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82156",
+    "published": "2026-11-16T04:16:44.230",
+    "last_modified": "2026-11-16T04:16:44.230",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dell PowerStore contains an authorization-bypass vulnerability. A low-privileged attacker could exploit it, potentially leading to elevation of privilege to administrator.",
+    "references": [
+      "https://www.dell.com/support/kbdoc/en-us/000527640/dsa-2026-479-dell-powerstore-t-security-update-for-multiple-vulnerabilities"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 54.0,
+    "reasons": [
+      "recently modified (last 48h)"
     ]
   },
   {
@@ -28273,6 +27582,918 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-124254",
+    "published": "2026-11-15T14:17:21.387",
+    "last_modified": "2026-11-15T14:17:21.503",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Exactly WWW LLC EWWW Image Optimizer ewww-image-optimizer allows Stored XSS.This issue affects EWWW Image Optimizer: from n/a through 8.9.1.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/ewww-image-optimizer/vulnerability/wordpress-ewww-image-optimizer-plugin-8-9-1-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-124259",
+    "published": "2026-11-15T14:17:21.543",
+    "last_modified": "2026-11-15T14:17:21.653",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Franky Events Made Easy events-made-easy allows Reflected XSS.This issue affects Events Made Easy: from n/a through 3.3.5.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/events-made-easy/vulnerability/wordpress-events-made-easy-plugin-3-3-5-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-124270",
+    "published": "2026-11-15T14:17:21.687",
+    "last_modified": "2026-11-15T14:17:21.800",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Basix NEX-Forms nex-forms-express-wp-form-builder allows Reflected XSS.This issue affects NEX-Forms: from n/a through 9.3.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/nex-forms-express-wp-form-builder/vulnerability/wordpress-nex-forms-plugin-9-3-3-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-124995",
+    "published": "2026-11-15T14:17:24.187",
+    "last_modified": "2026-11-15T14:17:24.303",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Michal Jaworski Track, Analyze & Optimize by WP Tao wp-tao allows Stored XSS.This issue affects Track, Analyze & Optimize by WP Tao: from n/a through 1.3.1.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wp-tao/vulnerability/wordpress-track-analyze-optimize-by-wp-tao-plugin-1-3-1-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125443",
+    "published": "2026-11-15T14:17:24.340",
+    "last_modified": "2026-11-15T14:17:24.457",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Denishua WPJAM Basic wpjam-basic allows DOM-Based XSS.This issue affects WPJAM Basic: from n/a through 7.1.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wpjam-basic/vulnerability/wordpress-wpjam-basic-plugin-7-1-2-cross-site-scripting-xss-vulnerability-2?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125764",
+    "published": "2026-11-15T14:17:24.647",
+    "last_modified": "2026-11-15T14:17:24.770",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in E2Pdf.com e2pdf e2pdf allows Stored XSS.This issue affects e2pdf: from n/a through 1.32.65.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/e2pdf/vulnerability/wordpress-e2pdf-plugin-1-32-65-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125775",
+    "published": "2026-11-15T14:17:24.977",
+    "last_modified": "2026-11-15T14:17:25.090",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in CRM Perks CRM Perks Forms crm-perks-forms allows Reflected XSS.This issue affects CRM Perks Forms: from n/a through 1.1.8.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/crm-perks-forms/vulnerability/wordpress-crm-perks-forms-plugin-1-1-8-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125789",
+    "published": "2026-11-15T14:17:25.277",
+    "last_modified": "2026-11-15T14:17:25.390",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in e4jvikwp VikBooking Hotel Booking Engine & PMS vikbooking allows Stored XSS.This issue affects VikBooking Hotel Booking Engine & PMS: from n/a through 1.8.20.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/vikbooking/vulnerability/wordpress-vikbooking-hotel-booking-engine-pms-plugin-1-8-20-cross-site-scripting-xss-vulnerability-2?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125790",
+    "published": "2026-11-15T14:17:25.423",
+    "last_modified": "2026-11-15T14:17:25.533",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in e4jvikwp VikBooking Hotel Booking Engine & PMS vikbooking allows Stored XSS.This issue affects VikBooking Hotel Booking Engine & PMS: from n/a through 1.8.20.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/vikbooking/vulnerability/wordpress-vikbooking-hotel-booking-engine-pms-plugin-1-8-20-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125791",
+    "published": "2026-11-15T14:17:25.563",
+    "last_modified": "2026-11-15T14:17:25.670",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in iWorks Orphans sierotki allows Stored XSS.This issue affects Orphans: from n/a through 3.4.6.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/sierotki/vulnerability/wordpress-orphans-plugin-3-4-6-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125813",
+    "published": "2026-11-15T14:17:25.847",
+    "last_modified": "2026-11-15T14:17:25.957",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Ays Pro Survey Maker survey-maker allows Reflected XSS.This issue affects Survey Maker: from n/a through 5.2.4.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/survey-maker/vulnerability/wordpress-survey-maker-plugin-5-2-4-3-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125828",
+    "published": "2026-11-15T14:17:25.990",
+    "last_modified": "2026-11-15T14:17:26.100",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Liquid Web / StellarWP BookIt bookit allows Stored XSS.This issue affects BookIt: from n/a through 2.6.0.7.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/bookit/vulnerability/wordpress-bookit-plugin-2-6-0-7-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125447",
+    "published": "2026-11-15T15:16:45.760",
+    "last_modified": "2026-11-15T15:16:46.563",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Kaliforms Kali Forms kali-forms allows Reflected XSS.This issue affects Kali Forms: from n/a through 2.4.31.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/kali-forms/vulnerability/wordpress-kali-forms-plugin-2-4-31-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125733",
+    "published": "2026-11-15T15:16:46.600",
+    "last_modified": "2026-11-15T15:16:46.710",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in DevItems ShopLentor woolentor-addons allows Reflected XSS.This issue affects ShopLentor: from n/a through 3.5.7.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/woolentor-addons/vulnerability/wordpress-shoplentor-plugin-3-5-7-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125765",
+    "published": "2026-11-15T15:16:46.743",
+    "last_modified": "2026-11-15T15:16:46.853",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in ShortPixel ShortPixel Adaptive Images shortpixel-adaptive-images allows Stored XSS.This issue affects ShortPixel Adaptive Images: from n/a through 3.11.6.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/shortpixel-adaptive-images/vulnerability/wordpress-shortpixel-adaptive-images-plugin-3-11-6-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125793",
+    "published": "2026-11-15T15:16:47.027",
+    "last_modified": "2026-11-15T15:16:47.133",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in flexmls Flexmls® IDX flexmls-idx allows Reflected XSS.This issue affects Flexmls® IDX: from n/a through 4.1.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/flexmls-idx/vulnerability/wordpress-flexmls-idx-plugin-4-1-2-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-128893",
+    "published": "2026-11-15T15:16:47.467",
+    "last_modified": "2026-11-15T15:16:47.580",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Marcin Wise Chat wise-chat allows Reflected XSS.This issue affects Wise Chat: from n/a through 3.4.5.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wise-chat/vulnerability/wordpress-wise-chat-plugin-3-4-5-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125760",
+    "published": "2026-11-15T19:17:15.073",
+    "last_modified": "2026-11-15T19:17:15.183",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Bit Apps Bit Assist bit-assist allows DOM-Based XSS.This issue affects Bit Assist: from n/a through 1.8.4.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/bit-assist/vulnerability/wordpress-bit-assist-plugin-1-8-4-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125798",
+    "published": "2026-11-15T19:17:15.413",
+    "last_modified": "2026-11-15T19:17:15.523",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Zaytech Smart Online Order for Clover clover-online-orders allows DOM-Based XSS.This issue affects Smart Online Order for Clover: from n/a through 1.6.6.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/clover-online-orders/vulnerability/wordpress-smart-online-order-for-clover-plugin-1-6-6-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125804",
+    "published": "2026-11-15T19:17:15.557",
+    "last_modified": "2026-11-15T19:17:15.667",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Meow Apps AI Engine ai-engine allows Stored XSS.This issue affects AI Engine: from n/a through 3.9.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/ai-engine/vulnerability/wordpress-ai-engine-plugin-3-9-3-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125817",
+    "published": "2026-11-15T19:17:15.703",
+    "last_modified": "2026-11-15T19:17:15.813",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Themeisle Feedzy feedzy-rss-feeds allows Stored XSS.This issue affects Feedzy: from n/a through 5.2.15.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/feedzy-rss-feeds/vulnerability/wordpress-feedzy-plugin-5-2-15-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125818",
+    "published": "2026-11-15T19:17:15.850",
+    "last_modified": "2026-11-15T19:17:16.090",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in AdvancedCoding wpDiscuz wpdiscuz allows Stored XSS.This issue affects wpDiscuz: from n/a through 7.6.75.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wpdiscuz/vulnerability/wordpress-wpdiscuz-plugin-7-6-75-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125822",
+    "published": "2026-11-15T19:17:16.123",
+    "last_modified": "2026-11-15T19:17:16.237",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Nickboss WordPress File Upload wp-file-upload allows Stored XSS.This issue affects WordPress File Upload: from n/a through 5.2.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wp-file-upload/vulnerability/wordpress-wordpress-file-upload-plugin-5-2-3-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125830",
+    "published": "2026-11-15T19:17:16.580",
+    "last_modified": "2026-11-15T19:17:16.693",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Belingo belingoGeo belingogeo allows Reflected XSS.This issue affects belingoGeo: from n/a through 1.13.3.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/belingogeo/vulnerability/wordpress-belingogeo-plugin-1-13-3-cross-site-scripting-xss-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+    "tags": [
+      "xss"
+    ],
+    "intel_score": 53.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "xss+8"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-121295",
     "published": "2026-11-10T20:18:55.750",
     "last_modified": "2026-11-13T18:17:30.317",
@@ -28326,36 +28547,6 @@
       "components": []
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
-    "tags": [],
-    "intel_score": 53.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-47711",
-    "published": "2026-11-12T20:18:41.220",
-    "last_modified": "2026-11-13T02:18:58.013",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "BACnet Stack is a BACnet open source protocol stack C library for embedded systems. Prior to versions 1.4.4, 1.5.1, and 1.6.0, the current master demo server can be crashed remotely over BACnet/IP by sending a valid Confirmed WriteProperty request that updates loop-1's controlled-variable-reference to point to life-safety-zone-1 / accepted-modes. This issue has been patched in versions 1.4.4, 1.5.1, and 1.6.0.",
-    "references": [
-      "https://github.com/bacnet-stack/bacnet-stack/security/advisories/GHSA-vrpm-9gm2-x552"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 21.0,
-    "score_breakdown": {
-      "base_cvss": 43.0,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
     "tags": [],
     "intel_score": 53.0,
     "reasons": [
@@ -29804,6 +29995,41 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-129445",
+    "published": "2026-11-15T10:16:53.970",
+    "last_modified": "2026-11-15T10:16:54.147",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security flaw has been discovered in D-Link DIR-850L FW1.20WWb03. This impacts an unknown function of the file /usr/sbin/consolepwd of the component Console Login. Performing a manipulation results in hard-coded credentials. The attack requires a local approach. The exploit has been released to the public and may be used for attacks.",
+    "references": [
+      "https://github.com/XueDugu/dlink-dir850l-consolepwd-evidence",
+      "https://vuldb.com/cve/CVE-2026-129445",
+      "https://vuldb.com/submit/1044944",
+      "https://vuldb.com/vuln/437458",
+      "https://vuldb.com/vuln/437458/cti",
+      "https://www.dlink.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 41.0,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 51.0,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2025-4637",
     "published": "2025-05-14T18:15:33.353",
     "last_modified": "2026-11-13T17:02:41.927",
@@ -29971,50 +30197,6 @@
     "weaponized": false,
     "epss": 0.6,
     "epss_percentile": 51.7,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-103963",
-    "published": "2026-10-30T05:16:57.237",
-    "last_modified": "2026-11-13T00:20:06.320",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in glib-networking. When establishing connections using Transport Layer Security (TLS) version 1.3, the client-side session cache does not limit the number of session tickets retained for a single host. A malicious server can exploit this by sending excessive session ticket messages, causing the client application to continuously consume memory. This unbounded memory growth can exhaust system memory, resulting in a Denial of Service (DoS).",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:99695",
-      "https://access.redhat.com/errata/RHSA-2026:99696",
-      "https://access.redhat.com/errata/RHSA-2026:99697",
-      "https://access.redhat.com/errata/RHSA-2026:99698",
-      "https://access.redhat.com/security/cve/CVE-2026-103963",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2465656",
-      "https://gitlab.gnome.org/GNOME/glib-networking/-/merge_requests/288"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 33.1,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -30781,79 +30963,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-127030",
-    "published": "2026-11-12T17:17:43.150",
-    "last_modified": "2026-11-13T02:18:53.413",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in freeradius. An improper length validation in the EAP-FAST module allows a stack-based buffer overflow during session ticket processing. A remote, unauthenticated attacker can exploit this flaw by sending a specially crafted handshake request, causing the server process to crash and resulting in a Denial of Service (DoS).",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-127030",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2572340",
-      "https://github.com/FreeRADIUS/freeradius-server/commit/064567a08f3b9d9b4863fab6060fafe296ac7de9",
-      "https://github.com/FreeRADIUS/freeradius-server/commit/a5d09dad528d7a3a3c4c01158716ab85a12e09ef"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 53.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos"
-    ],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "dos+3"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-47257",
-    "published": "2026-11-12T20:18:40.020",
-    "last_modified": "2026-11-13T02:18:57.897",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "BACnet Stack is a BACnet open source protocol stack C library for embedded systems. In versions 1.5.0 and 1.6.0-rc1, there is a restore logic flaw in bacnet-stack that is reachable through the official, unmodified apps/server management path when BACNET_BACKUP_RESTORE is enabled. This issue has been patched in versions 1.5.1 and 1.6.0.",
-    "references": [
-      "https://github.com/bacnet-stack/bacnet-stack/pull/1352",
-      "https://github.com/bacnet-stack/bacnet-stack/security/advisories/GHSA-x6pp-3pf3-f87r",
-      "https://github.com/bacnet-stack/bacnet-stack/security/advisories/GHSA-x6pp-3pf3-f87r"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 33.9,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H",
-    "tags": [],
-    "intel_score": 50.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-123711",
     "published": "2026-11-13T06:16:53.687",
     "last_modified": "2026-11-13T19:19:20.320",
@@ -31037,6 +31146,74 @@
       "components": []
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125823",
+    "published": "2026-11-15T19:17:16.273",
+    "last_modified": "2026-11-15T19:17:16.397",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Allocation of Resources Without Limits or Throttling vulnerability in Jegstudio Gutenverse gutenverse allows HTTP DoS.This issue affects Gutenverse: from n/a through 4.2.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/gutenverse/vulnerability/wordpress-gutenverse-plugin-4-2-2-denial-of-service-attack-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: dos",
+          "points": 3
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "tags": [
+      "dos"
+    ],
+    "intel_score": 50.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129091",
+    "published": "2026-11-15T19:17:16.730",
+    "last_modified": "2026-11-15T19:17:16.840",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Improper Control of Filename for Include/Require Statement in PHP Program ('PHP Remote File Inclusion') vulnerability in Mikado-Themes GrandPrix Core grandprix-core allows PHP Local File Inclusion.This issue affects GrandPrix Core: from n/a through 1.0.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/grandprix-core/vulnerability/wordpress-grandprix-core-plugin-1-0-local-file-inclusion-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [],
     "intel_score": 50.5,
     "reasons": [
@@ -33208,41 +33385,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124563",
-    "published": "2026-11-09T04:17:06.773",
-    "last_modified": "2026-11-13T04:17:42.670",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A security flaw has been discovered in D-Link DIR-878 1.20B05. Affected by this vulnerability is the function SetWanSettings of the component HNAP Handler. The manipulation of the argument Primary/Secondary results in buffer overflow. The attack may be launched remotely. The exploit has been released to the public and may be used for attacks. This vulnerability only affects products that are no longer supported by the maintainer.",
-    "references": [
-      "https://github.com/Zimo-666/DIR-878-cves/tree/main/05-setwansettings-l2tp-pptp-dns-overflow",
-      "https://vuldb.com/cve/CVE-2026-124563",
-      "https://vuldb.com/submit/1035619",
-      "https://vuldb.com/vuln/432895",
-      "https://vuldb.com/vuln/432895/cti",
-      "https://www.dlink.com/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 45.9,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-121629",
     "published": "2026-11-09T12:16:37.847",
     "last_modified": "2026-11-14T02:16:46.933",
@@ -33874,38 +34016,6 @@
     "weaponized": false,
     "epss": 0.3,
     "epss_percentile": 20.1,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [],
-    "intel_score": 47.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-46674",
-    "published": "2026-11-12T20:18:39.080",
-    "last_modified": "2026-11-13T02:18:57.780",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "BACnet Stack is a BACnet open source protocol stack C library for embedded systems. Prior to versions 1.4.4 and 1.5.1, an out-of-bounds read vulnerability exists in bacnet-stack's AtomicWriteFile record-access path. The bug is caused by a mismatch between an externally controlled returnedRecordCount field and the fixed-size internal fileData[] array used by BACNET_ATOMIC_WRITE_FILE_DATA. This issue has been patched in versions 1.4.4 and 1.5.1.",
-    "references": [
-      "https://github.com/bacnet-stack/bacnet-stack/pull/1344",
-      "https://github.com/bacnet-stack/bacnet-stack/security/advisories/GHSA-8384-pwhh-cxjh",
-      "https://github.com/bacnet-stack/bacnet-stack/security/advisories/GHSA-8384-pwhh-cxjh"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 37.6,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -34583,6 +34693,36 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-125799",
+    "published": "2026-11-15T15:16:47.317",
+    "last_modified": "2026-11-15T15:16:47.430",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Insertion of Sensitive Information into Externally-Accessible File or Directory vulnerability in Looks Awesome Flow-Flow Social Stream flow-flow-social-streams allows Retrieve Embedded Sensitive Data.This issue affects Flow-Flow Social Stream: from n/a through 5.0.5.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/flow-flow-social-streams/vulnerability/wordpress-flow-flow-social-stream-plugin-5-0-5-sensitive-data-exposure-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [],
+    "intel_score": 47.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-42784",
     "published": "2026-09-16T17:17:18.380",
     "last_modified": "2026-11-13T17:17:31.910",
@@ -34651,41 +34791,6 @@
       "components": []
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [],
-    "intel_score": 47.0,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124579",
-    "published": "2026-11-09T08:17:02.723",
-    "last_modified": "2026-11-13T04:17:43.283",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was determined in aaPanel BillionMail up to 4.9. Affected by this issue is some unknown functionality of the file core/api/relay/v1/relay.go of the component Relay Configuration API. Executing a manipulation of the argument helo_name can lead to injection. The attack may be performed from remote. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://gist.github.com/stoic-crawler/07c4b68b76b870659ade38d0035fced8",
-      "https://vuldb.com/cve/CVE-2026-124579",
-      "https://vuldb.com/submit/1038400",
-      "https://vuldb.com/vuln/432929",
-      "https://vuldb.com/vuln/432929/cti",
-      "https://gist.github.com/stoic-crawler/07c4b68b76b870659ade38d0035fced8"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.2,
-    "epss_percentile": 13.6,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:L",
     "tags": [],
     "intel_score": 47.0,
     "reasons": [
@@ -34853,40 +34958,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124501",
-    "published": "2026-11-09T00:18:01.407",
-    "last_modified": "2026-11-13T04:17:42.110",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A weakness has been identified in Tidelift moto up to 5.2.4. Affected is an unknown function of the file moto/batch/models.py of the component AWS Batch Emulation. This manipulation of the argument privileged/volumes causes improper privilege management. Remote exploitation of the attack is possible. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://drive.google.com/file/d/1EnXEWD-kBQLwRqpLoJPhtixywWumE0Br/view?usp=sharing",
-      "https://vuldb.com/cve/CVE-2026-124501",
-      "https://vuldb.com/submit/1033844",
-      "https://vuldb.com/vuln/432806",
-      "https://vuldb.com/vuln/432806/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 20.5,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-125076",
     "published": "2026-11-10T00:17:06.357",
     "last_modified": "2026-11-14T03:17:24.300",
@@ -34901,41 +34972,6 @@
       "https://vuldb.com/vuln/433180",
       "https://vuldb.com/vuln/433180/cti",
       "https://www.sourcecodester.com/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 34.5,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-127278",
-    "published": "2026-11-13T02:18:54.713",
-    "last_modified": "2026-11-13T02:18:54.860",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A weakness has been identified in AIP-PUB ACPs-community up to 2.2.0. The impacted element is the function send_verification_code of the file registry-server/app/account/service_auth.py of the component verify-code Endpoint. Executing a manipulation of the argument phone can lead to improper authentication. The attack can be launched remotely. The exploit has been made available to the public and could be used for attacks. The reported GitHub issue was closed with the reason \"completed\". However, it was not possible to determine the PR or commit which could have fixed this issue.",
-    "references": [
-      "https://github.com/AIP-PUB/ACPs-community/",
-      "https://github.com/AIP-PUB/ACPs-community/issues/11",
-      "https://vuldb.com/cve/CVE-2026-127278",
-      "https://vuldb.com/submit/1040948",
-      "https://vuldb.com/vuln/436433",
-      "https://vuldb.com/vuln/436433/cti"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -35027,41 +35063,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-127286",
-    "published": "2026-11-13T03:17:30.113",
-    "last_modified": "2026-11-13T03:17:30.267",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A vulnerability was identified in Zackriya-Solutions Meetily up to 0.4.1. Affected is an unknown function of the file backend/app/main.py. The manipulation leads to missing authentication. The attack is possible to be carried out remotely. The exploit is publicly available and might be used. The legacy backend was not removed yet. Vulnerable code is still present on main. The vendor explains: \"[W]e are moving towards a single unified application using the tauri framework, and we deprecated the client-server architecture of this application.\"",
-    "references": [
-      "https://github.com/Zackriya-Solutions/meetily/",
-      "https://github.com/Zackriya-Solutions/meetily/issues/845",
-      "https://vuldb.com/cve/CVE-2026-127286",
-      "https://vuldb.com/submit/1041189",
-      "https://vuldb.com/vuln/436458",
-      "https://vuldb.com/vuln/436458/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 34.5,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": []
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-    "tags": [],
-    "intel_score": 46.5,
-    "reasons": [
-      "recently modified (last 48h)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-129262",
     "published": "2026-11-14T17:16:52.833",
     "last_modified": "2026-11-14T17:16:52.990",
@@ -35075,6 +35076,40 @@
       "https://vuldb.com/submit/1043317",
       "https://vuldb.com/vuln/437306",
       "https://vuldb.com/vuln/437306/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 21.2,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 10,
+      "components": []
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+    "tags": [],
+    "intel_score": 46.5,
+    "reasons": [
+      "recently modified (last 48h)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129359",
+    "published": "2026-11-15T03:16:51.997",
+    "last_modified": "2026-11-15T03:16:52.477",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security flaw has been discovered in Linux Foundation Magma up to 1.9.0. The affected element is an unknown function of the file orc8r/lib/go/registry/interceptors.go. Performing a manipulation results in hard-coded credentials. The attack can be initiated remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://vuldb.com/cve/CVE-2026-129359",
+      "https://vuldb.com/submit/1044005",
+      "https://vuldb.com/vuln/437422",
+      "https://vuldb.com/vuln/437422/cti",
+      "https://www.linuxfoundation.org/"
     ],
     "source": "NVD",
     "cisa_kev": false,
