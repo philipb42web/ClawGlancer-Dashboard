@@ -313,8 +313,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 56.2,
+    "epss": 0.9,
+    "epss_percentile": 60.5,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -350,6 +350,65 @@
       "ai_infrastructure+35",
       "rce+30",
       "deserialization+20",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129448",
+    "published": "2026-11-17T11:17:28.190",
+    "last_modified": "2026-11-17T12:17:48.687",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Deserialization of Untrusted Data in Apache Roller versions 4.0.0 through 6.1.4 allows an unauthenticated remote attacker to execute arbitrary code. The XML-RPC endpoint accepts vendor extension types and deserializes them before authenticating the requester.\n\nThis is the same vulnerability as CVE-2026-82384, which listed only Apache Roller 6.1.5 as affected. This issue is being actively exploited.\n\nUsers are recommended to upgrade to Apache Roller 6.1.6 or later, which disables the extension types and rejects XML-RPC requests when the XML-RPC feature is disabled.\n\nUsers who cannot upgrade right away should set \"enabledForExtensions\" to \"false\" in WEB-INF/web.xml, or remove the \"/roller-services/xmlrpc\" servlet mapping, and restart Roller. Disabling XML-RPC in the administration UI is not enough, because older versions deserialize the request before checking that setting.",
+    "references": [
+      "https://github.com/apache/roller/pull/171",
+      "https://lists.apache.org/thread.html/lnz4s26tv6hdo03wngtdbpfj4hg4gtds",
+      "https://lists.apache.org/thread/cc0jck13nb9vvcmzxzwotr6n16mx28z9",
+      "https://www.cve.org/CVERecord?id=CVE-2026-82384"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        },
+        {
+          "signal": "Tag: in_the_wild",
+          "points": 35
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "deserialization",
+      "in_the_wild",
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 169.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20",
+      "in_the_wild+35",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -414,64 +473,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-124079",
-    "published": "2026-11-09T13:17:07.503",
-    "last_modified": "2026-11-14T02:16:48.033",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "rConfig Core 8.0.0 before 8.2.19 and rConfig Pro before 8.4.1 contain a deserialization of untrusted data vulnerability that allows unauthenticated network attackers to execute arbitrary code by pushing a crafted serialized job onto the Redis-backed Laravel Horizon queue, which runs without authentication in affected deployments. Laravel's CallQueuedHandler unserializes the job without class restrictions, allowing attackers to instantiate the existing App\\\\Jobs\\\\TaskDownloadRun class and invoke an attacker-controlled Artisan command. Attackers can leverage the bundled laravel/tinker package to execute arbitrary PHP and operating system commands as the queue worker's user, write a persistent web shell into the web-served storage/app/public directory, and read database credentials, stored device credentials, and API tokens. Where Redis is not directly reachable, authenticated attackers can deliver the payload through the application by configuring a device target that points at the rConfig server's loopback address.",
-    "references": [
-      "https://github.com/rconfig/rconfig/releases/tag/core-8.2.19",
-      "https://www.rconfig.com/security-advisories",
-      "https://www.vulncheck.com/advisories/rconfig-core-before-and-rconfig-pro-before-rce-via-unauthenticated-redis-queue-poisoning"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 50.4,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: deserialization",
-          "points": 20
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "deserialization",
-      "pre_auth",
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 159.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124021",
     "published": "2026-11-13T22:17:22.217",
     "last_modified": "2026-11-16T14:17:05.877",
@@ -489,8 +490,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 52.5,
+    "epss": 0.8,
+    "epss_percentile": 56.9,
     "score_breakdown": {
       "base_cvss": 40.5,
       "freshness": 10,
@@ -549,8 +550,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.4,
+    "epss_percentile": 38.1,
     "score_breakdown": {
       "base_cvss": 45.5,
       "freshness": 10,
@@ -768,8 +769,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 47.9,
+    "epss": 0.5,
+    "epss_percentile": 44.0,
     "score_breakdown": {
       "base_cvss": 37.0,
       "freshness": 10,
@@ -799,6 +800,56 @@
       "recently modified (last 48h)",
       "edge_perimeter+35",
       "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-126184",
+    "published": "2026-11-11T22:17:17.603",
+    "last_modified": "2026-11-17T14:17:33.733",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A authentication bypass by spoofing vulnerability in Fortinet FortiAnalyzer 8.0.0 through 8.0.1, FortiAnalyzer 7.6.0 through 7.6.7, FortiAnalyzer 7.4.0 through 7.4.11, FortiAnalyzer 7.2.0 through 7.2.12, FortiAnalyzer Cloud 8.0.1, FortiAnalyzer Cloud 7.6.0 through 7.6.7, FortiAnalyzer Cloud 7.4.1 through 7.4.11, FortiAnalyzer Cloud 7.2.1 through 7.2.12, FortiAnalyzer-BigData 7.6.0 through 7.6.2, FortiAnalyzer-BigData 7.4.0 through 7.4.6, FortiAnalyzer-BigData 7.2.0 through 7.2.12, FortiManager 8.0.0 through 8.0.1, FortiManager 7.6.0 through 7.6.7, FortiManager 7.4.0 through 7.4.11, FortiManager 7.2.0 through 7.2.12, FortiManager Cloud 8.0.1, FortiManager Cloud 7.6.0 through 7.6.7, FortiManager Cloud 7.4.1 through 7.4.11, FortiManager Cloud 7.2.1 through 7.2.12 may allow an attacker to disrupt the HA state.",
+    "references": [
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-229"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 43.2,
+    "score_breakdown": {
+      "base_cvss": 41.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:H",
+    "tags": [
+      "auth_bypass",
+      "edge_perimeter",
+      "pre_auth"
+    ],
+    "intel_score": 136.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
+      "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -873,7 +924,7 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 32.5,
+    "epss_percentile": 32.6,
     "score_breakdown": {
       "base_cvss": 36.0,
       "freshness": 10,
@@ -923,7 +974,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 39.4,
+    "epss_percentile": 39.5,
     "score_breakdown": {
       "base_cvss": 47.0,
       "freshness": 10,
@@ -972,8 +1023,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.7,
+    "epss_percentile": 54.0,
     "score_breakdown": {
       "base_cvss": 50.0,
       "freshness": 10,
@@ -1007,28 +1058,24 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-126542",
-    "published": "2026-11-11T01:17:15.547",
-    "last_modified": "2026-11-14T04:17:20.027",
+    "cve_id": "CVE-2026-123550",
+    "published": "2026-11-08T02:16:46.410",
+    "last_modified": "2026-11-17T15:28:13.550",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "WWBN AVideo 6.5 through 29.7.1 contains an authentication bypass vulnerability that allows unauthenticated attackers to log in as any user via Hybridauth social login display names. Attackers can set their X, Facebook, Yahoo or LinkedIn display name to a victim's username and withhold email, causing login.json.php or oauth2.php to log them in as that account, including administrators, without a password.",
+    "summary": "OpenAM before 16.1.4 contains an authentication bypass vulnerability in its SAML v2.0 service provider that accepts unsigned assertions on the ECP (PAOS) and HTTP-Artifact bindings when WantAssertionsSigned is false. Unauthenticated remote attackers can submit forged assertions to obtain sessions as any mapped user, including administrators, and hijack single sign-on to dependent applications.",
     "references": [
-      "https://github.com/WWBN/AVideo/blob/v29.7.1/objects/login.json.php#L133-L145",
-      "https://github.com/WWBN/AVideo/blob/v29.7.1/plugin/MobileManager/oauth2.php#L90-L102",
-      "https://github.com/WWBN/AVideo/commit/d34ccf23b37a127a68478d66ac00b450b5788bad",
-      "https://github.com/WWBN/AVideo/security/advisories/GHSA-9rvm-cfc4-q9g9",
-      "https://www.vulncheck.com/advisories/wwbn-avideo-6.5-through-29.7.1-authentication-bypass-via-hybridauth-social-login",
-      "https://github.com/WWBN/AVideo/security/advisories/GHSA-9rvm-cfc4-q9g9"
+      "https://github.com/OpenIdentityPlatform/OpenAM/security/advisories/GHSA-3j2f-qhrc-rjfj",
+      "https://www.vulncheck.com/advisories/openam-before-16.1.4-saml-authentication-bypass-via-unsigned-assertions"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 0.8,
-    "epss_percentile": 55.6,
+    "epss": 0.6,
+    "epss_percentile": 47.2,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1184,8 +1231,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.5,
+    "epss_percentile": 45.7,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1238,8 +1285,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.5,
+    "epss_percentile": 45.9,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1292,8 +1339,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.5,
+    "epss_percentile": 45.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1346,8 +1393,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.4,
+    "epss_percentile": 39.0,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1376,64 +1423,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-124001",
-    "published": "2026-11-09T19:16:48.003",
-    "last_modified": "2026-11-14T02:16:47.907",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NASA JPL ION-DTN 2.2.1b through 4.2.0 contains an integer overflow vulnerability in the Datagram Retransmission (DGR) convergence layer that allows attackers to corrupt heap memory by sending a maliciously crafted 64-bit svcDataLength value that wraps a 32-bit allocation size calculation. Attackers can exploit the dgr_receive API's unchecked memcpy operation using synthetic datagrams or DGR traffic over internal IPC or custom transports to trigger an out-of-bounds write, leading to denial of service or potential remote code execution.",
-    "references": [
-      "https://github.com/nasa-jpl/ION-DTN/releases/tag/ion-open-source-4.2.1-a.2",
-      "https://github.com/nasa-jpl/ION-DTN/security/advisories/GHSA-rcqq-5qmv-7fxp",
-      "https://www.vulncheck.com/advisories/ion-dtn-1b-integer-overflow-heap-corruption-via-dgr"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 44.9,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "dos",
-      "pre_auth",
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 133.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
@@ -1506,8 +1495,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 51.8,
+    "epss": 0.8,
+    "epss_percentile": 56.3,
     "score_breakdown": {
       "base_cvss": 40.5,
       "freshness": 10,
@@ -1598,7 +1587,7 @@
   {
     "cve_id": "CVE-2026-130070",
     "published": "2026-11-16T22:18:22.220",
-    "last_modified": "2026-11-16T22:18:22.220",
+    "last_modified": "2026-11-17T14:17:42.133",
     "cvss_v3": 9.1,
     "severity": "CRITICAL",
     "affected": [],
@@ -1615,8 +1604,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.4,
+    "epss_percentile": 38.5,
     "score_breakdown": {
       "base_cvss": 45.5,
       "freshness": 10,
@@ -1652,7 +1641,7 @@
   {
     "cve_id": "CVE-2026-126325",
     "published": "2026-11-11T15:17:22.510",
-    "last_modified": "2026-11-16T19:17:31.460",
+    "last_modified": "2026-11-17T05:18:35.360",
     "cvss_v3": 9.0,
     "severity": "CRITICAL",
     "affected": [],
@@ -1821,8 +1810,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.1,
+    "epss_percentile": 1.5,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -1874,7 +1863,7 @@
     "pre_auth": true,
     "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 39.4,
+    "epss_percentile": 39.5,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -2073,6 +2062,220 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-130366",
+    "published": "2026-11-17T02:17:19.593",
+    "last_modified": "2026-11-17T02:17:19.727",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "AdminNeo before 5.9.1 contains an authentication bypass vulnerability in the ClickHouse driver that allows remote attackers to log in to passwordless accounts without the configured defaultPasswordHash password. Attackers who know the name of a ClickHouse no_password account can submit any non-empty password, because connect() skips openPasswordless(), and obtain a session with that account's rights.",
+    "references": [
+      "https://github.com/adminneo-org/adminneo/commit/7905a3583d25ccfa598665d717dd722e4f7ce52e",
+      "https://github.com/adminneo-org/adminneo/releases/tag/v5.9.1",
+      "https://github.com/adminneo-org/adminneo/security/advisories/GHSA-h9x9-p972-28q9",
+      "https://www.vulncheck.com/advisories/adminneo-before-5.9.1-authentication-bypass-via-clickhouse-driver-defaultpasswordhash"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.6,
+    "epss_percentile": 49.0,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 125.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-130369",
+    "published": "2026-11-17T02:17:20.130",
+    "last_modified": "2026-11-17T02:17:20.257",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "phpMyFAQ 4.1.9 before 4.1.12 and 4.2.0-alpha before 4.2.0-RC.2 contains an authorization bypass vulnerability in multisite deployments that allows attackers to overwrite passkeys of accounts on other tenants via a shared PHP session store. Attackers can run WebAuthn prepare() for a login on one tenant, then replay the session against /api/webauthn/register on another tenant or the master to replace that user's passkeys and log in as admin.",
+    "references": [
+      "https://github.com/thorsten/phpMyFAQ/commit/8a7eeddddda7f11882d1e9944ab92473c6890b85",
+      "https://github.com/thorsten/phpMyFAQ/releases/tag/4.1.12",
+      "https://github.com/thorsten/phpMyFAQ/releases/tag/4.2.0-RC.2",
+      "https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-j82j-jp9w-f75c",
+      "https://www.vulncheck.com/advisories/phpmyfaq-4.1.9-before-4.1.12-and-4.2.0-alpha-before-4.2.0-rc.2-cross-tenant-webauthn-account-takeover"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 39.6,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 125.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-130371",
+    "published": "2026-11-17T02:17:20.490",
+    "last_modified": "2026-11-17T02:17:20.617",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "phpMyFAQ before 4.1.12 and 4.2.0-alpha before 4.2.0-RC.2 contains an authentication bypass vulnerability because the web installer ignores the legacy config/database.php during 3.x upgrades. Unauthenticated attackers can reinstall the site against an attacker-controlled database and create their own administrator account to take over the application.",
+    "references": [
+      "https://github.com/thorsten/phpMyFAQ/commit/eae6674d64bb6f53caf703d3f38b657f0c16a13c",
+      "https://github.com/thorsten/phpMyFAQ/releases/tag/4.1.12",
+      "https://github.com/thorsten/phpMyFAQ/releases/tag/4.2.0-RC.2",
+      "https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-jhf3-22r2-88hm",
+      "https://www.vulncheck.com/advisories/phpmyfaq-before-4.1.12-and-4.2.0-alpha-before-4.2.0-rc.2-unauthenticated-reinstall-via-web-installer"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 45.6,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 125.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-130380",
+    "published": "2026-11-17T02:17:22.037",
+    "last_modified": "2026-11-17T14:17:44.087",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "AdminNeo before 5.9.1 contains an authentication bypass vulnerability in the sqlsrv-based MS SQL driver that allows unauthenticated attackers to log in by submitting an empty username. Attackers can supply any non-empty password, triggering Windows integrated authentication that grants a full session with the web server identity's SQL Server privileges.",
+    "references": [
+      "https://github.com/adminneo-org/adminneo/releases/tag/v5.9.1",
+      "https://github.com/adminneo-org/adminneo/security/advisories/GHSA-w8j4-8pww-wm83",
+      "https://www.vulncheck.com/advisories/adminneo-before-5.9.1-authentication-bypass-via-ms-sql-empty-username",
+      "https://github.com/adminneo-org/adminneo/security/advisories/GHSA-w8j4-8pww-wm83"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 44.9,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 125.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-123039",
     "published": "2026-11-12T14:17:24.233",
     "last_modified": "2026-11-16T16:55:09.243",
@@ -2089,8 +2292,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": false,
-    "epss": 2.2,
-    "epss_percentile": 82.7,
+    "epss": 1.9,
+    "epss_percentile": 80.5,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -2137,7 +2340,7 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 1.5,
-    "epss_percentile": 75.0,
+    "epss_percentile": 75.1,
     "score_breakdown": {
       "base_cvss": 36.0,
       "freshness": 10,
@@ -2347,8 +2550,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 1.1,
+    "epss_percentile": 65.2,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -2398,8 +2601,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 53.9,
+    "epss": 1.3,
+    "epss_percentile": 70.0,
     "score_breakdown": {
       "base_cvss": 40.5,
       "freshness": 10,
@@ -2430,6 +2633,61 @@
       "rce+30",
       "command_injection+18",
       "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-130615",
+    "published": "2026-11-17T14:17:47.437",
+    "last_modified": "2026-11-17T14:17:47.580",
+    "cvss_v3": 7.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Flowise through 3.1.4 contains a server-side request forgery vulnerability that allows authenticated users to reach internal services by exploiting unpinned DNS validation in checkDenyList(). Attackers can configure a chatflow with Playwright or Puppeteer loaders using a DNS-rebinding domain so headless Chromium fetches internal or cloud metadata endpoints, returning responses as document content.",
+    "references": [
+      "https://flowiseai.com/sunset",
+      "https://github.com/FlowiseAI/Flowise/blob/a65f81bb43ef66d3ce734bf0dff4223ae8041c95/packages/components/nodes/documentloaders/Playwright/Playwright.ts#L193-L245",
+      "https://github.com/FlowiseAI/Flowise/blob/a65f81bb43ef66d3ce734bf0dff4223ae8041c95/packages/components/nodes/documentloaders/Puppeteer/Puppeteer.ts#L184-L239",
+      "https://github.com/FlowiseAI/Flowise/blob/a65f81bb43ef66d3ce734bf0dff4223ae8041c95/packages/components/src/httpSecurity.ts#L121-L139",
+      "https://github.com/FlowiseAI/Flowise/blob/main/SECURITY.md",
+      "https://www.vulncheck.com/advisories/flowise-through-3.1.4-ssrf-via-dns-rebinding-in-playwright-and-puppeteer-loaders"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 35.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: ssrf",
+          "points": 18
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:L",
+    "tags": [
+      "ai_infrastructure",
+      "ssrf",
+      "weaponized"
+    ],
+    "intel_score": 123.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "ssrf+18",
+      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -2501,8 +2759,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -2536,113 +2794,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-63496",
-    "published": "2026-11-09T22:18:53.473",
-    "last_modified": "2026-11-14T03:17:30.093",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "augment-vir is a collection of helper functions. Prior to version 31.73.5, the grep() function exported by @augment-vir/node inserts caller-controlled search patterns directly into a double-quoted shell command string without sanitization (grep.ts:310). When the constructed command is passed to spawn() with shell: 'bash' (shell.ts:98-99), bash evaluates $() command substitution expressions embedded in the pattern, resulting in arbitrary OS command execution as the Node.js process user. Any downstream application that passes untrusted input to grep()'s pattern or patterns field is vulnerable to unauthenticated local (and potentially remote) code execution. This issue has been patched in version 31.73.5.",
-    "references": [
-      "https://github.com/electrovir/augment-vir/commit/9e1a3592903a56e500959be72276ede1708c3437",
-      "https://github.com/electrovir/augment-vir/releases/tag/v31.73.5",
-      "https://github.com/electrovir/augment-vir/security/advisories/GHSA-xvcc-vqjv-phqh",
-      "https://github.com/electrovir/augment-vir/security/advisories/GHSA-xvcc-vqjv-phqh"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.2,
-    "epss_percentile": 8.1,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 122.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-125758",
-    "published": "2026-11-10T16:17:23.267",
-    "last_modified": "2026-11-14T03:17:28.260",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Aptabase before commit 61d4c01 contains an authentication bypass vulnerability that allows unauthenticated attackers to forge sign-in links by using the publicly known example AUTH_SECRET. Attackers can enumerate registered e-mails via /api/_auth/signin, forge HS256 JWTs redeemed by /api/_auth/continue, impersonate users, export analytics data, and transfer app ownership.",
-    "references": [
-      "https://github.com/aptabase/aptabase/commit/61d4c01298a706d575265461ac07bb956ca7b8d2",
-      "https://github.com/aptabase/aptabase/pull/204",
-      "https://github.com/aptabase/aptabase/security/advisories/GHSA-gc76-cqm4-vqcf",
-      "https://github.com/aptabase/self-hosting/commit/b79a472419ff17e485d0bd5b4adf1b1ef2b9953c",
-      "https://www.vulncheck.com/advisories/aptabase-before-commit-61d4c01-authentication-bypass-via-known-example-auth-secret"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 28.2,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 122.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-126255",
     "published": "2026-11-11T22:17:25.623",
     "last_modified": "2026-11-16T21:17:24.740",
@@ -2659,7 +2810,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.8,
-    "epss_percentile": 55.6,
+    "epss_percentile": 55.7,
     "score_breakdown": {
       "base_cvss": 37.0,
       "freshness": 10,
@@ -2693,6 +2844,58 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-128023",
+    "published": "2026-11-13T10:18:07.930",
+    "last_modified": "2026-11-17T14:17:37.623",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "FrankenPHP before 1.13.0 contains an authentication bypass vulnerability that allows unauthenticated attackers to spoof trusted headers by sending dot-form header names that PHP rewrites to underscores. Attackers can send headers like X.Authenticated.User or X.Forwarded.For that map to $_SERVER keys, spoofing user identity, client IP, or scheme.",
+    "references": [
+      "https://github.com/php/frankenphp/security/advisories/GHSA-qcrp-8483-f2f2",
+      "https://www.vulncheck.com/advisories/frankenphp-before-1.13.0-authentication-bypass-via-dot-form-header-name-aliasing",
+      "https://github.com/php/frankenphp/security/advisories/GHSA-qcrp-8483-f2f2"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 40.3,
+    "score_breakdown": {
+      "base_cvss": 37.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 122.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-82568",
     "published": "2026-11-15T10:16:54.217",
     "last_modified": "2026-11-16T15:17:33.183",
@@ -2711,7 +2914,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 51.9,
+    "epss_percentile": 52.0,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -2741,50 +2944,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "sqli+18",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-126261",
-    "published": "2026-11-10T23:17:20.897",
-    "last_modified": "2026-11-14T05:18:39.560",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A improper authorization vulnerability in Fortinet FortiManager 8.0.0, FortiManager 7.6.0 through 7.6.7, FortiManager 7.4.0 through 7.4.5, FortiManager 7.2.0 through 7.2.8 may allow an unauthenticated attacker that can reach the FGFM port to execute code or commands via crafted FGFM packets.",
-    "references": [
-      "https://fortiguard.fortinet.com/psirt/FG-IR-26-275"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 56.6,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "edge_perimeter",
-      "pre_auth"
-    ],
-    "intel_score": 119.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -3025,6 +3184,56 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-118498",
+    "published": "2026-11-17T10:17:21.540",
+    "last_modified": "2026-11-17T10:17:21.540",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The CODESYS Automation Server Connector uses server-supplied file names without sufficient path traversal checks. An unauthenticated remote attacker controlling a malicious Automation Server and tricking a user to trust it, or performing a man-in-the-middle attack on a trusted communication channel, can exploit this vulnerability to write attacker-controlled files to arbitrary locations on the engineering workstation and subsequently achieve arbitrary code execution with user privileges.",
+    "references": [
+      "https://www.certvde.com/en/advisories/VDE-2026-146/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 50.2,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal",
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 117.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-121683",
     "published": "2026-11-10T16:17:17.900",
     "last_modified": "2026-11-16T15:17:12.100",
@@ -3144,8 +3353,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.8,
+    "epss_percentile": 56.4,
     "score_breakdown": {
       "base_cvss": 36.0,
       "freshness": 10,
@@ -3239,7 +3448,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 52.2,
+    "epss_percentile": 52.3,
     "score_breakdown": {
       "base_cvss": 45.5,
       "freshness": 10,
@@ -3283,7 +3492,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 35.7,
+    "epss_percentile": 35.8,
     "score_breakdown": {
       "base_cvss": 45.5,
       "freshness": 10,
@@ -3455,99 +3664,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-55335",
-    "published": "2026-11-10T20:19:13.430",
-    "last_modified": "2026-11-14T05:18:40.470",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In multiple locations, there is a possible use-after-free due to a logic error in the code. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://source.android.com/docs/security/bulletin/pixel/2026/2026-11-01"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 25.4,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-126065",
-    "published": "2026-11-10T21:19:24.310",
-    "last_modified": "2026-11-14T03:17:28.627",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "OpenObserve is a cloud-native observability platform. Prior to 1.1.0, the shared authentication validator in src/api/common/src/auth/validator.rs accepts an empty or whitespace-only HTTP Basic password for an account whose password_ext value is missing or empty. SSO-provisioned and migration-created users can have this state, allowing an unauthenticated attacker who knows an affected user's email address and organization to authenticate on protected non-ingestion API routes with the victim's role and permissions. A compromised privileged account can expose or modify telemetry, alerts, streams, users, and security configuration. An account with search permission can submit a DataFusion COPY ... TO statement through the search API to create or overwrite attacker-controlled files at service-process-writable locations, creating a conditional escalation to pre-authentication remote code execution. This issue is fixed in version 1.1.0.",
-    "references": [
-      "https://github.com/openobserve/openobserve/commit/46678ea8daba94c3904286471794f80c5a74ecea",
-      "https://github.com/openobserve/openobserve/commit/dc5c657002d97e9e29726cefcadec49cae755e1a",
-      "https://github.com/openobserve/openobserve/pull/15054",
-      "https://github.com/openobserve/openobserve/releases/tag/v1.1.0",
-      "https://github.com/openobserve/openobserve/security/advisories/GHSA-7w4v-2c9r-q94v",
-      "https://github.com/openobserve/openobserve/security/advisories/GHSA-7w4v-2c9r-q94v"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 1.2,
-    "epss_percentile": 69.3,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124008",
     "published": "2026-11-12T20:18:23.653",
     "last_modified": "2026-11-16T20:18:55.427",
@@ -3618,7 +3734,7 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 38.8,
+    "epss_percentile": 37.4,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -3665,8 +3781,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": null,
-    "epss_percentile": null,
+    "epss": 0.5,
+    "epss_percentile": 45.8,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -3710,7 +3826,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 45.9,
+    "epss_percentile": 46.0,
     "score_breakdown": {
       "base_cvss": 43.5,
       "freshness": 10,
@@ -3754,7 +3870,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 41.4,
+    "epss_percentile": 41.5,
     "score_breakdown": {
       "base_cvss": 41.0,
       "freshness": 10,
@@ -3914,6 +4030,56 @@
     ]
   },
   {
+    "cve_id": "CVE-2024-46670",
+    "published": "2025-01-14T14:15:32.243",
+    "last_modified": "2026-11-17T11:17:23.820",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An Out-of-bounds Read vulnerability [CWE-125] vulnerability in Fortinet FortiOS 7.6.0, FortiOS 7.4.0 through 7.4.4, FortiOS 7.2.0 through 7.2.9 may allow an unauthenticated remote attacker to trigger memory consumption leading to Denial of Service via crafted requests.",
+    "references": [
+      "https://fortiguard.fortinet.com/psirt/FG-IR-24-266"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 50.7,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: dos",
+          "points": 3
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+    "tags": [
+      "dos",
+      "edge_perimeter",
+      "pre_auth"
+    ],
+    "intel_score": 110.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
+      "dos+3",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-121528",
     "published": "2026-11-11T22:17:11.250",
     "last_modified": "2026-11-16T15:17:11.957",
@@ -3974,7 +4140,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 42.5,
+    "epss_percentile": 42.6,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -4240,6 +4406,53 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-130587",
+    "published": "2026-11-17T14:17:45.317",
+    "last_modified": "2026-11-17T14:17:45.317",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "OpenFunction through 1.2.0 contains a privilege escalation vulnerability that allows namespace tenants to create privileged host-access pods by supplying unrestricted PodSpec templates in Function and Serving resources. Attackers with only Function or Serving create permissions can set privileged, hostNetwork, hostPID, or hostPath fields to mount the worker node's root filesystem and escalate to node access.",
+    "references": [
+      "https://github.com/OpenFunction/OpenFunction/blob/v1.2.0/apis/core/v1beta2/serving_types.go#L225",
+      "https://github.com/OpenFunction/OpenFunction/blob/v1.2.0/pkg/core/serving/openfuncasync/servingrun.go#L320",
+      "https://github.com/OpenFunction/OpenFunction/issues/532",
+      "https://www.vulncheck.com/advisories/openfunction-through-1.2.0-privilege-escalation-via-unrestricted-podspec-templates"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": null,
+    "epss_percentile": null,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "priv_esc",
+      "weaponized"
+    ],
+    "intel_score": 109.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-66738",
     "published": "2026-08-10T16:19:48.607",
     "last_modified": "2026-11-16T22:18:24.897",
@@ -4257,8 +4470,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 48.4,
+    "epss": 0.7,
+    "epss_percentile": 52.5,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4301,8 +4514,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 28.2,
+    "epss": 0.5,
+    "epss_percentile": 44.3,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4332,7 +4545,7 @@
   {
     "cve_id": "CVE-2026-97033",
     "published": "2026-11-11T05:19:57.253",
-    "last_modified": "2026-11-16T16:17:55.790",
+    "last_modified": "2026-11-17T05:18:38.220",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -4348,8 +4561,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 16.8,
+    "epss": 0.5,
+    "epss_percentile": 46.1,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4379,7 +4592,7 @@
   {
     "cve_id": "CVE-2026-97035",
     "published": "2026-11-11T05:19:57.550",
-    "last_modified": "2026-11-16T22:18:27.407",
+    "last_modified": "2026-11-17T05:18:38.543",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -4395,8 +4608,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 16.8,
+    "epss": 0.5,
+    "epss_percentile": 46.1,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4426,7 +4639,7 @@
   {
     "cve_id": "CVE-2026-97036",
     "published": "2026-11-11T05:19:57.713",
-    "last_modified": "2026-11-16T16:17:56.127",
+    "last_modified": "2026-11-17T05:18:38.710",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -4442,8 +4655,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 16.8,
+    "epss": 0.5,
+    "epss_percentile": 46.1,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4473,7 +4686,7 @@
   {
     "cve_id": "CVE-2026-97037",
     "published": "2026-11-11T05:19:57.860",
-    "last_modified": "2026-11-16T15:17:34.947",
+    "last_modified": "2026-11-17T05:18:38.873",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -4489,8 +4702,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 16.8,
+    "epss": 0.6,
+    "epss_percentile": 50.3,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4520,7 +4733,7 @@
   {
     "cve_id": "CVE-2026-97038",
     "published": "2026-11-11T05:19:58.000",
-    "last_modified": "2026-11-16T15:17:35.293",
+    "last_modified": "2026-11-17T05:18:39.043",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -4536,8 +4749,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 16.8,
+    "epss": 0.5,
+    "epss_percentile": 46.1,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4567,7 +4780,7 @@
   {
     "cve_id": "CVE-2026-97043",
     "published": "2026-11-11T05:19:58.750",
-    "last_modified": "2026-11-16T15:17:35.470",
+    "last_modified": "2026-11-17T05:18:39.207",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
@@ -4583,98 +4796,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 18.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-126852",
-    "published": "2026-11-11T23:17:13.200",
-    "last_modified": "2026-11-14T05:18:39.700",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Use after free in MediaStream in Google Chrome prior to 157.0.8103.78 allowed a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_01744469280.html",
-      "https://issues.chromium.org/issues/580846651"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.2,
-    "epss_percentile": 13.0,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-126881",
-    "published": "2026-11-11T23:17:17.137",
-    "last_modified": "2026-11-14T05:18:39.903",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Improper initialization in Media in Google Chrome prior to 157.0.8103.78 allowed a remote attacker to potentially execute arbitrary code outside the sandbox via a crafted HTML page. (Chromium security severity: High)",
-    "references": [
-      "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_01744469280.html",
-      "https://issues.chromium.org/issues/575038730"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 39.0,
+    "epss": 0.6,
+    "epss_percentile": 47.7,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4719,7 +4842,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 29.5,
+    "epss_percentile": 34.7,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4764,95 +4887,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.3,
-    "epss_percentile": 20.6,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-116330",
-    "published": "2026-11-12T15:17:41.557",
-    "last_modified": "2026-11-14T05:18:28.207",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Untrusted data inclusion in PostgreSQL pg_dump tar-format restore.sql allows a compromised origin server to execute arbitrary code as the client operating system account running psql, via the predictable restriction key in restore.sql.  This is a gap in the fix for CVE-2025-8714.  restore.sql is undocumented.  Versions before PostgreSQL 18.7, 17.12, 16.16, 15.20, and 14.25 are affected.",
-    "references": [
-      "https://www.postgresql.org/support/security/CVE-2026-116330/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 31.8,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-120145",
-    "published": "2026-11-12T15:17:43.060",
-    "last_modified": "2026-11-14T05:18:30.250",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Missing authorization in PostgreSQL logical replication allows a compromised publisher to execute arbitrary code as the operating system user running the superuser-owned subscription, via naming a system catalog as a replication target.  Only subscriptions owned by a superuser are vulnerable.  Versions before PostgreSQL 18.7, 17.12, 16.16, 15.20, and 14.25 are affected.",
-    "references": [
-      "https://www.postgresql.org/support/security/CVE-2026-120145/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 46.0,
+    "epss_percentile": 24.9,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
