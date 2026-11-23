@@ -1425,6 +1425,57 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-134287",
+    "published": "2026-11-21T17:16:48.030",
+    "last_modified": "2026-11-21T17:16:48.030",
+    "cvss_v3": 7.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "OpenRemote core before 1.34.0 contains an authentication bypass vulnerability in UserAssetProvisioningMQTTHandler that allows unauthenticated attackers to impersonate provisioned devices without proof of private key possession. Attackers can publish a known device's public certificate to the provisioning request topic, authenticating their anonymous MQTT connection as the device's service account to read and modify assets.",
+    "references": [
+      "https://github.com/openremote/core/security/advisories/GHSA-7jp3-2229-xgqj",
+      "https://www.vulncheck.com/advisories/openremote-before-1.34.0-authentication-bypass-via-x-509-mqtt-provisioning"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.6,
+    "epss_percentile": 48.1,
+    "score_breakdown": {
+      "base_cvss": 38.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:L",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 123.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-86017",
     "published": "2026-11-20T19:18:55.490",
     "last_modified": "2026-11-20T21:17:39.417",
@@ -1482,6 +1533,58 @@
       "priv_esc+25",
       "file_write+15",
       "dos+3"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-134249",
+    "published": "2026-11-21T17:16:42.373",
+    "last_modified": "2026-11-21T17:16:42.500",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SiYuan before 3.8.10 contains an authentication bypass vulnerability that allows unauthenticated attackers to gain Administrator role by spoofing X-Forwarded-For through a loopback-trusted reverse proxy. Attackers can send requests with Host set to localhost and X-Forwarded-For set to 127.0.0.1 to read private note-history contents via the /history/*path route when no lock-screen password is set.",
+    "references": [
+      "https://github.com/siyuan-note/siyuan/commit/f951019168faf035b36c98f8e672719d511881ac",
+      "https://github.com/siyuan-note/siyuan/security/advisories/GHSA-gmcm-mggw-8759",
+      "https://www.vulncheck.com/advisories/siyuan-before-3.8.10-authentication-bypass-via-x-forwarded-for-on-history-route"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.6,
+    "epss_percentile": 49.7,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "auth_bypass",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 122.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -1654,127 +1757,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-116440",
-    "published": "2026-11-19T13:17:27.983",
-    "last_modified": "2026-11-20T05:18:38.857",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Dell PowerStore SDNAS contains a buffer overflow vulnerability that could allow an unauthenticated remote attacker to cause a denial of service or potential code execution on the NAS node.",
-    "references": [
-      "https://www.dell.com/support/kbdoc/en-us/000527640/dsa-2026-479-dell-powerstore-t-security-update-for-multiple-vulnerabilities"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 52.1,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "dos",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 117.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-46846",
-    "published": "2023-11-03T08:15:07.953",
-    "last_modified": "2026-11-20T04:17:08.530",
-    "cvss_v3": 9.3,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "SQUID is vulnerable to HTTP request smuggling, caused by chunked decoder lenience, allows a remote attacker to perform Request/Response smuggling past firewall and frontend security systems.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2023:6266",
-      "https://access.redhat.com/errata/RHSA-2023:6267",
-      "https://access.redhat.com/errata/RHSA-2023:6268",
-      "https://access.redhat.com/errata/RHSA-2023:6748",
-      "https://access.redhat.com/errata/RHSA-2023:6801",
-      "https://access.redhat.com/errata/RHSA-2023:6803",
-      "https://access.redhat.com/errata/RHSA-2023:6804",
-      "https://access.redhat.com/errata/RHSA-2023:6810",
-      "https://access.redhat.com/errata/RHSA-2023:7213",
-      "https://access.redhat.com/errata/RHSA-2024:11049",
-      "https://access.redhat.com/security/cve/CVE-2023-46846",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2245910",
-      "https://github.com/squid-cache/squid/security/advisories/GHSA-j83v-w3p4-5cqh",
-      "https://access.redhat.com/errata/RHSA-2023:6266",
-      "https://access.redhat.com/errata/RHSA-2023:6267",
-      "https://access.redhat.com/errata/RHSA-2023:6268",
-      "https://access.redhat.com/errata/RHSA-2023:6748",
-      "https://access.redhat.com/errata/RHSA-2023:6801",
-      "https://access.redhat.com/errata/RHSA-2023:6803",
-      "https://access.redhat.com/errata/RHSA-2023:6804",
-      "https://access.redhat.com/errata/RHSA-2023:6810",
-      "https://access.redhat.com/errata/RHSA-2023:7213",
-      "https://access.redhat.com/security/cve/CVE-2023-46846",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2245910",
-      "https://github.com/squid-cache/squid/security/advisories/GHSA-j83v-w3p4-5cqh",
-      "https://lists.debian.org/debian-lts-announce/2024/01/msg00003.html",
-      "https://lists.debian.org/debian-lts-announce/2024/01/msg00008.html",
-      "https://security.netapp.com/advisory/ntap-20231130-0002/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 3.0,
-    "epss_percentile": 87.7,
-    "score_breakdown": {
-      "base_cvss": 46.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
-    "tags": [
-      "edge_perimeter",
-      "pre_auth"
-    ],
-    "intel_score": 116.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-130675",
     "published": "2026-11-18T12:17:10.783",
     "last_modified": "2026-11-21T03:17:01.927",
@@ -1792,50 +1774,6 @@
     "weaponized": false,
     "epss": 0.5,
     "epss_percentile": 46.6,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-132891",
-    "published": "2026-11-19T11:16:55.263",
-    "last_modified": "2026-11-20T05:18:45.970",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In JetBrains TeamCity before 2026.2, 2026.1.4, 2025.11.8 remote code execution was possible via external pull requests",
-    "references": [
-      "https://www.jetbrains.com/privacy-security/issues-fixed/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 55.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -2056,60 +1994,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-42793",
-    "published": "2026-05-08T16:16:12.550",
-    "last_modified": "2026-11-20T05:18:55.510",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Allocation of Resources Without Limits or Throttling vulnerability in absinthe-graphql absinthe allows unauthenticated denial of service via atom table exhaustion when parsing attacker-controlled GraphQL SDL.\n\nMultiple Blueprint.Draft.convert/2 implementations in Absinthe's SDL language modules call String.to_atom/1 on attacker-controlled names from parsed GraphQL SDL documents, including directive names, field names, type names, and argument names. Because atoms are never garbage-collected and the BEAM atom table has a fixed limit (default 1,048,576), each unique name permanently consumes one slot. An attacker can exhaust the atom table by submitting SDL documents containing enough unique names, causing the Erlang VM to abort with system_limit and taking down the entire node.\n\nAny application that passes attacker-controlled GraphQL SDL through Absinthe's parser is exposed — for example, a schema-upload endpoint, a federation gateway that ingests remote SDL, or any developer tool that runs the parser over user-supplied documents.\n\nThis issue affects absinthe: from 1.5.0-alpha.2 before 1.10.2.",
-    "references": [
-      "https://cna.erlef.org/cves/CVE-2026-42793.html",
-      "https://github.com/absinthe-graphql/absinthe/commit/d0eae7764520d4e8e5dfff619068c0de911aec33",
-      "https://github.com/absinthe-graphql/absinthe/commit/dd842b938e3823f345c10416914ffab5d5536838",
-      "https://github.com/absinthe-graphql/absinthe/security/advisories/GHSA-qf4g-9fqq-mmm7",
-      "https://osv.dev/vulnerability/EEF-CVE-2026-42793"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 50.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos",
-      "edge_perimeter",
-      "pre_auth"
-    ],
-    "intel_score": 110.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "dos+3",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -2612,6 +2496,51 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-134253",
+    "published": "2026-11-21T17:16:42.870",
+    "last_modified": "2026-11-21T17:16:43.000",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Grav API plugin from 1.0.0 before 1.1.4 contains a remote code execution vulnerability that allows publishers with media and page write rights to write theme template files through the blueprint-upload endpoint. Attackers can upload a file into a theme's Twig templates folder and include it from sandboxed page Twig to execute commands as the web-server user.",
+    "references": [
+      "https://github.com/getgrav/grav/security/advisories/GHSA-3rqp-8h7g-xxv8",
+      "https://www.vulncheck.com/advisories/grav-api-plugin-1.0.0-before-1.1.4-rce-via-blueprint-upload-theme-template-write"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 1.3,
+    "epss_percentile": 70.2,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-82342",
     "published": "2026-11-19T21:18:05.230",
     "last_modified": "2026-11-20T14:17:54.287",
@@ -2753,52 +2682,6 @@
       "recently modified (last 48h)",
       "edge_perimeter+35",
       "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-133528",
-    "published": "2026-11-20T01:17:10.633",
-    "last_modified": "2026-11-20T01:17:10.633",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "BeamNG.drive before 0.40.6 contains an out-of-bounds write vulnerability because JIT-compiled LuaJIT traces omit FFI array bounds checks, letting untrusted Lua escape the sandbox. Attackers supplying a malicious mod can JIT-compile an FFI store loop, write out of range using a tostring() address leak, re-enable ffi.load, and run commands as the game user.",
-    "references": [
-      "https://github.com/drbloop2000/BeamNG-Drive-RCE",
-      "https://store.steampowered.com/news/app/284160/view/681890829846973542",
-      "https://www.vulncheck.com/advisories/beamng-drive-before-0.40.6-luajit-ffi-sandbox-escape-via-jit-bounds-check-bypass"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.1,
-    "epss_percentile": 2.5,
-    "score_breakdown": {
-      "base_cvss": 43.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 108.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -2997,50 +2880,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-133254",
-    "published": "2026-11-19T16:21:28.983",
-    "last_modified": "2026-11-20T05:18:53.393",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In JetBrains IntelliJ IDEA before 2026.3, 2026.2.4 code execution was possible in untrusted projects via the Code Provenance plugin",
-    "references": [
-      "https://www.jetbrains.com/privacy-security/issues-fixed/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 32.0,
-    "score_breakdown": {
-      "base_cvss": 41.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 106.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-97196",
     "published": "2026-09-30T07:16:31.320",
     "last_modified": "2026-11-20T08:18:37.057",
@@ -3131,60 +2970,6 @@
       "recently modified (last 48h)",
       "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-86476",
-    "published": "2026-10-14T10:17:56.850",
-    "last_modified": "2026-11-20T04:17:11.960",
-    "cvss_v3": 8.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in gst-plugins-base. A heap buffer overflow can be triggered when processing video buffers whose attached GstVideoMeta metadata declares plane strides and offsets that exceed the actual backing memory allocation. The metadata is not range-checked during deserialization, and the video frame mapping code does not verify that the declared plane geometry fits within the buffer before allowing consumers to read or write video data. A local attacker who controls the sending side of a GStreamer inter-process IPC pipeline can deliver a crafted buffer carrying fabricated strides, causing the receiving process to read or write beyond heap boundaries. Successful exploitation can cause a denial of service or potentially allow code execution within the affected process.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:98600",
-      "https://access.redhat.com/errata/RHSA-2026:99033",
-      "https://access.redhat.com/security/cve/CVE-2026-86476",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2529510",
-      "https://redhat.atlassian.net/browse/PSIRTSUPT-23320"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.2,
-    "epss_percentile": 12.8,
-    "score_breakdown": {
-      "base_cvss": 42.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: deserialization",
-          "points": 20
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "deserialization",
-      "dos",
-      "rce"
-    ],
-    "intel_score": 105.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20",
-      "dos+3"
     ]
   },
   {
@@ -3626,6 +3411,51 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-134309",
+    "published": "2026-11-21T17:16:50.990",
+    "last_modified": "2026-11-21T17:16:51.127",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SurrealDB 1.0.0 before 4.0.0 contains an authorization bypass vulnerability that allows authenticated users to shadow protected $access, $auth, and $token variables by binding them as FOR loop variables. Attackers can wrap queries in nested FOR loops with forged values to satisfy table permission predicates, enabling unauthorized reads, modifications, or deletions as a VIEWER.",
+    "references": [
+      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-ffvm-mqh3-7986",
+      "https://www.vulncheck.com/advisories/surrealdb-1.0.0-before-4.0.0-authorization-bypass-via-for-loop-variable-shadowing"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.6,
+    "epss_percentile": 47.9,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "weaponized"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-133493",
     "published": "2026-11-20T07:17:10.853",
     "last_modified": "2026-11-20T18:18:49.200",
@@ -3862,6 +3692,57 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-134258",
+    "published": "2026-11-21T17:16:43.747",
+    "last_modified": "2026-11-21T17:16:43.870",
+    "cvss_v3": 8.7,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Admidio 5.0.0 before 5.0.18 contains a path traversal vulnerability in the Documents & Files renameFile() action that allows authenticated users with folder upload rights to move files outside adm_my_files by supplying ../ sequences in adm_new_name. Attackers can relocate an uploaded SVG containing script to the web root, where it is served inline and executes stored cross-site scripting against administrators for account takeover.",
+    "references": [
+      "https://github.com/Admidio/admidio/security/advisories/GHSA-gp7m-9622-gcw9",
+      "https://www.vulncheck.com/advisories/admidio-5.0.0-before-5.0.18-path-traversal-to-stored-xss-via-file-rename"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.7,
+    "epss_percentile": 54.0,
+    "score_breakdown": {
+      "base_cvss": 43.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Tag: xss",
+          "points": 8
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:N",
+    "tags": [
+      "path_traversal",
+      "weaponized",
+      "xss"
+    ],
+    "intel_score": 101.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "xss+8",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-96805",
     "published": "2026-11-20T19:18:58.183",
     "last_modified": "2026-11-20T19:18:58.183",
@@ -3907,6 +3788,51 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-134300",
+    "published": "2026-11-21T17:16:49.917",
+    "last_modified": "2026-11-21T17:16:50.043",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SurrealDB from 2.2.0 before 4.0.0 contains an authorization bypass vulnerability in Document::purge_references that lets authenticated users bypass target table PERMISSIONS by triggering REFERENCE ON DELETE cascades. Attackers can delete a referenced record to delete, unset, or run CUSTOM expressions on referencing records despite PERMISSIONS FOR delete or update NONE.",
+    "references": [
+      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-fh2q-8f75-m4h6",
+      "https://www.vulncheck.com/advisories/surrealdb-2.2.0-before-4.0.0-permission-bypass-via-reference-on-delete-cascade"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 30.8,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "weaponized"
+    ],
+    "intel_score": 100.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-76466",
     "published": "2026-10-21T17:19:06.813",
     "last_modified": "2026-11-21T05:18:23.937",
@@ -3945,50 +3871,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-132917",
-    "published": "2026-11-19T11:16:58.400",
-    "last_modified": "2026-11-20T05:18:48.197",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In JetBrains TeamCity before 2026.2, 2026.1.4, 2025.11.8 remote code execution was possible via a file write bypass in the Kotlin DSL sandbox",
-    "references": [
-      "https://www.jetbrains.com/privacy-security/issues-fixed/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 1.0,
-    "epss_percentile": 63.4,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
     ]
   },
   {
@@ -4726,6 +4608,96 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-134293",
+    "published": "2026-11-21T17:16:49.057",
+    "last_modified": "2026-11-21T17:16:49.180",
+    "cvss_v3": 8.2,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SurrealDB 3.1.0 before 4.0.0 contains an SQL injection vulnerability in its Model Context Protocol (MCP) server because the identifier validator (consume_backtick_ident and validate_identifier) treats the first backtick as the closing delimiter, ignoring escape characters that the SurrealQL parser honors. Attackers can supply MCP tool arguments containing an escaped backtick to break out of the quoted identifier and execute arbitrary SurrealQL statements.",
+    "references": [
+      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-cr79-9p8r-p5wx",
+      "https://www.vulncheck.com/advisories/surrealdb-3.1.0-before-4.0.0-sql-injection-via-mcp-tool-identifier-escaped-backticks"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 18.4,
+    "score_breakdown": {
+      "base_cvss": 41.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: sqli",
+          "points": 18
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
+    "tags": [
+      "sqli",
+      "weaponized"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "sqli+18",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-134295",
+    "published": "2026-11-21T17:16:49.393",
+    "last_modified": "2026-11-21T17:16:49.520",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "SurrealDB 3.0.0 before 4.0.0 contains a path traversal vulnerability in direct filesystem buckets because BucketController::check_permission evaluates key-based ACLs against the un-normalized object key, while FileStore::to_os_path collapses '..' sequences without a traversal check. An authenticated tenant permitted only for certain keys can supply a key such as /public/../private/confidential.txt to read, write, or delete arbitrary files within the storage root.",
+    "references": [
+      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-cph5-pm57-9w9c",
+      "https://www.vulncheck.com/advisories/surrealdb-3.0.0-before-4.0.0-path-traversal-in-direct-filesystem-buckets"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.7,
+    "epss_percentile": 54.6,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal",
+      "weaponized"
+    ],
+    "intel_score": 94.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "path_traversal+15",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-49490",
     "published": "2026-05-31T13:16:49.243",
     "last_modified": "2026-11-20T15:17:54.663",
@@ -4958,44 +4930,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-131253",
-    "published": "2026-11-19T20:17:40.407",
-    "last_modified": "2026-11-20T05:18:43.277",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In Splunk SOAR versions below 8.8.0, an authenticated user that holds a role with the Apps edit, Containers edit, and Playbooks execute permissions could use the App Wizard to execute arbitrary code as the user account that runs Splunk SOAR. This could compromise the confidentiality, integrity, and availability of the Splunk SOAR instance.\nThe vulnerability exists because the App Wizard does not validate user-supplied identifiers before incorporating them into generated connector code.",
-    "references": [
-      "https://advisory.splunk.com/advisories/SVD-2026-1108"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 48.9,
-    "score_breakdown": {
-      "base_cvss": 49.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "rce"
-    ],
-    "intel_score": 89.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-86539",
     "published": "2026-09-07T23:16:53.583",
     "last_modified": "2026-11-20T15:17:58.663",
@@ -5086,6 +5020,46 @@
       "recently modified (last 48h)",
       "ssrf+18",
       "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-129995",
+    "published": "2026-11-20T19:18:44.467",
+    "last_modified": "2026-11-20T19:18:44.467",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "mcp-ssh-manager is an MCP server for managing servers over SSH with human approval, an encrypted vault, and a live audit trail. Prior to 3.8.5, ssh_backup_create, ssh_backup_restore, ssh_backup_schedule, and ssh_backup_list build remote shell commands from caller-controlled values in src/backup-manager.js and inline backup handlers in src/index.js without neutralizing shell metacharacters. Crafted database, connection, backup directory, path, exclusion, schedule, or comment arguments can therefore execute arbitrary OS commands on managed remote servers as the configured SSH user. ssh_backup_schedule can persist execution through cron. ssh_backup_list does not pass through the server policy check and remains available in readonly and restricted modes, allowing command execution despite those restrictions. Tool arguments can be supplied by a malicious or compromised MCP client or steered through indirect prompt injection; fully trusted benign arguments do not trigger the issue. The earlier database-helper remediation for CVE-2026-77383 applied shell quoting to src/database-manager.js but did not cover these parallel backup builders. This issue is fixed in version 3.8.5.",
+    "references": [
+      "https://github.com/bvisible/mcp-ssh-manager/commit/d40daa8a43388dfaedf593bff18f0064d50f9633",
+      "https://github.com/bvisible/mcp-ssh-manager/releases/tag/v3.8.5",
+      "https://github.com/bvisible/mcp-ssh-manager/security/advisories/GHSA-qwwm-vrm9-4mw8"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 58.6,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 89.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
     ]
   }
 ]
