@@ -1,26 +1,34 @@
 [
   {
-    "cve_id": "CVE-2026-129448",
-    "published": "2026-11-17T11:17:28.190",
-    "last_modified": "2026-11-21T05:18:11.013",
+    "cve_id": "CVE-2026-109618",
+    "published": "2026-10-21T14:17:09.357",
+    "last_modified": "2026-11-24T14:27:42.290",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Deserialization of Untrusted Data in Apache Roller versions 4.0.0 through 6.1.4 allows an unauthenticated remote attacker to execute arbitrary code. The XML-RPC endpoint accepts vendor extension types and deserializes them before authenticating the requester.\n\nThis is the same vulnerability as CVE-2026-82384, which listed only Apache Roller 6.1.5 as affected. This issue is being actively exploited.\n\nUsers are recommended to upgrade to Apache Roller 6.1.6 or later, which disables the extension types and rejects XML-RPC requests when the XML-RPC feature is disabled.\n\nUsers who cannot upgrade right away should set \"enabledForExtensions\" to \"false\" in WEB-INF/web.xml, or remove the \"/roller-services/xmlrpc\" servlet mapping, and restart Roller. Disabling XML-RPC in the administration UI is not enough, because older versions deserialize the request before checking that setting.",
+    "summary": "PHP uses longjmp() for out-of-memory (OOM) errors to exit the current context and abort handling of the request. Some contexts may not properly account for this scenario and leave request memory in an uninitialized state before performing an allocation. The subsequent request cleanup procedure may read or branch on this memory. Multiple OOM strategies can consistently trigger this condition and lead to remote code execution (RCE).",
     "references": [
-      "https://github.com/apache/roller/pull/171",
-      "https://lists.apache.org/thread.html/lnz4s26tv6hdo03wngtdbpfj4hg4gtds",
-      "https://lists.apache.org/thread/cc0jck13nb9vvcmzxzwotr6n16mx28z9",
-      "https://www.cve.org/CVERecord?id=CVE-2026-82384",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-129448"
+      "https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w",
+      "http://seclists.org/fulldisclosure/2026/Oct/51",
+      "http://www.openwall.com/lists/oss-security/2026/10/21/6",
+      "http://www.openwall.com/lists/oss-security/2026/10/23/5",
+      "https://github.com/rapid7/metasploit-framework/pull/22139",
+      "https://arcticwolf.com/resources/blog/php2shell-critical-php-vulnerabilities-enable-unauthenticated-remote-code-execution/",
+      "https://cert-portal.siemens.com/productcert/html/ssa-166980.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-566435.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-566512.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-862892.html",
+      "https://php2shell.delftintellab.com",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109618",
+      "https://www.wiz.io/blog/php2shell-php-rce"
     ],
     "source": "NVD",
     "cisa_kev": true,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 5.5,
-    "epss_percentile": 92.9,
+    "epss": 100.0,
+    "epss_percentile": 100.0,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -30,14 +38,10 @@
           "points": 30
         },
         {
-          "signal": "Tag: deserialization",
+          "signal": "Tag: poc",
           "points": 20
         },
         {
-          "signal": "Tag: in_the_wild",
-          "points": 35
-        },
-        {
           "signal": "Pre-Auth Remote Execution",
           "points": 25
         },
@@ -48,52 +52,74 @@
         {
           "signal": "CISA KEV Active Exploit",
           "points": 40
+        },
+        {
+          "signal": "High EPSS (100.0%)",
+          "points": 25
         }
       ]
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
       "cisa_kev",
-      "deserialization",
       "in_the_wild",
+      "poc",
       "pre_auth",
       "rce",
       "weaponized"
     ],
-    "intel_score": 234.0,
+    "intel_score": 224.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "deserialization+20",
-      "in_the_wild+35",
+      "poc+20",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)",
-      "CISA KEV active exploitation (+40)"
+      "CISA KEV active exploitation (+40)",
+      "High EPSS exploit prob 100.0% (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-133968",
-    "published": "2026-11-20T19:18:51.670",
-    "last_modified": "2026-11-23T21:16:58.763",
+    "cve_id": "CVE-2026-111497",
+    "published": "2026-10-22T14:17:37.190",
+    "last_modified": "2026-11-24T15:17:09.400",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "monailabel (aka MONAI Label) before 0.8.6 allows directory traversal, with resultant remote code execution, via the image parameter to the PUT /datastore/image endpoint, as exploited in the wild starting in September 2026.",
+    "summary": "A buffer overflow vulnerability in the Brotli decoder (c/dec/decode.c) in Google Brotli versions 1.0.3 through 1.2.0 on all platforms allows a remote unauthenticated attacker to corrupt adjacent decoder state memory, disclose sensitive memory contents, cause a denial of service, or potentially execute arbitrary code using a crafted Brotli-compressed stream.\n\n\n\n\n\nUsers need to update any Brotli libraries or binaries between 1.0.3 through 1.2.0 to the latest available version: 1.0.10 or 1.1.1 or 1.2.1.",
     "references": [
-      "https://github.com/Project-MONAI/MONAILabel/pull/1915",
-      "https://github.com/Project-MONAI/MONAILabel/releases/tag/0.8.6",
-      "https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94",
-      "https://www.theregister.com/security/2026/11/20/china-attackers-deployed-ai-agents-that-autonomously-found-and-exploited-a-0-day-to-take-over-a-university-server/5311382",
-      "https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-133968"
+      "https://github.com/andybalholm/brotli/releases/tag/v1.2.7",
+      "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases#nodejs-brotli-decoder-out-of-bounds-write-permits-remote-code-execution-cve-2026-111497---high",
+      "http://www.openwall.com/lists/oss-security/2026/10/23/25",
+      "http://www.openwall.com/lists/oss-security/2026/10/24/6",
+      "http://www.openwall.com/lists/oss-security/2026/10/26/12",
+      "http://www.openwall.com/lists/oss-security/2026/10/26/13",
+      "http://www.openwall.com/lists/oss-security/2026/10/26/16",
+      "http://www.openwall.com/lists/oss-security/2026/11/03/2",
+      "https://broccoli2shell.com",
+      "https://github.com/advisories/GHSA-9v8h-qqgm-4m35",
+      "https://github.com/dotnet/announcements/issues/494",
+      "https://github.com/google/brotli/releases/tag/v1.0.10",
+      "https://github.com/google/brotli/releases/tag/v1.1.1",
+      "https://github.com/google/brotli/releases/tag/v1.2.1",
+      "https://lists.debian.org/debian-lts-announce/2026/10/msg00049.html",
+      "https://patchtheplanet.org/brotli",
+      "https://www.aikido.dev/blog/node2shell-nodejs-brotli-rce-cve-2026-111497",
+      "https://cert-portal.siemens.com/productcert/html/ssa-045512.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-242944.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-443410.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-678870.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-898633.html",
+      "https://ellio.tech/en/blog/node2shell-cve-2026-111497-rce-on-stock-nodejs-builds/",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-111497"
     ],
     "source": "NVD",
     "cisa_kev": true,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 3.7,
-    "epss_percentile": 89.9,
+    "epss": 100.0,
+    "epss_percentile": 100.0,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -103,12 +129,8 @@
           "points": 30
         },
         {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        },
-        {
-          "signal": "Tag: in_the_wild",
-          "points": 35
+          "signal": "Tag: dos",
+          "points": 3
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -121,51 +143,72 @@
         {
           "signal": "CISA KEV Active Exploit",
           "points": 40
+        },
+        {
+          "signal": "High EPSS (100.0%)",
+          "points": 25
         }
       ]
     },
     "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
       "cisa_kev",
+      "dos",
       "in_the_wild",
-      "path_traversal",
       "pre_auth",
       "rce",
       "weaponized"
     ],
-    "intel_score": 229.0,
+    "intel_score": 207.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "path_traversal+15",
-      "in_the_wild+35",
+      "dos+3",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)",
-      "CISA KEV active exploitation (+40)"
+      "CISA KEV active exploitation (+40)",
+      "High EPSS exploit prob 100.0% (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2024-10441",
-    "published": "2025-03-19T02:15:27.120",
-    "last_modified": "2026-11-21T05:18:09.090",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-109619",
+    "published": "2026-10-21T14:17:09.823",
+    "last_modified": "2026-11-24T14:27:34.097",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "Improper encoding or escaping of output vulnerability in the system plugin daemon in Synology BeeStation OS (BSM) before 1.1-65374 and Synology DiskStation Manager (DSM) before 7.2-64570-4, 7.2.1-69057-6 and 7.2.2-72806-1 allows remote attackers to execute arbitrary code via unspecified vectors.",
+    "summary": "PHP has various global state that temporarily points into request memory. In some scenarios, global state may not be correctly reset, or may be repopulated after being reset. The global state may then refer to request memory even after it has been freed. Subsequent requests may read or branch on this stale state before it is fully initialized. Multiple strategies can trigger this condition and produce remote code execution (RCE).",
     "references": [
-      "https://www.synology.com/en-global/security/advisory/Synology_SA_24_20",
-      "https://www.synology.com/en-global/security/advisory/Synology_SA_24_23",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2024-10441"
+      "https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp",
+      "http://www.openwall.com/lists/oss-security/2026/10/21/16",
+      "http://www.openwall.com/lists/oss-security/2026/10/21/17",
+      "http://www.openwall.com/lists/oss-security/2026/10/21/23",
+      "http://www.openwall.com/lists/oss-security/2026/10/21/7",
+      "http://www.openwall.com/lists/oss-security/2026/10/22/14",
+      "http://www.openwall.com/lists/oss-security/2026/10/22/15",
+      "http://www.openwall.com/lists/oss-security/2026/10/22/16",
+      "http://www.openwall.com/lists/oss-security/2026/10/22/19",
+      "http://www.openwall.com/lists/oss-security/2026/10/22/2",
+      "http://www.openwall.com/lists/oss-security/2026/10/22/20",
+      "http://www.openwall.com/lists/oss-security/2026/10/23/4",
+      "https://arcticwolf.com/resources/blog/php2shell-critical-php-vulnerabilities-enable-unauthenticated-remote-code-execution/",
+      "https://cert-portal.siemens.com/productcert/html/ssa-166980.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-566435.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-566512.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-862892.html",
+      "https://php2shell.delftintellab.com/",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-109619",
+      "https://www.wiz.io/blog/php2shell-php-rce"
     ],
     "source": "NVD",
     "cisa_kev": true,
-    "ransomware_campaign": true,
+    "ransomware_campaign": false,
     "pre_auth": true,
-    "weaponized": false,
-    "epss": 3.1,
-    "epss_percentile": 88.2,
+    "weaponized": true,
+    "epss": 100.0,
+    "epss_percentile": 100.0,
     "score_breakdown": {
-      "base_cvss": 49.0,
+      "base_cvss": 40.5,
       "freshness": 10,
       "components": [
         {
@@ -177,30 +220,35 @@
           "points": 25
         },
         {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        },
+        {
           "signal": "CISA KEV Active Exploit",
           "points": 40
         },
         {
-          "signal": "Known Ransomware Campaign",
-          "points": 35
+          "signal": "High EPSS (100.0%)",
+          "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
       "cisa_kev",
       "in_the_wild",
       "pre_auth",
-      "ransomware",
-      "rce"
+      "rce",
+      "weaponized"
     ],
-    "intel_score": 189.0,
+    "intel_score": 195.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
       "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)",
       "CISA KEV active exploitation (+40)",
-      "CISA KEV Known Ransomware Campaign (+35)"
+      "High EPSS exploit prob 100.0% (+25)"
     ]
   },
   {
@@ -377,7 +425,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.9,
-    "epss_percentile": 60.9,
+    "epss_percentile": 60.7,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -440,7 +488,7 @@
     "pre_auth": true,
     "weaponized": true,
     "epss": 0.9,
-    "epss_percentile": 59.5,
+    "epss_percentile": 59.4,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -496,7 +544,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 54.8,
+    "epss_percentile": 54.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -552,7 +600,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 54.8,
+    "epss_percentile": 54.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -608,7 +656,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 54.8,
+    "epss_percentile": 54.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -664,7 +712,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.8,
-    "epss_percentile": 56.4,
+    "epss_percentile": 56.2,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -720,7 +768,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 54.8,
+    "epss_percentile": 54.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -776,7 +824,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.8,
-    "epss_percentile": 56.6,
+    "epss_percentile": 56.4,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -816,59 +864,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-123890",
-    "published": "2026-11-19T15:17:25.407",
-    "last_modified": "2026-11-21T05:18:10.817",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "VMware vCenter contains an authentication bypass vulnerability in the VMware Directory Service.\nAffected versions: 9.1.x (fixed in 9.1.1.0200); 9.0.x (fixed in 9.0.2.0200); 8.0 (fixed in 8.0 U3m); 5.x (fixed in 5.2.5).\nTelco Cloud Platform 3.0, 4.x, 5.0.x, 5.1.x, 5.2 and Telco Cloud Infrastructure 3.0 are also affected (see KB463116).",
-    "references": [
-      "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495",
-      "https://cloud.google.com/blog/topics/threat-intelligence/armory-castle-exploits-vsphere?e=48754805",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-123890"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 3.5,
-    "epss_percentile": 89.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "CISA KEV Active Exploit",
-          "points": 40
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "cisa_kev",
-      "in_the_wild",
-      "pre_auth"
-    ],
-    "intel_score": 149.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
     "cve_id": "CVE-2024-9050",
     "published": "2024-10-22T13:15:02.410",
     "last_modified": "2026-11-23T15:17:13.290",
@@ -900,7 +895,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 40.1,
+    "epss_percentile": 39.8,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -934,88 +929,34 @@
     ]
   },
   {
-    "cve_id": "CVE-2012-20007",
-    "published": "2026-11-18T16:17:47.560",
-    "last_modified": "2026-11-21T04:17:09.163",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-126256",
+    "published": "2026-11-11T22:17:25.783",
+    "last_modified": "2026-11-24T14:18:02.443",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "ThinkPHP 2.0 through 2.2 and 3.0 Lite mode contains an eval injection vulnerability in the Dispatcher PATH_INFO parsing, which uses preg_replace with the /e modifier and a double-quoted replacement. Unauthenticated attackers can send crafted requests to index.php with a malicious 's' parameter containing PHP expressions to execute arbitrary code on the server. Exploitation evidence was first observed by the Shadowserver Foundation on 2023-10-14.",
+    "summary": "A out-of-bounds read vulnerability in Fortinet FortiOS 8.0.0 through 8.0.1, FortiOS 7.6.0 through 7.6.7, FortiOS 7.4.0 through 7.4.13, FortiOS 7.2 all versions may allow an unauthenticated attacker to execute arbitrary code or command via crafted packets.",
     "references": [
-      "http://web.archive.org/web/20140201221754/http://www.jb51.net:80/softjc/43550.html",
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/thinkphp/thinkphp-2-rce.yaml",
-      "https://github.com/vulhub/vulhub/tree/master/thinkphp/2-rce",
-      "https://www.vulncheck.com/advisories/thinkphp-2-x-3.0-lite-unauthenticated-rce-via-dispatcher-path-info"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 45.4,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 139.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-125294",
-    "published": "2026-11-21T19:16:31.403",
-    "last_modified": "2026-11-23T15:17:30.223",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The Nexter Blocks Pro plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 5.0.10 via the `tpgb_ajax_register_user()` function. This is due to a byte-level denylist on the `tpgb_acf_key[]` and `tpgb_acf[]` parameters that fails to block Unicode look-alike characters — such as U+1E87 and U+00E7 in a key like `ẇp_çapabilities` — whose UTF-8 byte sequences do not match any ASCII-based pattern check, while the database's default accent-insensitive collation (`utf8mb4_unicode_ci` / `utf8mb4_0900_ai_ci`) treats the decorated key as equivalent to the canonical `wp_capabilities` row, causing `update_user_meta()` to overwrite the newly registered user's role with `administrator`. This makes it possible for unauthenticated attackers to register a new account bearing the full Administrator role, gaining complete control over the WordPress site including the ability to install plugins, modify files, and execute arbitrary code. The nonce required by the handler is publicly emitted on any page containing the tp-login-register block, making the full exploit chain — nonce retrieval, a single crafted registration POST, and the plugin's own `autologin` flow — trivially reachable on any default install where user registration is enabled. Successful exploitation causes the attacker's own account to receive the complete Administrator role.",
-    "references": [
-      "https://nexterwp.com",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/8670d9ac-e2b0-4c19-a9d7-00be23a139c4?source=cve"
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-270"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 57.6,
+    "epss": 0.5,
+    "epss_percentile": 41.4,
     "score_breakdown": {
-      "base_cvss": 49.0,
+      "base_cvss": 37.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: edge_perimeter",
+          "points": 35
         },
         {
-          "signal": "Tag: priv_esc",
-          "points": 25
+          "signal": "Tag: rce",
+          "points": 30
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -1023,17 +964,17 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
     "tags": [
+      "edge_perimeter",
       "pre_auth",
-      "priv_esc",
       "rce"
     ],
-    "intel_score": 139.0,
+    "intel_score": 137.0,
     "reasons": [
       "recently modified (last 48h)",
+      "edge_perimeter+35",
       "rce+30",
-      "priv_esc+25",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -1055,8 +996,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": 3.2,
-    "epss_percentile": 88.4,
+    "epss": 3.1,
+    "epss_percentile": 88.1,
     "score_breakdown": {
       "base_cvss": 49.5,
       "freshness": 10,
@@ -1086,58 +1027,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "path_traversal+15",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134352",
-    "published": "2026-11-21T17:16:56.200",
-    "last_modified": "2026-11-23T17:17:37.313",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Rclone from 1.51.0 before 1.76.0 contains an authentication bypass vulnerability in serve sftp --auth-proxy because the generateCacheKey cache key omits the authentication method. Attackers knowing a victim's base64 public key can submit it as a password from the same client IP to reuse the cached entry and gain read-write VFS access.",
-    "references": [
-      "https://github.com/rclone/rclone/security/advisories/GHSA-66qv-66mg-9h74",
-      "https://www.vulncheck.com/advisories/rclone-1.51.0-before-1.76.0-authentication-bypass-via-serve-sftp-auth-proxy-cache",
-      "https://github.com/rclone/rclone/security/advisories/GHSA-66qv-66mg-9h74"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 35.4,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 125.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
@@ -1173,8 +1062,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 21.0,
-    "epss_percentile": 97.6,
+    "epss": 21.5,
+    "epss_percentile": 97.7,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1188,7 +1077,7 @@
           "points": 25
         },
         {
-          "signal": "Moderate EPSS (21.0%)",
+          "signal": "Moderate EPSS (21.5%)",
           "points": 10
         }
       ]
@@ -1203,7 +1092,7 @@
       "recently modified (last 48h)",
       "rce+30",
       "Pre-Auth Remote Execution (+25)",
-      "Moderate EPSS prob 21.0% (+10)"
+      "Moderate EPSS prob 21.5% (+10)"
     ]
   },
   {
@@ -1227,8 +1116,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.9,
-    "epss_percentile": 62.1,
+    "epss": 1.0,
+    "epss_percentile": 64.1,
     "score_breakdown": {
       "base_cvss": 40.5,
       "freshness": 10,
@@ -1259,110 +1148,6 @@
       "rce+30",
       "ssrf+18",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134287",
-    "published": "2026-11-21T17:16:48.030",
-    "last_modified": "2026-11-21T17:16:48.030",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "OpenRemote core before 1.34.0 contains an authentication bypass vulnerability in UserAssetProvisioningMQTTHandler that allows unauthenticated attackers to impersonate provisioned devices without proof of private key possession. Attackers can publish a known device's public certificate to the provisioning request topic, authenticating their anonymous MQTT connection as the device's service account to read and modify assets.",
-    "references": [
-      "https://github.com/openremote/core/security/advisories/GHSA-7jp3-2229-xgqj",
-      "https://www.vulncheck.com/advisories/openremote-before-1.34.0-authentication-bypass-via-x-509-mqtt-provisioning"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 48.1,
-    "score_breakdown": {
-      "base_cvss": 38.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:L",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 123.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134249",
-    "published": "2026-11-21T17:16:42.373",
-    "last_modified": "2026-11-23T16:17:29.627",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SiYuan before 3.8.10 contains an authentication bypass vulnerability that allows unauthenticated attackers to gain Administrator role by spoofing X-Forwarded-For through a loopback-trusted reverse proxy. Attackers can send requests with Host set to localhost and X-Forwarded-For set to 127.0.0.1 to read private note-history contents via the /history/*path route when no lock-screen password is set.",
-    "references": [
-      "https://github.com/siyuan-note/siyuan/commit/f951019168faf035b36c98f8e672719d511881ac",
-      "https://github.com/siyuan-note/siyuan/security/advisories/GHSA-gmcm-mggw-8759",
-      "https://www.vulncheck.com/advisories/siyuan-before-3.8.10-authentication-bypass-via-x-forwarded-for-on-history-route",
-      "https://github.com/siyuan-note/siyuan/security/advisories/GHSA-gmcm-mggw-8759"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 49.7,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 122.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -1444,7 +1229,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.9,
-    "epss_percentile": 59.9,
+    "epss_percentile": 59.8,
     "score_breakdown": {
       "base_cvss": 35.5,
       "freshness": 10,
@@ -1494,7 +1279,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 54.8,
+    "epss_percentile": 54.6,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1544,7 +1329,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.6,
-    "epss_percentile": 52.1,
+    "epss_percentile": 51.9,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1578,6 +1363,54 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-77312",
+    "published": "2026-11-19T22:18:44.013",
+    "last_modified": "2026-11-24T04:17:35.447",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Flyto2 Core is an execution kernel for automation and AI-agent workflows. Prior to 2.26.8, the earlier CVE-2026-67429 remediation applied validate_path_with_env_config() to only a hand-picked set of file-writing modules, leaving data.csv.write in src/core/modules/atomic/data/csv_write.py, data.json_to_csv in src/core/modules/atomic/data/json_to_csv.py, file.copy in src/core/modules/atomic/file/copy.py, and file.move in src/core/modules/atomic/file/move.py outside the FLYTO_SANDBOX_DIR confinement boundary. The advisory also identifies unguarded modules across the broader data.*, file.*, and report-writer families. data.csv.write relies on a .. substring denylist that does not reject absolute paths, while the other named modules accept caller-controlled output or destination paths without the canonical guard. A caller able to execute modules or recipes can therefore write attacker-controlled content outside the configured sandbox, potentially overwriting application code, recipes, startup files, scheduled-task files, or authorization files and gaining code execution on the host. This issue is fixed in version 2.26.8.",
+    "references": [
+      "https://github.com/advisories/GHSA-h9f9-h6gm-wc85",
+      "https://github.com/flytohub/flyto-core/commit/bbb6f1cfec22fee1ea0e6ecf1129d7103c85e09f",
+      "https://github.com/flytohub/flyto-core/releases/tag/v2.26.8",
+      "https://github.com/flytohub/flyto-core/security/advisories/GHSA-p34x-fmph-9fjx",
+      "https://github.com/flytohub/flyto-core/security/advisories/GHSA-p34x-fmph-9fjx"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 55.6,
+    "score_breakdown": {
+      "base_cvss": 50.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 115.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-107904",
     "published": "2026-11-17T07:17:23.257",
     "last_modified": "2026-11-23T16:17:10.900",
@@ -1594,106 +1427,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.6,
-    "epss_percentile": 52.0,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-114025",
-    "published": "2026-11-21T00:17:45.423",
-    "last_modified": "2026-11-23T21:16:52.143",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "An out-of-bounds write was addressed with improved input validation. This issue is fixed in iOS 26.7.2 and iPadOS 26.7.2, iOS 27.2 and iPadOS 27.2, macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2, tvOS 27.2. A user may be able to cause unexpected app termination or arbitrary code execution.",
-    "references": [
-      "https://support.apple.com/en-us/149227",
-      "https://support.apple.com/en-us/149230",
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523",
-      "https://support.apple.com/en-us/149524"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 26.0,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-120539",
-    "published": "2026-11-21T06:16:33.227",
-    "last_modified": "2026-11-23T17:17:29.997",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The Restrictions for BuddyPress plugin for WordPress is vulnerable to Remote Code Execution in all versions up to, and including, 1.5.4 This is due to the plugin splicing the attacker-controlled request URI into a PHP expression inside a double-quoted string and evaluating it with eval(). Because PHP interpolates double-quoted strings, a payload of the form {${...}} in the URL path is executed during interpolation, so no quote breakout is required and WordPress' slashing does not mitigate it. This makes it possible for unauthenticated attackers to execute arbitrary code on the server with a single GET request. The affected conditions ship enabled by default and are evaluated before any logged-in check, so no plugin configuration is needed; the site must have BuddyPress and Paid Memberships Pro active alongside this plugin.",
-    "references": [
-      "https://github.com/seventhqueen/buddypress-restrict/releases/tag/1.5.5",
-      "https://plugins.trac.wordpress.org/browser/bp-restrict/tags/1.5.4/admin/class-bp-restrict-admin.php#L213",
-      "https://plugins.trac.wordpress.org/browser/bp-restrict/tags/1.5.4/admin/class-bp-restrict-pmpro.php#L184",
-      "https://plugins.trac.wordpress.org/browser/bp-restrict/tags/1.5.4/admin/class-bp-restrict-pmpro.php#L187",
-      "https://plugins.trac.wordpress.org/browser/bp-restrict/tags/1.5.4/includes/class-bp-restrict.php#L172",
-      "https://plugins.trac.wordpress.org/browser/bp-restrict/tags/1.5.4/includes/class-bp-restrict.php#L210",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/fab68c0b-2211-4cc4-a112-f0011f9d72ed?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 2.2,
-    "epss_percentile": 82.7,
+    "epss_percentile": 51.8,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -1736,8 +1470,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 28.6,
+    "epss": 0.4,
+    "epss_percentile": 33.7,
     "score_breakdown": {
       "base_cvss": 40.5,
       "freshness": 10,
@@ -1781,7 +1515,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 44.6,
+    "epss_percentile": 44.3,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -1831,7 +1565,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 44.6,
+    "epss_percentile": 44.3,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -1881,7 +1615,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 39.7,
+    "epss_percentile": 39.4,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -1931,7 +1665,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 42.6,
+    "epss_percentile": 42.3,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -1962,6 +1696,83 @@
       "edge_perimeter+35",
       "dos+3",
       "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-6409",
+    "published": "2024-07-08T18:15:09.487",
+    "last_modified": "2026-11-24T06:17:04.327",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A race condition vulnerability was discovered in how signals are handled by OpenSSH's server (sshd). If a remote attacker does not authenticate within a set time period, then sshd's SIGALRM handler is called asynchronously. However, this signal handler calls various functions that are not async-signal-safe, for example, syslog(). As a consequence of a successful attack, in the worst case scenario, an attacker may be able to perform a remote code execution (RCE) as an unprivileged user running the sshd server.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2024:4457",
+      "https://access.redhat.com/errata/RHSA-2024:4613",
+      "https://access.redhat.com/errata/RHSA-2024:4716",
+      "https://access.redhat.com/errata/RHSA-2024:4910",
+      "https://access.redhat.com/errata/RHSA-2024:4955",
+      "https://access.redhat.com/errata/RHSA-2024:4960",
+      "https://access.redhat.com/errata/RHSA-2024:5444",
+      "https://access.redhat.com/security/cve/CVE-2024-6409",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2295085",
+      "http://www.openwall.com/lists/oss-security/2024/07/08/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/09/2",
+      "http://www.openwall.com/lists/oss-security/2024/07/09/5",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/1",
+      "http://www.openwall.com/lists/oss-security/2024/07/10/2",
+      "https://access.redhat.com/errata/RHSA-2024:4457",
+      "https://access.redhat.com/errata/RHSA-2024:4613",
+      "https://access.redhat.com/errata/RHSA-2024:4716",
+      "https://access.redhat.com/security/cve/CVE-2024-6409",
+      "https://almalinux.org/blog/2024-07-09-cve-2024-6409/",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2295085",
+      "https://bugzilla.suse.com/show_bug.cgi?id=1227217",
+      "https://explore.alas.aws.amazon.com/CVE-2024-6409.html",
+      "https://github.com/openela-main/openssh/commit/c00da7741d42029e49047dd89e266d91dcfbffa0",
+      "https://security-tracker.debian.org/tracker/CVE-2024-6409",
+      "https://security.netapp.com/advisory/ntap-20240712-0003/",
+      "https://sig-security.rocky.page/issues/CVE-2024-6409/",
+      "https://ubuntu.com/security/CVE-2024-6409",
+      "https://www.suse.com/security/cve/CVE-2024-6409.html",
+      "https://cert-portal.siemens.com/productcert/html/ssa-398330.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 27.9,
+    "epss_percentile": 98.1,
+    "score_breakdown": {
+      "base_cvss": 35.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Moderate EPSS (27.9%)",
+          "points": 10
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 110.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)",
+      "Moderate EPSS prob 27.9% (+10)"
     ]
   },
   {
@@ -2020,7 +1831,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.6,
-    "epss_percentile": 47.3,
+    "epss_percentile": 47.0,
     "score_breakdown": {
       "base_cvss": 50.0,
       "freshness": 10,
@@ -2065,7 +1876,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 33.2,
+    "epss_percentile": 36.0,
     "score_breakdown": {
       "base_cvss": 45.0,
       "freshness": 10,
@@ -2109,8 +1920,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 37.8,
+    "epss": 0.5,
+    "epss_percentile": 41.6,
     "score_breakdown": {
       "base_cvss": 45.0,
       "freshness": 10,
@@ -2154,7 +1965,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.3,
-    "epss_percentile": 19.4,
+    "epss_percentile": 19.2,
     "score_breakdown": {
       "base_cvss": 50.0,
       "freshness": 10,
@@ -2277,6 +2088,52 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-18107",
+    "published": "2026-07-28T19:17:32.420",
+    "last_modified": "2026-11-24T11:17:15.647",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in CRIU's handling of restartable sequences (rseq) during checkpoint/restore. A malicious process inside a container can register an rseq critical section that hijacks CRIU's parasite code injection during checkpoint, allowing it to spoof the process credentials saved in the checkpoint image. On restore, the container process gains elevated capabilities and zeroed UIDs/GIDs.\n\nThe practical impact on Red Hat products is limited by several factors: checkpoint/restore requires root privileges (podman) or cluster-admin RBAC (OpenShift) to trigger and cannot be initiated from within the container itself; on OpenShift prior to 4.17 the feature required explicit opt-in, and on 4.17+ the kubelet checkpoint API RBAC is not configured by default; OpenShift enforces user namespaces by default for regular workloads (hostUsers is gated behind admin-only SCCs), which makes the spoofed capabilities namespace-scoped and ineffective for privilege escalation; SELinux type enforcement (container_t) blocks privilege transitions independently of capabilities; seccomp filters persist through checkpoint/restore and cannot be corrupted via the parasite; and kernel mount namespace ownership checks on RHEL 9/10 kernels prevent mount-based container escape even with spoofed capabilities.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2026-18107",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2508140",
+      "https://github.com/checkpoint-restore/criu/pull/3097"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 9.6,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter",
+      "priv_esc"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
+      "priv_esc+25"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-89091",
     "published": "2026-10-08T22:17:35.777",
     "last_modified": "2026-11-23T16:18:03.147",
@@ -2294,7 +2151,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 42.3,
+    "epss_percentile": 42.0,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -2319,232 +2176,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-130733",
-    "published": "2026-11-18T12:17:19.627",
-    "last_modified": "2026-11-21T04:17:19.697",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Grav from 2.0.0 before 2.2.18 contains an authorization bypass vulnerability that allows publishers to overwrite pages their per-page permissions deny by abusing FolderStorage key delimiter collisions and PageStorage folder reconstruction. Attackers can rename a folder like locked*** or save from a page with an unusual prefix width through a front-end Flex pages form, replacing protected content and permissions to access the protected subtree.",
-    "references": [
-      "https://github.com/getgrav/grav/security/advisories/GHSA-3rxf-jpgc-hwpv"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 24.0,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "pre_auth"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-130754",
-    "published": "2026-11-18T19:17:45.940",
-    "last_modified": "2026-11-21T05:18:11.707",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "All versions of LaraDashboard contain an authentication bypass in SocialAuthService::findOrCreateUser(), which links a social login to an existing account by email without checking that the OAuth provider verified that email. Unauthenticated attackers using an OAuth/OIDC provider that asserts a victim's email can log in as any user, including Superadmin, and keep persistent access through a linked social_accounts entry.",
-    "references": [
-      "https://github.com/laradashboard/laradashboard/security/advisories/GHSA-c5x3-wvxj-7cgr",
-      "https://github.com/laradashboard/laradashboard/security/advisories/GHSA-c5x3-wvxj-7cgr"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 39.2,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "pre_auth"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-114023",
-    "published": "2026-11-21T00:17:45.177",
-    "last_modified": "2026-11-23T21:16:51.803",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A path handling issue was addressed with improved validation. This issue is fixed in macOS Golden Gate 27.2, macOS Sequoia 15.8.2, macOS Tahoe 26.7.2. Processing web content may lead to arbitrary code execution.",
-    "references": [
-      "https://support.apple.com/en-us/149521",
-      "https://support.apple.com/en-us/149522",
-      "https://support.apple.com/en-us/149523"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 24.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134253",
-    "published": "2026-11-21T17:16:42.870",
-    "last_modified": "2026-11-23T21:16:59.470",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Grav API plugin from 1.0.0 before 1.1.4 contains a remote code execution vulnerability that allows publishers with media and page write rights to write theme template files through the blueprint-upload endpoint. Attackers can upload a file into a theme's Twig templates folder and include it from sandboxed page Twig to execute commands as the web-server user.",
-    "references": [
-      "https://github.com/getgrav/grav/security/advisories/GHSA-3rqp-8h7g-xxv8",
-      "https://www.vulncheck.com/advisories/grav-api-plugin-1.0.0-before-1.1.4-rce-via-blueprint-upload-theme-template-write"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 1.3,
-    "epss_percentile": 70.2,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134452",
-    "published": "2026-11-21T17:17:10.250",
-    "last_modified": "2026-11-23T19:17:34.190",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Dockhand before 1.0.57 merges stack secret environment variables into the environment used to spawn docker compose during stack deploys without filtering reserved keys such as PATH. An authenticated attacker with stacks:edit permission can set PATH to a directory containing a malicious binary and trigger a deploy, executing arbitrary commands as the Dockhand server process user.",
-    "references": [
-      "https://github.com/Finsys/dockhand/security/advisories/GHSA-8fh8-h5v2-wmj4",
-      "https://www.vulncheck.com/advisories/dockhand-before-1.0.57-rce-via-path-poisoning-in-stack-deploy",
-      "https://github.com/Finsys/dockhand/security/advisories/GHSA-8fh8-h5v2-wmj4"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 32.3,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 109.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -2566,7 +2197,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 1.2,
-    "epss_percentile": 69.7,
+    "epss_percentile": 69.6,
     "score_breakdown": {
       "base_cvss": 36.5,
       "freshness": 10,
@@ -2606,55 +2237,54 @@
     ]
   },
   {
-    "cve_id": "CVE-2023-54420",
-    "published": "2026-11-18T16:17:53.717",
-    "last_modified": "2026-11-21T04:17:10.930",
-    "cvss_v3": 7.5,
+    "cve_id": "CVE-2024-8676",
+    "published": "2024-11-26T20:15:34.260",
+    "last_modified": "2026-11-24T07:17:11.227",
+    "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
-    "summary": "LiveBOS builds through 2023-08-16 contain a path traversal vulnerability that allows unauthenticated attackers to read arbitrary files via the imgName parameter in /feed/ShowImage.do using a ';.js.jsp' suffix bypass. Attackers can send crafted GET requests with directory traversal sequences in imgName to read system files such as /etc/passwd. Exploitation evidence was first observed by the Shadowserver Foundation on 2023-10-30.",
+    "summary": "A vulnerability was found in CRI-O, where it can be requested to take a checkpoint archive of a container and later be asked to restore it. When it does that restoration, it attempts to restore the mounts from the restore archive instead of the pod request. As a result, the validations run on the pod spec, verifying that the pod has access to the mounts it specifies are not applicable to a restored container. This flaw allows a malicious user to trick CRI-O into restoring a pod that doesn't have access to host mounts. The user needs access to the kubelet or cri-o socket to call the restore endpoint and trigger the restore.",
     "references": [
-      "https://github.com/luck-ying/Library-POC/blob/master/2023HW/20238.16/LiveBOS_howImage.do%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E.py",
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/other/livebos-file-read.yaml",
-      "https://www.vulncheck.com/advisories/livebos-unauthenticated-path-traversal-file-read-via-showimage-do"
+      "https://access.redhat.com/errata/RHBA-2024:10826",
+      "https://access.redhat.com/errata/RHSA-2025:0648",
+      "https://access.redhat.com/errata/RHSA-2025:1908",
+      "https://access.redhat.com/errata/RHSA-2025:3297",
+      "https://access.redhat.com/errata/RHSA-2025:4211",
+      "https://access.redhat.com/errata/RHSA-2025:9765",
+      "https://access.redhat.com/security/cve/CVE-2024-8676",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2313842"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 54.8,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 55.7,
     "score_breakdown": {
-      "base_cvss": 37.5,
+      "base_cvss": 37.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: path_traversal",
-          "points": 15
+          "signal": "Tag: edge_perimeter",
+          "points": 35
         },
         {
-          "signal": "Tag: poc",
-          "points": 20
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
+          "signal": "Pre-Auth Remote Execution",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
     "tags": [
-      "path_traversal",
-      "poc",
-      "weaponized"
+      "edge_perimeter",
+      "pre_auth"
     ],
-    "intel_score": 107.5,
+    "intel_score": 107.0,
     "reasons": [
       "recently modified (last 48h)",
-      "path_traversal+15",
-      "poc+20",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "edge_perimeter+35",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -2756,7 +2386,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 40.2,
+    "epss_percentile": 39.9,
     "score_breakdown": {
       "base_cvss": 38.0,
       "freshness": 10,
@@ -2806,7 +2436,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 44.4,
+    "epss_percentile": 44.1,
     "score_breakdown": {
       "base_cvss": 45.5,
       "freshness": 10,
@@ -2854,7 +2484,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.2,
-    "epss_percentile": 12.7,
+    "epss_percentile": 12.6,
     "score_breakdown": {
       "base_cvss": 42.0,
       "freshness": 10,
@@ -2888,6 +2518,51 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-4255",
+    "published": "2026-03-16T14:20:19.480",
+    "last_modified": "2026-11-24T13:17:32.687",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A DLL search order hijacking vulnerability in Thermalright TR-VISION HOME on Windows (64-bit) allows a local attacker to escalate privileges via DLL side-loading. The application loads certain dynamic-link library (DLL) dependencies using the default Windows search order, which includes directories that may be writable by non-privileged users.\\n\\n\\n\\nBecause these directories can be modified by unprivileged users, an attacker can place a malicious DLL with the same name as a legitimate dependency in a directory that is searched before trusted system locations. When the application is executed, which is always with administrative privileges, the malicious DLL is loaded instead of the legitimate library.\\n\\n\\n\\nThe application does not enforce restrictions on DLL loading locations and does not verify the integrity or digital signature of loaded libraries. As a result, attacker-controlled code may be executed within the security context of the application, allowing arbitrary code execution with elevated privileges.\\n\\n\\n\\nSuccessful exploitation requires that an attacker place a crafted malicious DLL in a user-writable directory that is included in the application's DLL search path and then cause the affected application to be executed. Once loaded, the malicious DLL runs with the same privileges as the application.\\n\\n\\n\\nThis issue affects \\nTR-VISION HOME  versions up to and including 2.0.5.",
+    "references": [
+      "https://github.com/Ard33/CVE-2026-4255",
+      "https://www.thermalright.com/support/download/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 12.1,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-125396",
     "published": "2026-11-10T00:17:13.713",
     "last_modified": "2026-11-22T05:18:07.513",
@@ -2910,7 +2585,7 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 38.9,
+    "epss_percentile": 38.7,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -2983,23 +2658,27 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-19776",
-    "published": "2026-11-20T20:17:40.157",
-    "last_modified": "2026-11-23T15:16:16.790",
+    "cve_id": "CVE-2026-133168",
+    "published": "2026-11-19T15:17:36.650",
+    "last_modified": "2026-11-24T04:17:25.080",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "G DATA Total Security TSNxGService Link Following Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of G DATA Total Security. An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the TSNxGService service. By creating a symbolic link, an attacker can abuse the service to delete a file. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of SYSTEM. Was ZDI-CAN-28663.",
+    "summary": "OFFIS DCMTK 3.7.1 contains a heap buffer overflow vulnerability in togglePlanarConfiguration8 and togglePlanarConfiguration16 in djcodece.cc, which compute row offsets using rows instead of columns. Attackers can supply a crafted color-by-plane DICOM image with more rows than columns that is compressed with the true-lossless JPEG codec to corrupt heap memory, causing crashes and potentially code execution.",
     "references": [
-      "https://www.zerodayinitiative.com/advisories/ZDI-26-1030/"
+      "https://github.com/DCMTK/dcmtk",
+      "https://github.com/DCMTK/dcmtk/blob/DCMTK-3.7.1/dcmjpeg/libsrc/djcodece.cc#L1503-L1540",
+      "https://github.com/DCMTK/dcmtk/commit/c22836c449bb81834fee5d883e9ebd9d7dab90b9",
+      "https://support.dcmtk.org/redmine/issues/1298",
+      "https://www.vulncheck.com/advisories/dcmtk-3.7.1-heap-buffer-overflow-via-jpeg-encoder-planar-configuration-conversion"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 26.2,
+    "weaponized": true,
+    "epss": 0.2,
+    "epss_percentile": 13.0,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -3009,134 +2688,47 @@
           "points": 30
         },
         {
-          "signal": "Tag: priv_esc",
+          "signal": "Verified Weaponized Exploit",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
-      "priv_esc",
-      "rce"
+      "rce",
+      "weaponized"
     ],
     "intel_score": 104.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134309",
-    "published": "2026-11-21T17:16:50.990",
-    "last_modified": "2026-11-23T16:17:31.137",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SurrealDB 1.0.0 before 4.0.0 contains an authorization bypass vulnerability that allows authenticated users to shadow protected $access, $auth, and $token variables by binding them as FOR loop variables. Attackers can wrap queries in nested FOR loops with forged values to satisfy table permission predicates, enabling unauthorized reads, modifications, or deletions as a VIEWER.",
-    "references": [
-      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-ffvm-mqh3-7986",
-      "https://www.vulncheck.com/advisories/surrealdb-1.0.0-before-4.0.0-authorization-bypass-via-for-loop-variable-shadowing",
-      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-ffvm-mqh3-7986"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 47.9,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-134337",
-    "published": "2026-11-21T17:16:54.557",
-    "last_modified": "2026-11-21T17:16:54.683",
+    "cve_id": "CVE-2026-133172",
+    "published": "2026-11-19T15:17:37.253",
+    "last_modified": "2026-11-24T04:17:25.230",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "ArcadeDB native-image server builds 26.8.1 before 26.11.1 contain an authorization bypass vulnerability that allows authenticated clients to perform writes through read-only query paths by nesting statements in SELECT. Missing reflection metadata leaves SqlAstInspector with an empty AST, letting INSERT in projections or LET clauses persist via the query endpoint, MCP read-only mode, and HA follower routing.",
+    "summary": "Cozy Cloud cozy-stack 1.6.62 before 1.6.69 contains an authorization bypass vulnerability in the shared-drive move handler that allows authenticated users to access other instances' files. Attackers owning a shared drive can name another instance's domain and any directory ID as the move source to copy and delete the victim's file tree.",
     "references": [
-      "https://github.com/ArcadeData/arcadedb/security/advisories/GHSA-84m7-76gh-rm42",
-      "https://github.com/ArcadeData/arcadedb/security/advisories/GHSA-ww64-52x2-w3x2",
-      "https://www.vulncheck.com/advisories/arcadedb-26.8.1-before-26.11.1-native-image-read-only-bypass-via-nested-select-writes"
+      "https://github.com/linagora/cozy-stack/blob/1.6.68/web/sharings/move.go#L250-L263",
+      "https://github.com/linagora/cozy-stack/commit/983fe4b1218b8a7d83a2734b5ce2fe04227acc0c",
+      "https://github.com/linagora/cozy-stack/pull/5179",
+      "https://github.com/linagora/cozy-stack/releases/tag/1.6.69",
+      "https://hackmd.io/@hieund/cozy-stack-shared-drive-move-cross-instance-authz-bypass",
+      "https://www.vulncheck.com/advisories/cozy-cloud-cozy-stack-1.6.62-before-1.6.69-authorization-bypass-via-shared-drive-move",
+      "https://hackmd.io/@hieund/cve-2026-133172-cozy-stack-shared-drive-move-cross-instance-authz-bypass"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 55.8,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134339",
-    "published": "2026-11-21T17:16:54.900",
-    "last_modified": "2026-11-23T17:17:36.690",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ArcadeDB from 26.11.1-SNAPSHOT before 26.11.1 contains an authorization bypass vulnerability that allows authenticated users to skip per-type ACL checks when a database is opened on demand. Attackers can send the first POST /api/v1/batch/{database} request to a closed database to read and write types they are not entitled to access.",
-    "references": [
-      "https://github.com/ArcadeData/arcadedb/security/advisories/GHSA-97h7-j68g-w3r2",
-      "https://www.vulncheck.com/advisories/arcadedb-from-26.11.1-snapshot-before-26.11.1-authorization-bypass-via-batch-endpoint"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 38.8,
+    "epss": 0.5,
+    "epss_percentile": 44.2,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -3242,7 +2834,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.6,
-    "epss_percentile": 51.8,
+    "epss_percentile": 51.6,
     "score_breakdown": {
       "base_cvss": 35.5,
       "freshness": 10,
@@ -3292,7 +2884,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 38.7,
+    "epss_percentile": 38.4,
     "score_breakdown": {
       "base_cvss": 40.5,
       "freshness": 10,
@@ -3326,57 +2918,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-134370",
-    "published": "2026-11-21T17:16:58.457",
-    "last_modified": "2026-11-23T17:17:40.053",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Frappe Framework before 15.120.1 and 16.x before 16.33.1 contains a path traversal vulnerability in file attachment handling that permits arbitrary file read. Authenticated attackers holding a single ordinary role without write permissions can abuse attachment handling to read server files outside the application boundary.",
-    "references": [
-      "https://github.com/frappe/frappe/security/advisories/GHSA-r8px-9662-x39c",
-      "https://www.vulncheck.com/advisories/frappe-framework-before-16.33.1-authenticated-arbitrary-file-read-via-file-attachment-handling"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 23.9,
-    "score_breakdown": {
-      "base_cvss": 38.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        },
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
-    "tags": [
-      "file_write",
-      "path_traversal",
-      "weaponized"
-    ],
-    "intel_score": 103.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15",
-      "file_write+15",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-85197",
     "published": "2026-09-04T08:17:16.677",
     "last_modified": "2026-11-23T16:18:02.037",
@@ -3399,7 +2940,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.3,
-    "epss_percentile": 28.4,
+    "epss_percentile": 28.1,
     "score_breakdown": {
       "base_cvss": 38.0,
       "freshness": 10,
@@ -3443,7 +2984,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.3,
-    "epss_percentile": 23.5,
+    "epss_percentile": 23.3,
     "score_breakdown": {
       "base_cvss": 38.0,
       "freshness": 10,
@@ -3487,7 +3028,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.3,
-    "epss_percentile": 24.9,
+    "epss_percentile": 24.7,
     "score_breakdown": {
       "base_cvss": 38.0,
       "freshness": 10,
@@ -3515,6 +3056,94 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-5121",
+    "published": "2026-03-30T08:16:18.780",
+    "last_modified": "2026-11-24T12:17:24.850",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in libarchive. On 32-bit systems, an integer overflow vulnerability exists in the zisofs block pointer allocation logic. A remote attacker can exploit this by providing a specially crafted ISO9660 image, which can lead to a heap buffer overflow. This could potentially allow for arbitrary code execution on the affected system.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:10065",
+      "https://access.redhat.com/errata/RHSA-2026:10097",
+      "https://access.redhat.com/errata/RHSA-2026:11768",
+      "https://access.redhat.com/errata/RHSA-2026:12071",
+      "https://access.redhat.com/errata/RHSA-2026:12274",
+      "https://access.redhat.com/errata/RHSA-2026:13812",
+      "https://access.redhat.com/errata/RHSA-2026:14773",
+      "https://access.redhat.com/errata/RHSA-2026:14937",
+      "https://access.redhat.com/errata/RHSA-2026:15087",
+      "https://access.redhat.com/errata/RHSA-2026:16008",
+      "https://access.redhat.com/errata/RHSA-2026:16009",
+      "https://access.redhat.com/errata/RHSA-2026:16030",
+      "https://access.redhat.com/errata/RHSA-2026:16174",
+      "https://access.redhat.com/errata/RHSA-2026:17596",
+      "https://access.redhat.com/errata/RHSA-2026:19724",
+      "https://access.redhat.com/errata/RHSA-2026:19725",
+      "https://access.redhat.com/errata/RHSA-2026:20040",
+      "https://access.redhat.com/errata/RHSA-2026:21690",
+      "https://access.redhat.com/errata/RHSA-2026:25096",
+      "https://access.redhat.com/errata/RHSA-2026:72502",
+      "https://access.redhat.com/errata/RHSA-2026:82304",
+      "https://access.redhat.com/errata/RHSA-2026:82322",
+      "https://access.redhat.com/errata/RHSA-2026:82347",
+      "https://access.redhat.com/errata/RHSA-2026:82354",
+      "https://access.redhat.com/errata/RHSA-2026:82372",
+      "https://access.redhat.com/errata/RHSA-2026:82857",
+      "https://access.redhat.com/errata/RHSA-2026:82888",
+      "https://access.redhat.com/errata/RHSA-2026:8510",
+      "https://access.redhat.com/errata/RHSA-2026:8517",
+      "https://access.redhat.com/errata/RHSA-2026:8521",
+      "https://access.redhat.com/errata/RHSA-2026:8534",
+      "https://access.redhat.com/errata/RHSA-2026:8864",
+      "https://access.redhat.com/errata/RHSA-2026:8866",
+      "https://access.redhat.com/errata/RHSA-2026:8867",
+      "https://access.redhat.com/errata/RHSA-2026:8873",
+      "https://access.redhat.com/errata/RHSA-2026:8908",
+      "https://access.redhat.com/errata/RHSA-2026:8944",
+      "https://access.redhat.com/errata/RHSA-2026:9026",
+      "https://access.redhat.com/errata/RHSA-2026:9592",
+      "https://access.redhat.com/errata/RHSA-2026:9832",
+      "https://access.redhat.com/security/cve/CVE-2026-5121",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2452945",
+      "https://github.com/advisories/GHSA-2vwv-vqpv-v8vc",
+      "https://github.com/libarchive/libarchive/pull/2934",
+      "https://cert-portal.siemens.com/productcert/html/ssa-585531.html"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 1.1,
+    "epss_percentile": 66.7,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 102.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2026-129840",
     "published": "2026-11-20T09:19:58.200",
     "last_modified": "2026-11-23T15:18:36.233",
@@ -3533,7 +3162,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 1.0,
-    "epss_percentile": 62.4,
+    "epss_percentile": 62.2,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -3577,7 +3206,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 1.0,
-    "epss_percentile": 62.3,
+    "epss_percentile": 62.1,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -3621,7 +3250,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 44.0,
+    "epss_percentile": 43.7,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -3665,7 +3294,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 2.9,
-    "epss_percentile": 87.1,
+    "epss_percentile": 87.0,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -3709,7 +3338,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 1.3,
-    "epss_percentile": 71.7,
+    "epss_percentile": 71.5,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -3737,288 +3366,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-119114",
-    "published": "2026-11-21T10:16:50.800",
-    "last_modified": "2026-11-23T19:17:30.213",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The WP Fastest Cache – WordPress Cache Plugin plugin for WordPress is vulnerable to arbitrary directory deletion due to insufficient file path validation in the singleDeleteCache function in all versions up to, and including, 1.5.4 This makes it possible for unauthenticated attackers to delete arbitrary files on the server, which can easily lead to remote code execution when the right file is deleted (such as wp-config.php). Successful exploitation requires either the Custom Permalinks plugin or the GeoDirectory plugin to be co-installed, as these provide the necessary mechanism to write a traversal-bearing permalink value into the database that WP Fastest Cache then consumes without validation.",
-    "references": [
-      "https://plugins.trac.wordpress.org/browser/wp-fastest-cache/tags/1.5.3/wpFastestCache.php#L1389",
-      "https://plugins.trac.wordpress.org/browser/wp-fastest-cache/tags/1.5.3/wpFastestCache.php#L1501",
-      "https://plugins.trac.wordpress.org/browser/wp-fastest-cache/tags/1.5.3/wpFastestCache.php#L1517",
-      "https://plugins.trac.wordpress.org/browser/wp-fastest-cache/tags/1.5.3/wpFastestCache.php#L1627",
-      "https://plugins.trac.wordpress.org/browser/wp-fastest-cache/tags/1.5.3/wpFastestCache.php#L1718",
-      "https://plugins.trac.wordpress.org/browser/wp-fastest-cache/tags/1.5.3/wpFastestCache.php#L2406",
-      "https://plugins.trac.wordpress.org/changeset/3780060/wp-fastest-cache/trunk/wpFastestCache.php",
-      "https://plugins.trac.wordpress.org/changeset/3786304/wp-fastest-cache/trunk/wpFastestCache.php",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/2925032b-2a0c-43b6-a719-27831be34d19?source=cve"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.9,
-    "epss_percentile": 60.6,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 102.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-19779",
-    "published": "2026-11-20T20:17:40.543",
-    "last_modified": "2026-11-23T15:16:16.790",
-    "cvss_v3": 7.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "G DATA Total Security Backup Service Uncontrolled Search Path Element Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of G DATA Total Security. An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the Backup Service. The service restores archives from an unsecured location. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of SYSTEM. Was ZDI-CAN-28666.",
-    "references": [
-      "https://www.zerodayinitiative.com/advisories/ZDI-26-1028/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 23.3,
-    "score_breakdown": {
-      "base_cvss": 36.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "priv_esc",
-      "rce"
-    ],
-    "intel_score": 101.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "priv_esc+25"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134258",
-    "published": "2026-11-21T17:16:43.747",
-    "last_modified": "2026-11-23T17:17:33.537",
-    "cvss_v3": 8.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Admidio 5.0.0 before 5.0.18 contains a path traversal vulnerability in the Documents & Files renameFile() action that allows authenticated users with folder upload rights to move files outside adm_my_files by supplying ../ sequences in adm_new_name. Attackers can relocate an uploaded SVG containing script to the web root, where it is served inline and executes stored cross-site scripting against administrators for account takeover.",
-    "references": [
-      "https://github.com/Admidio/admidio/security/advisories/GHSA-gp7m-9622-gcw9",
-      "https://www.vulncheck.com/advisories/admidio-5.0.0-before-5.0.18-path-traversal-to-stored-xss-via-file-rename"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 54.1,
-    "score_breakdown": {
-      "base_cvss": 43.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        },
-        {
-          "signal": "Tag: xss",
-          "points": 8
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:N",
-    "tags": [
-      "path_traversal",
-      "weaponized",
-      "xss"
-    ],
-    "intel_score": 101.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15",
-      "xss+8",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-96805",
-    "published": "2026-11-20T19:18:58.183",
-    "last_modified": "2026-11-23T16:22:17.953",
-    "cvss_v3": 9.6,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "The affected products have an unauthenticated command injection, which may allow an in-range BLE device to gain access to write to the control interface and influence braking with no authentication or pairing.",
-    "references": [
-      "https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-323-02.json",
-      "https://www.cisa.gov/news-events/ics-advisories/icsa-26-323-02"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 1.5,
-    "epss_percentile": 74.2,
-    "score_breakdown": {
-      "base_cvss": 48.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:C/C:L/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "pre_auth"
-    ],
-    "intel_score": 101.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134300",
-    "published": "2026-11-21T17:16:49.917",
-    "last_modified": "2026-11-24T01:17:24.933",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SurrealDB from 2.2.0 before 4.0.0 contains an authorization bypass vulnerability in Document::purge_references that lets authenticated users bypass target table PERMISSIONS by triggering REFERENCE ON DELETE cascades. Attackers can delete a referenced record to delete, unset, or run CUSTOM expressions on referencing records despite PERMISSIONS FOR delete or update NONE.",
-    "references": [
-      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-fh2q-8f75-m4h6",
-      "https://www.vulncheck.com/advisories/surrealdb-2.2.0-before-4.0.0-permission-bypass-via-reference-on-delete-cascade"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 30.7,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 100.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134451",
-    "published": "2026-11-21T17:17:10.100",
-    "last_modified": "2026-11-21T17:17:10.100",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Dockhand before 1.0.57 contains a privilege escalation vulnerability that allows non-admin users with settings:edit permission to modify OIDC provider configuration due to an improper permission check. Attackers can send a PUT request to /api/auth/oidc/<provider-id> setting adminClaim to their own OIDC group, gaining full admin access on their next OIDC login.",
-    "references": [
-      "https://github.com/Finsys/dockhand/security/advisories/GHSA-fhrh-phv3-xg2h",
-      "https://www.vulncheck.com/advisories/dockhand-before-1.0.57-privilege-escalation-via-oidc-provider-update-handler"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 42.9,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 100.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-93834",
     "published": "2026-09-25T14:17:24.063",
     "last_modified": "2026-11-23T16:18:05.333",
@@ -4038,7 +3385,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 35.5,
+    "epss_percentile": 35.2,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4066,44 +3413,47 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-76466",
-    "published": "2026-10-21T17:19:06.813",
-    "last_modified": "2026-11-21T05:18:23.937",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-126231",
+    "published": "2026-11-11T22:17:21.930",
+    "last_modified": "2026-11-24T13:17:22.850",
+    "cvss_v3": 7.2,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "A vulnerability in the database service feature of Cisco Expressway Series could allow an unauthenticated, remote attacker with network access to a Cisco Expressway device to execute arbitrary operating system commands as&nbsp;root.\r\n\r\nThis vulnerability is due to the use of persistent cookies. Additionally, there is insufficient validation of client certificates when the TLS Verify Mode is set to Enabled for clustering, which means that client certificates are not validated. An attacker with possession of the cookies could exploit this vulnerability by connecting to the database service and invoking specific remote procedure call (RPC) commands. A successful exploit could allow the attacker to execute arbitrary commands as root on the underlying operating system of an affected device.\r\nNote: Cisco Expressway Series refers to Cisco Expressway Core (Expressway-C) devices and Cisco Expressway Edge (Expressway-E) devices.",
+    "summary": "A improper neutralization of special elements used in an os command ('os command injection') vulnerability in Fortinet FortiAnalyzer 8.0.0, FortiAnalyzer 7.6.0 through 7.6.7, FortiAnalyzer 7.4.0 through 7.4.11, FortiAnalyzer 7.2.0 through 7.2.13, FortiAnalyzer Cloud 7.6.0 through 7.6.7, FortiAnalyzer Cloud 7.4.1 through 7.4.11, FortiAnalyzer Cloud 7.2 all versions, FortiManager 8.0.0, FortiManager 7.6.0 through 7.6.7, FortiManager 7.4.0 through 7.4.11, FortiManager 7.2.0 through 7.2.13, FortiManager Cloud 7.6.0 through 7.6.7, FortiManager Cloud 7.4.1 through 7.4.11, FortiManager Cloud 7.2 all versions may allow an authenticated attacker to execute unauthorized commands via a crafted HTTP request.",
     "references": [
-      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-vcs-static-cred-hr7EWZ8t",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-76466",
-      "https://www.f6.ru/media-center/press-releases/cisco-cve-2026-76466/"
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-246"
     ],
     "source": "NVD",
-    "cisa_kev": true,
+    "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": true,
+    "pre_auth": false,
     "weaponized": false,
-    "epss": 2.2,
-    "epss_percentile": 82.9,
+    "epss": 1.1,
+    "epss_percentile": 65.5,
     "score_breakdown": {
-      "base_cvss": 49.0,
+      "base_cvss": 36.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "CISA KEV Active Exploit",
-          "points": 40
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "cisa_kev",
-      "in_the_wild"
+      "command_injection",
+      "edge_perimeter"
     ],
     "intel_score": 99.0,
     "reasons": [
       "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
+      "edge_perimeter+35",
+      "command_injection+18"
     ]
   },
   {
@@ -4123,7 +3473,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 1.6,
-    "epss_percentile": 75.8,
+    "epss_percentile": 75.6,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4151,47 +3501,47 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-130729",
-    "published": "2026-11-18T12:17:18.980",
-    "last_modified": "2026-11-21T04:17:19.567",
-    "cvss_v3": 7.5,
+    "cve_id": "CVE-2026-132917",
+    "published": "2026-11-19T11:16:58.400",
+    "last_modified": "2026-11-24T16:14:16.663",
+    "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "NocoDB before 2026.08.0 contains an authorization bypass in its public shared-view relation endpoints, which verify that a parent record exists but not that it passes the view's row filters. Unauthenticated attackers holding a public share link can supply guessable auto-incrementing ids of filtered-out records to has-many, many-to-many, one-many, or link endpoints to read their child records.",
+    "summary": "In JetBrains TeamCity before 2026.2, 2026.1.4, 2025.11.8 remote code execution was possible via a file write bypass in the Kotlin DSL sandbox",
     "references": [
-      "https://github.com/nocodb/nocodb/security/advisories/GHSA-267g-6rgg-2qf9"
+      "https://www.jetbrains.com/privacy-security/issues-fixed/"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": true,
+    "pre_auth": false,
     "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 17.1,
+    "epss": 1.0,
+    "epss_percentile": 63.2,
     "score_breakdown": {
-      "base_cvss": 37.5,
+      "base_cvss": 44.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: auth_bypass",
-          "points": 25
+          "signal": "Tag: rce",
+          "points": 30
         },
         {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
+          "signal": "Tag: file_write",
+          "points": 15
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "auth_bypass",
-      "pre_auth"
+      "file_write",
+      "rce"
     ],
-    "intel_score": 97.5,
+    "intel_score": 99.0,
     "reasons": [
       "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)"
+      "rce+30",
+      "file_write+15"
     ]
   },
   {
@@ -4213,7 +3563,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 0.6,
-    "epss_percentile": 50.3,
+    "epss_percentile": 50.1,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -4274,7 +3624,7 @@
     "pre_auth": true,
     "weaponized": false,
     "epss": 2.6,
-    "epss_percentile": 85.8,
+    "epss_percentile": 85.7,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4299,52 +3649,6 @@
       "recently modified (last 48h)",
       "command_injection+18",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134359",
-    "published": "2026-11-21T17:16:57.063",
-    "last_modified": "2026-11-23T22:20:13.590",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "AzuraCast before 0.24.1 fails to escape backslashes in Liquidsoap annotation values, allowing media managers to break out of quoted annotation strings. Attackers can set a crafted ID3 title ending in a backslash to inject a process: protocol URI, achieving OS command execution in the Liquidsoap container during playback.",
-    "references": [
-      "https://github.com/AzuraCast/AzuraCast/security/advisories/GHSA-mf65-hj88-hvrw",
-      "https://www.vulncheck.com/advisories/azuracast-before-0.24.1-os-command-injection-via-liquidsoap-annotation-values",
-      "https://github.com/AzuraCast/AzuraCast/security/advisories/GHSA-mf65-hj88-hvrw"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 1.4,
-    "epss_percentile": 74.0,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "weaponized"
-    ],
-    "intel_score": 97.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -4373,7 +3677,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 3.2,
-    "epss_percentile": 88.6,
+    "epss_percentile": 88.5,
     "score_breakdown": {
       "base_cvss": 37.5,
       "freshness": 10,
@@ -4401,54 +3705,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2018-25442",
-    "published": "2026-11-18T16:17:48.317",
-    "last_modified": "2026-11-21T04:17:09.717",
-    "cvss_v3": 8.3,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Baidu UEditor 1.4.0 before 1.4.3.1 contains a server-side request forgery vulnerability that allows unauthenticated attackers to make arbitrary requests via the source[] parameter in /ueditor/jsp/controller.jsp?action=catchimage. Attackers can supply crafted URLs that the ImageHunter component fetches through url.openConnection() to reach internal services and bypass network restrictions. Exploitation evidence was first observed by the Shadowserver Foundation on 2024-07-03.",
-    "references": [
-      "https://github.com/fex-team/ueditor/blob/v1.4.3/jsp/src/com/baidu/ueditor/hunter/ImageHunter.java",
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/ueditor/ueditor-ssrf.yaml",
-      "https://www.seebug.org/vuldb/ssvid-97311",
-      "https://www.vulncheck.com/advisories/baidu-ueditor-1.4.0-1.4.3.1-ssrf-via-controller-jsp-catchimage",
-      "https://www.vulncheck.com/advisories/baidu-ueditor-1.4.0-before-1.4.3.1-ssrf-via-controller-jsp-catchimage"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 16.3,
-    "score_breakdown": {
-      "base_cvss": 41.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: ssrf",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L",
-    "tags": [
-      "ssrf",
-      "weaponized"
-    ],
-    "intel_score": 94.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "ssrf+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-85634",
     "published": "2026-10-15T17:17:29.250",
     "last_modified": "2026-11-23T16:18:02.207",
@@ -4467,7 +3723,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.4,
-    "epss_percentile": 36.4,
+    "epss_percentile": 38.8,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4513,287 +3769,7 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 0.5,
-    "epss_percentile": 44.1,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "path_traversal",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2019-25784",
-    "published": "2026-11-18T16:17:49.010",
-    "last_modified": "2026-11-21T04:17:09.880",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "FineCMS versions 5.0.4 before 5.0.11 contain an unauthenticated SQL injection vulnerability in the data2 API action handled by list_tag in libraries/Template.php. Attackers can send GET requests to index.php?c=api&m=data2 with a valid auth hash and the param action=sql sql='...' to execute arbitrary SELECT queries and extract database information. Exploitation evidence was first observed by the Shadowserver Foundation on 2023-10-14.",
-    "references": [
-      "http://www.cnblogs.com/ichunqiu/p/10944669.html",
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/other/finecms-sqli.yaml",
-      "https://www.vulncheck.com/advisories/finecms-5.0.4-5.0.11-sql-injection-via-api-data2-param",
-      "https://www.vulncheck.com/advisories/finecms-5.0.4-before-5.0.11-sql-injection-via-api-data2-param"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 16.2,
-    "score_breakdown": {
-      "base_cvss": 41.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-    "tags": [
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2021-48021",
-    "published": "2026-11-18T16:17:50.097",
-    "last_modified": "2026-11-21T04:17:10.053",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Chamilo LMS 1.11.10 before 1.11.16 contains an unauthenticated SQL injection vulnerability in the searchOptionsFromTags function through the options parameter of extra_field.ajax.php. Attackers can send POST requests with a malicious JSON options array to inject SQL into the IN clause and extract database information. Exploitation evidence was first observed by the Shadowserver Foundation on 2023-10-14.",
-    "references": [
-      "https://github.com/chamilo/chamilo-lms/commit/23787842c2013db318e82d6987469fc8b17df0f8",
-      "https://github.com/chamilo/chamilo-lms/commit/e8332fd9d5607ae7866e27936b4376ea1053ae03",
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/other/chamilo-lms-sqli.yaml",
-      "https://www.vulncheck.com/advisories/chamilo-lms-1.11.10-1.11.16-sql-injection-via-extra-field-ajax-php",
-      "https://www.vulncheck.com/advisories/chamilo-lms-1.11.10-before-1.11.16-sql-injection-via-extra-field-ajax-php"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 16.2,
-    "score_breakdown": {
-      "base_cvss": 41.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-    "tags": [
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2022-51028",
-    "published": "2026-11-18T16:17:51.760",
-    "last_modified": "2026-11-21T04:17:10.353",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "CmsEasy 7.7.5_20210919 contains an unauthenticated SQL injection vulnerability in the execsql_action function at /?case=crossall&act=execsql that executes attacker-supplied queries decrypted with the hardcoded key 'cmseasy_sql'. Attackers can send a crafted 'sql' parameter to run arbitrary SQL and dump the admin username and password hash. Exploitation evidence was first observed by the Shadowserver Foundation on 2023-10-22.",
-    "references": [
-      "https://cn-sec.com/archives/1580677.html",
-      "https://github.com/PeiQi0/PeiQi-WIKI-Book/blob/main/docs/wiki/cms/CmsEasy/CmsEasy%20crossall_act.php%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.md",
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/other/cmseasy-crossall-act-sqli.yaml",
-      "https://www.vulncheck.com/advisories/cmseasy-7.7-5-20210919-unauthenticated-sql-injection-via-crossall-execsql"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 16.2,
-    "score_breakdown": {
-      "base_cvss": 41.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-    "tags": [
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2024-58402",
-    "published": "2026-11-18T16:17:54.363",
-    "last_modified": "2026-11-21T04:17:12.143",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Azon Dominator releases through 2024-06-03 contain an SQL injection vulnerability that allows unauthenticated attackers to manipulate database queries through the cid parameter in /fetch_products.php. Attackers can send crafted POST requests with boolean-based or time-based blind payloads to extract sensitive database information. Exploitation evidence was first observed by the Shadowserver Foundation on 2024-07-30.",
-    "references": [
-      "https://github.com/projectdiscovery/nuclei-templates/blob/main/http/vulnerabilities/other/azon-dominator-sqli.yaml",
-      "https://packetstorm.news/files/id/179283/",
-      "https://www.codester.com/items/12775/azon-dominator-affiliate-marketing-script",
-      "https://www.exploit-db.com/exploits/52059",
-      "https://www.vulncheck.com/advisories/azon-dominator-sql-injection-via-fetch-products-php-cid-parameter"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 27.3,
-    "score_breakdown": {
-      "base_cvss": 41.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-    "tags": [
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134293",
-    "published": "2026-11-21T17:16:49.057",
-    "last_modified": "2026-11-23T20:18:00.277",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SurrealDB 3.1.0 before 4.0.0 contains an SQL injection vulnerability in its Model Context Protocol (MCP) server because the identifier validator (consume_backtick_ident and validate_identifier) treats the first backtick as the closing delimiter, ignoring escape characters that the SurrealQL parser honors. Attackers can supply MCP tool arguments containing an escaped backtick to break out of the quoted identifier and execute arbitrary SurrealQL statements.",
-    "references": [
-      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-cr79-9p8r-p5wx",
-      "https://www.vulncheck.com/advisories/surrealdb-3.1.0-before-4.0.0-sql-injection-via-mcp-tool-identifier-escaped-backticks"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 18.3,
-    "score_breakdown": {
-      "base_cvss": 41.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-    "tags": [
-      "sqli",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134295",
-    "published": "2026-11-21T17:16:49.393",
-    "last_modified": "2026-11-23T16:17:30.880",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "SurrealDB 3.0.0 before 4.0.0 contains a path traversal vulnerability in direct filesystem buckets because BucketController::check_permission evaluates key-based ACLs against the un-normalized object key, while FileStore::to_os_path collapses '..' sequences without a traversal check. An authenticated tenant permitted only for certain keys can supply a key such as /public/../private/confidential.txt to read, write, or delete arbitrary files within the storage root.",
-    "references": [
-      "https://github.com/surrealdb/surrealdb/security/advisories/GHSA-cph5-pm57-9w9c",
-      "https://www.vulncheck.com/advisories/surrealdb-3.0.0-before-4.0.0-path-traversal-in-direct-filesystem-buckets"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 54.6,
+    "epss_percentile": 45.8,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -4841,8 +3817,8 @@
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 1.1,
-    "epss_percentile": 67.7,
+    "epss": 1.4,
+    "epss_percentile": 72.1,
     "score_breakdown": {
       "base_cvss": 43.0,
       "freshness": 10,
@@ -4865,139 +3841,57 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-134372",
-    "published": "2026-11-21T17:16:58.797",
-    "last_modified": "2026-11-24T01:17:25.953",
-    "cvss_v3": 7.7,
+    "cve_id": "CVE-2024-2947",
+    "published": "2024-03-28T19:15:48.693",
+    "last_modified": "2026-11-24T05:18:17.457",
+    "cvss_v3": 7.3,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Frappe ERPNext 4.3.0 before 15.121.6 and 16.x before 16.37.0 contains an SQL injection vulnerability in an endpoint of the Selling and Buying modules, where a request value validated early can be overridden by caller-supplied data that reaches a database query unvalidated. Any authenticated user, including a portal user with no roles, can send crafted requests to extract sensitive data, including active session data, and take over other accounts such as administrators.",
+    "summary": "A flaw was found in Cockpit. Deleting a sosreport with a crafted name via the Cockpit web interface can lead to a command injection vulnerability, resulting in privilege escalation. This issue affects Cockpit versions 270 and newer.",
     "references": [
-      "https://github.com/frappe/erpnext/security/advisories/GHSA-cc74-rc2g-p7hw",
-      "https://www.vulncheck.com/advisories/frappe-erpnext-4.3.0-before-15.121.6-sql-injection-in-selling-and-buying-modules"
+      "https://access.redhat.com/errata/RHSA-2024:3667",
+      "https://access.redhat.com/errata/RHSA-2024:3843",
+      "https://access.redhat.com/security/cve/CVE-2024-2947",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2271614",
+      "https://access.redhat.com/errata/RHSA-2024:3667",
+      "https://access.redhat.com/errata/RHSA-2024:3843",
+      "https://access.redhat.com/security/cve/CVE-2024-2947",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2271614",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KNG7GXOZI6QH3OIQJYAYDB3CRRGH37Q5/",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/N3Q5SDIFACAY4VHACN5MMCMT3A53A3FB/",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PIQY2HGDJW2JY27ALTS4GEVZZJJ4XQ36/"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 34.3,
+    "weaponized": false,
+    "epss": 1.2,
+    "epss_percentile": 68.4,
     "score_breakdown": {
-      "base_cvss": 38.5,
+      "base_cvss": 36.5,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: sqli",
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Tag: command_injection",
           "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
-      "sqli",
-      "weaponized"
+      "command_injection",
+      "priv_esc"
     ],
-    "intel_score": 91.5,
+    "intel_score": 89.5,
     "reasons": [
       "recently modified (last 48h)",
-      "sqli+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134448",
-    "published": "2026-11-21T17:17:09.627",
-    "last_modified": "2026-11-23T22:20:13.747",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Finsys Dockhand 1.0.7 before 1.0.57 contains a path traversal vulnerability that allows low-privileged users to read and write arbitrary files by setting an unvalidated envPath on a stack source. Attackers with stacks:edit permission can point envPath to files like /etc/shadow or SSH keys, then use GET or PUT on /api/stacks/[name]/env/raw to read or overwrite them.",
-    "references": [
-      "https://github.com/Finsys/dockhand/security/advisories/GHSA-x667-xx33-5gwp",
-      "https://www.vulncheck.com/advisories/finsys-dockhand-1.0.7-before-1.0.57-path-traversal-via-stack-env-raw-endpoint"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 54.8,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: path_traversal",
-          "points": 15
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "path_traversal",
-      "weaponized"
-    ],
-    "intel_score": 90.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "path_traversal+15",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-134454",
-    "published": "2026-11-21T17:17:10.550",
-    "last_modified": "2026-11-23T17:17:44.020",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Hysteria from 2.0.0 before 2.9.2 contains an ACL bypass vulnerability that allows authenticated clients to reach blocked UDP destinations by reusing an established UDP session. Attackers can open a session to an allowed destination, then send later packets to localhost or private-network addresses to access internal-only UDP services.",
-    "references": [
-      "https://github.com/HyNetworks/hysteria/security/advisories/GHSA-vgrc-hq28-p3xp",
-      "https://www.vulncheck.com/advisories/hysteria-2.0.0-before-2.9.2-udp-acl-bypass-enabling-ssrf",
-      "https://github.com/HyNetworks/hysteria/security/advisories/GHSA-vgrc-hq28-p3xp"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 24.4,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: ssrf",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:L/A:L",
-    "tags": [
-      "ssrf",
-      "weaponized"
-    ],
-    "intel_score": 90.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "ssrf+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "priv_esc+25",
+      "command_injection+18"
     ]
   },
   {
@@ -5017,7 +3911,45 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 45.6,
+    "epss_percentile": 45.3,
+    "score_breakdown": {
+      "base_cvss": 49.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 89.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131253",
+    "published": "2026-11-19T20:17:40.407",
+    "last_modified": "2026-11-24T15:25:28.980",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In Splunk SOAR versions below 8.8.0, an authenticated user that holds a role with the Apps edit, Containers edit, and Playbooks execute permissions could use the App Wizard to execute arbitrary code as the user account that runs Splunk SOAR. This could compromise the confidentiality, integrity, and availability of the Splunk SOAR instance.\nThe vulnerability exists because the App Wizard does not validate user-supplied identifiers before incorporating them into generated connector code.",
+    "references": [
+      "https://advisory.splunk.com/advisories/SVD-2026-1108"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 48.7,
     "score_breakdown": {
       "base_cvss": 49.5,
       "freshness": 10,
@@ -5066,7 +3998,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.2,
-    "epss_percentile": 7.5,
+    "epss_percentile": 7.4,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -5111,7 +4043,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.7,
-    "epss_percentile": 52.3,
+    "epss_percentile": 52.1,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -5148,8 +4080,8 @@
     "ransomware_campaign": false,
     "pre_auth": false,
     "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 44.9,
+    "epss": 0.6,
+    "epss_percentile": 48.4,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -5171,54 +4103,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-134543",
-    "published": "2026-11-22T00:17:00.150",
-    "last_modified": "2026-11-23T17:17:44.310",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw has been found in jprocms up to 1.7.7. Affected is the function StrUtil.format of the component Database Backup Module. Executing a manipulation of the argument host/port/username/password/dbName can lead to os command injection. The attack can be launched remotely. The exploit has been published and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
-    "references": [
-      "https://ucn9h68n9289.feishu.cn/wiki/ZkAEwbKNSitfe4kKz9GcEtNXnY6?from=from_copylink",
-      "https://vuldb.com/cve/CVE-2026-134543",
-      "https://vuldb.com/submit/1052920",
-      "https://vuldb.com/vuln/441683",
-      "https://vuldb.com/vuln/441683/cti"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 1.7,
-    "epss_percentile": 77.4,
-    "score_breakdown": {
-      "base_cvss": 35.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
-    "tags": [
-      "command_injection",
-      "pre_auth"
-    ],
-    "intel_score": 88.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-124457",
     "published": "2026-11-08T14:18:13.240",
     "last_modified": "2026-11-23T21:03:42.900",
@@ -5237,7 +4121,7 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 36.8,
+    "epss_percentile": 38.1,
     "score_breakdown": {
       "base_cvss": 38.0,
       "freshness": 10,
@@ -5284,7 +4168,7 @@
     "pre_auth": false,
     "weaponized": false,
     "epss": 0.5,
-    "epss_percentile": 40.8,
+    "epss_percentile": 40.5,
     "score_breakdown": {
       "base_cvss": 42.5,
       "freshness": 10,
@@ -5303,6 +4187,1342 @@
     "reasons": [
       "recently modified (last 48h)",
       "edge_perimeter+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-126180",
+    "published": "2026-11-11T22:17:16.813",
+    "last_modified": "2026-11-24T13:17:22.687",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A improper neutralization of special elements used in a template engine vulnerability in Fortinet FortiManager 8.0.0 through 8.0.1, FortiManager 7.6.0 through 7.6.7, FortiManager 7.4.0 through 7.4.11, FortiManager Cloud 8.0.0 through 8.0.1, FortiManager Cloud 7.6.0 through 7.6.7, FortiManager Cloud 7.4.1 through 7.4.11 may allow a low privileged Device Manager admin to obtain super admin privilege on managed FortiGates via injecting malicious commands.",
+    "references": [
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-225"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 39.3,
+    "score_breakdown": {
+      "base_cvss": 42.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:R/S:C/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter"
+    ],
+    "intel_score": 87.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131202",
+    "published": "2026-11-19T20:17:33.250",
+    "last_modified": "2026-11-24T15:25:28.980",
+    "cvss_v3": 9.1,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "In Splunk Enterprise Security versions below 8.7.0, a user who holds the \"ess_admin\" Splunk Enterprise Security role could execute arbitrary code on the search head as the user account running Splunk Enterprise by combining lookup file upload and Configuration Checker functionality.\nThe vulnerability is possible because Splunk Enterprise Security does not restrict lookup upload file types or keep Configuration Checker module paths within the intended directory.\nFor more information see Users and roles for Splunk Enterprise Security (https://help.splunk.com/en/splunk-enterprise-security-8/install/8.7/installation/users-and-roles-for-splunk-enterprise-security) and Create and manage lookups in Splunk Enterprise Security (https://help.splunk.com/en/splunk-enterprise-security-8/administer/8.7/managing-security-content/create-and-manage-lookups-in-splunk-enterprise-security) in the Splunk documentation.",
+    "references": [
+      "https://advisory.splunk.com/advisories/SVD-2026-1106"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 53.6,
+    "score_breakdown": {
+      "base_cvss": 45.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 85.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-3094",
+    "published": "2024-03-29T17:15:21.150",
+    "last_modified": "2026-11-23T14:17:21.190",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Malicious code was discovered in the upstream tarballs of xz, starting with version 5.6.0. \r\nThrough a series of complex obfuscations, the liblzma build process extracts a prebuilt object file from a disguised test file existing in the source code, which is then used to modify specific functions in the liblzma code. This results in a modified liblzma library that can be used by any software linked against this library, intercepting and modifying the data interaction with this library.",
+    "references": [
+      "https://access.redhat.com/security/cve/CVE-2024-3094",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2272210",
+      "https://www.openwall.com/lists/oss-security/2024/03/29/4",
+      "https://www.redhat.com/en/blog/urgent-security-alert-fedora-41-and-rawhide-users",
+      "http://www.openwall.com/lists/oss-security/2024/03/29/10",
+      "http://www.openwall.com/lists/oss-security/2024/03/29/12",
+      "http://www.openwall.com/lists/oss-security/2024/03/29/4",
+      "http://www.openwall.com/lists/oss-security/2024/03/29/5",
+      "http://www.openwall.com/lists/oss-security/2024/03/29/8",
+      "http://www.openwall.com/lists/oss-security/2024/03/30/12",
+      "http://www.openwall.com/lists/oss-security/2024/03/30/27",
+      "http://www.openwall.com/lists/oss-security/2024/03/30/36",
+      "http://www.openwall.com/lists/oss-security/2024/03/30/5",
+      "http://www.openwall.com/lists/oss-security/2024/04/16/5",
+      "https://access.redhat.com/security/cve/CVE-2024-3094",
+      "https://ariadne.space/2024/04/02/the-xz-utils-backdoor-is-a-symptom-of-a-larger-problem/",
+      "https://arstechnica.com/security/2024/03/backdoor-found-in-widely-used-linux-utility-breaks-encrypted-ssh-connections/",
+      "https://aws.amazon.com/security/security-bulletins/AWS-2024-002/",
+      "https://blog.netbsd.org/tnf/entry/statement_on_backdoor_in_xz",
+      "https://boehs.org/node/everything-i-know-about-the-xz-backdoor",
+      "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1068024",
+      "https://bugs.gentoo.org/928134",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2272210",
+      "https://bugzilla.suse.com/show_bug.cgi?id=1222124",
+      "https://discourse.nixos.org/t/cve-2024-3094-malicious-code-in-xz-5-6-0-and-5-6-1-tarballs/42405",
+      "https://gist.github.com/thesamesam/223949d5a074ebc3dce9ee78baad9e27",
+      "https://github.com/advisories/GHSA-rxwq-x6h5-x525",
+      "https://github.com/amlweems/xzbot",
+      "https://github.com/karcherm/xz-malware",
+      "https://gynvael.coldwind.pl/?lang=en&id=782",
+      "https://lists.debian.org/debian-security-announce/2024/msg00057.html",
+      "https://lists.freebsd.org/archives/freebsd-security/2024-March/000248.html",
+      "https://lwn.net/Articles/967180/",
+      "https://news.ycombinator.com/item?id=39865810",
+      "https://news.ycombinator.com/item?id=39877267",
+      "https://news.ycombinator.com/item?id=39895344",
+      "https://openssf.org/blog/2024/03/30/xz-backdoor-cve-2024-3094/",
+      "https://research.swtch.com/xz-script",
+      "https://research.swtch.com/xz-timeline",
+      "https://security-tracker.debian.org/tracker/CVE-2024-3094",
+      "https://security.alpinelinux.org/vuln/CVE-2024-3094",
+      "https://security.archlinux.org/CVE-2024-3094",
+      "https://security.netapp.com/advisory/ntap-20240402-0001/",
+      "https://tukaani.org/xz-backdoor/",
+      "https://twitter.com/LetsDefendIO/status/1774804387417751958",
+      "https://twitter.com/debian/status/1774219194638409898",
+      "https://twitter.com/infosecb/status/1774595540233167206",
+      "https://twitter.com/infosecb/status/1774597228864139400",
+      "https://ubuntu.com/security/CVE-2024-3094",
+      "https://www.binarly.io/blog/persistent-risk-xz-utils-backdoor-still-lurking-in-docker-images",
+      "https://www.cisa.gov/news-events/alerts/2024/03/29/reported-supply-chain-compromise-affecting-xz-utils-data-compression-library-cve-2024-3094",
+      "https://www.darkreading.com/vulnerabilities-threats/are-you-affected-by-the-backdoor-in-xz-utils",
+      "https://www.kali.org/blog/about-the-xz-backdoor/",
+      "https://www.openwall.com/lists/oss-security/2024/03/29/4",
+      "https://www.redhat.com/en/blog/urgent-security-alert-fedora-41-and-rawhide-users",
+      "https://www.tenable.com/blog/frequently-asked-questions-cve-2024-3094-supply-chain-backdoor-in-xz-utils",
+      "https://www.theregister.com/2024/03/29/malicious_backdoor_xz/",
+      "https://www.vicarius.io/vsociety/vulnerabilities/cve-2024-3094",
+      "https://xeiaso.net/notes/2024/xz-vuln/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 90.9,
+    "epss_percentile": 99.8,
+    "score_breakdown": {
+      "base_cvss": 50.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "High EPSS (90.9%)",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 85.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "High EPSS exploit prob 90.9% (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-65094",
+    "published": "2026-11-20T03:17:36.693",
+    "last_modified": "2026-11-23T16:06:05.540",
+    "cvss_v3": 9.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "NVIDIA VIRTIO-Net for Bluefield contains a vulnerability in Virtio-Net where a VM user may cause a Write-What-Where condition by crafted message. A successful exploit of this vulnerability may lead to Code Execution in Virtio-Net scope.",
+    "references": [
+      "https://github.com/NVIDIA/product-security/tree/main/2026/5815",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-65094",
+      "https://www.cve.org/CVERecord?id=CVE-2026-65094"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 27.6,
+    "score_breakdown": {
+      "base_cvss": 45.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 85.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2023-5869",
+    "published": "2023-12-10T18:15:07.410",
+    "last_modified": "2026-11-23T14:17:12.553",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in PostgreSQL that allows authenticated database users to execute arbitrary code through missing overflow checks during SQL array value modification. This issue exists due to an integer overflow during array modification where a remote user can trigger the overflow by providing specially crafted data. This enables the execution of arbitrary code on the target system, allowing users to write arbitrary bytes to memory and extensively read the server's memory.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2023:7545",
+      "https://access.redhat.com/errata/RHSA-2023:7579",
+      "https://access.redhat.com/errata/RHSA-2023:7580",
+      "https://access.redhat.com/errata/RHSA-2023:7581",
+      "https://access.redhat.com/errata/RHSA-2023:7616",
+      "https://access.redhat.com/errata/RHSA-2023:7656",
+      "https://access.redhat.com/errata/RHSA-2023:7666",
+      "https://access.redhat.com/errata/RHSA-2023:7667",
+      "https://access.redhat.com/errata/RHSA-2023:7694",
+      "https://access.redhat.com/errata/RHSA-2023:7695",
+      "https://access.redhat.com/errata/RHSA-2023:7714",
+      "https://access.redhat.com/errata/RHSA-2023:7770",
+      "https://access.redhat.com/errata/RHSA-2023:7771",
+      "https://access.redhat.com/errata/RHSA-2023:7772",
+      "https://access.redhat.com/errata/RHSA-2023:7778",
+      "https://access.redhat.com/errata/RHSA-2023:7783",
+      "https://access.redhat.com/errata/RHSA-2023:7784",
+      "https://access.redhat.com/errata/RHSA-2023:7785",
+      "https://access.redhat.com/errata/RHSA-2023:7786",
+      "https://access.redhat.com/errata/RHSA-2023:7788",
+      "https://access.redhat.com/errata/RHSA-2023:7789",
+      "https://access.redhat.com/errata/RHSA-2023:7790",
+      "https://access.redhat.com/errata/RHSA-2023:7878",
+      "https://access.redhat.com/errata/RHSA-2023:7883",
+      "https://access.redhat.com/errata/RHSA-2023:7884",
+      "https://access.redhat.com/errata/RHSA-2023:7885",
+      "https://access.redhat.com/errata/RHSA-2024:0304",
+      "https://access.redhat.com/errata/RHSA-2024:0332",
+      "https://access.redhat.com/errata/RHSA-2024:0337",
+      "https://access.redhat.com/security/cve/CVE-2023-5869",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2247169",
+      "https://www.postgresql.org/about/news/postgresql-161-155-1410-1313-1217-and-1122-released-2749/",
+      "https://www.postgresql.org/support/security/CVE-2023-5869/",
+      "https://access.redhat.com/errata/RHSA-2023:7545",
+      "https://access.redhat.com/errata/RHSA-2023:7579",
+      "https://access.redhat.com/errata/RHSA-2023:7580",
+      "https://access.redhat.com/errata/RHSA-2023:7581",
+      "https://access.redhat.com/errata/RHSA-2023:7616",
+      "https://access.redhat.com/errata/RHSA-2023:7656",
+      "https://access.redhat.com/errata/RHSA-2023:7666",
+      "https://access.redhat.com/errata/RHSA-2023:7667",
+      "https://access.redhat.com/errata/RHSA-2023:7694",
+      "https://access.redhat.com/errata/RHSA-2023:7695",
+      "https://access.redhat.com/errata/RHSA-2023:7714",
+      "https://access.redhat.com/errata/RHSA-2023:7770",
+      "https://access.redhat.com/errata/RHSA-2023:7771",
+      "https://access.redhat.com/errata/RHSA-2023:7772",
+      "https://access.redhat.com/errata/RHSA-2023:7778",
+      "https://access.redhat.com/errata/RHSA-2023:7783",
+      "https://access.redhat.com/errata/RHSA-2023:7784",
+      "https://access.redhat.com/errata/RHSA-2023:7785",
+      "https://access.redhat.com/errata/RHSA-2023:7786",
+      "https://access.redhat.com/errata/RHSA-2023:7788",
+      "https://access.redhat.com/errata/RHSA-2023:7789",
+      "https://access.redhat.com/errata/RHSA-2023:7790",
+      "https://access.redhat.com/errata/RHSA-2023:7878",
+      "https://access.redhat.com/errata/RHSA-2023:7883",
+      "https://access.redhat.com/errata/RHSA-2023:7884",
+      "https://access.redhat.com/errata/RHSA-2023:7885",
+      "https://access.redhat.com/errata/RHSA-2024:0304",
+      "https://access.redhat.com/errata/RHSA-2024:0332",
+      "https://access.redhat.com/errata/RHSA-2024:0337",
+      "https://access.redhat.com/security/cve/CVE-2023-5869",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2247169",
+      "https://lists.debian.org/debian-lts-announce/2023/11/msg00007.html",
+      "https://security.netapp.com/advisory/ntap-20240119-0003/",
+      "https://www.postgresql.org/about/news/postgresql-161-155-1410-1313-1217-and-1122-released-2749/",
+      "https://www.postgresql.org/support/security/CVE-2023-5869/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 4.3,
+    "epss_percentile": 91.3,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-12084",
+    "published": "2025-01-15T15:15:10.537",
+    "last_modified": "2026-11-23T14:17:18.153",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A heap-based buffer overflow flaw was found in the rsync daemon. This issue is due to improper handling of attacker-controlled checksum lengths (s2length) in the code. When MAX_DIGEST_LEN exceeds the fixed SUM_LENGTH (16 bytes), an attacker can write out of bounds in the sum2 buffer.",
+    "references": [
+      "https://access.redhat.com/errata/RHBA-2025:6470",
+      "https://access.redhat.com/security/cve/CVE-2024-12084",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2330527",
+      "https://kb.cert.org/vuls/id/952657",
+      "http://www.openwall.com/lists/oss-security/2025/01/14/6",
+      "https://security.netapp.com/advisory/ntap-20250131-0002/",
+      "https://www.kb.cert.org/vuls/id/952657",
+      "https://github.com/google/security-research/security/advisories/GHSA-p5pg-x43v-mvqj"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 72.5,
+    "epss_percentile": 99.4,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "High EPSS (72.5%)",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "High EPSS exploit prob 72.5% (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-5674",
+    "published": "2026-07-16T14:16:56.070",
+    "last_modified": "2026-11-23T16:17:49.963",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A flaw was found in PipeWire, a multimedia server. This vulnerability allows an attacker to escape sandboxed applications, such as Flatpak, by exploiting PipeWire's PulseAudio compatibility layer. An attacker with minimal permissions within a sandboxed environment can load a malicious library, leading to arbitrary code execution outside the sandbox and potential compromise of the user's system.",
+    "references": [
+      "https://access.redhat.com/errata/RHSA-2026:47082",
+      "https://access.redhat.com/errata/RHSA-2026:47083",
+      "https://access.redhat.com/errata/RHSA-2026:51064",
+      "https://access.redhat.com/errata/RHSA-2026:56028",
+      "https://access.redhat.com/errata/RHSA-2026:56029",
+      "https://access.redhat.com/errata/RHSA-2026:61768",
+      "https://access.redhat.com/security/cve/CVE-2026-5674",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2455341"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 8.0,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-124445",
+    "published": "2026-11-08T14:18:11.487",
+    "last_modified": "2026-11-23T21:09:47.087",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "OpenEMR from 7.0.1 before 8.4.0 contains a flaw in src/Common/Auth/OneTimeAuth.php that ignores the enforce_onetime_use and max_access_count flags, never revokes consumed service_auth tokens, and checks login_pin without rate limiting or strict comparison. Attackers holding a captured token can replay it or brute-force the PIN to open patient-portal sessions exposing PHI.",
+    "references": [
+      "https://github.com/openemr/openemr/security/advisories/GHSA-xg3m-9pfq-c8r6",
+      "https://www.vulncheck.com/advisories/openemr-7.0.1-before-8.4.0-onetimeauth-token-replay-and-pin-brute-force",
+      "https://github.com/openemr/openemr/security/advisories/GHSA-xg3m-9pfq-c8r6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 44.6,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "weaponized"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-126978",
+    "published": "2026-11-18T00:18:38.467",
+    "last_modified": "2026-11-23T15:22:36.787",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Philips Hue Bridge hap_pair_setup_handler Heap-based Buffer Overflow Remote Code Execution Vulnerability. This vulnerability allows network-adjacent attackers to execute arbitrary code on affected installations of Philips Hue Bridge. Authentication is not required to exploit this vulnerability.\n\nThe specific flaw exists within the HomeKit Accessory Protocol service, which listens on TCP port 8080 by default. When parsing pairing requests, the process does not properly validate the length of user-supplied data prior to copying it to a fixed-length, heap-based buffer. An attacker can leverage this vulnerability to execute code in the context of the device. Was ZDI-CAN-28434.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-963/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 48.8,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-126979",
+    "published": "2026-11-18T00:18:38.590",
+    "last_modified": "2026-11-23T15:22:36.787",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Philips Hue Bridge HomeKit Accessory Protocol chacha20_decrypt Integer Underflow Remote Code Execution Vulnerability. This vulnerability allows network-adjacent attackers to execute arbitrary code on affected installations of Philips Hue Bridge. Authentication is not required to exploit this vulnerability.\n\nThe specific flaw exists within the HomeKit Accessory Protocol service, which listens on TCP port 8080 by default. When parsing pairing requests, the process does not properly validate user-supplied data, which can result in an integer underflow before writing to memory. An attacker can leverage this vulnerability to execute code in the context of the device. Was ZDI-CAN-28332.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-964/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 33.2,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-128668",
+    "published": "2026-11-18T20:18:59.280",
+    "last_modified": "2026-11-23T16:17:10.900",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An Unrestricted File Upload vulnerability in the admin panel of PHPGurukul News Portal Project V4.1 allows authenticated attackers to upload files with arbitrary content by bypassing weak filename extension validation in add-post.php and change-image.php. Although files are renamed with an image extension upon storage, the lack of MIME type and content validation enables content spoofing, storage of malicious markup, and creates a vector for Remote Code Execution (RCE) with server misconfigurations or secondary Local File Inclusion.",
+    "references": [
+      "https://github.com/dharmstm/PHP-GuruKul/blob/main/NVP-011-Unrestricted-File-Upload.pdf",
+      "https://github.com/dharmstm/PHP-GuruKul/blob/main/NVP-011-Unrestricted-File-Upload.pdf"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 52.1,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-76913",
+    "published": "2026-11-18T21:18:03.180",
+    "last_modified": "2026-11-23T22:23:24.990",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "NotrinosERP is an open-source web-based enterprise resource planning system written in PHP and MySQL. From 1.0.0 until 1.1.0, the employee document handler in hrm/manage/employees.php allows an authenticated user with SA_EMPLOYEE permission to submit doc_file through tab_documents() and stores the raw client filename, including an executable extension, under company/0/documents/employees/ without extension, MIME, or content validation. Uploading a PHP file places executable content beneath the web root, where requesting the stored file results in server-side code execution. This issue is fixed in version 1.1.0.",
+    "references": [
+      "https://github.com/notrinos/NotrinosERP/commit/71cac7cd199e40cff7f2b18551620133e29f8967",
+      "https://github.com/notrinos/NotrinosERP/commit/99ae49fe1a880ed3144a6ea4b917d0ca4260bfd8",
+      "https://github.com/notrinos/NotrinosERP/releases/tag/1.1.0",
+      "https://github.com/notrinos/NotrinosERP/security/advisories/GHSA-qv4m-m73m-8hj7",
+      "https://github.com/notrinos/NotrinosERP/security/advisories/GHSA-qv4m-m73m-8hj7"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 40.7,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-132909",
+    "published": "2026-11-19T11:16:57.443",
+    "last_modified": "2026-11-24T16:15:50.373",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In JetBrains TeamCity before 2026.2, 2026.1.4, 2025.11.8 remote code execution was possible via Mercurial repository contents",
+    "references": [
+      "https://www.jetbrains.com/privacy-security/issues-fixed/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 55.8,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99506",
+    "published": "2026-11-19T15:18:05.863",
+    "last_modified": "2026-11-23T08:17:53.007",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/hugetlb: fix use-after-free of a new anon folio\n\nFor a fault in a private mapping with nothing in the page cache,\nhugetlb_no_page() allocates a folio, locks it and maps it.  The folio has\none reference, which belongs to the page table entry from then on.  After\ndropping the page table lock the function still sets the migratable flag\nof the folio and unlocks it.\n\nWhoever zaps the entry in between frees the folio.  The fault holds the\nfault mutex and the lock of the vma.  MADV_DONTNEED and the first unmap of\na hole punch, hugetlb_vmdelete_list(), do not take the fault mutex, and a\nprivate vma only has a lock if it owns a reservation map: not with\nMAP_NORESERVE, and not in the child after fork().\n\nThen the flag is set in, and folio_unlock() is called on, a folio that is\nfree or has a new owner.  A surplus page goes back to the page allocator\nwhile it is locked:\n\n  BUG: Bad page state in process init  pfn:108e00\n  flags: 0x200000000000059(locked|uptodate|dirty|head|node=0|zone=2)\n  page dumped because: PAGE_FLAGS_CHECK_AT_FREE flag(s) set\n\nA page of the pool can be given to the next user, of any file, who locks\nit and loses the lock to the late folio_unlock():\n\n  kernel BUG at mm/filemap.c:1532!\n   hugetlb_no_page+0x111b/0x23e0\n   hugetlb_fault+0x3a9/0x14a0\n\nAn unprivileged process is enough: threads that write to a MAP_PRIVATE |\nMAP_NORESERVE hugetlb mapping, threads that call MADV_DONTNEED on it, and\none that takes the freed pages for another file.\n\nUntil commit 3a47c54f09c4 (\"hugetlbfs: revert use i_mmap_rwsem for more\npmd sharing synchronization\") the fault held i_mmap_rwsem for reading,\nwhich everybody who zaps takes for writing.  The lock that commit\nbf4916922c60 (\"hugetlbfs: extend hugetlb_vma_lock to private VMAs\") gave\nto private vmas closed the window again, but only for those with a\nreservation map.\n\nBe done with the folio before the page table lock is dropped, as\nhugetlb_wp() is with its copy.  The function already unlocks page cache\nfolios under that lock.\n\nOriginal fix generated by an LLM and sent in private by Josef.\n\n[david@kernel.org: simplify+move comment]",
+    "references": [
+      "https://git.kernel.org/stable/c/1108d9a51c91bb459fa62506fd0176dc9e0927c5",
+      "https://git.kernel.org/stable/c/50d813d4fb702a502a34eb5ddd3f94eb2eee96c4",
+      "https://git.kernel.org/stable/c/51b21515bdac0a60efac142dbfa44481e4206f28",
+      "https://git.kernel.org/stable/c/727dfb28c6a2334f08cdaef82540137c9b094ab7",
+      "https://git.kernel.org/stable/c/824cc56bf43c714319992bad3558803cac6e77c0"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 5.6,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131261",
+    "published": "2026-11-19T20:17:41.400",
+    "last_modified": "2026-11-24T15:25:28.980",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In Splunk SOAR versions below 8.8.0, a user that holds a role with the Apps edit permission could execute arbitrary code as the user account that runs Splunk SOAR by installing a malicious app.\nThe vulnerability is possible because Splunk SOAR does not restrict app dependencies to validated binary packages before installing them.",
+    "references": [
+      "https://advisory.splunk.com/advisories/SVD-2026-1108"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 40.4,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131263",
+    "published": "2026-11-19T20:17:41.650",
+    "last_modified": "2026-11-24T15:25:28.980",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In Splunk SOAR versions below 8.8.0, a user that holds a role with only the apps:edit permission could install a connector app that causes Splunk SOAR to write attacker-controlled files outside the app directory. This could let the user modify files used by Splunk SOAR and execute arbitrary code as the user account that runs Splunk SOAR.\nThe vulnerability is possible because Splunk SOAR constructs the dependency installation command from app-supplied metadata without preventing that metadata from changing its arguments.\nFor more information see Manage roles and permissions in Splunk SOAR (On-premises) (https://help.splunk.com/en/splunk-soar/soar-on-premises/administer-soar-on-premises/8.8.0/manage-your-splunk-soar-on-premises-users-and-accounts/manage-roles-and-permissions-in-splunk-soar-on-premises) and Add and configure apps and assets to provide actions in Splunk SOAR (On-premises) (https://help.splunk.com/en/splunk-soar/soar-on-premises/administer-soar-on-premises/8.6.0/manage-your-splunk-soar-on-premises-apps-and-assets/add-and-configure-apps-and-assets-to-provide-actions-in-splunk-soar-on-premises) in the Splunk documentation.",
+    "references": [
+      "https://advisory.splunk.com/advisories/SVD-2026-1108"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 43.3,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131269",
+    "published": "2026-11-19T20:17:42.393",
+    "last_modified": "2026-11-23T15:08:00.533",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In Splunk SOAR versions below 8.8.0, a user that holds a role with the Apps edit permission could cause Splunk SOAR to execute arbitrary code on the host when the user validates an installed app.\nThe vulnerability is possible because the app validation workflow does not isolate untrusted code from the trusted environment.",
+    "references": [
+      "https://advisory.splunk.com/advisories/SVD-2026-1108"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 40.4,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99574",
+    "published": "2026-11-20T06:17:48.457",
+    "last_modified": "2026-11-23T08:17:59.250",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nf2fs: bound the SIT/NAT bitmaps by the checkpoint pack\n\nsit_ver_bitmap_bytesize and nat_ver_bitmap_bytesize are used as memcpy\nlengths into and out of sbi->ckpt, which is sized from cp_payload alone,\nand nothing compares either length against that allocation.\n\nsanity_check_ckpt() has checked these two fields since c77ec61ca0a4, which\nadded them after a crafted image overran build_sit_info(). That check ties\neach length to a segment count; it never compares either against the\nallocation, which is the half this adds.\n\nMounting over-reads in build_sit_info() and build_node_manager(), and the\nfirst checkpoint writes the same lengths back through the same pointers,\nso the over-read's contents reach the on-disk checkpoint. An unmount is\nenough; the filesystem does not have to be used.\n\nBound both ends the way __bitmap_ptr() lays them out. The three branches\ndiffer, so a single sum of the two lengths would still admit a small\noverflow when cp_payload is non-zero.",
+    "references": [
+      "https://git.kernel.org/stable/c/080833a32fd5dc10b3acf2fa9af9b3213e6cb617",
+      "https://git.kernel.org/stable/c/415b142b03b4daf770340761db1431d638d188e2",
+      "https://git.kernel.org/stable/c/47897ae5e050c40ee80994507dd7eb504174e27f",
+      "https://git.kernel.org/stable/c/7f88cd38394a16c326073c8813e7f1f1445bf3ba",
+      "https://git.kernel.org/stable/c/8beac82c7cc9f7d0b060a4c67d912c1b6a66a1f8",
+      "https://git.kernel.org/stable/c/9b08fc2d092171af388f83030d54488b87453155",
+      "https://git.kernel.org/stable/c/daf5987d2c48d9965534c3adc0a200bcb6e9d726",
+      "https://git.kernel.org/stable/c/ddb9848fd6b2f4e9ed5ef78b20c9720c65a29df5"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 9.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99654",
+    "published": "2026-11-20T06:17:59.243",
+    "last_modified": "2026-11-23T08:18:06.310",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm: fix unmap_mapping_range() beyond 4 GiB on 32-bit\n\nCommit 9eab0421fa94 (\"mm: fix unmap_mapping_range high bits shift bug\")\nmade holebegin and holelen unsigned before they are shifted, by casting\nthem to pgoff_t. That is an unsigned long: on a 32-bit kernel the cast\ncuts off the upper half of the two loff_t values, so a hole which begins\nat 4 GiB or beyond is taken for one in the first 4 GiB of the file.\n\ntruncate_pagecache() passes the new size of the file and asks for private\nCOWed pages to be unmapped as well. If a file of 6 GiB is truncated to\n5 GiB, everything from 1 GiB on is unmapped, and what a process has\nwritten to a private mapping of the range between 1 GiB and 5 GiB is\nlost: it reads the contents of the file again.\n\nWhere the range has an end, the wrong range is unmapped instead of the\nright one. The page cache copes with that, as it unmaps every folio that\nit removes. The callers which only have unmap_mapping_range() to get\nrid of user mappings do not, for example drm_vma_node_unmap(), whose fake\noffsets reach beyond 4 GiB on 32-bit, and revoke_iomem() with physical\naddresses of more than 32 bits.\n\nCast to u64 instead. Nothing changes for 64-bit kernels.\n\nFix generated by an LLM and sent by Josef Bacik in private.",
+    "references": [
+      "https://git.kernel.org/stable/c/0cf8d3fdd869fe079e55f8e621e45397a819d93c",
+      "https://git.kernel.org/stable/c/119bb87a630d25d61ed77738c73a4ba743f8e410",
+      "https://git.kernel.org/stable/c/273121718c4c79ac0dd044d5f7998f21854b7cd6",
+      "https://git.kernel.org/stable/c/67e6d5468a7d693a00176713d44267e5360d63c3",
+      "https://git.kernel.org/stable/c/7a81bc23dade8082187be6d9cc36e4be4b7207e2",
+      "https://git.kernel.org/stable/c/aeaa0d4e301c5d2d97ba40603f899abe4e118572",
+      "https://git.kernel.org/stable/c/aff28bb139a69437922311e4078f77dc92d54831",
+      "https://git.kernel.org/stable/c/cbf6c66a2ef46433092b41b87176755de32bf65b"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 5.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99657",
+    "published": "2026-11-20T06:17:59.677",
+    "last_modified": "2026-11-23T08:18:06.713",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/mmu_notifier: set ->mm only after mmgrab()\n\nRadeon uses a non-NULL notifier->mm to decide whether to call\nmmu_interval_notifier_remove() when freeing a buffer object.\n__mmu_interval_notifier_insert() sets ->mm before validating the range,\nso a wrapping userptr range can leave ->mm set after insertion fails.\nCleanup then tries to remove an unregistered notifier for which no mm\nreference was acquired.\n\nSet ->mm only after mmgrab(), once insertion can no longer fail. While\nwe could fix radeon's code instead, setting ->mm on success only makes\nthe code more robust.\n\nFix generated by an LLM and sent by Chris Mason in private.\n\n[ david: simplify description ]",
+    "references": [
+      "https://git.kernel.org/stable/c/0d9450d006506d2af7016afd435b9c1a24985d02",
+      "https://git.kernel.org/stable/c/1dab01f19b76a8e354c2c06800882027ffa6f7c3",
+      "https://git.kernel.org/stable/c/3df451b65b6bc342d9291b1132baf4a4dd3a7b63",
+      "https://git.kernel.org/stable/c/5ad9e4b0f1104f5dbfb41125c34bb30ea6dc7a94",
+      "https://git.kernel.org/stable/c/61bc907ff3fb703484239e963198a66988351877",
+      "https://git.kernel.org/stable/c/87e71f7808952b09f0b85e72d58f6dc7fac3efb7",
+      "https://git.kernel.org/stable/c/b6b43bf9d25a459e3ec9993f05c7c9b1796622db",
+      "https://git.kernel.org/stable/c/fe3b7bf598ba708431d531cfbb1035b8a463eed9"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 5.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99662",
+    "published": "2026-11-20T06:18:00.327",
+    "last_modified": "2026-11-23T08:18:07.357",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/gup: fix out-of-bounds write for nr_pages == 0 in GUP-fast\n\nWith nr_pages == 0, GUP-fast still enters its page table walk and can\nwrite past the caller's page array. The old end <= start check caught\nempty ranges, but was replaced with an overflow check.\n\nUsers such as OrangeFS can pass a zero page count derived from a\nuserspace-supplied length. So let's return zero for nr_pages == 0 before\nstarting the walk, just like GUP-slow.\n\nFix generated by an LLM and sent by Chris Mason in private.\n\n[ david: simplify description ]",
+    "references": [
+      "https://git.kernel.org/stable/c/0452d6d24ee4d65226824bcbefaf187707b72ced",
+      "https://git.kernel.org/stable/c/0794c5809fa6322e8b43b70601700fd6c48e69ea",
+      "https://git.kernel.org/stable/c/11536b9b6bed3cc4d684a70d468493775e7d1d48",
+      "https://git.kernel.org/stable/c/1dfe4b276c23189394afb42d114ee8a54cc3aff2",
+      "https://git.kernel.org/stable/c/21854ef8dc4e9398d84e4129db52dad69622fd9b",
+      "https://git.kernel.org/stable/c/32717a0763b2170eae5693fe4afbeecaa168ffdc",
+      "https://git.kernel.org/stable/c/5697a3b58722b15fcb06fb30368ce9f46458a95a",
+      "https://git.kernel.org/stable/c/6ac370032a68a343be599d8476ded2c36b43b53a"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.1,
+    "epss_percentile": 2.6,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99668",
+    "published": "2026-11-20T06:18:01.197",
+    "last_modified": "2026-11-22T11:17:05.320",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/huge_memory: fix zapping migration entries for device-private THPs\n\nA PMD migration entry can refer to a device-private folio.\nzap_huge_pmd_folio() checks the folio type instead of the entry type,\nso it treats such a migration entry as a device-private entry.\n\nInstalling the migration entry already removed the reverse mapping and\ndropped the mapping reference. Zapping it must not repeat those\noperations. Concurrent MADV_DONTNEED during migration back to system\nmemory can trigger this.\n\nCheck the PMD entry type using pmd_is_device_private_entry().\n\nFix generated by an LLM and sent by Chris Mason in private.\n\n[ david: simplify description ]",
+    "references": [
+      "https://git.kernel.org/stable/c/2d7e94a16d0d33ce2cce5ea06cf61079c392d351",
+      "https://git.kernel.org/stable/c/63a940541358d09cc9f02d40b71eb8d3917a21c0"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 4.3,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99669",
+    "published": "2026-11-20T06:18:01.333",
+    "last_modified": "2026-11-23T08:18:07.493",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/huge_memory: fix truncate racing with PMD zapping\n\nzap_huge_pmd_folio() removes the rmap before calling folio_mark_dirty().\nIf this was the last mapping, truncation can skip unmapping the folio\nand proceed without waiting for the PMD lock, racing with dirtying.\n\nifs_set_range_dirty() can oops if MADV_DONTNEED races with\nftruncate() on XFS, when we get the folio set dirty after it was found\nto not be mapped anymore.\n\nMove folio_mark_dirty() and folio_mark_accessed() before rmap removal,\nmatching the PTE zap path. This keeps the folio mapped while updating\nits state, so truncation must wait for the page table lock.\n\nFix generated by an LLM and sent by Chris Mason in private.\n\n[ david: simplify comment and description ]",
+    "references": [
+      "https://git.kernel.org/stable/c/37a32c760eb709440bb9cd6cd6852022850a542b",
+      "https://git.kernel.org/stable/c/664d37982d094623f5c3ac0373d3751401b10020",
+      "https://git.kernel.org/stable/c/a5786ec7ba7967433207f20214ff75768497a2c9",
+      "https://git.kernel.org/stable/c/b72f49d669840a87d0a811b3f16e14fe597fc3ce",
+      "https://git.kernel.org/stable/c/d08f371175e5ad3bea97983ef446e416e4fb32e2",
+      "https://git.kernel.org/stable/c/df588ea0cf5dce9ee7cc1689e40a6940dc25429a",
+      "https://git.kernel.org/stable/c/e6a07d29b0a60f3a4cfe77fe34eeb4b3fb38d6c4",
+      "https://git.kernel.org/stable/c/e80c3d6e1dc80bae76471ea5b10bf625168f14c6"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 5.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-99735",
+    "published": "2026-11-20T06:18:10.993",
+    "last_modified": "2026-11-23T08:18:13.887",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm/mglru: don't use stack pointers when walking PUD and PMD tables\n\nMGLRU passes stack copies of page-table entries in walk_pud_range() and\nwalk_pmd_range() when walking to the next level. These copies can become\nstale when khugepaged or MADV_DONTNEED (CONFIG_PT_RECLAIM) removes a PTE\ntable concurrently.\n\nThis pattern dates back to commit bd74fdaea146 (\"mm: multi-gen LRU:\nsupport page table walks\"). Likely, earlier locking masked the latent\nbug. Later changes exposed it: commit 1d65b771bc08 (\"mm/khugepaged:\nretract_page_tables() without mmap or vma lock\") allowed concurrent\nretraction, and commit cf4a65539c13 (\"memcg-v1: no need for memcg locking\nfor MGLRU\") dropped the walker's outer RCU protection.\n\nThe fix is simple, so just fix the original commit so we don't have to\nspeculate. To fix it, pass the actual PMD/PUD pointers. This restores the\nRCU-protected lookup and validation against the live PMD. Note that the PUD\nhandling is required as well to handle folded page tables correctly in all\ncases.\n\nFix generated by an LLM and sent by Josef Bacik in private.\n\n[ david: handle walk_pud_range() as well, clarify+simplify description,\n         adjust Fixes: ]",
+    "references": [
+      "https://git.kernel.org/stable/c/4240f886a8ba35b5fa18cf067358cd31a122dcc8",
+      "https://git.kernel.org/stable/c/4b428d9d24e303f92819119c66858f5de38bbc78",
+      "https://git.kernel.org/stable/c/4e5eb180d37cb222ed3c9b6772c6044e16c2a1c3",
+      "https://git.kernel.org/stable/c/60454f64ab304a89707291af6f455893e5506187",
+      "https://git.kernel.org/stable/c/65a9bf08a3e4d6e58df211ed900c16bafb79b267",
+      "https://git.kernel.org/stable/c/a352391f8f9c035d3b2a8a9fe6e3fd2e1c4ec44e"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 5.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure"
+    ],
+    "intel_score": 84.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2024-46549",
+    "published": "2024-09-30T17:15:04.683",
+    "last_modified": "2026-11-23T18:17:06.167",
+    "cvss_v3": 7.6,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "An issue in the TP-Link MQTT Broker and API gateway of TP-Link Kasa KP125M v1.0.3 and Tapo P125M v1.0.2 allows attackers to establish connections by impersonating devices owned by other users.",
+    "references": [
+      "https://github.com/Chapoly1305/tp-link-cve/blob/main/CVE-2024-46549.md"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 30.3,
+    "score_breakdown": {
+      "base_cvss": 38.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:A/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:L",
+    "tags": [
+      "edge_perimeter"
+    ],
+    "intel_score": 83.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-39821",
+    "published": "2026-05-22T16:16:20.410",
+    "last_modified": "2026-11-23T21:17:03.490",
+    "cvss_v3": 9.6,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "The ToASCII and ToUnicode functions incorrectly accept Punycode-encoded labels that decode to an ASCII-only label. For example, ToUnicode(\"xn--example-.com\") incorrectly returns the name \"example.com\" rather than an error. This behavior can lead to privilege escalation in programs using the idna package. For example, a program which performs privilege checks on the ASCII hostname may reject \"example.com\" but permit \"xn--example-.com\". If that program subsequently converts the ASCII hostname to Unicode, it will inadvertently permits access to the Unicode name \"example.com\".",
+    "references": [
+      "https://go.dev/cl/767220",
+      "https://go.dev/cl/796421",
+      "https://go.dev/issue/78760",
+      "https://groups.google.com/g/golang-announce/c/94pEornpRlI",
+      "https://groups.google.com/g/golang-announce/c/iI-mYSI0lu8",
+      "https://pkg.go.dev/vuln/GO-2026-5026",
+      "https://access.redhat.com/errata/RHSA-2026:23262",
+      "https://access.redhat.com/errata/RHSA-2026:23264",
+      "https://access.redhat.com/errata/RHSA-2026:26546",
+      "https://access.redhat.com/errata/RHSA-2026:26547",
+      "https://access.redhat.com/errata/RHSA-2026:30650",
+      "https://access.redhat.com/errata/RHSA-2026:30651",
+      "https://access.redhat.com/errata/RHSA-2026:30853",
+      "https://access.redhat.com/errata/RHSA-2026:30854",
+      "https://access.redhat.com/errata/RHSA-2026:30855",
+      "https://access.redhat.com/errata/RHSA-2026:33155",
+      "https://access.redhat.com/errata/RHSA-2026:33160",
+      "https://access.redhat.com/errata/RHSA-2026:33163",
+      "https://access.redhat.com/errata/RHSA-2026:33173",
+      "https://access.redhat.com/errata/RHSA-2026:33183",
+      "https://access.redhat.com/errata/RHSA-2026:33524",
+      "https://access.redhat.com/errata/RHSA-2026:33531",
+      "https://access.redhat.com/errata/RHSA-2026:34342",
+      "https://access.redhat.com/errata/RHSA-2026:34357",
+      "https://access.redhat.com/errata/RHSA-2026:34359",
+      "https://access.redhat.com/errata/RHSA-2026:34364",
+      "https://access.redhat.com/errata/RHSA-2026:34789",
+      "https://access.redhat.com/errata/RHSA-2026:35826",
+      "https://access.redhat.com/errata/RHSA-2026:35827",
+      "https://access.redhat.com/errata/RHSA-2026:35828",
+      "https://access.redhat.com/errata/RHSA-2026:35829",
+      "https://access.redhat.com/errata/RHSA-2026:35830",
+      "https://access.redhat.com/errata/RHSA-2026:35831",
+      "https://access.redhat.com/errata/RHSA-2026:35993",
+      "https://access.redhat.com/errata/RHSA-2026:35994",
+      "https://access.redhat.com/errata/RHSA-2026:36105",
+      "https://access.redhat.com/errata/RHSA-2026:36167",
+      "https://access.redhat.com/errata/RHSA-2026:36207",
+      "https://access.redhat.com/errata/RHSA-2026:36648",
+      "https://access.redhat.com/errata/RHSA-2026:36651",
+      "https://access.redhat.com/errata/RHSA-2026:36796",
+      "https://access.redhat.com/errata/RHSA-2026:36797",
+      "https://access.redhat.com/errata/RHSA-2026:36808",
+      "https://access.redhat.com/errata/RHSA-2026:36820",
+      "https://access.redhat.com/errata/RHSA-2026:36883",
+      "https://access.redhat.com/errata/RHSA-2026:37387",
+      "https://access.redhat.com/errata/RHSA-2026:37435",
+      "https://access.redhat.com/errata/RHSA-2026:37436",
+      "https://access.redhat.com/errata/RHSA-2026:38995",
+      "https://access.redhat.com/errata/RHSA-2026:39005",
+      "https://access.redhat.com/errata/RHSA-2026:39573",
+      "https://access.redhat.com/errata/RHSA-2026:39879",
+      "https://access.redhat.com/errata/RHSA-2026:40118",
+      "https://access.redhat.com/errata/RHSA-2026:40262",
+      "https://access.redhat.com/errata/RHSA-2026:40945",
+      "https://access.redhat.com/errata/RHSA-2026:41019",
+      "https://access.redhat.com/errata/RHSA-2026:41030",
+      "https://access.redhat.com/errata/RHSA-2026:41031",
+      "https://access.redhat.com/errata/RHSA-2026:41036",
+      "https://access.redhat.com/errata/RHSA-2026:41055",
+      "https://access.redhat.com/errata/RHSA-2026:41066",
+      "https://access.redhat.com/errata/RHSA-2026:41928",
+      "https://access.redhat.com/errata/RHSA-2026:41930",
+      "https://access.redhat.com/errata/RHSA-2026:42043",
+      "https://access.redhat.com/errata/RHSA-2026:42047",
+      "https://access.redhat.com/errata/RHSA-2026:42048",
+      "https://access.redhat.com/errata/RHSA-2026:42049",
+      "https://access.redhat.com/errata/RHSA-2026:42050",
+      "https://access.redhat.com/errata/RHSA-2026:42051",
+      "https://access.redhat.com/errata/RHSA-2026:42078",
+      "https://access.redhat.com/errata/RHSA-2026:42079",
+      "https://access.redhat.com/errata/RHSA-2026:42080",
+      "https://access.redhat.com/errata/RHSA-2026:42082",
+      "https://access.redhat.com/errata/RHSA-2026:42132",
+      "https://access.redhat.com/errata/RHSA-2026:42142",
+      "https://access.redhat.com/errata/RHSA-2026:42146",
+      "https://access.redhat.com/errata/RHSA-2026:42150",
+      "https://access.redhat.com/errata/RHSA-2026:42151",
+      "https://access.redhat.com/errata/RHSA-2026:42240",
+      "https://access.redhat.com/errata/RHSA-2026:42644",
+      "https://access.redhat.com/errata/RHSA-2026:42796",
+      "https://access.redhat.com/errata/RHSA-2026:42852",
+      "https://access.redhat.com/errata/RHSA-2026:43038",
+      "https://access.redhat.com/errata/RHSA-2026:43052",
+      "https://access.redhat.com/errata/RHSA-2026:43692",
+      "https://access.redhat.com/errata/RHSA-2026:44622",
+      "https://access.redhat.com/errata/RHSA-2026:44624",
+      "https://access.redhat.com/errata/RHSA-2026:46395",
+      "https://access.redhat.com/errata/RHSA-2026:47149",
+      "https://access.redhat.com/errata/RHSA-2026:47735",
+      "https://access.redhat.com/errata/RHSA-2026:47737",
+      "https://access.redhat.com/errata/RHSA-2026:47952",
+      "https://access.redhat.com/errata/RHSA-2026:49702",
+      "https://access.redhat.com/errata/RHSA-2026:49712",
+      "https://access.redhat.com/errata/RHSA-2026:50300",
+      "https://access.redhat.com/errata/RHSA-2026:50843",
+      "https://access.redhat.com/errata/RHSA-2026:51033",
+      "https://access.redhat.com/errata/RHSA-2026:51112",
+      "https://access.redhat.com/errata/RHSA-2026:51187",
+      "https://access.redhat.com/errata/RHSA-2026:51194",
+      "https://access.redhat.com/errata/RHSA-2026:51341",
+      "https://access.redhat.com/errata/RHSA-2026:52826",
+      "https://access.redhat.com/errata/RHSA-2026:53374",
+      "https://access.redhat.com/errata/RHSA-2026:53412",
+      "https://access.redhat.com/errata/RHSA-2026:53413",
+      "https://access.redhat.com/errata/RHSA-2026:53415",
+      "https://access.redhat.com/errata/RHSA-2026:53530",
+      "https://access.redhat.com/errata/RHSA-2026:54191",
+      "https://access.redhat.com/errata/RHSA-2026:54274",
+      "https://access.redhat.com/errata/RHSA-2026:54283",
+      "https://access.redhat.com/errata/RHSA-2026:54284",
+      "https://access.redhat.com/errata/RHSA-2026:54285",
+      "https://access.redhat.com/errata/RHSA-2026:54286",
+      "https://access.redhat.com/errata/RHSA-2026:54287",
+      "https://access.redhat.com/errata/RHSA-2026:54395",
+      "https://access.redhat.com/errata/RHSA-2026:54401",
+      "https://access.redhat.com/errata/RHSA-2026:54435",
+      "https://access.redhat.com/errata/RHSA-2026:54441",
+      "https://access.redhat.com/errata/RHSA-2026:54531",
+      "https://access.redhat.com/errata/RHSA-2026:54580",
+      "https://access.redhat.com/errata/RHSA-2026:54757",
+      "https://access.redhat.com/errata/RHSA-2026:56143",
+      "https://access.redhat.com/errata/RHSA-2026:56223",
+      "https://access.redhat.com/errata/RHSA-2026:56340",
+      "https://access.redhat.com/errata/RHSA-2026:56431",
+      "https://access.redhat.com/errata/RHSA-2026:57194",
+      "https://access.redhat.com/errata/RHSA-2026:57541",
+      "https://access.redhat.com/errata/RHSA-2026:57649",
+      "https://access.redhat.com/errata/RHSA-2026:57845",
+      "https://access.redhat.com/errata/RHSA-2026:59546",
+      "https://access.redhat.com/errata/RHSA-2026:59549",
+      "https://access.redhat.com/errata/RHSA-2026:59562",
+      "https://access.redhat.com/errata/RHSA-2026:60315",
+      "https://access.redhat.com/errata/RHSA-2026:60354",
+      "https://access.redhat.com/errata/RHSA-2026:60387",
+      "https://access.redhat.com/errata/RHSA-2026:60520",
+      "https://access.redhat.com/errata/RHSA-2026:61245",
+      "https://access.redhat.com/errata/RHSA-2026:61253",
+      "https://access.redhat.com/errata/RHSA-2026:62549",
+      "https://access.redhat.com/errata/RHSA-2026:63134",
+      "https://access.redhat.com/errata/RHSA-2026:65126",
+      "https://access.redhat.com/errata/RHSA-2026:65153",
+      "https://access.redhat.com/errata/RHSA-2026:65359",
+      "https://access.redhat.com/errata/RHSA-2026:65534",
+      "https://access.redhat.com/errata/RHSA-2026:65851",
+      "https://access.redhat.com/errata/RHSA-2026:65886",
+      "https://access.redhat.com/errata/RHSA-2026:66016",
+      "https://access.redhat.com/errata/RHSA-2026:66022",
+      "https://access.redhat.com/errata/RHSA-2026:66350",
+      "https://access.redhat.com/errata/RHSA-2026:66432",
+      "https://access.redhat.com/errata/RHSA-2026:67149",
+      "https://access.redhat.com/errata/RHSA-2026:67159",
+      "https://access.redhat.com/errata/RHSA-2026:67160",
+      "https://access.redhat.com/errata/RHSA-2026:67287",
+      "https://access.redhat.com/errata/RHSA-2026:67319",
+      "https://access.redhat.com/errata/RHSA-2026:67517",
+      "https://access.redhat.com/errata/RHSA-2026:68504",
+      "https://access.redhat.com/security/cve/CVE-2026-39821",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2480756",
+      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-39821.json"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 1.8,
+    "epss_percentile": 79.3,
+    "score_breakdown": {
+      "base_cvss": 48.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:N",
+    "tags": [
+      "priv_esc"
+    ],
+    "intel_score": 83.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "priv_esc+25"
     ]
   }
 ]
