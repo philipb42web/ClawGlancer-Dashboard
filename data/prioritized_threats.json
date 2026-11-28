@@ -151,6 +151,125 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-136433",
+    "published": "2026-11-24T19:18:19.153",
+    "last_modified": "2026-11-25T05:18:35.100",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PyTorch Foundation PyTorch torch_save_to_dcp Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch Foundation PyTorch. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the checkpoint format conversion utilities. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-32834.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1059/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 24.2,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "deserialization",
+      "edge_perimeter",
+      "rce"
+    ],
+    "intel_score": 169.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "edge_perimeter+35",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-82489",
+    "published": "2026-11-25T15:17:52.040",
+    "last_modified": "2026-11-25T20:17:56.077",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "openIMIS before 2026-10 contains an unauthenticated remote code execution vulnerability in the report module (openimis-be-report_py) where the /api/report/reportbro/preview endpoint evaluates printIf expressions server-side using simpleeval with an insufficient name-prefix blocklist. An attacker can craft an expression that reaches sys.modules['os'] via datetime.sys to execute arbitrary operating-system commands as root, and can also exploit the same endpoint's key parameter for unauthenticated arbitrary file read, enabling full host compromise including exposure of database credentials and JWT signing keys.",
+    "references": [
+      "https://openimis.atlassian.net/wiki/spaces/OP/pages/5166989313/Release+2026-10",
+      "https://www.vulncheck.com/advisories/openimis-2026-10-report-module-unauthenticated-rce-via-reportbro-preview"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 1.1,
+    "epss_percentile": 65.8,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Tag: file_write",
+          "points": 15
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "file_write",
+      "path_traversal",
+      "pre_auth",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 169.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15",
+      "file_write+15",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2020-11978",
     "published": "2020-07-17T00:15:10.337",
     "last_modified": "2026-11-27T13:17:14.220",
@@ -274,6 +393,129 @@
     ]
   },
   {
+    "cve_id": "CVE-2026-137060",
+    "published": "2026-11-25T20:18:40.283",
+    "last_modified": "2026-11-25T20:18:40.283",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "paramz through 0.10.0 contains an insecure deserialization vulnerability that allows attackers to execute code by supplying crafted model files to paramz.load(), which calls pickle.load() without restrictions. Attackers can embed objects whose __reduce__ method returns callables like exec or os.system in shared paramz or GPy model files to run code with the victim's privileges.",
+    "references": [
+      "https://github.com/sods/paramz/blob/v0.10.0/paramz/__init__.py#L44-L50",
+      "https://github.com/sods/paramz/commit/e9fb87fb6b277d5c40bbe79c4dacfea177d22a3e",
+      "https://github.com/sods/paramz/issues/60",
+      "https://github.com/sods/paramz/pull/61",
+      "https://www.vulncheck.com/advisories/paramz-through-0.10.0-insecure-deserialization-rce-via-load"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 10.3,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "deserialization",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 159.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30",
+      "deserialization+20",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-77230",
+    "published": "2026-11-25T19:17:39.077",
+    "last_modified": "2026-11-27T17:18:00.340",
+    "cvss_v3": 8.1,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Camunda 8.8.0 before 8.8.47, 8.9.0 before 8.9.29, 8.10.0 before 8.10.10, and 8.11.0-alpha1 contain an insecure deserialization vulnerability in the persistent web session feature, which stores session attributes as Java-serialized data in secondary storage and deserializes them via an ObjectInputStream without an ObjectInputFilter. Attackers with write access to the web session index, such as an unauthenticated Elasticsearch cluster deployed via Camunda's docker-compose files, can plant a crafted serialized object and trigger deserialization by presenting a matching session cookie, which combined with a gadget chain like the bundled Commons Collections 3.1-RC1 library can lead to code execution as the Camunda service account.",
+    "references": [
+      "https://github.com/camunda/camunda/commit/5870c91d4ec8c2dae96db60f3261daed2273baf2",
+      "https://github.com/camunda/camunda/commit/82b490cd41a685118b63a378d8963334711b7d8d",
+      "https://github.com/camunda/camunda/commit/aaf0498ec37dc9b43dbbab2616f3bf5303f911ce",
+      "https://github.com/camunda/camunda/commit/fc363d6d0fc7999463f23d98700b292af1737916",
+      "https://github.com/camunda/camunda/releases/tag/8.10.10",
+      "https://github.com/camunda/camunda/releases/tag/8.8.47",
+      "https://github.com/camunda/camunda/releases/tag/8.9.29",
+      "https://www.vulncheck.com/advisories/camunda-8-insecure-deserialization-via-web-session-storage"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 1.6,
+    "epss_percentile": 76.6,
+    "score_breakdown": {
+      "base_cvss": 40.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "deserialization",
+      "pre_auth",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 150.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "deserialization+20",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
     "cve_id": "CVE-2020-13927",
     "published": "2020-11-10T16:15:11.807",
     "last_modified": "2026-11-27T13:17:14.960",
@@ -330,20 +572,16 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-129167",
-    "published": "2026-11-13T18:17:41.910",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 8.1,
+    "cve_id": "CVE-2026-130336",
+    "published": "2026-11-25T05:18:29.723",
+    "last_modified": "2026-11-26T05:18:19.750",
+    "cvss_v3": 7.5,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Seafile SeaDoc converter 2.0.4 before 2.0.11 and 3.0.0 before 3.0.8 contains an absolute path traversal vulnerability that allows unauthenticated attackers holding a public share token to execute code. Attackers supply an absolute filename to /api/v1/confluence-to-wiki/ to extract a ZIP from download_url into the Python library path, then trigger the module's import via a file-convert request.",
+    "summary": "Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection') in the HWBridge custom methods command dispatcher (lib/rex/post/hwbridge/ui/console/command_dispatcher/custom_methods.rb) in Rapid7 Metasploit Framework versions prior to 6.5.10 on all platforms allows a malicious or compromised hardware bridge to execute arbitrary code in the msfconsole process via a crafted method_name returned by the /custom_methods endpoint. The injected code runs automatically when the operator connects to the bridge, without the operator invoking any custom command.",
     "references": [
-      "https://github.com/haiwen/seadoc-converter/blob/bb6cf0fb9ebc6bb05c9161acbfd6289737ec2cd6/seadoc_converter/server/apis.py#L26-L42",
-      "https://github.com/haiwen/seadoc-converter/blob/bb6cf0fb9ebc6bb05c9161acbfd6289737ec2cd6/seadoc_converter/server/apis.py#L360-L395",
-      "https://github.com/haiwen/seadoc-converter/commit/cb43162e8bc2991a2900c8acf85090358a30e516",
-      "https://vul.yulun.ac.cn/20261024/seafile/",
-      "https://www.vulncheck.com/advisories/seadoc-converter-2.0.4-before-2.0.11-and-3.0.0-before-3.0.8-path-traversal-rce-via-confluence-to-wiki",
-      "https://vul.yulun.ac.cn/20261024/seafile/"
+      "https://github.com/rapid7/metasploit-framework/pull/22111",
+      "https://github.com/rapid7/metasploit-framework/releases/tag/6.5.10"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -351,9 +589,9 @@
     "pre_auth": true,
     "weaponized": true,
     "epss": 0.7,
-    "epss_percentile": 48.7,
+    "epss_percentile": 46.7,
     "score_breakdown": {
-      "base_cvss": 40.5,
+      "base_cvss": 37.5,
       "freshness": 10,
       "components": [
         {
@@ -361,8 +599,8 @@
           "points": 30
         },
         {
-          "signal": "Tag: path_traversal",
-          "points": 15
+          "signal": "Tag: poc",
+          "points": 20
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -374,18 +612,18 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
-      "path_traversal",
+      "poc",
       "pre_auth",
       "rce",
       "weaponized"
     ],
-    "intel_score": 145.5,
+    "intel_score": 147.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "path_traversal+15",
+      "poc+20",
       "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
@@ -607,26 +845,27 @@
     ]
   },
   {
-    "cve_id": "CVE-2019-25628",
-    "published": "2026-03-24T12:16:02.777",
-    "last_modified": "2026-11-24T19:45:30.040",
+    "cve_id": "CVE-2023-53774",
+    "published": "2025-12-09T21:15:52.780",
+    "last_modified": "2026-11-27T17:17:34.883",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "Download Accelerator Plus DAP 10.0.6.0 contains a structured exception handler buffer overflow vulnerability that allows remote attackers to execute arbitrary code by crafting malicious URLs. Attackers can create specially crafted URLs with overflowing buffer data that overwrites SEH pointers and executes embedded shellcode when imported through the application's web page import functionality.",
+    "summary": "MiniDVBLinux 5.4 contains a remote code execution vulnerability in the SVDRP protocol that allows remote attackers to send commands to manipulate TV systems. Attackers can send crafted SVDRP commands through the svdrpsend.sh script to execute messages and potentially control the video disk recorder remotely.",
     "references": [
-      "http://www.speedbit.com/dap/",
-      "http://www.speedbit.com/dap/download/downloading.asp",
-      "https://www.exploit-db.com/exploits/46673",
-      "https://www.vulncheck.com/advisories/download-accelerator-plus-dap-seh-buffer-overflow"
+      "https://www.exploit-db.com/exploits/51093",
+      "https://www.linuxtv.org/vdrwiki/index.php/SVDRP#The_commands",
+      "https://www.minidvblinux.de",
+      "https://www.vulncheck.com/advisories/minidvblinux-simple-videodiskrecorder-protocol-remote-code-execution",
+      "https://www.zeroscience.mk/en/vulnerabilities/ZSL-2022-5714.php"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 3.1,
-    "epss_percentile": 88.6,
+    "epss": 5.2,
+    "epss_percentile": 93.3,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -761,116 +1000,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-131857",
-    "published": "2026-11-18T00:18:43.923",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Supergateway 4.2.0 through 4.2.2 contains a denial of service vulnerability in stdio-to-SSE mode that allows unauthenticated attackers to crash the gateway via prototype-inherited sessionId values. Attackers can send a POST message request with sessionId set to toString or constructor, triggering an unhandled TypeError that terminates every attached MCP session.",
-    "references": [
-      "https://github.com/Teycir/supergateway-security-research",
-      "https://github.com/supercorp-ai/supergateway/blob/v4.2.2/src/gateways/stdioToSse.ts#L222-L238",
-      "https://github.com/supercorp-ai/supergateway/commit/e2254169a0780ec7c299fff7d51e128b013a65d3",
-      "https://github.com/supercorp-ai/supergateway/issues/378",
-      "https://www.vulncheck.com/advisories/supergateway-4.2.0-through-4.2.2-dos-via-prototype-inherited-sessionid"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.7,
-    "epss_percentile": 46.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: edge_perimeter",
-          "points": 35
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-    "tags": [
-      "dos",
-      "edge_perimeter",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 135.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "edge_perimeter+35",
-      "dos+3",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-93664",
-    "published": "2026-11-16T13:17:23.313",
-    "last_modified": "2026-11-24T17:50:07.100",
-    "cvss_v3": 10.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A Deserialization of Untrusted Data vulnerability affecting Station Launcher App in 3DEXPERIENCE platform from Release 3DEXPERIENCE R2023x through Release 3DEXPERIENCE R2026x could lead to an unauthenticated remote code execution.",
-    "references": [
-      "https://www.3ds.com/trust-center/security/security-advisories/cve-2026-93664"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 54.0,
-    "score_breakdown": {
-      "base_cvss": 50.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: deserialization",
-          "points": 20
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "deserialization",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 135.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2020-11982",
     "published": "2020-07-17T00:15:10.477",
     "last_modified": "2026-11-27T13:17:14.703",
@@ -922,27 +1051,28 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-134352",
-    "published": "2026-11-21T17:16:56.200",
-    "last_modified": "2026-11-24T16:17:51.817",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
+    "cve_id": "CVE-2023-53771",
+    "published": "2025-12-09T21:15:52.310",
+    "last_modified": "2026-11-27T17:17:34.453",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "Rclone from 1.51.0 before 1.76.0 contains an authentication bypass vulnerability in serve sftp --auth-proxy because the generateCacheKey cache key omits the authentication method. Attackers knowing a victim's base64 public key can submit it as a password from the same client IP to reuse the cached entry and gain read-write VFS access.",
+    "summary": "MiniDVBLinux 5.4 contains an authentication bypass vulnerability that allows remote attackers to change the root password without authentication. Attackers can send crafted POST requests to the system setup endpoint with modified SYSTEM_PASSWORD parameters to reset root credentials.",
     "references": [
-      "https://github.com/rclone/rclone/security/advisories/GHSA-66qv-66mg-9h74",
-      "https://www.vulncheck.com/advisories/rclone-1.51.0-before-1.76.0-authentication-bypass-via-serve-sftp-auth-proxy-cache",
-      "https://github.com/rclone/rclone/security/advisories/GHSA-66qv-66mg-9h74"
+      "https://www.exploit-db.com/exploits/51094",
+      "https://www.minidvblinux.de",
+      "https://www.vulncheck.com/advisories/minidvblinux-unauthenticated-root-password-change-via-system-setup",
+      "https://www.zeroscience.mk/en/vulnerabilities/ZSL-2022-5715.php"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 39.8,
+    "epss": 1.9,
+    "epss_percentile": 79.7,
     "score_breakdown": {
-      "base_cvss": 40.5,
+      "base_cvss": 49.0,
       "freshness": 10,
       "components": [
         {
@@ -959,13 +1089,13 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
       "auth_bypass",
       "pre_auth",
       "weaponized"
     ],
-    "intel_score": 125.5,
+    "intel_score": 134.0,
     "reasons": [
       "recently modified (last 48h)",
       "auth_bypass+25",
@@ -974,27 +1104,375 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-101862",
-    "published": "2026-11-23T23:17:01.047",
-    "last_modified": "2026-11-24T17:18:10.417",
-    "cvss_v3": 8.8,
+    "cve_id": "CVE-2026-136428",
+    "published": "2026-11-24T19:18:18.543",
+    "last_modified": "2026-11-25T05:18:34.330",
+    "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "EUSurvey through 1.6, prior to commit 0669a36, contains a path traversal vulnerability in the survey import function that allows authenticated attackers with the Form Manager role to execute arbitrary code on the server. The POST /noform/management/importSurvey endpoint trusts archive entry names when SurveyExportHelper writes imported files through FileService, so a crafted survey archive can write a JSP file outside the survey storage directory into the application directory, where Tomcat executes it with the privileges of the EUSurvey process",
+    "summary": "PyTorch Foundation PyTorch load_compiled_function Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch Foundation PyTorch. User interaction is required to exploit this vulnerability in that the target must open a malicious file.\n\nThe specific flaw exists within the load_compiled_function function. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-32603.",
     "references": [
-      "https://github.com/EUSurvey/EUSURVEY/commit/0669a368475f21157950aca423a119e0dc503d37",
-      "https://github.com/je-lv/eusurvey-security-research",
-      "https://www.vulncheck.com/advisories/eusurvey-1.6-path-traversal-rce-via-importsurvey"
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1055/"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": true,
-    "epss": 1.1,
-    "epss_percentile": 66.1,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 41.8,
     "score_breakdown": {
-      "base_cvss": 44.0,
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 134.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136431",
+    "published": "2026-11-24T19:18:18.910",
+    "last_modified": "2026-11-25T05:18:34.797",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PyTorch Foundation PyTorch load_state_dict_from_url Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch Foundation PyTorch. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the load_state_dict_from_url function. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-32601.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1058/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 41.8,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 134.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136432",
+    "published": "2026-11-24T19:18:19.030",
+    "last_modified": "2026-11-25T05:18:34.943",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PyTorch Foundation PyTorch FileSystemReader Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch. Interaction with this library is required to exploit this vulnerability but attack vectors may vary depending on the implementation.\n\nThe specific flaw exists within the FileSystemReader class. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-32600.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1054/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 24.2,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "deserialization",
+      "rce"
+    ],
+    "intel_score": 134.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136439",
+    "published": "2026-11-24T19:18:19.880",
+    "last_modified": "2026-11-25T19:17:35.433",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DeepSpeed _get_zero_stage Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of DeepSpeed. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the parsing of checkpoint data. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-29242.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1065/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 13.1,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: deserialization",
+          "points": 20
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "deserialization",
+      "edge_perimeter",
+      "rce"
+    ],
+    "intel_score": 134.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
+      "rce+30",
+      "deserialization+20"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136427",
+    "published": "2026-11-24T19:18:18.417",
+    "last_modified": "2026-11-25T05:18:34.187",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PyTorch Foundation PyTorch AOTIModelPackageLoader Command Injection Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch. Interaction with this library is required to exploit this vulnerability but attack vectors may vary depending on the implementation.\n\nThe specific flaw exists within the AOTIModelPackageLoader. The issue results from the lack of proper validation of a user-supplied string before using it to execute a system call. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-32262.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1053/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 46.0,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 132.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-80273",
+    "published": "2026-11-25T10:17:16.290",
+    "last_modified": "2026-11-26T05:18:24.247",
+    "cvss_v3": 8.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Dell Secure Connect Gateway (SCG) Virtual Edition, versions prior to 5.36.00.16, contains an Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection') vulnerability. An attacker with local access to the appliance could potentially exploit this vulnerability, leading to arbitrary command execution and privilege escalation, resulting in complete compromise of confidentiality, integrity, and availability of the appliance.",
+    "references": [
+      "https://www.dell.com/support/kbdoc/en-us/000503504/dsa-2026-386-security-update-for-dell-secure-connect-gateway-virtual-edition-multiple-vulnerabilities"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 1.9,
+    "epss_percentile": 80.0,
+    "score_breakdown": {
+      "base_cvss": 42.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "command_injection",
+      "edge_perimeter",
+      "priv_esc"
+    ],
+    "intel_score": 130.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
+      "priv_esc+25",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136430",
+    "published": "2026-11-24T19:18:18.790",
+    "last_modified": "2026-11-25T05:18:34.647",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PyTorch Foundation PyTorch AOTIModelPackageLoader  Directory Traversal Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch Foundation PyTorch. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the AOTInductor model package loader. The issue results from the lack of proper validation of a user-supplied path prior to using it in file operations. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-33055.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1057/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 50.8,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "path_traversal",
+      "rce"
+    ],
+    "intel_score": 129.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30",
+      "path_traversal+15"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-125812",
+    "published": "2026-11-25T13:17:26.063",
+    "last_modified": "2026-11-25T16:17:38.840",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability in WP Media WP Rocket wp-rocket allows Path Traversal.This issue affects WP Rocket: from n/a before 3.24.2.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wp-rocket/vulnerability/wordpress-wp-rocket-plugin-3-24-2-remote-code-execution-rce-vulnerability?_s_id=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 1.0,
+    "epss_percentile": 62.3,
+    "score_breakdown": {
+      "base_cvss": 49.0,
       "freshness": 10,
       "components": [
         {
@@ -1006,22 +1484,464 @@
           "points": 15
         },
         {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal",
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 129.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136630",
+    "published": "2026-11-25T03:17:49.700",
+    "last_modified": "2026-11-25T03:17:49.840",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Electerm before 5.9.0 contains an origin validation vulnerability in the MCP Server widget that allows remote attackers to execute commands by bypassing Host and Origin checks through DNS rebinding. Attackers can lure users to a page that rebinds to 127.0.0.1 and calls unauthenticated MCP tools on port 30837 to run OS commands locally and on open SSH sessions.",
+    "references": [
+      "https://github.com/electerm/electerm/blob/v5.8.0/src/app/widgets/widget-mcp-server.js#L1142-L1161",
+      "https://github.com/electerm/electerm/blob/v5.8.0/src/app/widgets/widget-mcp-server.js#L1191-L1222",
+      "https://github.com/electerm/electerm/commit/572551df2be4bdd7964fa0f9102b42f49bc8de7b",
+      "https://github.com/electerm/electerm/releases/tag/v5.9.0",
+      "https://github.com/electerm/electerm/security/advisories/GHSA-45rj-2wq9-r9mr",
+      "https://www.vulncheck.com/advisories/electerm-before-5.9.0-rce-via-dns-rebinding-in-mcp-server-widget"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 23.4,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
           "signal": "Verified Weaponized Exploit",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
-      "path_traversal",
+      "pre_auth",
       "rce",
       "weaponized"
     ],
-    "intel_score": 124.0,
+    "intel_score": 127.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "path_traversal+15",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-134283",
+    "published": "2026-11-25T04:17:26.430",
+    "last_modified": "2026-11-25T17:17:38.887",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Webmin through 2.670 contains an improper certificate validation vulnerability in the http_download function of web-lib-funcs.pl that skips TLS chain and hostname verification. Man-in-the-middle attackers can present any certificate and substitute downloaded modules, themes, or catalog content, leading to root code execution or injected HTML.",
+    "references": [
+      "https://doi.org/10.5281/zenodo.24396540",
+      "https://github.com/webmin/webmin",
+      "https://github.com/webmin/webmin/blob/2.670/web-lib-funcs.pl#L3447",
+      "https://github.com/webmin/webmin/blob/2.670/web-lib-funcs.pl#L9990",
+      "https://github.com/webmin/webmin/issues/2941",
+      "https://www.vulncheck.com/advisories/webmin-through-2.670-improper-tls-certificate-validation-via-http-download"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.4,
+    "epss_percentile": 28.9,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 127.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-134630",
+    "published": "2026-11-25T04:17:31.033",
+    "last_modified": "2026-11-25T13:17:27.670",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Webmin through 2.670 contains a remote code execution vulnerability in the Perl Modules (cpan) module, which downloads CPAN indexes and module archives over plaintext HTTP without checksum or signature verification. On-path network attackers can answer the outbound fetch while an administrator installs a CPAN module, supplying a malicious Makefile.PL that cpan/download.cgi runs as root before confirmation.",
+    "references": [
+      "https://doi.org/10.5281/zenodo.24396540",
+      "https://github.com/webmin/webmin",
+      "https://github.com/webmin/webmin/blob/2.670/cpan/download.cgi#L190",
+      "https://github.com/webmin/webmin/blob/2.670/cpan/download.cgi#L267",
+      "https://github.com/webmin/webmin/issues/2941",
+      "https://www.vulncheck.com/advisories/webmin-through-2.670-rce-via-plaintext-cpan-downloads-in-perl-modules"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.5,
+    "epss_percentile": 37.3,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 127.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-134642",
+    "published": "2026-11-25T04:17:33.360",
+    "last_modified": "2026-11-25T04:17:33.483",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Webmin through 2.670 contains a missing authentication vulnerability in fastrpc.cgi that allows unauthenticated network peers to connect to tcpwrite and tcpread file-transfer listeners without session checks. Attackers can race to connect to the predictable transfer port during cluster operations to steal transferred files or replace staged packages, achieving root code execution.",
+    "references": [
+      "https://doi.org/10.5281/zenodo.24396540",
+      "https://github.com/webmin/webmin",
+      "https://github.com/webmin/webmin/blob/2.670/fastrpc.cgi#L209",
+      "https://github.com/webmin/webmin/blob/2.670/fastrpc.cgi#L293",
+      "https://github.com/webmin/webmin/commit/0678fbfa6bfb14aab7bc7de72c448d78e9149dfb",
+      "https://github.com/webmin/webmin/issues/2941",
+      "https://www.vulncheck.com/advisories/webmin-through-2.670-missing-authentication-on-fastrpc-cgi-file-transfer-sockets"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.7,
+    "epss_percentile": 47.6,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 127.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-137090",
+    "published": "2026-11-25T20:18:46.220",
+    "last_modified": "2026-11-25T20:18:46.220",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "build-git-clone before 1.0.4 contains an OS command injection vulnerability in the clone() function that allows attackers to execute commands by supplying crafted repository URLs. Attackers can embed shell metacharacters such as ; or $() in the url argument, which is concatenated into a sh -c command, to execute operating system commands with Node.js process privileges.",
+    "references": [
+      "https://github.com/emanuelmoraes-dev/build-git-clone/blob/68bc305028d04c9a71a030c4b0b5cc36450201b9/src/index.ts#L77",
+      "https://github.com/emanuelmoraes-dev/build-git-clone/commit/3d55e64e5b7c61e560b5d030d6a918cad5c67a29",
+      "https://github.com/emanuelmoraes-dev/build-git-clone/pull/1",
+      "https://www.vulncheck.com/advisories/build-git-clone-before-1.0.4-os-command-injection-in-clone-via-repository-url"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 2.3,
+    "epss_percentile": 84.1,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "command_injection",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 127.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18",
+      "Pre-Auth Remote Execution (+25)",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-137308",
+    "published": "2026-11-26T02:17:02.833",
+    "last_modified": "2026-11-27T17:17:48.647",
+    "cvss_v3": 7.4,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "markdownify-mcp before 1.2.0 contains a server-side request forgery vulnerability that allows attackers to bypass URL validation by supplying DNS names, bracketed IPv6 literals, or IPv4-mapped IPv6 addresses. Attackers can influence URLs passed to webpage-to-markdown or git-repo-to-markdown through prompt injection to fetch loopback services, internal hosts, and cloud metadata endpoints.",
+    "references": [
+      "https://github.com/zcaceres/markdownify-mcp/blob/v1.1.0/src/utils.ts#L60-L90",
+      "https://github.com/zcaceres/markdownify-mcp/commit/ee00464d0744d5defddecd660c29e91470eea96a",
+      "https://github.com/zcaceres/markdownify-mcp/releases/tag/v1.2.0",
+      "https://github.com/zcaceres/markdownify-mcp/security/advisories/GHSA-pxwh-pcrm-vrm3",
+      "https://www.vulncheck.com/advisories/markdownify-mcp-before-1.2.0-ssrf-protection-bypass-via-validateurl-and-validaterepourl"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.6,
+    "epss_percentile": 39.9,
+    "score_breakdown": {
+      "base_cvss": 37.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: ssrf",
+          "points": 18
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:N/A:N",
+    "tags": [
+      "ai_infrastructure",
+      "ssrf",
+      "weaponized"
+    ],
+    "intel_score": 125.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "ssrf+18",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-135798",
+    "published": "2026-11-24T19:18:14.827",
+    "last_modified": "2026-11-25T15:17:41.680",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A security flaw has been discovered in Volans NGFW Next-Generation Firewall r5.1. The affected element is an unknown function of the file include/sqlite3.inc of the component Web Management Interface. Performing a manipulation results in sql injection. The attack is possible to be carried out remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://github.com/nenghun/IoT/blob/main/Volans%20NGFW%20(nf51)/SQL_RCE/Unauthenticated%20SQL%20Injection%20Leading%20to%20Root%20RCE.md",
+      "https://vuldb.com/cve/CVE-2026-135798",
+      "https://vuldb.com/submit/1055818",
+      "https://vuldb.com/vuln/442768",
+      "https://vuldb.com/vuln/442768/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 22.1,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Tag: sqli",
+          "points": 18
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+    "tags": [
+      "edge_perimeter",
+      "pre_auth",
+      "sqli"
+    ],
+    "intel_score": 124.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
+      "sqli+18",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-137087",
+    "published": "2026-11-25T20:18:45.767",
+    "last_modified": "2026-11-25T20:18:45.767",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "@irrelon/path 6.2.2 before 7.0.3 contains a prototype pollution vulnerability in merge() and mergeImmutable() that allows remote attackers to modify Object.prototype by supplying __proto__ keys. Attackers can pass untrusted JSON containing __proto__ or constructor.prototype payloads to merged objects, causing property injection, authorization bypass, or denial of service.",
+    "references": [
+      "https://github.com/irrelon/irrelon-path/blob/c59481b07f46172419c8331192fbc881c16c97cf/src/path.ts#L1872-L1890",
+      "https://github.com/irrelon/irrelon-path/commit/a554ca96310d63602c30346809eefe7774dff501",
+      "https://github.com/irrelon/irrelon-path/commit/f4d986ca677e408eba5c2892cae4b248dbeb60bd",
+      "https://github.com/irrelon/irrelon-path/security/advisories/GHSA-hp37-rc53-gpm2",
+      "https://www.vulncheck.com/advisories/irrelon-path-6.2.2-before-7.0.3-prototype-pollution-via-merge-and-mergeimmutable"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.7,
+    "epss_percentile": 48.9,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Tag: dos",
+          "points": 3
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+    "tags": [
+      "auth_bypass",
+      "dos",
+      "pre_auth",
+      "weaponized"
+    ],
+    "intel_score": 124.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
+      "dos+3",
+      "Pre-Auth Remote Execution (+25)",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
@@ -1078,134 +1998,126 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-101868",
-    "published": "2026-11-23T23:17:01.790",
-    "last_modified": "2026-11-24T17:18:10.830",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
+    "cve_id": "CVE-2025-30012",
+    "published": "2025-05-13T01:15:47.833",
+    "last_modified": "2026-11-27T18:46:27.073",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "EUSurvey through 1.6, prior to commit 4bf95a3, contains an authorization bypass vulnerability in the GET /preparepublishedcontribution/{id} endpoint that allows unauthenticated attackers to read private responses submitted to published surveys. The contribution PDF handler in ContributionController looks up a response by its sequential database ID and skips the normal response access checks, so attackers can enumerate IDs to retrieve other respondents' answers, including free-text answers that may contain personal data, across surveys.",
+    "summary": "The Live Auction Cockpit in SAP Supplier Relationship Management (SRM) uses a deprecated java applet component, which allows an unauthenticated attacker to send malicious payload request in a specific encoding format. The servlet will then decode this malicious request which will result in deserialization of data in the application leading to execution of arbitrary OS command on target as SAP Administrator. This vulnerability has High impact on confidentiality, integrity, and availability of the application.",
     "references": [
-      "https://github.com/EUSurvey/EUSURVEY/commit/4bf95a32b0f0be73a3c76d9028951f40447b59cc",
-      "https://github.com/je-lv/eusurvey-security-research",
-      "https://www.vulncheck.com/advisories/eusurvey-1.6-authorization-bypass-via-preparepublishedcontribution-endpoint"
+      "https://me.sap.com/notes/3578900",
+      "https://url.sap/sapsecuritypatchday"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 38.0,
+    "weaponized": false,
+    "epss": 1.5,
+    "epss_percentile": 74.6,
     "score_breakdown": {
-      "base_cvss": 37.5,
+      "base_cvss": 50.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: auth_bypass",
-          "points": 25
+          "signal": "Tag: deserialization",
+          "points": 20
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
         },
         {
           "signal": "Pre-Auth Remote Execution",
           "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
     "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
+      "command_injection",
+      "deserialization",
+      "pre_auth"
     ],
-    "intel_score": 122.5,
+    "intel_score": 123.0,
     "reasons": [
       "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "deserialization+20",
+      "command_injection+18",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-130838",
-    "published": "2026-11-17T20:17:48.413",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Radicale 3.3.0 before 3.8.3 contains an authorization bypass vulnerability that allows unauthenticated attackers to inherit group-based rights by reusing group memberships never reset between requests. Attackers can send credential-less requests after a group member logs in to read and write group-shared calendar and address book collections evaluated by the from_file rights backend.",
-    "references": [
-      "https://github.com/Kozea/Radicale/blob/v3.7.8/radicale/app/__init__.py",
-      "https://github.com/Kozea/Radicale/blob/v3.7.8/radicale/rights/from_file.py",
-      "https://github.com/Kozea/Radicale/commit/4c426f2ecf072665476c97e1d0870c8d34f02704",
-      "https://github.com/Kozea/Radicale/releases/tag/v3.8.3",
-      "https://www.vulncheck.com/advisories/radicale-3.3.0-before-3.8.3-authorization-bypass-via-stale-group-memberships"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 35.7,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 122.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-132756",
-    "published": "2026-11-19T00:17:44.180",
-    "last_modified": "2026-11-24T20:38:28.417",
+    "cve_id": "CVE-2026-131814",
+    "published": "2026-11-25T21:17:16.477",
+    "last_modified": "2026-11-25T21:17:16.477",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "Geany through 2.1.0 contains an OS command injection vulnerability that allows attackers to run shell commands by embedding metacharacters in filenames substituted into build and execute commands. Attackers can craft a file named with backticks or $(...) that executes via /bin/sh when a user runs Compile, Build or Execute, gaining code execution as the user.",
+    "summary": "ChargePoint Home Flex dwnldlogsm tar Command Injection Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of ChargePoint Home Flex EV chargers. An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the tar function. The issue results from the lack of proper validation of a user-supplied string before using it to execute a system call. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of root. Was ZDI-CAN-29057.",
     "references": [
-      "https://github.com/geany/geany/blob/2.1.0/src/build.c#L1100-L1111",
-      "https://github.com/geany/geany/blob/2.1.0/src/utils.c#L2561-L2610",
-      "https://github.com/geany/geany/issues/4611",
-      "https://www.vulncheck.com/advisories/geany-through-2.1.0-os-command-injection-via-filename-in-build-commands"
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1110/"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": true,
-    "epss": 1.2,
-    "epss_percentile": 67.7,
+    "weaponized": false,
+    "epss": 0.7,
+    "epss_percentile": 47.9,
     "score_breakdown": {
       "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "command_injection",
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 122.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136613",
+    "published": "2026-11-24T23:17:32.180",
+    "last_modified": "2026-11-25T19:17:35.680",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "GNU Inetutils FTP Client File Retrieval Command Injection Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of GNU Inetutils FTP Client. User interaction is required to exploit this vulnerability in that the target must interact with a malicious FTP server.\n\nThe specific flaw exists within the processing of filenames. The issue results from the lack of proper validation of a user-supplied string before using it to execute a system call. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-29119.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1044/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.9,
+    "epss_percentile": 56.2,
+    "score_breakdown": {
+      "base_cvss": 37.5,
       "freshness": 10,
       "components": [
         {
@@ -1217,77 +2129,23 @@
           "points": 18
         },
         {
-          "signal": "Verified Weaponized Exploit",
+          "signal": "Pre-Auth Remote Execution",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
       "command_injection",
-      "rce",
-      "weaponized"
+      "pre_auth",
+      "rce"
     ],
-    "intel_score": 122.0,
+    "intel_score": 120.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
       "command_injection+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-135300",
-    "published": "2026-11-23T17:17:54.230",
-    "last_modified": "2026-11-24T17:18:23.553",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Pomerium from 0.30.0 before 0.34.0 contains an authentication bypass vulnerability in the MCP token endpoint that skips client secret verification for client_secret_basic clients. Attackers holding an intercepted authorization code or refresh token can redeem it at /.pomerium/mcp/token with any secret to obtain the victim's access tokens.",
-    "references": [
-      "https://github.com/pomerium/pomerium/blob/v0.33.0/internal/mcp/handler_token.go#L304-L306",
-      "https://github.com/pomerium/pomerium/commit/f86d7c00ad98ba74a662fea6bbc53ca57c3f1741",
-      "https://github.com/pomerium/pomerium/pull/6787",
-      "https://github.com/pomerium/pomerium/releases/tag/v0.34.0",
-      "https://www.vulncheck.com/advisories/pomerium-0.30.0-before-0.34.0-missing-client-secret-verification-via-mcp-token-endpoint"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.9,
-    "epss_percentile": 58.1,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth",
-      "weaponized"
-    ],
-    "intel_score": 122.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -1333,6 +2191,110 @@
       "recently modified (last 48h)",
       "edge_perimeter+35",
       "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136923",
+    "published": "2026-11-25T15:17:50.847",
+    "last_modified": "2026-11-25T15:17:50.847",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "asar-py before 0.1.4 contains a path traversal vulnerability in AsarArchive.extract() and extract_archive() that allows attackers to write files outside the destination directory via crafted archive headers. Attackers can supply a .asar archive with '..' path components or malicious symlink targets to write files such as usercustomize.py, leading to code execution.",
+    "references": [
+      "https://github.com/black-06/asar-py/blob/v0.1.3/asar/asar.py#L181-L230",
+      "https://github.com/black-06/asar-py/commit/d978a7e8fc882bbb781f13218f754f43ff634de0",
+      "https://github.com/black-06/asar-py/issues/4",
+      "https://github.com/black-06/asar-py/releases/tag/v0.1.4",
+      "https://www.vulncheck.com/advisories/asar-py-before-0.1.4-path-traversal-via-asararchive-extract"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.3,
+    "epss_percentile": 13.1,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: path_traversal",
+          "points": 15
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "path_traversal",
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 119.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "path_traversal+15",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131815",
+    "published": "2026-11-25T21:17:16.607",
+    "last_modified": "2026-11-25T21:17:16.607",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ChargePoint Home Flex uploadsm filetype Link Following Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of ChargePoint Home Flex EV chargers. An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the handling of the filetype parameter passed to the uploadsm endpoint. By creating a symbolic link, an attacker can abuse the service to write an arbitrary file. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of root. Was ZDI-CAN-29096.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1111/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 10.6,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        },
+        {
+          "signal": "Tag: file_write",
+          "points": 15
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "file_write",
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 119.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25",
+      "file_write+15"
     ]
   },
   {
@@ -1701,54 +2663,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-110486",
-    "published": "2026-11-18T11:17:37.963",
-    "last_modified": "2026-11-24T19:10:01.980",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In Eclipse Mosquitto versions 2.1 through 2.1.2, a listener configured with `protocol websockets` mishandles empty WebSocket data frames. `net__read_ws()` in `lib/net_ws.c` returns the number of framing bytes consumed (the 4 masking-key bytes) for a data frame with a zero-length payload, without writing any bytes to the caller’s buffer. The MQTT packet reader in `packet__read_single()` (`lib/packet_mosq.c`) trusts that return value as a payload byte count. A remote client can therefore advance the read position over an uninitialised heap allocation, causing the broker to process and forward uninitialised heap memory (information disclosure, including heap and libc pointers), and can underflow the unsigned `to_process` counter so that subsequent attacker-controlled frame data is written past the end of the allocation (heap out-of-bounds write). The out-of-bounds write is reachable from the CONNECT packet before any authentication check, so an unauthenticated client can corrupt the heap and crash the broker even when `allow_anonymous false` is set. Combining the disclosure and the write allows remote code execution as the broker’s user by any client able to establish a session.",
-    "references": [
-      "https://github.com/eclipse-mosquitto/mosquitto/security/advisories/GHSA-6j8m-r32v-4h38",
-      "https://gitlab.eclipse.org/security/cve-assignment/-/work_items/399",
-      "https://gitlab.eclipse.org/security/vulnerability-reports/-/work_items/521",
-      "http://www.openwall.com/lists/oss-security/2026/11/17/14",
-      "https://gitlab.eclipse.org/security/vulnerability-reports/-/work_items/521"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 1.3,
-    "epss_percentile": 70.0,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-132891",
     "published": "2026-11-19T11:16:55.263",
     "last_modified": "2026-11-25T14:55:36.003",
@@ -1766,270 +2680,6 @@
     "weaponized": false,
     "epss": 0.8,
     "epss_percentile": 53.1,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95417",
-    "published": "2026-11-23T17:17:56.437",
-    "last_modified": "2026-11-24T18:19:06.103",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In ResolvePendingNotifyRequests of remote_characteristic.cc, there is a possible use after free due to a status callback that can destroy the object while its pending request queue is still being iterated. This could lead to remote (proximal/adjacent) code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 36.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95418",
-    "published": "2026-11-23T17:17:56.560",
-    "last_modified": "2026-11-24T18:19:06.257",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In LogicalLink::SignalError of logical_link.cc, there is a possible use after free due to the object being destroyed by a callback while it is still iterating over its channels. This could lead to remote (proximal/adjacent) code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 38.4,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95421",
-    "published": "2026-11-23T17:17:56.920",
-    "last_modified": "2026-11-24T18:19:06.567",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In BrEdrSignalingChannel::DecodeRxUnit of bredr_signaling_channel.cc, there is a possible use after free due to a missing object lifetime check in a command processing loop. This could lead to remote (proximal/adjacent) code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 36.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95425",
-    "published": "2026-11-23T17:17:57.387",
-    "last_modified": "2026-11-24T19:18:26.410",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In StartDescriptorDiscovery of remote_service.cc, there is a possible use after free due to the service object being destroyed from within a synchronous callback while it is still iterating over its characteristics. This could lead to remote (proximal/adjacent) code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 36.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95439",
-    "published": "2026-11-23T17:17:58.850",
-    "last_modified": "2026-11-24T19:18:28.477",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In EnhancedRetransmissionModeRxEngine::ProcessPdu of enhanced_retransmission_mode_rx_engine.cc, there is a possible use after free due to a connection failure callback that synchronously destroys the channel and its engines while a received frame is still being processed. This could lead to remote (proximal/adjacent) code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 36.5,
-    "score_breakdown": {
-      "base_cvss": 49.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 114.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95442",
-    "published": "2026-11-23T17:17:59.213",
-    "last_modified": "2026-11-24T20:19:03.217",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "In NotifyCachedPeers of low_energy_scanner.cc, there is a possible use after free due to a scan result cache being cleared while it is being iterated. This could lead to remote (proximal/adjacent) code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.4,
-    "epss_percentile": 29.4,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -2235,36 +2885,74 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-135202",
-    "published": "2026-11-24T06:17:08.080",
-    "last_modified": "2026-11-24T17:18:19.513",
-    "cvss_v3": 9.8,
-    "severity": "CRITICAL",
+    "cve_id": "CVE-2026-136426",
+    "published": "2026-11-24T19:18:18.297",
+    "last_modified": "2026-11-25T05:18:34.023",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
     "affected": [],
-    "summary": "Several plugins for WordPress published by WP connect (Orders Sync to Airtable for WooCommerce, Add-On for Contact Form 7 to Notion, WP Sync for Notion – Notion to WordPress, Add-On for Contact Form 7 to Airtable, Add-on Brevo for Gravity Forms, and Air WP Sync – Airtable to WordPress) contain embedded malicious code (a backdoor) in the versions listed. The affected releases unconditionally load a backdoor module (includes/airwp-online.php) that runs on every request via the 'init' hook and on a half-hourly WP-Cron event, sends site information (site URL, PHP, WordPress and OS versions, and the server user) to a remote command-and-control server at tascredit-pay.com with TLS certificate verification disabled, and executes the PHP code returned by that server via eval(). The module also accepts queued commands that run shell commands, read, write and delete arbitrary files, query arbitrary database tables, dump the users table including password hashes, drop a webshell into the uploads directory, and install persistent hourly code execution. This makes it possible for unauthenticated attackers in control of the remote server, or able to intercept its traffic, to execute arbitrary code on the server and fully compromise affected sites. All affected plugins have been closed on WordPress.org and no patched versions are available; we strongly recommend uninstalling them and running a complete malware scan.",
+    "summary": "PyTorch Foundation PyTorch PT2 File Parsing Code Injection Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch. Interaction with this library is required to exploit this vulnerability but attack vectors may vary depending on the implementation.\n\nThe specific flaw exists within the parsing of PT2 files. The issue results from the lack of proper validation of a user-supplied string before using it to execute Python code. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-32602.",
     "references": [
-      "https://plugins.trac.wordpress.org/browser/add-on-cf7-for-airtable/tags/2.5.4/includes/airwp-online.php#L258",
-      "https://plugins.trac.wordpress.org/browser/add-on-cf7-for-notion/tags/1.6.4/includes/airwp-online.php#L258",
-      "https://plugins.trac.wordpress.org/browser/addon-gravityforms-sendinblue-free/tags/2.6.3/includes/airwp-online.php#L258",
-      "https://plugins.trac.wordpress.org/browser/air-wp-sync/tags/2.9.4/includes/airwp-online.php#L258",
-      "https://plugins.trac.wordpress.org/browser/orders-sync-to-airtable-for-woocommerce/tags/1.0.2/includes/airwp-online.php#L258",
-      "https://plugins.trac.wordpress.org/browser/wp-sync-for-notion/tags/1.7.4/includes/airwp-online.php#L258",
-      "https://www.wordfence.com/threat-intel/vulnerabilities/id/2bda1d59-0524-40ee-9427-2d31470780f9?source=cve"
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1052/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 31.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "rce"
+    ],
+    "intel_score": 114.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-135959",
+    "published": "2026-11-25T11:17:11.457",
+    "last_modified": "2026-11-25T13:17:28.560",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Cross-Site Request Forgery (CSRF) vulnerability in Paul Shield Security wp-simple-firewall allows Cross Site Request Forgery.This issue affects Shield Security: from n/a through 22.3.4.",
+    "references": [
+      "https://patchstack.com/database/wordpress/plugin/wp-simple-firewall/vulnerability/wordpress-shield-security-plugin-22-3-4-cross-site-request-forgery-csrf-vulnerability?_s_id=cve"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 2.7,
-    "epss_percentile": 86.5,
+    "epss": 0.3,
+    "epss_percentile": 17.1,
     "score_breakdown": {
-      "base_cvss": 49.0,
+      "base_cvss": 44.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: edge_perimeter",
+          "points": 35
         },
         {
           "signal": "Pre-Auth Remote Execution",
@@ -2272,15 +2960,110 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
     "tags": [
-      "pre_auth",
-      "rce"
+      "edge_perimeter",
+      "pre_auth"
     ],
     "intel_score": 114.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
+      "edge_perimeter+35",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-137056",
+    "published": "2026-11-25T20:18:39.143",
+    "last_modified": "2026-11-25T20:18:39.143",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "DeepSeek-Reasonix before 2.53.0 contains a command execution vulnerability that allows attackers to run commands without user approval because the shellsafe classifier treats git blame and git whatchanged as read-only. Attackers can plant a diff textconv driver in .gitattributes and .git/config so that git blame, triggered via prompt injection or routine use, executes attacker-chosen commands with the user's privileges, exposing stored provider API keys and session history.",
+    "references": [
+      "https://github.com/esengine/DeepSeek-Reasonix/blob/v1.39.11/internal/shellsafe/effect.go#L279-L300",
+      "https://github.com/esengine/DeepSeek-Reasonix/commit/191d1e17a15021818f0c70fe47b7b0011f0958ff",
+      "https://github.com/esengine/DeepSeek-Reasonix/releases/tag/v2.53.0",
+      "https://github.com/esengine/DeepSeek-Reasonix/security/advisories/GHSA-m46m-j2rc-6ff4",
+      "https://www.vulncheck.com/advisories/deepseek-reasonix-before-2.53.0-command-execution-via-auto-approved-git-blame"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": true,
+    "epss": 0.9,
+    "epss_percentile": 56.3,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "weaponized"
+    ],
+    "intel_score": 114.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-115576",
+    "published": "2026-11-26T02:16:59.420",
+    "last_modified": "2026-11-26T02:16:59.420",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "NetBird is a zero-trust networking platform that connects people, machines, and AI agents across any network. From versions 0.5.0 through 0.75.1, the client daemon exposes its gRPC control interface to any local process without authentication. On Linux, macOS, and FreeBSD, the interface is a Unix domain socket that is accessible to all local users, allowing any of them to control the daemon. An attacker with a low-privilege account can read or modify privileged VPN and daemon settings, disconnect or hijack the NetBird peer, and gain an unauthenticated root shell via the built-in SSH server. This issue is fixed in version 0.76.0.",
+    "references": [
+      "https://github.com/netbirdio/netbird/commit/0f5d2d91fb3d969e30cb13396e5b6917a8f6617b",
+      "https://github.com/netbirdio/netbird/pull/6967",
+      "https://github.com/netbirdio/netbird/releases/tag/v0.76.0",
+      "https://github.com/netbirdio/netbird/security/advisories/GHSA-qcpp-8vwj-hhwr"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 6.9,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: edge_perimeter",
+          "points": 35
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "edge_perimeter",
+      "pre_auth"
+    ],
+    "intel_score": 114.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "edge_perimeter+35",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -2330,25 +3113,29 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-70187",
-    "published": "2026-10-13T19:19:32.963",
-    "last_modified": "2026-11-24T21:22:57.400",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
+    "cve_id": "CVE-2026-135790",
+    "published": "2026-11-24T17:18:43.717",
+    "last_modified": "2026-11-27T17:17:42.323",
+    "cvss_v3": 9.9,
+    "severity": "CRITICAL",
     "affected": [],
-    "summary": "Use after free in Remote Desktop Gateway Service allows an unauthorized attacker to execute code over a network.",
+    "summary": "A vulnerability was detected in Panabit Smart Application Gateway TANGr7p10. This affects an unknown part of the file /cgi-bin/dashboard/ajax_chart_dump. The manipulation of the argument isntmeye results in os command injection. The attack can be launched remotely. The exploit is now public and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
     "references": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-70187"
+      "https://github.com/nenghun/IoT/blob/main/Panabit/rce1/RCE1.md",
+      "https://vuldb.com/cve/CVE-2026-135790",
+      "https://vuldb.com/submit/1055811",
+      "https://vuldb.com/vuln/442753",
+      "https://vuldb.com/vuln/442753/cti"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": true,
+    "pre_auth": false,
     "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 49.1,
+    "epss": 1.9,
+    "epss_percentile": 80.8,
     "score_breakdown": {
-      "base_cvss": 40.5,
+      "base_cvss": 49.5,
       "freshness": 10,
       "components": [
         {
@@ -2356,21 +3143,21 @@
           "points": 35
         },
         {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
+          "signal": "Tag: command_injection",
+          "points": 18
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
     "tags": [
-      "edge_perimeter",
-      "pre_auth"
+      "command_injection",
+      "edge_perimeter"
     ],
-    "intel_score": 110.5,
+    "intel_score": 112.5,
     "reasons": [
       "recently modified (last 48h)",
       "edge_perimeter+35",
-      "Pre-Auth Remote Execution (+25)"
+      "command_injection+18"
     ]
   },
   {
@@ -2441,6 +3228,99 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136429",
+    "published": "2026-11-24T19:18:18.660",
+    "last_modified": "2026-11-25T05:18:34.493",
+    "cvss_v3": 7.0,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "PyTorch Foundation PyTorch PT2 File Parsing Exposed Dangerous Method Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of PyTorch Foundation PyTorch. User interaction is required to exploit this vulnerability in that the target must open a malicious file.\n\nThe specific flaw exists within the parsing of PT2 archive files. The issue results from an exposed dangerous function. An attacker can leverage this vulnerability to execute code in the context of the current process. Was ZDI-CAN-32653.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1056/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 17.0,
+    "score_breakdown": {
+      "base_cvss": 35.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: ai_infrastructure",
+          "points": 35
+        },
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "ai_infrastructure",
+      "rce"
+    ],
+    "intel_score": 110.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "ai_infrastructure+35",
+      "rce+30"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-137043",
+    "published": "2026-11-26T03:16:39.110",
+    "last_modified": "2026-11-27T17:17:47.150",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A security vulnerability has been detected in TOTOLINK N350RT 9.3.5u.6468_B20250827/9.3.5u.6466_B20250825. The affected element is the function setLanguageCfg of the file /cgi-bin/cstecgi.cgi. Such manipulation of the argument lang leads to authorization bypass. The attack can be executed remotely. The exploit has been disclosed publicly and may be used.",
+    "references": [
+      "https://gist.github.com/aslanbekthedefender/15846cb866cab1e7a1dfb197a84ee823",
+      "https://vuldb.com/cve/CVE-2026-137043",
+      "https://vuldb.com/submit/1061323",
+      "https://vuldb.com/vuln/443967",
+      "https://vuldb.com/vuln/443967/cti",
+      "https://www.totolink.net/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 1.0,
+    "epss_percentile": 62.1,
+    "score_breakdown": {
+      "base_cvss": 50.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth"
+    ],
+    "intel_score": 110.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -2584,23 +3464,24 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-95793",
-    "published": "2026-11-23T20:18:05.050",
-    "last_modified": "2026-11-24T20:19:04.213",
+    "cve_id": "CVE-2026-129959",
+    "published": "2026-11-24T19:18:08.400",
+    "last_modified": "2026-11-25T05:18:29.367",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "An arbitrary remote code execution vulnerability exists in HPE Morpheus Manager.",
+    "summary": "When sftpEnabled=true (the default configuration in etc/org.apache.karaf.shell.cfg), the SSH server exposes the karaf.base directory tree through the MINA SSHD SFTP subsystem and SCP command factory without verifying the authenticated user's roles beyond the initial sshRole login check. Consequently, an authenticated user with only low-privileged roles (such as viewer and ssh) can read sensitive configuration and key files (including etc/users.properties and etc/host.key) or write arbitrary bundles/configurations into monitored directories (such as deploy/ or etc/), leading to privilege escalation and arbitrary code execution.\n\n\nApache Karaf 4.4.13 and 4.5.0 introduce the sftpRole configuration property in org.apache.karaf.shell (defaulting to admin) and enforce role-based access control on SFTP subsystem creation, SCP command execution, and virtual filesystem access.\n\nMitigation / WorkaroundUsers are recommended to upgrade to Apache Karaf 4.4.13 or 4.5.0.\n\n\n\n\nOn earlier versions where SFTP/SCP access is not required, set sftpEnabled=false in etc/org.apache.karaf.shell.cfg and restart the SSH server bundle (or Karaf instance).",
     "references": [
-      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbvs05182en_us&docLocale=en_US"
+      "https://lists.apache.org/thread/h5458p0jjn5o29hbymolrrlhcmkn053d",
+      "http://www.openwall.com/lists/oss-security/2026/11/24/5"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": true,
+    "pre_auth": false,
     "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 46.9,
+    "epss": 1.8,
+    "epss_percentile": 78.5,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -2610,41 +3491,42 @@
           "points": 30
         },
         {
-          "signal": "Pre-Auth Remote Execution",
+          "signal": "Tag: priv_esc",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "pre_auth",
+      "priv_esc",
       "rce"
     ],
     "intel_score": 109.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Pre-Auth Remote Execution (+25)"
+      "priv_esc+25"
     ]
   },
   {
-    "cve_id": "CVE-2026-121018",
-    "published": "2026-11-24T08:17:05.643",
-    "last_modified": "2026-11-24T17:18:12.873",
+    "cve_id": "CVE-2026-82493",
+    "published": "2026-11-25T15:17:52.640",
+    "last_modified": "2026-11-25T20:17:56.077",
     "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "The affected products insufficiently restrict runtime-supplied visualization commands, allowing local functionality on the engineering workstation to be invoked, if a user is both logged in to a CODESYS Control runtime and operates a visualization. An unauthenticated remote attacker controlling a malicious runtime and tricking a user to trust it, or performing a man-in-the-middle attack on the communication between the CODESYS Control runtime and the engineering workstation, may cause arbitrary code execution on the engineering workstation.",
+    "summary": "openIMIS before 2026-10 contains a remote code execution vulnerability in the report module's overrideReport GraphQL mutation, which stores submitted report definitions without proper validation before rendering them with the simpleeval expression evaluator. An attacker holding only limited report add, edit, or query privileges can craft a printIf expression that leverages the datetime module to reach os.system functions, bypassing the name-prefix blocklist to execute arbitrary operating-system commands as root whenever the malicious report is later rendered by any viewer, including administrators or scheduled jobs.",
     "references": [
-      "https://www.certvde.com/en/advisories/VDE-2026-154/"
+      "https://openimis.atlassian.net/wiki/spaces/OP/pages/5166989313/Release+2026-10",
+      "https://www.vulncheck.com/advisories/openimis-2026-10-report-module-expression-evaluator-rce-via-overridereport"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.9,
-    "epss_percentile": 58.2,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 1.1,
+    "epss_percentile": 65.6,
     "score_breakdown": {
       "base_cvss": 44.0,
       "freshness": 10,
@@ -2654,20 +3536,158 @@
           "points": 30
         },
         {
-          "signal": "Pre-Auth Remote Execution",
+          "signal": "Verified Weaponized Exploit",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "pre_auth",
-      "rce"
+      "rce",
+      "weaponized"
     ],
     "intel_score": 109.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-66052",
+    "published": "2026-11-25T22:17:21.493",
+    "last_modified": "2026-11-25T22:17:21.493",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Comviva Revenue Plus (MobiLytix Customer Value Management) 3.0.0 contains an expression language injection vulnerability in the user administration module, where the POST /rp/manageUser endpoint handled by manageUsersAction evaluates the name of an arbitrary request parameter as a server-side Java EL expression before rendering the response. The only protection is a denylist of reflective method names, which does not cover constructor-based access to a JDK scripting engine, so authenticated low-privilege attackers can supply an EL expression as a parameter name to execute arbitrary operating system commands as the application server account. This product is no longer supported by the vendor; standard support ended on 2022-10-31 and extended support ended on 2023-10-31.",
+    "references": [
+      "https://github.com/ZeroDayx-06/revenue-plus-el-injection-advisory",
+      "https://www.comviva.com/support/revenue-plus-end-of-support-notification/",
+      "https://www.comviva.com/wp-content/uploads/2017/08/MahindraComviva_Revenue_Plus.pdf",
+      "https://www.vulncheck.com/advisories/comviva-revenue-plus-3.0.0-expression-language-injection-rce-via-manageuser-parameter-name"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.6,
+    "epss_percentile": 44.0,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-69695",
+    "published": "2026-11-25T22:17:21.800",
+    "last_modified": "2026-11-25T22:17:21.800",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "Handesk through 1.5 contains an unrestricted file upload vulnerability in Attachment::storeAttachmentFromRequest() that allows authenticated agents to upload files with arbitrary extensions by attaching them to ticket comments without extension, MIME type, or size validation. Attackers can upload a PHP file via POST /tickets/{ticket}/comments, which is stored under storage/app/public/attachments and served from /storage/attachments/, to achieve remote code execution as the web server user or serve malicious HTML/SVG content from the application origin.",
+    "references": [
+      "https://github.com/BadChoice/handesk/blob/49814852fe97f524e513e1ca9d78f4c1f4a64dc3/app/Attachment.php#L15-L20",
+      "https://github.com/BadChoice/handesk/issues/830",
+      "https://www.vulncheck.com/advisories/handesk-through-1.5-unrestricted-file-upload-via-ticket-comments"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": true,
+    "epss": 0.9,
+    "epss_percentile": 57.6,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Verified Weaponized Exploit",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "rce",
+      "weaponized"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Weaponized Exploit / Public PoC verified (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-133971",
+    "published": "2026-11-25T23:17:21.570",
+    "last_modified": "2026-11-25T23:17:21.570",
+    "cvss_v3": 9.8,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "An authentication bypass vulnerability exists in the web management interface of HPE Networking Management Software (Airwave). Successful exploitation could allow an unauthenticated remote attacker to gain unauthorized administrative access to the affected system, impacting the confidentiality and integrity of AirWave.",
+    "references": [
+      "https://csaf.arubanetworking.hpe.com/2026/hpe_networking_-_hpesbnw05186.txt",
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05186en_us&docLocale=en_US"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 1.0,
+    "epss_percentile": 61.7,
+    "score_breakdown": {
+      "base_cvss": 49.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: auth_bypass",
+          "points": 25
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "auth_bypass",
+      "pre_auth"
+    ],
+    "intel_score": 109.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "auth_bypass+25",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -2839,110 +3859,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-100985",
-    "published": "2026-11-24T14:18:01.127",
-    "last_modified": "2026-11-24T19:17:42.870",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NVIDIA AIStore contains a vulnerability in object-copy destination validation where an unauthenticated attacker could use a crafted destination object name to write a file outside the configured storage location. A successful exploit might lead to code execution,\ndenial of service,\nescalation of privileges,\ninformation disclosure, or data tampering.",
-    "references": [
-      "https://github.com/NVIDIA/product-security/tree/main/2026/5928",
-      "https://nvd.nist.gov/vuln/detail/CVE-2026-100985",
-      "https://www.cve.org/CVERecord?id=CVE-2026-100985"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.8,
-    "epss_percentile": 53.5,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "dos",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 108.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-100986",
-    "published": "2026-11-24T14:18:01.260",
-    "last_modified": "2026-11-24T19:17:44.707",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "NVIDIA AIStore contains a vulnerability in append-operation handle validation where an unauthenticated attacker could cause data to be appended to a file outside the intended storage location. A successful exploit might lead to code execution, denial of service,\nescalation of privileges,\ninformation disclosure, or data tampering.",
-    "references": [
-      "https://github.com/NVIDIA/product-security/tree/main/2026/5928",
-      "https://nvd.nist.gov/vuln/detail/CVE-2026-100986",
-      "https://www.cve.org/CVERecord?id=CVE-2026-100986"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.5,
-    "epss_percentile": 38.5,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "dos",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 108.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-133528",
     "published": "2026-11-20T01:17:10.633",
     "last_modified": "2026-11-25T04:17:25.537",
@@ -2986,56 +3902,6 @@
       "recently modified (last 48h)",
       "rce+30",
       "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-77326",
-    "published": "2026-11-20T19:18:54.110",
-    "last_modified": "2026-11-24T17:54:52.597",
-    "cvss_v3": 8.6,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "MapServer is a system for developing web-based GIS applications. From 8.2.0 until 8.6.5, an unauthenticated attacker can send a WMS GetLegendGraphic request with a nonempty BBOX and repeated LAYER parameters to trigger a heap buffer overflow in msWMSDispatch() in src/mapwms.cpp. The handler appends synthesized entries to cgiRequestObj.ParamNames and cgiRequestObj.ParamValues at NumParams without retaining the arrays' capacity or reallocating them, while incrementing NumParams inside the loop. Once the parser's hidden capacity is exhausted, the writes pass the heap allocation boundary. A single request can corrupt heap memory and crash the process; code execution may be possible but was not demonstrated. This issue is fixed in version 8.6.5.",
-    "references": [
-      "https://github.com/MapServer/MapServer/commit/a7d5eb844a59ea076b7972a018753242f18e6f7b",
-      "https://github.com/MapServer/MapServer/commit/ea1d87a6d45bbe5814a545a8b4d6a5e6b6842ea8",
-      "https://github.com/MapServer/MapServer/pull/7555",
-      "https://github.com/MapServer/MapServer/pull/7569",
-      "https://github.com/MapServer/MapServer/releases/tag/rel-8-6-5",
-      "https://github.com/MapServer/MapServer/security/advisories/GHSA-4mwc-qc95-5959",
-      "https://github.com/MapServer/MapServer/security/advisories/GHSA-4mwc-qc95-5959"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 1.0,
-    "epss_percentile": 60.0,
-    "score_breakdown": {
-      "base_cvss": 43.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 108.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -3090,49 +3956,54 @@
     ]
   },
   {
-    "cve_id": "CVE-2019-25637",
-    "published": "2026-03-24T12:16:04.593",
-    "last_modified": "2026-11-24T19:46:33.617",
-    "cvss_v3": 8.4,
+    "cve_id": "CVE-2026-135403",
+    "published": "2026-11-25T17:17:45.720",
+    "last_modified": "2026-11-25T20:17:56.077",
+    "cvss_v3": 7.4,
     "severity": "HIGH",
     "affected": [],
-    "summary": "X-NetStat Pro 5.63 contains a local buffer overflow vulnerability that allows local attackers to execute arbitrary code by overwriting the EIP register through a 264-byte buffer overflow. Attackers can inject shellcode into memory and use an egg hunter technique to locate and execute the payload when the application processes malicious input through HTTP Client or Rules functionality.",
+    "summary": "Ever Gauzy is an open source business management platform for ERP, CRM, HRM, ATS, and project management. Prior to 111.44.2, getTracker in packages/core/src/lib/throttler/throttler-behind-proxy.guard.ts accepts CF-Connecting-IP without verifying that a trusted Cloudflare edge supplied it; when CF-Connecting-IP is absent, app.set('trust proxy', true) can let an attacker-controlled X-Forwarded-For value determine req.ip. In deployments where a trusted intermediary does not overwrite these headers, or where the firewall permits direct API access, varying the applicable header on repeated POST /auth/login requests gives an unauthenticated remote attacker a distinct throttle bucket for each attempt, so the five-attempts-per-60-seconds limit does not trigger and no account lockout, CAPTCHA, or exponential backoff limits password guessing. This issue is fixed in version 111.44.2.",
     "references": [
-      "https://freshsoftware.com",
-      "https://www.exploit-db.com/exploits/46596",
-      "https://www.vulncheck.com/advisories/x-netstat-pro-local-buffer-overflow-via-egghunter"
+      "https://github.com/ever-co/ever-gauzy/commit/3b63567b11d4e0d79381aeb140f82d0459a8db84",
+      "https://github.com/ever-co/ever-gauzy/commit/70b1a856064b3a73a0cbd162aa372fc4b7999fb9",
+      "https://github.com/ever-co/ever-gauzy/commit/7f7ab0c1c9aec22a2ad5ae462c8bbd9f4fafcf66",
+      "https://github.com/ever-co/ever-gauzy/commit/a472bfa2484304f9bcfebab053ea1d3fdf4143e3",
+      "https://github.com/ever-co/ever-gauzy/pull/10194",
+      "https://github.com/ever-co/ever-gauzy/pull/10243",
+      "https://github.com/ever-co/ever-gauzy/releases/tag/v111.44.2",
+      "https://github.com/ever-co/ever-gauzy/security/advisories/GHSA-86mw-2crg-vmhc"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.9,
-    "epss_percentile": 55.9,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.8,
+    "epss_percentile": 54.8,
     "score_breakdown": {
-      "base_cvss": 42.0,
+      "base_cvss": 37.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: edge_perimeter",
+          "points": 35
         },
         {
-          "signal": "Verified Weaponized Exploit",
+          "signal": "Pre-Auth Remote Execution",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
     "tags": [
-      "rce",
-      "weaponized"
+      "edge_perimeter",
+      "pre_auth"
     ],
     "intel_score": 107.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "edge_perimeter+35",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -3269,94 +4140,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-95433",
-    "published": "2026-11-23T17:17:58.257",
-    "last_modified": "2026-11-24T19:18:27.603",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In FuchsiaVideoOutputProvider of fuchsia_video_output_provider.cc, there is a possible use after free due to a race condition. This could lead to remote code execution with no additional execution privileges needed. User interaction is needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 40.5,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 105.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95455",
-    "published": "2026-11-23T17:18:00.797",
-    "last_modified": "2026-11-24T21:18:44.070",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In ServerSessionBroker of server_session_broker.cc, there is a possible use after free due to a race condition. This could lead to remote code execution with no additional execution privileges needed. User interaction is not needed for exploitation.",
-    "references": [
-      "https://support.google.com/product-documentation/answer/18972684"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.3,
-    "epss_percentile": 14.9,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 105.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-113824",
     "published": "2026-11-23T22:19:04.970",
     "last_modified": "2026-11-25T05:18:26.447",
@@ -3397,57 +4180,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-95508",
-    "published": "2026-09-22T09:17:06.073",
-    "last_modified": "2026-11-24T23:17:32.930",
-    "cvss_v3": 7.4,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A heap-based buffer overflow was found in the DHCPv6 and TFTP response builders of libslirp. When the host is configured with a small interface MTU, a guest-supplied DHCPv6 CLIENTID option or TFTP blksize option can overflow the reply buffer with attacker-controlled content and length, resulting in denial of service and potentially arbitrary code execution in the host process. The default interface MTU is not affected.",
-    "references": [
-      "https://access.redhat.com/security/cve/CVE-2026-95508",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2537748"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 41.1,
-    "score_breakdown": {
-      "base_cvss": 37.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: dos",
-          "points": 3
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
-    "tags": [
-      "dos",
-      "pre_auth",
-      "rce"
-    ],
-    "intel_score": 105.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "dos+3",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -3557,105 +4289,6 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-130839",
-    "published": "2026-11-17T20:17:48.577",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "ModelScope 1.11.0 to before 1.40.1 contains an unsafe reflection vulnerability in the image-to-3D SyncDreamer pipeline that allows remote attackers to execute code via crafted model configuration. Attackers can publish a model whose syncdreamer.yaml target field makes instantiate_from_config() import and instantiate any class with controlled params, without an allowlist or trust_remote_code check, executing code when victims load it.",
-    "references": [
-      "https://github.com/modelscope/modelscope/blob/v1.40.0/modelscope/models/cv/image_to_3d/ldm/util.py",
-      "https://github.com/modelscope/modelscope/blob/v1.40.0/modelscope/pipelines/cv/image_to_3d_pipeline.py",
-      "https://github.com/modelscope/modelscope/commit/563133cfbc7af7891498d9928a1b018fa42ce30b",
-      "https://github.com/modelscope/modelscope/pull/1788",
-      "https://github.com/modelscope/modelscope/releases/tag/v1.40.1",
-      "https://www.vulncheck.com/advisories/modelscope-1.11.0-to-before-1.40.1-unsafe-reflection-rce-via-syncdreamer-yaml"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 42.2,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-133707",
-    "published": "2026-11-20T13:18:46.853",
-    "last_modified": "2026-11-24T20:38:28.417",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "The targets R package before 1.12.1 contains a code execution vulnerability that allows attackers to run arbitrary R code by planting format functions in the data store metadata file. Attackers can supply a crafted _targets data store whose custom format or CAS repository functions are passed to eval(parse()), executing code when victims call tar_read(), tar_load() or tar_workspace().",
-    "references": [
-      "https://github.com/ropensci/targets/blob/1.12.0/R/class_store_format_custom.R",
-      "https://github.com/ropensci/targets/blob/1.12.0/R/class_store_repository_cas.R",
-      "https://github.com/ropensci/targets/commit/a9681eb237500c7e9a0814cfde31bd05c53d934f",
-      "https://github.com/ropensci/targets/issues/1602",
-      "https://github.com/ropensci/targets/releases/tag/1.12.1",
-      "https://www.vulncheck.com/advisories/targets-r-package-before-1.12.1-code-execution-via-custom-storage-metadata",
-      "https://github.com/ropensci/targets/issues/1602"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 7.6,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
     "cve_id": "CVE-2026-133708",
     "published": "2026-11-20T13:18:47.003",
     "last_modified": "2026-11-25T04:17:26.287",
@@ -3751,67 +4384,17 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-135722",
-    "published": "2026-11-24T04:17:30.013",
-    "last_modified": "2026-11-24T20:37:44.187",
-    "cvss_v3": 7.8,
+    "cve_id": "CVE-2026-64845",
+    "published": "2026-11-25T16:17:54.540",
+    "last_modified": "2026-11-25T16:17:54.677",
+    "cvss_v3": 8.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "FFmpeg before 9.1 contains a heap-based buffer overflow vulnerability in peak_init_writer() and wav_write_packet() in libavformat/wavenc.c that allows attackers to corrupt heap memory by supplying audio with zero channels. Attackers can provide a crafted PCM stream declaring no channels for WAV output with peak envelope enabled, causing out-of-bounds writes past peak_maxpos and peak_maxneg arrays, crashes, and potential code execution.",
+    "summary": "KubeSphere 4.0.0 through 4.1.3 contains a missing authorization vulnerability in the CertificateSigningRequest controller that allows attackers with permission to create CertificateSigningRequest objects to escalate privileges by exploiting automatic approval of requests carrying a kubesphere.io/username label without verifying the requester's identity or subject match. Attackers can submit a CertificateSigningRequest for the kubernetes.io/kube-apiserver-client signer with an arbitrary subject such as a platform administrator to obtain a cluster CA-signed client certificate, enabling authentication as the chosen identity and full cluster administrator privilege escalation.",
     "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/pulls/24932",
-      "https://github.com/FFmpeg/FFmpeg",
-      "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavformat/wavenc.c#L391",
-      "https://github.com/FFmpeg/FFmpeg/commit/0b1c279b62af82e422e3fc21ba6cc2fc3154dc76",
-      "https://www.vulncheck.com/advisories/ffmpeg-before-9.1-heap-buffer-overflow-via-wav-muxer-peak-envelope-writer"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 37.6,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "weaponized"
-    ],
-    "intel_score": 104.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-135734",
-    "published": "2026-11-24T04:17:32.137",
-    "last_modified": "2026-11-24T18:26:19.497",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "FFmpeg before 9.1 contains a heap out-of-bounds write vulnerability in the deflicker filter that lets attackers corrupt heap memory via unclamped high bit depth luma samples. Attackers can supply crafted video whose luma values exceed the nominal depth, making calc_avgy16() increment counters past the histogram allocation, causing crashes or possibly code execution.",
-    "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/pulls/26121",
-      "https://github.com/FFmpeg/FFmpeg",
-      "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavfilter/vf_deflicker.c#L193",
-      "https://github.com/FFmpeg/FFmpeg/commit/fa10042f748f20fad0cc0ee8fdcebe96b76603af",
-      "https://www.vulncheck.com/advisories/ffmpeg-before-9.1-heap-out-of-bounds-write-via-deflicker-filter-histogram"
+      "https://github.com/ashikmd7/kubeSphere/blob/main/CertificateSigningRequest%20Controller%20Authorization%20Bypass/README.md",
+      "https://github.com/kubesphere/kubesphere/issues/6660",
+      "https://www.vulncheck.com/advisories/kubesphere-missing-authorization-via-certificatesigningrequest-controller"
     ],
     "source": "NVD",
     "cisa_kev": false,
@@ -3819,14 +4402,14 @@
     "pre_auth": false,
     "weaponized": true,
     "epss": 0.4,
-    "epss_percentile": 23.4,
+    "epss_percentile": 24.6,
     "score_breakdown": {
-      "base_cvss": 39.0,
+      "base_cvss": 44.0,
       "freshness": 10,
       "components": [
         {
-          "signal": "Tag: rce",
-          "points": 30
+          "signal": "Tag: priv_esc",
+          "points": 25
         },
         {
           "signal": "Verified Weaponized Exploit",
@@ -3834,40 +4417,36 @@
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "rce",
+      "priv_esc",
       "weaponized"
     ],
     "intel_score": 104.0,
     "reasons": [
       "recently modified (last 48h)",
-      "rce+30",
+      "priv_esc+25",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
-    "cve_id": "CVE-2026-135740",
-    "published": "2026-11-24T04:17:33.157",
-    "last_modified": "2026-11-24T16:33:31.727",
+    "cve_id": "CVE-2026-131818",
+    "published": "2026-11-25T21:17:16.973",
+    "last_modified": "2026-11-25T21:17:16.973",
     "cvss_v3": 7.8,
     "severity": "HIGH",
     "affected": [],
-    "summary": "FFmpeg before 9.1 contains a heap out-of-bounds write vulnerability in libavfilter/vf_readeia608.c because build_histogram() does not clamp high bit depth luma samples to the nominal maximum. Attackers can supply crafted 9, 10, 12 or 14 bit gray or YUV video to corrupt heap memory, causing crashes or possibly code execution.",
+    "summary": "ChargePoint Home Flex busybox Unnecessary Privileges Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of ChargePoint Home Flex EV chargers. An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the busybox binary. The issue results from the setuid flag being set. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of root. Was ZDI-CAN-29090.",
     "references": [
-      "https://code.ffmpeg.org/FFmpeg/FFmpeg/pulls/26121",
-      "https://github.com/FFmpeg/FFmpeg",
-      "https://github.com/FFmpeg/FFmpeg/blob/n9.0.2/libavfilter/vf_readeia608.c#L176",
-      "https://github.com/FFmpeg/FFmpeg/commit/df1ddf75db9a1ff36a35019511e17f795cf20c55",
-      "https://www.vulncheck.com/advisories/ffmpeg-before-9.1-heap-out-of-bounds-write-via-readeia608-filter-histogram"
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1114/"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.4,
-    "epss_percentile": 25.4,
+    "weaponized": false,
+    "epss": 0.2,
+    "epss_percentile": 5.9,
     "score_breakdown": {
       "base_cvss": 39.0,
       "freshness": 10,
@@ -3877,21 +4456,66 @@
           "points": 30
         },
         {
-          "signal": "Verified Weaponized Exploit",
+          "signal": "Tag: priv_esc",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
     "tags": [
-      "rce",
-      "weaponized"
+      "priv_esc",
+      "rce"
     ],
     "intel_score": 104.0,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "priv_esc+25"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-131827",
+    "published": "2026-11-25T21:17:17.227",
+    "last_modified": "2026-11-25T21:17:17.227",
+    "cvss_v3": 7.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "RustDesk Client for Windows reg_recovery Missing Authorization Local Privilege Escalation Vulnerability. This vulnerability allows local attackers to escalate privileges on affected installations of RustDesk Client for Windows. An attacker must first obtain the ability to execute low-privileged code on the target system in order to exploit this vulnerability.\n\nThe specific flaw exists within the main IPC endpoint exposed by the RustDesk service. The issue results from the lack of authorization prior to allowing access to functionality. An attacker can leverage this vulnerability to escalate privileges and execute arbitrary code in the context of SYSTEM. Was ZDI-CAN-34805.",
+    "references": [
+      "https://github.com/rustdesk/rustdesk/pull/17040",
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1080/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 0.3,
+    "epss_percentile": 17.5,
+    "score_breakdown": {
+      "base_cvss": 39.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: priv_esc",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "priv_esc",
+      "rce"
+    ],
+    "intel_score": 104.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "priv_esc+25"
     ]
   },
   {
@@ -4004,6 +4628,245 @@
       "recently modified (last 48h)",
       "rce+30",
       "dos+3",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136549",
+    "published": "2026-11-25T06:17:15.597",
+    "last_modified": "2026-11-25T06:17:15.763",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A security flaw has been discovered in Tenda RX3 16.03.13.11_multi. The impacted element is the function formSetSafeWanWebMan of the file /goform/SetRemoteWebCfg. The manipulation of the argument remoteIp results in command injection. The attack can be executed remotely. The exploit has been released to the public and may be used for attacks.",
+    "references": [
+      "https://github.com/Zeyfrost/tenda-rx3-vulns/blob/master/cmd_injection_remoteIp/detail.md",
+      "https://vuldb.com/cve/CVE-2026-136549",
+      "https://vuldb.com/submit/1057767",
+      "https://vuldb.com/vuln/443407",
+      "https://vuldb.com/vuln/443407/cti",
+      "https://www.tenda.com.cn/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 2.2,
+    "epss_percentile": 83.3,
+    "score_breakdown": {
+      "base_cvss": 50.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "command_injection",
+      "pre_auth"
+    ],
+    "intel_score": 103.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136823",
+    "published": "2026-11-25T22:17:20.717",
+    "last_modified": "2026-11-25T22:17:20.867",
+    "cvss_v3": 10.0,
+    "severity": "CRITICAL",
+    "affected": [],
+    "summary": "A vulnerability was found in D-Link R32 1.10B02. This affects an unknown function of the file /usr/bin/httpd of the component flupl self Endpoint. Performing a manipulation of the argument fpath results in os command injection. The attack can be initiated remotely. The exploit has been made public and could be used.",
+    "references": [
+      "https://github.com/Zzzhangxxx/cve/blob/main/D-Link_R32_A1_1.10B02_flupl_self_fpath_OS_Command_Injection.md",
+      "https://vuldb.com/cve/CVE-2026-136823",
+      "https://vuldb.com/submit/1059269",
+      "https://vuldb.com/vuln/443782",
+      "https://vuldb.com/vuln/443782/cti",
+      "https://www.dlink.com/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 2.5,
+    "epss_percentile": 85.2,
+    "score_breakdown": {
+      "base_cvss": 50.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+    "tags": [
+      "command_injection",
+      "pre_auth"
+    ],
+    "intel_score": 103.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "command_injection+18",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136503",
+    "published": "2026-11-25T23:17:23.307",
+    "last_modified": "2026-11-25T23:17:23.307",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "psqlODBC frees memory that is still in use, frees it twice, or writes outside an application buffer in these cases:\n\n- The clean-up the driver runs at commit and rollback sends queries of its own, and the reply to one of them can start the clean-up again while it is running. The nested run frees the rollback log, or the list of cursors and prepared statements to close, and the outer run uses and frees it again.\n- The callback through which libpq delivers notices could run that clean-up, and close the connection, while libpq was still using the connection.\n- Freeing a statement whose result holds several cursors (FetchRefcursors=1, or UseDeclareFetch=1) used the freed first result while the later cursors were closed.\n- With UseDeclareFetch=1, after a rollback closed an updatable cursor, rows added or deleted through it were counted but not stored, so freeing the statement freed uninitialised pointers, and adding a row wrote past the keyset.\n- After a multi-row fetch failed on a row other than the first of its rowset, SQLGetData() wrote at an offset past the buffer the application passed.\n- SQLProcedureColumns() freed the result of its catalog query twice when the query failed.\n- In a process named sqlservr (SQL Server linked servers), a server version below 8.4 made the statement parser free a buffer twice.\n- A failed SQLPutData in the middle of a SQLSetPos() or SQLBulkOperations() data-at-execution sequence left the whole operation pending, with the internal statement still allocated and autocommit silently off, so later statements were rolled back at disconnect. The next positioned update ran the stale callback against a statement that was never executed and dereferenced NULL.\n\nMost of these can be triggered by a hostile or compromised server, or anyone on the network path of a connection that does not use sslmode=verify-full (the default is disable). A database user who can make a statement fail, or who controls the contents of a row the application reads, can trigger the UseDeclareFetch=1 and SQLGetData() cases against an honest server. The demonstrated results are crashes and heap corruption; code execution has not been demonstrated.\n\nVersions up to and including psqlODBC 18.00.0006 are affected.",
+    "references": [
+      "https://github.com/postgresql-interfaces/psqlodbc/security/advisories/GHSA-48v4-hjc5-hx8w",
+      "https://odbc.postgresql.org/changelog/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 40.9,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 102.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136509",
+    "published": "2026-11-25T23:17:24.077",
+    "last_modified": "2026-11-25T23:17:24.077",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "psqlODBC did not check that a server reply matches the query it sent: that a FETCH returns no more rows than it asked for, that each row has the described number of columns, that one query produces one result, and that a COPY, a transaction or the connection ends where the protocol says. By sending replies that do not match, a hostile or compromised server, or anyone on the network path of a connection that does not use sslmode=verify-full (the default is disable) can corrupt memory in the application:\n\n- A FETCH reply with more rows than requested overflows the row cache.\n- Extra results in reply to a FETCH, or to the queries of a keyset-driven cursor, are freed while still in use.\n- A key query of a keyset-driven cursor answered with extra columns, or a re-read row with fewer columns, overflows the row cache.\n- Replies without columns or rows, or with NULL values, to the driver's internal queries at connect time and in catalog functions are dereferenced.\n- A malformed relacl value in SQLTablePrivileges() makes the driver write past a buffer.\n- On Windows with MSDTC, a long transaction name returned by the server overflows a buffer during recovery.\n- Values in replies to the driver's internal queries are used without checking their range: an empty column name, a parameter count, a large-object size, a function's or trigger's argument count, and a result of exactly 32767 columns. They are dereferenced, read past, returned to the application or sent back to the server as stack memory, or make the driver loop forever.\n- A reply that ends a COPY, the connection or the transaction at an unexpected point leaves freed results, keysets or table information in use: a CopyOutResponse followed by a lost connection, a ROLLBACK command tag under UseDeclareFetch=1, or a lost connection while a cursor with positioned updates is closed. Eight extra bytes in a reply also make the driver wait forever for a COPY to end.\n- On Windows, a start-up reply without client_encoding crashes the driver, and with MSDTC a failed connection makes the XA library use a connection it has already freed.\n- An error message ending in the first byte of a multibyte character leaves the SQLSTATE returned by SQLGetDiagRecW() unterminated.\n- When a string value did not fit the application's buffer, eight Unicode entry points filled the buffer and wrote no null terminator, so a caller that reads to the terminator, as ODBC allows, read past the end of its own buffer.\n\nThis continues the fixes for CVE-2026-120058 and CVE-2026-120060, which covered other replies. The demonstrated results are crashes and heap corruption; code execution has not been demonstrated.\n\nVersions up to and including psqlODBC 18.00.0006 are affected.",
+    "references": [
+      "https://github.com/postgresql-interfaces/psqlodbc/security/advisories/GHSA-98mx-57hv-xjpr",
+      "https://odbc.postgresql.org/changelog/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.5,
+    "epss_percentile": 32.0,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 102.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-135151",
+    "published": "2026-11-26T10:17:08.653",
+    "last_modified": "2026-11-26T10:17:08.780",
+    "cvss_v3": 7.5,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "The Download Manager plugin for WordPress is vulnerable to Local File Inclusion in all versions up to, and including, 3.3.78 via the 'file[page_template]' parameter parameter. This makes it possible for authenticated attackers, with author-level access and above, to include and execute arbitrary .php files on the server, allowing the execution of any PHP code in those files. This can be used to bypass access controls, obtain sensitive data, or achieve code execution in cases where .php file types can be uploaded and included. The malicious page_template value is stored when an Author creates or edits a package post, and the inclusion is triggered on any subsequent page view of the package permalink, meaning the include() can be fired by unauthenticated visitors after the payload is planted.",
+    "references": [
+      "https://plugins.trac.wordpress.org/browser/download-manager/",
+      "https://plugins.trac.wordpress.org/browser/download-manager/tags/3.3.78/src/Admin/Menu/Packages.php#L62",
+      "https://plugins.trac.wordpress.org/browser/download-manager/tags/3.3.78/src/Package/Hooks.php#L70",
+      "https://plugins.trac.wordpress.org/browser/download-manager/tags/3.3.78/src/Package/PackageService.php#L80",
+      "https://plugins.trac.wordpress.org/browser/download-manager/tags/3.3.78/src/Package/PackageTemplate.php#L51",
+      "https://plugins.trac.wordpress.org/browser/download-manager/tags/3.3.78/src/wpdm-functions.php#L170",
+      "https://plugins.trac.wordpress.org/changeset/3821101/download-manager/trunk/src/Package/PackageTemplate.php",
+      "https://www.wordfence.com/threat-intel/vulnerabilities/id/e5d6be10-e65c-4191-b260-93190fac8885?source=cve"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 1.0,
+    "epss_percentile": 62.4,
+    "score_breakdown": {
+      "base_cvss": 37.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 102.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
       "Pre-Auth Remote Execution (+25)"
     ]
   },
@@ -4152,25 +5015,68 @@
     ]
   },
   {
-    "cve_id": "CVE-2011-10042",
-    "published": "2026-11-14T14:17:21.480",
-    "last_modified": "2026-11-24T19:10:01.980",
+    "cve_id": "CVE-2026-131817",
+    "published": "2026-11-25T21:17:16.850",
+    "last_modified": "2026-11-25T21:17:16.850",
+    "cvss_v3": 8.8,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "ChargePoint Home Flex wpa_passphrase Command Injection Remote Code Execution Vulnerability. This vulnerability allows network-adjacent attackers to execute arbitrary code on affected installations of ChargePoint Home Flex EV chargers. Authentication is not required to exploit this vulnerability.\n\nThe specific flaw exists within the PSK parameter passed to the wpa_passphrase endpoint. The issue results from the lack of proper validation of a user-supplied string before using it to execute a system call. An attacker can leverage this vulnerability to execute arbitrary code in the context of root. Was ZDI-CAN-29000.",
+    "references": [
+      "https://www.zerodayinitiative.com/advisories/ZDI-26-1113/"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": false,
+    "weaponized": false,
+    "epss": 1.3,
+    "epss_percentile": 71.0,
+    "score_breakdown": {
+      "base_cvss": 44.0,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Tag: command_injection",
+          "points": 18
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+    "tags": [
+      "command_injection",
+      "rce"
+    ],
+    "intel_score": 102.0,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "command_injection+18"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-133973",
+    "published": "2026-11-25T23:17:21.787",
+    "last_modified": "2026-11-25T23:17:21.787",
     "cvss_v3": 9.8,
     "severity": "CRITICAL",
     "affected": [],
-    "summary": "HTTP::Session versions before 0.43 for Perl allow memcached command injection via unfiltered session ids in HTTP::Session::Store::Memcached.\n\nThe session id from the client's cookie reaches memcached unchanged as the cache key.\n\nA CR and LF in the session id end the cache command early, and the server reads the bytes after them as further commands.",
+    "summary": "A command injection vulnerability exists in the web-based management interface of HPE Networking Management Software (Airwave). Successful exploitation could allow an unauthenticated remote attacker to execute arbitrary commands on the underlying operating system of the affected system, impacting the confidentiality, integrity and availability of HPE Networking Management Software (AirWave).",
     "references": [
-      "https://github.com/tokuhirom/http-session/commit/039345db9bc9311868019fde67b89c355114a3d3.patch",
-      "https://metacpan.org/release/TOKUHIROM/HTTP-Session-0.42/changes",
-      "http://www.openwall.com/lists/oss-security/2026/11/14/10"
+      "https://csaf.arubanetworking.hpe.com/2026/hpe_networking_-_hpesbnw05186.txt",
+      "https://support.hpe.com/hpesc/public/docDisplay?docId=hpesbnw05186en_us&docLocale=en_US"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
     "pre_auth": true,
     "weaponized": false,
-    "epss": 1.7,
-    "epss_percentile": 77.9,
+    "epss": 1.8,
+    "epss_percentile": 79.3,
     "score_breakdown": {
       "base_cvss": 49.0,
       "freshness": 10,
@@ -4198,75 +5104,30 @@
     ]
   },
   {
-    "cve_id": "CVE-2026-130857",
-    "published": "2026-11-17T20:17:51.407",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 8.3,
+    "cve_id": "CVE-2026-136448",
+    "published": "2026-11-25T03:17:30.397",
+    "last_modified": "2026-11-25T03:17:30.593",
+    "cvss_v3": 7.3,
     "severity": "HIGH",
     "affected": [],
-    "summary": "EveryDocs Core before 1.6.1 contains an authorization bypass vulnerability that allows authenticated users to access other users' records through unscoped Model.find(params[:id]) lookups in multiple controllers. Self-registered attackers can enumerate sequential ids to read, modify, or delete other users' documents and stored files, and rename or delete their folders, tags and people.",
+    "summary": "A vulnerability was identified in nliautaud pico-content-editor up to 02d5ad6c820c5050c542ab9505819b5e0a0ba1af. Affected by this vulnerability is the function Uploads::saveFile/Auth::init of the file src/Uploads.php of the component Authorization Subsystem. Such manipulation of the argument PicoContentEditorUpload leads to unrestricted upload. The attack may be launched remotely. The exploit is publicly available and might be used. This product operates on a rolling release basis, ensuring continuous delivery. Consequently, there are no version details for either affected or updated releases. The vendor was contacted early about this disclosure but did not respond in any way. This vulnerability only affects products that are no longer supported by the maintainer.",
     "references": [
-      "https://github.com/jonashellmann/everydocs-core/blob/v1.6.0/app/controllers/documents_controller.rb#L110-L140",
-      "https://github.com/jonashellmann/everydocs-core/commit/4b6e1a79baae44c479505674f9354a9da0906f4d",
-      "https://github.com/jonashellmann/everydocs-core/releases/tag/v1.6.1",
-      "https://github.com/jonashellmann/everydocs-core/security/advisories/GHSA-g83j-767p-v5w7",
-      "https://www.vulncheck.com/advisories/everydocs-core-before-1.6.1-authorization-bypass-via-unscoped-record-lookups",
-      "https://github.com/jonashellmann/everydocs-core/security/advisories/GHSA-g83j-767p-v5w7"
+      "https://github.com/vinniboy021-blip/Advisory/blob/main/pico-content-editor-unauth-rce.md",
+      "https://vuldb.com/cve/CVE-2026-136448",
+      "https://vuldb.com/submit/1057470",
+      "https://vuldb.com/submit/1057473",
+      "https://vuldb.com/vuln/443235",
+      "https://vuldb.com/vuln/443235/cti"
     ],
     "source": "NVD",
     "cisa_kev": false,
     "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 33.7,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.4,
+    "epss_percentile": 26.8,
     "score_breakdown": {
-      "base_cvss": 41.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 101.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-82025",
-    "published": "2026-11-17T14:17:47.647",
-    "last_modified": "2026-11-24T20:38:28.417",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "WP File Manager before 8.0.7 contains a file upload restriction bypass vulnerability that allows authenticated administrators to upload arbitrary PHP files by exploiting a misconfigured elFinder connector in file_folder_manager.php where an empty uploadDeny list causes allowPutMime() to unconditionally return true, bypassing the uploadAllow restriction. Attackers can upload a .php file directly or upload it under an allowed filename and then rename it via the rename connector command, achieving remote code execution as the web server user.",
-    "references": [
-      "https://wordpress.org/plugins/wp-file-manager/#developers",
-      "https://www.vulncheck.com/advisories/wp-file-manager-arbitrary-file-upload-rce-via-elfinder"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.9,
-    "epss_percentile": 56.5,
-    "score_breakdown": {
-      "base_cvss": 36.0,
+      "base_cvss": 36.5,
       "freshness": 10,
       "components": [
         {
@@ -4274,21 +5135,69 @@
           "points": 30
         },
         {
-          "signal": "Verified Weaponized Exploit",
+          "signal": "Pre-Auth Remote Execution",
           "points": 25
         }
       ]
     },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
     "tags": [
-      "rce",
-      "weaponized"
+      "pre_auth",
+      "rce"
     ],
-    "intel_score": 101.0,
+    "intel_score": 101.5,
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
+      "Pre-Auth Remote Execution (+25)"
+    ]
+  },
+  {
+    "cve_id": "CVE-2026-136692",
+    "published": "2026-11-25T13:17:28.970",
+    "last_modified": "2026-11-25T15:17:47.047",
+    "cvss_v3": 7.3,
+    "severity": "HIGH",
+    "affected": [],
+    "summary": "A vulnerability was identified in dayrui XunRuiCMS up to 4.7.4. The impacted element is the function down of the file dayrui/Fcms/Library/Api.php of the component Attachment Download API. Such manipulation of the argument ID leads to unrestricted upload. The attack may be performed from remote. The exploit is publicly available and might be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "references": [
+      "https://github.com/riyuedeqi/xunruicms-4.7.4-api-down-rce/blob/main/README.zh-CN.md",
+      "https://vuldb.com/cve/CVE-2026-136692",
+      "https://vuldb.com/submit/1058433",
+      "https://vuldb.com/vuln/443649",
+      "https://vuldb.com/vuln/443649/cti"
+    ],
+    "source": "NVD",
+    "cisa_kev": false,
+    "ransomware_campaign": false,
+    "pre_auth": true,
+    "weaponized": false,
+    "epss": 0.6,
+    "epss_percentile": 43.7,
+    "score_breakdown": {
+      "base_cvss": 36.5,
+      "freshness": 10,
+      "components": [
+        {
+          "signal": "Tag: rce",
+          "points": 30
+        },
+        {
+          "signal": "Pre-Auth Remote Execution",
+          "points": 25
+        }
+      ]
+    },
+    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+    "tags": [
+      "pre_auth",
+      "rce"
+    ],
+    "intel_score": 101.5,
+    "reasons": [
+      "recently modified (last 48h)",
+      "rce+30",
+      "Pre-Auth Remote Execution (+25)"
     ]
   },
   {
@@ -4333,54 +5242,6 @@
       "recently modified (last 48h)",
       "command_injection+18",
       "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-130589",
-    "published": "2026-11-17T14:17:45.653",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 8.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Emitter through 3.1 contains a privilege escalation vulnerability that allows any channel key holder to forge a master key because channel keys use bare XOR Salsa20 encryption without a MAC or signature. Attackers can flip the permissions byte to the master value and present the forged key to the keygen service to mint keys with arbitrary permissions on every channel of the contract.",
-    "references": [
-      "https://github.com/emitter-io/emitter/blob/v3.1/internal/provider/contract/contract.go#L57-L62",
-      "https://github.com/emitter-io/emitter/blob/v3.1/internal/security/cipher/shuffle.go#L75-L90",
-      "https://github.com/emitter-io/emitter/blob/v3.1/internal/service/keygen/keygen.go#L65",
-      "https://github.com/emitter-io/emitter/issues/439",
-      "https://www.vulncheck.com/advisories/emitter-through-3.1-master-key-forgery-via-unauthenticated-channel-key-encryption"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 3.5,
-    "score_breakdown": {
-      "base_cvss": 40.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 100.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
     ]
   },
   {
@@ -4474,809 +5335,6 @@
     "reasons": [
       "recently modified (last 48h)",
       "rce+30",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-25915",
-    "published": "2023-08-21T21:15:09.170",
-    "last_modified": "2026-11-27T13:34:06.430",
-    "cvss_v3": 9.9,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Due to improper input validation, an authenticated remote attacker could execute arbitrary commands on the target system.",
-    "references": [
-      "https://csirt.divd.nl/CVE-2023-25915",
-      "https://csirt.divd.nl/DIVD-2023-00025",
-      "https://csirt.divd.nl/CVE-2023-25915",
-      "https://csirt.divd.nl/DIVD-2023-00025",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2023-25915"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 2.5,
-    "epss_percentile": 85.3,
-    "score_breakdown": {
-      "base_cvss": 49.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "CISA KEV Active Exploit",
-          "points": 40
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 99.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-130583",
-    "published": "2026-11-17T14:17:44.847",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 9.3,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "Rootways Authorize.net CIM Pro extension for Magento 2 before 4.1.5 contains an unauthenticated server-side request forgery vulnerability in the Apple Pay merchant validation controller. Attackers can supply file://, gopher://, or dict:// URLs in the validationUrl parameter to read app/etc/env.php credentials and encryption keys or reach internal services and cloud metadata endpoints.",
-    "references": [
-      "https://sansec.io/research/rootways-authorize-net-apple-pay-ssrf",
-      "https://www.rootways.com/blog/security-update-authorizenet-cim-pro-extension-v415-apple-pay",
-      "https://www.rootways.com/magento-2-authorize-net-cim-extension",
-      "https://www.vulncheck.com/advisories/rootways-authorize-net-cim-pro-for-magento-2-before-4.1.5-ssrf-via-apple-pay-validation"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": true,
-    "epss": 0.3,
-    "epss_percentile": 12.7,
-    "score_breakdown": {
-      "base_cvss": 46.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: ssrf",
-          "points": 18
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N",
-    "tags": [
-      "ssrf",
-      "weaponized"
-    ],
-    "intel_score": 99.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "ssrf+18",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-12540",
-    "published": "2026-10-01T17:17:20.053",
-    "last_modified": "2026-11-26T14:17:22.340",
-    "cvss_v3": 8.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Foreman. A command injection vulnerability exists in the foreman-rake errors:fetch_log task. The request_id parameter is passed to an underlying system command (typically grep) without adequate shell neutralization. While the task is intended to fetch specific log entries, an attacker with sudo permissions to execute this rake task can inject shell metacharacters (such as ;, \", or |) to break out of the intended command and execute arbitrary code.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:74503",
-      "https://access.redhat.com/errata/RHSA-2026:74504",
-      "https://access.redhat.com/errata/RHSA-2026:74505",
-      "https://access.redhat.com/errata/RHSA-2026:74506",
-      "https://access.redhat.com/security/cve/CVE-2026-12540",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2489969",
-      "http://www.openwall.com/lists/oss-security/2026/10/07/9"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 1.7,
-    "epss_percentile": 78.2,
-    "score_breakdown": {
-      "base_cvss": 41.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-132917",
-    "published": "2026-11-19T11:16:58.400",
-    "last_modified": "2026-11-24T16:14:16.663",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In JetBrains TeamCity before 2026.2, 2026.1.4, 2025.11.8 remote code execution was possible via a file write bypass in the Kotlin DSL sandbox",
-    "references": [
-      "https://www.jetbrains.com/privacy-security/issues-fixed/"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 1.0,
-    "epss_percentile": 62.5,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: file_write",
-          "points": 15
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "file_write",
-      "rce"
-    ],
-    "intel_score": 99.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "file_write+15"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-12544",
-    "published": "2026-10-01T17:17:20.340",
-    "last_modified": "2026-11-26T14:17:22.793",
-    "cvss_v3": 7.7,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Foreman. The foreman-rake initialization logic in /usr/share/foreman/config/settings.rb contains a vulnerable code pattern where configuration data is processed through two distinct executable layers. This creates a multi-stage execution chain that allows for both Server-Side Template Injection (SSTI) and insecure deserialization. This vulnerability can lead to remote code execution, total infrastructure compromise and supply chain risk.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:74503",
-      "https://access.redhat.com/errata/RHSA-2026:74504",
-      "https://access.redhat.com/errata/RHSA-2026:74505",
-      "https://access.redhat.com/errata/RHSA-2026:74506",
-      "https://access.redhat.com/security/cve/CVE-2026-12544",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2489992",
-      "http://www.openwall.com/lists/oss-security/2026/10/07/6"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 0.6,
-    "epss_percentile": 42.7,
-    "score_breakdown": {
-      "base_cvss": 38.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: deserialization",
-          "points": 20
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:C/C:H/I:H/A:H",
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 98.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2025-12548",
-    "published": "2026-01-13T16:15:55.527",
-    "last_modified": "2026-11-26T08:17:03.437",
-    "cvss_v3": 9.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A flaw was found in Eclipse Che che-machine-exec. This vulnerability allows unauthenticated remote arbitrary command execution and secret exfiltration (SSH keys, tokens, etc.) from other users' Developer Workspace containers, via an unauthenticated JSON-RPC / websocket API exposed on TCP port 3333.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2025:22620",
-      "https://access.redhat.com/errata/RHSA-2025:22623",
-      "https://access.redhat.com/errata/RHSA-2025:22652",
-      "https://access.redhat.com/security/cve/CVE-2025-12548",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2408850"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 2.1,
-    "epss_percentile": 82.0,
-    "score_breakdown": {
-      "base_cvss": 45.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "pre_auth"
-    ],
-    "intel_score": 98.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-1961",
-    "published": "2026-03-26T13:16:27.650",
-    "last_modified": "2026-11-26T15:17:30.000",
-    "cvss_v3": 8.0,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Foreman. A remote attacker could exploit a command injection vulnerability in Foreman's WebSocket proxy implementation. This vulnerability arises from the system's use of unsanitized hostname values from compute resource providers when constructing shell commands. By operating a malicious compute resource server, an attacker could achieve remote code execution on the Foreman server when a user accesses VM VNC console functionality. This could lead to the compromise of sensitive credentials and the entire managed infrastructure.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:5968",
-      "https://access.redhat.com/errata/RHSA-2026:5970",
-      "https://access.redhat.com/errata/RHSA-2026:5971",
-      "https://access.redhat.com/security/cve/CVE-2026-1961",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2437036",
-      "http://www.openwall.com/lists/oss-security/2026/03/27/3",
-      "https://access.redhat.com/errata/RHSA-2026:5968",
-      "https://access.redhat.com/errata/RHSA-2026:5970",
-      "https://access.redhat.com/errata/RHSA-2026:5971",
-      "https://access.redhat.com/security/cve/CVE-2026-1961",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2437036",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-1961.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 2.9,
-    "epss_percentile": 87.9,
-    "score_breakdown": {
-      "base_cvss": 40.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "rce"
-    ],
-    "intel_score": 98.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "command_injection+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-6857",
-    "published": "2026-04-22T13:16:22.583",
-    "last_modified": "2026-11-26T15:17:39.940",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in camel-infinispan. This vulnerability involves unsafe deserialization in the ProtoStream remote aggregation repository. A remote attacker with low privileges could exploit this by sending specially crafted data, leading to arbitrary code execution. This allows the attacker to gain full control over the affected system, impacting its confidentiality, integrity, and availability.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:17668",
-      "https://access.redhat.com/errata/RHSA-2026:22453",
-      "https://access.redhat.com/security/cve/CVE-2026-6857",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2460003",
-      "https://access.redhat.com/errata/RHSA-2026:17668",
-      "https://access.redhat.com/errata/RHSA-2026:22453",
-      "https://access.redhat.com/security/cve/CVE-2026-6857",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2460003",
-      "https://security.access.redhat.com/data/csaf/v2/vex/2026/cve-2026-6857.json"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 1.3,
-    "epss_percentile": 70.9,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: deserialization",
-          "points": 20
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "deserialization",
-      "rce"
-    ],
-    "intel_score": 97.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "deserialization+20"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-12423",
-    "published": "2026-10-01T17:17:19.887",
-    "last_modified": "2026-11-26T14:17:22.070",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "A flaw was found in Foreman. The Red Hat Satellite /unattended/provision API endpoint is vulnerable to an authentication bypass due to a semantic logic flaw in host_verifier.rb. The application verifies the database state of a provisioning token rather than its actual presence in the incoming HTTP request. Because a host actively undergoing provisioning has an unexpired token in the database, the server's valid_host_token? method evaluates to true, granting access to the kickstart template even if the requester provides no token at all in the URL.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2026:74503",
-      "https://access.redhat.com/errata/RHSA-2026:74504",
-      "https://access.redhat.com/errata/RHSA-2026:74505",
-      "https://access.redhat.com/errata/RHSA-2026:74506",
-      "https://access.redhat.com/security/cve/CVE-2026-12423",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2488956",
-      "http://www.openwall.com/lists/oss-security/2026/10/07/10"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 0.7,
-    "epss_percentile": 46.2,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-    "tags": [
-      "auth_bypass",
-      "pre_auth"
-    ],
-    "intel_score": 97.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2017-17835",
-    "published": "2019-01-23T17:29:00.303",
-    "last_modified": "2026-11-27T13:17:13.017",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "In Apache Airflow 1.8.2 and earlier, a CSRF vulnerability allowed for a remote command injection on a default install of Airflow.",
-    "references": [
-      "https://lists.apache.org/thread.html/ade4d54ebf614f68dc81a08891755e60ea58ba88e0209233eeea5f57%40%3Cdev.airflow.apache.org%3E",
-      "https://lists.apache.org/thread.html/ade4d54ebf614f68dc81a08891755e60ea58ba88e0209233eeea5f57%40%3Cdev.airflow.apache.org%3E"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 2.0,
-    "epss_percentile": 81.8,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: command_injection",
-          "points": 18
-        },
-        {
-          "signal": "Pre-Auth Remote Execution",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-    "tags": [
-      "command_injection",
-      "pre_auth"
-    ],
-    "intel_score": 97.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "command_injection+18",
-      "Pre-Auth Remote Execution (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-130853",
-    "published": "2026-11-17T20:17:50.753",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 7.2,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Nexterm through 1.2.2-BETA contains a privilege escalation vulnerability that allows users with permissions.manage to gain unauthorized permissions because addGroupMember and setUserGroups lack the grantsBeyondCaller check. Attackers can add their own account to custom groups via the group membership endpoints to inherit permissions like users.impersonate and settings.backup.",
-    "references": [
-      "https://github.com/gnmyt/Nexterm/blob/v1.2.2-BETA/server/controllers/permission.js#L148-L210",
-      "https://github.com/gnmyt/Nexterm/commit/9491ece151498a50c3eb1412054dd8362f99ba1a",
-      "https://github.com/gnmyt/Nexterm/issues/2001",
-      "https://www.vulncheck.com/advisories/nexterm-through-1.2.2-beta-privilege-escalation-via-permission-group-membership"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.6,
-    "epss_percentile": 41.6,
-    "score_breakdown": {
-      "base_cvss": 36.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: priv_esc",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "priv_esc",
-      "weaponized"
-    ],
-    "intel_score": 96.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "priv_esc+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-39417",
-    "published": "2023-08-11T13:15:09.870",
-    "last_modified": "2026-11-26T21:17:02.497",
-    "cvss_v3": 7.5,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "IN THE EXTENSION SCRIPT, a SQL Injection vulnerability was found in PostgreSQL if it uses @extowner@, @extschema@, or @extschema:...@ inside a quoting construct (dollar quoting, '', or \"\"). If an administrator has installed files of a vulnerable, trusted, non-bundled extension, an attacker with database-level CREATE privilege can execute arbitrary code as the bootstrap superuser.",
-    "references": [
-      "https://access.redhat.com/errata/RHSA-2023:7545",
-      "https://access.redhat.com/errata/RHSA-2023:7579",
-      "https://access.redhat.com/errata/RHSA-2023:7580",
-      "https://access.redhat.com/errata/RHSA-2023:7581",
-      "https://access.redhat.com/errata/RHSA-2023:7616",
-      "https://access.redhat.com/errata/RHSA-2023:7656",
-      "https://access.redhat.com/errata/RHSA-2023:7666",
-      "https://access.redhat.com/errata/RHSA-2023:7667",
-      "https://access.redhat.com/errata/RHSA-2023:7694",
-      "https://access.redhat.com/errata/RHSA-2023:7695",
-      "https://access.redhat.com/errata/RHSA-2023:7714",
-      "https://access.redhat.com/errata/RHSA-2023:7770",
-      "https://access.redhat.com/errata/RHSA-2023:7772",
-      "https://access.redhat.com/errata/RHSA-2023:7784",
-      "https://access.redhat.com/errata/RHSA-2023:7785",
-      "https://access.redhat.com/errata/RHSA-2023:7883",
-      "https://access.redhat.com/errata/RHSA-2023:7884",
-      "https://access.redhat.com/errata/RHSA-2023:7885",
-      "https://access.redhat.com/errata/RHSA-2024:0304",
-      "https://access.redhat.com/errata/RHSA-2024:0332",
-      "https://access.redhat.com/errata/RHSA-2024:0337",
-      "https://access.redhat.com/security/cve/CVE-2023-39417",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2228111",
-      "https://www.postgresql.org/support/security/CVE-2023-39417",
-      "https://access.redhat.com/errata/RHSA-2023:7545",
-      "https://access.redhat.com/errata/RHSA-2023:7579",
-      "https://access.redhat.com/errata/RHSA-2023:7580",
-      "https://access.redhat.com/errata/RHSA-2023:7581",
-      "https://access.redhat.com/errata/RHSA-2023:7616",
-      "https://access.redhat.com/errata/RHSA-2023:7656",
-      "https://access.redhat.com/errata/RHSA-2023:7666",
-      "https://access.redhat.com/errata/RHSA-2023:7667",
-      "https://access.redhat.com/errata/RHSA-2023:7694",
-      "https://access.redhat.com/errata/RHSA-2023:7695",
-      "https://access.redhat.com/errata/RHSA-2023:7714",
-      "https://access.redhat.com/errata/RHSA-2023:7770",
-      "https://access.redhat.com/errata/RHSA-2023:7772",
-      "https://access.redhat.com/errata/RHSA-2023:7784",
-      "https://access.redhat.com/errata/RHSA-2023:7785",
-      "https://access.redhat.com/errata/RHSA-2023:7883",
-      "https://access.redhat.com/errata/RHSA-2023:7884",
-      "https://access.redhat.com/errata/RHSA-2023:7885",
-      "https://access.redhat.com/errata/RHSA-2024:0304",
-      "https://access.redhat.com/errata/RHSA-2024:0332",
-      "https://access.redhat.com/errata/RHSA-2024:0337",
-      "https://access.redhat.com/security/cve/CVE-2023-39417",
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2228111",
-      "https://lists.debian.org/debian-lts-announce/2023/10/msg00003.html",
-      "https://lists.debian.org/debian-lts-announce/2026/09/msg00039.html",
-      "https://security.netapp.com/advisory/ntap-20230915-0002/",
-      "https://www.debian.org/security/2023/dsa-5553",
-      "https://www.debian.org/security/2023/dsa-5554",
-      "https://www.postgresql.org/support/security/CVE-2023-39417"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 2.2,
-    "epss_percentile": 83.3,
-    "score_breakdown": {
-      "base_cvss": 37.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: rce",
-          "points": 30
-        },
-        {
-          "signal": "Tag: sqli",
-          "points": 18
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "rce",
-      "sqli"
-    ],
-    "intel_score": 95.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "rce+30",
-      "sqli+18"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-130851",
-    "published": "2026-11-17T20:17:50.437",
-    "last_modified": "2026-11-24T20:48:26.733",
-    "cvss_v3": 7.1,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "wishthis through 1.2.3 contains an authorization bypass vulnerability in User::ownsWishlist() that allows authenticated users to modify other users' wishes and wishlists. Attackers can supply sequential wish_id and wishlist_id values to the wishes and wishlists API handlers to edit wishes, add wishes, or rename and delete wishlists.",
-    "references": [
-      "https://github.com/wishthis/wishthis/blob/v1.2.3/src/api/wishlists.php#L223-L265",
-      "https://github.com/wishthis/wishthis/blob/v1.2.3/src/classes/wishthis/User.php#L317-L332",
-      "https://github.com/wishthis/wishthis/commit/6798ada87f821bc955cda15e4412e84143dbcb85",
-      "https://github.com/wishthis/wishthis/issues/244",
-      "https://www.vulncheck.com/advisories/wishthis-through-1.2.3-authorization-bypass-via-ownswishlist-ownership-check"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.5,
-    "epss_percentile": 32.6,
-    "score_breakdown": {
-      "base_cvss": 35.5,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: auth_bypass",
-          "points": 25
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:L",
-    "tags": [
-      "auth_bypass",
-      "weaponized"
-    ],
-    "intel_score": 95.5,
-    "reasons": [
-      "recently modified (last 48h)",
-      "auth_bypass+25",
-      "Weaponized Exploit / Public PoC verified (+25)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-133303",
-    "published": "2026-11-19T17:18:51.670",
-    "last_modified": "2026-11-27T13:33:54.470",
-    "cvss_v3": 9.0,
-    "severity": "CRITICAL",
-    "affected": [],
-    "summary": "A vulnerability in the Audio, Web, and Video Conferencing (AWV) component of Mitel MiCollab through 10.3 (10.3.0.18) could allow an unauthenticated attacker to leverage pre-staged malicious content to conduct an XML injection attack due to insufficient parameter validation. A successful exploit could allow an attacker to execute arbitrary commands within the context of the system. This is MTLVULN-1862.",
-    "references": [
-      "https://www.mitel.com/support/security-advisories/mitel-product-security-advisory-misa-2026-0012",
-      "https://accenture.github.io/cyber-intelligence/micollab-exploitation/",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-133303"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "ransomware_campaign": false,
-    "pre_auth": true,
-    "weaponized": false,
-    "epss": 1.3,
-    "epss_percentile": 71.1,
-    "score_breakdown": {
-      "base_cvss": 45.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "CISA KEV Active Exploit",
-          "points": 40
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 95.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2023-25914",
-    "published": "2023-08-21T21:15:08.970",
-    "last_modified": "2026-11-27T13:34:09.137",
-    "cvss_v3": 8.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Due to improper restriction, authenticated attackers could retrieve and read system files of the underlying server through the XML interface. The information that can be read can lead to a full system compromise.",
-    "references": [
-      "https://csirt.divd.nl/CVE-2023-25914",
-      "https://csirt.divd.nl/DIVD-2023-00025",
-      "https://csirt.divd.nl/CVE-2023-25914",
-      "https://csirt.divd.nl/DIVD-2023-00025",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2023-25914"
-    ],
-    "source": "NVD",
-    "cisa_kev": true,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": false,
-    "epss": 1.8,
-    "epss_percentile": 79.6,
-    "score_breakdown": {
-      "base_cvss": 44.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "CISA KEV Active Exploit",
-          "points": 40
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "cisa_kev",
-      "in_the_wild"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "CISA KEV active exploitation (+40)"
-    ]
-  },
-  {
-    "cve_id": "CVE-2026-132038",
-    "published": "2026-11-18T15:17:41.740",
-    "last_modified": "2026-11-24T18:56:39.360",
-    "cvss_v3": 7.8,
-    "severity": "HIGH",
-    "affected": [],
-    "summary": "Rapid7 Metasploit Framework versions prior to 6.5.10 suffer from an Improper Access Control issue in the msfdb database initialisation component whereby a PostgreSQL cluster initialised via msfdb init is configured with trust authentication and a world-accessible Unix domain socket in /tmp, allowing any local user on the same host to authenticate as the passwordless postgres superuser and execute arbitrary operating system commands as the msfdb owner. \n\n\nThis issue is fixed in version 6.5.10.",
-    "references": [
-      "https://github.com/rapid7/metasploit-framework/pull/22105"
-    ],
-    "source": "NVD",
-    "cisa_kev": false,
-    "ransomware_campaign": false,
-    "pre_auth": false,
-    "weaponized": true,
-    "epss": 0.2,
-    "epss_percentile": 3.4,
-    "score_breakdown": {
-      "base_cvss": 39.0,
-      "freshness": 10,
-      "components": [
-        {
-          "signal": "Tag: poc",
-          "points": 20
-        },
-        {
-          "signal": "Verified Weaponized Exploit",
-          "points": 25
-        }
-      ]
-    },
-    "cvss_vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
-    "tags": [
-      "poc",
-      "weaponized"
-    ],
-    "intel_score": 94.0,
-    "reasons": [
-      "recently modified (last 48h)",
-      "poc+20",
       "Weaponized Exploit / Public PoC verified (+25)"
     ]
   }
